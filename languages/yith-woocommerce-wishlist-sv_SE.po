@@ -1,0 +1,1845 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YITH WCWL\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/init\n"
+"POT-Creation-Date: 2019-08-12 11:01:34+00:00\n"
+"PO-Revision-Date: 2019-02-12 14:38+0100\n"
+"Last-Translator: Nicola Mustone <mail@nicolamustone.it>\n"
+"Language-Team: Your Inspiration Themes <support@yithemes.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-KeywordsList: __;_e;_x\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: plugin-fw\n"
+
+#: includes/class.yith-wcwl-admin-init.php:159
+#: includes/class.yith-wcwl-admin-init.php:1492
+#: includes/class.yith-wcwl-admin-init.php:1493
+#: includes/class.yith-wcwl-install.php:245
+msgid "Wishlist"
+msgstr "Önskelista"
+
+#: includes/class.yith-wcwl-admin-init.php:161
+msgid "Settings"
+msgstr "Inställningar"
+
+#: includes/class.yith-wcwl-admin-init.php:162
+#: includes/class.yith-wcwl-admin-init.php:243
+msgid "Colors"
+msgstr "Färger"
+
+#: includes/class.yith-wcwl-admin-init.php:163
+msgid "Premium Version"
+msgstr "Premiumversion"
+
+#: includes/class.yith-wcwl-admin-init.php:1009
+msgid "Enable all plugin features"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1010
+msgid ""
+"Be sure to select at least one option in the Wishlist page menu in this "
+"settings page"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1011
+msgctxt "[Part of]: Also, please read the plugin documentation"
+msgid "Also, please read the plugin"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1012
+#, fuzzy
+msgctxt "[Part Of]: Also, please read the plugin documentation"
+msgid "documentation"
+msgstr "Tilläggets dokumentation"
+
+#: includes/class.yith-wcwl-admin-init.php:1018
+msgid "Upgrade to the PREMIUM VERSION"
+msgstr "Uppgradera till Premiumversion"
+
+#: includes/class.yith-wcwl-admin-init.php:1022
+msgid "Discover the Advanced Features"
+msgstr "Upptäck de avancerade funktionerna"
+
+#: includes/class.yith-wcwl-admin-init.php:1023
+msgid ""
+"Upgrade to the PREMIUM VERSION of YITH WOOCOMMERCE WISHLIST to benefit from "
+"all features!"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1029
+msgid "Get Support and Pro Features"
+msgstr "Få support och professionella funktioner"
+
+#: includes/class.yith-wcwl-admin-init.php:1030
+msgid ""
+"By purchasing the premium version of the plugin, you will take advantage of "
+"the advanced features of the product and you will get one year of free "
+"updates and support through our platform available 24h/24."
+msgstr ""
+"När du köper premiumversionen av detta tilläg så kommer du utnyttja de "
+"avancerade funktionerna ifrån produkten, samt få ett års gratis "
+"uppdateringar och support genom hela plattformen 24/7."
+
+#: includes/class.yith-wcwl-admin-init.php:1040
+msgid "General Settings"
+msgstr "Generella inställningar"
+
+#: includes/class.yith-wcwl-admin-init.php:1047
+msgid "Enable YITH Wishlist"
+msgstr "Aktivera YITH Wishlist"
+
+#: includes/class.yith-wcwl-admin-init.php:1054
+msgid "Default wishlist title"
+msgstr "Titel på önskelistan"
+
+#: includes/class.yith-wcwl-admin-init.php:1056
+#: includes/class.yith-wcwl-admin-init.php:1057
+#: includes/class.yith-wcwl-admin-init.php:1307
+msgid "My wishlist on %s"
+msgstr "Min önskelista på %s"
+
+#: includes/class.yith-wcwl-admin-init.php:1062
+msgid "Wishlist Page"
+msgstr "Önskelistans sida"
+
+#: includes/class.yith-wcwl-admin-init.php:1063
+msgid "Page contents: [yith_wcwl_wishlist]"
+msgstr "Sidans innehåll: [yith_wcwl_wishlist]"
+
+#: includes/class.yith-wcwl-admin-init.php:1072
+msgid "Position"
+msgstr "Position"
+
+#: includes/class.yith-wcwl-admin-init.php:1073
+msgid ""
+"You can add the button in variable products only after the \"Add to Cart\" "
+"button or using the shortcode [yith_wcwl_add_to_wishlist]."
+msgstr ""
+"Du kan lägga till knappen i variabla produkter enbart efter “Lägg till i "
+"kundvagn”-knappen eller genom att använda kortkoden "
+"[yith_wcwl_add_to_wishlist]."
+
+#: includes/class.yith-wcwl-admin-init.php:1079
+msgid "After \"Add to cart\""
+msgstr "Efter “Lägg till i varukorgen”"
+
+#: includes/class.yith-wcwl-admin-init.php:1080
+msgid "After thumbnails"
+msgstr "Efter miniatyrbilder"
+
+#: includes/class.yith-wcwl-admin-init.php:1081
+msgid "After summary"
+msgstr "Efter sammanfattning"
+
+#: includes/class.yith-wcwl-admin-init.php:1082
+msgid "Use shortcode"
+msgstr "Använd kortkod"
+
+#: includes/class.yith-wcwl-admin-init.php:1087
+msgid "Redirect to cart"
+msgstr "Omdirigera till kundvagnen"
+
+#: includes/class.yith-wcwl-admin-init.php:1088
+msgid ""
+"Redirect to cart page if \"Add to cart\" button is clicked in the wishlist "
+"page."
+msgstr ""
+"Omdirigera till kundvagnen om “Lägg till i kundvagnen” blir klickad i "
+"önskelistan."
+
+#: includes/class.yith-wcwl-admin-init.php:1094
+msgid "Remove if added to the cart"
+msgstr "Ta bort om tillagd i kundvagnen"
+
+#: includes/class.yith-wcwl-admin-init.php:1095
+msgid "Remove the product from the wishlist if it has been added to the cart."
+msgstr ""
+"Ta bort produkten ifrån önskelistan om den har blivit tillagd i kundvagnen."
+
+#: includes/class.yith-wcwl-admin-init.php:1101
+msgid "\"Add to Wishlist\" text"
+msgstr "“Lägg till i önskelistan”s text"
+
+#: includes/class.yith-wcwl-admin-init.php:1103
+msgid "Add to Wishlist"
+msgstr "Lägg till i önskelistan"
+
+#: includes/class.yith-wcwl-admin-init.php:1108
+msgid "\"Browse wishlist\" text"
+msgstr "“Bläddra i önskelistan”s text"
+
+#: includes/class.yith-wcwl-admin-init.php:1110
+#: includes/class.yith-wcwl-ui.php:82 includes/class.yith-wcwl-ui.php:83
+msgid "Browse Wishlist"
+msgstr "Bläddra i önskelistan"
+
+#: includes/class.yith-wcwl-admin-init.php:1115
+msgid "\"Product already in wishlist\" text"
+msgstr "“Produkten redan i önskelistan”s text"
+
+#: includes/class.yith-wcwl-admin-init.php:1117
+#: includes/class.yith-wcwl-ui.php:83
+msgid "The product is already in the wishlist!"
+msgstr "Produkten är redan i önskelistan!"
+
+#: includes/class.yith-wcwl-admin-init.php:1122
+msgid "\"Product added\" text"
+msgstr "“Produkt tillagd”s text"
+
+#: includes/class.yith-wcwl-admin-init.php:1124
+#: includes/class.yith-wcwl-ui.php:82
+msgid "Product added!"
+msgstr "Produkt tillagd!"
+
+#: includes/class.yith-wcwl-admin-init.php:1129
+msgid "\"Add to Cart\" text"
+msgstr "“Lägg till i kundvagn”s text"
+
+#: includes/class.yith-wcwl-admin-init.php:1131
+msgid "Add to Cart"
+msgstr "Lägg till i kundvagn"
+
+#: includes/class.yith-wcwl-admin-init.php:1136
+msgid "Show Unit price"
+msgstr "Visa produktens pris"
+
+#: includes/class.yith-wcwl-admin-init.php:1137
+msgid "Show unit price for each product in wishlist"
+msgstr "Visa produktens pris för varje objekt i önskelistan"
+
+#: includes/class.yith-wcwl-admin-init.php:1144
+msgid "Show \"Add to Cart\" button"
+msgstr "Visa “Lägg till i kundvagn”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1145
+msgid "Show \"Add to Cart\" button for each product in wishlist"
+msgstr "Visa “Lägg till i kundvagn”-knapp för varje produkt i önskelistan"
+
+#: includes/class.yith-wcwl-admin-init.php:1152
+msgid "Show Stock status"
+msgstr "Visa lagersaldo"
+
+#: includes/class.yith-wcwl-admin-init.php:1153
+msgid ""
+"Show \"In stock\" or \"Out of stock\" label for each product in wishlist"
+msgstr "Visa “I lager” eller “Slut i lager” för varje produkt i önskelistan"
+
+#: includes/class.yith-wcwl-admin-init.php:1160
+msgid "Show Date of addition"
+msgstr "Visa tilläggsdatum"
+
+#: includes/class.yith-wcwl-admin-init.php:1161
+msgid "Show the date when users have added a product to the wishlist"
+msgstr "Visa datumet som användaren lade till produkten i önskelistan"
+
+#: includes/class.yith-wcwl-admin-init.php:1168
+msgid "Add second remove button"
+msgstr "Lägg till en andre “Ta bort”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1169
+msgid "Add a second remove button in the last column, with extended label"
+msgstr "Lägg till en andre “Ta bort”-knapp i sista kolumnen med utökad text"
+
+#: includes/class.yith-wcwl-admin-init.php:1184
+msgid "Styles"
+msgstr "Stilregler"
+
+#: includes/class.yith-wcwl-admin-init.php:1191
+msgid "Use buttons"
+msgstr "Använd knappar"
+
+#: includes/class.yith-wcwl-admin-init.php:1192
+msgid "Use buttons instead of simple anchors."
+msgstr "Använd knappar istället för enkla länkar"
+
+#: includes/class.yith-wcwl-admin-init.php:1198
+msgid "Custom CSS"
+msgstr "Egen CSS"
+
+#: includes/class.yith-wcwl-admin-init.php:1205
+msgid "Use theme style"
+msgstr "Använd temastil"
+
+#: includes/class.yith-wcwl-admin-init.php:1206
+msgid "Use the theme style."
+msgstr "Använd temats stil"
+
+#: includes/class.yith-wcwl-admin-init.php:1212
+msgid "Rounded buttons"
+msgstr "Rundade knappar"
+
+#: includes/class.yith-wcwl-admin-init.php:1213
+msgid "Make button corners rounded"
+msgstr "Gör knappars hörs rundade"
+
+#: includes/class.yith-wcwl-admin-init.php:1219
+msgid "\"Add to Wishlist\" icon"
+msgstr "“Lägg till i önskelista”s ikon"
+
+#: includes/class.yith-wcwl-admin-init.php:1220
+msgid "Add an icon to the \"Add to Wishlist\" button"
+msgstr "Lägg till en ikon till “Lägg till i önskelista”s knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1230
+msgid "\"Add to Cart\" icon"
+msgstr "“Lägg till i kundvagn”s ikon"
+
+#: includes/class.yith-wcwl-admin-init.php:1231
+msgid "Add an icon to the \"Add to Cart\" button"
+msgstr "Lägg till en ikon till “Lägg till i kundvagn”s knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1249
+msgid "Social Networks & Share"
+msgstr "Sociala nätverk & dela"
+
+#: includes/class.yith-wcwl-admin-init.php:1256
+msgid "Share on Facebook"
+msgstr "Dela på Facebook"
+
+#: includes/class.yith-wcwl-admin-init.php:1257
+msgid "Show \"Share on Facebook\" button"
+msgstr "Visa “Dela på Facebook”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1263
+msgid "Tweet on Twitter"
+msgstr "Twittra på Twitter"
+
+#: includes/class.yith-wcwl-admin-init.php:1264
+msgid "Show \"Tweet on Twitter\" button"
+msgstr "Visa “Twittra på Twitter”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1270
+msgid "Pin on Pinterest"
+msgstr "Pinna på Pintrest"
+
+#: includes/class.yith-wcwl-admin-init.php:1271
+msgid "Show \"Pin on Pinterest\" button"
+msgstr "Visa “Pinna på Pintrest”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1277
+msgid "Share on Google+"
+msgstr "Dela på Google+"
+
+#: includes/class.yith-wcwl-admin-init.php:1278
+msgid "Show \"Share on Google+\" button"
+msgstr "Visa “Dela på Google+”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1284
+msgid "Share by Email"
+msgstr "Dela via Email"
+
+#: includes/class.yith-wcwl-admin-init.php:1285
+msgid "Show \"Share by Email\" button"
+msgstr "Visa “Dela via Email”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1291
+#, fuzzy
+msgid "Share by WhatsApp"
+msgstr "Dela via Email"
+
+#: includes/class.yith-wcwl-admin-init.php:1292
+#, fuzzy
+msgid "Show \"Share by WhatsApp\" button ( only on phones )"
+msgstr "Visa “Dela via Email”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1298
+#, fuzzy
+msgid "Share by Url"
+msgstr "Dela via Email"
+
+#: includes/class.yith-wcwl-admin-init.php:1299
+msgid "Show \"Share Url\" field on wishlist page"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1305
+msgid "Social title"
+msgstr "Titel på sociala medier"
+
+#: includes/class.yith-wcwl-admin-init.php:1312
+msgid "Social text"
+msgstr "Text på sociala medier"
+
+#: includes/class.yith-wcwl-admin-init.php:1313
+msgid ""
+"It will be used by Twitter and Pinterest. Use <strong>%wishlist_url%</"
+"strong> where you want to show the URL of your wishlist."
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1320
+msgid "Social image URL"
+msgstr "Bild för sociala medier (URL)"
+
+#: includes/class.yith-wcwl-admin-init.php:1321
+msgid "It will be used by Pinterest."
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1335
+msgid ""
+"If you want to take advantage of this feature, you could consider to "
+"purchase the %s."
+msgstr "Om du vill ta del av denna funktionen bör du överväga att köpa %s."
+
+#: includes/class.yith-wcwl-admin-init.php:1340
+msgid "YITH WooCommerce Frequently Bought Together Integration"
+msgstr "YITH WooCommerce Vanliga köpte tillsammans integritet"
+
+#: includes/class.yith-wcwl-admin-init.php:1347
+msgid "Enable slider in wishlist"
+msgstr "Aktivera slider i önskelistan"
+
+#: includes/class.yith-wcwl-admin-init.php:1348
+msgid ""
+"Choose to enable product slider in wishlist page with linked products (<a "
+"href=\"%s\" class=\"thickbox\">Example</a>). %s"
+msgstr ""
+"Välj en produktslider på önskelistans sida med länkade produkter (<a "
+"href=“%s” class=“thickbox”>Exempel</a>.%s"
+
+#: includes/class.yith-wcwl-admin-init.php:1384
+msgid "\"Add to wishlist\" button"
+msgstr "“Lägg till i önskelista”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1387
+#: includes/class.yith-wcwl-admin-init.php:1405
+#: includes/class.yith-wcwl-admin-init.php:1423
+#: includes/class.yith-wcwl-admin-init.php:1441
+#: includes/class.yith-wcwl-admin-init.php:1459
+msgid "Background"
+msgstr "Bakgrund"
+
+#: includes/class.yith-wcwl-admin-init.php:1388
+#: includes/class.yith-wcwl-admin-init.php:1406
+#: includes/class.yith-wcwl-admin-init.php:1424
+#: includes/class.yith-wcwl-admin-init.php:1442
+#: includes/class.yith-wcwl-admin-init.php:1460
+msgid "Text"
+msgstr "Text"
+
+#: includes/class.yith-wcwl-admin-init.php:1389
+#: includes/class.yith-wcwl-admin-init.php:1407
+#: includes/class.yith-wcwl-admin-init.php:1425
+#: includes/class.yith-wcwl-admin-init.php:1443
+#: includes/class.yith-wcwl-admin-init.php:1461
+msgid "Border"
+msgstr "Ram"
+
+#: includes/class.yith-wcwl-admin-init.php:1396
+#: includes/class.yith-wcwl-admin-init.php:1414
+#: includes/class.yith-wcwl-admin-init.php:1432
+#: includes/class.yith-wcwl-admin-init.php:1450
+msgid "Background (hover)"
+msgstr "Bakgrund (när muspekare är över)"
+
+#: includes/class.yith-wcwl-admin-init.php:1397
+#: includes/class.yith-wcwl-admin-init.php:1415
+#: includes/class.yith-wcwl-admin-init.php:1433
+#: includes/class.yith-wcwl-admin-init.php:1451
+msgid "Text (hover)"
+msgstr "Text (när muspekare är över)"
+
+#: includes/class.yith-wcwl-admin-init.php:1398
+#: includes/class.yith-wcwl-admin-init.php:1416
+#: includes/class.yith-wcwl-admin-init.php:1434
+#: includes/class.yith-wcwl-admin-init.php:1452
+msgid "Border (hover)"
+msgstr "Ram (när muspekare är över)"
+
+#: includes/class.yith-wcwl-admin-init.php:1402
+msgid "\"Add to Cart\" button"
+msgstr "“Lägg till i kundvagn”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1420
+msgid "\"Style 1\" button"
+msgstr "“Stil 1”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1438
+msgid "\"Style 2\" button"
+msgstr "“Stil 2”-knapp"
+
+#: includes/class.yith-wcwl-admin-init.php:1456
+msgid "Wishlist table"
+msgstr "Önskelistatabell"
+
+#: includes/class.yith-wcwl-admin-init.php:1465
+msgid "Headers"
+msgstr "Headers"
+
+#: includes/class.yith-wcwl-admin-init.php:1468
+msgid "Background color"
+msgstr "Bakgrundsfärg"
+
+#: includes/class.yith-wcwl-admin-init.php:1558
+msgid "Wishlist Activated"
+msgstr "Önskelista aktiverad"
+
+#: includes/class.yith-wcwl-admin-init.php:1559
+msgid ""
+"In the YIT Plugin tab you can find the Wishlist options. With this menu, you "
+"can access to all the settings of our plugins that you have activated. "
+"Wishlist is available in an outstanding PREMIUM version with many new "
+"options, <a href=\"%s\">discover it now</a>."
+msgstr ""
+"I YIP Plugin-fliken hittar du alternativ för önskelistan. I det menyvalen "
+"hittar du alla inställningar till de plugin som du installerat. Önskelista "
+"finns tillgänglig i en utmärkt premiumversion med många nya inställningar, "
+"<a href=“%s”>upptäck dem nu</a>"
+
+#: includes/class.yith-wcwl-admin-init.php:1570
+msgid "Wishlist Updated"
+msgstr "Önskelistan uppdaterad"
+
+#: includes/class.yith-wcwl-admin-init.php:1571
+msgid ""
+"From now on, you can find all the options of Wishlist under YIT Plugin -> "
+"Wishlist instead of WooCommerce -> Settings -> Wishlist, as in the previous "
+"version. When one of our plugins is updated, a new voice will be added to "
+"this menu. Wishlist has been updated with new available options, <a href=\"%s"
+"\">discover the PREMIUM version.</a>"
+msgstr ""
+"Från och med nukan du hitta alla inställningar av Whishlist under YIT Plugin "
+"-> Whishlist istället för under WooCommerce -> Inställningar -> Whishlist "
+"som i den förra versionen. När ett av dina plugin blir uppdaterat kommer ett "
+"nytt menyalternativ bli tillagt i denna meny. Wishlist har blivit uppdaterat "
+"med nya alternativ tillgängliga, <a href=“%s”>upptäck premiumversionen</a>"
+
+#: includes/class.yith-wcwl-init.php:448
+msgid ""
+"We are sorry, but this feature is available only if cookies are enabled on "
+"your browser."
+msgstr ""
+"Vi är ledsna men denna funktionen är enbart tillgänglig när kakor (cookies) "
+"är påslaget i din webbläsare."
+
+#: includes/class.yith-wcwl-init.php:449
+msgid "Product correctly added to cart"
+msgstr "Produkt korrekt tillagd i varukorgen"
+
+#: includes/class.yith-wcwl-install.php:244
+msgctxt "page_slug"
+msgid "wishlist"
+msgstr "onskelista"
+
+#: includes/class.yith-wcwl-privacy.php:50
+msgid "While you visit our site, we’ll track:"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:52
+msgid ""
+"Products you’ve added to the wishlist: we’ll use this to show you and other "
+"users your favourite products, and to create targeted email campaigns."
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:53
+msgid ""
+"Wishlists you’ve created: we’ll keep track of the wishlists you create, and "
+"make them visible to the store’s staff"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:55
+msgid ""
+"We’ll also use cookies to keep track of wishlist contents while you’re "
+"browsing our site."
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:58
+msgid ""
+"Members of our team have access to the information you provide us. For "
+"example, both Administrators and Shop Managers can access:"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:60
+msgid ""
+"Wishlist details, such as products added, date of addition, name and privacy "
+"settings of your wishlists"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:62
+msgid ""
+"Our team members have access to this information to offer you better deals "
+"for the products you love."
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:82
+#: includes/class.yith-wcwl-privacy.php:98
+#, fuzzy
+msgid "Customer Wishlists"
+msgstr "Lägg till i önskelistan"
+
+#: includes/class.yith-wcwl-privacy.php:133
+#, fuzzy
+msgid "Wishlists"
+msgstr "Önskelista"
+
+#. Translators: %s Order number.
+#: includes/class.yith-wcwl-privacy.php:195
+#, fuzzy
+msgid "Removed wishlist %s."
+msgstr "Min önskelista på %s"
+
+#. Translators: %s Order number.
+#: includes/class.yith-wcwl-privacy.php:199
+msgid "Wishlist %s has been retained."
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:210
+msgid "Removed default user's wishlist"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:228
+msgid "Token"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:229
+#, fuzzy
+msgid "Wishlist url"
+msgstr "Önskelista"
+
+#: includes/class.yith-wcwl-privacy.php:230
+#, fuzzy
+msgid "Title"
+msgstr "Fälttitel"
+
+#: includes/class.yith-wcwl-privacy.php:231
+msgctxt "date wishlist was created"
+msgid "Created on"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:232
+msgid "Visibility"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:233
+msgid "Items Added"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:283 templates/wishlist-view.php:212
+msgid "Shared"
+msgstr "Delar"
+
+#: includes/class.yith-wcwl-privacy.php:286 templates/wishlist-view.php:215
+msgid "Private"
+msgstr "Privat"
+
+#: includes/class.yith-wcwl-privacy.php:289 templates/wishlist-view.php:218
+msgid "Public"
+msgstr "Offentlig"
+
+#: includes/class.yith-wcwl-shortcode.php:45
+#, fuzzy
+msgctxt "[gutenberg]: block name"
+msgid "YITH Add to Wishlist"
+msgstr "Lägg till i önskelistan"
+
+#: includes/class.yith-wcwl-shortcode.php:46
+#, fuzzy
+msgctxt "[gutenberg]: block description"
+msgid "Shows Add to Wishlist button"
+msgstr "“Lägg till i önskelista”-knapp"
+
+#: includes/class.yith-wcwl-shortcode.php:51
+msgid ""
+"ID of the product to add to wishlist (leave empty to use global product)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:56
+msgid "Url of wishlist page (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:61
+msgid "Button label (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:66
+msgid "\"Browse wishlist\" label (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:71
+#, fuzzy
+msgid "\"Product already in wishlist\" label (leave empty to use default)"
+msgstr "“Produkten redan i önskelistan”s text"
+
+#: includes/class.yith-wcwl-shortcode.php:76
+msgid "\"Product added to wishlist\" label (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:81
+msgid ""
+"Icon for the button (use any FontAwesome valid class, or leave empty to use "
+"default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:86
+msgid "Additional css classes for the button (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:94
+#, fuzzy
+msgctxt "[gutenberg]: block name"
+msgid "YITH Wishlist"
+msgstr "Aktivera YITH Wishlist"
+
+#: includes/class.yith-wcwl-shortcode.php:95
+#, fuzzy
+msgctxt "[gutenberg]: block description"
+msgid "Shows list of products in wishlist"
+msgstr "Visa produktens pris för varje objekt i önskelistan"
+
+#: includes/class.yith-wcwl-shortcode.php:100
+msgid "Choose whether to paginate items in the wishlist or show them all"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:103
+msgid "Paginate"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:104
+msgid "Do not paginate"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:109
+msgid "Number of items to show for each page"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:114
+msgid "ID of the wishlist to show (EG: K6EOWXB888ZD)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:387
+#: includes/class.yith-wcwl-ui.php:164
+msgid "Share on:"
+msgstr "Dela på:"
+
+#: includes/class.yith-wcwl-ui.php:118 includes/class.yith-wcwl-ui.php:200
+msgid "Select options"
+msgstr "Välj alternativ"
+
+#: includes/class.yith-wcwl-ui.php:168 templates/share.php:20
+msgid "Facebook"
+msgstr "Facebook"
+
+#: includes/class.yith-wcwl-ui.php:171 templates/share.php:26
+msgid "Twitter"
+msgstr "Twitter"
+
+#: includes/class.yith-wcwl-ui.php:180
+msgid "email"
+msgstr "epost"
+
+#: includes/class.yith-wcwl.php:201
+msgid "An error occurred while adding products to the wishlist."
+msgstr "Ett fel uppstod när produkten skulle läggas till i önskelistan"
+
+#: includes/class.yith-wcwl.php:293
+msgid "An error occurred while adding products to wishlist."
+msgstr "Ett fel uppstod när produkten skulle läggas till i önskelistan"
+
+#: includes/class.yith-wcwl.php:310
+msgid "The \"Remove\" option now does not require any parameter"
+msgstr "“Ta bort”-alternativet kräver inte några parametrar"
+
+#: includes/class.yith-wcwl.php:359
+msgid "An error occurred while removing products from the wishlist"
+msgstr "Ett fel uppstod när produkten skulle tas bort ifrån önskelistan"
+
+#: includes/class.yith-wcwl.php:825
+msgid "You need to log in before creating a new wishlist"
+msgstr "Du behöver logga in innan du kan skapa en ny önskelista"
+
+#: includes/class.yith-wcwl.php:1627
+msgid "Product successfully removed."
+msgstr "Produkten borttagen."
+
+#: includes/class.yith-wcwl.php:1631
+msgid "Error. Unable to remove the product from the wishlist."
+msgstr "Fel. Kunde inte ta bort produkten ifrån önskelistan."
+
+#: includes/class.yith-wcwl.php:1635 templates/wishlist-view.php:242
+msgid "No products were added to the wishlist"
+msgstr "Ingen produkt har blivit tillagd i önskelistan"
+
+#: includes/class.yith-wcwl.php:1677
+msgid "An error as occurred."
+msgstr "Ett fel uppstod"
+
+#: init.php:130
+#, fuzzy
+msgid "is enabled but not effective. It requires WooCommerce in order to work."
+msgstr ""
+"YITH WooCommerce Wishlist är på men inte effektivt då det kräver tilläget "
+"WooComerce för att fungera."
+
+#: init.php:140
+msgid "You can't activate the free version of"
+msgstr ""
+
+#: init.php:140
+msgid "while you are using the premium one."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:185
+#: templates/admin/wishlist-panel-premium.php:383
+msgid ""
+"Upgrade to the %1$spremium version%2$s%3$sof %1$sYITH WooCommerce Wishlist"
+"%2$s to benefit from all features!"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:187
+#: templates/admin/wishlist-panel-premium.php:385
+msgid "%1$sUPGRADE%2$s%3$s to the premium version%2$s"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:193
+msgid "Premium Features"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:196
+#: templates/admin/wishlist-panel-premium.php:201
+msgid "Multiple Wishlist"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:203
+msgid ""
+"%1$sDoes it ever happened to you to have too many wishes for a single wish "
+"list?%2$s%3$s The possibility to manage one's wishes is a fundamental "
+"feature in a modern e-commerce store and it also lets users' degree of "
+"satisfaction increase.%3$sThe option \"multiple wishlist\" of %1$sYITH "
+"Wishlist%2$s makes this feature and many others on your online store "
+"available, and thanks to this plugin your customers will be able to create, "
+"manage and share their own wish lists."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:212
+#: templates/admin/wishlist-panel-premium.php:222
+msgid "Wishlist Private"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:214
+msgid ""
+"By enabling the option wishlist, users will also have the possibility to "
+"%1$smanage the visibility%2$s of their wish lists according to one of the "
+"following options:"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:216
+msgid "%1$spublic:%2$s all users can look for your wish list and see it;"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:217
+msgid ""
+"%1$sshared:%2$s only users possessing a direct link to the wish list page "
+"can display it;"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:218
+msgid "%1$sprivate:%2$s only the wish list creator can see it."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:229
+#: templates/admin/wishlist-panel-premium.php:234
+msgid "Estimate Cost"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:236
+msgid ""
+"%1$sDo you want to add the possibility to ask for estimates of costs into "
+"your catalogue?%3$s Do you want to manage customised packets for faithful "
+"customers in your store?%2$s%3$sThanks to the feature \"estimate cost\" of "
+"%1$sYITH WooCommerce Wishlist%2$s, each registered user will be able to ask "
+"for an estimate of their own products in the wishlist and add a text in the "
+"popup window that will open just after clicking. Then, they can confirm the "
+"text and send an email with all necessary information directly to the "
+"address that you have previously set."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:245
+#: templates/admin/wishlist-panel-premium.php:250
+msgid "Admin Panel"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:247
+msgid ""
+"Thanks to the useful Admin panel, accessible directly among the WooCommerce "
+"submenu pages, you will have total control on users' wishlists. In addition "
+"to that, evaluating the degree of appreciation for your products has never "
+"been so easy, now that %1$syou can see a useful report,%2$s available "
+"directly in the product page, which registers the occurrences of the product "
+"in customers' wish lists."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:257
+#: templates/admin/wishlist-panel-premium.php:262
+msgid "Search Wishlists"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:264
+msgid ""
+"How many times have you been looking for the perfect gift for a important "
+"event but you had no idea of what to buy? %1$s'Search wishlists'%2$s allows "
+"your e-shop users to access public wishlists of anyone, by simply knowing "
+"their name or email. This way you can grant %1$shigher visibility%2$s to "
+"your products and even encourage users to purchase."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:273
+msgid "'ADD TO CART' CHECKBOX"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:275
+msgid ""
+"Your shop offers always a wide selection of products and wishlists of your "
+"users get more and more crowded everyday. Give them the possibility to "
+"select %1$ssome or all products%2$s in the wishlist and add them to cart "
+"just with one click."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:278
+msgid "'ADD TO CART'"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:285
+msgid "DISABLE WISHLIST"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:290
+msgid "DISABLE WISHLIST FOR UNLOGGED USERS"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:292
+msgid ""
+"Favour users that have registered to your shop and disable plugin "
+"functionalities for all users that have not. By disabling this option, each "
+"time they try to add a product to the wishlist, they will be %1$sredirected"
+"%2$s to \"My Account\" page and a message will invite them to log in."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:301
+msgid "MESSAGE TO UNLOGGED USERS"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:303
+msgid ""
+"Invite users that are visiting your shop to login if they want to fully "
+"benefit from Wishlist functionalities. Show a %1$scustomised message%2$s and "
+"redirect them to \"My Account\" page for registration."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:306
+msgid "UNLOGGED USERS"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:313
+#: templates/admin/wishlist-panel-premium.php:318
+msgid "POPULAR TABLE"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:320
+msgid ""
+"Some products draw customer's attention more than others and they do not "
+"hesitate to add products to their wishlist. Table %1$s'Popular'%2$s allows "
+"you, as shop administrator, to track products that appear most frequently in "
+"their wishlists."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:329
+msgid "FUNCTIONALITIES IN ONE CLICK"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:331
+msgid ""
+"Users have the possibility to search for a wishlist, create a new one or "
+"display those already created. Add these %1$sfunctionalities%2$s through the "
+"dedicated widgets or show them immediately after \"Wishlist\" table."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:334
+msgid "FUNCTIONALITIES"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:341
+#: templates/admin/wishlist-panel-premium.php:346
+msgid "PROMOTIONAL EMAIL"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:348
+msgid ""
+"If you want to give the right input to your users to persuade them to "
+"%1$spurchase the products%2$s they have in their wishlists, you need to use "
+"this feature! %1$sSend them an email%2$s: customize its whole content from "
+"the option panel and add a coupon they can use in your shop, so that they "
+"will know you are offering a unique offer!"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:357
+msgid "FROM A WISHLIST TO ANOTHER"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:359
+msgid ""
+"Who said that a product has to remain forever in the same wishlist? With the "
+"option %1$s\"Show \"Move to another wishlist\" dropdown menu\"%2$s, with "
+"just one click users will be free to move a product from a wishlist to "
+"another one, managing as they want their lists."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:362
+msgid "FROM A WISHLIST"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:369
+msgid "DATE"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:374
+msgid "DATE OF ADDITION TO A WISHLIST"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:376
+msgid ""
+"Activating the %1$s\"Show date of addition\"%2$s option, users can see the "
+"date in which they have added a particular product to their list: a new way "
+"to keep you users informed about their operations."
+msgstr ""
+
+#: templates/share.php:32
+msgid "Pinterest"
+msgstr "Pintrest"
+
+#: templates/share.php:38
+msgid "Google+"
+msgstr "Google+"
+
+#: templates/share.php:44
+msgid "Email"
+msgstr "Epost"
+
+#: templates/share.php:51
+#, fuzzy
+msgid "My wishlist on "
+msgstr "Min önskelista på %s"
+
+#: templates/share.php:51
+msgid "WhatsApp"
+msgstr ""
+
+#: templates/share.php:61
+msgid "(Now"
+msgstr ""
+
+#: templates/share.php:61
+msgid "copy"
+msgstr ""
+
+#: templates/share.php:61
+msgid "this wishlist link and share it anywhere)"
+msgstr ""
+
+#: templates/wishlist-view.php:32
+msgid "Edit title"
+msgstr "Ändra titel"
+
+#: templates/wishlist-view.php:41
+msgid "Save"
+msgstr "Spara"
+
+#: templates/wishlist-view.php:45
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: templates/wishlist-view.php:82
+msgid "Product Name"
+msgstr "Produktnamn"
+
+#: templates/wishlist-view.php:89
+msgid "Unit Price"
+msgstr "Enhetspris"
+
+#: templates/wishlist-view.php:102
+msgid "Stock Status"
+msgstr "I lager?"
+
+#: templates/wishlist-view.php:152 templates/wishlist-view.php:232
+msgid "Remove this product"
+msgstr "Ta bort denna produkt"
+
+#: templates/wishlist-view.php:172
+msgid "Free!"
+msgstr "Gratis!"
+
+#: templates/wishlist-view.php:179
+msgid "Out of Stock"
+msgstr "Slut i lager"
+
+#: templates/wishlist-view.php:179
+msgid "In Stock"
+msgstr "Finns i lager"
+
+#: templates/wishlist-view.php:188
+msgid "Added on : %s"
+msgstr "Tillagd: %s"
+
+#: templates/wishlist-view.php:200
+msgid "Move"
+msgstr "Flytta"
+
+#: templates/wishlist-view.php:232
+msgid "Remove"
+msgstr "Ta bort"
+
+#: templates/wishlist-view.php:259
+msgid "Add the selected products to the cart"
+msgstr "Lägg till de markerade produkterna i kundvagnen"
+
+#: templates/wishlist-view.php:267 templates/wishlist-view.php:313
+msgid "Ask for an estimate"
+msgstr "Fråga efter en uppskattning"
+
+#: templates/wishlist-view.php:303
+msgid "Your email"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "YITH WooCommerce Wishlist"
+msgstr "YITH WooCommerce Wishlist"
+
+#. Plugin URI of the plugin/theme
+msgid "https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"<code><strong>YITH WooCommerce Wishlist</strong></code> gives your users the "
+"possibility to create, fill, manage and share their wishlists allowing you "
+"to analyze their interests and needs to improve your marketing strategies. "
+"<a href=\"https://yithemes.com/\" target=\"_blank\">Get more plugins for "
+"your e-commerce on <strong>YITH</strong></a>"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "YITH"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://yithemes.com/"
+msgstr ""
+
+#~ msgid "wishlist"
+#~ msgstr "önskelista"
+
+#~ msgid ""
+#~ "WARNING: This plugin requires at least WooCommerce 2.2! Please, use this "
+#~ "link to update it."
+#~ msgstr ""
+#~ "VARNING: Detta plugin kräver mins WooCommerce 2.2! Vänligen använd denna "
+#~ "länk för att uppdatera."
+
+#~ msgid "WARNING: This plugin requires at least WooCommerce 2.2!"
+#~ msgstr "VARNING: Detta plugin kräver minst WooCommerce 2.2!"
+
+#~ msgid ""
+#~ "You can't activate the free version of YITH WooCommerce Wishlist while "
+#~ "you are using the premium one."
+#~ msgstr ""
+#~ "Du kan inte aktivera gratisversionen av YITH WooCommerce Wishlist när du "
+#~ "redan använder premiumversionen"
+
+#~ msgid ""
+#~ "Upgrade to the PREMIUM VERSION\n"
+#~ "of YITH WOOCOMMERCE WISHLIST to benefit from all features!"
+#~ msgstr ""
+#~ "Uppgradera till Premiumverionen\n"
+#~ "av YITH WOOCOMMERCE WISHLIST för att ta del av alla funktioner!"
+
+#~ msgid ""
+#~ "Enable all plugin features. <strong>Be sure to select at least one option "
+#~ "in the Wishlist page menu in %s.</strong> Also, please read the plugin <a "
+#~ "href=\"%s\" target=\"_blank\">documentation</a>."
+#~ msgstr ""
+#~ "Aktivera alla funktioner <strong>Försäkra dig om att välja minst ett "
+#~ "alternativ i önskelistans sidmeny i %s.</strong> Samt, vänligen läs "
+#~ "tilläggets <a href=“%s” target=“_blank”>dokumentation</a>."
+
+#~ msgid ""
+#~ "It will be used by Facebook, Twitter and Pinterest. Use <strong>"
+#~ "%wishlist_url%</strong> where you want to show the URL of your wishlist."
+#~ msgstr ""
+#~ "Detta kommer att användas av Facebook, Twitter och Pintrest. Använd "
+#~ "<strong>%whishlist_url%</strong> där du vill visa länken till din "
+#~ "önskelista."
+
+#~ msgid "Select a date"
+#~ msgstr "Välj ett datum"
+
+#~ msgid "Hours"
+#~ msgstr "Timmar"
+
+#~ msgid "Minutes"
+#~ msgstr "Minuter"
+
+#~ msgid "Upload"
+#~ msgstr "Ladda upp"
+
+#~ msgid "px"
+#~ msgstr "px"
+
+#~ msgid "em"
+#~ msgstr "em"
+
+#~ msgid "pt"
+#~ msgstr "pt"
+
+#~ msgid "rem"
+#~ msgstr "rem"
+
+#~ msgid "Select a font family"
+#~ msgstr "Välj ett typsnitt"
+
+#~ msgid "Regular"
+#~ msgstr "Vanlig"
+
+#~ msgid "Bold"
+#~ msgstr "Fetstil"
+
+#~ msgid "Extra bold"
+#~ msgstr "Extra fetstil"
+
+#~ msgid "Italic"
+#~ msgstr "Kursiv"
+
+#~ msgid "Italic bold"
+#~ msgstr "Fet kursiv"
+
+#~ msgid "Click to preview"
+#~ msgstr "Klicka för att förhandsgranska"
+
+#~ msgid "Add %s"
+#~ msgstr "Lägg till %s"
+
+#~ msgid "Add New %s"
+#~ msgstr "Lägg till ny %s"
+
+#~ msgid "Edit %s"
+#~ msgstr "Ändra %s"
+
+#~ msgid "New %s"
+#~ msgstr "Ny %s"
+
+#~ msgid "All %s"
+#~ msgstr "Alla %s"
+
+#~ msgid "View %s"
+#~ msgstr "Granska %s"
+
+#~ msgid "Search %s"
+#~ msgstr "Sök %s"
+
+#~ msgid "No %s found"
+#~ msgstr "Inga %s hittade"
+
+#~ msgid "No %s found in Trash"
+#~ msgstr "Inga %s hittade i papperskorgen"
+
+#~ msgid "%s Categories"
+#~ msgstr "%s Kategorier"
+
+#~ msgid "Category"
+#~ msgstr "Kategori"
+
+#~ msgid "Search Categories"
+#~ msgstr "Sök kategorier"
+
+#~ msgid "All Categories"
+#~ msgstr "Alla kategorier"
+
+#~ msgid "Parent Category"
+#~ msgstr "Förälderkategori"
+
+#~ msgid "Parent Category:"
+#~ msgstr "Förälderkategori:"
+
+#~ msgid "Edit Category"
+#~ msgstr "Ändra kategori"
+
+#~ msgid "Update Category"
+#~ msgstr "Uppdatera kategori"
+
+#~ msgid "Add New Category"
+#~ msgstr "Lägg till ny kategori"
+
+#~ msgid "New Category Name"
+#~ msgstr "Ny kategoris namn"
+
+#~ msgid "Categories"
+#~ msgstr "Kategorier"
+
+#~ msgid "%s Settings"
+#~ msgstr "%s Inställningar"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Layout for this "
+#~ msgstr "Layout för detta"
+
+#~ msgid "Rewrite"
+#~ msgstr "Ta bort"
+
+#~ msgid ""
+#~ "Univocal identification name in the URL for each product (slug from post "
+#~ "if empty)"
+#~ msgstr ""
+#~ "Entydigt identifieringgsnamn i denna URL för varje produkt (smeknamn "
+#~ "(slug) från inlägg tomt)"
+
+#~ msgid "Label in Singular"
+#~ msgstr "Etikett i singular"
+
+#~ msgid "Set a label in singular (title of portfolio if empty)"
+#~ msgstr "Ange etikett i singular (titel på portfolion om den är tom)"
+
+#~ msgid "Label in Plural"
+#~ msgstr "Etikett i plural"
+
+#~ msgid "Set a label in plural (title of portfolio if empty)"
+#~ msgstr "Ange etikett i plural (titel på portfolio om den är tom)"
+
+#~ msgid "Taxonomy"
+#~ msgstr "Taxanomi"
+
+#~ msgid ""
+#~ "If you want to use categories in the portfolio, set a name for taxonomy. "
+#~ "Name should be a slug (must not contain capital letters nor spaces) and "
+#~ "must not be more than 32 characters long (database structure restriction)."
+#~ msgstr ""
+#~ "Om du vill använda kategorier i portfolion så sätt ett namn för "
+#~ "taxanomin. Namnet bör vara ett “slug” (får inte innehålla stora "
+#~ "bokstäver, symboler eller mellanslag) och får inte vara längre än 32 "
+#~ "tecken långt (detta på grund av databasens restriktioner)."
+
+#~ msgid "Taxonomy Rewrite"
+#~ msgstr "Taxanomi omskrivning"
+
+#~ msgid "Set univocal name for each category page URL."
+#~ msgstr "Ange entydigt namn för varje kategorisidas URL."
+
+#~ msgid "Single layout"
+#~ msgstr "Enskild layout"
+
+#~ msgid "Layout for single page of this portfolio"
+#~ msgstr "Layout för enskild sida i denna portfolio"
+
+#~ msgid "layout settings"
+#~ msgstr "layoutinställningar"
+
+#~ msgid "Quick links"
+#~ msgstr "Snabblänkar"
+
+#~ msgid "Show frontend of the %s"
+#~ msgstr "Visa framsidan för %s"
+
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid "Add %s from images"
+#~ msgstr "Lägg till %s ifrån bilder"
+
+#~ msgid "Add with multiupload"
+#~ msgstr "Lägg till med multi-uppladdning"
+
+#~ msgid "The changes you have made will be lost if you leave this page."
+#~ msgstr "Ändringarna du gjort kommer gå förlorade om du lämnar sidan."
+
+#~ msgid "Plugin Settings"
+#~ msgstr "Plugininställningar"
+
+#~ msgid "YIT Plugins"
+#~ msgstr "YIT Plugins"
+
+#~ msgid "Save Changes"
+#~ msgstr "Spara ändringar"
+
+#~ msgid ""
+#~ "If you continue with this action, you will reset all options in this page."
+#~ msgstr ""
+#~ "Om du fortsätter kommer du nollställa alla inställningar på denna sida."
+
+#~ msgid "Reset to Default"
+#~ msgstr "Återställ till standardvärden"
+
+#~ msgid "Are you sure?"
+#~ msgstr "Är du säker?"
+
+#~ msgid ""
+#~ "The element you have entered already exists. Please, enter another name."
+#~ msgstr "Elementet du har angett finns redan. Vänligen ange ett annat namn."
+
+#~ msgid "Settings saved"
+#~ msgstr "Inställningar sparade"
+
+#~ msgid "Settings reset"
+#~ msgstr "Inställningar återställda"
+
+#~ msgid "Element deleted correctly."
+#~ msgstr "Elementet rederat."
+
+#~ msgid "Element updated correctly."
+#~ msgstr "Element uppdaterat."
+
+#~ msgid "Database imported correctly."
+#~ msgstr "Databasen importerad."
+
+#~ msgid "An error has occurred during import. Please try again."
+#~ msgstr "Ett fel uppstod under importering. Vänligen prova igen."
+
+#~ msgid "The added file is not valid."
+#~ msgstr "Den tillagda filen är inte godkänd."
+
+#~ msgid "Sorry, import is disabled."
+#~ msgstr "Ledsen, importering är avslaget."
+
+#~ msgid "Sorting successful."
+#~ msgstr "Sorteringen lyckades."
+
+#~ msgid ""
+#~ "If you continue with this action, you will reset all the options in this "
+#~ "page."
+#~ msgstr ""
+#~ "Om du fortsätter kommer du nollställa alla inställningar på denna sida."
+
+#~ msgid "Plugins Activated"
+#~ msgstr "Plugins aktiverade"
+
+#~ msgid ""
+#~ "From now on, you can find all plugin options in YIT Plugin menu.\n"
+#~ "                                     For each plugin installed, "
+#~ "customization settings will be available as a new entry in YIT Plugin "
+#~ "menu."
+#~ msgstr ""
+#~ "Från och med nu kan du hitta alla inställningar under YIT Plugin-menyn. "
+#~ "För varje plugin tillagt kommer mer inställningar att hamna som ett "
+#~ "undermenyval där."
+
+#~ msgid "Discover all our plugins available on:"
+#~ msgstr "Upptäck alla våra plugins på:"
+
+#~ msgid "and"
+#~ msgstr "och"
+
+#~ msgid "Plugins Upgraded"
+#~ msgstr "Plugin uppgraderade"
+
+#~ msgid ""
+#~ "From now on, you can find all options of your plugins in YIT Plugin "
+#~ "menu.\n"
+#~ "                                    Any time one of our plugins is "
+#~ "updated, a new entry will be added to this menu.\n"
+#~ "                                    For example, after the update, plugin "
+#~ "options (such as for YITH WooCommerce Wishlist, YITH WooCommerce Ajax "
+#~ "Search, etc.)\n"
+#~ "                                    will be moved from previous location "
+#~ "to YIT Plugin tab."
+#~ msgstr ""
+#~ "Från och med nu hittar du alla inställningar under YIT Plugins-menyn. När "
+#~ "ett plugin uppdateras kommer ett nytt undermenyval hamna där. Till "
+#~ "exempel inställningar för YITH WooCommerce Whishlist, YITH WooCommerce "
+#~ "Ajax Search m.m, kommer att tas bort ifrån deras gamla ställe till YIT "
+#~ "Plugin-menyvalet."
+
+#~ msgid "There is a new version of %plugin_name% available."
+#~ msgstr "Det finns en ny version av %plugin_name% tillgänglig."
+
+#~ msgid "View version %latest% details."
+#~ msgstr "Se version %latest% detaljer."
+
+#~ msgid "Automatic update is unavailable for this plugin,"
+#~ msgstr "Automatiska uppdateringar är inte tillgängligt för detta plugin,"
+
+#~ msgid ""
+#~ "please <a href=\"%activate_link%\">activate</a> your copy of %plugin_name"
+#~ "%."
+#~ msgstr ""
+#~ "vänligen <a href=“%activate_link%”>aktivera</a> din kopia av %plugin_name"
+#~ "%."
+
+#~ msgid "Update now."
+#~ msgstr "Uppdatera nu."
+
+#~ msgid "Yithemes Repository"
+#~ msgstr "Yithemes källa"
+
+#~ msgid "Invalid URL Provided."
+#~ msgstr "Ogiltig URL angiven"
+
+#~ msgid "Could not create Temporary file."
+#~ msgstr "Kunde inte skapa tillfällig fil."
+
+#~ msgid ""
+#~ "There is a new version of %1$s available. <a href=\"%2$s\" class="
+#~ "\"thickbox yit-changelog-button\" title=\"%3$s\">View version %4$s "
+#~ "details</a>."
+#~ msgstr ""
+#~ "Det finns en ny version av %1$s tillgänglig. <a href=“%2$s” "
+#~ "class=“thickbox yit-changelog-button” title=“%3$s”> Se version %4$s "
+#~ "detaljer</a>"
+
+#~ msgid ""
+#~ "There is a new version of %1$s available. <a href=\"%2$s\" class="
+#~ "\"thickbox yit-changelog-button\" title=\"%3$s\">View version %4$s "
+#~ "details</a>. <em>You have to activate the plugin on a single site of the "
+#~ "network to benefit from automatic updates.</em>"
+#~ msgstr ""
+#~ "Det finns en ny version av %1$s tillgänglig. <a href=“%2$s” "
+#~ "class=“thickbox yit-changelog-button” title=“%3$s”> Se version %4$s "
+#~ "detaljer</a>. <em>Du måste aktivera pluginet på någon sida i nätverket "
+#~ "för att kunna ta del av automatiska uppdateringar.</em>"
+
+#~ msgid ""
+#~ "There is a new version of %1$s available. <a href=\"%2$s\" class="
+#~ "\"thickbox yit-changelog-button\" title=\"%3$s\">View version %4$s "
+#~ "details</a>. <em>Automatic update is unavailable for this plugin, please "
+#~ "<a href=\"%5$s\" title=\"Licence activation\">activate</a> your copy of "
+#~ "%6s.</em>"
+#~ msgstr ""
+#~ "Det finns en ny version av %1$s tillgänglig. <a href=“%2$s” "
+#~ "class=“thickbox yit-changelog-button” title=“%3$s”> Se version %4$s "
+#~ "detaljer</a>. <em>Automatiska uppdateringar är inte tillgängligt för "
+#~ "detta plugin, vänligen <a href=“%5$s” title=“Aktivera licens”>aktivera</"
+#~ "a> din kopia av %6s.</em>"
+
+#~ msgid ""
+#~ "There is a new version of %1$s available. <a href=\"%2$s\" class="
+#~ "\"thickbox yit-changelog-button\" title=\"%3$s\">View version %4$s "
+#~ "details</a> or <a href=\"%5$s\">update now</a>."
+#~ msgstr ""
+#~ "Det finns en ny version av %1$s tillgänglig. <a href=“%2$s” "
+#~ "class=“thickbox yit-changelog-button” title=“%3$s”> Se version %4$s "
+#~ "detaljer</a> eller <a href=“%5$s”>uppdatera nu</a>."
+
+#~ msgid "You can't update the plugins for this site."
+#~ msgstr "Du kan inte uppdatera plugins på denna sida."
+
+#~ msgid ""
+#~ "You do not have sufficient permissions to update the plugins for this "
+#~ "site."
+#~ msgstr ""
+#~ "Du har inte tillräckligt med rättigheter för att uppdatera plugins på "
+#~ "denna sida."
+
+#~ msgid "Update Plugin"
+#~ msgstr "Uppdatera plugin"
+
+#~ msgid "%field% field cannot be empty"
+#~ msgstr "%field% fält kan inte lämnas tomma"
+
+#~ msgid "%field_1% and %field_2% fields cannot be empty"
+#~ msgstr "%field_1% och %field_2% fälten kan inte lämnas tomma"
+
+#~ msgid "Unable to contact the remote server, please try again later. Thanks!"
+#~ msgstr "Kunde inte kontakta fjärrservern, vänligen försök senare. Tack!"
+
+#~ msgid "Invalid Request"
+#~ msgstr "Ogiltig förfrågan"
+
+#~ msgid "Invalid licence key"
+#~ msgstr "Ogiltig licensnyckel"
+
+#~ msgid "Software has been deactivated"
+#~ msgstr "Mjukvaran har blivit avaktiverad"
+
+#~ msgid "Maximum number of activations exceeded"
+#~ msgstr "Maxantalet aktiveringar är uppnått"
+
+#~ msgid "Invalid instance ID"
+#~ msgstr "Ogiltig ID-nummer"
+
+#~ msgid "Invalid security key"
+#~ msgstr "Ogiltig säkerhetsnyckel"
+
+#~ msgid "Licence key has expired"
+#~ msgstr "Licensnyckeln har utgått"
+
+#~ msgid "Licence key has been banned"
+#~ msgstr "Licensnyckeln har blivit svartlistad"
+
+#~ msgid "Licence Activation"
+#~ msgstr "Licensaktivering"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "Yithemes Licence Activation"
+#~ msgstr "Yithemes licensaktivering"
+
+#~ msgid ""
+#~ "I cannot find the license key for activating the theme I have bought some "
+#~ "time ago. Where can I find it?"
+#~ msgstr ""
+#~ "Jag kan inte hitta licensnyckeln för att aktivera temat jag köpt. Vart "
+#~ "hittar jag den?"
+
+#~ msgid ""
+#~ "If you have purchased one of our products before 27 January 2015, you can "
+#~ "benefit from support and updates (the services offered with the license)\n"
+#~ "            until 27 January 2016 and you do not have to purchase it "
+#~ "again to get a new license key, because, before this date, your license "
+#~ "used to be activated automatically by our system.\n"
+#~ "            After 27 January 2016, instead, if you want to benefit from "
+#~ "support and updates you have to buy a new license and activate it through "
+#~ "the license key you will be\n"
+#~ "            provided with and that you can find in your YIThemes account, "
+#~ "in section \"My licenses\"."
+#~ msgstr ""
+#~ "Om du har köpt någon av våra produkter för den 27e januari 2015 kan du ta "
+#~ "del av vår support och uppdateringar (servicen som ingår med licensen) "
+#~ "tills den 27e januari 2016 och du behöver Inte köpa en ny licens. Fram "
+#~ "tills detta datum ligger din licens aktiverad automatiskt i våra system.\n"
+#~ "Efter 27e januari 2015 däremot så måste du köpa en ny licens om du vill "
+#~ "ta del av vår support och uppdateringar och aktivera den med "
+#~ "licensnyckeln du fått av oss och som du kan hitta på ditt YIThemes-konto "
+#~ "i sektionen “My licenses”."
+
+#~ msgid ""
+#~ "Have you updated your licenses? Have you asked for an extension? Update "
+#~ "information concerning your products."
+#~ msgstr ""
+#~ "Har du uppdaterat din licens? Har du frågat efter ett tilläg? Uppdatera "
+#~ "informationen angående dina produkter."
+
+#~ msgid "Update licence information"
+#~ msgstr "Uppdatera licensinformation"
+
+#~ msgid "Products to be activated"
+#~ msgstr "Produkter som ska aktiveras"
+
+#~ msgid "Activate"
+#~ msgstr "Aktivera"
+
+#~ msgid "Activated"
+#~ msgstr "Aktiverad"
+
+#~ msgid "Licence Key"
+#~ msgstr "Licensnyckel"
+
+#~ msgid "Expires"
+#~ msgstr "Utgår"
+
+#~ msgid "Remaining"
+#~ msgstr "Kvarstår"
+
+#~ msgid "Renew"
+#~ msgstr "Förnya"
+
+#~ msgid "%1s out of %2s"
+#~ msgstr "%1s utav %2s"
+
+#~ msgid "Banned"
+#~ msgstr "Svartlistad"
+
+#~ msgid "Expired"
+#~ msgstr "Utgått"
+
+#~ msgid "Search for a product"
+#~ msgstr "Sök efter produkt"
+
+#~ msgid "No categories."
+#~ msgstr "Inga kategorier."
+
+#~ msgid "+ Add New Category"
+#~ msgstr "+ Lägg till ny kategori"
+
+#~ msgid "Text Input"
+#~ msgstr "Text input"
+
+#~ msgid "Checkbox"
+#~ msgstr "Checkbox"
+
+#~ msgid "Select"
+#~ msgstr "Välj"
+
+#~ msgid "Textarea"
+#~ msgstr "Textruta"
+
+#~ msgid "Radio Input"
+#~ msgstr "Radioknappar"
+
+#~ msgid "Password Field"
+#~ msgstr "Lösenordsfält"
+
+#~ msgid "File Upload"
+#~ msgstr "Filuppladdning"
+
+#~ msgid "Theme Icon"
+#~ msgstr "Temaikon"
+
+#~ msgid "Custom Icon"
+#~ msgstr "Egen ikon"
+
+#~ msgid "None"
+#~ msgstr "Ingen"
+
+#~ msgid "Add field"
+#~ msgstr "Lägg till fält"
+
+#~ msgid "Click to toggle"
+#~ msgstr "Klicka för att slå på/av"
+
+#~ msgid "Insert the title for the field."
+#~ msgstr "Ange titeln för fältet."
+
+#~ msgid "Data Name"
+#~ msgstr "Data namn"
+
+#~ msgid ""
+#~ "REQUIRED: Field identification name to be entered into email body. "
+#~ "<strong>Note:</strong>Use only lowercase characters and underscores."
+#~ msgstr ""
+#~ "KRAV: Fältidentiferingsnamnet som går i mailet. <strong>Notera:</strong> "
+#~ "Använd enbart små bokstäver och understräck."
+
+#~ msgid "Type field"
+#~ msgstr "Fälttyp"
+
+#~ msgid "Select the type for this field."
+#~ msgstr "Välj typ för detta fält."
+
+#~ msgid "Checked"
+#~ msgstr "Markerad"
+
+#~ msgid ""
+#~ "Select this option if you want this field appears as already checked."
+#~ msgstr "Välj detta alternativ om du vill att fälten ska vara förmarkerade."
+
+#~ msgid "Add options "
+#~ msgstr "Lägg till alternativ"
+
+#~ msgid "Add option"
+#~ msgstr "Lägg till alternativ"
+
+#~ msgid "Selected"
+#~ msgstr "Vald"
+
+#~ msgid "Delete option"
+#~ msgstr "Ta bort alternativ"
+
+#~ msgid "Error Message"
+#~ msgstr "Felmeddelande"
+
+#~ msgid "Insert the error message for validation."
+#~ msgstr "Välj felmeddelande för validering."
+
+#~ msgid "Required"
+#~ msgstr "Obligatorisk"
+
+#~ msgid "Select this option if it must be required."
+#~ msgstr "Välj detta alternativ om detta är obligatoriskt."
+
+#~ msgid "Select this option if the email must be valid."
+#~ msgstr "Välj detta alternativ om epostadressen måste vara giltig."
+
+#~ msgid "Reply To"
+#~ msgstr "Svara till"
+
+#~ msgid "Select this if it is the email you can reply to."
+#~ msgstr "Välj detta om det är denna epost du kan svara till."
+
+#~ msgid "Class"
+#~ msgstr "Klass"
+
+#~ msgid ""
+#~ "Insert additional class(es) (separated by commas) for more "
+#~ "personalization."
+#~ msgstr ""
+#~ "Lägg till ytterligare klass(er) (separerade med kommatecken) för en mer "
+#~ "personligare känsla."
+
+#~ msgid "Icon"
+#~ msgstr "Ikon"
+
+#~ msgid "Image preview"
+#~ msgstr "Bildförhandsgranskning"
+
+#~ msgid "Insert an icon for more personalization."
+#~ msgstr "Lägg till en ikon för en mer personligare känsla."
+
+#~ msgid "Width"
+#~ msgstr "Bredd"
+
+#~ msgid "Set field length."
+#~ msgstr "Välj fältets längd."
+
+#~ msgid "Close all"
+#~ msgstr "Stäng alla"
+
+#~ msgid "Expand all"
+#~ msgstr "Utöka alla"
+
+#~ msgid "Value"
+#~ msgstr "Värde"
+
+#~ msgid "Content of the tab. (HTML is supported)"
+#~ msgstr "Innehållet i fliken. (HTML är tillåtet)"
+
+#~ msgid "Add custom product tab"
+#~ msgstr "Lätt till egen produktflik"
+
+#~ msgid "Do you want to remove the custom tab?"
+#~ msgstr "Vill du ta bort egenskapad flik?"
+
+#~ msgid "(Default: %s <img src=\"%s\"/>)"
+#~ msgstr "(Standard: %s <img src=“%s”/>)"
+
+#~ msgid "(Default: <i %s></i> )"
+#~ msgstr "(Standard: <i %s></i>)"
+
+#~ msgid "Delete image"
+#~ msgstr "Ta bort bild"
+
+#~ msgid "Add Images to Gallery"
+#~ msgstr "Lägg till bilder i galleri"
+
+#~ msgid "Add to gallery"
+#~ msgstr "Till till i galleri"
+
+#~ msgid "Add images"
+#~ msgstr "Lägg till bilder"
+
+#~ msgid "Delete"
+#~ msgstr "Ta bort"
+
+#~ msgid "Upload new images"
+#~ msgstr "Ladda upp nya bilder"
+
+#~ msgid "Are you sure you want to remove this image?"
+#~ msgstr "Är du säker på att du vill ta bort denna bild?"
+
+#~ msgid "Left sidebar"
+#~ msgstr "Vänster sidebar"
+
+#~ msgid "No sidebar"
+#~ msgstr "Ingen sidebar"
+
+#~ msgid "Right sidebar"
+#~ msgstr "Höger sidebar"
+
+#~ msgid "Choose a sidebar"
+#~ msgstr "Välj en sidebar"
+
+#~ msgid "Left Sidebar"
+#~ msgstr "Vänster sidebar"
+
+#~ msgid "Right Sidebar"
+#~ msgstr "Höger sidebar"
+
+#~ msgid "Web fonts"
+#~ msgstr "Webbtypsnitt"
+
+#~ msgid "Google fonts"
+#~ msgstr "Google typsnitt"
+
+#~ msgid "Reset Defaults"
+#~ msgstr "Återställ standardvärde"

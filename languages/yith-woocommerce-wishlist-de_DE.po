@@ -1,0 +1,1766 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YITH WooCommerce Wishlist\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/init\n"
+"POT-Creation-Date: 2019-08-12 11:01:34+00:00\n"
+"PO-Revision-Date: 2019-02-12 14:36+0100\n"
+"Last-Translator: \n"
+"Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_n:1,2;__ngettext:1,2;"
+"__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
+"_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPathExcluded-0: ../plugin-fw\n"
+
+#: includes/class.yith-wcwl-admin-init.php:159
+#: includes/class.yith-wcwl-admin-init.php:1492
+#: includes/class.yith-wcwl-admin-init.php:1493
+#: includes/class.yith-wcwl-install.php:245
+msgid "Wishlist"
+msgstr "Wunschliste"
+
+#: includes/class.yith-wcwl-admin-init.php:161
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: includes/class.yith-wcwl-admin-init.php:162
+#: includes/class.yith-wcwl-admin-init.php:243
+msgid "Colors"
+msgstr "Farben"
+
+#: includes/class.yith-wcwl-admin-init.php:163
+msgid "Premium Version"
+msgstr "Premium Version"
+
+#: includes/class.yith-wcwl-admin-init.php:1009
+msgid "Enable all plugin features"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1010
+msgid ""
+"Be sure to select at least one option in the Wishlist page menu in this "
+"settings page"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1011
+msgctxt "[Part of]: Also, please read the plugin documentation"
+msgid "Also, please read the plugin"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1012
+#, fuzzy
+msgctxt "[Part Of]: Also, please read the plugin documentation"
+msgid "documentation"
+msgstr "Plugin Dokumentation"
+
+#: includes/class.yith-wcwl-admin-init.php:1018
+msgid "Upgrade to the PREMIUM VERSION"
+msgstr ""
+"Hier die <a href=\"https://goo.gl/wxbNyw\" target=\"_blank\">PREMIUM "
+"VERSION</a> kaufen."
+
+#: includes/class.yith-wcwl-admin-init.php:1022
+msgid "Discover the Advanced Features"
+msgstr "Erweiterte Funktionen ansehen"
+
+#: includes/class.yith-wcwl-admin-init.php:1023
+msgid ""
+"Upgrade to the PREMIUM VERSION of YITH WOOCOMMERCE WISHLIST to benefit from "
+"all features!"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1029
+msgid "Get Support and Pro Features"
+msgstr ""
+"<a href=\"https://goo.gl/wxbNyw\" target=\"_blank\">Support und Premium "
+"Features bekommen</a>"
+
+#: includes/class.yith-wcwl-admin-init.php:1030
+msgid ""
+"By purchasing the premium version of the plugin, you will take advantage of "
+"the advanced features of the product and you will get one year of free "
+"updates and support through our platform available 24h/24."
+msgstr ""
+"Mit dem Kauf der <a href=\"https://goo.gl/wxbNyw\" target=\"_blank\">Premium "
+"Version</a> des Plugins, bekommst du ALLE Premium Funktionen und ein ganzes "
+"Jahr freie Updates. Außerdem gibt's 24h Support auf unserer Webseite -> <a "
+"href=\"https://goo.gl/wxbNyw\" target=\"_blank\">Premium Version</a>"
+
+#: includes/class.yith-wcwl-admin-init.php:1040
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#: includes/class.yith-wcwl-admin-init.php:1047
+msgid "Enable YITH Wishlist"
+msgstr "YITH Wunschlisten Plugin aktivieren"
+
+#: includes/class.yith-wcwl-admin-init.php:1054
+msgid "Default wishlist title"
+msgstr "Standard Wunschlisten Titel"
+
+#: includes/class.yith-wcwl-admin-init.php:1056
+#: includes/class.yith-wcwl-admin-init.php:1057
+#: includes/class.yith-wcwl-admin-init.php:1307
+msgid "My wishlist on %s"
+msgstr "Meine Wunschliste bei %s"
+
+#: includes/class.yith-wcwl-admin-init.php:1062
+msgid "Wishlist Page"
+msgstr "Wunschlisten Seite"
+
+#: includes/class.yith-wcwl-admin-init.php:1063
+msgid "Page contents: [yith_wcwl_wishlist]"
+msgstr "Seiteninhalt: [yith_wcwl_wishlist]"
+
+#: includes/class.yith-wcwl-admin-init.php:1072
+msgid "Position"
+msgstr "Position"
+
+#: includes/class.yith-wcwl-admin-init.php:1073
+msgid ""
+"You can add the button in variable products only after the \"Add to Cart\" "
+"button or using the shortcode [yith_wcwl_add_to_wishlist]."
+msgstr ""
+"Du kannst den Button bei Variablen Produkten nur nach dem \"In den Warenkorb"
+"\" Button hinzufügen oder du nutzt den Shortcode [yith_wcwl_add_to_wishlist]."
+
+#: includes/class.yith-wcwl-admin-init.php:1079
+msgid "After \"Add to cart\""
+msgstr "Nach \"in den Warenkorb\""
+
+#: includes/class.yith-wcwl-admin-init.php:1080
+msgid "After thumbnails"
+msgstr "Nach dem Vorschaubild"
+
+#: includes/class.yith-wcwl-admin-init.php:1081
+msgid "After summary"
+msgstr "Nach der Zusammenfassung"
+
+#: includes/class.yith-wcwl-admin-init.php:1082
+msgid "Use shortcode"
+msgstr "Benutze Shortcodes"
+
+#: includes/class.yith-wcwl-admin-init.php:1087
+msgid "Redirect to cart"
+msgstr "Zum Warenkorb weiterleiten"
+
+#: includes/class.yith-wcwl-admin-init.php:1088
+msgid ""
+"Redirect to cart page if \"Add to cart\" button is clicked in the wishlist "
+"page."
+msgstr ""
+"Zum Warenkorb weiterleiten wenn der Button \"Hinzufügen zum Warenkorb\" "
+"geklickt wird"
+
+#: includes/class.yith-wcwl-admin-init.php:1094
+msgid "Remove if added to the cart"
+msgstr "Entfernen wenn zum Warenkorb hinzugefügt"
+
+#: includes/class.yith-wcwl-admin-init.php:1095
+msgid "Remove the product from the wishlist if it has been added to the cart."
+msgstr "Von der Wunschliste entfernen wenn zum Warenkorb hinzugefügt."
+
+#: includes/class.yith-wcwl-admin-init.php:1101
+msgid "\"Add to Wishlist\" text"
+msgstr "Zur Wunschliste hinzufügen Text"
+
+#: includes/class.yith-wcwl-admin-init.php:1103
+msgid "Add to Wishlist"
+msgstr "Auf die Wunschliste"
+
+#: includes/class.yith-wcwl-admin-init.php:1108
+msgid "\"Browse wishlist\" text"
+msgstr "\"Wunschliste durchsuchen\" Text"
+
+#: includes/class.yith-wcwl-admin-init.php:1110
+#: includes/class.yith-wcwl-ui.php:82 includes/class.yith-wcwl-ui.php:83
+msgid "Browse Wishlist"
+msgstr "Wunschliste durchstöbern"
+
+#: includes/class.yith-wcwl-admin-init.php:1115
+msgid "\"Product already in wishlist\" text"
+msgstr "Artikel ist bereits auf der Wunschliste Text"
+
+#: includes/class.yith-wcwl-admin-init.php:1117
+#: includes/class.yith-wcwl-ui.php:83
+msgid "The product is already in the wishlist!"
+msgstr "Der Artikel ist bereits auf einer Wunschliste"
+
+#: includes/class.yith-wcwl-admin-init.php:1122
+msgid "\"Product added\" text"
+msgstr "Artikel hinzugefügt Text"
+
+#: includes/class.yith-wcwl-admin-init.php:1124
+#: includes/class.yith-wcwl-ui.php:82
+msgid "Product added!"
+msgstr "Artikel hinzugefügt!"
+
+#: includes/class.yith-wcwl-admin-init.php:1129
+msgid "\"Add to Cart\" text"
+msgstr "In den Warenkorb Text"
+
+#: includes/class.yith-wcwl-admin-init.php:1131
+msgid "Add to Cart"
+msgstr "In den Warenkorb"
+
+#: includes/class.yith-wcwl-admin-init.php:1136
+msgid "Show Unit price"
+msgstr "Zeige Artikel Preis"
+
+#: includes/class.yith-wcwl-admin-init.php:1137
+msgid "Show unit price for each product in wishlist"
+msgstr "Zeige Artikel Preis für jedes Produkt"
+
+#: includes/class.yith-wcwl-admin-init.php:1144
+msgid "Show \"Add to Cart\" button"
+msgstr "Zeige \"Zum Warenkorb hinzufügen\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1145
+msgid "Show \"Add to Cart\" button for each product in wishlist"
+msgstr "Zeige \"Zum, Warenkorb hinzufügen\" Button bei jedem Artikel"
+
+#: includes/class.yith-wcwl-admin-init.php:1152
+msgid "Show Stock status"
+msgstr "Zeige Lagerstatus"
+
+#: includes/class.yith-wcwl-admin-init.php:1153
+msgid ""
+"Show \"In stock\" or \"Out of stock\" label for each product in wishlist"
+msgstr "Zeige den Lagerstatus für jeden Artikel"
+
+#: includes/class.yith-wcwl-admin-init.php:1160
+msgid "Show Date of addition"
+msgstr "Zeige Datum des hinzufügens"
+
+#: includes/class.yith-wcwl-admin-init.php:1161
+msgid "Show the date when users have added a product to the wishlist"
+msgstr "Zeige Datum wann der Kunde den Artikel hinzugefügt hat"
+
+#: includes/class.yith-wcwl-admin-init.php:1168
+msgid "Add second remove button"
+msgstr "Einen zweiten \"Entfernen\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1169
+msgid "Add a second remove button in the last column, with extended label"
+msgstr "Zweiter \"entfernen\" Button in der letzten Spalte"
+
+#: includes/class.yith-wcwl-admin-init.php:1184
+msgid "Styles"
+msgstr "Stile"
+
+#: includes/class.yith-wcwl-admin-init.php:1191
+msgid "Use buttons"
+msgstr "Benutze Buttons"
+
+#: includes/class.yith-wcwl-admin-init.php:1192
+msgid "Use buttons instead of simple anchors."
+msgstr "Benutze Buttons anstelle von Text Links."
+
+#: includes/class.yith-wcwl-admin-init.php:1198
+msgid "Custom CSS"
+msgstr "Benutzerdefiniertes CSS"
+
+#: includes/class.yith-wcwl-admin-init.php:1205
+msgid "Use theme style"
+msgstr "Nutze das Theme Styling"
+
+#: includes/class.yith-wcwl-admin-init.php:1206
+msgid "Use the theme style."
+msgstr "Nutze das Theme Styling."
+
+#: includes/class.yith-wcwl-admin-init.php:1212
+msgid "Rounded buttons"
+msgstr "Abgerundete Buttons"
+
+#: includes/class.yith-wcwl-admin-init.php:1213
+msgid "Make button corners rounded"
+msgstr "Nutze runde Button Ecken."
+
+#: includes/class.yith-wcwl-admin-init.php:1219
+msgid "\"Add to Wishlist\" icon"
+msgstr "Zur Wunschliste hinzufügen Symbol"
+
+#: includes/class.yith-wcwl-admin-init.php:1220
+msgid "Add an icon to the \"Add to Wishlist\" button"
+msgstr "Symbol für \"Auf die Wunschliste\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1230
+msgid "\"Add to Cart\" icon"
+msgstr "In den Warenkorb Symbol"
+
+#: includes/class.yith-wcwl-admin-init.php:1231
+msgid "Add an icon to the \"Add to Cart\" button"
+msgstr "Symbol für \"in den Warenkorb\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1249
+msgid "Social Networks & Share"
+msgstr "Social Netzwerke und Teilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1256
+msgid "Share on Facebook"
+msgstr "Auf Facebook teilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1257
+msgid "Show \"Share on Facebook\" button"
+msgstr "Zeige \"Auf Facebook teilen\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1263
+msgid "Tweet on Twitter"
+msgstr "Auf Twitter teilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1264
+msgid "Show \"Tweet on Twitter\" button"
+msgstr "Zeige \"Auf Twitter teilen\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1270
+msgid "Pin on Pinterest"
+msgstr "Auf Pinterest teilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1271
+msgid "Show \"Pin on Pinterest\" button"
+msgstr "Zeige \"Auf Pinterest teilen\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1277
+msgid "Share on Google+"
+msgstr "Auf Google+ teilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1278
+msgid "Show \"Share on Google+\" button"
+msgstr "Zeige \"Auf Google+ teilen\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1284
+msgid "Share by Email"
+msgstr "Per E-Mail teilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1285
+msgid "Show \"Share by Email\" button"
+msgstr "Zeige \"Per E-Mail teilen\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1291
+#, fuzzy
+msgid "Share by WhatsApp"
+msgstr "Per E-Mail teilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1292
+#, fuzzy
+msgid "Show \"Share by WhatsApp\" button ( only on phones )"
+msgstr "Zeige \"Per E-Mail teilen\" Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1298
+#, fuzzy
+msgid "Share by Url"
+msgstr "Per E-Mail teilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1299
+msgid "Show \"Share Url\" field on wishlist page"
+msgstr ""
+
+#: includes/class.yith-wcwl-admin-init.php:1305
+msgid "Social title"
+msgstr "Social Titel"
+
+#: includes/class.yith-wcwl-admin-init.php:1312
+msgid "Social text"
+msgstr "Social Text"
+
+#: includes/class.yith-wcwl-admin-init.php:1313
+msgid ""
+"It will be used by Twitter and Pinterest. Use <strong>%wishlist_url%</"
+"strong> where you want to show the URL of your wishlist."
+msgstr ""
+"Wird von Pinterest und Twitter genutzt. Benutze <strong>%wishlist_url%</"
+"strong> um die URL der Wunschliste anzuzeigen."
+
+#: includes/class.yith-wcwl-admin-init.php:1320
+msgid "Social image URL"
+msgstr "Social Bild URL"
+
+#: includes/class.yith-wcwl-admin-init.php:1321
+msgid "It will be used by Pinterest."
+msgstr "Wird von Pinterest genutzt."
+
+#: includes/class.yith-wcwl-admin-init.php:1335
+msgid ""
+"If you want to take advantage of this feature, you could consider to "
+"purchase the %s."
+msgstr ""
+"Wenn du diese Funktion nutzen möchtest brauchst du die Premium Version von "
+"<a href=https://goo.gl/iHq6lS\" target=\"_blank\">Frequently Bought "
+"together</a>.  %s"
+
+#: includes/class.yith-wcwl-admin-init.php:1340
+msgid "YITH WooCommerce Frequently Bought Together Integration"
+msgstr "YITH WooCommerce Frequently Bought Together integration"
+
+#: includes/class.yith-wcwl-admin-init.php:1347
+msgid "Enable slider in wishlist"
+msgstr "Slider in Wunschliste aktivieren"
+
+#: includes/class.yith-wcwl-admin-init.php:1348
+msgid ""
+"Choose to enable product slider in wishlist page with linked products (<a "
+"href=\"%s\" class=\"thickbox\">Example</a>). %s"
+msgstr ""
+"Auswählen um einen Artikel Slider in der Wunschliste zu aktivieren. (<a href="
+"\"%s\" class=\"thickbox\">Beispiel</a>). %s"
+
+#: includes/class.yith-wcwl-admin-init.php:1384
+msgid "\"Add to wishlist\" button"
+msgstr "Zur Wunschliste hinzufügen Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1387
+#: includes/class.yith-wcwl-admin-init.php:1405
+#: includes/class.yith-wcwl-admin-init.php:1423
+#: includes/class.yith-wcwl-admin-init.php:1441
+#: includes/class.yith-wcwl-admin-init.php:1459
+msgid "Background"
+msgstr "Hintergrund"
+
+#: includes/class.yith-wcwl-admin-init.php:1388
+#: includes/class.yith-wcwl-admin-init.php:1406
+#: includes/class.yith-wcwl-admin-init.php:1424
+#: includes/class.yith-wcwl-admin-init.php:1442
+#: includes/class.yith-wcwl-admin-init.php:1460
+msgid "Text"
+msgstr "Text"
+
+#: includes/class.yith-wcwl-admin-init.php:1389
+#: includes/class.yith-wcwl-admin-init.php:1407
+#: includes/class.yith-wcwl-admin-init.php:1425
+#: includes/class.yith-wcwl-admin-init.php:1443
+#: includes/class.yith-wcwl-admin-init.php:1461
+msgid "Border"
+msgstr "Rand"
+
+#: includes/class.yith-wcwl-admin-init.php:1396
+#: includes/class.yith-wcwl-admin-init.php:1414
+#: includes/class.yith-wcwl-admin-init.php:1432
+#: includes/class.yith-wcwl-admin-init.php:1450
+msgid "Background (hover)"
+msgstr "Hintergrund (Hover)"
+
+#: includes/class.yith-wcwl-admin-init.php:1397
+#: includes/class.yith-wcwl-admin-init.php:1415
+#: includes/class.yith-wcwl-admin-init.php:1433
+#: includes/class.yith-wcwl-admin-init.php:1451
+msgid "Text (hover)"
+msgstr "Text (hover)"
+
+#: includes/class.yith-wcwl-admin-init.php:1398
+#: includes/class.yith-wcwl-admin-init.php:1416
+#: includes/class.yith-wcwl-admin-init.php:1434
+#: includes/class.yith-wcwl-admin-init.php:1452
+msgid "Border (hover)"
+msgstr "Rand (Hover)"
+
+#: includes/class.yith-wcwl-admin-init.php:1402
+msgid "\"Add to Cart\" button"
+msgstr "In den Warenkorb Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1420
+msgid "\"Style 1\" button"
+msgstr "Stil 1 Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1438
+msgid "\"Style 2\" button"
+msgstr "Stil 2 Button"
+
+#: includes/class.yith-wcwl-admin-init.php:1456
+msgid "Wishlist table"
+msgstr "Wunschlisten Tabelle"
+
+#: includes/class.yith-wcwl-admin-init.php:1465
+msgid "Headers"
+msgstr "Kopfzeilen"
+
+#: includes/class.yith-wcwl-admin-init.php:1468
+msgid "Background color"
+msgstr "Hintergrund Farbe"
+
+#: includes/class.yith-wcwl-admin-init.php:1558
+msgid "Wishlist Activated"
+msgstr "Wunschliste aktiviert"
+
+#: includes/class.yith-wcwl-admin-init.php:1559
+msgid ""
+"In the YIT Plugin tab you can find the Wishlist options. With this menu, you "
+"can access to all the settings of our plugins that you have activated. "
+"Wishlist is available in an outstanding PREMIUM version with many new "
+"options, <a href=\"%s\">discover it now</a>."
+msgstr ""
+"Im YITH Plugin Tab findest du die Wunschlisten Optionen. Mit diesem Menü "
+"erhältst du Zugang zu allen aktivierten Einstellungen des Plugins. Die <a "
+"href=\"https://goo.gl/wxbNyw\" target=\"blank\">Premium Version</a> hat eine "
+"Menge Funktionen mehr, schau sie dir doch mal an<a href=\"%s\">.</a>"
+
+#: includes/class.yith-wcwl-admin-init.php:1570
+msgid "Wishlist Updated"
+msgstr "Wunschliste aktualisiert"
+
+#: includes/class.yith-wcwl-admin-init.php:1571
+msgid ""
+"From now on, you can find all the options of Wishlist under YIT Plugin -> "
+"Wishlist instead of WooCommerce -> Settings -> Wishlist, as in the previous "
+"version. When one of our plugins is updated, a new voice will be added to "
+"this menu. Wishlist has been updated with new available options, <a href=\"%s"
+"\">discover the PREMIUM version.</a>"
+msgstr ""
+"Ab sofort findest du alle Funktionen im Menü <strong>YITH Plugins</strong> -"
+"> Wunschliste und nicht mehr in den Einstellungen von WooCommerce. Wenn du "
+"eine <a href=\"https://goo.gl/wxbNyw\" target=\"_blank\">Premium Version</a> "
+"hast erscheint bei einem Update immer ein Hinweis<a href=\"%s\".</a>"
+
+#: includes/class.yith-wcwl-init.php:448
+msgid ""
+"We are sorry, but this feature is available only if cookies are enabled on "
+"your browser."
+msgstr "Achtung, diese Funktionen benötigt Cookies."
+
+#: includes/class.yith-wcwl-init.php:449
+msgid "Product correctly added to cart"
+msgstr "Artikel zum Einkaufswagen hinzugefügt"
+
+#: includes/class.yith-wcwl-install.php:244
+msgctxt "page_slug"
+msgid "wishlist"
+msgstr "Wunschliste"
+
+#: includes/class.yith-wcwl-privacy.php:50
+msgid "While you visit our site, we’ll track:"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:52
+msgid ""
+"Products you’ve added to the wishlist: we’ll use this to show you and other "
+"users your favourite products, and to create targeted email campaigns."
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:53
+msgid ""
+"Wishlists you’ve created: we’ll keep track of the wishlists you create, and "
+"make them visible to the store’s staff"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:55
+msgid ""
+"We’ll also use cookies to keep track of wishlist contents while you’re "
+"browsing our site."
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:58
+msgid ""
+"Members of our team have access to the information you provide us. For "
+"example, both Administrators and Shop Managers can access:"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:60
+msgid ""
+"Wishlist details, such as products added, date of addition, name and privacy "
+"settings of your wishlists"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:62
+msgid ""
+"Our team members have access to this information to offer you better deals "
+"for the products you love."
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:82
+#: includes/class.yith-wcwl-privacy.php:98
+#, fuzzy
+msgid "Customer Wishlists"
+msgstr "Benutzer Details"
+
+#: includes/class.yith-wcwl-privacy.php:133
+msgid "Wishlists"
+msgstr "Wunschlisten"
+
+#. Translators: %s Order number.
+#: includes/class.yith-wcwl-privacy.php:195
+#, fuzzy
+msgid "Removed wishlist %s."
+msgstr "Meine Wunschliste bei %s"
+
+#. Translators: %s Order number.
+#: includes/class.yith-wcwl-privacy.php:199
+#, fuzzy
+msgid "Wishlist %s has been retained."
+msgstr "Wunschliste \"Angebot anfragen\""
+
+#: includes/class.yith-wcwl-privacy.php:210
+#, fuzzy
+msgid "Removed default user's wishlist"
+msgstr "Wunschlisten anderer Nutzer"
+
+#: includes/class.yith-wcwl-privacy.php:228
+msgid "Token"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:229
+#, fuzzy
+msgid "Wishlist url"
+msgstr "Wunschliste"
+
+#: includes/class.yith-wcwl-privacy.php:230
+#, fuzzy
+msgid "Title"
+msgstr "Titel:"
+
+#: includes/class.yith-wcwl-privacy.php:231
+#, fuzzy
+msgctxt "date wishlist was created"
+msgid "Created on"
+msgstr "Erstellen"
+
+#: includes/class.yith-wcwl-privacy.php:232
+msgid "Visibility"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:233
+msgid "Items Added"
+msgstr ""
+
+#: includes/class.yith-wcwl-privacy.php:283 templates/wishlist-view.php:212
+msgid "Shared"
+msgstr "geteilt"
+
+#: includes/class.yith-wcwl-privacy.php:286 templates/wishlist-view.php:215
+msgid "Private"
+msgstr "Privat"
+
+#: includes/class.yith-wcwl-privacy.php:289 templates/wishlist-view.php:218
+msgid "Public"
+msgstr "Öffentlich"
+
+#: includes/class.yith-wcwl-shortcode.php:45
+#, fuzzy
+msgctxt "[gutenberg]: block name"
+msgid "YITH Add to Wishlist"
+msgstr "Auf die Wunschliste"
+
+#: includes/class.yith-wcwl-shortcode.php:46
+#, fuzzy
+msgctxt "[gutenberg]: block description"
+msgid "Shows Add to Wishlist button"
+msgstr "Zur Wunschliste hinzufügen Button"
+
+#: includes/class.yith-wcwl-shortcode.php:51
+msgid ""
+"ID of the product to add to wishlist (leave empty to use global product)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:56
+msgid "Url of wishlist page (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:61
+msgid "Button label (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:66
+msgid "\"Browse wishlist\" label (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:71
+#, fuzzy
+msgid "\"Product already in wishlist\" label (leave empty to use default)"
+msgstr "Artikel ist bereits auf der Wunschliste Text"
+
+#: includes/class.yith-wcwl-shortcode.php:76
+msgid "\"Product added to wishlist\" label (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:81
+msgid ""
+"Icon for the button (use any FontAwesome valid class, or leave empty to use "
+"default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:86
+msgid "Additional css classes for the button (leave empty to use default)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:94
+#, fuzzy
+msgctxt "[gutenberg]: block name"
+msgid "YITH Wishlist"
+msgstr "YITH Wunschliste"
+
+#: includes/class.yith-wcwl-shortcode.php:95
+#, fuzzy
+msgctxt "[gutenberg]: block description"
+msgid "Shows list of products in wishlist"
+msgstr "Zeige Artikel Preis für jedes Produkt"
+
+#: includes/class.yith-wcwl-shortcode.php:100
+msgid "Choose whether to paginate items in the wishlist or show them all"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:103
+msgid "Paginate"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:104
+msgid "Do not paginate"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:109
+msgid "Number of items to show for each page"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:114
+msgid "ID of the wishlist to show (EG: K6EOWXB888ZD)"
+msgstr ""
+
+#: includes/class.yith-wcwl-shortcode.php:387
+#: includes/class.yith-wcwl-ui.php:164
+msgid "Share on:"
+msgstr "Teile auf:"
+
+#: includes/class.yith-wcwl-ui.php:118 includes/class.yith-wcwl-ui.php:200
+msgid "Select options"
+msgstr "Optionen auswählen"
+
+#: includes/class.yith-wcwl-ui.php:168 templates/share.php:20
+msgid "Facebook"
+msgstr "Facebook"
+
+#: includes/class.yith-wcwl-ui.php:171 templates/share.php:26
+msgid "Twitter"
+msgstr "Twitter"
+
+#: includes/class.yith-wcwl-ui.php:180
+msgid "email"
+msgstr "email"
+
+#: includes/class.yith-wcwl.php:201
+msgid "An error occurred while adding products to the wishlist."
+msgstr "Beim hinzufügen von Artikeln trat ein Fehler auf."
+
+#: includes/class.yith-wcwl.php:293
+msgid "An error occurred while adding products to wishlist."
+msgstr "Beim hinzufügen von Artikeln trat ein Fehler auf."
+
+#: includes/class.yith-wcwl.php:310
+msgid "The \"Remove\" option now does not require any parameter"
+msgstr "Die entfernen Funktion benötigt keine Parameter"
+
+#: includes/class.yith-wcwl.php:359
+msgid "An error occurred while removing products from the wishlist"
+msgstr "Beim entfernen von Artikeln trat ein Fehler auf."
+
+#: includes/class.yith-wcwl.php:825
+msgid "You need to log in before creating a new wishlist"
+msgstr "Du musst dich einloggen um eine Wunschliste zu erstellen"
+
+#: includes/class.yith-wcwl.php:1627
+msgid "Product successfully removed."
+msgstr "Artikel entfernt."
+
+#: includes/class.yith-wcwl.php:1631
+msgid "Error. Unable to remove the product from the wishlist."
+msgstr "Fehler: Artikel konnte nicht von der Wunschliste entfernt werden."
+
+#: includes/class.yith-wcwl.php:1635 templates/wishlist-view.php:242
+msgid "No products were added to the wishlist"
+msgstr "Keine Produkte zur Wunschliste hinzugefügt"
+
+#: includes/class.yith-wcwl.php:1677
+msgid "An error as occurred."
+msgstr "Es ist ein Fehler aufgetreten."
+
+#: init.php:130
+#, fuzzy
+msgid "is enabled but not effective. It requires WooCommerce in order to work."
+msgstr "YITH Wishlist erfordert WooCommerce"
+
+#: init.php:140
+msgid "You can't activate the free version of"
+msgstr ""
+
+#: init.php:140
+msgid "while you are using the premium one."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:185
+#: templates/admin/wishlist-panel-premium.php:383
+msgid ""
+"Upgrade to the %1$spremium version%2$s%3$sof %1$sYITH WooCommerce Wishlist"
+"%2$s to benefit from all features!"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:187
+#: templates/admin/wishlist-panel-premium.php:385
+msgid "%1$sUPGRADE%2$s%3$s to the premium version%2$s"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:193
+msgid "Premium Features"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:196
+#: templates/admin/wishlist-panel-premium.php:201
+msgid "Multiple Wishlist"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:203
+msgid ""
+"%1$sDoes it ever happened to you to have too many wishes for a single wish "
+"list?%2$s%3$s The possibility to manage one's wishes is a fundamental "
+"feature in a modern e-commerce store and it also lets users' degree of "
+"satisfaction increase.%3$sThe option \"multiple wishlist\" of %1$sYITH "
+"Wishlist%2$s makes this feature and many others on your online store "
+"available, and thanks to this plugin your customers will be able to create, "
+"manage and share their own wish lists."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:212
+#: templates/admin/wishlist-panel-premium.php:222
+msgid "Wishlist Private"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:214
+msgid ""
+"By enabling the option wishlist, users will also have the possibility to "
+"%1$smanage the visibility%2$s of their wish lists according to one of the "
+"following options:"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:216
+msgid "%1$spublic:%2$s all users can look for your wish list and see it;"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:217
+msgid ""
+"%1$sshared:%2$s only users possessing a direct link to the wish list page "
+"can display it;"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:218
+msgid "%1$sprivate:%2$s only the wish list creator can see it."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:229
+#: templates/admin/wishlist-panel-premium.php:234
+msgid "Estimate Cost"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:236
+msgid ""
+"%1$sDo you want to add the possibility to ask for estimates of costs into "
+"your catalogue?%3$s Do you want to manage customised packets for faithful "
+"customers in your store?%2$s%3$sThanks to the feature \"estimate cost\" of "
+"%1$sYITH WooCommerce Wishlist%2$s, each registered user will be able to ask "
+"for an estimate of their own products in the wishlist and add a text in the "
+"popup window that will open just after clicking. Then, they can confirm the "
+"text and send an email with all necessary information directly to the "
+"address that you have previously set."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:245
+#: templates/admin/wishlist-panel-premium.php:250
+msgid "Admin Panel"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:247
+msgid ""
+"Thanks to the useful Admin panel, accessible directly among the WooCommerce "
+"submenu pages, you will have total control on users' wishlists. In addition "
+"to that, evaluating the degree of appreciation for your products has never "
+"been so easy, now that %1$syou can see a useful report,%2$s available "
+"directly in the product page, which registers the occurrences of the product "
+"in customers' wish lists."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:257
+#: templates/admin/wishlist-panel-premium.php:262
+msgid "Search Wishlists"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:264
+msgid ""
+"How many times have you been looking for the perfect gift for a important "
+"event but you had no idea of what to buy? %1$s'Search wishlists'%2$s allows "
+"your e-shop users to access public wishlists of anyone, by simply knowing "
+"their name or email. This way you can grant %1$shigher visibility%2$s to "
+"your products and even encourage users to purchase."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:273
+msgid "'ADD TO CART' CHECKBOX"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:275
+msgid ""
+"Your shop offers always a wide selection of products and wishlists of your "
+"users get more and more crowded everyday. Give them the possibility to "
+"select %1$ssome or all products%2$s in the wishlist and add them to cart "
+"just with one click."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:278
+msgid "'ADD TO CART'"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:285
+msgid "DISABLE WISHLIST"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:290
+msgid "DISABLE WISHLIST FOR UNLOGGED USERS"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:292
+msgid ""
+"Favour users that have registered to your shop and disable plugin "
+"functionalities for all users that have not. By disabling this option, each "
+"time they try to add a product to the wishlist, they will be %1$sredirected"
+"%2$s to \"My Account\" page and a message will invite them to log in."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:301
+msgid "MESSAGE TO UNLOGGED USERS"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:303
+msgid ""
+"Invite users that are visiting your shop to login if they want to fully "
+"benefit from Wishlist functionalities. Show a %1$scustomised message%2$s and "
+"redirect them to \"My Account\" page for registration."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:306
+msgid "UNLOGGED USERS"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:313
+#: templates/admin/wishlist-panel-premium.php:318
+msgid "POPULAR TABLE"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:320
+msgid ""
+"Some products draw customer's attention more than others and they do not "
+"hesitate to add products to their wishlist. Table %1$s'Popular'%2$s allows "
+"you, as shop administrator, to track products that appear most frequently in "
+"their wishlists."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:329
+msgid "FUNCTIONALITIES IN ONE CLICK"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:331
+msgid ""
+"Users have the possibility to search for a wishlist, create a new one or "
+"display those already created. Add these %1$sfunctionalities%2$s through the "
+"dedicated widgets or show them immediately after \"Wishlist\" table."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:334
+msgid "FUNCTIONALITIES"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:341
+#: templates/admin/wishlist-panel-premium.php:346
+msgid "PROMOTIONAL EMAIL"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:348
+msgid ""
+"If you want to give the right input to your users to persuade them to "
+"%1$spurchase the products%2$s they have in their wishlists, you need to use "
+"this feature! %1$sSend them an email%2$s: customize its whole content from "
+"the option panel and add a coupon they can use in your shop, so that they "
+"will know you are offering a unique offer!"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:357
+msgid "FROM A WISHLIST TO ANOTHER"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:359
+msgid ""
+"Who said that a product has to remain forever in the same wishlist? With the "
+"option %1$s\"Show \"Move to another wishlist\" dropdown menu\"%2$s, with "
+"just one click users will be free to move a product from a wishlist to "
+"another one, managing as they want their lists."
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:362
+msgid "FROM A WISHLIST"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:369
+msgid "DATE"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:374
+msgid "DATE OF ADDITION TO A WISHLIST"
+msgstr ""
+
+#: templates/admin/wishlist-panel-premium.php:376
+msgid ""
+"Activating the %1$s\"Show date of addition\"%2$s option, users can see the "
+"date in which they have added a particular product to their list: a new way "
+"to keep you users informed about their operations."
+msgstr ""
+
+#: templates/share.php:32
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: templates/share.php:38
+msgid "Google+"
+msgstr "Google+"
+
+#: templates/share.php:44
+msgid "Email"
+msgstr "EMail"
+
+#: templates/share.php:51
+#, fuzzy
+msgid "My wishlist on "
+msgstr "Meine Wunschliste bei %s"
+
+#: templates/share.php:51
+msgid "WhatsApp"
+msgstr ""
+
+#: templates/share.php:61
+msgid "(Now"
+msgstr ""
+
+#: templates/share.php:61
+msgid "copy"
+msgstr ""
+
+#: templates/share.php:61
+msgid "this wishlist link and share it anywhere)"
+msgstr ""
+
+#: templates/wishlist-view.php:32
+msgid "Edit title"
+msgstr "Titel bearbeiten"
+
+#: templates/wishlist-view.php:41
+msgid "Save"
+msgstr "Speichern"
+
+#: templates/wishlist-view.php:45
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: templates/wishlist-view.php:82
+msgid "Product Name"
+msgstr "Artikel Name"
+
+#: templates/wishlist-view.php:89
+msgid "Unit Price"
+msgstr "Artikel Preis"
+
+#: templates/wishlist-view.php:102
+msgid "Stock Status"
+msgstr "Lager Status"
+
+#: templates/wishlist-view.php:152 templates/wishlist-view.php:232
+msgid "Remove this product"
+msgstr "Artikel entfernen"
+
+#: templates/wishlist-view.php:172
+msgid "Free!"
+msgstr "Kostenlos!"
+
+#: templates/wishlist-view.php:179
+msgid "Out of Stock"
+msgstr "Nicht auf Lager"
+
+#: templates/wishlist-view.php:179
+msgid "In Stock"
+msgstr "Auf Lager"
+
+#: templates/wishlist-view.php:188
+msgid "Added on : %s"
+msgstr "Hinzugefügt am: %s"
+
+#: templates/wishlist-view.php:200
+msgid "Move"
+msgstr "Verschieben"
+
+#: templates/wishlist-view.php:232
+msgid "Remove"
+msgstr "Entfernen"
+
+#: templates/wishlist-view.php:259
+msgid "Add the selected products to the cart"
+msgstr "Ausgewählte Artikel<br />in den Warenkorb"
+
+#: templates/wishlist-view.php:267 templates/wishlist-view.php:313
+msgid "Ask for an estimate"
+msgstr "Nach einem Angebot Fragen"
+
+#: templates/wishlist-view.php:303
+msgid "Your email"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "YITH WooCommerce Wishlist"
+msgstr "YITH WooCommerce Wunschliste"
+
+#. Plugin URI of the plugin/theme
+msgid "https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"<code><strong>YITH WooCommerce Wishlist</strong></code> gives your users the "
+"possibility to create, fill, manage and share their wishlists allowing you "
+"to analyze their interests and needs to improve your marketing strategies. "
+"<a href=\"https://yithemes.com/\" target=\"_blank\">Get more plugins for "
+"your e-commerce on <strong>YITH</strong></a>"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "YITH"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://yithemes.com/"
+msgstr ""
+
+#~ msgid "Live Demo"
+#~ msgstr "Live Demo"
+
+#~ msgid ""
+#~ "WARNING: This plugin requires at least WooCommerce 2.2! Please, use this "
+#~ "link to update it."
+#~ msgstr "WARNUNG: Das Plugin erfordert mindestens WooCommerce 2.2!"
+
+#~ msgid "WARNING: This plugin requires at least WooCommerce 2.2!"
+#~ msgstr "WARNUNG: Das Plugin erfordert mindestens WooCommerce 2.2!"
+
+#~ msgid "I wanted you to see this site"
+#~ msgstr "Ich möchte das ihr meine Seite seht"
+
+#~ msgid ""
+#~ "Upgrade to the PREMIUM VERSION\n"
+#~ "of YITH WOOCOMMERCE WISHLIST to benefit from all features!"
+#~ msgstr ""
+#~ "Kaufe hier die <a href=\"https://goo.gl/wxbNyw\" target=\"_blank"
+#~ "\">PREMIUM VERSION</a>\n"
+#~ " von <a href=\"https://goo.gl/wxbNyw\" target=\"_blank\">YITH WooCommerce "
+#~ "Wunschliste</a> um alle Funktionen zu erhalten."
+
+#~ msgid ""
+#~ "Enable all plugin features. <strong>Be sure to select at least one option "
+#~ "in the Wishlist page menu in %s.</strong> Also, please read the plugin <a "
+#~ "href=\"%s\" target=\"_blank\">documentation</a>."
+#~ msgstr ""
+#~ "Alle Funktionen aktivieren. <strong>Versichere dich das mindestens eine "
+#~ "Option im Wunschlisten Seiten Menü ausgewählt ist: %s.</strong> Bitte "
+#~ "lies auch die Plugin <a href=\"https://goo.gl/NSvbek\" target=\"_blank"
+#~ "\">Dokumentation</a>. <a href=\"%s\">.</a>"
+
+#~ msgid "Promotional email sent correctly"
+#~ msgstr "Marketing EMail erfolgreich gesendet"
+
+#~ msgid "There was an error while sending emails; please, try again later"
+#~ msgstr "Es ist ein Fehler aufgetreten, bitte versuch es später erneut."
+
+#~ msgid "Show \"Add to Cart\" checkbox"
+#~ msgstr "Zeige \"Zum Warenkorb hinzufügen\" Auswahlbox"
+
+#~ msgid "Show the checkbox to add multiple items to the cart with one click"
+#~ msgstr "Zeige Checkbox um mehrere Artikel in den Einkaufswagen zu legen"
+
+#~ msgid "Show \"Move to another wishlist\" dropdown menu"
+#~ msgstr "Zeige \"Auf andere Liste verschieben\" Menü"
+
+#~ msgid ""
+#~ "Show the dropdown menu to move one item to another user defined wishlist"
+#~ msgstr ""
+#~ "Zeige Dropdown Menü um Artikel auf einen andere Wunschliste zu verschieben"
+
+#~ msgid "Premium Settings"
+#~ msgstr "Premium Einstellungen"
+
+#~ msgid "Disable the wishlist for unauthenticated users"
+#~ msgstr "Wunschliste für Gäste deaktivieren"
+
+#~ msgid ""
+#~ "Disable the wishlist features for unauthenticated users, redirecting them "
+#~ "to the login page"
+#~ msgstr ""
+#~ "Wunschlisten Funktionen für Gäste deaktivieren, an der Stelle einen Link "
+#~ "zur Login Seite hinterlegen"
+
+#~ msgid "Show login notice before wishlist table"
+#~ msgstr "Zeige Einloggen Notiz vor der Wunschliste"
+
+#~ msgid ""
+#~ "This option lets you add a notice before the wishlist table to ask "
+#~ "unauthorized users to login (use %login_anchor% placeholder to show login "
+#~ "link; leave empty to hide)"
+#~ msgstr ""
+#~ "Hier kannst du eine Notiz hinzufügen die vor der Wunschliste angezeigt "
+#~ "wird und Gäste bittet sich einzuloggen. (Nutze den %login_anchor% "
+#~ "Shortcode um den Link zu zeigen, nicht ausfüllen um zu verstecken)"
+
+#~ msgid "Please %login_anchor% to use all wishlist features"
+#~ msgstr "Bitte %login_anchor% um alle Funktionen zu nutzen"
+
+#~ msgid "Login anchor text"
+#~ msgstr "Einloggen Text"
+
+#~ msgid ""
+#~ "This options lets you customize the login anchor text shown in wishlist "
+#~ "login notice"
+#~ msgstr ""
+#~ "Hier kannst du den Login Text des Login Hinweises auf der Wunschliste "
+#~ "anpassen."
+
+#~ msgid "login"
+#~ msgstr "einloggen"
+
+#~ msgid "Wishlist search page title"
+#~ msgstr "Wunschlisten Suchseiten Titel"
+
+#~ msgid "This option lets you customize the title of the wishlist search page"
+#~ msgstr "Hier kannst du den Seiten Titel der Such Seite anpassen."
+
+#~ msgid "Search a wishlist on %s"
+#~ msgstr "Auf Wunschliste %s suchen"
+
+#~ msgid "Enable multi-wishlist support"
+#~ msgstr "Mehrfach Wunschlisten aktivieren"
+
+#~ msgid ""
+#~ "Enable multi-wishlist support for logged in users (<a href=\"%s\" class="
+#~ "\"thickbox\">Example</a>)"
+#~ msgstr ""
+#~ "Mehrfach Wunschlisten für eingeloggte Kunden aktivieren. (<a href=\"%s\" "
+#~ "class=\"thickbox\">Beispiel</a>)"
+
+#~ msgid "Show \"Product already in wishlist\" on multi-wishlist"
+#~ msgstr ""
+#~ "Zeige \"Artikel ist bereits auf der Wunschliste\" bei Mehrfach "
+#~ "Wunschlisten"
+
+#~ msgid ""
+#~ "Show \"Product already in wishlist\" message also when a multi-wishlist "
+#~ "is activated"
+#~ msgstr ""
+#~ "Zeige \"Artikel ist bereits auf der Wunschliste\" Hinweis auch wenn "
+#~ "Mehrfach-Wunschlisten aktiviert sind"
+
+#~ msgid "\"Add to Wishlist\" popup button text"
+#~ msgstr "Zur Wunschliste hinzufügen Popup Text"
+
+#~ msgid "Text of the \"Add to Wishlist\" button in the popup"
+#~ msgstr ""
+#~ "Text in der PopUp Nachricht nachdem der Kunde ein Artikel hinzugefügt hat"
+
+#~ msgid "Add to wishlist"
+#~ msgstr "Auf die Wunschliste"
+
+#~ msgid "Enable \"Ask for an estimate\" button"
+#~ msgstr "\"Angebot anfragen\" aktivieren"
+
+#~ msgid ""
+#~ "Shows \"Ask for an estimate\" button on wishlist page (<a href=\"%s\" "
+#~ "class=\"thickbox\">Example</a>)"
+#~ msgstr ""
+#~ "Zeige \"Angebot anfragen\" Button auf der Wunschliste (<a href=\"%s\" "
+#~ "class=\"thickbox\">Beispiel</a>)"
+
+#~ msgid "Show additional notes when asking for an estimante"
+#~ msgstr "Zeige zusätzliche Informationen wenn ein Angebot angefragt wird"
+
+#~ msgid ""
+#~ "Shows \"Additional notes\" text area to let users add more information "
+#~ "when asking for an estimate (<a href=\"%s\" class=\"thickbox\">Example</"
+#~ "a>)"
+#~ msgstr ""
+#~ "Zeige \"Zusätzliche Informationen\" Textbox wenn der Kunde nach einem "
+#~ "Angebot fragt (<a href=\"%s\" class=\"thickbox\">Beispiel</a>)"
+
+#~ msgid "Label for \"Additional notes\" text area"
+#~ msgstr "Bezeichnung für den \"Zusätzliche Informationen\" Text Bereich"
+
+#~ msgid ""
+#~ "This option lets you customize the label for \"Additional notes\" text "
+#~ "area"
+#~ msgstr ""
+#~ "Hier kannst du die Bezeichnung für \"Zusätzliche Informationen\" anpassen."
+
+#~ msgid "Additional notes"
+#~ msgstr "Zusätzliche Angaben"
+
+#~ msgid "Show links"
+#~ msgstr "Zeige Links"
+
+#~ msgid ""
+#~ "Show the links for the \"manage\", \"create\", and \"search\" pages after "
+#~ "the wishlist table"
+#~ msgstr "Zeige Links um die Wunschliste zu verwalten nach der Tabelle"
+
+#~ msgid "Title of the \"Create wishlist\" page"
+#~ msgstr "Titel der \"Wunschliste erstellen\" Seite"
+
+#~ msgid ""
+#~ "This option lets you customize the title of the page where you can create "
+#~ "a new wishlist (only when additional info textarea is enabled)"
+#~ msgstr ""
+#~ "Hier kannst du den Seiten Titel anpassen wenn ein Kunde eine neue "
+#~ "Wunschliste erstellt. (nur wenn \"Zusätzliche Informationen\" aktiviert "
+#~ "ist)"
+
+#~ msgid "Create a new wishlist"
+#~ msgstr "Neue Wunschliste erstellen"
+
+#~ msgid "Title of the \"Manage wishlist\" page"
+#~ msgstr "Titel der \"Wunschliste bearbeiten\" Seite"
+
+#~ msgid ""
+#~ "This option lets you customize the title of the page where you can manege "
+#~ "the wishlist"
+#~ msgstr ""
+#~ "Hier kannst du den Seiten Titel anpassen wenn der Kunde seine "
+#~ "Wunschlisten verwaltet"
+
+#~ msgid "Manage your wishlists on %s"
+#~ msgstr "Wunschlisten auf %s bearbeiten"
+
+#~ msgid "Popular"
+#~ msgstr "Beliebt"
+
+#~ msgid "\"Ask for an estimate\" email"
+#~ msgstr "\"Angebot anfragen\" Email"
+
+#~ msgid "Promotional email"
+#~ msgstr "Marketing EMail"
+
+#~ msgid "Popular products"
+#~ msgstr "Beliebte Produkte"
+
+#~ msgid "Search by product"
+#~ msgstr "Nach Artikel suchen"
+
+#~ msgid "Search by user"
+#~ msgstr "Nach Nutzer suchen"
+
+#~ msgid ""
+#~ "Users that have added \"%s\" <a href=\"%s\" class=\"add-new-h2\">%s</a>"
+#~ msgstr ""
+#~ "Kunden die \"%s\" hinzugefügt haben <a href=\"%s\" class=\"add-new-h2\">"
+#~ "%s</a>"
+
+#~ msgid "Back to popular"
+#~ msgstr "Zurück zu den beliebten."
+
+#~ msgid ""
+#~ "In the YIT Plugin tab you can find the Wishlist options. With this menu, "
+#~ "you can access to all the settings of our plugins that you have activated."
+#~ msgstr ""
+#~ "Im YITH Plugin Tab findest du die Wunschlisten Optionen. Mit diesem Menü "
+#~ "erhältst du Zugang zu allen aktivierten Einstellungen des Plugins."
+
+#~ msgid ""
+#~ "From now on, you can find all the options of Wishlist under YIT Plugin -> "
+#~ "Wishlist instead of WooCommerce -> Settings -> Wishlist, as in the "
+#~ "previous version. When one of our plugins is updated, a new voice will be "
+#~ "added to this menu."
+#~ msgstr ""
+#~ "Ab sofort findest du alle Funktionen im Menü <strong>YITH Plugins</"
+#~ "strong> -> Wunschliste und nicht mehr in den Einstellungen von "
+#~ "WooCommerce."
+
+#~ msgid "Wishlist Count"
+#~ msgstr "Wunschlisten Zähler"
+
+#~ msgid "Wishlist Promotion"
+#~ msgstr "Wunschlisten Marketing"
+
+#~ msgid "View"
+#~ msgstr "Ansehen"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgid "N/D"
+#~ msgstr "N/D"
+
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgid "Username"
+#~ msgstr "Nutzername"
+
+#~ msgid "Privacy"
+#~ msgstr "Privatssphäre"
+
+#~ msgid "Items in wishlist"
+#~ msgstr "Artikel auf der Wunschliste"
+
+#~ msgid "All"
+#~ msgstr "Alles"
+
+#~ msgid "Wishlist \"Ask for an estimate\" email"
+#~ msgstr "Wunschliste \"Angebot anfragen\" Email"
+
+#~ msgid ""
+#~ "This email is sent when a user click the \"ask for an estimate\" button, "
+#~ "only if this feature has been enabled in the wishlist option panel"
+#~ msgstr ""
+#~ "Diese EMail wird versendet wenn ein Kunde den \"Angebot anfragen\" Button "
+#~ "nutzt, jedoch nur wenn die Option in den Wunschlisten Einstellungen "
+#~ "aktiviert ist."
+
+#~ msgid "Estimate request"
+#~ msgstr "Angebot anfragen"
+
+#~ msgid "[Estimate request]"
+#~ msgstr "[Angebot anfragen]"
+
+#~ msgid "Subject"
+#~ msgstr "Betreff"
+
+#~ msgid ""
+#~ "This field lets you modify the email subject line. Leave blank to use the "
+#~ "default subject: <code>%s</code>."
+#~ msgstr ""
+#~ "Hier kannst du den EMail Betreff bearbeiten. Für den Standard Betreff "
+#~ "(<code>%s</code>) bitte einfach frei lassen."
+
+#~ msgid "Recipient(s)"
+#~ msgstr "Empfänger"
+
+#~ msgid ""
+#~ "Enter recipients (comma separated) for this email. Defaults to <code>%s</"
+#~ "code>"
+#~ msgstr ""
+#~ "Empfänger für die Email (Komma getrennt) eintragen. Standardempfänger ist "
+#~ "<code> %s</code>"
+
+#~ msgid "Send CC copy"
+#~ msgstr "Sende CC Kopie"
+
+#~ msgid "Send a carbon copy to the user"
+#~ msgstr "Sende eine CC Kopie an den Nutzer"
+
+#~ msgid "Email Heading"
+#~ msgstr "EMail Kopfzeilen"
+
+#~ msgid ""
+#~ "This field lets you modify the main heading contained within the email "
+#~ "notification. Leave blank to use the default heading: <code>%s</code>."
+#~ msgstr ""
+#~ "Hier kannst du die Überschrift der EMail anpassen. Um die Standard "
+#~ "Überschrift (<code>%s</code>) zu nutzen lass das Feld einfach leer."
+
+#~ msgid "Email type"
+#~ msgstr "EMail Typ"
+
+#~ msgid "Choose which type of email to send."
+#~ msgstr "Auswählen welches E-Mail Format verwendet wird."
+
+#~ msgid "Plain text"
+#~ msgstr "Nur Text"
+
+#~ msgid "HTML"
+#~ msgstr "HTML"
+
+#~ msgid "Multipart"
+#~ msgstr "Mehrfach"
+
+#~ msgid "Edit this item"
+#~ msgstr "Objekt bearbeiten"
+
+#~ msgid "Edit"
+#~ msgstr "Bearbeiten"
+
+#~ msgid "View users that have added this product to their wishlist"
+#~ msgstr "Benutzer ansehen die diesen Artikel auf der Liste haben"
+
+#~ msgid "View users"
+#~ msgstr "Benutzer ansehen"
+
+#~ msgid "View Product \"%s\""
+#~ msgstr "Artikel \"%s\" ansehen"
+
+#~ msgid "View Product"
+#~ msgstr "Artikel ansehen"
+
+#~ msgid "Send promotional email"
+#~ msgstr "Sende Marketing EMail"
+
+#~ msgid "View \"%s\""
+#~ msgstr "Ansehen \"%s\""
+
+#~ msgid "View product"
+#~ msgstr "Artikel ansehen"
+
+#~ msgid "Image"
+#~ msgstr "Bild"
+
+#~ msgid "Wishlist count"
+#~ msgstr "Wunschlisten Zähler"
+
+#~ msgid "Actions"
+#~ msgstr "Aktionen"
+
+#~ msgid "Wishlist name is required"
+#~ msgstr "Die Wunschliste benötigt einen Namen"
+
+#~ msgid "Wishlist name exceeds the maximum number of characters allowed"
+#~ msgstr "Der Name der Wunschliste ist zu lang"
+
+#~ msgid "Error occurred while creating a new wishlist."
+#~ msgstr "Beim erstellen einer neuen Wunschliste ist ein Fehler aufgetreten."
+
+#~ msgid "Manage wishlists"
+#~ msgstr "Wunschlisten bearbeiten"
+
+#~ msgid "Manage"
+#~ msgstr "Verwalten"
+
+#~ msgid "Create wishlist"
+#~ msgstr "Wunschliste erstellen"
+
+#~ msgid "Search wishlists"
+#~ msgstr "Wunschliste suchen"
+
+#~ msgid "Search"
+#~ msgstr "Suche"
+
+#~ msgid "Please, log in to use the wishlist features"
+#~ msgstr "Bitte einloggen um alle Funktionen zu nutzen"
+
+#~ msgid "Wishlist correctly created"
+#~ msgstr "Wunschliste wurde erstellt"
+
+#~ msgid "Wishlist successfully deleted"
+#~ msgstr "Wunschliste gelöscht"
+
+#~ msgid ""
+#~ "There was an error while deleting the wishlist; please try again later!"
+#~ msgstr "Es ist ein Fehler aufgetreten, bitte versuch es später erneut."
+
+#~ msgid "Estimate request sent"
+#~ msgstr "Angebotsanfrage gesendet"
+
+#~ msgid "You have to select at least one product"
+#~ msgstr "Du musst mindestens einen Artikel auswählen"
+
+#~ msgid "Element correctly moved to %s"
+#~ msgstr "Artikel wurde zu %s verschoben"
+
+#~ msgid ""
+#~ "There was an error while moving an item to another wishlist. Please, try "
+#~ "again later"
+#~ msgstr "Es ist ein Fehler aufgetreten, bitte versuch es später erneut."
+
+#~ msgid "Wishlist Promotional Email"
+#~ msgstr "Wunschlisten Marketing Email"
+
+#~ msgid ""
+#~ "This email is sent to users to inform them about a promotion on a product "
+#~ "that was added to their wishlist"
+#~ msgstr ""
+#~ "Diese EMail wird an alle Kunden gesendet deren Wunschliste ein "
+#~ "Angebotsartikel enthält"
+
+#~ msgid "There is a deal for you!"
+#~ msgstr "Hier ist ein Angebot für dich."
+
+#~ msgid "A product of your wishlist is on sale"
+#~ msgstr "Ein Artikel auf der Wunschliste ist im Angebot"
+
+#~ msgid "Email HTML Content"
+#~ msgstr "EMail HTML Inhalt"
+
+#~ msgid ""
+#~ "This field lets you modify the main content of the HTML email. You can "
+#~ "use the following placeholder: <code>{user_name}</code> <code>{user_email}"
+#~ "</code> <code>{user_first_name}</code> <code>{user_last_name}</code> "
+#~ "<code>{product_image}</code> <code>{product_name}</code> "
+#~ "<code>{product_price}</code> <code>{coupon_code}</code> "
+#~ "<code>{coupon_amount}</code> <code>{add_to_cart_url}</code>"
+#~ msgstr ""
+#~ "Hier kannst du den Inhalt der HTML EMail anpassen. Du kannst folgende "
+#~ "Shortcodes nutzen: <code>{user_name}</code> <code>{user_email}</code> "
+#~ "<code>{user_first_name}</code> <code>{user_last_name}</code> "
+#~ "<code>{product_image}</code> <code>{product_name}</code> "
+#~ "<code>{product_price}</code> <code>{coupon_code}</code> "
+#~ "<code>{coupon_amount}</code> <code>{add_to_cart_url}</code>"
+
+#~ msgid "Email Text Content"
+#~ msgstr "EMail \"Nur Text\" Inhalt"
+
+#~ msgid ""
+#~ "This field lets you modify the main content of the text email. You can "
+#~ "use the following placeholder: <code>{user_name}</code> <code>{user_email}"
+#~ "</code> <code>{user_first_name}</code> <code>{user_last_name}</code> "
+#~ "<code>{product_name}</code> <code>{product_price}</code> "
+#~ "<code>{coupon_code}</code> <code>{coupon_amount}</code> "
+#~ "<code>{coupon_value}</code> <code>{add_to_cart_url}</code>"
+#~ msgstr ""
+#~ "Hier kannst du den Inhalt der Nur Text EMail anpassen. Du kannst folgende "
+#~ "Shortcodes nutzen: <code>{user_name}</code> <code>{user_email}</code> "
+#~ "<code>{user_first_name}</code> <code>{user_last_name}</code> "
+#~ "<code>{product_name}</code> <code>{product_price}</code> "
+#~ "<code>{coupon_code}</code> <code>{coupon_amount}</code> "
+#~ "<code>{coupon_value}</code> <code>{add_to_cart_url}</code>"
+
+#~ msgid "Sorry! This feature is available only for logged users"
+#~ msgstr "Diese Funktion ist nur für eingeloggte Kunden."
+
+#~ msgid "Select a Wishlist"
+#~ msgstr "Wunschliste auswählen"
+
+#~ msgid "product"
+#~ msgstr "Produkt"
+
+#~ msgid "Edit this user"
+#~ msgstr "Benutzer bearbeiten"
+
+#~ msgid "Email this user"
+#~ msgstr "Benutzer anmailen"
+
+#~ msgid "Email user"
+#~ msgstr "EMail Benutzer"
+
+#~ msgid "Send Promotional Email"
+#~ msgstr "Sende Marketing EMail"
+
+#~ msgid "Added on"
+#~ msgstr "Hinzugefügt am:"
+
+#~ msgid "\"Your wishlist\" link:"
+#~ msgstr "Deine Wunschliste Link"
+
+#~ msgid "Show create link"
+#~ msgstr "Zeige erstellen Link"
+
+#~ msgid "Show search link"
+#~ msgstr "Zeigen Suchen Link"
+
+#~ msgid "Show manage link"
+#~ msgstr "Zeige Links verwalten"
+
+#~ msgid "My Wishlist"
+#~ msgstr "Meine Wunschliste"
+
+#~ msgid "Create a new list"
+#~ msgstr "Neue Liste erstellen"
+
+#~ msgid "Wishlist name"
+#~ msgstr "Wunschlisten Name"
+
+#~ msgid "Save changes"
+#~ msgstr "Änderungen speichern"
+
+#~ msgid "Users' wishlists"
+#~ msgstr "Kunden Wunschlisten:"
+
+#~ msgid "Set email content"
+#~ msgstr "Verfasse EMail Inhalt"
+
+#~ msgid "Email HTML content"
+#~ msgstr "EMail HTML Inhalt"
+
+#~ msgid ""
+#~ "This field lets you modify the main content of the HTML email. You can "
+#~ "use the following placeholder: <code>{user_name}</code> <code>{user_email}"
+#~ "</code> <code>{user_first_name}</code> <code>{user_last_name}</code> "
+#~ "<code>{product_image}</code> <code>{product_name}</code> "
+#~ "<code>{product_price}</code> <code>{coupon_code}</code> "
+#~ "<code>{coupon_amount}</code> <code>{coupon_value}</code> "
+#~ "<code>{add_to_cart_url}</code>"
+#~ msgstr ""
+#~ "Hier kannst du den Inhalt der HTML EMail anpassen. Du kannst folgende "
+#~ "Shortcodes nutzen: <code>{user_name}</code> <code>{user_email}</code> "
+#~ "<code>{user_first_name}</code> <code>{user_last_name}</code> "
+#~ "<code>{product_image}</code> <code>{product_name}</code> "
+#~ "<code>{product_price}</code> <code>{coupon_code}</code> "
+#~ "<code>{coupon_amount}</code> <code>{coupon_value}</code> "
+#~ "<code>{add_to_cart_url}</code>"
+
+#~ msgid "View preview"
+#~ msgstr "Vorschau ansehen"
+
+#~ msgid "Email plain text content"
+#~ msgstr "EMail \"Nur Text\" Inhalt"
+
+#~ msgid "Use coupon"
+#~ msgstr "Nutze einen Rabatt Code"
+
+#~ msgid ""
+#~ "Select whether you want to use a coupon in your email or not "
+#~ "(<code>{coupon_code}</code> <code>{coupon_amount}</code> "
+#~ "<code>{coupon_value}</code> it won't be replaced if you don't check this "
+#~ "option)"
+#~ msgstr ""
+#~ "Auswählen ob ein Rabatt Code in der EMail genutzt werden soll oder nicht. "
+#~ "(<code>{coupon_code}</code> <code>{coupon_amount}</code> "
+#~ "<code>{coupon_value}</code> wird nicht ersetzt wenn diese Option nicht "
+#~ "aktiviert ist.)"
+
+#~ msgid "Email related coupon"
+#~ msgstr "EMail zughörige Gutscheine"
+
+#~ msgid "Select a coupon"
+#~ msgstr "Rabattcode auswählen"
+
+#~ msgid "Send emails"
+#~ msgstr "Sende EMails"
+
+#~ msgid "Back"
+#~ msgstr "Zurück"
+
+#~ msgid ""
+#~ "You have received an estimate request from %s. The request is the "
+#~ "following:"
+#~ msgstr "Neue Angebotsanfrage von %s. Die Anfrage lautet:"
+
+#~ msgid "Wishlist: %s"
+#~ msgstr "Wunschliste: %s"
+
+#~ msgid "Product"
+#~ msgstr "Produkt"
+
+#~ msgid "Quantity"
+#~ msgstr "Menge"
+
+#~ msgid ""
+#~ "\n"
+#~ "Additional info:\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Zusätzliche Angaben:\n"
+
+#~ msgid "Email:"
+#~ msgstr "EMail:"
+
+#~ msgid "Wishlist link: %s"
+#~ msgstr "Wunschlisten Link: %s"
+
+#~ msgid "Save Settings"
+#~ msgstr "Einstellungen speichern"
+
+#~ msgid "Type a name or an email address"
+#~ msgstr "Bitte Name oder Email eintragen"
+
+#~ msgid "User's wishlists:"
+#~ msgstr "Kunden Wunschlisten:"
+
+#~ msgid "0 results for \"%s\" in Wishlist"
+#~ msgstr "0 Ergebnisse für \"%s\" in der Wunschliste"
