@@ -183,7 +183,7 @@
         <div class="landing-container">
             <div class="wishlist-cta">
                 <p><?php echo sprintf (__('Upgrade to the %1$spremium version%2$s%3$sof %1$sYITH WooCommerce Wishlist%2$s to benefit from all features!','yith-woocommerce-wishlist'),'<span class="highlight">','</span>','<br/>');?></p>
-                <a href="<?php echo YITH_WCWL_Admin_Init()->get_premium_landing_uri(); ?>" target="_blank" class="wishlist-cta-button button btn">
+                <a href="<?php echo YITH_WCWL_Admin()->get_premium_landing_uri(); ?>" target="_blank" class="wishlist-cta-button button btn">
                    <?php echo sprintf (__('%1$sUPGRADE%2$s%3$s to the premium version%2$s','yith-woocommerce-wishlist'),'<span class="highlight">','</span>','<span>');?>
                 </a>
             </div>
@@ -381,7 +381,7 @@
         <div class="landing-container">
             <div class="wishlist-cta">
                 <p><?php echo sprintf (__('Upgrade to the %1$spremium version%2$s%3$sof %1$sYITH WooCommerce Wishlist%2$s to benefit from all features!','yith-woocommerce-wishlist'),'<span class="highlight">','</span>','<br/>');?></p>
-                <a href="<?php echo YITH_WCWL_Admin_Init()->get_premium_landing_uri();?>" target="_blank" class="wishlist-cta-button button btn">
+                <a href="<?php echo YITH_WCWL_Admin()->get_premium_landing_uri();?>" target="_blank" class="wishlist-cta-button button btn">
                     <?php echo sprintf (__('%1$sUPGRADE%2$s%3$s to the premium version%2$s','yith-woocommerce-wishlist'),'<span class="highlight">','</span>','<span>');?>
                 </a>
             </div>

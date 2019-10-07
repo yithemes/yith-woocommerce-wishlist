@@ -1,6 +1,6 @@
 <?php
 /**
- * Add to wishlist button template
+ * Add to wishlist button template - Added to list
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
@@ -10,11 +10,9 @@
 /**
  * Template variables:
  *
- * @var $base_url string Current page url
  * @var $wishlist_url string Url to wishlist page
  * @var $exists bool Whether current product is already in wishlist
  * @var $show_exists bool Whether to show already in wishlist link on multi wishlist
- * @var $show_count bool Whether to show count of times item was added to wishlist
  * @var $product_id int Current product id
  * @var $product_type string Current product type
  * @var $label string Button label
@@ -26,19 +24,20 @@
  * @var $available_multi_wishlist bool Whether add to wishlist is available or not
  * @var $disable_wishlist bool Whether wishlist is disabled or not
  * @var $template_part string Template part
- * @var $container_classes string Container classes
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
-    exit;
+	exit;
 } // Exit if accessed directly
 
 global $product;
 ?>
 
-<div class="yith-wcwl-add-button">
-    <a href="<?php echo esc_url( add_query_arg( 'add_to_wishlist', $product_id, $base_url ) )?>" rel="nofollow" data-product-id="<?php echo $product_id ?>" data-product-type="<?php echo $product_type?>" class="<?php echo $link_classes ?>" data-title="<?php echo esc_attr( apply_filters( 'yith_wcwl_add_to_wishlist_title', $label ) ) ?>">
-        <?php echo $icon ?>
-        <?php echo $label ?>
-    </a>
+<!-- ADDED TO WISHLIST MESSAGE -->
+<div class="yith-wcwl-wishlistaddedbrowse">
+	<span class="feedback"><?php echo $product_added_text ?></span>
+	<a href="<?php echo esc_url( $wishlist_url )?>" rel="nofollow" data-title="<?php echo esc_attr( $browse_wishlist_text ) ?>">
+		<?php echo $icon ?>
+		<?php echo apply_filters( 'yith-wcwl-browse-wishlist-label', $browse_wishlist_text, $product_id, $icon ) ?>
+	</a>
 </div>

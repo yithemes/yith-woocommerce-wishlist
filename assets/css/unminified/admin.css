@@ -1,0 +1,92 @@
+/**
+ * Admin YITH WooCommerce Wishlist CSS
+ *
+ * @author Your Inspiration Themes
+ * @package YITH WooCommerce Wishlist
+ * @version 1.1.5
+ */
+
+#popular-filter .wp-list-table td.column-name img{
+    max-width: 40px;
+    height: auto;
+    float: left;
+}
+
+#popular-filter .wp-list-table td.column-name .product-details{
+    padding-left: 60px;
+}
+
+#popular-filter .wp-list-table td.column-actions .button{
+    text-indent: 9999px;
+    margin: 2px 0 2px 4px;
+    height: 2em!important;
+    width: 2em;
+    overflow: hidden;
+    vertical-align: middle;
+    position: relative;
+}
+
+#popular-filter .wp-list-table td.column-actions .button:after{
+    font-family: WooCommerce;
+    speak: none;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    margin: 0;
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 1.85;
+}
+
+#popular-filter .wp-list-table td.column-actions .button.send:after{
+    content: "\e02d";
+}
+
+#popular-filter .wp-list-table td.column-actions .button.user:after{
+    content: "\e038";
+}
+
+#popular-filter .wp-list-table td.column-actions .button.export:after{
+    content: "\e00a";
+}
+
+#popular-filter .wp-list-table td.column-actions .button.view:after{
+    content: "\e010";
+}
+
+#popular-filter .wp-list-table td.column-actions .button.edit:after{
+    content: "\e603";
+}
+
+#wishlist-filter .wp-list-table td.column-username img{
+    float: left;
+}
+
+#wishlist-filter .wp-list-table td.column-username .customer-details{
+    padding-left: 60px;
+}
+
+.yith-plugin-ui #plugin-fw-wc h2 + #yith_wcwl_shop_page_settings-description p,
+.yith-plugin-ui #plugin-fw-wc h2 + #yith_wcwl_yith_wfbt-description p,
+.yith-plugin-ui #plugin-fw-wc h2 + #yith_wcwl_additional_fields_settings-description p{
+    background: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+}
+
+.yith-plugin-ui #plugin-fw-wc h2 + #yith_wcwl_shop_page_settings-description p:before,
+.yith-plugin-ui #plugin-fw-wc h2 + #yith_wcwl_yith_wfbt-description p:before,
+.yith-plugin-ui #plugin-fw-wc h2 + #yith_wcwl_additional_fields_settings-description p:before{
+    content: '';
+}
+
+.option-icon{
+    margin-right: 5px;
+}
