@@ -8,29 +8,26 @@ Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
+YITH WooCommerce Wishlist adds all Wishlist features to your website. Needs WooCommerce to work.
 WooCommerce 3.7.x compatible.
 
 
 == Description ==
 
-What can really make the difference in conversions and amount of sales is without a doubt the freedom to share your own wishlist, even on social networks, increasing indirect sales: can you imagine the sales volume you can generate during holidays or birthdays, when relatives and friends will be looking for the wishlist of your clients to buy a gift?
+What can really make the difference in conversions and amount of sales is without a doubt the freedom to share your own wishlist, even on social networks, and increase indirect sales: can you imagine the sales volume you can generate during holidays or birthdays, when relatives and friends will be looking for the wishlist of your clients to buy a gift?
 
-Offer to your visitors a chance to add the products of your woocommerce store to a wishlist page. With YITH WooCommerce Wishlist you can add a link in each product detail page,
-in order to add the products to the wishlist page. The plugin will create you the specific page and the products will be added in this page and
-afterwards add them to the cart or remove them.
+Offer to your visitors a chance to add the products of your WooCommerce store to a wishlist page. With YITH WooCommerce Wishlist you can add a link on each product detail page
+to add the products to the wishlist page. The plugin will create the specific page for you and the products will be added on this page. Afterwards, you will be able to add them to the cart or remove them.
 
 Working demo are available:
 
-**[LIVE DEMO 1](http://preview.yithemes.com/room09/product/africa-style/)** - **[LIVE DEMO 2](http://preview.yithemes.com/bazar/shop/ankle-shoes/)**
+** - **[LIVE DEMO](https://plugins.yithemes.com/yith-woocommerce-wishlist/?current_demo_user=demo)**
 
-Full documentation is available [here](http://yithemes.com/docs-plugins/yith-woocommerce-wishlist).
+The full documentation is available [here](https://docs.yithemes.com/yith-woocommerce-wishlist/).
 
 This plugin is 100% compatible with [WPML](http://wpml.org/?aid=24889&affiliate_key=Qn1wDeBNTcZV)
 
 = Available Languages =
-
-**NOTE: The translation process of this plugin has been changed by WordPress. Please, read the correlated FAQ to be updated about the news changes.**
 
 * Chinese - CHINA
 * Chinese - TAIWAN
@@ -55,13 +52,15 @@ This plugin is 100% compatible with [WPML](http://wpml.org/?aid=24889&affiliate_
 * Turkish - TURKEY
 * Ukrainian - UKRAINE
 
+**NOTE: if no translation is available for your language yet, you can translate it yourself thanks to the advanced tool offered by WordPress at [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/yith-woocommerce-wishlist/)!**
+
 == Installation ==
 
-1. Unzip the downloaded zip file.
+1. Unzip the downloaded .zip file.
 2. Upload the plugin folder into the `wp-content/plugins/` directory of your WordPress site.
-3. Activate `YITH WooCommerce Wishlist` from Plugins page
+3. Activate `YITH WooCommerce Wishlist` from Plugins page.
 
-YITH WooCommerce Wishlist will add a new submenu called "Wishlist" under "YIT Plugins" menu. Here you are able to configure all the plugin settings.
+YITH WooCommerce Wishlist will add a new submenu called "Wishlist" under "YITH" menu. Here you can configure all the plugin settings.
 
 == Frequently Asked Questions ==
 
@@ -72,29 +71,29 @@ Yes, the page is a simple template and you can override it by putting the file t
 Yes, you can move the button to another default position or you can also use the shortcode inside your theme code.
 
 = Can I change the style of "Add to wishlist" button? =
-Yes, you can change the colors of background, text and border or apply a custom css. You can also use a link or a button for the "Add to wishlist" feature.
+Yes, you can change the colours of background, text and border or apply custom CSS. You can also use a link or a button for the "Add to wishlist" feature.
 
 = Wishlist page returns a 404 error? =
 Try to regenerate permalinks from Settings -> Permalinks by simply saving them again.
 
-= Did icons of your theme disappear after update to Wishlist 2.0.x? =
-It might be a compatibility problem with the old version of font-awesome, which has been solved with version 2.0.2 of the plugin. Be sure that you are using a plugin version that is greater or equal to 2.0.2. If, after update, you cannot see icons in your theme yet, save again options of YITH WooCommerce Wishlist plugin (that you can find in YIT Plugin -> Wishlist).
+= Did any icon of your theme disappear after updating to Wishlist 2.0.x? =
+It might be a compatibility issue with the old version of font-awesome, which has been solved in the plugin version 2.0.2. Make sure that you are using a plugin version that is greater or equal to 2.0.2. If, after the update, you cannot see icons in your theme yet, save the options of YITH WooCommerce Wishlist plugin (that you can find in YITH > Wishlist) once again.
 
-= Have you encountered anomalies after plugin update, that did not exist in the previous version? =
-This might depend on the fact that your theme overrides plugin templates. Check if the developer of your theme has released a compatibility update with version 2.0 or later of YITH WooCommerce Wishlist. As an alternative you can try the plugin in WordPress default theme to leave out any possible influences by the theme.
+= After updating the plugin, have you found issues that did not exist in the previous version? =
+This might depend on the fact that your theme overrides the plugin templates. Check if the developer of your theme has released a compatibility update with version 2.0 or later of YITH WooCommerce Wishlist. As an alternative, you can try the plugin with any of WordPress default themes to leave out any possible incompatibilities with the current theme.
 
-= I am currently using Wishlist plugin with Catalog Mode enabled in my site. Prices for products should disappear, yet they still appear in the wishlist page. Can I remove them? =
-Yes, of course you can. To avoid Wishlist page to show product prices, you can hide price column from wishlist table. Go to YIT plugins -> wishlist -> settings and disable option "Show Unit price".
+= I am currently using Wishlist plugin with Catalog Mode enabled in my site. Prices for products should disappear, yet they still appear on the wishlist page. Can I remove them? =
+Yes, of course, you can. To ensure that prices are hidden also on the Wishlist page, you can hide the price column from the wishlist table. Go to YITH > Wishlist > Settings and disable the option called "Show Unit price".
 
 = What are the main changes in plugin translation? =
 Recently YITH WooCommerce Wishlist has been selected to be included in the "translate.wordpress.org" translate programme.
-In order to import correctly the plugin strings in the new system, we had to change the text domain from 'yit' to 'yith-woocommerce-wishlist'.
+In order to import correctly the plugin strings into the new system, we had to change the text domain from 'yit' to 'yith-woocommerce-wishlist'.
 Once the plugin is imported into the translate.wordpress.org system, the translations of other languages will be downloadable directly from WordPress, without using any .po and .mo files. Moreover, users will be able to participate in a more direct way to plugin translations, suggesting texts in their languages in the dedicated tab on translate.wordpress.org.
 During this transition step, .po and .mo files will be used as usual, but in order to be recognized by WordPress, they must have a new nomenclature and be renamed as:
 yith-woocommerce-wishlist-&lt;WORDPRESS LOCALE&gt;.po
 yith-woocommerce-wishlist-&lt;WORDPRESS LOCALE&gt;.mo
-If your theme overrides plugin templates, it might happen that they are still using the old textdomain ('yit'), which is no longer used as reference for translation.
-If you are experiencing problems with translation of your YITH WooCommerce Wishlist and the theme you are using includes wishlist templates (such as add-to-wishlist.php,
+If your theme overrides the plugin templates, it might happen that they are still using the old textdomain ('yit'), which is no longer used as reference for translation.
+If you are experiencing problems with the translation of your YITH WooCommerce Wishlist and the theme you are using includes wishlist templates (such as add-to-wishlist.php,
 add-to-wishlist-button.php, wishlist-view,php), you could try to update them with the most recent version included in the plugin
 (never forget to make a copy of your project before you apply any change).
 If you want to keep customisations applied by the theme to wishlist templates (still using the old textdomain), then,
@@ -103,7 +102,7 @@ you should ask theme developers to update custom templates and replace the old t
 == Screenshots ==
 
 1. The page with "Add to wishlist" button
-2. The wishlist page
+2. The Wishlist page
 3. The Wishlist settings page
 4. The Wishlist settings page
 
@@ -437,7 +436,7 @@ you should ask theme developers to update custom templates and replace the old t
 
 = 1.1.5 - Released: Jun, 30 - 2014 =
 
-* Added: Share wishlist by email 
+* Added: Share wishlist by email
 
 = 1.1.4 - Released: Jun, 26 - 2014 =
 
@@ -456,7 +455,7 @@ you should ask theme developers to update custom templates and replace the old t
 
 = 1.1.1 - Released: Feb, 26 - 2014 =
 
-* Fixed: Inability to unistall plugin 
+* Fixed: Inability to unistall plugin
 * Fixed: Redirect to cart page from wishlist page
 
 = 1.1.0 - Released: Feb, 13 - 2014 =
@@ -472,7 +471,7 @@ you should ask theme developers to update custom templates and replace the old t
 * Added: Portuguese (Brazil) translation by Lincoln Lemos
 * Fixed: Share buttons show also when not logged in
 * Fixed: Price shows including or excluding tax based on WooCommerce settings
-* Fixed: Better compatibility for WPML 
+* Fixed: Better compatibility for WPML
 * Fixed: Price shows "Free!" if the product is without price
 * Fixed: DB Table creation on plugin activation
 
