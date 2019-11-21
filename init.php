@@ -9,7 +9,7 @@
  * Text Domain: yith-woocommerce-wishlist
  * Domain Path: /languages/
  * WC requires at least: 2.5.0
- * WC tested up to: 3.7.0
+ * WC tested up to: 3.8.0
  *
  * @author YITHEMES
  * @package YITH WooCommerce Wishlist

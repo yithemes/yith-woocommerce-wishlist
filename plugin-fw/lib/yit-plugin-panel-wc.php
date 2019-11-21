@@ -588,7 +588,7 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 
                 $value = apply_filters( 'yith_plugin_fw_wc_panel_pre_field_value', null, $field );
                 if ( is_null( $value ) ) {
-                    if ( 'toggle-element' === $field[ 'type' ] ) {
+                    if ( 'toggle-element' === $field[ 'type' ] || 'toggle-element-fixed' === $field[ 'type' ] ) {
                         $value = get_option( $field[ 'id' ], $field[ 'default' ] );
                     } else {
                         $value = WC_Admin_Settings::get_option( $field[ 'id' ], $field[ 'default' ] );

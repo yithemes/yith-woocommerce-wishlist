@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 1.1.5
+ * @version 3.0.0
  */
 
 if ( !defined( 'YITH_WCWL' ) ) {
@@ -211,6 +211,9 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		        ),
 		        'yith_wcwl_color_button_style_1_hover' => array(
 		        	'yith_wcwl_color_ask_an_estimate_hover'
+		        ),
+		        'woocommerce_promotion_mail_settings' => array(
+		        	'woocommerce_yith_wcwl_promotion_mail_settings'
 		        )
 	        );
 

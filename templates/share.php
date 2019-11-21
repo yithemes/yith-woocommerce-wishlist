@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.13
+ * @version 3.0.0
  */
 
 /**
@@ -42,7 +42,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
     <ul>
         <?php if( $share_facebook_enabled ): ?>
             <li class="share-button">
-                <a target="_blank" class="facebook" href="http://www.facebook.com/sharer.php?u=<?php echo urlencode($share_link_url)?>&p[title]=<?php echo $share_link_title ?>" title="<?php _e( 'Facebook', 'yith-woocommerce-wishlist' ) ?>">
+                <a target="_blank" class="facebook" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode($share_link_url)?>&p[title]=<?php echo $share_link_title ?>" title="<?php _e( 'Facebook', 'yith-woocommerce-wishlist' ) ?>">
                     <?php echo $share_facebook_icon ? $share_facebook_icon : __( 'Facebook', 'yith-woocommerce-wishlist' ) ?>
                 </a>
             </li>

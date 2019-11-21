@@ -4,7 +4,7 @@
  *
  * @author  Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -14,7 +14,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 $yith_wfbt_installed = ( defined( 'YITH_WFBT' ) && YITH_WFBT );
 $yith_wfbt_landing = 'https://yithemes.com/themes/plugins/yith-woocommerce-frequently-bought-together/';
 $yith_wfbt_thickbox = YITH_WCWL_URL . 'assets/images/landing/yith-wfbt-slider.jpg';
-$yith_wfbt_promo = sprintf( __( 'If you want to take advantage of this feature, you could consider to purchase the %s.', 'yith-woocommerce-wishlist' ), '<a href="https://yithemes.com/themes/plugins/yith-woocommerce-frequently-bought-together/">YITH WooCommerce Frequently Bought Together Plugin</a>' );
+$yith_wfbt_promo = sprintf( __( 'If you want to take advantage of this feature, you could consider purchasing the %s.', 'yith-woocommerce-wishlist' ), '<a href="https://yithemes.com/themes/plugins/yith-woocommerce-frequently-bought-together/">YITH WooCommerce Frequently Bought Together Plugin</a>' );
 
 return apply_filters( 'yith_wcwl_settings_options', array(
 	'settings' => array(
@@ -27,7 +27,7 @@ return apply_filters( 'yith_wcwl_settings_options', array(
 		),
 
 		'enable_ajax_loading' => array(
-			'name'      => __( 'Enable ajax loading', 'yith-woocommerce-wishlist' ),
+			'name'      => __( 'Enable AJAX loading', 'yith-woocommerce-wishlist' ),
 			'desc'      => __( 'Load any item of the wishlist that may be cached via AJAX', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_ajax_enable',
 			'default'   => 'no',
@@ -43,13 +43,13 @@ return apply_filters( 'yith_wcwl_settings_options', array(
 		'yith_wfbt_start' => array(
 			'name' => __( 'YITH WooCommerce Frequently Bought Together Integration', 'yith-woocommerce-wishlist' ),
 			'type' => 'title',
-			'desc' => ! $yith_wfbt_installed ? sprintf( __( 'In order to use this integration you need to install and activate YITH WooCommerce Frequently Bought Together. <a href="%s">Learn more</a>', 'yith-woocommerce-wishlist' ), $yith_wfbt_landing ) : '',
+			'desc' => ! $yith_wfbt_installed ? sprintf( __( 'In order to use this integration you have to install and activate YITH WooCommerce Frequently Bought Together. <a href="%s">Learn more</a>', 'yith-woocommerce-wishlist' ), $yith_wfbt_landing ) : '',
 			'id' => 'yith_wcwl_yith_wfbt'
 		),
 
 		'yith_wfbt_enable_integration' => array(
 			'name'      => __( 'Enable slider in wishlist', 'yith-woocommerce-wishlist' ),
-			'desc'      => sprintf( __( 'Choose to enable product slider in wishlist page with linked products (<a href="%s" class="thickbox">Example</a>). %s', 'yith-woocommerce-wishlist' ), $yith_wfbt_thickbox,  ( ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) ) ? $yith_wfbt_promo : '' ),
+			'desc'      => sprintf( __( 'Enable the slider with linked products on the Wishlist page (<a href="%s" class="thickbox">Example</a>). %s', 'yith-woocommerce-wishlist' ), $yith_wfbt_thickbox,  ( ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) ) ? $yith_wfbt_promo : '' ),
 			'id'        => 'yith_wfbt_enable_integration',
 			'default'   => 'yes',
 			'type'      => 'yith-field',

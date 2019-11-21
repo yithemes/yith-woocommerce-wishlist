@@ -65,14 +65,14 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
         <th class="product-name">
             <span class="nobr">
-                <?php echo apply_filters( 'yith_wcwl_wishlist_view_name_heading', __( 'Product Name', 'yith-woocommerce-wishlist' ) ) ?>
+                <?php echo apply_filters( 'yith_wcwl_wishlist_view_name_heading', __( 'Product name', 'yith-woocommerce-wishlist' ) ) ?>
             </span>
         </th>
 
         <?php if( $show_price || $show_price_variations ) : $column_count ++; ?>
             <th class="product-price">
                 <span class="nobr">
-                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_price_heading', __( 'Unit Price', 'yith-woocommerce-wishlist' ) ) ?>
+                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_price_heading', __( 'Unit price', 'yith-woocommerce-wishlist' ) ) ?>
                 </span>
             </th>
         <?php endif; ?>
@@ -88,7 +88,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         <?php if( $show_stock_status ) : $column_count ++; ?>
             <th class="product-stock-status">
                 <span class="nobr">
-                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_stock_heading', __( 'Stock Status', 'yith-woocommerce-wishlist' ) ) ?>
+                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_stock_heading', __( 'Stock status', 'yith-woocommerce-wishlist' ) ) ?>
                 </span>
             </th>
         <?php endif; ?>
@@ -174,7 +174,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
                     <?php if( $show_quantity ) : ?>
                         <td class="product-quantity">
-                            <?php if( ! $no_interactions ): ?>
+                            <?php if( ! $no_interactions && $is_user_owner ): ?>
                                 <input type="number" min="1" step="1" name="items[<?php echo esc_attr( $item->get_product_id() )?>][quantity]" value="<?php echo esc_attr( $item->get_quantity() )?>" />
                             <?php else: ?>
                                 <?php echo $item->get_quantity() ?>
@@ -184,7 +184,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
                     <?php if( $show_stock_status ) : ?>
                         <td class="product-stock-status">
-                            <?php echo $stock_status == 'out-of-stock' ? '<span class="wishlist-out-of-stock">' . apply_filters( 'yith_wcwl_out_of_stock_label', __( 'Out of Stock', 'yith-woocommerce-wishlist' ) ) . '</span>' : '<span class="wishlist-in-stock">' . apply_filters( 'yith_wcwl_in_stock_label', __( 'In Stock', 'yith-woocommerce-wishlist' ) ) . '</span>'; ?>
+                            <?php echo $stock_status == 'out-of-stock' ? '<span class="wishlist-out-of-stock">' . apply_filters( 'yith_wcwl_out_of_stock_label', __( 'Out of stock', 'yith-woocommerce-wishlist' ) ) . '</span>' : '<span class="wishlist-in-stock">' . apply_filters( 'yith_wcwl_in_stock_label', __( 'In Stock', 'yith-woocommerce-wishlist' ) ) . '</span>'; ?>
                         </td>
                     <?php endif ?>
 
@@ -193,7 +193,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
                             <!-- Date added -->
                             <?php
                             if( $show_dateadded && $item->get_date_added() ):
-                                echo '<span class="dateadded">' . sprintf( __( 'Added on : %s', 'yith-woocommerce-wishlist' ), $item->get_date_added_formatted() ) . '</span>';
+                                echo '<span class="dateadded">' . sprintf( __( 'Added on: %s', 'yith-woocommerce-wishlist' ), $item->get_date_added_formatted() ) . '</span>';
                             endif;
                             ?>
 
@@ -249,7 +249,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         endforeach;
     else: ?>
         <tr>
-            <td colspan="<?php echo esc_attr( $column_count ) ?>" class="wishlist-empty"><?php echo apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products were added to the wishlist', 'yith-woocommerce-wishlist' ) ) ?></td>
+            <td colspan="<?php echo esc_attr( $column_count ) ?>" class="wishlist-empty"><?php echo apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ) ) ?></td>
         </tr>
     <?php
     endif;

@@ -4,7 +4,7 @@
  *
  * @author  Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.9
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -256,9 +256,20 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				$template_directory = get_template_directory();
 				$template_directory_uri = get_template_directory_uri();
 
-				$style_url = ( strpos( $located, $stylesheet_directory ) ) ? str_replace( $stylesheet_directory, $stylesheet_directory_uri, $located ) : str_replace( $template_directory, $template_directory_uri, $located );
+				$style_url = ( strpos( $located, $stylesheet_directory ) !== false ) ? str_replace( $stylesheet_directory, $stylesheet_directory_uri, $located ) : str_replace( $template_directory, $template_directory_uri, $located );
 
 				wp_register_style( 'yith-wcwl-user-main', $style_url, array( 'jquery-selectBox', 'yith-wcwl-font-awesome' ), $this->version );
+            }
+
+			// theme specific assets
+            $current_theme = wp_get_theme();
+
+			if( $current_theme->exists() ){
+			    $theme_slug = $current_theme->Template;
+
+			    if( file_exists( YITH_WCWL_DIR . 'assets/css/themes/' . $theme_slug . '.css' ) ){
+			        wp_register_style( 'yith-wcwl-theme', YITH_WCWL_URL . 'assets/css/themes/' . $theme_slug . '.css', array( $located ? 'yith-wcwl-user-main' : 'yith-wcwl-main' ), $this->version );
+                }
             }
 		}
 
@@ -301,9 +312,12 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 1.0.0
 		 */
 		public function enqueue_styles_and_stuffs() {
+		    // libraries
 		    wp_enqueue_style( 'woocommerce_prettyPhoto_css' );
 			wp_enqueue_style( 'jquery-selectBox' );
+			wp_enqueue_style( 'yith-wcwl-font-awesome' );
 
+			// main plugin style
 			if ( ! wp_style_is( 'yith-wcwl-user-main', 'registered' ) ) {
 				wp_enqueue_style( 'yith-wcwl-main' );
 			}
@@ -311,8 +325,12 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				wp_enqueue_style( 'yith-wcwl-user-main' );
 			}
 
-			wp_enqueue_style( 'yith-wcwl-font-awesome' );
+			// theme specific style
+			if( wp_style_is( 'yith-wcwl-theme', 'registered' ) ){
+			    wp_enqueue_style( 'yith-wcwl-theme' );;
+            }
 
+			// custom style
 			$this->enqueue_custom_style();
 		}
 
@@ -358,15 +376,15 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		public function get_localize() {
             return apply_filters( 'yith_wcwl_localize_script', array(
 	            'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),
-	            'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ),
+	            'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ) == 'yes',
 	            'multi_wishlist' => false,
 	            'hide_add_button' => apply_filters( 'yith_wcwl_hide_add_button', true ),
 	            'enable_ajax_loading' => 'yes' == get_option( 'yith_wcwl_ajax_enable', 'no' ),
 	            'ajax_loader_url' => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
 	            'remove_from_wishlist_after_add_to_cart' => get_option( 'yith_wcwl_remove_after_add_to_cart' ) == 'yes',
 	            'labels' => array(
-		            'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies are enabled on your browser.', 'yith-woocommerce-wishlist' ),
-		            'added_to_cart_message' => sprintf( '<div class="woocommerce-message">%s</div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product correctly added to cart', 'yith-woocommerce-wishlist' ) ) )
+		            'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
+		            'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) )
 	            ),
 	            'actions' => array(
 		            'add_to_wishlist_action' => 'add_to_wishlist',
@@ -506,6 +524,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 	                    unset( $options['container_classes'] );
 	                    unset( $options['found_in_list'] );
 	                    unset( $options['found_item'] );
+	                    unset( $options['popup_title'] );
                         break;
                 }
             }
@@ -1005,6 +1024,23 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			        ),
 			        'deps' => array(
 				        'yith_wcwl_add_to_cart_style' => 'button_custom'
+			        )
+		        ),
+		        'color_share_button' => array(
+			        'selector' => '.yith-wcwl-share li a',
+			        'rules'    => array(
+				        'color'  => array(
+					        'rule'    => 'color: %s;',
+					        'default' => '#FFFFFF'
+				        ),
+				        'color_hover'  => array(
+					        'rule'    => 'color: %s;',
+					        'status'  => ':hover',
+					        'default' => '#FFFFFF'
+				        )
+			        ),
+			        'deps' => array(
+				        'yith_wcwl_enable_share' => 'yes'
 			        )
 		        ),
 		        'color_fb_button' => array(

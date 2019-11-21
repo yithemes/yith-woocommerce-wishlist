@@ -12,6 +12,7 @@ if( ! function_exists( 'simplexml_load_string' ) ){
     return false;
 }
 
+add_action( 'admin_notices', 'yith_plugin_fw_regenerate_transient' );
 add_action( 'admin_notices', 'yith_plugin_fw_promo_notices', 15 );
 add_action( 'admin_enqueue_scripts', 'yith_plugin_fw_notice_dismiss', 20 );
 
@@ -21,8 +22,8 @@ if( ! function_exists( 'yith_plugin_fw_promo_notices' ) ){
 	        return false;
         }
 
-		$base_url                   = apply_filters( 'yith_plugin_fw_promo_base_url', YIT_CORE_PLUGIN_PATH . '/lib/promo/' );
-		$xml                        = apply_filters( 'yith_plugin_fw_promo_xml_url', $base_url . 'yith-promo.xml' );
+		$base_url                   = apply_filters( 'yith_plugin_fw_promo_base_url', YIT_CORE_PLUGIN_URL . '/lib/promo/' );
+		$xml                        = apply_filters( 'yith_plugin_fw_promo_xml_url', YIT_CORE_PLUGIN_PATH . '/lib/promo/yith-promo.xml' );
 		$transient                  = "yith_promo_message";
 		$remote_data                = get_site_transient( $transient );
 		$regenerate_promo_transient = isset( $_GET['yith_regenerate_promo_transient'] ) && 'yes' == $_GET['yith_regenerate_promo_transient'] ? $_GET['yith_regenerate_promo_transient'] : '';
@@ -36,33 +37,38 @@ if( ! function_exists( 'yith_plugin_fw_promo_notices' ) ){
 
 		if ( ! is_wp_error( $remote_data ) && ! empty( $remote_data ) ) {
 			$promo_data = @simplexml_load_string( $remote_data );
-			if( true === $create_transient ){
-				$is_membership_user = false;
-				$license            = function_exists( 'YITH_Plugin_Licence' ) ? YITH_Plugin_Licence()->get_licence() : array();
-				$xml_expiry_date    = '';
 
-				if( is_array( $license ) && apply_filters( 'yith_plugin_fw_check_for_membership_user', true ) ){
-				    /* === Check is the user have the YITH Club === */
-					foreach( $license as $plugin => $data ){
-						if( ! empty( $data['is_membership'] ) ){
-							$is_membership_user = true;
-							$xml_expiry_date    = $data['licence_expires'];
-							$remote_data = $promo_data = array();
-							break;
-						}
+			/**
+			 * Check if current user is an YITH Club Members
+			 */
+			$is_membership_user = false;
+			$license            = function_exists( 'YITH_Plugin_Licence' ) ? YITH_Plugin_Licence()->get_licence() : array();
+			$xml_expiry_date    = '';
+
+			if( is_array( $license ) && apply_filters( 'yith_plugin_fw_check_for_membership_user', true ) ){
+				/* === Check is the user have the YITH Club === */
+				foreach( $license as $plugin => $data ){
+					if( ! empty( $data['is_membership'] ) ){
+						$is_membership_user = true;
+						$xml_expiry_date    = $data['licence_expires'];
+						$remote_data        = $promo_data = array();
+						$create_transient   = true;
+						break;
 					}
-                }
+				}
+			}
 
-				if( empty( $is_membership_user ) && ! empty( $promo_data->expiry_date ) ){
-				    $xml_expiry_date = $promo_data->expiry_date;
-                }
+			if( empty( $is_membership_user ) && ! empty( $promo_data->expiry_date ) ){
+				$xml_expiry_date = $promo_data->expiry_date;
+			}
 
+			if( true === $create_transient ){
 				//Set Site Transient
 				set_site_transient( $transient, $remote_data, yith_plugin_fw_get_promo_transient_expiry_date( $xml_expiry_date ) );
 			}
 
 			if ( $promo_data && ! empty( $promo_data->promo ) ) {
-				$now = strtotime( current_time( 'mysql' ) );
+				$now = apply_filters( 'yith_plugin_fw_promo_now_date', strtotime( current_time( 'mysql' ) ) );
 
 				foreach ($promo_data->promo as $promo ){
 					$show_promo = true;
@@ -186,4 +192,13 @@ if( ! function_exists( 'yith_plugin_fw_get_promo_transient_expiry_date' ) ){
 
 		return $expiry_date;
 	}
+}
+
+if( ! function_exists( 'yith_plugin_fw_regenerate_transient' ) ){
+    function yith_plugin_fw_regenerate_transient(){
+        if( false === get_option( 'yith_plugin_fw_promo_2019', false ) ){
+	        delete_site_transient( 'yith_promo_message' );
+	        update_option( 'yith_plugin_fw_promo_2019', true );
+        }
+    }
 }

@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.8
+ * @version 3.0.0
  */
 
 /**
@@ -24,6 +24,7 @@
  * @var $available_multi_wishlist bool Whether add to wishlist is available or not
  * @var $disable_wishlist bool Whether wishlist is disabled or not
  * @var $template_part string Template part
+ * @var $loop_position string Loop position
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -35,9 +36,12 @@ global $product;
 
 <!-- BROWSE WISHLIST MESSAGE -->
 <div class="yith-wcwl-wishlistexistsbrowse">
-	<span class="feedback"><?php echo $already_in_wishslist_text ?></span>
+	<span class="feedback">
+        <?php echo $icon ?>
+        <?php echo $already_in_wishslist_text ?>
+    </span>
 	<a href="<?php echo esc_url( $wishlist_url ) ?>" rel="nofollow" data-title="<?php echo esc_attr( $browse_wishlist_text ) ?>">
-		<?php echo $icon ?>
+		<?php echo ( ! $is_single && 'before_image' == $loop_position ) ? $icon : false ?>
 		<?php echo apply_filters( 'yith-wcwl-browse-wishlist-label', $browse_wishlist_text, $product_id, $icon ) ?>
 	</a>
 </div>

@@ -29,12 +29,19 @@
 
 .yith-plugin-fw-title-field-wrapper h3.title {
     width: 100%;
+    padding: 0 !important;
 }
 
 .the-metabox .yith-plugin-fw-title-field-wrapper h3.title {
     float: left;
 }
 
+.yith-plugin-fw span.color-alpha {
+    height: 23px!important;
+}
+.yith-plugin-fw  .wp-color-result-text{
+    height: 100%;
+}
 .yith-plugin-fw input[type=email],
 .yith-plugin-fw input[type=number],
 .yith-plugin-fw input[type=text]:not(.select2-search__field),
@@ -48,6 +55,7 @@
     max-width: 100%;
     height: 30px;
     padding: 5px;
+    line-height: 1;
 }
 
 .woocommerce .yith-plugin-fw table.form-table input[type=text].wp-color-picker,
@@ -58,6 +66,10 @@
     max-width: none;
     height: auto;
     padding: 3px 5px;
+}
+
+.wp-core-ui  .yith-plugin-fw-colorpicker-field-wrapper button{
+   border-color: #7e8993;
 }
 
 .woocommerce .yith-plugin-fw table.form-table input[type=text].colorpick,
@@ -409,6 +421,18 @@ ul.yit-icons-manager-list li.active {
 }
 
 /****************
+WordPress 5.3 with old panel fixes
+ ****************/
+.yith-plugin-fw-field-wrapper .select2-container .select2-selection--single {
+  height: auto;
+  line-height: 1;
+}
+
+.yith-plugin-fw-field-wrapper .select2-container .select2-selection--single .select2-selection__arrow{
+  height: 100%;
+}
+
+/****************
 YITH UI
  ****************/
 @font-face {
@@ -437,6 +461,10 @@ YITH UI
     -moz-osx-font-smoothing: grayscale;
 }
 
+.yith-icon-reply:before {
+    content: "\e91a";
+    color: #757575;
+}
 .yith-icon-calendar_add:before {
     content: "\e913";
     color: #757575;
@@ -741,7 +769,9 @@ YITH UI
 .yith-plugin-ui #plugin-fw-wc table.form-table th, #yith-plugin-fw-panel table.form-table th.titledesc, .yith-plugin-ui #plugin-fw-wc table.form-table td, #yith-plugin-fw-panel table.form-table td.forminp {
     padding: 30px 20px;
 }
-
+.yith-plugin-ui #plugin-fw-wc table.form-table tr.toggle-element-fixed td, #yith-plugin-fw-panel table.form-table tr.toggle-element-fixed td.forminp {
+    padding: 0 20px 30px;
+}
 .yith-plugin-ui #plugin-fw-wc h2 + div {
     background: #fff;
     border-left: 1px solid #d9d9d9;
@@ -819,7 +849,9 @@ YITH UI
 .woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=text].wp-color-picker {
     border: 0;
     height: 30px;
-    max-width: 60px;
+    max-width: 121px;
+    font-size: 11px;
+    padding: 0;
 
 }
 
@@ -1169,11 +1201,7 @@ YITH UI
 .yith-plugin-ui .select2-container--default .select2-results__option[data-selected=true],
 .yith-plugin-ui .select2-container--default .select2-results__option[aria-selected=true],
 .yith-plugin-fw-panel .select2-container--default .select2-results__option[data-selected=true],
-.yith-plugin-fw-panel .select2-container--default .select2-results__option[aria-selected=true] {
-    background-color: #fff;
-    outline: none;
-}
-
+.yith-plugin-fw-panel .select2-container--default .select2-results__option[aria-selected=true],
 .yith-plugin-ui .select2-container--default .select2-results__option--highlighted[aria-selected],
 .yith-plugin-ui .select2-container--default .select2-results__option--highlighted[data-selected],
 .yith-plugin-fw-panel .select2-container--default .select2-results__option--highlighted[aria-selected],
@@ -1583,8 +1611,10 @@ DATEPICKER
     display: none !important;
 }
 
-.yith-plugin-ui .yith-plugin-fw-field-wrapper .wp-picker-input-wrap {
-    display: inline !important;
+.yith-plugin-ui .yith-plugin-fw-field-wrapper .wp-picker-input-wrap,
+.yith-plugin-ui .yith-plugin-fw-field-wrapper .wp-picker-input-wrap > * {
+    display: inline-block !important;
+    vertical-align: middle;
 }
 
 .yith-plugin-ui .yith-plugin-fw-field-wrapper .wp-picker-active .iris-picker,
@@ -1605,6 +1635,14 @@ DATEPICKER
 
 .yith-plugin-ui .wp-color-result-text {
     display: none;
+}
+
+.yith-plugin-ui .wp-picker-container .wp-color-result.button{
+    height: 30px!important;
+}
+
+.yith-plugin-ui .wp-picker-container .color-alpha {
+    height: 28px!important;
 }
 
 .yith-plugin-ui .wp-picker-container .wp-color-result.button {
@@ -1640,7 +1678,7 @@ DATEPICKER
 }
 
 .yith-plugin-ui .wp-picker-default-custom:before {
-    content: "\e910";
+    content: "\e91a";
     text-indent: 0;
     font-family: 'yith-icon';
     font-size: 20px;
@@ -1762,7 +1800,9 @@ DATEPICKER
     cursor: pointer;
     transition: all ease 0.5s;
 }
-
+.yith-plugin-ui .yith-toggle-row.fixed {
+    margin: 0;
+}
 .yith-plugin-ui .yith-toggle-row.highlight {
     transition: all ease 0.5s;
     /*box-shadow: 0 0 7px rgb(81, 117, 129);*/
@@ -1847,7 +1887,7 @@ DATEPICKER
 }
 
 .yith-plugin-ui .yith-add-box-row label,
-.yith-plugin-ui .yith-toggle-row-opened .yith-toggle-content .yith-toggle-content-row label {
+.yith-plugin-ui .yith-toggle-row-opened .yith-toggle-content .yith-toggle-content-row > label {
     display: table-cell;
     width: 200px;
     padding-right: 21px;
@@ -2054,16 +2094,35 @@ DATEPICKER
     border: 0;
 }
 
+/** MULTI SELECT **/
+.yith-plugin-ui .yith-plugin-fw-multi-select .yith-single-select {
+    display: inline-block;
+    width: 30%;
+    margin-right: 3%;
+    max-width: 400px;
+}
+.yith-plugin-ui .yith-plugin-fw-multi-select .yith-single-select label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+}
+.yith-plugin-ui .yith-plugin-fw-multi-select .yith-single-select select,
+.yith-plugin-ui .yith-plugin-fw-multi-select .yith-single-select span.select2 {
+    width: 100% !important;
+    min-width: auto !important;
+}
+
 @media screen and (max-width: 1440px) {
     .yith-plugin-ui .yith-add-box,
-    .yith-plugin-ui .yith-toggle-row {
+    .yith-plugin-ui .yith-toggle-row:not(.fixed) {
         width: 80%;
     }
 }
 
 @media screen and (max-width: 1024px) {
     .yith-plugin-ui .yith-add-box,
-    .yith-plugin-ui .yith-toggle-row {
+    .yith-plugin-ui .yith-toggle-row:not(.fixed) {
         width: 90%;
     }
 

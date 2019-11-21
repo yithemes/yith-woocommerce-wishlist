@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.8
+ * @version 3.0.0
  */
 
 /**
@@ -16,6 +16,7 @@
  * @var $show_exists bool Whether to show already in wishlist link on multi wishlist
  * @var $show_count bool Whether to show count of times item was added to wishlist
  * @var $product_id int Current product id
+ * @var $parent_product_id int Parent for current product
  * @var $product_type string Current product type
  * @var $label string Button label
  * @var $browse_wishlist_text string Browse wishlist text
@@ -37,8 +38,8 @@ global $product;
 ?>
 
 <div class="yith-wcwl-add-button">
-    <a href="<?php echo esc_url( add_query_arg( 'add_to_wishlist', $product_id, $base_url ) )?>" rel="nofollow" data-product-id="<?php echo $product_id ?>" data-product-type="<?php echo $product_type?>" class="<?php echo $link_classes ?>" data-title="<?php echo esc_attr( apply_filters( 'yith_wcwl_add_to_wishlist_title', $label ) ) ?>">
+    <a href="<?php echo esc_url( add_query_arg( 'add_to_wishlist', $product_id, $base_url ) )?>" rel="nofollow" data-product-id="<?php echo $product_id ?>" data-product-type="<?php echo $product_type?>" data-original-product-id="<?php echo $parent_product_id ?>" class="<?php echo $link_classes ?>" data-title="<?php echo esc_attr( apply_filters( 'yith_wcwl_add_to_wishlist_title', $label ) ) ?>">
         <?php echo $icon ?>
-        <?php echo $label ?>
+        <span><?php echo $label ?></span>
     </a>
 </div>

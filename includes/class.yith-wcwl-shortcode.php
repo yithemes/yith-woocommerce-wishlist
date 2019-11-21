@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 1.1.5
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) { exit; } // Exit if accessed directly
@@ -42,48 +42,48 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'yith-wcwl-add-to-wishlist' => array(
 					'style'          => 'yith-wcwl-main',
 					'script'         => 'jquery-yith-wcwl',
-					'title'          => _x( 'YITH Add to Wishlist', '[gutenberg]: block name', 'yith-woocommerce-brands-add-on' ),
-					'description'    => _x( 'Shows Add to Wishlist button', '[gutenberg]: block description', 'yith-woocommerce-brands-add-on' ),
+					'title'          => _x( 'YITH Add to wishlist', '[gutenberg]: block name', 'yith-woocommerce-wishlist' ),
+					'description'    => _x( 'Shows Add to wishlist button', '[gutenberg]: block description', 'yith-woocommerce-wishlist' ),
 					'shortcode_name' => 'yith_wcwl_add_to_wishlist',
 					'attributes'     => array(
 						'product_id'  => array(
 							'type'    => 'text',
-							'label'   => __( 'ID of the product to add to wishlist (leave empty to use global product)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( 'ID of the product to add to the wishlist (leave empty to use the global product)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 						'wishlist_url'  => array(
 							'type'    => 'text',
-							'label'   => __( 'Url of wishlist page (leave empty to use default)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( 'URL of the wishlist page (leave empty to use the default settings)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 						'label'  => array(
 							'type'    => 'text',
-							'label'   => __( 'Button label (leave empty to use default)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( 'Button label (leave empty to use the default settings)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 						'browse_wishlist_text'  => array(
 							'type'    => 'text',
-							'label'   => __( '"Browse wishlist" label (leave empty to use default)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( '"Browse wishlist" label (leave empty to use the default settings)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 						'already_in_wishslist_text'  => array(
 							'type'    => 'text',
-							'label'   => __( '"Product already in wishlist" label (leave empty to use default)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( '"Product already in wishlist" label (leave empty to use the default settings)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 						'product_added_text'  => array(
 							'type'    => 'text',
-							'label'   => __( '"Product added to wishlist" label (leave empty to use default)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( '"Product added to wishlist" label (leave empty to use the default settings)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 						'icon'  => array(
 							'type'    => 'text',
-							'label'   => __( 'Icon for the button (use any FontAwesome valid class, or leave empty to use default)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( 'Icon for the button (use any FontAwesome valid class, or leave empty to use the default settings)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 						'link_classes'  => array(
 							'type'    => 'text',
-							'label'   => __( 'Additional css classes for the button (leave empty to use default)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( 'Additional CSS classes for the button (leave empty to use the default settings)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 					),
@@ -91,13 +91,13 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'yith-wcwl-wishlist' => array(
 					'style'          => 'yith-wcwl-main',
 					'script'         => 'jquery-yith-wcwl',
-					'title'          => _x( 'YITH Wishlist', '[gutenberg]: block name', 'yith-woocommerce-brands-add-on' ),
-					'description'    => _x( 'Shows list of products in wishlist', '[gutenberg]: block description', 'yith-woocommerce-brands-add-on' ),
+					'title'          => _x( 'YITH Wishlist', '[gutenberg]: block name', 'yith-woocommerce-wishlist' ),
+					'description'    => _x( 'Shows a list of products in wishlist', '[gutenberg]: block description', 'yith-woocommerce-wishlist' ),
 					'shortcode_name' => 'yith_wcwl_wishlist',
 					'attributes'     => array(
 						'pagination'    => array(
 							'type'    => 'select',
-							'label'   => __( 'Choose whether to paginate items in the wishlist or show them all', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( 'Choose whether to paginate items in the wishlist or show them all', 'yith-woocommerce-wishlist' ),
 							'default' => 'no',
 							'options' => array(
 								'yes' => __( 'Paginate', 'yith-woocommerce-wishlist' ),
@@ -106,12 +106,12 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 						),
 						'per_page'    => array(
 							'type'    => 'number',
-							'label'   => __( 'Number of items to show for each page', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( 'Number of items to show per page', 'yith-woocommerce-wishlist' ),
 							'default' => '5',
 						),
 						'wishlist_id'  => array(
 							'type'    => 'text',
-							'label'   => __( 'ID of the wishlist to show (EG: K6EOWXB888ZD)', 'yith-woocommerce-brands-add-on' ),
+							'label'   => __( 'ID of the wishlist to show (e.g. K6EOWXB888ZD)', 'yith-woocommerce-wishlist' ),
 							'default' => '',
 						),
 					),
@@ -184,6 +184,17 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			$price_excluding_tax = get_option( 'woocommerce_tax_display_cart' ) == 'excl';
 			$ajax_loading = get_option( 'yith_wcwl_ajax_enable', 'no' );
 
+			// icons
+			$icon = get_option( 'yith_wcwl_add_to_wishlist_icon' );
+			$custom_icon = get_option( 'yith_wcwl_add_to_wishlist_custom_icon' );
+
+			if( 'custom' == $icon ){
+				$heading_icon = '<img src="' . $custom_icon . '" width="32" />';
+			}
+			else{
+				$heading_icon = ! empty( $icon ) ? '<i class="fa ' . $icon . '"></i>' : '';
+			}
+
 			// init params needed to load correct template
 			$template_part = 'view';
 			$no_interactions = $no_interactions == 'yes';
@@ -231,6 +242,9 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'move_to_another_wishlist' => false,
 				'repeat_remove_button' => $repeat_remove_button && ! $no_interactions,
 				'show_last_column' => $show_date_added || ( $show_add_to_cart && ! $no_interactions ) || ( $repeat_remove_button && ! $no_interactions ),
+
+				// wishlist icon
+				'heading_icon' => $heading_icon,
 
 				// share data
 				'share_enabled' => false,
@@ -494,6 +508,9 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			$current_product_id = yit_get_product_id( $current_product );
 
+			// product parent
+			$current_product_parent = $current_product->get_parent_id();
+
 			// labels & icons settings
 			$label_option = get_option( 'yith_wcwl_add_to_wishlist_text' );
 			$icon_option = get_option( 'yith_wcwl_add_to_wishlist_icon' );
@@ -503,6 +520,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			$browse_wishlist = get_option( 'yith_wcwl_browse_wishlist_text' );
 			$already_in_wishlist = get_option( 'yith_wcwl_already_in_wishlist_text' );
 			$product_added = get_option( 'yith_wcwl_product_added_text' );
+			$loop_position = get_option( 'yith_wcwl_loop_position' );
 
 			// button label
 			$label = apply_filters( 'yith_wcwl_button_label', $label_option );
@@ -559,6 +577,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'found_in_list' => $found_in_list,
 				'found_item' => $found_item,
 				'product_id' => $current_product_id,
+				'parent_product_id' => $current_product_parent ? $current_product_parent : $current_product_id,
 				'product_type' => $product_type,
 				'label' => $label,
 				'show_view' => yith_wcwl_is_single(),
@@ -566,11 +585,13 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'already_in_wishslist_text' => apply_filters( 'yith_wcwl_product_already_in_wishlist_text_button', $already_in_wishlist ),
 				'product_added_text' => apply_filters( 'yith_wcwl_product_added_to_wishlist_message_button', $product_added ),
 				'icon' => $icon,
+				'heading_icon' => $icon,
 				'link_classes' => $classes,
 				'available_multi_wishlist' => false,
 				'disable_wishlist' => false,
 				'show_count' => false,
 				'ajax_loading' => $ajax_loading,
+				'loop_position' => $loop_position,
 				'template_part' => $template_part
 			);
 
@@ -602,17 +623,16 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				}
 			}
 
-			// transform icon to html
-			$atts['icon'] = ( $is_single || 'before_image' != get_option( 'yith_wcwl_loop_position' ) ) && in_array( $atts['template_part'], array('browse', 'added' ) ) ? '' : $atts['icon'];
-
 			if( 'custom' == $atts['icon'] && $atts['exists'] && $custom_added_icon ){
-				$icon_html = '<img src="' . $custom_added_icon . '" width="32" />';
+				$icon_html = '<img class="yith-wcwl-icon" src="' . $custom_added_icon . '" width="32" />';
 			}
 			elseif( 'custom' == $atts['icon'] && $custom_icon ){
-				$icon_html = '<img src="' . $custom_icon . '" width="32" />';
+				$icon_html = '<img class="yith-wcwl-icon" src="' . $custom_icon . '" width="32" />';
+				$heading_icon_html = $icon_html;
 			}
 			elseif( 'custom' != $atts['icon'] ){
-				$icon_html = ! empty( $atts['icon'] ) ? '<i class="fa ' . $atts['icon'] . '"></i>' : '';
+				$icon_html = ! empty( $atts['icon'] ) ? '<i class="yith-wcwl-icon fa ' . $atts['icon'] . '"></i>' : '';
+				$heading_icon_html = ! empty( $atts['heading_icon'] ) ? '<i class="yith-wcwl-icon fa ' . $atts['heading_icon'] . '"></i>' : '';
 			}
 			else{
 				$icon_html = '';
@@ -621,6 +641,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			// set fragment options
 			$atts['fragment_options'] = YITH_WCWL_Frontend()->format_fragment_options( $atts, 'add_to_wishlist' );
 			$atts['icon'] = $icon_html;
+			$atts['heading_icon'] = $heading_icon_html;
 
 			$template = yith_wcwl_get_template( 'add-to-wishlist.php', $atts, true );
 

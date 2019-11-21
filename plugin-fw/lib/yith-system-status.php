@@ -308,7 +308,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 
 			$tls = $imagick_version = 'n/a';
 
-			if ( function_exists( 'curl_init' ) ) {
+			if ( function_exists( 'curl_init' ) && apply_filters( 'yith_system_status_check_ssl', true ) ) {
 				//Get TLS version
 				$ch = curl_init();
 				curl_setopt( $ch, CURLOPT_URL, 'https://www.howsmyssl.com/a/check' );
@@ -338,7 +338,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 
 			return apply_filters( 'yith_system_additional_check', array(
 				'min_wp_version'    => get_bloginfo( 'version' ),
-				'min_wc_version'    => function_exists( 'WC' ) ? WC()->version : __( 'Not installed', 'yith-plugin-fw' ),
+				'min_wc_version'    => function_exists( 'WC' ) ? WC()->version : 'n/a',
 				'wp_memory_limit'   => $wp_memory_limit,
 				'min_php_version'   => $php_version,
 				'min_tls_version'   => $tls,
@@ -365,8 +365,9 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		 * @author  Alberto Ruggiero
 		 */
 		public function memory_size_to_num( $memory_size ) {
-			$unit       = strtoupper( substr( $memory_size, - 1 ) );
-			$size       = substr( $memory_size, 0, - 1 );
+			$unit = strtoupper( substr( $memory_size, - 1 ) );
+			$size = substr( $memory_size, 0, - 1 );
+
 			$multiplier = array(
 				'P' => 5,
 				'T' => 4,
@@ -374,8 +375,11 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				'M' => 2,
 				'K' => 1,
 			);
-			for ( $i = 1; $i <= $multiplier[ $unit ]; $i ++ ) {
-				$size *= 1024;
+
+			if ( isset( $multiplier[ $unit ] ) ) {
+				for ( $i = 1; $i <= $multiplier[ $unit ]; $i ++ ) {
+					$size *= 1024;
+				}
 			}
 
 			return $size;

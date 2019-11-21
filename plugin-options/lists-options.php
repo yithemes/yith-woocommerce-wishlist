@@ -4,7 +4,7 @@
  *
  * @author  Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {

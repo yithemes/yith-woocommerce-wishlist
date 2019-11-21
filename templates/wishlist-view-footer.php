@@ -38,7 +38,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         <?php if ( $count && $show_cb ) : ?>
             <!-- Bulk actions form -->
             <div class="yith_wcwl_wishlist_bulk_action">
-                <label for="bulk_actions"><?php echo apply_filters( 'yith_wcwl_wishlist_bulk_actions_label', __( 'Apply this action for all items selected:', 'yith-woocommerce-wishlist' ) ) ?></label>
+                <label for="bulk_actions"><?php echo apply_filters( 'yith_wcwl_wishlist_bulk_actions_label', __( 'Apply this action to all the selected items:', 'yith-woocommerce-wishlist' ) ) ?></label>
                 <select name="bulk_actions" id="bulk_actions">
                     <option value="add_to_cart"><?php _e( 'Add to cart', 'yith-woocommerce-wishlist' ) ?></option>
 

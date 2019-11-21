@@ -4,7 +4,7 @@
  *
  * @author  Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -23,11 +23,11 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 
 		'after_add_to_wishlist_behaviour' => array(
 			'name'      => __( 'When product is added to wishlist', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Choose how "Add to Wishlist" button should appear when product is already in wishlist', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Choose the look of the Wishlist button when the product has already been added to a wishlist', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_after_add_to_wishlist_behaviour',
 			'options'   => array_merge(
 				array(
-					'add'    => __( 'Show "Add to Wishilist" button', 'yith-woocommerce-wishlist' ),
+					'add'    => __( 'Show "Add to wishilist" button', 'yith-woocommerce-wishlist' ),
 					'view'   => __( 'Show "View wishlist" link', 'yith-woocommerce-wishlist' ),
 					'remove' => __( 'Show "Remove from list" link', 'yith-woocommerce-wishlist' ),
 				)
@@ -45,13 +45,13 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		'shop_page_section_start' => array(
 			'name' => __( 'Loop settings', 'yith-woocommerce-wishlist' ),
 			'type' => 'title',
-			'desc' => __( 'Options of "loop" will be active in shop page, category pages, shortcodes of products, products sliders.. in all places where is used the WooCommerce "loop"', 'yith-woocommerce-wishlist' ),
+			'desc' => __( 'Loop options will be visible on Shop page, category pages, product shortcodes, products sliders, and all the other places where the WooCommerce products\' loop is used', 'yith-woocommerce-wishlist' ),
 			'id' => 'yith_wcwl_shop_page_settings'
 		),
 
 		'show_on_loop' => array(
-			'name'      => __( 'Show "Add to Wishlist" on loop', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Enable the "Add to Wishlist" feature in loop', 'yith-woocommerce-wishlist' ),
+			'name'      => __( 'Show "Add to wishlist" in loop', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Enable the "Add to wishlist" feature in WooCommerce products\' loop', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_show_on_loop',
 			'default'   => 'no',
 			'type'      => 'yith-field',
@@ -59,8 +59,8 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'loop_position' => array(
-			'name'      => __( 'Position of "Add to Wishlist" in loop', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Choose where to show "Add to Wishlist" button or link in loop. <span class="addon">Copy this shortcode <span class="code"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it where you want to show the "Add to Wishlist" link or button</span>', 'yith-woocommerce-wishlist' ),
+			'name'      => __( 'Position of "Add to wishlist" in loop', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Choose where to show "Add to wishlist" button or link in WooCommerce products\' loop. <span class="addon">Copy this shortcode <span class="code"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it where you want to show the "Add to wishlist" link or button</span>', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_loop_position',
 			'default'   => 'after_add_to_cart',
 			'type'      => 'yith-field',
@@ -68,8 +68,8 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 			'class'     => 'wc-enhanced-select',
 			'options'   => array(
 				'before_image' => __( 'On top of the image', 'yith-woocommerce-wishlist' ),
-				'before_add_to_cart' => __( 'Before "Add to Cart" button', 'yith-woocommerce-wishlist' ),
-				'after_add_to_cart' => __( 'After "Add to Cart" button', 'yith-woocommerce-wishlist' ),
+				'before_add_to_cart' => __( 'Before "Add to cart" button', 'yith-woocommerce-wishlist' ),
+				'after_add_to_cart' => __( 'After "Add to cart" button', 'yith-woocommerce-wishlist' ),
 				'shortcode' => __( 'Use shortcode', 'yith-woocommerce-wishlist' )
 			),
 			'deps'      => array(
@@ -92,8 +92,8 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'add_to_wishlist_position' => array(
-			'name'      => __( 'Position of "Add to Wishlist" in product page', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Choose where to show "Add to Wishlist" button or link in product page. <span class="addon">Copy this shortcode <span class="code"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it where you want to show the "Add to Wishlist" link or button</span>', 'yith-woocommerce-wishlist' ),
+			'name'      => __( 'Position of "Add to wishlist" on product page', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Choose where to show "Add to wishlist" button or link on the product page. <span class="addon">Copy this shortcode <span class="code"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it where you want to show the "Add to wishlist" link or button</span>', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_button_position',
 			'default'   => 'after_add_to_cart',
 			'type'      => 'yith-field',
@@ -120,16 +120,16 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'add_to_wishlist_text' => array(
-			'name'    => __( '"Add to Wishlist" text', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Enter a text for "Add to Wishlist" button', 'yith-woocommerce-wishlist' ),
+			'name'    => __( '"Add to wishlist" text', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Enter a text for "Add to wishlist" button', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_add_to_wishlist_text',
-			'default' => __( 'Add to Wishlist', 'yith-woocommerce-wishlist' ),
+			'default' => __( 'Add to wishlist', 'yith-woocommerce-wishlist' ),
 			'type'    => 'text',
 		),
 
 		'product_added_text' => array(
 			'name'    => __( '"Product added" text', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Enter a text for "Product added" message when user add a product in wishlist', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Enter the text of the message displayed when the user adds a product to the wishlist', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_product_added_text',
 			'default' => __( 'Product added!', 'yith-woocommerce-wishlist' ),
 			'type'    => 'text',
@@ -137,17 +137,17 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 
 		'browse_wishlist_text' => array(
 			'name'    => __( '"Browse wishlist" text', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Enter a text for "Browse wishlist" text in product page', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Enter a text for the "Browse wishlist" link on the product page', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_browse_wishlist_text',
-			'default' => __( 'Browse Wishlist', 'yith-woocommerce-wishlist' ),
+			'default' => __( 'Browse wishlist', 'yith-woocommerce-wishlist' ),
 			'type'    => 'text',
 		),
 
 		'already_in_wishlist_text' => array(
 			'name'    => __( '"Product already in wishlist" text', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Enter a text for "Product already in wishlist" message when user view a product already in his list', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Enter the text for the message displayed when the user views a product that is already in the wishlist', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_already_in_wishlist_text',
-			'default' => __( 'The product is already in the wishlist!', 'yith-woocommerce-wishlist' ),
+			'default' => __( 'The product is already in your wishlist!', 'yith-woocommerce-wishlist' ),
 			'type'    => 'text',
 		),
 
@@ -164,8 +164,8 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'use_buttons' => array(
-			'name'      => __( 'Style of "Add to Wishlist"', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Choose if you want to show a textual "Add to Wishlist" link or a button', 'yith-woocommerce-wishlist' ),
+			'name'      => __( 'Style of "Add to wishlist"', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Choose if you want to show a textual "Add to wishlist" link or a button', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_add_to_wishlist_style',
 			'options'   => array(
 				'link'           => __( 'Textual (anchor)', 'yith-woocommerce-wishlist' ),
@@ -178,13 +178,13 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'add_to_wishlist_colors' => array(
-			'name'         => __( '"Add to Wishlist" button style', 'yith-woocommerce-wishlist' ),
+			'name'         => __( '"Add to wishlist" button style', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_add_to_wishlist',
 			'type'         => 'yith-field',
 			'yith-type'    => 'multi-colorpicker',
 			'colorpickers' => array(
 				array(
-					'desc' => __( 'Choose colors to apply to "Add to Wishlist" button', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors for the "Add to wishlist" button', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background',
@@ -202,7 +202,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 					),
 				),
 				array(
-					'desc' => __( 'Choose colors to apply to "Add to Wishlist" button when on hover state', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors for the "Add to wishlist" button on hover state', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background Hover', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background_hover',
@@ -229,7 +229,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 
 		'rounded_buttons_radius' => array(
 			'name'      => __( 'Border radius', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Choose radius to apply to "Add to Wishlist" button', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Choose radius for the "Add to wishlist" button', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_rounded_corners_radius',
 			'default'   => 16,
 			'type'      => 'yith-field',
@@ -244,8 +244,8 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'add_to_wishlist_icon' => array(
-			'name'      => __( '"Add to Wishlist" icon', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Select an icon for the "Add to Wishlist" button (optional)', 'yith-woocommerce-wishlist' ),
+			'name'      => __( '"Add to wishlist" icon', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Select an icon for the "Add to wishlist" button (optional)', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_add_to_wishlist_icon',
 			'default'   => apply_filters( 'yith_wcwl_add_to_wishlist_std_icon', '' ),
 			'type'      => 'yith-field',
@@ -255,8 +255,8 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'add_to_wishlist_custom_icon' => array(
-			'name'      => __( '"Add to Wishlist" custom icon', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Upload an icon you\'d like to use for "Add to Wishlist" button (suggested 32px x 32px)', 'yith-woocommerce-wishlist' ),
+			'name'      => __( '"Add to wishlist" custom icon', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Upload an icon you\'d like to use for "Add to wishlist" button (suggested 32px x 32px)', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_add_to_wishlist_custom_icon',
 			'default'   => '',
 			'type'      => 'yith-field',
@@ -269,19 +269,19 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'added_to_wishlist_icon' => array(
-			'name'      => __( '"Added to Wishlist" icon', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Select an icon for the "Add to Wishlist" button (optional)', 'yith-woocommerce-wishlist' ),
+			'name'      => __( '"Added to wishlist" icon', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Select an icon for the "Add to wishlist" button (optional)', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_added_to_wishlist_icon',
 			'default'   => apply_filters( 'yith_wcwl_add_to_wishlist_std_icon', '' ),
 			'type'      => 'yith-field',
 			'class'     => 'icon-select',
 			'yith-type' => 'select',
-			'options'   => yith_wcwl_get_plugin_icons( __( 'Same used for Add to Wishlist', 'yith-woocommerce-wishlist' ) )
+			'options'   => yith_wcwl_get_plugin_icons( __( 'Same used for Add to wishlist', 'yith-woocommerce-wishlist' ) )
 		),
 
 		'added_to_wishlist_custom_icon' => array(
-			'name'      => __( '"Added to Wishlist" custom icon', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Upload an icon you\'d like to use for "Add to Wishlist" button (suggested 32px x 32px)', 'yith-woocommerce-wishlist' ),
+			'name'      => __( '"Added to wishlist" custom icon', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Upload an icon you\'d like to use for "Add to wishlist" button (suggested 32px x 32px)', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_added_to_wishlist_custom_icon',
 			'default'   => '',
 			'type'      => 'yith-field',

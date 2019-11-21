@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.9
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -159,17 +159,17 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 	        do_action( 'yith_wcwl_adding_to_wishlist', $prod_id, $wishlist_id, $user_id );
 
 	        if( ! $this->can_user_add_to_wishlist() ){
-		        throw new YITH_WCWL_Exception( apply_filters( 'yith_wcwl_user_cannot_add_to_wishlist_message', __( 'Item cannot be added to selected wishlist', 'yith-woocommerce-wishlist' ) ), 1 );
+		        throw new YITH_WCWL_Exception( apply_filters( 'yith_wcwl_user_cannot_add_to_wishlist_message', __( 'The item cannot be added to this wishlist', 'yith-woocommerce-wishlist' ) ), 1 );
 	        }
 
             if ( $prod_id == false ) {
-            	throw new YITH_WCWL_Exception( __( 'An error occurred while adding products to the wishlist.', 'yith-woocommerce-wishlist' ), 0 );
+            	throw new YITH_WCWL_Exception( __( 'An error occurred while adding the products to the wishlist.', 'yith-woocommerce-wishlist' ), 0 );
             }
 
 	        $wishlist = 'new' === $wishlist_id ? $this->add_wishlist( $atts ) : YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_id, 'edit' );
 
             if( ! $wishlist instanceof YITH_WCWL_Wishlist ){
-	            throw new YITH_WCWL_Exception( __( 'An error occurred while adding products to the wishlist.', 'yith-woocommerce-wishlist' ), 0 );
+	            throw new YITH_WCWL_Exception( __( 'An error occurred while adding the products to the wishlist.', 'yith-woocommerce-wishlist' ), 0 );
             }
 
 	        $this->last_operation_token = $wishlist->get_token();

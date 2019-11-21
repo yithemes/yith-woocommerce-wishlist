@@ -681,15 +681,32 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			// retrieves default wishlist ids
 			$default_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE is_default = %d AND user_id = %d ORDER BY dateadded ASC", 1, $user_id ) );
 
-			// if we find more than one default list, leave just first one as default
+			// if we find more than one default list, fix data in db
 			if( count( $default_ids ) > 1 ){
 
-				// remove first default
-				array_shift( $default_ids );
+				// search for master default wishlist
+				$master_default_wishlist = array_shift( $default_ids );
+				$where_statement = implode( ', ', array_map( 'esc_sql', $default_ids ) );
 
 				try{
-					$where_statement = implode( ', ', array_map( 'esc_sql', $default_ids ) );
-					$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->yith_wcwl_wishlists} SET is_default = %d WHERE ID IN ({$where_statement})", 0 ) );
+					// by default we merge all default wishlists into oldest one (master default wishlist)
+					if( apply_filters( 'yith_wcwl_merge_default_wishlists', true ) ){
+						// change wishlist id to master default id
+						$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->yith_wcwl_items} SET wishlist_id = %d WHERE wishlist_id IN ({$where_statement})", $master_default_wishlist ) );
+
+						// delete slave default wishlists
+						$wpdb->query( "DELETE FROM {$wpdb->yith_wcwl_wishlists} WHERE ID IN ({$where_statement})" );
+					}
+
+					// otherwise, we just leave all the wishlists as they are, but we remove default flag from latest
+					else {
+						// remove default flag
+						$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->yith_wcwl_wishlists} SET is_default = %d WHERE ID IN ({$where_statement})", 0 ) );
+
+						// set name where it is missing
+						$default_title = apply_filters( 'yith_wcwl_default_wishlist_formatted_title', get_option( 'yith_wcwl_wishlist_title' ) );
+						$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->yith_wcwl_wishlists} SET wishlist_name = %s WHERE ID IN ({$where_statement}) AND wishlist_name = ''", $default_title ) );
+					}
 				}
 				catch( Exception $e ){
 					return;

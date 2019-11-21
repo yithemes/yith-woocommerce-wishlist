@@ -1,3 +1,11 @@
+/**
+ * Main YITH WooCommerce Wishlist JS
+ *
+ * @author YITH
+ * @package YITH WooCommerce Wishlist
+ * @version 3.0.0
+ */
+
 jQuery( document ).ready( function( $ ){
 
     /* === MAIN INIT === */
@@ -110,13 +118,15 @@ jQuery( document ).ready( function( $ ){
             if( typeof button != 'undefined' && typeof data != 'undefined' && button.closest( '.wishlist_table' ).length ){
                 data.remove_from_wishlist_after_add_to_cart = button.closest( '[data-row-id]' ).data( 'row-id' );
                 data.wishlist_id = button.closest( '.wishlist_table' ).data( 'id' );
-                wc_add_to_cart_params.cart_redirect_after_add = yith_wcwl_l10n.redirect_to_cart;
+                typeof wc_add_to_cart_params !== 'undefined' && ( wc_add_to_cart_params.cart_redirect_after_add = yith_wcwl_l10n.redirect_to_cart );
+                typeof yith_wccl_general !== 'undefined' && ( yith_wccl_general.cart_redirect = yith_wcwl_l10n.redirect_to_cart );
             }
         } );
 
         t.on( 'added_to_cart', 'body', function( ev, fragments, carthash, button ){
             if( typeof button != 'undefined' && button.closest( '.wishlist_table' ).length ) {
-                wc_add_to_cart_params.cart_redirect_after_add = cart_redirect_after_add;
+                typeof wc_add_to_cart_params !== 'undefined' && ( wc_add_to_cart_params.cart_redirect_after_add = cart_redirect_after_add );
+                typeof yith_wccl_general !== 'undefined' && ( yith_wccl_general.cart_redirect = cart_redirect_after_add );
 
                 var tr = button.closest('[data-row-id]'),
                     table = tr.closest('.wishlist-fragment'),
@@ -413,15 +423,15 @@ jQuery( document ).ready( function( $ ){
                     container = t.closest( '.yith-wcwl-add-to-wishlist' ),
                     options;
 
-                t.attr( 'data-original-product-id', product_id );
-                t.attr( 'data-product-id', variation_id );
+                t.data( 'original-product-id', product_id );
+                t.data( 'product-id', variation_id );
 
                 if( container.length ) {
                     options = container.data( 'fragment-options' );
 
                     if( typeof options != 'undefined' ){
                         options.product_id = variation_id;
-                        container.attr( 'data-fragment-options', JSON.stringify( options ) );
+                        container.data( 'fragment-options', options );
                     }
 
                     container
@@ -449,15 +459,15 @@ jQuery( document ).ready( function( $ ){
                     variation_id = t.data( 'product-id' ),
                     options;
 
-                t.attr( 'data-product-id', product_id );
-                t.attr( 'data-original-product-id', '' );
+                t.data( 'product-id', product_id );
+                t.data( 'original-product-id', '' );
 
                 if( container.length ) {
                     options = container.data( 'fragment-options' );
 
                     if( typeof options != 'undefined' ){
                         options.product_id = product_id;
-                        container.attr( 'data-fragment-options', JSON.stringify( options ) );
+                        container.data( 'fragment-options', options );
                     }
 
                     container
@@ -988,6 +998,27 @@ jQuery( document ).ready( function( $ ){
                 container.find( '#new_wishlist_selector' ).remove();
             }
         } );
+
+        $(document).on( 'change', '.wishlist-select', function(ev){
+            var t = $(this),
+                container = t.closest('.yith-wcwl-popup-content'),
+                tab = t.closest( '.tab' ),
+                createTab = container.find( '.tab.create' ),
+                showTab = container.find( '.show-tab' ),
+                createShowTab = showTab.filter( '[data-tab="create"]' ),
+                val = t.val();
+
+            if( val === 'new' && createTab.length ){
+                tab.hide();
+                createTab.show();
+
+                showTab.removeClass( 'active' );
+                createShowTab.addClass( 'active' );
+
+                t.find('option').removeProp( 'selected' );
+                t.change();
+            }
+        } )
     }
 
     /**
@@ -1301,13 +1332,16 @@ jQuery( document ).ready( function( $ ){
         // update options for all wishlist selects
         wishlist_select.each( function(){
             var t = $(this),
-                wishlist_options = t.find( 'option' );
+                wishlist_options = t.find( 'option' ),
+                new_option = wishlist_options.filter( '[value="new"]' );
 
-            wishlist_options.remove();
+            wishlist_options.not(new_option ).remove();
 
             $.each( wishlists, function( i, v ){
                 $('<option>', { value: v.id, html: v.wishlist_name } ).appendTo(t);
             } );
+
+            t.append( new_option );
         } );
 
         // update options for all wishlist dropdown

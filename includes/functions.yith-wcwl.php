@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.10
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -524,7 +524,7 @@ if( !function_exists( 'yith_wcwl_get_privacy_label' ) ){
 
 				if( $extended ){
 					$privacy_text = '<b>' . $privacy_text . '</b> - ';
-					$privacy_text .= __( 'Only people with the link can see this list', 'yith-woocommerce-wishlist' );
+					$privacy_text .= __( 'Only people with a link to this list can see it', 'yith-woocommerce-wishlist' );
 				}
 
 				break;

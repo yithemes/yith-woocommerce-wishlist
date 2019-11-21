@@ -160,7 +160,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
                                             <?php _e( 'Quantity:', 'yith-woocommerce-wishlist' ) ?>
                                         </td>
                                         <td class="value">
-                                            <?php if( ! $no_interactions ): ?>
+                                            <?php if( ! $no_interactions && $is_user_owner ): ?>
                                                 <input type="number" min="1" step="1" name="items[<?php echo esc_attr( $item->get_product_id() )?>][quantity]" value="<?php echo esc_attr( $item->get_quantity() )?>" />
                                             <?php else: ?>
                                                 <?php echo $item->get_quantity() ?>
@@ -175,7 +175,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
                                             <?php _e( 'Stock:', 'yith-woocommerce-wishlist' ) ?>
                                         </td>
                                         <td class="value">
-                                            <?php echo $stock_status == 'out-of-stock' ? '<span class="wishlist-out-of-stock">' . __( 'Out of Stock', 'yith-woocommerce-wishlist' ) . '</span>' : '<span class="wishlist-in-stock">' . __( 'In Stock', 'yith-woocommerce-wishlist' ) . '</span>'; ?>
+                                            <?php echo $stock_status == 'out-of-stock' ? '<span class="wishlist-out-of-stock">' . __( 'Out of stock', 'yith-woocommerce-wishlist' ) . '</span>' : '<span class="wishlist-in-stock">' . __( 'In Stock', 'yith-woocommerce-wishlist' ) . '</span>'; ?>
                                         </td>
                                     </tr>
 	                            <?php endif ?>
@@ -231,7 +231,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         endforeach;
     else: ?>
         <p class="wishlist-empty">
-            <?php echo apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products were added to the wishlist', 'yith-woocommerce-wishlist' ) ) ?>
+            <?php echo apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ) ) ?>
         </p>
     <?php
     endif;

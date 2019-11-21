@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.2.2
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -50,12 +50,12 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 					$content =  '<p>' . __( 'While you visit our site, we’ll track:', 'yith-woocommerce-wishlist' ) . '</p>' .
 					            '<ul>' .
 					            '<li>' . __( 'Products you’ve added to the wishlist: we’ll use this to show you and other users your favourite products, and to create targeted email campaigns.', 'yith-woocommerce-wishlist' ) . '</li>' .
-					            '<li>' . __( 'Wishlists you’ve created: we’ll keep track of the wishlists you create, and make them visible to the store’s staff', 'yith-woocommerce-wishlist' ) . '</li>' .
+					            '<li>' . __( 'Wishlists you’ve created: we’ll keep track of the wishlists you create, and make them visible to the store staff', 'yith-woocommerce-wishlist' ) . '</li>' .
 					            '</ul>' .
 					            '<p>' . __( 'We’ll also use cookies to keep track of wishlist contents while you’re browsing our site.', 'yith-woocommerce-wishlist' ) . '</p>';
 					break;
 				case 'has_access':
-					$content =  '<p>' . __( 'Members of our team have access to the information you provide us. For example, both Administrators and Shop Managers can access:', 'yith-woocommerce-wishlist' ) . '</p>' .
+					$content =  '<p>' . __( 'Members of our team have access to the information you provide us with. For example, both Administrators and Shop Managers can access:', 'yith-woocommerce-wishlist' ) . '</p>' .
 					            '<ul>' .
 					            '<li>' . __( 'Wishlist details, such as products added, date of addition, name and privacy settings of your wishlists', 'yith-woocommerce-wishlist' ) . '</li>' .
 					            '</ul>' .
@@ -79,7 +79,7 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		 */
 		public function register_exporter( $exporters ) {
 			$exporters['yith_wcwl_exporter'] = array(
-				'exporter_friendly_name' => __( 'Customer Wishlists', 'yith-woocommerce-wishlist' ),
+				'exporter_friendly_name' => __( 'Customer wishlists', 'yith-woocommerce-wishlist' ),
 				'callback' => array( $this, 'wishlist_data_exporter' )
 			);
 
@@ -95,7 +95,7 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		 */
 		public function register_eraser( $erasers ) {
 			$erasers['yith_wcwl_eraser'] = array(
-				'eraser_friendly_name' => __( 'Customer Wishlists', 'yith-woocommerce-wishlist' ),
+				'eraser_friendly_name' => __( 'Customer wishlists', 'yith-woocommerce-wishlist' ),
 				'callback' => array( $this, 'wishlist_data_eraser' )
 			);
 
@@ -217,11 +217,11 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 			$personal_data   = array();
 			$props_to_export = apply_filters( 'yith_wcwl_privacy_export_wishlist_personal_data_props', array(
 				'wishlist_token'   => __( 'Token', 'yith-woocommerce-wishlist' ),
-				'wishlist_url'     => __( 'Wishlist url', 'yith-woocommerce-wishlist' ),
+				'wishlist_url'     => __( 'Wishlist URL', 'yith-woocommerce-wishlist' ),
 				'wishlist_name'    => __( 'Title', 'yith-woocommerce-wishlist' ),
-				'dateadded'        => _x( 'Created on', 'date wishlist was created', 'yith-woocommerce-wishlist' ),
+				'dateadded'        => _x( 'Created on', 'date when wishlist was created', 'yith-woocommerce-wishlist' ),
 				'wishlist_privacy' => __( 'Visibility', 'yith-woocommerce-wishlist' ),
-				'items'            => __( 'Items Added', 'yith-woocommerce-wishlist' ),
+				'items'            => __( 'Items added', 'yith-woocommerce-wishlist' ),
 			), $wishlist );
 
 			foreach ( $props_to_export as $prop => $name ) {

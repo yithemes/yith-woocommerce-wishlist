@@ -13,5 +13,5 @@
 
 extract( $field );
 ?>
-<h3 class="title" <?php echo $custom_attributes ?>
+<h3 id="<?php echo $id ?>" class="title" <?php echo $custom_attributes ?>
     <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>><?php echo $desc ?></h3>

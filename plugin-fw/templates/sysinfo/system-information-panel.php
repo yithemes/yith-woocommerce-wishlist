@@ -10,6 +10,19 @@
 
 $system_info        = get_option( 'yith_system_info' );
 $recommended_memory = 134217728;
+$output_ip          = 'n/a';
+
+if ( function_exists( 'curl_init' ) && apply_filters( 'yith_system_status_check_ip', true ) ) {
+	//Get Output IP Address
+	$ch = curl_init();
+	curl_setopt( $ch, CURLOPT_URL, 'https://ifconfig.co/ip' );
+	curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
+	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
+	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+	$data = curl_exec( $ch );
+	curl_close( $ch );
+	$output_ip = $data != '' ? $data : 'n/a';
+}
 
 ?>
 <div id="yith-sysinfo" class="wrap yith-system-info">
@@ -18,6 +31,25 @@ $recommended_memory = 134217728;
     </h1>
 
 	<?php if ( ! isset( $_GET['yith-phpinfo'] ) || $_GET['yith-phpinfo'] != 'true' ): ?>
+
+        <table class="widefat striped">
+            <tr>
+                <th>
+					<?php _e( 'Site URL', 'yith-plugin-fw' ); ?>
+                </th>
+                <td class="requirement-value">
+					<?php echo get_site_url() ?>
+                </td>
+            </tr>
+            <tr>
+                <th>
+					<?php _e( 'Output IP Address', 'yith-plugin-fw' ); ?>
+                </th>
+                <td class="requirement-value">
+					<?php echo $output_ip ?>
+                </td>
+            </tr>
+        </table>
 
         <table class="widefat striped">
 			<?php foreach ( $system_info['system_info'] as $key => $item ): ?>

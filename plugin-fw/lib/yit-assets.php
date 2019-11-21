@@ -50,8 +50,11 @@ if ( !class_exists( 'YIT_Assets' ) ) {
             $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
             //scripts
-            wp_register_script( 'yith-plugin-fw-fields', YIT_CORE_PLUGIN_URL . '/assets/js/yith-fields' . $suffix . '.js', array( 'jquery', 'jquery-ui-datepicker', 'wp-color-picker', 'codemirror', 'codemirror-javascript', 'jquery-ui-slider', 'jquery-ui-sortable' ), $this->version, true );
-            wp_register_script( 'yit-metabox', YIT_CORE_PLUGIN_URL . '/assets/js/metabox' . $suffix . '.js', array( 'jquery', 'wp-color-picker', 'yith-plugin-fw-fields' ), $this->version, true );
+	        wp_register_script( 'yith-colorpicker', YIT_CORE_PLUGIN_URL . '/assets/js/yith-colorpicker.min.js', array( 'jquery', 'wp-color-picker' ), $this->version, true );
+
+	        wp_register_script( 'yith-plugin-fw-fields', YIT_CORE_PLUGIN_URL . '/assets/js/yith-fields' . $suffix . '.js', array( 'jquery', 'jquery-ui-datepicker', 'yith-colorpicker', 'codemirror', 'codemirror-javascript', 'jquery-ui-slider', 'jquery-ui-sortable' ), $this->version, true );
+
+	        wp_register_script( 'yit-metabox', YIT_CORE_PLUGIN_URL . '/assets/js/metabox' . $suffix . '.js', array( 'jquery', 'wp-color-picker', 'yith-plugin-fw-fields' ), $this->version, true );
             wp_register_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel' . $suffix . '.js', array( 'jquery', 'wp-color-picker', 'jquery-ui-sortable', 'yith-plugin-fw-fields' ), $this->version, true );
             wp_register_script( 'codemirror', YIT_CORE_PLUGIN_URL . '/assets/js/codemirror/codemirror.js', array( 'jquery' ), $this->version, true );
             wp_register_script( 'codemirror-javascript', YIT_CORE_PLUGIN_URL . '/assets/js/codemirror/javascript.js', array( 'jquery', 'codemirror' ), $this->version, true );

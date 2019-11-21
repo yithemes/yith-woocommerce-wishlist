@@ -3,8 +3,19 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 1.1.5
+ * @version 3.0.0
  */
+
+/**
+ * Index:
+ *
+ * 1. POPULAR TAB
+ * 2. ALL WISHLISTS TAB
+ * 3. GENERAL PLUGIN FW PANEL
+ * 4. PROMOTION WIZARD
+ */
+
+/* === 1. POPULAR TAB === */
 
 #popular-filter .wp-list-table td.column-name img{
     max-width: 40px;
@@ -16,52 +27,30 @@
     padding-left: 60px;
 }
 
-#popular-filter .wp-list-table td.column-actions .button{
-    text-indent: 9999px;
-    margin: 2px 0 2px 4px;
-    height: 2em!important;
-    width: 2em;
-    overflow: hidden;
+#popular-filter .wp-list-table th.column-actions,
+#popular-filter .wp-list-table td.column-actions {
+    width: 25%!important;
+}
+
+#popular-filter .wp-list-table td.column-actions a{
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+#popular-filter .wp-list-table td.column-actions a i{
+    margin: 5px;
+}
+
+#popular-filter .wp-list-table td.column-actions a.button-primary{
+    padding-right: 5px;
+}
+
+#popular-filter .wp-list-table td.column-actions a,
+#popular-filter .wp-list-table td.column-actions a i{
     vertical-align: middle;
-    position: relative;
 }
 
-#popular-filter .wp-list-table td.column-actions .button:after{
-    font-family: WooCommerce;
-    speak: none;
-    font-weight: 400;
-    font-variant: normal;
-    text-transform: none;
-    margin: 0;
-    text-indent: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    line-height: 1.85;
-}
-
-#popular-filter .wp-list-table td.column-actions .button.send:after{
-    content: "\e02d";
-}
-
-#popular-filter .wp-list-table td.column-actions .button.user:after{
-    content: "\e038";
-}
-
-#popular-filter .wp-list-table td.column-actions .button.export:after{
-    content: "\e00a";
-}
-
-#popular-filter .wp-list-table td.column-actions .button.view:after{
-    content: "\e010";
-}
-
-#popular-filter .wp-list-table td.column-actions .button.edit:after{
-    content: "\e603";
-}
+/* === 2. ALL WISHLISTS TAB === */
 
 #wishlist-filter .wp-list-table td.column-username img{
     float: left;
@@ -69,6 +58,12 @@
 
 #wishlist-filter .wp-list-table td.column-username .customer-details{
     padding-left: 60px;
+}
+
+/* === 3. GENERAL PLUGIN FW PANEL === */
+
+.yith-plugin-ui #plugin-fw-wc .option-icon{
+    margin-right: 5px;
 }
 
 .yith-plugin-ui #plugin-fw-wc h2 + #yith_wcwl_shop_page_settings-description p,
@@ -87,6 +82,249 @@
     content: '';
 }
 
-.option-icon{
+/* === 4. PROMOTION WIZARD === */
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main{
+    padding-bottom: 0;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main .wc-backbone-modal-header{
+    border-bottom: none;
+    padding: 0;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main .wc-backbone-modal-header .modal-close-link{
+    border-left: none;
+    z-index: 1;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article{
+    padding: 0;
+    max-height: calc(100vh - 40px)!important;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article h2{
+    font-size: 1.5em;
+    margin: 0.8em 0 2em;
+
+    color: #007694;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article h4{
+    color: #007694;
+    margin: 1.33em 0;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article p.description{
+    font-weight: 600;
+    font-style: normal;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article p.placeholders{
+    font-size: .9em;
+    margin-top: 1.33em;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article code{
+    background: none;
+    padding: 0;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article small{
+    font-size: .9em;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article b.alert{
+    color: #a20000;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .form-row{
+    margin-top: 1.5em;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article label{
+    color: #00a79c;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tabs{
+    display: inline-block;
+    margin: 0;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tabs li{
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tabs li a{
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 1.1em;
+    color: #404040;
+    font-weight: 600;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tabs li a.active {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 0 25px -4px rgba(68,138,133,.4);
+    z-index: 1;
+    color: #00a79c;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tabs li a:hover{
+    color: #00a79c;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tab,
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .form-row{
+    padding: 20px;
+
+    position: relative;
+
+    -webkit-box-shadow: 0px 0px 25px -4px rgba(68,138,133,0.4);
+    -moz-box-shadow: 0px 0px 25px -4px rgba(68,138,133,0.4);
+    box-shadow: 0px 0px 25px -4px rgba(68,138,133,0.4);
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tab:before {
+    content: '';
+    display: block;
+    background: #ffffff;
+    left: 0;
+    right: 0;
+    height: 20px;
+    position: absolute;
+    top: -1px;
+    z-index: 1;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tab:not(.active){
+    display: none;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .tab > textarea{
+    width: 100%;
+    margin-top: 30px;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .col{
+    padding: 20px 30px;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1{
+    display: flex;
+    width: 100%;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 > .col{
+    flex: 1;
+    width: 600px;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 > .col-dx {
+    background-color: #f2f2f2;
+    position: relative;
+    padding-bottom: 80px;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 #content_html{
+    width: 100%;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview{
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin: 30px 0;
+    pointer-events: none;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview.plain{
+    padding: 0 20px;
+    background: #fff;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview #wrapper{
+    padding: 0!important;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview #wrapper > table{
+    width: 100%!important;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .promotion-actions{
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    line-height: 40px;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .promotion-actions .save-promotion-draft,
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .promotion-actions a.back-button{
+    color: #007694;
+    font-weight: 700;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .promotion-actions .save-promotion-draft{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .promotion-actions a.continue-button {
+    float: right;
+    background-color: #007694;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 26px;
+    height: auto;
+    padding: 5px 20px;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .promotion-actions a.continue-button:hover{
+    background-color: #375f6b;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-2{
+    max-width: 500px;
+    min-height: 400px;
+    position: relative;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-2 h2{
+    margin-top: 2em;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-2 p{
+    font-weight: 600;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-2 #main_submit_button{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    right: 30px;
+    width: calc(100% - 60px);
+    padding: 5px 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    vertical-align: middle;
+    line-height: 30px;
+    height: auto;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-2 #main_submit_button i{
+    vertical-align: middle;
     margin-right: 5px;
+    font-size: 22px;
 }

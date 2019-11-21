@@ -171,7 +171,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 */
 		public static function load_fragments() {
 			wp_send_json( array(
-				'fragments' => YITH_WCWL_Ajax_Handler::refresh_fragments( isset( $_POST['fragments'] ) ? $_POST['fragments'] : false )
+				'fragments' => self::refresh_fragments( isset( $_POST['fragments'] ) ? $_POST['fragments'] : false )
 			) );
 		}
 

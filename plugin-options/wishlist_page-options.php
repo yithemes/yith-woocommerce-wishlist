@@ -4,7 +4,7 @@
  *
  * @author  Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -14,15 +14,15 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 	'wishlist_page' => array(
 		'manage_section_start' => array(
-			'name' => __( 'List of wishlists', 'yith-woocommerce-wishlist' ),
+			'name' => __( 'All your wishlists', 'yith-woocommerce-wishlist' ),
 			'type' => 'title',
 			'desc' => '',
 			'id' => 'yith_wcwl_manage_settings'
 		),
 
 		'wishlist_page' => array(
-			'name'     => __( 'Wishlist Page', 'yith-woocommerce-wishlist' ),
-			'desc'     => __( 'Select a page for your wishlist page; make sure to add <span class="code"><code>[yith_wcwl_wishlist]</code></span> shortcode to page content', 'yith-woocommerce-wishlist' ),
+			'name'     => __( 'Wishlist page', 'yith-woocommerce-wishlist' ),
+			'desc'     => __( 'Pick a page as the main Wishlist page; make sure you add the <span class="code"><code>[yith_wcwl_wishlist]</code></span> shortcode into the page content', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_wishlist_page_id',
 			'type'     => 'single_select_page',
 			'default'  => '',
@@ -52,7 +52,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'show_stock_status' => array(
 			'name'     => __( 'In wishlist table show', 'yith-woocommerce-wishlist' ),
-			'desc'     => __( 'Product stock (to show if product is available or not)', 'yith-woocommerce-wishlist' ),
+			'desc'     => __( 'Product stock (show if the product is available or not)', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_stock_show',
 			'type'     => 'checkbox',
 			'default'  => '',
@@ -61,7 +61,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'show_dateadded' => array(
 			'name'     => __( 'In wishlist table show', 'yith-woocommerce-wishlist' ),
-			'desc'     => __( 'Date on which product was added to the wishlist', 'yith-woocommerce-wishlist' ),
+			'desc'     => __( 'Date on which the product was added to the wishlist', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_show_dateadded',
 			'type'     => 'checkbox',
 			'default'  => '',
@@ -70,7 +70,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'show_add_to_cart' => array(
 			'name'     => __( 'In wishlist table show', 'yith-woocommerce-wishlist' ),
-			'desc'     => __( 'Add to Cart option for each product', 'yith-woocommerce-wishlist' ),
+			'desc'     => __( 'Add to cart option for each product', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_add_to_cart_show',
 			'type'     => 'checkbox',
 			'default'  => '',
@@ -79,7 +79,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'show_remove_button' => array(
 			'name'     => __( 'In wishlist table show', 'yith-woocommerce-wishlist' ),
-			'desc'     => __( 'Option to remove product from the wishlist', 'yith-woocommerce-wishlist' ),
+			'desc'     => __( 'Icon to remove the product from the wishlist - to the left of the product', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_show_remove',
 			'type'     => 'checkbox',
 			'default'  => 'yes',
@@ -88,7 +88,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'repeat_remove_button' => array(
 			'name'     => __( 'In wishlist table show', 'yith-woocommerce-wishlist' ),
-			'desc'     => __( 'A second option to remove product in last column of the table', 'yith-woocommerce-wishlist' ),
+			'desc'     => __( 'Button to remove the product from the wishlist - to the right of the product', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_repeat_remove_button',
 			'type'     => 'checkbox',
 			'default'  => '',
@@ -97,7 +97,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'redirect_to_cart' => array(
 			'name'      => __( 'Redirect to cart', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Redirect to cart page after adding product to cart from wishlist page', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Redirect users to the cart page when they add a product to the cart from the wishlist page', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_redirect_cart',
 			'default'   => 'no',
 			'type'      => 'yith-field',
@@ -106,7 +106,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'remove_after_add_to_cart' => array(
 			'name'      => __( 'Remove if added to the cart', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Remove product from the wishlist after customer addes it to cart', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Remove the product from the wishlist after it has been added to the cart', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_remove_after_add_to_cart',
 			'default'   => 'yes',
 			'type'      => 'yith-field',
@@ -115,7 +115,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'enable_wishlist_share' => array(
 			'name'      => __( 'Share wishlist', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Enable to allow users to share wishlist in socials', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Enable this option to let users share their wishlist on social media', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_enable_share',
 			'type'      => 'yith-field',
 			'yith-type' => 'onoff',
@@ -123,7 +123,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'share_on_facebook' => array(
-			'name'    => __( 'Share socials', 'yith-woocommerce-wishlist' ),
+			'name'    => __( 'Share on social media', 'yith-woocommerce-wishlist' ),
 			'desc'    => __( 'Share on Facebook', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_share_fb',
 			'default' => 'yes',
@@ -132,7 +132,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'share_on_twitter' => array(
-			'name'    => __( 'Share socials', 'yith-woocommerce-wishlist' ),
+			'name'    => __( 'Share on social media', 'yith-woocommerce-wishlist' ),
 			'desc'    => __( 'Tweet on Twitter', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_share_twitter',
 			'default' => 'yes',
@@ -141,7 +141,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'share_on_pinterest' => array(
-			'name'    => __( 'Share socials', 'yith-woocommerce-wishlist' ),
+			'name'    => __( 'Share on social media', 'yith-woocommerce-wishlist' ),
 			'desc'    => __( 'Pin on Pinterest', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_share_pinterest',
 			'default' => 'yes',
@@ -150,8 +150,8 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'share_by_email' => array(
-			'name'    => __( 'Share socials', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Share by Email', 'yith-woocommerce-wishlist' ),
+			'name'    => __( 'Share on social media', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Share by email', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_share_email',
 			'default' => 'yes',
 			'type'    => 'checkbox',
@@ -159,8 +159,8 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'share_by_whatsapp' => array(
-			'name'    => __( 'Share socials', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Share by WhatsApp', 'yith-woocommerce-wishlist' ),
+			'name'    => __( 'Share on social media', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Share on WhatsApp', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_share_whatsapp',
 			'default' => 'yes',
 			'type'    => 'checkbox',
@@ -168,8 +168,8 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'share_by_url' => array(
-			'name'    => __( 'Share by Url', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Show "Share Url" field on wishlist page', 'yith-woocommerce-wishlist' ),
+			'name'    => __( 'Share by URL', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Show "Share URL" field on wishlist page', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_share_url',
 			'default' => 'no',
 			'type'    => 'checkbox',
@@ -178,7 +178,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'socials_title' => array(
 			'name'    => __( 'Sharing title', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Title to use during sharing (only used on Twitter and Pinterest)', 'yith-woocommerce' ),
+			'desc'    => __( 'Wishlist title used for sharing (only used on Twitter and Pinterest)', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_socials_title',
 			'default' => sprintf( __( 'My wishlist on %s', 'yith-woocommerce-wishlist' ), get_bloginfo( 'name' ) ),
 			'type'    => 'text',
@@ -186,7 +186,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'socials_text' =>  array(
 			'name'    => __( 'Social text', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Type the message you want to publish when you share your wishlist in Twitter and Pinterest', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Type the message you want to publish when you share your wishlist on Twitter and Pinterest', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_socials_text',
 			'default' => '',
 			'type'    => 'yith-field',
@@ -195,7 +195,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'socials_image' => array(
 			'name'    => __( 'Social image URL', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'It will be used to pin wishlist on Pinterest.', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'It will be used to pin the wishlist on Pinterest.', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_socials_image_url',
 			'default' => '',
 			'type'    => 'text',
@@ -215,17 +215,17 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'default_wishlist_title' => array(
 			'name'    => __( 'Default wishlist name', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Enter a name for the default wishlist of your site. This is the wishlist that users will use automatically if they not create  a custom wishlist', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Enter a name for the default wishlist. This is the wishlist that will be automatically generated for all users if they do not create any custom one', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_wishlist_title',
 			'default' => sprintf( __( 'My wishlist on %s', 'yith-woocommerce-wishlist' ), get_bloginfo( 'name' ) ), // for woocommerce >= 2.0
 			'type'    => 'text',
 		),
 
 		'add_to_cart_text' => array(
-			'name'    => __( '"Add to Cart" text', 'yith-woocommerce-wishlist' ),
-			'desc'    => __( 'Enter a text for "Add to Cart" button', 'yith-woocommerce-wishlist' ),
+			'name'    => __( '"Add to cart" text', 'yith-woocommerce-wishlist' ),
+			'desc'    => __( 'Enter a text for the "Add to cart" button', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_add_to_cart_text',
-			'default' => __( 'Add to Cart', 'yith-woocommerce-wishlist' ),
+			'default' => __( 'Add to cart', 'yith-woocommerce-wishlist' ),
 			'type'    => 'text',
 		),
 
@@ -235,15 +235,15 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'style_section_start' => array(
-			'name' => __( 'Style & Color customization', 'yith-woocommerce-wishlist' ),
+			'name' => __( 'Style & color customization', 'yith-woocommerce-wishlist' ),
 			'type' => 'title',
 			'desc' => '',
 			'id' => 'yith_wcwl_style_section_settings'
 		),
 
 		'use_buttons' => array(
-			'name'      => __( 'Style of "Add to Cart"', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Choose if you want to show a textual "Add to Cart" link or a button', 'yith-woocommerce-wishlist' ),
+			'name'      => __( 'Style of "Add to cart"', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Choose whether to show a textual "Add to cart" link or a button', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_add_to_cart_style',
 			'options'   => array(
 				'link'           => __( 'Textual (anchor)', 'yith-woocommerce-wishlist' ),
@@ -256,13 +256,13 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'add_to_cart_colors' => array(
-			'name'         => __( '"Add to Cart" button style', 'yith-woocommerce-wishlist' ),
+			'name'         => __( '"Add to cart" button style', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_add_to_cart',
 			'type'         => 'yith-field',
 			'yith-type'    => 'multi-colorpicker',
 			'colorpickers' => array(
 				array(
-					'desc' => __( 'Choose colors to apply to "Add to Cart" button', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose the colors for the "Add to cart" button', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background',
@@ -280,7 +280,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 					),
 				),
 				array(
-					'desc' => __( 'Choose colors to apply to "Add to Cart" button when on hover state', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors for the "Add to cart" button on hover state', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background Hover', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background_hover',
@@ -307,7 +307,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'rounded_buttons_radius' => array(
 			'name'      => __( 'Border radius', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Choose radius to apply to "Add to Cart" button', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Set the radius for the "Add to cart" button', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_add_to_cart_rounded_corners_radius',
 			'default'   => 16,
 			'type'      => 'yith-field',
@@ -322,8 +322,8 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'add_to_cart_icon' => array(
-			'name'      => __( '"Add to Cart" icon', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Select an icon for the "Add to Cart" button (optional)', 'yith-woocommerce-wishlist' ),
+			'name'      => __( '"Add to cart" icon', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Select an icon for the "Add to cart" button (optional)', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_add_to_cart_icon',
 			'default'   => apply_filters( 'yith_wcwl_add_to_cart_std_icon', 'fa-shopping-cart' ),
 			'type'      => 'yith-field',
@@ -339,8 +339,8 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 		),
 
 		'add_to_cart_custom_icon' => array(
-			'name'      => __( '"Add to Cart" custom icon', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Upload an icon you\'d like to use for "Add to Cart" button (suggested 32px x 32px)', 'yith-woocommerce-wishlist' ),
+			'name'      => __( '"Add to cart" custom icon', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Upload an icon you\'d like to use for the "Add to cart" button (suggested 32px x 32px)', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_add_to_cart_custom_icon',
 			'default'   => '',
 			'type'      => 'yith-field',
@@ -354,7 +354,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'yith-type'    => 'multi-colorpicker',
 			'colorpickers' => array(
 				array(
-					'desc' => __( 'Choose colors to apply to Primary button<br/><small>This style will be applied to "Edit title" button on wishlist view, "Submit Changes" button on manage view and "Search wishlist" button on search view</small>', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors for the primary button<br/><small>This style will be applied to "Edit title" button on Wishlist view, "Submit Changes" button on Manage view and "Search wishlist" button on Search view</small>', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background',
@@ -372,7 +372,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 					),
 				),
 				array(
-					'desc' => __( 'Choose colors to apply to Primary button when on hover state<br/><small>This style will be applied to "Edit title" button on wishlist view, "Submit Changes" button on manage view and "Search wishlist" button on search view</small>', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors for the primary button on hover state<br/><small>This style will be applied to "Edit title" button on Wishlist view, "Submit Changes" button on Manage view and "Search wishlist" button on Search view</small>', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background Hover', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background_hover',
@@ -404,7 +404,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'yith-type'    => 'multi-colorpicker',
 			'colorpickers' => array(
 				array(
-					'desc' => __( 'Choose colors to apply to Secondary button<br/><small>This style will be applied to "Show title form" and "Hide title form" buttons on wishlist view and "Create new Wishlist" button on manage view</small>', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors the secondary button<br/><small>This style will be applied to "Show title form" and "Hide title form" buttons on Wishlist view and "Create new Wishlist" button on Manage view</small>', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background',
@@ -422,7 +422,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 					),
 				),
 				array(
-					'desc' => __( 'Choose colors to apply to Secondary button when on hover state<br/><small>This style will be applied to "Show title form" and "Hide title form" buttons on wishlist view and "Create new Wishlist" button on manage view</small>', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors for the secondary button on hover state<br/><small>This style will be applied to "Show title form" and "Hide title form" buttons on Wishlist view and "Create new Wishlist" button on Manage view</small>', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background Hover', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background_hover',
@@ -449,7 +449,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'wishlist_table_style' => array(
 			'name'         => __( 'Wishlist table style', 'yith-woocommerce-wishlist' ),
-			'desc'         => __( 'Choose colors to apply to wishlist table (when using "Traditional" layout)', 'yith-woocommerce-wishlist' ),
+			'desc'         => __( 'Choose the colors for the wishlist table (when set to "Traditional" layout)', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_wishlist_table',
 			'type'         => 'yith-field',
 			'yith-type'    => 'multi-colorpicker',
@@ -479,7 +479,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'headings_style' => array(
 			'name'         => __( 'Highlight color', 'yith-woocommerce-wishlist' ),
-			'desc'         => __( 'Choose color to apply to all sections with background<br/><small>This color will be used as background for wishlist table heading and footer (when using "Traditional" layout), and for various form across wishlist views</small>', 'yith-woocommerce-wishlist' ),
+			'desc'         => __( 'Choose the color for all sections with background<br/><small>This color will be used as background for the wishlist table heading and footer (when set to "Traditional" layout), and for various form across wishlist views</small>', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_headers_background',
 			'type'         => 'yith-field',
 			'yith-type'    => 'colorpicker',
@@ -489,6 +489,32 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 				'value' => 'button_custom',
 				'type' => 'disable'
 			)
+		),
+
+		'share_colors' => array(
+			'name'         => __( 'Share button text color', 'yith-woocommerce-wishlist' ),
+			'desc'         => __( 'Choose colors for share buttons text', 'yith-woocommerce-wishlist' ),
+			'id'           => 'yith_wcwl_color_share_button',
+			'type'         => 'yith-field',
+			'yith-type'    => 'multi-colorpicker',
+			'colorpickers' => array(
+				array(
+					'name' => __( 'Text', 'yith-woocommerce-wishlist' ),
+					'id'   => 'color',
+					'default' => '#FFFFFF'
+				),
+				array(
+					'name' => __( 'Text hover', 'yith-woocommerce-wishlist' ),
+					'id'   => 'color_hover',
+					'default' => '#FFFFFF'
+				),
+			),
+			'deps' => array(
+				'id' => 'yith_wcwl_enable_share',
+				'value' => 'yes',
+				'type' => 'disable'
+			)
+
 		),
 
 		'fb_button_icon' => array(
@@ -513,7 +539,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'fb_button_colors' => array(
 			'name'         => __( 'Facebook share button style', 'yith-woocommerce-wishlist' ),
-			'desc'         => __( 'Choose colors to apply to Facebook share button', 'yith-woocommerce-wishlist' ),
+			'desc'         => __( 'Choose colors for Facebook share button', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_fb_button',
 			'type'         => 'yith-field',
 			'yith-type'    => 'multi-colorpicker',
@@ -553,7 +579,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'tw_button_colors' => array(
 			'name'         => __( 'Twitter share button style', 'yith-woocommerce-wishlist' ),
-			'desc'         => __( 'Choose colors to apply to Twitter share button', 'yith-woocommerce-wishlist' ),
+			'desc'         => __( 'Choose colors for Twitter share button', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_tw_button',
 			'type'         => 'yith-field',
 			'yith-type'    => 'multi-colorpicker',
@@ -593,7 +619,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'pr_button_colors' => array(
 			'name'         => __( 'Pinterest share button style', 'yith-woocommerce-wishlist' ),
-			'desc'         => __( 'Choose colors to apply to Pinterest share button', 'yith-woocommerce-wishlist' ),
+			'desc'         => __( 'Choose colors for Pinterest share button', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_pr_button',
 			'type'         => 'yith-field',
 			'yith-type'    => 'multi-colorpicker',
@@ -624,7 +650,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'em_button_custom_icon' => array(
 			'name'      => __( 'Email share button custom icon', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Upload an icon you\'d like to use for Email share button (suggested 32px x 32px)', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Upload an icon you\'d like to use for the Email share button (suggested 32px x 32px)', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_em_button_custom_icon',
 			'default'   => '',
 			'type'      => 'yith-field',
@@ -633,7 +659,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'em_button_colors' => array(
 			'name'         => __( 'Email share button style', 'yith-woocommerce-wishlist' ),
-			'desc'         => __( 'Choose colors to apply to Email share button', 'yith-woocommerce-wishlist' ),
+			'desc'         => __( 'Choose colors for the Email share button', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_em_button',
 			'type'         => 'yith-field',
 			'yith-type'    => 'multi-colorpicker',
@@ -673,7 +699,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 
 		'wa_button_colors' => array(
 			'name'         => __( 'WhatsApp share button style', 'yith-woocommerce-wishlist' ),
-			'desc'         => __( 'Choose colors to apply to WhatsApp share button', 'yith-woocommerce-wishlist' ),
+			'desc'         => __( 'Choose colors for WhatsApp share button', 'yith-woocommerce-wishlist' ),
 			'id'           => 'yith_wcwl_color_wa_button',
 			'type'         => 'yith-field',
 			'yith-type'    => 'multi-colorpicker',
