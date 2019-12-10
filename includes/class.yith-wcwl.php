@@ -55,7 +55,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
             return self::$instance;
         }
-        
+
         /**
          * Constructor.
          *
@@ -74,7 +74,6 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 	        // init session
 	        $this->wcwl_session = YITH_WCWL_Session();
-	        $this->wcwl_session->init();
 
 	        // init admin handling
 	        if( is_admin() ){
@@ -124,7 +123,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
         }
 
         /* === ITEMS METHODS === */
-        
+
         /**
          * Add a product in the wishlist.
          *
@@ -199,7 +198,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 	        do_action( 'yith_wcwl_added_to_wishlist', $prod_id, $wishlist_id, $user_id );
         }
-        
+
         /**
          * Remove an entry from the wishlist.
          *
@@ -647,12 +646,12 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
             return $public_var;
         }
-        
+
         /**
          * Build wishlist page URL.
          *
          * @param $action string
-         * 
+         *
          * @return string
          * @since 1.0.0
          */

@@ -1,5 +1,4 @@
-
-jQuery( function ( $ ) {
+( function ( $ ) {
 
     /* global yith_framework_fw_fields*/
 
@@ -27,6 +26,16 @@ jQuery( function ( $ ) {
         /* Datepicker */
         $datepicker.each( function () {
             var args = $( this ).data();
+
+            // set animation to false to prevent style 'glitches' when removing class on closing
+            args.showAnim   = false;
+            args.beforeShow = function ( input, instance ) {
+                instance.dpDiv.addClass( 'yith-plugin-fw-datepicker-div' );
+            };
+            args.onClose    = function ( selectedDate, instance ) {
+                instance.dpDiv.removeClass( 'yith-plugin-fw-datepicker-div' );
+            };
+
             $( this ).datepicker( args );
         } );
 
@@ -408,7 +417,7 @@ jQuery( function ( $ ) {
         $( document.body ).trigger( 'yith-framework-enhanced-select-init' );
     };
 
-    yith_fields_init();
+    $( document ).on( 'yith_fields_init', yith_fields_init ).trigger( 'yith_fields_init' );
 
     /* on-off */
     $( document ).on( 'click', '.yith-plugin-fw-onoff-container span', function () {
@@ -438,7 +447,7 @@ jQuery( function ( $ ) {
             id          = wrapper.attr( 'id' ),
             current_tab = $.urlParam( 'tab' );
 
-        formdata.append( 'security', wrapper.data('nonce') );
+        formdata.append( 'security', wrapper.data( 'nonce' ) );
 
         if ( typeof array_keys != 'undefined' && array_keys.length > 0 ) {
             formdata.append( 'yith_toggle_elements_order_keys', array_keys );
@@ -464,7 +473,7 @@ jQuery( function ( $ ) {
                             spinner.removeClass( 'show' );
                         }
 
-                        $( document ).trigger( 'yith_save_toggle_element_done', [ result, toggle ] );
+                        $( document ).trigger( 'yith_save_toggle_element_done', [result, toggle] );
                     }
                 } );
     };
@@ -523,7 +532,7 @@ jQuery( function ( $ ) {
             toggle_el.find( '.subtitle' ).html( subtitle );
         }
 
-        $( document ).trigger( 'yith-toggle-element-item-title', [ toggle_el ] );
+        $( document ).trigger( 'yith-toggle-element-item-title', [toggle_el] );
     };
 
     $.urlParam = function ( name ) {
@@ -553,25 +562,25 @@ jQuery( function ( $ ) {
     /**Add new box toggle**/
     $( document ).on( 'click', '.yith-add-box-button', function ( event ) {
         event.preventDefault();
-        var $this = $( this ),
-            target_id = $this.data( 'box_id' ),
-            closed_label   = $this.data('closed_label'),
-            label          = $this.data('opened_label'),
-            id        = $this.closest( '.yith-toggle_wrapper' ).attr( 'id' );
-            template      = wp.template( 'yith-toggle-element-add-box-content-' + id );
+        var $this        = $( this ),
+            target_id    = $this.data( 'box_id' ),
+            closed_label = $this.data( 'closed_label' ),
+            label        = $this.data( 'opened_label' ),
+            id           = $this.closest( '.yith-toggle_wrapper' ).attr( 'id' );
+        template         = wp.template( 'yith-toggle-element-add-box-content-' + id );
 
         if ( '' !== target_id ) {
             $( '#' + target_id ).html( template( { index: 'box_id' } ) ).slideToggle();
-            if (closed_label !== '') {
-                if ($this.html() === closed_label) {
-                    $this.html(label).removeClass('closed');
+            if ( closed_label !== '' ) {
+                if ( $this.html() === closed_label ) {
+                    $this.html( label ).removeClass( 'closed' );
                 } else {
-                    $this.html(closed_label).addClass('closed');
+                    $this.html( closed_label ).addClass( 'closed' );
                 }
             }
 
-            yith_fields_init();
-            $( document ).trigger( 'yith-add-box-button-toggle', [ $this ] );
+            $( document ).trigger( 'yith_fields_init' );
+            $( document ).trigger( 'yith-add-box-button-toggle', [$this] );
         }
     } );
 
@@ -588,7 +597,7 @@ jQuery( function ( $ ) {
 
         hidden_obj.val( counter );
 
-        $( document ).trigger( 'yith-toggle-change-counter', [ hidden_obj, add_box ] );
+        $( document ).trigger( 'yith-toggle-change-counter', [hidden_obj, add_box] );
 
         counter       = hidden_obj.val();
         var template  = wp.template( 'yith-toggle-element-item-' + id ),
@@ -626,27 +635,26 @@ jQuery( function ( $ ) {
 
         $( toggle_el ).formatToggleTitle();
         var form_is_valid = $( '<input type="hidden">' ).val( 'yes' );
-        $( document ).trigger( 'yith-toggle-element-item-before-add', [ add_box, toggle_el, form_is_valid ] );
+        $( document ).trigger( 'yith-toggle-element-item-before-add', [add_box, toggle_el, form_is_valid] );
 
-        var delayInMilliseconds =1000; //1 second
-        setTimeout(function() {
+        var delayInMilliseconds = 1000; //1 second
+        setTimeout( function () {
             if ( form_is_valid.val() === 'yes' ) {
                 $( toggle_element ).find( '.yith-toggle-elements' ).append( toggle_el );
                 $( add_box ).find( '.yith-plugin-fw-datepicker' ).datepicker( 'destroy' );
                 $( add_box ).html( '' );
-                $( add_box ).prev('.yith-add-box-button').trigger('click');
+                $( add_box ).prev( '.yith-add-box-button' ).trigger( 'click' );
                 toggle_element.saveToggleElement();
 
-                var delayInMilliseconds =2000; //1 second
-                setTimeout(function() {
-                    $( toggle_element ).find('.highlight').removeClass('highlight');
-                }, delayInMilliseconds);
+                var delayInMilliseconds = 2000; //1 second
+                setTimeout( function () {
+                    $( toggle_element ).find( '.highlight' ).removeClass( 'highlight' );
+                }, delayInMilliseconds );
 
 
-                yith_fields_init();
+                $( document ).trigger( 'yith_fields_init' );
             }
         }, delayInMilliseconds );
-
 
 
     } );
@@ -656,10 +664,10 @@ jQuery( function ( $ ) {
         var toggle     = $( this ).closest( '.toggle-element' ),
             toggle_row = $( this ).closest( '.yith-toggle-row' ),
             spinner    = toggle_row.find( '.spinner' );
-            toggle_row.formatToggleTitle();
+        toggle_row.formatToggleTitle();
 
         var form_is_valid = $( '<input type="hidden">' ).val( 'yes' );
-        $( document ).trigger( 'yith-toggle-element-item-before-update', [ toggle, toggle_row, form_is_valid ] );
+        $( document ).trigger( 'yith-toggle-element-item-before-update', [toggle, toggle_row, form_is_valid] );
         if ( form_is_valid.val() === 'yes' ) {
             spinner.addClass( 'show' );
             toggle.saveToggleElement( spinner );
@@ -687,20 +695,32 @@ jQuery( function ( $ ) {
         $( this ).closest( '.yith-plugin-fw-radio' ).val( $( this ).val() ).trigger( 'change' );
     } );
 
-    $(document).on('click', '.yith-password-eye', function () {
-        var $this = $(this),
-            inp = $(this).closest('.yith-password-wrapper').find('input');
-        if (inp.attr('type') === "password") {
-            inp.attr('type', 'text');
-            $this.addClass('yith-password-eye-closed');
+    $( document ).on( 'click', '.yith-password-eye', function () {
+        var $this = $( this ),
+            inp   = $( this ).closest( '.yith-password-wrapper' ).find( 'input' );
+        if ( inp.attr( 'type' ) === "password" ) {
+            inp.attr( 'type', 'text' );
+            $this.addClass( 'yith-password-eye-closed' );
         } else {
-            inp.attr('type', 'password');
-            $this.removeClass('yith-password-eye-closed');
+            inp.attr( 'type', 'password' );
+            $this.removeClass( 'yith-password-eye-closed' );
         }
-    });
-
-    $( '.yith-plugin-fw-radio' ).each( function () {
-        $( this ).val( $( this ).attr( 'value' ) );
     } );
 
-} );
+    $( document.body ).on( 'yith-plugin-fw-init-radio', function () {
+        $( '.yith-plugin-fw-radio:not(.yith-plugin-fw-radio--initialized)' ).each( function () {
+            $( this ).val( $( this ).attr( 'value' ) );
+            $( this ).addClass( 'yith-plugin-fw-radio--initialized' );
+        } );
+    } ).trigger( 'yith-plugin-fw-init-radio' );
+
+    /**
+     * Select2 - add class to stylize it with the new plugin-fw style
+     */
+    $( document ).on( 'select2:open', function ( e ) {
+        if ( $( e.target ).closest( '.yith-plugin-ui' ).length ) {
+            $( '.select2-results' ).closest( '.select2-container' ).addClass( 'yith-plugin-fw-select2-container' );
+        }
+    } );
+
+} )( jQuery );

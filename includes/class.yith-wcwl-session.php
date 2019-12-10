@@ -68,7 +68,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * Construct session class
 		 */
 		public function __construct() {
-			$this->_cookie = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
+			add_action( 'init', array( $this, 'init' ), 0 );
 		}
 
 		/**
@@ -77,6 +77,8 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @since 3.0.0
 		 */
 		public function init() {
+			$this->_cookie = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
+
 			$this->init_session_cookie();
 		}
 

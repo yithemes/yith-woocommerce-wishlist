@@ -270,7 +270,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 
 		'added_to_wishlist_icon' => array(
 			'name'      => __( '"Added to wishlist" icon', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Select an icon for the "Add to wishlist" button (optional)', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Select an icon for the "Added to wishlist" button (optional)', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_added_to_wishlist_icon',
 			'default'   => apply_filters( 'yith_wcwl_add_to_wishlist_std_icon', '' ),
 			'type'      => 'yith-field',

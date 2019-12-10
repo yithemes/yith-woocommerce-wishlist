@@ -13,7 +13,7 @@
  *
  * @author YITHEMES
  * @package YITH WooCommerce Wishlist
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 /*  Copyright 2013  Your Inspiration Themes  (email : plugins@yithemes.com)
@@ -63,6 +63,10 @@ if ( ! defined( 'YITH_WCWL_INIT' ) ) {
 
 if ( ! defined( 'YITH_WCWL_FREE_INIT' ) ) {
     define( 'YITH_WCWL_FREE_INIT', plugin_basename( __FILE__ ) );
+}
+
+if ( ! defined( 'YITH_WCWL_SLUG' ) ) {
+	define( 'YITH_WCWL_SLUG', 'yith-woocommerce-wishlist' );
 }
 
 /* Plugin Framework Version Check */

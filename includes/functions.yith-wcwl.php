@@ -39,7 +39,7 @@ if( !function_exists( 'yith_wcwl_is_wishlist_page' ) ){
             return false;
         }
 
-        return is_page( $wishlist_page_id );
+        return apply_filters( 'yith_wcwl_is_wishlist_page', is_page( $wishlist_page_id ) );
     }
 }
 
@@ -58,7 +58,7 @@ if( !function_exists( 'yith_wcwl_locate_template' ) ) {
     	$template_woocommerce_path =  $woocommerce_base . $path;
         $template_path = '/' . $path;
         $plugin_path = YITH_WCWL_DIR . 'templates/' . $path;
-    	
+
     	$located = locate_template( array(
             $template_woocommerce_path, // Search in <theme>/woocommerce/
             $template_path,             // Search in <theme>/
@@ -75,7 +75,7 @@ if( !function_exists( 'yith_wcwl_locate_template' ) ) {
 if( !function_exists( 'yith_wcwl_get_template' ) ) {
     /**
      * Retrieve a template file.
-     * 
+     *
      * @param string $path
      * @param mixed $var
      * @param bool $return
@@ -84,18 +84,18 @@ if( !function_exists( 'yith_wcwl_get_template' ) ) {
      */
     function yith_wcwl_get_template( $path, $var = null, $return = false ) {
         $located = yith_wcwl_locate_template( $path, $var );
-        
+
         if ( $var && is_array( $var ) ) {
 	        extract( $var );
         }
-                               
+
         if( $return ) {
         	ob_start();
         }
-                                                                     
+
         // include file located
         include( $located );
-        
+
         if( $return ) {
         	return ob_get_clean();
         }
@@ -148,7 +148,7 @@ if( !function_exists( 'yith_wcwl_count_products' ) ) {
      * Retrieve the number of products in the wishlist.
      *
      * @param $wishlist_token string|bool Optional wishlist token
-     * 
+     *
      * @return int
      * @since 1.0.0
      */
@@ -221,7 +221,7 @@ if( !function_exists( 'yith_wcwl_get_count_text' ) ){
 if( !function_exists( 'yith_frontend_css_color_picker' ) ) {
     /**
      * Output a colour picker input box.
-     * 
+     *
      * This function is not of the plugin YITH WCWL. It is from WooCommerce.
      * We redeclare it only because it is needed in the tab "Styles" where it is not available.
      * The original function name is woocommerce_frontend_css_colorpicker and it is declared in
@@ -246,7 +246,7 @@ if( !function_exists( 'yith_frontend_css_color_picker' ) ) {
        		      <input name="' . esc_attr( $id ). '" id="' . $id . '" type="text" value="' . esc_attr( $value ) . '" class="colorpick colorpickpreview" style="background-color: ' . $value . '" /> <div id="colorPickerDiv_' . esc_attr( $id ) . '" class="colorpickdiv"></div>
        		      </td></tr></table>
        		  </div>';
-    
+
     }
 }
 
@@ -259,7 +259,7 @@ if( !function_exists( 'yith_wcwl_get_cookie_expiration' ) ){
 if( !function_exists( 'yith_setcookie' ) ) {
     /**
      * Create a cookie.
-     * 
+     *
      * @param string $name
      * @param mixed $value
      * @param int $time
@@ -286,7 +286,7 @@ if( !function_exists( 'yith_setcookie' ) ) {
 if( !function_exists( 'yith_getcookie' ) ) {
     /**
      * Retrieve the value of a cookie.
-     * 
+     *
      * @param string $name
      * @return mixed
      * @since 1.0.0
@@ -295,7 +295,7 @@ if( !function_exists( 'yith_getcookie' ) ) {
         if( isset( $_COOKIE[$name] ) ) {
 	        return json_decode( stripslashes( $_COOKIE[$name] ), true );
         }
-        
+
         return array();
     }
 }
@@ -303,7 +303,7 @@ if( !function_exists( 'yith_getcookie' ) ) {
 if( !function_exists ( 'yith_destroycookie' ) ) {
     /**
      * Destroy a cookie.
-     * 
+     *
      * @param string $name
      * @return void
      * @since 1.0.0
@@ -340,7 +340,7 @@ if( !function_exists( 'yith_wcwl_get_hidden_products' ) ){
      *
      * WC switched from meta _visibility to product_visibility taxonomy since version 3.0.0,
      * forcing a split handling (Thank you, WC!)
-     * 
+     *
      * @return array List of hidden product ids
      * @since 2.1.1
      */
@@ -464,6 +464,10 @@ if( !function_exists( 'yith_wcwl_maybe_format_field_array' ) ){
 
 				if ( ! empty( $raw_options ) ) {
 					foreach ( $raw_options as $raw_option ) {
+						if( strpos( $raw_option, '::' ) === false ){
+							continue;
+						}
+
 						list( $id, $value ) = explode( '::', $raw_option );
 						$options[ $id ] = $value;
 					}
@@ -476,7 +480,7 @@ if( !function_exists( 'yith_wcwl_maybe_format_field_array' ) ){
 			$field['class'] = array( 'form-row-' . $field['position'] );
 
 			// format requires
-			$field['required'] = 'yes' == $field['required'];
+			$field['required'] = isset( $field['required'] ) && 'yes' == $field['required'];
 
 			// set custom attributes when field is required
 			if ( $field['required'] ) {

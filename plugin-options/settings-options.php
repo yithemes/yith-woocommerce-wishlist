@@ -28,7 +28,7 @@ return apply_filters( 'yith_wcwl_settings_options', array(
 
 		'enable_ajax_loading' => array(
 			'name'      => __( 'Enable AJAX loading', 'yith-woocommerce-wishlist' ),
-			'desc'      => __( 'Load any item of the wishlist that may be cached via AJAX', 'yith-woocommerce-wishlist' ),
+			'desc'      => __( 'Load any cacheable wishlist item via AJAX', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_ajax_enable',
 			'default'   => 'no',
 			'type'      => 'yith-field',

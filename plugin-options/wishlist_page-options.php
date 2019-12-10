@@ -41,13 +41,22 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'id' => 'yith_wcwl_wishlist_settings'
 		),
 
+		'show_product_variation' => array(
+			'name'     => __( 'In wishlist table show', 'yith-woocommerce-wishlist' ),
+			'desc'     => __( 'Product variations selected by the user (example: size or color)', 'yith-woocommerce-wishlist' ),
+			'id'       => 'yith_wcwl_variation_show',
+			'type'     => 'checkbox',
+			'default'  => '',
+			'checkboxgroup' => 'start'
+		),
+
 		'show_unit_price' => array(
 			'name'     => __( 'In wishlist table show', 'yith-woocommerce-wishlist' ),
 			'desc'     => __( 'Product price', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_price_show',
 			'type'     => 'checkbox',
 			'default'  => '',
-			'checkboxgroup' => 'start'
+			'checkboxgroup' => 'wishlist_info'
 		),
 
 		'show_stock_status' => array(
@@ -404,7 +413,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'yith-type'    => 'multi-colorpicker',
 			'colorpickers' => array(
 				array(
-					'desc' => __( 'Choose colors the secondary button<br/><small>This style will be applied to "Show title form" and "Hide title form" buttons on Wishlist view and "Create new Wishlist" button on Manage view</small>', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors of the secondary button<br/><small>This style will be applied to the buttons that allow showing and hiding the Edit title form on Wishlist view and "Create new Wishlist" button on Manage view</small>', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background',
@@ -422,7 +431,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 					),
 				),
 				array(
-					'desc' => __( 'Choose colors for the secondary button on hover state<br/><small>This style will be applied to "Show title form" and "Hide title form" buttons on Wishlist view and "Create new Wishlist" button on Manage view</small>', 'yith-woocommerce-wishlist' ),
+					'desc' => __( 'Choose colors of the secondary button<br/><small>This style will be applied to the buttons that allow showing and hiding the Edit title form on Wishlist view and "Create new Wishlist" button on Manage view</small>', 'yith-woocommerce-wishlist' ),
 					array(
 						'name' => __( 'Background Hover', 'yith-woocommerce-wishlist' ),
 						'id'   => 'background_hover',

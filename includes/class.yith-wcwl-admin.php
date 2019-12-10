@@ -211,6 +211,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 				'parent_slug'   => '',
 				'page_title'    => __( 'YITH WooCommerce Wishlist', 'yith-woocommerce-wishlist' ),
 				'menu_title'    => __( 'Wishlist', 'yith-woocommerce-wishlist' ),
+				'plugin_slug'   => YITH_WCWL_SLUG,
 				'plugin_description' => __( 'Allows your customers to create and share lists of products that they want to purchase on your e-commerce.', 'yith-woocommerce-wishlist' ),
 				'capability'    => apply_filters( 'yith_wcwl_settings_panel_capability', 'manage_options' ),
 				'parent'        => '',

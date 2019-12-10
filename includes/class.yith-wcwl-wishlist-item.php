@@ -387,6 +387,11 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 
 			$product = $this->get_product();
 			$current_price = $this->get_product_price();
+
+			if( ! is_numeric( $current_price ) ){
+				return '';
+			}
+
 			$difference = $original_price - $current_price;
 
 			if( $difference <= 0 && apply_filters( 'yith_wcwl_hide_price_increase', true, $product, $original_price, $original_currency ) ){
@@ -396,12 +401,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			$percentage_difference = -1 * round( $difference / $original_price * 100, 2 );
 			$class = $percentage_difference > 0 ? 'increase' : 'decrease';
 
-			$template = sprintf(
-				apply_filters( 'yith_wcwl_price_variation_template', '<small class="price-variation %1$s"><span class="variation-rate">Price is %2$s%%</span><span class="old-price">(Was %3$s when added  in list)</span></small>', $class, $percentage_difference, $original_price, $original_currency ),
+			$template = apply_filters( 'yith_wcwl_price_variation_template', sprintf(
+				'<small class="price-variation %s"><span class="variation-rate">%s</span><span class="old-price">%s</span></small>',
 				$class,
-				$percentage_difference,
-				wc_price( $original_price, array( 'currency' => $original_currency ) )
-			);
+				_x( 'Price is %1$s%%', 'Part of the template that shows price variation since addition to list; placeholder will be replaced with a percentage', 'yith-woocommerce-wishlist' ),
+				_x( '(Was %2$s when added  in list)', 'Part of the template that shows price variation since addition to list; placeholder will be replaced with a price', 'yith-woocommerce-wishlist' )
+			), $class, $percentage_difference, $original_price, $original_currency );
+			$template = sprintf( $template, $percentage_difference, wc_price( $original_price, array( 'currency' => $original_currency ) ) );
 
 			return $template;
 		}

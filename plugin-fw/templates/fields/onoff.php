@@ -1,7 +1,6 @@
 <?php
 /**
  * This file belongs to the YIT Plugin Framework.
- *
  * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -15,8 +14,12 @@
 extract( $field );
 ?>
 
-<div class="yith-plugin-fw-onoff-container  <?php echo !empty( $class ) ? $class : ''; ?> ">
-    <input type="checkbox" id="<?php echo $id ?>" name="<?php echo $name ?>" value="<?php echo esc_attr( $value ) ?>" <?php checked( yith_plugin_fw_is_true( $value ) ) ?> class="on_off" <?php if ( isset( $std ) ) : ?>data-std="<?php echo $std ?>"<?php endif ?> />
+<div class="yith-plugin-fw-onoff-container <?php echo !empty( $class ) ? $class : ''; ?>"
+    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>>
+    <input type="checkbox" id="<?php echo $id ?>" name="<?php echo $name ?>" value="<?php echo esc_attr( $value ) ?>"
+        <?php checked( yith_plugin_fw_is_true( $value ) ) ?> class="on_off" <?php if ( isset( $std ) ) : ?>data-std="<?php echo $std ?>"<?php endif ?>
+        <?php echo $custom_attributes ?>
+    />
     <span class="yith-plugin-fw-onoff"></span>
 </div>
 <?php

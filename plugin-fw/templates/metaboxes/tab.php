@@ -1,11 +1,13 @@
 <?php
 /**
  * This file belongs to the YIT Plugin Framework.
- *
  * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://www.gnu.org/licenses/gpl-3.0.txt
+ *
+ * @var array  $tabs
+ * @var string $class
  */
 
 if ( !defined( 'ABSPATH' ) ) {
@@ -13,16 +15,16 @@ if ( !defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 global $post;
-$classes = apply_filters('yith_plugin_fw_metabox_class', '', $post );
+$classes = apply_filters( 'yith_plugin_fw_metabox_class', $class, $post );
 $classes = yith_plugin_fw_remove_duplicate_classes( $classes );
 
 do_action( 'yit_before_metaboxes_tab' ) ?>
-<div class="yith-plugin-fw metaboxes-tab <?php echo  esc_attr($classes )?>">
+<div class="yith-plugin-fw metaboxes-tab <?php echo esc_attr( $classes ) ?>">
     <?php do_action( 'yit_before_metaboxes_labels' ) ?>
     <ul class="metaboxes-tabs clearfix"<?php if ( count( $tabs ) <= 1 ) : ?> style="display:none;"<?php endif; ?>>
         <?php
         $i = 0;
-        foreach ( $tabs as $key=>$tab ) :
+        foreach ( $tabs as $key => $tab ) :
             if ( !isset( $tab[ 'fields' ] ) || empty( $tab[ 'fields' ] ) ) {
                 continue;
             }
@@ -54,7 +56,7 @@ do_action( 'yit_before_metaboxes_tab' ) ?>
     // Use nonce for verification
     wp_nonce_field( 'metaboxes-fields-nonce', 'yit_metaboxes_nonce' );
     ?>
-    <?php foreach ( $tabs as $key=> $tab ) :
+    <?php foreach ( $tabs as $key => $tab ) :
 
         ?>
         <div class="tabs-panel" id="<?php echo urldecode( $key ) ?>">
@@ -71,11 +73,11 @@ do_action( 'yit_before_metaboxes_tab' ) ?>
                 if ( $pos = strpos( $field_name, ']' ) ) {
                     $field_name = substr_replace( $field_name, '', $pos, 1 );
                 }
-                $value            = yit_get_post_meta( $post->ID, $field_name );
-                $field[ 'value' ] = $value != '' ? $value : ( isset( $field[ 'std' ] ) ? $field[ 'std' ] : '' );
-	            $field[ 'checkboxgroup' ] = ( $field[ 'type' ] == 'checkbox' && isset( $field[ 'checkboxgroup' ] ) ) ? " " .$field[ 'checkboxgroup' ] : "";
-                $container_classes = "the-metabox " . $field[ 'type' ] .$field[ 'checkboxgroup' ] . " clearfix ";
-                $container_classes .= empty( $field[ 'label' ] ) ? 'no-label' : '';
+                $value                    = yit_get_post_meta( $post->ID, $field_name );
+                $field[ 'value' ]         = $value != '' ? $value : ( isset( $field[ 'std' ] ) ? $field[ 'std' ] : '' );
+                $field[ 'checkboxgroup' ] = ( $field[ 'type' ] == 'checkbox' && isset( $field[ 'checkboxgroup' ] ) ) ? " " . $field[ 'checkboxgroup' ] : "";
+                $container_classes        = "the-metabox " . $field[ 'type' ] . $field[ 'checkboxgroup' ] . " clearfix ";
+                $container_classes        .= empty( $field[ 'label' ] ) ? 'no-label' : '';
 
                 ?>
                 <div class="<?php echo $container_classes ?>">
@@ -83,7 +85,7 @@ do_action( 'yit_before_metaboxes_tab' ) ?>
                     if ( $field_template_path = yith_plugin_fw_get_field_template_path( $field ) ) {
                         $display_row                   = 'hidden' !== $field[ 'type' ];
                         $display_row                   = isset( $field[ 'yith-display-row' ] ) ? !!$field[ 'yith-display-row' ] : $display_row;
-                        $field[ 'display-field-only' ] = in_array( $field[ 'type' ], array( 'hidden', 'html', 'sep', 'simple-text', 'title') );
+                        $field[ 'display-field-only' ] = in_array( $field[ 'type' ], array( 'hidden', 'html', 'sep', 'simple-text', 'title', 'list-table' ) );
 
                         if ( $display_row ) {
 
@@ -111,3 +113,5 @@ do_action( 'yit_before_metaboxes_tab' ) ?>
         </div>
     <?php endforeach ?>
 </div>
+
+<?php do_action( 'yit_after_metaboxes_tab' );

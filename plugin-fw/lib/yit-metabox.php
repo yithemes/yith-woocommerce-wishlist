@@ -1,7 +1,6 @@
 <?php
 /**
  * This file belongs to the YIT Framework.
- *
  * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -16,7 +15,6 @@ if ( !defined( 'ABSPATH' ) ) {
 if ( !class_exists( 'YIT_Metabox' ) ) {
     /**
      * YIT Metabox
-     *
      * the metabox can be created using this code
      * <code>
      * $args1 = array(
@@ -37,22 +35,19 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
      *                            ),
      *                      ),
      *  );
-     *
      * $metabox1 = YIT_Metabox( 'yit-metabox-id' );
      * $metabox1->init( $args );
      * </code>
      *
-     * @class YIT_Metaboxes
+     * @class      YIT_Metaboxes
      * @package    YITH
      * @since      1.0.0
      * @author     Emanuela Castorina <emanuela.castorina@yithemes.com>
-     *
      */
     class YIT_Metabox {
 
         /**
          * @var string the id of metabox
-         *
          * @since 1.0
          */
 
@@ -60,14 +55,12 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * @var array An array where are saved all metabox settings options
-         *
          * @since 1.0
          */
         private $options = array();
 
         /**
          * @var array An array where are saved all tabs of metabox
-         *
          * @since 1.0
          */
         private $tabs = array();
@@ -82,11 +75,8 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
          * Main Instance
          *
          * @static
-         *
          * @param $id
-         *
          * @return object Main instance
-         *
          * @since  1.0
          * @author Antonino Scarfi' <antonino.scarfi@yithemes.com>
          */
@@ -102,7 +92,6 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
          * Constructor
          *
          * @param string $id
-         *
          * @return \YIT_Metabox
          * @since  1.0
          * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
@@ -115,11 +104,9 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Init
-         *
          * set options and tabs, add actions to register metabox, scripts and save data
          *
          * @param array $options
-         *
          * @return void
          * @since    1.0
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
@@ -130,20 +117,18 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
             $this->set_tabs();
 
             add_action( 'add_meta_boxes', array( $this, 'register_metabox' ), 99 );
-            add_action( 'save_post', array( $this, 'save_postdata' ) );
+            add_action( 'save_post', array( $this, 'save_postdata' ), 10, 1 );
             add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 15 );
 
             add_filter( 'yit_icons_screen_ids', array( $this, 'add_screen_ids_for_icons' ) );
 
-	        add_action( 'wp_ajax_yith_plugin_fw_save_toggle_element_metabox', array( $this, 'save_toggle_element' ) );
-	        add_filter( 'admin_body_class', array( $this, 'add_body_class' ), 10, 1 );
+            add_action( 'wp_ajax_yith_plugin_fw_save_toggle_element_metabox', array( $this, 'save_toggle_element' ) );
         }
 
         /**
          * Add Screen ids to include icons
          *
          * @param $screen_ids
-         *
          * @return array
          */
         public function add_screen_ids_for_icons( $screen_ids ) {
@@ -152,7 +137,6 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Enqueue script and styles in admin side
-         *
          * Add style and scripts to administrator
          *
          * @return void
@@ -183,11 +167,9 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Set Options
-         *
          * Set the variable options
          *
          * @param array $options
-         *
          * @return void
          * @since    1.0
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
@@ -199,12 +181,10 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Set Tabs
-         *
          * Set the variable tabs
          *
-         * @internal param array $tabs
-         *
          * @return void
+         * @internal param array $tabs
          * @since    1.0
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
          */
@@ -221,16 +201,13 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Add Tab
-         *
          * Add a tab inside the metabox
          *
-         * @internal param array $tabs
-         *
-         * @param array  $tab the new tab to add to the metabox
+         * @param array  $tab   the new tab to add to the metabox
          * @param string $where tell where insert the tab if after or before a $refer
          * @param null   $refer an existent tab inside metabox
-         *
          * @return void
+         * @internal param array $tabs
          * @since    1.0
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
          */
@@ -256,14 +233,11 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Remove Tab
-         *
          * Remove a tab from the tabs of metabox
          *
-         * @internal param array $tabs
-         *
          * @param $id_tab
-         *
          * @return void
+         * @internal param array $tabs
          * @since    1.0
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
          */
@@ -276,17 +250,14 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Add Field
-         *
          * Add a field inside a tab of metabox
          *
-         * @internal param array $tabs
-         *
          * @param string $tab_id the id of the tabs where add the field
-         * @param array  $args the  field to add
-         * @param string $where tell where insert the field if after or before a $refer
-         * @param null   $refer an existent field inside tab
-         *
+         * @param array  $args   the  field to add
+         * @param string $where  tell where insert the field if after or before a $refer
+         * @param null   $refer  an existent field inside tab
          * @return void
+         * @internal param array $tabs
          * @since    1.0
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
          */
@@ -325,11 +296,9 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Remove Field
-         *
          * Remove a field from the metabox, search inside the tabs and remove it if exists
          *
          * @param $id_field
-         *
          * @return void
          * @since    1.0
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
@@ -344,14 +313,12 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Reorder tabs
-         *
          * Order the tabs and fields and set id and name to each field
          *
-         * @internal param $id_field
-         *
          * @return void
-         * @since  1.0
-         * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
+         * @internal param $id_field
+         * @since    1.0
+         * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
          */
         public function reorder_tabs() {
             foreach ( $this->tabs as $tab_name => $tab ) {
@@ -369,12 +336,10 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Get Option Metabox ID
-         *
          * return the id of the field
          *
          * @param string $id_field
          * @param bool   $private if private add an _befor the id
-         *
          * @return string
          * @since  1.0
          * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
@@ -389,12 +354,10 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Get Option Metabox Name
-         *
          * return the name of the field, this name will be used as attribute name of the input field
          *
          * @param string $id_field
          * @param bool   $private if private add an _befor the id
-         *
          * @return string
          * @since  1.0
          * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
@@ -415,9 +378,7 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Register the metabox
-         *
          * call the wp function add_metabox to add the metabox
-         *
          *
          * @return void
          * @since    1.0
@@ -432,9 +393,7 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         /**
          * Show metabox
-         *
          * show the html of metabox
-         *
          *
          * @return void
          * @since    1.0
@@ -443,29 +402,30 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
         public function show() {
             $this->reorder_tabs();
 
-            yit_plugin_get_template( YIT_CORE_PLUGIN_PATH, 'metaboxes/tab.php', array( 'tabs' => $this->tabs ) );
+            $args = array(
+                'tabs'  => $this->tabs,
+                'class' => isset( $this->options[ 'class' ] ) ? $this->options[ 'class' ] : '',
+            );
+
+            yit_plugin_get_template( YIT_CORE_PLUGIN_PATH, 'metaboxes/tab.php', $args );
         }
 
         /**
          * Save Post Data
-         *
          * Save the post data in the database when save the post
          *
          * @param $post_id
-         *
          * @return int
          * @since  1.0
          * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
          */
         public function save_postdata( $post_id ) {
-
-
             if ( !isset( $_POST[ 'yit_metaboxes_nonce' ] ) || !wp_verify_nonce( $_POST[ 'yit_metaboxes_nonce' ], 'metaboxes-fields-nonce' ) ) {
                 return $post_id;
             }
 
-
-            if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+            $allow_ajax = isset( $_REQUEST[ 'yith_metabox_allow_ajax_saving' ] ) && $this->id === $_REQUEST[ 'yith_metabox_allow_ajax_saving' ];
+            if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX && !$allow_ajax ) ) {
                 return $post_id;
             }
 
@@ -475,7 +435,7 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
                 return $post_id;
             }
 
-            if ( 'page' == $post_type ) {
+            if ( 'page' === $post_type ) {
                 if ( !current_user_can( 'edit_page', $post_id ) ) {
                     return $post_id;
                 }
@@ -485,9 +445,9 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
                 }
             }
 
-            /*if (!in_array($post_type, (array)$this->options['pages'])) {
+            if ( !in_array( $post_type, (array) $this->options[ 'pages' ] ) ) {
                 return $post_id;
-            }*/
+            }
 
             if ( isset( $_POST[ 'yit_metaboxes' ] ) ) {
                 $yit_metabox_data = $_POST[ 'yit_metaboxes' ];
@@ -506,77 +466,92 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
 
         }
 
-	    /**
-	     * Sanitize the fields of metabox.
-	     *
-	     * @return void
-	     * @since 3.2.1
-	     * @author Emanuela Castorina
-	     */
-	    public function  sanitize_fields( $post_id ) {
+        /**
+         * Sanitize the fields of metabox.
+         *
+         * @return void
+         * @since  3.2.1
+         * @author Emanuela Castorina
+         */
+        public function sanitize_fields( $post_id ) {
+            $this->reorder_tabs();
+            $tabs_to_sanitize        = $this->tabs;
+            $allow_ajax              = isset( $_REQUEST[ 'yith_metabox_allow_ajax_saving' ] ) && $this->id === $_REQUEST[ 'yith_metabox_allow_ajax_saving' ];
+            $ajax_partial_saving_tab = isset( $_REQUEST[ 'yith_metabox_allow_ajax_partial_saving_tab' ] ) ? $_REQUEST[ 'yith_metabox_allow_ajax_partial_saving_tab' ] : false;
 
-		    $this->reorder_tabs();
+            if ( defined( 'DOING_AJAX' ) && DOING_AJAX && !$allow_ajax ) {
+                return;
+            } elseif ( $ajax_partial_saving_tab ) {
+                if ( array_key_exists( $ajax_partial_saving_tab, $tabs_to_sanitize ) ) {
+                    $tabs_to_sanitize = array( $ajax_partial_saving_tab => $tabs_to_sanitize[ $ajax_partial_saving_tab ] );
+                } else {
+                    return;
+                }
+            }
 
-		    foreach ( $this->tabs as $tab ) {
 
-			    foreach ( $tab['fields'] as $field ) {
 
-				    if ( in_array( $field['type'], array( 'title' ) ) ) {
-					    continue;
-				    }
 
-				    if ( isset( $_POST['yit_metaboxes'][ $field['id'] ] ) ) {
-					    if ( in_array( $field['type'], array( 'onoff', 'checkbox' ) ) ) {
-						    update_post_meta( $post_id, $field['id'], '1' );
-					    }elseif( in_array( $field['type'], array( 'toggle-element' ) ) ){
-					    	if ( isset( $field['elements'] ) && $field['elements'] ) {
-							    $elements_value = $_POST['yit_metaboxes'][ $field['id'] ];
-							    if ( $elements_value ) {
-							    	if( isset( $elements_value['box_id'])){
-							    		unset( $elements_value['box_id']);
-								    }
+            foreach ( $tabs_to_sanitize as $tab ) {
 
-								    foreach ( $field['elements'] as $element ) {
-									    foreach ( $elements_value as $key => $element_value ) {
-										    if ( isset( $field['onoff_field'] ) ) {
-										    	$elements_value[ $key ][ $field['onoff_field']['id'] ] = ! isset( $element_value[ $field['onoff_field']['id'] ] ) ? 0 : $element_value[ $field['onoff_field']['id'] ];
-										    }
-										    if ( in_array( $element['type'], array( 'onoff', 'checkbox' ) ) ) {
-											    $elements_value[ $key ][ $element['id'] ] = ! isset( $element_value[ $element['id'] ] ) ? 0 : 1;
-										    }
+                foreach ( $tab[ 'fields' ] as $field ) {
 
-										    if ( ! empty( $element['yith-sanitize-callback'] ) && is_callable( $element['yith-sanitize-callback'] ) ) {
-											    $elements_value[ $key ][ $element['id'] ]  = call_user_func( $element['yith-sanitize-callback'],  $elements_value[ $key ][ $element['id'] ] );
-										    }
-									    }
-								    }
-							    }
+                    if ( in_array( $field[ 'type' ], array( 'title' ) ) ) {
+                        continue;
+                    }
 
-							    update_post_meta( $post_id, $field['id'], maybe_serialize( $elements_value ) );
-						    }
-					    } else {
-						    $value = $_POST['yit_metaboxes'][ $field['id'] ];
-						    if ( ! empty( $field['yith-sanitize-callback'] ) && is_callable( $field['yith-sanitize-callback'] ) ) {
-							    $value = call_user_func( $field['yith-sanitize-callback'], $value );
-						    }
-						    add_post_meta( $post_id, $field['id'], $value, true ) || update_post_meta( $post_id, $field['id'], $value );
-					    }
-				    } elseif ( in_array( $field['type'], array( 'onoff', 'checkbox' ) ) ) {
-					    update_post_meta( $post_id, $field['id'], '0' );
-				    } else {
-					    delete_post_meta( $post_id, $field['id'] );
-				    }
-			    }
-		    }
-	    }
+                    if ( isset( $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ] ) ) {
+                        if ( in_array( $field[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
+                            update_post_meta( $post_id, $field[ 'id' ], '1' );
+                        } elseif ( in_array( $field[ 'type' ], array( 'toggle-element' ) ) ) {
+                            if ( isset( $field[ 'elements' ] ) && $field[ 'elements' ] ) {
+                                $elements_value = $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ];
+                                if ( $elements_value ) {
+                                    if ( isset( $elements_value[ 'box_id' ] ) ) {
+                                        unset( $elements_value[ 'box_id' ] );
+                                    }
+
+                                    foreach ( $field[ 'elements' ] as $element ) {
+                                        foreach ( $elements_value as $key => $element_value ) {
+                                            if ( isset( $field[ 'onoff_field' ] ) ) {
+                                                $elements_value[ $key ][ $field[ 'onoff_field' ][ 'id' ] ] = !isset( $element_value[ $field[ 'onoff_field' ][ 'id' ] ] ) ? 0 : $element_value[ $field[ 'onoff_field' ][ 'id' ] ];
+                                            }
+                                            if ( in_array( $element[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
+                                                $elements_value[ $key ][ $element[ 'id' ] ] = !isset( $element_value[ $element[ 'id' ] ] ) ? 0 : 1;
+                                            }
+
+                                            if ( !empty( $element[ 'yith-sanitize-callback' ] ) && is_callable( $element[ 'yith-sanitize-callback' ] ) ) {
+                                                $elements_value[ $key ][ $element[ 'id' ] ] = call_user_func( $element[ 'yith-sanitize-callback' ], $elements_value[ $key ][ $element[ 'id' ] ] );
+                                            }
+                                        }
+                                    }
+                                }
+
+                                update_post_meta( $post_id, $field[ 'id' ], maybe_serialize( $elements_value ) );
+                            }
+                        } else {
+                            $value = $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ];
+                            if ( !empty( $field[ 'yith-sanitize-callback' ] ) && is_callable( $field[ 'yith-sanitize-callback' ] ) ) {
+                                $value = call_user_func( $field[ 'yith-sanitize-callback' ], $value );
+                            }
+                            add_post_meta( $post_id, $field[ 'id' ], $value, true ) || update_post_meta( $post_id, $field[ 'id' ], $value );
+                        }
+                    } elseif ( in_array( $field[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
+                        update_post_meta( $post_id, $field[ 'id' ], '0' );
+                    } elseif ( in_array( $field[ 'type' ], array( 'checkbox-array' ) ) ) {
+                        update_post_meta( $post_id, $field[ 'id' ], array() );
+                    } else {
+                        delete_post_meta( $post_id, $field[ 'id' ] );
+                    }
+                }
+            }
+        }
 
         /**
          * Remove Fields
-         *
          * Remove a fields list from the metabox, search inside the tabs and remove it if exists
          *
          * @param $id_fields
-         *
          * @return   void
          * @since    2.0.0
          * @author   Andrea Grillo <andrea.grillo@yithemes.com>
@@ -587,64 +562,33 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
             }
         }
 
+        /**
+         * Save the element toggle via Ajax.
+         *
+         * @return void
+         * @since  3.2.1
+         * @author Emanuela Castorina
+         */
+        public function save_toggle_element() {
+            if ( !isset( $_REQUEST[ 'post_ID' ] ) ) {
+                return;
+            }
 
-	    /**
-	     * Add custom class to body
-	     *
-	     * It is necessary to add new style to the metaboxes
-	     *
-	     * @param $classes
-	     *
-	     * @return   string
-	     * @author   Emanuela Castorina
-	     */
-	    public function add_body_class( $classes ) {
-		    global $post;
+            if ( !isset( $_REQUEST[ 'yit_metaboxes_nonce' ] ) || !wp_verify_nonce( $_REQUEST[ 'yit_metaboxes_nonce' ], 'metaboxes-fields-nonce' ) ) {
+                return;
+            }
+            $post_id = $_REQUEST[ 'post_ID' ];
 
-		    $exclude_post_types = apply_filters( 'yith_plugin_fw_exclude_post_types_to_additional_classes', array( 'product' ) );
+            if ( isset( $_REQUEST[ 'yit_metaboxes' ] ) ) {
+                $yit_metabox_data = $_REQUEST[ 'yit_metaboxes' ];
 
-		    if ( $post && in_array( $post->post_type, $exclude_post_types ) ) {
-			    return $classes;
-		    }
-
-		    $new_class = apply_filters( 'yith_plugin_fw_metabox_class', '', $post );
-
-		    if ( empty( $new_class ) ) {
-			    return $classes;
-		    }
-
-		    $classes = yith_plugin_fw_remove_duplicate_classes( $classes. ' '. $new_class);
-
-		    return $classes;
-	    }
-
-	    /**
-	     * Save the element toggle via Ajax.
-	     *
-	     * @return void
-	     * @since 3.2.1
-	     * @author Emanuela Castorina
-	     */
-	    public function save_toggle_element() {
-		    if ( ! isset( $_REQUEST['post_ID'] ) ) {
-			    return;
-		    }
-
-		    if ( !isset( $_REQUEST[ 'yit_metaboxes_nonce' ] ) || !wp_verify_nonce( $_REQUEST[ 'yit_metaboxes_nonce' ], 'metaboxes-fields-nonce' ) ) {
-			    return;
-		    }
-		    $post_id = $_REQUEST['post_ID'];
-
-		    if ( isset( $_REQUEST['yit_metaboxes'] ) ) {
-			    $yit_metabox_data = $_REQUEST['yit_metaboxes'];
-
-			    if ( is_array( $yit_metabox_data ) ) {
-					$this->sanitize_fields( $post_id );
-			    }
-		    } elseif ( ! isset( $_REQUEST['yit_metaboxes'] ) || ! isset( $_REQUEST['yit_metaboxes'][ $_REQUEST['toggle_id'] ] ) ) {
-			    delete_post_meta( $post_id, $_REQUEST['toggle_id'] );
-		    }
-	    }
+                if ( is_array( $yit_metabox_data ) ) {
+                    $this->sanitize_fields( $post_id );
+                }
+            } elseif ( !isset( $_REQUEST[ 'yit_metaboxes' ] ) || !isset( $_REQUEST[ 'yit_metaboxes' ][ $_REQUEST[ 'toggle_id' ] ] ) ) {
+                delete_post_meta( $post_id, $_REQUEST[ 'toggle_id' ] );
+            }
+        }
     }
 }
 
@@ -654,7 +598,6 @@ if ( !function_exists( 'YIT_Metabox' ) ) {
      * Main instance of plugin
      *
      * @param $id
-     *
      * @return \YIT_Metabox
      * @since  1.0
      * @author Emanuela Castorina <emanuela.castorina@yithemes.it>

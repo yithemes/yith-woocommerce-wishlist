@@ -46,7 +46,6 @@ if ( ! defined( 'YITH_WCWL' ) ) {
                         <option value="delete"><?php _e( 'Remove from wishlist', 'yith-woocommerce-wishlist' ) ?></option>
 
                         <?php if( $available_multi_wishlist && count( $users_wishlists ) > 1 ): ?>
-                            <optgroup label="<?php echo esc_attr( 'Move to', 'yith-woocommerce-wishlist' ) ?>">
                             <?php
                             foreach( $users_wishlists as $wl ):
 	                            /**
@@ -56,9 +55,8 @@ if ( ! defined( 'YITH_WCWL' ) ) {
                                     continue;
                                 }
                             ?>
-                                <option value="<?php echo esc_attr( $wl->get_token() ) ?>"><?php echo $wl->get_formatted_name() ?></option>
+                                <option value="<?php echo esc_attr( $wl->get_token() ) ?>"><?php printf( __( 'Move to %s', 'yith-woocommerce-wishlist' ), $wl->get_formatted_name() ) ?></option>
                             <?php endforeach; ?>
-                            </optgroup>
                         <?php endif; ?>
                     <?php endif; ?>
                 </select>

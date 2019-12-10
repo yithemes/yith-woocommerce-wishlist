@@ -156,7 +156,8 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'pagination' => 'no',
 				'wishlist_id' => false,
 				'action_params' => get_query_var( YITH_WCWL()->wishlist_param, false ),
-				'no_interactions' => 'no'
+				'no_interactions' => 'no',
+				'layout' => ''
 			), $atts );
 
 			/**
@@ -165,6 +166,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			 * @var $wishlist_id int
 			 * @var $action_params array
 			 * @var $no_interactions string
+			 * @var $layout string
 			 */
 			extract( $atts );
 
@@ -179,6 +181,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			$show_date_added = get_option( 'yith_wcwl_show_dateadded' ) == 'yes';
 			$show_add_to_cart = get_option( 'yith_wcwl_add_to_cart_show' ) == 'yes';
 			$show_remove_product = get_option( 'yith_wcwl_show_remove', 'yes' ) == 'yes';
+			$show_variation = get_option( 'yith_wcwl_variation_show' ) == 'yes';
 			$repeat_remove_button = get_option( 'yith_wcwl_repeat_remove_button' ) == 'yes';
 			$add_to_cart_label = get_option( 'yith_wcwl_add_to_cart_text' );
 			$price_excluding_tax = get_option( 'woocommerce_tax_display_cart' ) == 'excl';
@@ -216,6 +219,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'default_wishlsit_title' => $default_wishlist_title,
 				'current_page' => 1,
 				'page_links' => false,
+				'layout' => $layout,
 
 				// user data
 				'is_user_logged_in' => is_user_logged_in(),
@@ -234,7 +238,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'price_excl_tax' => $price_excluding_tax,
 				'show_cb' => false,
 				'show_quantity' => false,
-				'show_variation' => false,
+				'show_variation' => $show_variation,
 				'show_price_variations' => false,
 				'show_update' => false,
 				'enable_drag_n_drop' => false,

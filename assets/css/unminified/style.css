@@ -10,30 +10,31 @@
  * Index:
  *
  * 1. SELECTBOX STYLE
- * 2. BLOCK STYLE
- * 3. POPUP ADD TO WISHLIST
- * 4. DROPDOWN ADD TO WISHLIST
- * 5. TOOLTIP
- * 6. POPUP MESSAGE
- * 7. WISHLIST TITLE FORM
- * 8. WISHLIST TABLE TEMPLATE
- * 9. WISHLIST MODERN GRID / IMAGES GRID TEMPLATE
- * 10. WISHLIST MOBILE
- * 11. WISHLIST BUTTONS
- * 12. WISHLIST TITLE
- * 13. REMOVE BUTTONS
- * 14. SHARE BUTTONS
- * 15. ASK AN ESTIMATE BUTTON
- * 16. WISHLIST FOOTER
- * 17. MOVE TO ANOTHER WISHLIST POPUP
- * 18. CREATE NEW WISHLIST
- * 19. MANAGE WISHLISTS
- * 20. MANAGE MOBILE WISHLISTS
- * 21. SEARCH WISHLIST
- * 22. AJAX LOADING GIF
- * 23. LISTS WIDGET
- * 24. ITEMS WIDGET
- * 25. RESPONSIVE
+ * 2. PRETTY PHOTO STYLE
+ * 3. BLOCK STYLE
+ * 4. POPUP ADD TO WISHLIST
+ * 5. DROPDOWN ADD TO WISHLIST
+ * 6. TOOLTIP
+ * 7. POPUP MESSAGE
+ * 8. WISHLIST TITLE FORM
+ * 9. WISHLIST TABLE TEMPLATE
+ * 10. WISHLIST MODERN GRID / IMAGES GRID TEMPLATE
+ * 11. WISHLIST MOBILE
+ * 12. WISHLIST BUTTONS
+ * 13. WISHLIST TITLE
+ * 14. REMOVE BUTTONS
+ * 15. SHARE BUTTONS
+ * 16. ASK AN ESTIMATE BUTTON
+ * 17. WISHLIST FOOTER
+ * 18. MOVE TO ANOTHER WISHLIST POPUP
+ * 19. CREATE NEW WISHLIST
+ * 20. MANAGE WISHLISTS
+ * 21. MANAGE MOBILE WISHLISTS
+ * 22. SEARCH WISHLIST
+ * 23. AJAX LOADING GIF
+ * 24. LISTS WIDGET
+ * 25. ITEMS WIDGET
+ * 26. RESPONSIVE
  */
 
 /* === 1. SELECTBOX STYLE === */
@@ -79,30 +80,6 @@
     font-size: 80%;
 }
 
-.selectBox-label.public-visibility:before,
-.selectBox-dropdown-menu li.public-visibility a:before{
-    font-family: FontAwesome;
-    display: inline-block;
-    content: "\f0ac";
-    margin-right: 5px;
-}
-
-.selectBox-label.shared-visibility:before,
-.selectBox-dropdown-menu li.shared-visibility a:before{
-    font-family: FontAwesome;
-    display: inline-block;
-    content: "\f0c1";
-    margin-right: 5px;
-}
-
-.selectBox-label.private-visibility:before,
-.selectBox-dropdown-menu li.private-visibility a:before{
-    font-family: FontAwesome;
-    display: inline-block;
-    content: "\f023";
-    margin-right: 5px;
-}
-
 .selectBox-dropdown-menu li a{
     color: inherit;
     padding: 5px 8px;
@@ -126,14 +103,20 @@ select.selectBox.change-wishlist{
     width: auto!important;
 }
 
-/* === 2. BLOCK STYLE === */
+/* === 3. PRETTY PHOTO STYLE === */
+
+.yith-wcwl-with-pretty-photo{
+    overflow: hidden;
+}
+
+/* === 3. BLOCK STYLE === */
 
 .woocommerce .wishlist-fragment .blockUI.blockOverlay::before,
 .woocommerce .yith-wcwl-popup-form .blockUI.blockOverlay::before{
     display: none;
 }
 
-/* === 3. POPUP ADD TO WISHLIST === */
+/* === 4. POPUP ADD TO WISHLIST === */
 
 .yith-wcwl-popup{
     display: none;
@@ -141,6 +124,7 @@ select.selectBox.change-wishlist{
 
 .yith-wcwl-popup-content h3{
     text-align: center;
+    font-size: 1.5em;
 }
 
 .yith-wcwl-popup-content .heading-icon,
@@ -165,8 +149,10 @@ select.selectBox.change-wishlist{
 }
 
 .yith-wcwl-popup-feedback p.feedback{
+    margin-top: 1.5em;
     text-align: center;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .yith-wcwl-popup-content label{
@@ -196,7 +182,20 @@ select.selectBox.change-wishlist{
     text-align: center;
 }
 
-/* === 4. DROPDOWN ADD TO WISHLIST === */
+.pp_pic_holder.pp_woocommerce.feedback{
+    max-width: 450px!important;
+}
+
+.pp_pic_holder.pp_woocommerce.feedback .pp_content{
+    width: auto!important;
+}
+
+.yith-wcwl-popup-feedback{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+/* === 5. DROPDOWN ADD TO WISHLIST === */
 
 .yith-wcwl-add-button.with-dropdown{
     position: relative;
@@ -249,11 +248,7 @@ select.selectBox.change-wishlist{
     border-bottom: 1px solid #cdcdcd;
 }
 
-/* === 5. TOOLTIP ===  */
-
-.yith-wcwl-add-to-wishlist [data-title]{
-    display: table;
-}
+/* === 6. TOOLTIP ===  */
 
 .yith-wcwl-add-to-wishlist .separator + [data-title]{
     display: inline-block;
@@ -296,8 +291,8 @@ select.selectBox.change-wishlist{
     height: 0;
 
     background: transparent!important;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
+    border-left: 5px solid transparent!important;
+    border-right: 5px solid transparent!important;
     border-bottom: 5px solid;
 }
 
@@ -311,7 +306,7 @@ select.selectBox.change-wishlist{
     border-bottom: none;
 }
 
-/* === 6. POPUP MESSAGE === */
+/* === 7. POPUP MESSAGE === */
 
 #yith-wcwl-popup-message {
     font-weight: 700;
@@ -330,7 +325,7 @@ select.selectBox.change-wishlist{
     z-index: 10000; /* Thanks WP -.- */
 }
 
-/* === 7. WISHLIST TITLE FORM === */
+/* === 8. WISHLIST TITLE FORM === */
 
 .wishlist-title{
     display: inline-block;
@@ -354,7 +349,7 @@ select.selectBox.change-wishlist{
     margin: 25px 0 39px;
 }
 
-/* === 8. WISHLIST TABLE TEMPLATE === */
+/* === 9. WISHLIST TABLE TEMPLATE === */
 
 table.wishlist_table{
     font-size: 80%;
@@ -473,7 +468,7 @@ table.wishlist_table tbody td{
     margin-bottom: 5px!important;
 }
 
-/* === 9. WISHLIST MODERN GRID / IMAGES GRID TEMPLATE === */
+/* === 10. WISHLIST MODERN GRID / IMAGES GRID TEMPLATE === */
 
 .wishlist_table.modern_grid{
     list-style: none;
@@ -561,7 +556,7 @@ table.wishlist_table tbody td{
     display: none;
     position: absolute;
     z-index: 2;
-    top: calc(100% - 60px);
+    bottom: 15px;
     left: calc(50% - 150px);
     width: 300px;
     background: #fff;
@@ -661,7 +656,7 @@ table.wishlist_table tbody td{
     display: inline-block;
 }
 
-/* === 10. WISHLIST MOBILE === */
+/* === 11. WISHLIST MOBILE === */
 
 .wishlist_table.mobile {
     list-style: none;
@@ -683,6 +678,10 @@ table.wishlist_table tbody td{
     width: calc(100% - 25px);
     vertical-align: top;
     margin-bottom: 7px;
+}
+
+.wishlist_table.wishlist_manage_table.mobile li .item-wrapper{
+    width: 100%;
 }
 
 .wishlist_table.mobile li .item-wrapper .product-thumbnail{
@@ -711,7 +710,7 @@ table.wishlist_table tbody td{
     text-align: right;
 }
 
-/* === 11. WISHLIST BUTTONS === */
+/* === 12. WISHLIST BUTTONS === */
 
 a.add_to_wishlist{
     cursor: pointer;
@@ -818,7 +817,7 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
     margin: 0;
 }
 
-/* === 12. WISHLIST TITLE === */
+/* === 13. WISHLIST TITLE === */
 
 .woocommerce .wishlist-title{
     margin-bottom: 30px;
@@ -849,7 +848,7 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
     margin-bottom: 20px;
 }
 
-/* === 13. REMOVE BUTTONS === */
+/* === 14. REMOVE BUTTONS === */
 
 .woocommerce #content table.wishlist_table.cart a.remove{
     color: #c3c3c3;
@@ -861,7 +860,7 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
     color: #fff;
 }
 
-/* === 14. SHARE BUTTONS === */
+/* === 15. SHARE BUTTONS === */
 
 .yith-wcwl-share{
     margin-bottom: 35px;
@@ -907,7 +906,7 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
     cursor: pointer;
 }
 
-/* === 15. ASK AN ESTIMATE BUTTON === */
+/* === 16. ASK AN ESTIMATE BUTTON === */
 
 .woocommerce .ask-an-estimate-button > img{
     max-width: 1em;
@@ -931,7 +930,12 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
     min-height: 150px;
 }
 
-/* === 16. WISHLIST FOOTER === */
+.ask-an-estimate-confirmation{
+    padding: 0 30px;
+    text-align: center;
+}
+
+/* === 17. WISHLIST FOOTER === */
 
 .yith_wcwl_wishlist_footer > div {
     margin-bottom: 15px;
@@ -940,18 +944,26 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
 .yith_wcwl_wishlist_footer .yith_wcwl_wishlist_bulk_action {
     float: left;
 }
+
 .yith_wcwl_wishlist_footer .yith_wcwl_wishlist_bulk_action #bulk_actions{
     min-width: 250px;
 }
+
 .yith_wcwl_wishlist_footer .yith_wcwl_wishlist_update {
     float: right;
 }
+
 .yith_wcwl_wishlist_footer .yith-wcwl-share {
     float: left;
     clear: both;
 }
+
 .yith_wcwl_wishlist_footer .yith_wcwl_footer_additional_action {
     float: right;
+}
+
+.yith_wcwl_wishlist_footer .yith_wcwl_footer_additional_action > *{
+    vertical-align: middle;
 }
 
 .yith_wcwl_wishlist_update + .yith_wcwl_footer_additional_action {
@@ -962,13 +974,13 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
     clear: both;
 }
 
-/* === 17. MOVE TO ANOTHER WISHLIST POPUP === */
+/* === 18. MOVE TO ANOTHER WISHLIST POPUP === */
 
 #move_to_another_wishlist{
     display: none;
 }
 
-/* === 18. CREATE NEW WISHLIST === */
+/* === 19. CREATE NEW WISHLIST === */
 
 .yith-wcwl-wishlist-new{
     padding: 20px 0;
@@ -995,7 +1007,7 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
     display: none;
 }
 
-/* === 19. MANAGE WISHLISTS === */
+/* === 20. MANAGE WISHLISTS === */
 
 .wishlist_manage_table select{
     vertical-align: middle;
@@ -1102,7 +1114,7 @@ table.wishlist_manage_table tfoot td{
     min-width: 0;
 }
 
-/* === 20. MANAGE MOBILE WISHLISTS === */
+/* === 21. MANAGE MOBILE WISHLISTS === */
 .wishlist_manage_table.mobile li{
     margin-bottom: 30px;
 }
@@ -1136,7 +1148,7 @@ table.wishlist_manage_table tfoot td{
     float: left;
 }
 
-/* === 21. SEARCH WISHLIST === */
+/* === 22. SEARCH WISHLIST === */
 
 .yith-wcwl-wishlist-search-form{
     text-align: center;
@@ -1176,7 +1188,7 @@ table.wishlist_manage_table tfoot td{
     margin-right: 15px;
 }
 
-/* === 22. AJAX LOADING GIF === */
+/* === 23. AJAX LOADING GIF === */
 
 .yith-wcwl-add-to-wishlist .ajax-loading {
     box-shadow: none !important;
@@ -1190,7 +1202,7 @@ table.wishlist_manage_table tfoot td{
     height: 16px !important;
 }
 
-/* === 23. LISTS WIDGET === */
+/* === 24. LISTS WIDGET === */
 
 .widget_yith-wcwl-lists ul.dropdown li{
     padding: 0;
@@ -1214,7 +1226,7 @@ table.wishlist_manage_table tfoot td{
     margin: 0;
 }
 
-/* === 24. ITEMS WIDGET === */
+/* === 25. ITEMS WIDGET === */
 
 .widget_yith-wcwl-items .mini{
     position: relative;
@@ -1351,7 +1363,7 @@ table.wishlist_manage_table tfoot td{
     text-align: center;
 }
 
-/* === 25. RESPONSIVE === */
+/* === 26. RESPONSIVE === */
 
 @media(max-width: 768px){
     .yith_wcwl_wishlist_bulk_action select{

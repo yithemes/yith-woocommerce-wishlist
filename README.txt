@@ -1,4 +1,4 @@
-=== YITH WooCommerce Wishlist === 
+=== YITH WooCommerce Wishlist ===
 
 Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
@@ -11,49 +11,59 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
 WooCommerce 3.8.x compatible.
 
-
 == Description ==
 
-What can really make the difference in conversions and amount of sales is without a doubt the freedom to share your own wishlist, even on social networks, increasing indirect sales: can you imagine the sales volume you can generate during holidays or birthdays, when relatives and friends will be looking for the wishlist of your clients to buy a gift?
+The wishlist is one of the most powerful and popular tools in an ecommerce shop. Thanks to the wishlist, users can:
 
-Offer to your visitors a chance to add the products of your woocommerce store to a wishlist page. With YITH WooCommerce Wishlist you can add a link in each product detail page,
-in order to add the products to the wishlist page. The plugin will create you the specific page and the products will be added in this page and
-afterwards add them to the cart or remove them.
+* Save their favourite products, find them quickly and easily at a later time and buy them.
+* Share the wishlist with relatives and friends for Christmas, birthdays and similar occasions so they can buy them one of the products from the list.
+* Share the wishlist on social networks and get indirect advertising for your store.
 
-Working demo are available:
+This means that you’ll be able to loyalise customers, push them to buy and attract new customers any time a wishlist is shared. Not bad for one plugin only, don’t you think?
 
-**[LIVE DEMO 1](http://preview.yithemes.com/room09/product/africa-style/)** - **[LIVE DEMO 2](http://preview.yithemes.com/bazar/shop/ankle-shoes/)**
+Our YITH WooCommerce Wishlist has more than **700,000 active installations** and that’s why it’s **the most popular wishlist plugin ever.**
 
-Full documentation is available [here](http://yithemes.com/docs-plugins/yith-woocommerce-wishlist).
+To celebrate this record and say thanks to all the plugin users, we’ve decided to release a new 3.0 version that has improved the design tremendously  and added many new options.
 
-This plugin is 100% compatible with [WPML](http://wpml.org/?aid=24889&affiliate_key=Qn1wDeBNTcZV)
+**If you like the new design, please, leave a review to help the plugin grow!**
 
-= Available Languages =
+[Free version live demo >](https://plugins.yithemes.com/yith-woocommerce-wishlist-free/)
+[Documentation >](https://docs.yithemes.com/yith-woocommerce-wishlist)
 
-**NOTE: The translation process of this plugin has been changed by WordPress. Please, read the correlated FAQ to be updated about the news changes.**
+= Basic features =
 
-* Chinese - CHINA
-* Chinese - TAIWAN
-* Croatian - CROATIA
-* Danish - DENMARK
-* Dutch - NETHERLANDS
-* English - UNITED KINGDOM (Default)
-* French - FRANCE
-* German - GERMANY
-* Hebrew - ISRAEL
-* Italian - ITALY
-* Korean - KOREA
-* Persian - IRAN, ISLAMIC REPUBLIC OF
-* Polish - POLAND
-* Portuguese - BRAZIL
-* Portuguese - PORTUGAL
-* Russian - RUSSIAN FEDERATION
-* Spanish - ARGENTINA
-* Spanish - SPAIN
-* Spanish - MEXICO
-* Swedish - SWEDEN
-* Turkish - TURKEY
-* Ukrainian - UKRAINE
+* Select a page for your wishlist
+* Select where to show the shortcode ‘Add to wishlist’
+* Show the ‘Remove from wishlist’ button when the product is in the Wishlist
+* Show the ‘Add to wishlist’ button also on the Shop page
+* Customise columns that will be displayed in the wishlist table
+* Product variation support (if the user selects a specific color or size and then adds it to the wishlist, this details will be saved)
+
+= Premium features =
+
+[Premium version live demo >](https://plugins.yithemes.com/yith-woocommerce-wishlist/)
+
+The free version of our plugin works like a charm, but the premium one is an even more powerful tool to increase sales and conversions. By upgrading to the premium version, you can:
+
+* View the wishlists created by logged-in customers
+* View a list of popular products (added to wishlists)
+* Send promotionals email to users who have added a specific product to their wishlist
+* Show the ‘Ask for an estimate’ button to let customers send the content of their wishlist to the admin and get a quotation
+* Add optional notes to the quote request
+* Enable/disable the wishlist features for unlogged users
+* Show a notice to unlogged users: invite them to log in to benefit from all the wishlist functionalities
+* Allow users to create as many wishlists as they want
+* Allow users to manage wishlists, rename and delete them, add or remove items
+* Allow users to search and see registered wishlists
+* Allow users to set visibility options for each wishlist, by making them either public (visible to everyone), private (visible to the owner only) or shared (visible only to people it has been shared with)
+* Show multiple ‘Add to Cart’ buttons in the wishlist table
+* Show product price variations (Amazon style)
+* Allow users to move an element from one wishlist to another, right from the wishlist table
+* Allow users to drag and drop products to arrange their order in the wishlist
+* Choose modern & beautiful layouts for the wishlist page and tables
+* Provide your customers with nice widgets to help them find their wishlist quickly and easily.
+
+[GET THE PREMIUM VERSION HERE with a 100% Money Back guarantee >](https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/)
 
 == Installation ==
 
@@ -61,9 +71,12 @@ This plugin is 100% compatible with [WPML](http://wpml.org/?aid=24889&affiliate_
 2. Upload the plugin folder into the `wp-content/plugins/` directory of your WordPress site.
 3. Activate `YITH WooCommerce Wishlist` from Plugins page
 
-YITH WooCommerce Wishlist will add a new submenu called "Wishlist" under "YIT Plugins" menu. Here you are able to configure all the plugin settings.
+YITH WooCommerce Wishlist will add a new submenu called "Wishlist" under "YITH Plugins" menu. Here you are able to configure all the plugin settings.
 
 == Frequently Asked Questions ==
+
+= Does YITH WooCommerce Wishlist allows adding an “add to wishlist” button on the products on shop page and archive pages? =
+Yes, from version 3.0 the plugin also allows showing the Add to wishlist button on your **shop page, category pages, product shortcodes, product sliders,** and all the other places where the WooCommerce products’ loop is used.
 
 = Can I customize the wishlist page? =
 Yes, the page is a simple template and you can override it by putting the file template "wishlist.php" inside the "woocommerce" folder of the theme folder.
@@ -77,46 +90,36 @@ Yes, you can change the colors of background, text and border or apply a custom 
 = Wishlist page returns a 404 error? =
 Try to regenerate permalinks from Settings -> Permalinks by simply saving them again.
 
-= Did icons of your theme disappear after update to Wishlist 2.0.x? =
-It might be a compatibility problem with the old version of font-awesome, which has been solved with version 2.0.2 of the plugin. Be sure that you are using a plugin version that is greater or equal to 2.0.2. If, after update, you cannot see icons in your theme yet, save again options of YITH WooCommerce Wishlist plugin (that you can find in YIT Plugin -> Wishlist).
-
 = Have you encountered anomalies after plugin update, that did not exist in the previous version? =
-This might depend on the fact that your theme overrides plugin templates. Check if the developer of your theme has released a compatibility update with version 2.0 or later of YITH WooCommerce Wishlist. As an alternative you can try the plugin in WordPress default theme to leave out any possible influences by the theme.
+This might depend on the fact that your theme overrides plugin templates. Check if the developer of your theme has released a compatibility update with version 3.0 or later of YITH WooCommerce Wishlist. As an alternative you can try the plugin in WordPress default theme to leave out any possible influences by the theme.
 
 = I am currently using Wishlist plugin with Catalog Mode enabled in my site. Prices for products should disappear, yet they still appear in the wishlist page. Can I remove them? =
 Yes, of course you can. To avoid Wishlist page to show product prices, you can hide price column from wishlist table. Go to YIT plugins -> wishlist -> settings and disable option "Show Unit price".
-
-= What are the main changes in plugin translation? =
-Recently YITH WooCommerce Wishlist has been selected to be included in the "translate.wordpress.org" translate programme.
-In order to import correctly the plugin strings in the new system, we had to change the text domain from 'yit' to 'yith-woocommerce-wishlist'.
-Once the plugin is imported into the translate.wordpress.org system, the translations of other languages will be downloadable directly from WordPress, without using any .po and .mo files. Moreover, users will be able to participate in a more direct way to plugin translations, suggesting texts in their languages in the dedicated tab on translate.wordpress.org.
-During this transition step, .po and .mo files will be used as usual, but in order to be recognized by WordPress, they must have a new nomenclature and be renamed as:
-yith-woocommerce-wishlist-&lt;WORDPRESS LOCALE&gt;.po
-yith-woocommerce-wishlist-&lt;WORDPRESS LOCALE&gt;.mo
-If your theme overrides plugin templates, it might happen that they are still using the old textdomain ('yit'), which is no longer used as reference for translation.
-If you are experiencing problems with translation of your YITH WooCommerce Wishlist and the theme you are using includes wishlist templates (such as add-to-wishlist.php,
-add-to-wishlist-button.php, wishlist-view,php), you could try to update them with the most recent version included in the plugin
-(never forget to make a copy of your project before you apply any change).
-If you want to keep customisations applied by the theme to wishlist templates (still using the old textdomain), then,
-you should ask theme developers to update custom templates and replace the old textdomain with the most recent one.
 
 == Screenshots ==
 
 1. The page with "Add to wishlist" button
 2. The wishlist page
-3. The Wishlist settings page
-4. The Wishlist settings page
+3. Show the ‘Add to Cart button in the Wishlist table
+4. Show the date when the product has been added to the wishlist (only for logged-in users)
+5. Share the wishlist on social channels (available also for guest users)
+6. Fully customizable appearance
+7. Responsive design
+8. Wishlist settings page (1/3)
+9. Wishlist settings page (2/3)
+10. Wishlist settings page (3/3)
+
 
 == Changelog ==
 
-= 3.0.0 - Released on xx xxxxxx xxxx =
+= 3.0.0 - Released on 09 December 2019 =
 
 * New: option to show Add to Wishlist button on loops
 * New: Add to Wishlist button style when placed over product image
 * New: Add to Wishlist button can now turn into Remove from Wishlist after addition
 * New: plugin will add variation to wishlist, if user selected one before pressing the button
 * New: option to load wishlist templates via Ajax
-* New: add to wishlist icon selection, and custom upload
+* New: select add to wishlist icon and/or upload  custom image
 * New: guest wishlists are now stored on db, within session id
 * New: unified experience for guests and logged in users
 * Tweak: improved admin panel, and settings UX
@@ -133,6 +136,11 @@ you should ask theme developers to update custom templates and replace the old t
 * Dev: added filter yith_wcwl_can_user_add_to_wishlist
 * Dev: added filters yith_wcwl_add_wishlist_{property}
 * Dev: added filters yith_wcwl_adding_to_wishlist_{property}
+
+= 2.2.17 – Released on 29 November 2019 =
+
+* Update: notice handler
+* Update: plugin framework
 
 = 2.2.16 – Released on 11 November 2019 =
 
@@ -482,7 +490,7 @@ you should ask theme developers to update custom templates and replace the old t
 
 = 1.1.5 - Released on 30 June 2014 =
 
-* Added: Share wishlist by email 
+* Added: Share wishlist by email
 
 = 1.1.4 - Released on 26 June 2014 =
 
@@ -501,7 +509,7 @@ you should ask theme developers to update custom templates and replace the old t
 
 = 1.1.1 - Released on 26 February 2014 =
 
-* Fixed: Inability to unistall plugin 
+* Fixed: Inability to unistall plugin
 * Fixed: Redirect to cart page from wishlist page
 
 = 1.1.0 - Released on 13 February 2014 =
@@ -517,7 +525,7 @@ you should ask theme developers to update custom templates and replace the old t
 * Added: Portuguese (Brazil) translation by Lincoln Lemos
 * Fixed: Share buttons show also when not logged in
 * Fixed: Price shows including or excluding tax based on WooCommerce settings
-* Fixed: Better compatibility for WPML 
+* Fixed: Better compatibility for WPML
 * Fixed: Price shows "Free!" if the product is without price
 * Fixed: DB Table creation on plugin activation
 
@@ -551,54 +559,3 @@ you should ask theme developers to update custom templates and replace the old t
 = 1.0.0 - Released on 23 May 2013 =
 
 * Initial release
-
-== Suggestions ==
-
-If you have suggestions about how to improve YITH WooCommerce Wishlist, you can [write us](mailto:plugins@yithemes.com "Your Inspiration Themes") so we can bundle them into YITH WooCommerce Wishlist.
-
-== Translators ==
-
-= Available Languages =
-* Chinese - CHINA
-* Chinese - TAIWAN
-* Danish - DENMARK
-* Dutch - NETHERLANDS
-* English - UNITED KINGDOM (Default)
-* German - GERMANY
-* French - FRANCE
-* Hebrew - ISRAEL
-* Italian - ITALY
-* Korean - KOREA
-* Persian - IRAN, ISLAMIC REPUBLIC OF
-* Polish - POLAND
-* Portuguese - BRAZIL
-* Portuguese - PORTUGAL
-* Russian - RUSSIAN FEDERATION
-* Spanish - ARGENTINA
-* Spanish - SPAIN
-* Spanish - MEXICO
-* Swedish - SWEDEN
-* Turkish - TURKEY
-* Ukrainian - UKRAINE
-
-Some of these translations are not complete.
-If you want to contribute to the translation of the plugin, please [go to WordPress official translator platform](https://translate.wordpress.org/ "Translating WordPress") and translate the strings in your own language. In this way, we will be able to increase the languages available for YITH WooCommerce Wishlist.
-
-
-== Documentation ==
-
-Full documentation is available [here](http://yithemes.com/docs-plugins/yith-woocommerce-wishlist).
-
-== Upgrade notice ==
-
-= 2.2.16 – Released on 08 November 2019 =
-
-* New: support for WordPress 5.3
-* New: support for WooCommerce 3.8
-* Update: plugin framework
-* Update: Italian language
-* Update: Dutch language
-* Tweak: wrapped Add to Wishlist button label into span html tag
-* Fix: removed occurrences of deprecated properties on promotional email class
-* Dev: added new yith_wcwl_product_already_in_wishlist_text_button and yith_wcwl_product_added_to_wishlist_message_button filters
-* Dev: added new yith_wcwl_out_of_stock_label and yith_wcwl_in_stock_label filters

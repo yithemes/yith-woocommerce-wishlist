@@ -112,7 +112,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			if ( $res ) {
 				$id = apply_filters( 'yith_wcwl_wishlist_correctly_created', intval( $wpdb->insert_id ) );
-				
+
 				$wishlist->set_id( $id );
 				$wishlist->apply_changes();
 				$this->clear_caches( $wishlist );
@@ -165,7 +165,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 					'privacy'    => $wishlist_data->wishlist_privacy,
 					'user_id'    => $wishlist_data->user_id,
 					'session_id' => $wishlist_data->session_id,
-					'name'       => $wishlist_data->wishlist_name,
+					'name'       => wc_clean( stripslashes( $wishlist_data->wishlist_name ) ),
 					'slug'       => $wishlist_data->wishlist_slug,
 					'token'      => $wishlist_data->wishlist_token,
 					'is_default' => $wishlist_data->is_default,

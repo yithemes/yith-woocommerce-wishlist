@@ -20,14 +20,14 @@ return apply_filters( 'yith_wcwl_list_options', array(
 		),
 
 		'wishlists' => array(
-			'name' => 'Wishlists',
+			'name' => __( 'Wishlists', 'yith-woocommerce-wishlist' ),
 			'type' => 'yith-field',
 			'yith-type' => 'list-table',
 
 			'class' => '',
 			'list_table_class' => 'YITH_WCWL_Admin_Table',
 			'list_table_class_dir' => YITH_WCWL_INC . 'tables/class.yith-wcwl-admin-table.php',
-			'title' => 'wishlists',
+			'title' => __( 'Wishlists', 'yith-woocommerce-wishlist' ),
 			'id' => 'wishlist-filter'
 		),
 

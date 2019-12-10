@@ -36,11 +36,12 @@ var minify_admin_js = function () {
 };
 
 var updatePot = function () {
-    return gulp.src(['./**/*.php', '!./plugin-fw/**/*.php', '!./plugin-upgrade/**/*.php'])
+    return gulp.src(['./*.php', './**/*.php', '!./plugin-fw/**/*.php', '!./plugin-upgrade/**/*.php'])
         .pipe(wpPot( {
             domain: 'yith-woocommerce-wishlist',
             package: 'YITH WooCommerce Wishlist',
             destFile: './languages/yith-woocommerce-wishlist.pot',
+            metadataFile: '../init.php',
             headers: {
                 "Project-Id-Version": "YITH WooCommerce Wishlist Premium",
                 "Content-Type": "text/plain; charset=UTF-8",

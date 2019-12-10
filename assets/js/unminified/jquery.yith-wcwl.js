@@ -371,6 +371,8 @@ jQuery( document ).ready( function( $ ){
                         if( typeof template != 'undefined' ){
                             form.replaceWith( template );
                             pp_content.css('height', 'auto');
+
+                            setTimeout( close_pretty_photo, 3000 );
                         }
                     }
                     else if( typeof data.message != 'undefined' ){
@@ -581,7 +583,7 @@ jQuery( document ).ready( function( $ ){
                 '<div class="pp_right"></div>' +
                 '</div>' +
                 '</div>' +
-                '<div class="pp_overlay"></div>'
+                '<div class="pp_overlay yith-wcwl-overlay"></div>'
         };
 
         $('a[data-rel^="prettyPhoto[add_to_wishlist_"]')
@@ -603,6 +605,30 @@ jQuery( document ).ready( function( $ ){
 
             form.append( '<input type="hidden" name="row_id" class="row-id" value="' + id + '"/>' );
         } ).prettyPhoto( ppParams );
+
+        // add & remove class to body when popup is opened
+        var observer = new MutationObserver( function( mutationsList, observer ){
+            for ( var i in mutationsList ) {
+                var mutation = mutationsList[ i ];
+                if ( mutation.type === 'childList' ) {
+                  typeof mutation.addedNodes !== 'undefined' && mutation.addedNodes.forEach( function( currentValue ){
+                      if( currentValue.classList.contains( 'yith-wcwl-overlay' ) ){
+                          $('body').addClass( 'yith-wcwl-with-pretty-photo' );
+                      }
+                  } );
+
+                  typeof mutation.removedNodes !== 'undefined' && mutation.removedNodes.forEach( function( currentValue ){
+                      if( currentValue.classList.contains( 'yith-wcwl-overlay' ) ){
+                          $('body').removeClass( 'yith-wcwl-with-pretty-photo' );
+                      }
+                  } );
+                }
+            }
+        } );
+
+        observer.observe( document.body, {
+          childList: true
+        } );
     }
 
     /**
@@ -663,6 +689,8 @@ jQuery( document ).ready( function( $ ){
         init_wishlist_details_popup();
         init_wishlist_drag_n_drop();
         init_copy_wishlist_link();
+
+        $(document).trigger( 'yith_wcwl_init_after_ajax' );
     }
 
     /**
@@ -1266,7 +1294,8 @@ jQuery( document ).ready( function( $ ){
             if( typeof message != 'undefined' ){
                 var container = $('.pp_content_container'),
                     content = container.find('.pp_content'),
-                    form = container.find('.yith-wcwl-popup-form');
+                    form = container.find('.yith-wcwl-popup-form'),
+                    popup = form.closest( '.pp_pic_holder' );
 
                 if( form.length ){
                     var new_content = $( '<div/>', {
@@ -1283,6 +1312,9 @@ jQuery( document ).ready( function( $ ){
                     form.fadeOut( 200, function(){
                         new_content.fadeIn();
                     } );
+
+                    popup.addClass( 'feedback' );
+                    popup.css( 'left', ( ( $( window ).innerWidth() / 2 ) - ( popup.outerWidth() / 2 ) ) + 'px' );
 
                     setTimeout( close_pretty_photo, 3000 );
                 }

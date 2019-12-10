@@ -1,7 +1,6 @@
 <?php
 /**
  * This file belongs to the YIT Plugin Framework.
- *
  * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -20,5 +19,6 @@ $class = !empty( $class ) ? $class : 'yith-plugin-fw-datepicker';
        id="<?php echo $id ?>"
        value="<?php echo esc_attr( $value ) ?>"
        class="<?php echo $class ?>"
+       autocomplete="off"
     <?php echo $custom_attributes ?>
     <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>/>

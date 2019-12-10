@@ -231,7 +231,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return string Wishlist name
 		 */
 		public function get_name( $context = 'view' ) {
-			return $this->get_prop( 'name', $context );
+			return wc_clean( stripslashes( $this->get_prop( 'name', $context ) ) );
 		}
 
 		/**
@@ -335,7 +335,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 
 			return '';
 		}
-		
+
 		/**
 		 * Retrieve email of the owner of the wishlist (if any)
 		 *
