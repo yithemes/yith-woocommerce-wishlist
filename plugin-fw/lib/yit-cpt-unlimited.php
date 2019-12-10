@@ -1592,7 +1592,7 @@ class YIT_CPT_Unlimited {
     public function admin_assets() {
 	    $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         wp_enqueue_media();
-        wp_enqueue_script( 'yit-cptu', YIT_CORE_PLUGIN_URL . '/assets/js/yit-cpt-unlimited' . $suffix . 'js', array('jquery'), '', true );
+        wp_enqueue_script( 'yit-cptu', YIT_CORE_PLUGIN_URL . '/assets/js/yit-cpt-unlimited' . $suffix . '.js', array('jquery'), '', true );
     }
 
     /**

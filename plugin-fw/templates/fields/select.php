@@ -30,9 +30,17 @@ $class = isset( $class ) ? $class : 'yith-plugin-fw-select';
 	    <?php echo $placeholder ?>
         <?php echo $custom_attributes ?>
         <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>>
-        <?php foreach ( $options as $key => $item ) : ?>
-            <option value="<?php echo esc_attr( $key ) ?>" <?php if ( $multiple ): selected( true, in_array( $key, $value ) );
-            else: selected( $key, $value ); endif; ?> ><?php echo $item ?></option>
+        <?php foreach ( $options as $key => $item ) :
+            if( is_array( $item ) ): ?>
+                <optgroup label="<?php esc_attr_e( $item['label'] ) ?>">
+                    <?php foreach( $item['options'] as $option_key => $option ) : ?>
+                        <option value="<?php echo esc_attr( $option_key ) ?>" <?php selected( $option_key, $value ); ?>><?php echo $option ?></option>
+                    <?php endforeach; ?>
+                </optgroup>
+            <?php else: ?>
+                <option value="<?php echo esc_attr( $key ) ?>" <?php if ( $multiple ): selected( true, in_array( $key, $value ) );
+                else: selected( $key, $value ); endif; ?> ><?php echo $item ?></option>
+            <?php endif; ?>
         <?php endforeach; ?>
     </select>
 

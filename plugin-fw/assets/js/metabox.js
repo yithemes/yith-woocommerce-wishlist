@@ -6,96 +6,109 @@
  * It is also available through the world-wide-web at this URL:
  * http://www.gnu.org/licenses/gpl-3.0.txt
  */
-(function ($) {
+( function ( $ ) {
 
-    $('.metaboxes-tab').each(function () {
-        $('.tabs-panel', this).hide();
+    $( '.metaboxes-tab' ).each( function () {
+        $( '.tabs-panel', this ).hide();
 
-        var active_tab = wpCookies.get('active_metabox_tab');
-        if (active_tab == null) {
-            active_tab = $('ul.metaboxes-tabs li:first-child a', this).attr('href');
+        var active_tab = wpCookies.get( 'active_metabox_tab' );
+        if ( active_tab == null ) {
+            active_tab = $( 'ul.metaboxes-tabs li:first-child a', this ).attr( 'href' );
         } else {
             active_tab = '#' + active_tab;
         }
 
-        $(active_tab).show();
+        $( active_tab ).show();
 
-        $('.metaboxes-tabs a', this).click(function (e) {
-            if ($(this).parent().hasClass('tabs')) {
+        $( '.metaboxes-tabs a', this ).click( function ( e ) {
+            if ( $( this ).parent().hasClass( 'tabs' ) ) {
                 e.preventDefault();
                 return;
             }
 
-            var t = $(this).attr('href');
-            $(this).parent().addClass('tabs').siblings('li').removeClass('tabs');
-            $(this).closest('.metaboxes-tab').find('.tabs-panel').hide();
-            $(t).show();
+            var t = $( this ).attr( 'href' );
+            $( this ).parent().addClass( 'tabs' ).siblings( 'li' ).removeClass( 'tabs' );
+            $( this ).closest( '.metaboxes-tab' ).find( '.tabs-panel' ).hide();
+            $( t ).show();
 
             return false;
-        });
-    });
+        } );
+    } );
 
-    var act_page_option = $('#_active_page_options-container').parent().html();
-    $('#_active_page_options-container').parent().remove();
-    $(act_page_option).insertAfter('#yit-post-setting .handlediv');
-    $(act_page_option).insertAfter('#yit-page-setting .handlediv');
+    var act_page_option = $( '#_active_page_options-container' ).parent().html();
+    $( '#_active_page_options-container' ).parent().remove();
+    $( act_page_option ).insertAfter( '#yit-post-setting .handlediv' );
+    $( act_page_option ).insertAfter( '#yit-page-setting .handlediv' );
 
 
-    $('#_active_page_options-container').on('click', function(){
-        if( $('#_active_page_options').is(":checked") ){
-            $('#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab').css( { 'opacity' : 1 , 'pointer-events' : 'auto' } );
-        }else{
-            $('#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab').css( { 'opacity' : 0.5 , 'pointer-events' : 'none' } );
+    $( '#_active_page_options-container' ).on( 'click', function () {
+        if ( $( '#_active_page_options' ).is( ":checked" ) ) {
+            $( '#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab' ).css( {
+                                                                                                               'opacity'       : 1,
+                                                                                                               'pointer-events': 'auto'
+                                                                                                           } );
+        } else {
+            $( '#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab' ).css( {
+                                                                                                               'opacity'       : 0.5,
+                                                                                                               'pointer-events': 'none'
+                                                                                                           } );
         }
-    }).click();
+    } ).click();
 
 
     //dependencies handler
-    $('.metaboxes-tab [data-dep-target]').each(function(){
-        var t = $(this);
+    $( document.body ).on( 'yith-plugin-fw-metabox-init-deps', function () {
+        $( document.body ).trigger( 'yith-plugin-fw-init-radio' );
+        $( '.metaboxes-tab [data-dep-target]:not(.yith-plugin-fw-metabox-deps-initialized)' ).each( function () {
+            var t = $( this );
 
-        var field = '#' + t.data('dep-target'),
-            dep = '#' + t.data('dep-id'),
-            value = t.data('dep-value'),
-            type = t.data('dep-type');
+            var field = '#' + t.data( 'dep-target' ),
+                dep   = '#' + t.data( 'dep-id' ),
+                value = t.data( 'dep-value' ),
+                type  = t.data( 'dep-type' );
 
 
-        dependencies_handler( field, dep, value.toString(), type );
-
-        $(dep).on('change', function(){
             dependencies_handler( field, dep, value.toString(), type );
-        }).change();
-    });
+
+            $( dep ).on( 'change', function () {
+                dependencies_handler( field, dep, value.toString(), type );
+            } ).change();
+
+            t.addClass( 'yith-plugin-fw-metabox-deps-initialized' );
+        } );
+    } ).trigger( 'yith-plugin-fw-metabox-init-deps' );
 
     //Handle dependencies.
-    function dependencies_handler ( id, deps, values, type ) {
+    function dependencies_handler( id, deps, values, type ) {
         var result = true;
 
 
         //Single dependency
-        if( typeof( deps ) == 'string' ) {
-            if( deps.substr( 0, 6 ) == ':radio' )
-            {deps = deps + ':checked'; }
+        if ( typeof ( deps ) == 'string' ) {
+            if ( deps.substr( 0, 6 ) == ':radio' ) {
+                deps = deps + ':checked';
+            }
 
             var val = $( deps ).val();
 
-            if( $(deps).attr('type') == 'checkbox'){
-                var thisCheck = $(deps);
-                if ( thisCheck.is ( ':checked' ) ) {
+            if ( $( deps ).attr( 'type' ) == 'checkbox' ) {
+                var thisCheck = $( deps );
+                if ( thisCheck.is( ':checked' ) ) {
                     val = 'yes';
-                }
-                else {
+                } else {
                     val = 'no';
                 }
             }
 
             values = values.split( ',' );
 
-            for( var i = 0; i < values.length; i++ ) {
-                if( val != values[i] )
-                { result = false; }
-                else
-                { result = true; break; }
+            for ( var i = 0; i < values.length; i++ ) {
+                if ( val != values[ i ] ) {
+                    result = false;
+                } else {
+                    result = true;
+                    break;
+                }
             }
         }
 
@@ -134,5 +147,5 @@
             }
         }
     }
-    
-})(jQuery);
+
+} )( jQuery );

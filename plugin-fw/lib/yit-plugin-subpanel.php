@@ -37,11 +37,6 @@ if ( !class_exists( 'YIT_Plugin_SubPanel' ) ) {
 
 
         /**
-         * @var array
-         */
-        private $_main_array_options = array();
-
-        /**
          * Constructor
          *
          * @since  1.0

@@ -12,8 +12,10 @@ $field         = wp_parse_args( $field, $default_field );
 
 $display_row = !in_array( $field[ 'type' ], array( 'hidden', 'html', 'sep', 'simple-text', 'title', 'list-table' ) );
 $display_row = isset( $field[ 'yith-display-row' ] ) ? !!$field[ 'yith-display-row' ] : $display_row;
+$is_required = !empty( $field[ 'required' ] );
 
-$extra_row_classes = apply_filters( 'yith_plugin_fw_panel_wc_extra_row_classes', array(), $field );
+$extra_row_classes = $is_required ? array( 'yith-plugin-fw--required' ) : array();
+$extra_row_classes = apply_filters( 'yith_plugin_fw_panel_wc_extra_row_classes', $extra_row_classes, $field );
 $extra_row_classes = is_array( $extra_row_classes ) ? implode( ' ', $extra_row_classes ) : '';
 
 ?>

@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.2.2
+ * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -50,12 +50,12 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 					$content =  '<p>' . __( 'While you visit our site, we’ll track:', 'yith-woocommerce-wishlist' ) . '</p>' .
 					            '<ul>' .
 					            '<li>' . __( 'Products you’ve added to the wishlist: we’ll use this to show you and other users your favourite products, and to create targeted email campaigns.', 'yith-woocommerce-wishlist' ) . '</li>' .
-					            '<li>' . __( 'Wishlists you’ve created: we’ll keep track of the wishlists you create, and make them visible to the store’s staff', 'yith-woocommerce-wishlist' ) . '</li>' .
+					            '<li>' . __( 'Wishlists you’ve created: we’ll keep track of the wishlists you create, and make them visible to the store staff', 'yith-woocommerce-wishlist' ) . '</li>' .
 					            '</ul>' .
 					            '<p>' . __( 'We’ll also use cookies to keep track of wishlist contents while you’re browsing our site.', 'yith-woocommerce-wishlist' ) . '</p>';
 					break;
 				case 'has_access':
-					$content =  '<p>' . __( 'Members of our team have access to the information you provide us. For example, both Administrators and Shop Managers can access:', 'yith-woocommerce-wishlist' ) . '</p>' .
+					$content =  '<p>' . __( 'Members of our team have access to the information you provide us with. For example, both Administrators and Shop Managers can access:', 'yith-woocommerce-wishlist' ) . '</p>' .
 					            '<ul>' .
 					            '<li>' . __( 'Wishlist details, such as products added, date of addition, name and privacy settings of your wishlists', 'yith-woocommerce-wishlist' ) . '</li>' .
 					            '</ul>' .
@@ -79,7 +79,7 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		 */
 		public function register_exporter( $exporters ) {
 			$exporters['yith_wcwl_exporter'] = array(
-				'exporter_friendly_name' => __( 'Customer Wishlists', 'yith-woocommerce-wishlist' ),
+				'exporter_friendly_name' => __( 'Customer wishlists', 'yith-woocommerce-wishlist' ),
 				'callback' => array( $this, 'wishlist_data_exporter' )
 			);
 
@@ -95,7 +95,7 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		 */
 		public function register_eraser( $erasers ) {
 			$erasers['yith_wcwl_eraser'] = array(
-				'eraser_friendly_name' => __( 'Customer Wishlists', 'yith-woocommerce-wishlist' ),
+				'eraser_friendly_name' => __( 'Customer wishlists', 'yith-woocommerce-wishlist' ),
 				'callback' => array( $this, 'wishlist_data_eraser' )
 			);
 
@@ -131,7 +131,7 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 						$data_to_export[] = array(
 							'group_id'    => 'yith_wcwl_wishlist',
 							'group_label' => __( 'Wishlists', 'yith-woocommerce-wishlist' ),
-							'item_id'     => 'wishlist-' . $wishlist['ID'],
+							'item_id'     => 'wishlist-' . $wishlist->get_id(),
 							'data'        => $this->get_wishlist_personal_data( $wishlist ),
 						);
 					}
@@ -172,43 +172,34 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 				return $response;
 			}
 
-			if( defined( 'YITH_WCWL_PREMIUM' ) ) {
+			$wishlists = YITH_WCWL()->get_wishlists( array(
+				'limit'   => 10,
+				'offset'  => $offset,
+				'user_id' => $user->ID,
+				'orderby' => 'ID',
+				'order'   => 'ASC'
+			) );
 
-				$wishlists = YITH_WCWL()->get_wishlists( array(
-					'limit'   => 10,
-					'offset'  => $offset,
-					'user_id' => $user->ID,
-					'orderby' => 'ID',
-					'order'   => 'ASC'
-				) );
+			if ( 0 < count( $wishlists ) ) {
+				foreach ( $wishlists as $wishlist ) {
+					if ( apply_filters( 'yith_wcwl_privacy_erase_wishlist_personal_data', true, $wishlist ) ) {
+						do_action( 'yith_wcwl_privacy_before_remove_wishlist_personal_data', $wishlist );
 
-				if ( 0 < count( $wishlists ) ) {
-					foreach ( $wishlists as $wishlist ) {
-						if ( apply_filters( 'yith_wcwl_privacy_erase_wishlist_personal_data', true, $wishlist ) ) {
-							do_action( 'yith_wcwl_privacy_before_remove_wishlist_personal_data', $wishlist );
+						$wishlist->delete();
 
-							YITH_WCWL_Premium()->remove_wishlist( $wishlist['ID'] );
+						do_action( 'yith_wcwl_privacy_remove_wishlist_personal_data', $wishlist );
 
-							do_action( 'yith_wcwl_privacy_remove_wishlist_personal_data', $wishlist );
-
-							/* Translators: %s Order number. */
-							$response['messages'][]    = sprintf( __( 'Removed wishlist %s.', 'yith-woocommerce-wishlist' ), $wishlist['wishlist_token'] );
-							$response['items_removed'] = true;
-						} else {
-							/* Translators: %s Order number. */
-							$response['messages'][]     = sprintf( __( 'Wishlist %s has been retained.', 'yith-woocommerce-wishlist' ), $wishlist['wishlist_token'] );
-							$response['items_retained'] = true;
-						}
+						/* Translators: %s Order number. */
+						$response['messages'][]    = sprintf( __( 'Removed wishlist %s.', 'yith-woocommerce-wishlist' ), $wishlist->get_token() );
+						$response['items_removed'] = true;
+					} else {
+						/* Translators: %s Order number. */
+						$response['messages'][]     = sprintf( __( 'Wishlist %s has been retained.', 'yith-woocommerce-wishlist' ), $wishlist->get_token() );
+						$response['items_retained'] = true;
 					}
-					$response['done'] = 10 > count( $wishlists );
-				} else {
-					$response['done'] = true;
 				}
+				$response['done'] = 10 > count( $wishlists );
 			} else {
-				$count = $wpdb->delete( $wpdb->yith_wcwl_items, array( 'user_id' => $user->ID ) );
-
-				$response['messages'][] = __( 'Removed default user\'s wishlist', 'yith-woocommerce-wishlist' );
-				$response['items_removed'] = $count;
 				$response['done'] = true;
 			}
 
@@ -218,7 +209,7 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		/**
 		 * Retrieves data to export for each user's wishlist
 		 *
-		 * @param $wishlist array Wishlist processed
+		 * @param $wishlist \YITH_WCWL_Wishlist Wishlist
 		 * @return array Data to export
 		 * @since 2.2.2
 		 */
@@ -226,11 +217,11 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 			$personal_data   = array();
 			$props_to_export = apply_filters( 'yith_wcwl_privacy_export_wishlist_personal_data_props', array(
 				'wishlist_token'   => __( 'Token', 'yith-woocommerce-wishlist' ),
-				'wishlist_url'     => __( 'Wishlist url', 'yith-woocommerce-wishlist' ),
+				'wishlist_url'     => __( 'Wishlist URL', 'yith-woocommerce-wishlist' ),
 				'wishlist_name'    => __( 'Title', 'yith-woocommerce-wishlist' ),
-				'dateadded'        => _x( 'Created on', 'date wishlist was created', 'yith-woocommerce-wishlist' ),
+				'dateadded'        => _x( 'Created on', 'date when wishlist was created', 'yith-woocommerce-wishlist' ),
 				'wishlist_privacy' => __( 'Visibility', 'yith-woocommerce-wishlist' ),
-				'items'            => __( 'Items Added', 'yith-woocommerce-wishlist' ),
+				'items'            => __( 'Items added', 'yith-woocommerce-wishlist' ),
 			), $wishlist );
 
 			foreach ( $props_to_export as $prop => $name ) {
@@ -239,12 +230,10 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 				switch ( $prop ) {
 					case 'items':
 						$item_names = array();
-						$items = YITH_WCWL()->get_products( array(
-							'wishlist_id' => $wishlist['ID']
-						) );
+						$items = $wishlist->get_items();
 
 						foreach ( $items as $item ) {
-							$product = wc_get_product( $item['prod_id'] );
+							$product = $item->get_product();
 
 							if( ! $product ){
 								continue;
@@ -252,8 +241,8 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 
 							$item_name = $product->get_name() . ' x ' . $item['quantity'];
 
-							if( $item['dateadded'] ){
-								$item_name .= ' (on: ' . date_i18n( 'd F Y', strtotime( $item['dateadded'] ) ) . ')';
+							if( $item->get_date_added() ){
+								$item_name .= ' (on: ' . $item->get_date_added() . ')';
 							}
 
 							$item_names[] = $item_name;
@@ -262,34 +251,20 @@ if( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 						$value = implode( ', ', $item_names );
 						break;
 					case 'wishlist_url':
-						$wishlist_url = YITH_WCWL()->get_wishlist_url( 'view/' . $wishlist['wishlist_token'] );
+						$wishlist_url = $wishlist->get_url();
 
 						$value = sprintf( '<a href="%1$s">%1$s</a>', $wishlist_url );
 						break;
 					case 'wishlist_name':
-						$wishlist_name = $wishlist['wishlist_name'];
+						$wishlist_name = $wishlist->get_formatted_name();
 
 						$value = $wishlist_name ? $wishlist_name : get_option( 'yith_wcwl_wishlist_title' );
 						break;
 					case 'dateadded':
-						$date = $wishlist['dateadded'];
-
-						$value = date_i18n( 'd F Y', strtotime( $date ) );
+						$value = $wishlist->get_date_added();
 						break;
 					case 'wishlist_privacy':
-						$privacy = $wishlist['wishlist_privacy'];
-
-						if( $privacy == 1 ){
-							$privacy_label = apply_filters( 'yith_wcwl_shared_wishlist_visibility', __( 'Shared', 'yith-woocommerce-wishlist' ) );
-						}
-						elseif( $privacy == 2 ){
-							$privacy_label = apply_filters( 'yith_wcwl_private_wishlist_visibility', __( 'Private', 'yith-woocommerce-wishlist' ) );
-						}
-						else{
-							$privacy_label = apply_filters( 'yith_wcwl_public_wishlist_visibility', __( 'Public', 'yith-woocommerce-wishlist' ) );
-						}
-
-						$value = $privacy_label;
+						$value = $wishlist->get_formatted_privacy();
 						break;
 					default:
 						if ( isset( $wishlist[ $prop ] ) ) {
