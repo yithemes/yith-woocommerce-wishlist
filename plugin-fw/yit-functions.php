@@ -348,8 +348,10 @@ if ( !function_exists( 'yit_get_post_meta' ) ) {
 
         $sub_meta = explode( '[', $meta );
 
-        $meta = get_post_meta( $id, current( $sub_meta ), true );
-        for ( $i = 1; $i < count( $sub_meta ); $i++ ) {
+        $meta           = get_post_meta( $id, current( $sub_meta ), true );
+        $sub_meta_count = count( $sub_meta );
+
+        for ( $i = 1; $i < $sub_meta_count; $i++ ) {
             $current_submeta = rtrim( $sub_meta[ $i ], ']' );
             if ( !isset( $meta[ $current_submeta ] ) )
                 return false;
@@ -792,6 +794,25 @@ if ( !function_exists( 'yit_load_js_file' ) ) {
 
         return $filename;
     }
+}
+
+if ( !function_exists( 'yit_load_css_file' ) ) {
+	/**
+	 * Load .min.css file if WP_Debug is not defined
+	 *
+	 * @param string $filename The file name
+	 * @return string The file path
+	 * @since  2.0.0
+	 * @author Alberto Ruggiero
+	 */
+	function yit_load_css_file( $filename ) {
+
+		if ( !( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) || isset( $_GET[ 'yith_script_debug' ] ) ) ) {
+			$filename = str_replace( '.css', '.min.css', $filename );
+		}
+
+		return $filename;
+	}
 }
 
 if ( !function_exists( 'yit_wpml_register_string' ) ) {

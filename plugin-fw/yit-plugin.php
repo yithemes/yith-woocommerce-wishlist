@@ -158,7 +158,8 @@ if( ! function_exists( 'yit_plugin_fw_row_meta' ) ){
 			}
 
 			if( ! empty( $url ) && ! empty( $label ) ){
-				$plugin_meta[] = sprintf( '<a href="%s" target="_blank"><span class="%s"></span>%s</a>', $url, $icon, $label );
+                $url           = trailingslashit( $url );
+                $plugin_meta[] = sprintf( '<a href="%s" target="_blank"><span class="%s"></span>%s</a>', $url, $icon, $label );
 			}
 		}
 

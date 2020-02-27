@@ -3,7 +3,7 @@
  * Plugin Name: YITH WooCommerce Wishlist
  * Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
  * Description: <code><strong>YITH WooCommerce Wishlist</strong></code> gives your users the possibility to create, fill, manage and share their wishlists allowing you to analyze their interests and needs to improve your marketing strategies. <a href="https://yithemes.com/" target="_blank">Get more plugins for your e-commerce on <strong>YITH</strong></a>
- * Version: 3.0.0
+ * Version: 3.0.1
  * Author: YITH
  * Author URI: https://yithemes.com/
  * Text Domain: yith-woocommerce-wishlist
@@ -103,7 +103,12 @@ if( ! function_exists( 'yith_wishlist_constructor' ) ) {
         }
 
         // Let's start the game!
-        YITH_WCWL();
+
+	    /**
+	     * @deprecated
+	     */
+	    global $yith_wcwl;
+	    $yith_wcwl = YITH_WCWL();
     }
 }
 add_action( 'yith_wcwl_init', 'yith_wishlist_constructor' );

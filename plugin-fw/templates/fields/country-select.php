@@ -28,8 +28,7 @@ if ( strstr( $country_setting, ':' ) ) {
 $countries = WC()->countries->get_countries();
 $class     = isset( $class ) ? $class : 'yith-plugin-fw-select';
 ?>
-<select<?php echo $multiple_html ?>
-        id="<?php echo $id ?>"
+<select id="<?php echo $id ?>"
         name="<?php echo $name ?>" <?php echo isset( $std ) ? " data-std='{$std}'" : '' ?>
         class="wc-enhanced-select <?php echo $class ?>"
     <?php echo $placeholder ?>

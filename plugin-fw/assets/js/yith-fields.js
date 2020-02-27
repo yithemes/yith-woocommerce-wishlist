@@ -457,7 +457,13 @@
             action              = 'yith_plugin_fw_save_toggle_element_metabox';
             post_id             = $( this ).closest( 'form#post' ).find( '#post_ID' ).val();
             yit_metaboxes_nonce = $( this ).closest( 'form#post' ).find( '#yit_metaboxes_nonce' ).val();
-            url                 = yith_framework_fw_fields.ajax_url + '?action=' + action + "&post_ID=" + post_id + '&yit_metaboxes_nonce=' + yit_metaboxes_nonce + "&toggle_id=" + id;
+            metabox_tab         = $( this ).closest( '.tabs-panel' ).attr( 'id' );
+            url                 = yith_framework_fw_fields.ajax_url +
+                                  '?action=' + action +
+                                  "&post_ID=" + post_id +
+                                  '&yit_metaboxes_nonce=' + yit_metaboxes_nonce +
+                                  "&toggle_id=" + id +
+                                  "&metabox_tab=" + metabox_tab;
         } else {
             url = yith_framework_fw_fields.admin_url + '?action=' + action + '&tab=' + current_tab + "&toggle_id=" + id;
         }

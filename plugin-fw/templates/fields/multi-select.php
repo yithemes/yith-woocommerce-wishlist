@@ -19,7 +19,8 @@ if ( empty( $selects ) ){
 ?>
 <div class="yith-plugin-fw-multi-select" id="<?php echo esc_attr( $id ) ?>">
     <?php
-    for( $i = 0; $i < count( $selects ); $i++ ) :
+    $selects_count = count( $selects );
+    for( $i = 0; $i < $selects_count; $i++ ) :
         // open group
         if( ( $i%2 ) == 0 ) : ?>
         <div class="yith-select-group">

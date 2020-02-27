@@ -23,9 +23,9 @@ $class = !empty( $class ) ? $class : 'yith-plugin-fw-multi-colorpicker';
 <div class="<?php echo esc_attr( $class )?>" id="<?php echo esc_attr( $id ) ?>">
 
 <?php
-$items_to_process = array();
-
-for ( $i = 0; $i < count( $colorpickers ); $i++ ):
+$items_to_process   = array();
+$colorpickers_count = count( $colorpickers );
+for ( $i = 0; $i < $colorpickers_count; $i++ ):
     $items = $colorpickers[ $i ];
 
     // make sure that we have at least one group

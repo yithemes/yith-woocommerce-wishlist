@@ -537,6 +537,7 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
          * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
          */
         public function yit_panel() {
+            $this->maybe_redirect_to_proper_wp_page();
             $yit_options = $this->get_main_array_options();
             $wrap_class  = isset( $this->settings[ 'class' ] ) ? $this->settings[ 'class' ] : '';
 
@@ -1221,41 +1222,25 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
             }
 
             if ( $this->is_free() && isset( $this->settings[ 'plugin_slug' ] ) ):
-                $banners = apply_filters( 'yith_plugin_fw_banners_free', array(
-                    'upgrade' => array(
-                        'image' => YIT_CORE_PLUGIN_URL . '/assets/images/upgrade_banner.png',
-                        'link'  => 'https://yithemes.com/themes/plugins/' . $this->settings[ 'plugin_slug' ],
-                    ),
-                    'rate'    => array(
-                        'image' => YIT_CORE_PLUGIN_URL . '/assets/images/rate_banner.png',
-                        'link'  => 'https://wordpress.org/support/plugin/' . $this->settings[ 'plugin_slug' ] . '/reviews/?rate=5#new-post',
-                    ),
-                ), $page );
+                $rate_link = apply_filters( 'yith_plugin_fw_rate_url', 'https://wordpress.org/support/plugin/' . $this->settings[ 'plugin_slug' ] . '/reviews/?rate=5#new-post' );
                 ?>
                 <h1 class="notice-container"></h1>
-                <div class="yith-plugin-fw-banner yith-plugin-fw-banner-free">
+                <div class="yith-plugin-fw-banner">
                     <h1><?php echo esc_html( $this->settings[ 'page_title' ] ) ?></h1>
-                    <?php if ( $banners ) : ?>
-                        <div class="yith-banners">
-                            <ul>
-                                <?php foreach ( $banners as $banner ): ?>
-                                    <li><a href="<?php echo esc_url( $banner[ 'link' ] ) ?>" target="_blank"><img src="<?php echo esc_url( $banner[ 'image' ] ) ?>"></a></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-
-                    <?php endif ?>
                 </div>
+                <div class="yith-plugin-fw-rate">
+	                <?php printf('<strong>%s</strong> %s <a href="%s" target="_blank"><u>%s</u> <span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a>  %s',
+                    __('We need your support','yith-plugin-fw'),
+                     __('to keep updating and improving the plugin. Please,','yith-plugin-fw'),
+                     $rate_link,
+                     __('help us by leaving a five-star rating','yith-plugin-fw' ),
+                     __(':) Thanks!','yith-plugin-fw' ) )?>
+                    </div>
             <?php else: ?>
                 <h1 class="notice-container"></h1>
                 <div class="yith-plugin-fw-banner">
-                    <h1><?php echo esc_html( $this->settings[ 'page_title' ] ) ?>
-                        <?php if ( isset( $this->settings[ 'plugin_description' ] ) ): ?>
-                            <span><?php echo esc_html( $this->settings[ 'plugin_description' ] ) ?></span>
-                        <?php endif ?>
-                    </h1>
+                    <h1><?php echo esc_html( $this->settings[ 'page_title' ] ) ?></h1>
                 </div>
-
             <?php endif ?>
             <?php
         }

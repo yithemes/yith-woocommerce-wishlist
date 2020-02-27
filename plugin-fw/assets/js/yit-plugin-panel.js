@@ -27,7 +27,6 @@ jQuery( function ( $ ) {
     //Handle dependencies.
     function dependencies_handler( id, deps, values, type ) {
         var result = true;
-
         //Single dependency
         if ( typeof( deps ) == 'string' ) {
             if ( deps.substr( 0, 6 ) == ':radio' ) {
@@ -81,7 +80,15 @@ jQuery( function ( $ ) {
                         $current_field.hide();
                         break;
                     default:
-                        $current_container.hide();
+                        if( ! $current_container.hasClass('fade-in')){
+                            $current_container.hide();
+                            $current_container.css({'opacity':'0'});
+                        }else{
+                            $current_container.fadeTo("slow" , 0, function(){
+                                $(this).hide().removeClass('fade-in');
+                            });
+                        }
+
                 }
 
             } else {
@@ -95,6 +102,7 @@ jQuery( function ( $ ) {
                         break;
                     default:
                         $current_container.show();
+                        $current_container.fadeTo("slow" , 1).addClass('fade-in');
                 }
             }
         }

@@ -461,19 +461,27 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
                 }
             }
 
-            $this->sanitize_fields( $post_id );
+            $this->sanitize_and_save_fields( $post_id );
 
-
+            return $post_id;
         }
 
         /**
-         * Sanitize the fields of metabox.
-         *
-         * @return void
-         * @since  3.2.1
-         * @author Emanuela Castorina
+         * @param $post_id
+         * @since      3.2.1
+         * @deprecated since 3.4.8
          */
         public function sanitize_fields( $post_id ) {
+            $this->sanitize_and_save_fields( $post_id );
+        }
+
+        /**
+         * Sanitize and save fields of the Metabox.
+         *
+         * @return void
+         * @since 3.4.8
+         */
+        public function sanitize_and_save_fields( $post_id ) {
             $this->reorder_tabs();
             $tabs_to_sanitize        = $this->tabs;
             $allow_ajax              = isset( $_REQUEST[ 'yith_metabox_allow_ajax_saving' ] ) && $this->id === $_REQUEST[ 'yith_metabox_allow_ajax_saving' ];
@@ -489,61 +497,67 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
                 }
             }
 
-
-
-
             foreach ( $tabs_to_sanitize as $tab ) {
-
                 foreach ( $tab[ 'fields' ] as $field ) {
+                    $this->sanitize_and_save_field( $field, $post_id );
+                }
+            }
+        }
 
-                    if ( in_array( $field[ 'type' ], array( 'title' ) ) ) {
-                        continue;
-                    }
+        /**
+         * Sanitize and save a single field
+         *
+         * @param array $field
+         * @param int   $post_id
+         * @since 3.4.8
+         */
+        public function sanitize_and_save_field( $field, $post_id ) {
+            if ( in_array( $field[ 'type' ], array( 'title' ) ) ) {
+                return;
+            }
 
-                    if ( isset( $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ] ) ) {
-                        if ( in_array( $field[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
-                            update_post_meta( $post_id, $field[ 'id' ], '1' );
-                        } elseif ( in_array( $field[ 'type' ], array( 'toggle-element' ) ) ) {
-                            if ( isset( $field[ 'elements' ] ) && $field[ 'elements' ] ) {
-                                $elements_value = $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ];
-                                if ( $elements_value ) {
-                                    if ( isset( $elements_value[ 'box_id' ] ) ) {
-                                        unset( $elements_value[ 'box_id' ] );
+            if ( isset( $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ] ) ) {
+                if ( in_array( $field[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
+                    update_post_meta( $post_id, $field[ 'id' ], '1' );
+                } elseif ( in_array( $field[ 'type' ], array( 'toggle-element' ) ) ) {
+                    if ( isset( $field[ 'elements' ] ) && $field[ 'elements' ] ) {
+                        $elements_value = $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ];
+                        if ( $elements_value ) {
+                            if ( isset( $elements_value[ 'box_id' ] ) ) {
+                                unset( $elements_value[ 'box_id' ] );
+                            }
+
+                            foreach ( $field[ 'elements' ] as $element ) {
+                                foreach ( $elements_value as $key => $element_value ) {
+                                    if ( isset( $field[ 'onoff_field' ] ) ) {
+                                        $elements_value[ $key ][ $field[ 'onoff_field' ][ 'id' ] ] = !isset( $element_value[ $field[ 'onoff_field' ][ 'id' ] ] ) ? 0 : $element_value[ $field[ 'onoff_field' ][ 'id' ] ];
+                                    }
+                                    if ( in_array( $element[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
+                                        $elements_value[ $key ][ $element[ 'id' ] ] = !isset( $element_value[ $element[ 'id' ] ] ) ? 0 : 1;
                                     }
 
-                                    foreach ( $field[ 'elements' ] as $element ) {
-                                        foreach ( $elements_value as $key => $element_value ) {
-                                            if ( isset( $field[ 'onoff_field' ] ) ) {
-                                                $elements_value[ $key ][ $field[ 'onoff_field' ][ 'id' ] ] = !isset( $element_value[ $field[ 'onoff_field' ][ 'id' ] ] ) ? 0 : $element_value[ $field[ 'onoff_field' ][ 'id' ] ];
-                                            }
-                                            if ( in_array( $element[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
-                                                $elements_value[ $key ][ $element[ 'id' ] ] = !isset( $element_value[ $element[ 'id' ] ] ) ? 0 : 1;
-                                            }
-
-                                            if ( !empty( $element[ 'yith-sanitize-callback' ] ) && is_callable( $element[ 'yith-sanitize-callback' ] ) ) {
-                                                $elements_value[ $key ][ $element[ 'id' ] ] = call_user_func( $element[ 'yith-sanitize-callback' ], $elements_value[ $key ][ $element[ 'id' ] ] );
-                                            }
-                                        }
+                                    if ( !empty( $element[ 'yith-sanitize-callback' ] ) && is_callable( $element[ 'yith-sanitize-callback' ] ) ) {
+                                        $elements_value[ $key ][ $element[ 'id' ] ] = call_user_func( $element[ 'yith-sanitize-callback' ], $elements_value[ $key ][ $element[ 'id' ] ] );
                                     }
                                 }
-
-                                update_post_meta( $post_id, $field[ 'id' ], maybe_serialize( $elements_value ) );
                             }
-                        } else {
-                            $value = $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ];
-                            if ( !empty( $field[ 'yith-sanitize-callback' ] ) && is_callable( $field[ 'yith-sanitize-callback' ] ) ) {
-                                $value = call_user_func( $field[ 'yith-sanitize-callback' ], $value );
-                            }
-                            add_post_meta( $post_id, $field[ 'id' ], $value, true ) || update_post_meta( $post_id, $field[ 'id' ], $value );
                         }
-                    } elseif ( in_array( $field[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
-                        update_post_meta( $post_id, $field[ 'id' ], '0' );
-                    } elseif ( in_array( $field[ 'type' ], array( 'checkbox-array' ) ) ) {
-                        update_post_meta( $post_id, $field[ 'id' ], array() );
-                    } else {
-                        delete_post_meta( $post_id, $field[ 'id' ] );
+
+                        update_post_meta( $post_id, $field[ 'id' ], maybe_serialize( $elements_value ) );
                     }
+                } else {
+                    $value = $_POST[ 'yit_metaboxes' ][ $field[ 'id' ] ];
+                    if ( !empty( $field[ 'yith-sanitize-callback' ] ) && is_callable( $field[ 'yith-sanitize-callback' ] ) ) {
+                        $value = call_user_func( $field[ 'yith-sanitize-callback' ], $value );
+                    }
+                    add_post_meta( $post_id, $field[ 'id' ], $value, true ) || update_post_meta( $post_id, $field[ 'id' ], $value );
                 }
+            } elseif ( in_array( $field[ 'type' ], array( 'onoff', 'checkbox' ) ) ) {
+                update_post_meta( $post_id, $field[ 'id' ], '0' );
+            } elseif ( in_array( $field[ 'type' ], array( 'checkbox-array' ) ) ) {
+                update_post_meta( $post_id, $field[ 'id' ], array() );
+            } else {
+                delete_post_meta( $post_id, $field[ 'id' ] );
             }
         }
 
@@ -579,13 +593,26 @@ if ( !class_exists( 'YIT_Metabox' ) ) {
             }
             $post_id = $_REQUEST[ 'post_ID' ];
 
-            if ( isset( $_REQUEST[ 'yit_metaboxes' ] ) ) {
+            if ( isset( $_REQUEST[ 'yit_metaboxes' ], $_REQUEST[ 'toggle_id' ], $_REQUEST[ 'metabox_tab' ], $_REQUEST[ 'yit_metaboxes' ][ $_REQUEST[ 'toggle_id' ] ] ) ) {
                 $yit_metabox_data = $_REQUEST[ 'yit_metaboxes' ];
+                $metabox_tab      = $_REQUEST[ 'metabox_tab' ];
+                $field_id         = $_REQUEST[ 'toggle_id' ];
+                if ( strpos( $field_id, '_' ) === 0 ) {
+                    $field_id = substr( $field_id, 1 );
+                }
 
                 if ( is_array( $yit_metabox_data ) ) {
-                    $this->sanitize_fields( $post_id );
+                    $this->reorder_tabs();
+                    $tabs = $this->tabs;
+
+                    if ( isset( $tabs[ $metabox_tab ], $tabs[ $metabox_tab ][ 'fields' ] ) && isset( $tabs[ $metabox_tab ][ 'fields' ][ $field_id ] ) ) {
+                        $field = $tabs[ $metabox_tab ][ 'fields' ][ $field_id ];
+                        if ( $field ) {
+                            $this->sanitize_and_save_field( $field, $post_id );
+                        }
+                    }
                 }
-            } elseif ( !isset( $_REQUEST[ 'yit_metaboxes' ] ) || !isset( $_REQUEST[ 'yit_metaboxes' ][ $_REQUEST[ 'toggle_id' ] ] ) ) {
+            } elseif ( isset( $_REQUEST[ 'toggle_id' ] ) ) {
                 delete_post_meta( $post_id, $_REQUEST[ 'toggle_id' ] );
             }
         }

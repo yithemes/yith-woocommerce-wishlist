@@ -20,7 +20,9 @@ extract( $field );
         <?php checked( yith_plugin_fw_is_true( $value ) ) ?> class="on_off" <?php if ( isset( $std ) ) : ?>data-std="<?php echo $std ?>"<?php endif ?>
         <?php echo $custom_attributes ?>
     />
-    <span class="yith-plugin-fw-onoff"></span>
+    <span class="yith-plugin-fw-onoff"
+          data-text-on="<?php echo esc_attr_x( 'ON', 'ON/OFF button: use MAX 3 characters!', 'yith-plugin-fw' ); ?>"
+          data-text-off="<?php echo esc_attr_x( 'OFF', 'ON/OFF button: use MAX 3 characters!', 'yith-plugin-fw' ); ?>"></span>
 </div>
 <?php
 if ( isset( $field[ 'desc-inline' ] ) ) {

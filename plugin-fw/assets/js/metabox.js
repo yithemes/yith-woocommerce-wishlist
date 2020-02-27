@@ -129,7 +129,14 @@
                         $current_field.hide();
                         break;
                     default:
-                        $current_container.hide();
+                        if( ! $current_container.hasClass('fade-in')){
+                            $current_container.hide();
+                            $current_container.css({'opacity':'0'});
+                        }else{
+                            $current_container.fadeTo("slow" , 0, function(){
+                                $(this).hide().removeClass('fade-in');
+                            });
+                        }
                 }
 
             } else {
@@ -143,6 +150,7 @@
                         break;
                     default:
                         $current_container.show();
+                        $current_container.fadeTo("slow" , 1).addClass('fade-in');
                 }
             }
         }

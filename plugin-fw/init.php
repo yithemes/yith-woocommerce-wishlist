@@ -1,13 +1,13 @@
 <?php
 /**
  * Framework Name: YIT Plugin Framework
- * Version: 3.4.4
+ * Version: 3.4.10
  * Author: YITHEMES
  * Text Domain: yith-plugin-fw
  * Domain Path: /languages/
  *
  * @author  Your Inspiration Themes
- * @version 3.4.0
+ * @version 3.4.10
  */
 /**
  * This file belongs to the YIT Plugin Framework.

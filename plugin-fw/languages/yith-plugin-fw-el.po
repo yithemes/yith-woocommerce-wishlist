@@ -1,19 +1,16 @@
 # Copyright (C) 2015 YIThemes
 # This file is distributed under the same license as the YITH Plugin Starter package.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: YITH Plugin Starter 1.0.0 Plugin FW\n"
 "Report-Msgid-Bugs-To: Your Inspiration Themes <plugins@yithemes.com>\n"
 "POT-Creation-Date: 2020-01-10 13:40+0100\n"
-"PO-Revision-Date: 2015-05-05 10:38+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2020-01-31 16:11+0000\n"
 "Language-Team: Your Inspiration Themes <info@yithemes.com>\n"
-"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
 "_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;_x;_ex\n"
@@ -21,302 +18,325 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
+"Last-Translator: \n"
+"Language: el_GR\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: lib/privacy/yit-privacy.php:24
 msgctxt "Privacy Policy Guide Title"
 msgid "YITH Plugins"
-msgstr ""
+msgstr "Πρόσθετα YITH"
 
 #: lib/privacy/yit-privacy.php:59
 msgctxt "Privacy Policy Content"
 msgid ""
-"This sample language includes the basics around what personal data your store may "
-"be collecting, storing and sharing, as well as who may have access to that data. "
-"Depending on what settings are enabled and which additional plugins are used, the "
-"specific information shared by your store will vary. We recommend consulting with "
-"a lawyer when deciding what information to disclose on your privacy policy."
+"This sample language includes the basics around what personal data your "
+"store may be collecting, storing and sharing, as well as who may have access "
+"to that data. Depending on what settings are enabled and which additional "
+"plugins are used, the specific information shared by your store will vary. "
+"We recommend consulting with a lawyer when deciding what information to "
+"disclose on your privacy policy."
 msgstr ""
+"Αυτό το δείγμα γλώσσας περιλαμβάνει τα βασικά στοιχεία γύρω από το τι "
+"προσωπικά δεδομένα το κατάστημά σας μπορεί να συλλέγει, την αποθήκευση και "
+"την κοινή χρήση, καθώς και ποιοι μπορεί να έχουν πρόσβαση σε αυτά τα "
+"δεδομένα. Ανάλογα με τις ρυθμίσεις που είναι ενεργοποιημένες και ποια "
+"επιπλέον πρόσθετα χρησιμοποιούνται, οι συγκεκριμένες πληροφορίες που "
+"κοινοποιούνται από το κατάστημά σας θα ποικίλλουν. Συνιστούμε τη διαβούλευση "
+"με έναν δικηγόρο, όταν αποφασίζετε ποιες πληροφορίες να αποκαλύπτετε στην "
+"πολιτική απορρήτου σας."
 
 #: lib/privacy/yit-privacy.php:63
 msgctxt "Privacy Policy Content"
 msgid "What we collect and store"
-msgstr ""
+msgstr "Τι συλλέγουμε και αποθηκεύουμε"
 
 #: lib/privacy/yit-privacy.php:66
 msgctxt "Privacy Policy Content"
 msgid "Who on our team has access"
-msgstr ""
+msgstr "Ποιος στην ομάδα μας έχει πρόσβαση"
 
 #: lib/privacy/yit-privacy.php:69
 msgctxt "Privacy Policy Content"
 msgid "What we share with others"
-msgstr ""
+msgstr "Τι μοιραζόμαστε με τους άλλους"
 
 #: lib/privacy/yit-privacy.php:72
 msgctxt "Privacy Policy Content"
 msgid "Payments"
-msgstr ""
+msgstr "Πληρωμές"
 
 #: lib/yit-cpt-unlimited.php:462 lib/yit-cpt-unlimited.php:576
 #: lib/yit-cpt-unlimited.php:721 lib/yit-cpt-unlimited.php:1636
 #, php-format
 msgid "Add %s"
-msgstr ""
+msgstr "Προσθήκη %s"
 
 #: lib/yit-cpt-unlimited.php:463 lib/yit-cpt-unlimited.php:577
 #, php-format
 msgid "Add New %s"
-msgstr ""
+msgstr "Προσθήκη Νέου %s"
 
 #: lib/yit-cpt-unlimited.php:464 lib/yit-cpt-unlimited.php:578
 #: lib/yit-cpt-unlimited.php:1269 lib/yit-cpt-unlimited.php:1306
 #, php-format
 msgid "Edit %s"
-msgstr ""
+msgstr "Επεξεργασία %s"
 
 #: lib/yit-cpt-unlimited.php:465 lib/yit-cpt-unlimited.php:579
 #, php-format
 msgid "New %s"
-msgstr ""
+msgstr "Νέο %s"
 
 #: lib/yit-cpt-unlimited.php:466 lib/yit-cpt-unlimited.php:580
 #, php-format
 msgid "All %s"
-msgstr ""
+msgstr "Όλα %s"
 
 #: lib/yit-cpt-unlimited.php:467 lib/yit-cpt-unlimited.php:581
 #: lib/yit-cpt-unlimited.php:1253 lib/yit-cpt-unlimited.php:1307
 #, php-format
 msgid "View %s"
-msgstr ""
+msgstr "Προβολή %s"
 
 #: lib/yit-cpt-unlimited.php:468 lib/yit-cpt-unlimited.php:582
 #, php-format
 msgid "Search %s"
-msgstr ""
+msgstr "Αναζήτηση %s"
 
 #: lib/yit-cpt-unlimited.php:469 lib/yit-cpt-unlimited.php:583
 #, php-format
 msgid "No %s found"
-msgstr ""
+msgstr "Δεν βρέθηκε %s"
 
 #: lib/yit-cpt-unlimited.php:470 lib/yit-cpt-unlimited.php:584
 #, php-format
 msgid "No %s found in Trash"
-msgstr ""
+msgstr "Δεν βρέθηκε %s στον Κάδο Ανακύκλωσης"
 
 #: lib/yit-cpt-unlimited.php:627
 #, php-format
 msgctxt "taxonomy general name"
 msgid "%s Categories"
-msgstr ""
+msgstr "Κατηγορίες %s"
 
 #: lib/yit-cpt-unlimited.php:628
 msgctxt "taxonomy singular name"
 msgid "Category"
-msgstr ""
+msgstr "Κατηγορία"
 
 #: lib/yit-cpt-unlimited.php:629 templates/fields/ajax-terms.php:56
 msgid "Search Categories"
-msgstr ""
+msgstr "Αναζήτηση Κατηγοριών"
 
 #: lib/yit-cpt-unlimited.php:630
 msgid "All Categories"
-msgstr ""
+msgstr "Όλες οι Κατηγορίες"
 
 #: lib/yit-cpt-unlimited.php:631
 msgid "Parent Category"
-msgstr ""
+msgstr "Γονική Κατηγορία"
 
 #: lib/yit-cpt-unlimited.php:632
 msgid "Parent Category:"
-msgstr ""
+msgstr "Γονική Κατηγορία:"
 
 #: lib/yit-cpt-unlimited.php:633
 msgid "Edit Category"
-msgstr ""
+msgstr "Επεξεργασία Kατηγορίας"
 
 #: lib/yit-cpt-unlimited.php:634
 msgid "Update Category"
-msgstr ""
+msgstr "Ενημέρωση Κατηγορίας"
 
 #: lib/yit-cpt-unlimited.php:635
 msgid "Add New Category"
-msgstr ""
+msgstr "Προσθήκη Νέας Κατηγορίας"
 
 #: lib/yit-cpt-unlimited.php:636
 msgid "New Category Name"
-msgstr ""
+msgstr "Όνομα Νέας Κατηγορίας"
 
 #: lib/yit-cpt-unlimited.php:637
 msgid "Category"
-msgstr ""
+msgstr "Κατηγορία"
 
 #: lib/yit-cpt-unlimited.php:726
 msgid "Categories"
-msgstr ""
+msgstr "Κατηγορίες"
 
 #: lib/yit-cpt-unlimited.php:1044
 #, php-format
 msgid "%s Settings"
-msgstr ""
+msgstr "Ρυθμίσεις %s"
 
 #: lib/yit-cpt-unlimited.php:1050 lib/yit-cpt-unlimited.php:1198
 #: lib/yit-cpt-unlimited.php:1204 lib/yit-plugin-panel.php:80
 msgid "Settings"
-msgstr ""
+msgstr "Ρυθμίσεις"
 
 #: lib/yit-cpt-unlimited.php:1053
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: lib/yit-cpt-unlimited.php:1054
 #, php-format
 msgid "Layout for this %s"
-msgstr ""
+msgstr "Διάταξη για %s"
 
 #: lib/yit-cpt-unlimited.php:1060
 msgid "Rewrite"
-msgstr ""
+msgstr "Επανεγγραφή"
 
 #: lib/yit-cpt-unlimited.php:1061
 msgid ""
-"Univocal identification name in the URL for each product (slug from post if empty)"
+"Univocal identification name in the URL for each product (slug from post if "
+"empty)"
 msgstr ""
+"Μονοσήμαντο όνομα ταυτοποίησης URL για κάθε προϊόν (slug από άρθρο αν είναι "
+"κενό)"
 
 #: lib/yit-cpt-unlimited.php:1066
 msgid "Label in Singular"
-msgstr ""
+msgstr "Επιγραφή σε Ενικό"
 
 #: lib/yit-cpt-unlimited.php:1067
 msgid "Set a label in singular (title of portfolio if empty)"
-msgstr ""
+msgstr "Ορίστε μια επιγραφή στον ενικό (τίτλος πορτφόλιο αν είναι κενό)"
 
 #: lib/yit-cpt-unlimited.php:1072
 msgid "Label in Plural"
-msgstr ""
+msgstr "Επιγραφή σε Πληθυντικό"
 
 #: lib/yit-cpt-unlimited.php:1073
 msgid "Set a label in plural (title of portfolio if empty)"
-msgstr ""
+msgstr "Ορίστε μια επιγραφή στον πληθυντικό (τίτλος πορτφόλιο αν είναι κενό)"
 
 #: lib/yit-cpt-unlimited.php:1078
 msgid "Taxonomy"
-msgstr ""
+msgstr "Ταξινομία"
 
 #: lib/yit-cpt-unlimited.php:1079
 msgid ""
-"If you want to use categories in the portfolio, set a name for taxonomy. Name "
-"should be a slug (must not contain capital letters nor spaces) and must not be "
-"more than 32 characters long (database structure restriction)."
+"If you want to use categories in the portfolio, set a name for taxonomy. "
+"Name should be a slug (must not contain capital letters nor spaces) and must "
+"not be more than 32 characters long (database structure restriction)."
 msgstr ""
+"Αν θέλετε να χρησιμοποιήσετε κατηγορίες στο πορτφόλιο, ορίστε ένα όνομα για "
+"την ταξινομία. Το όνομα πρέπει να είναι slug (δεν πρέπει να περιλαμβάνει "
+"κεφαλαία γράμματα ή κενά) και δεν πρέπει να είναι μεγαλύτερο από 32 "
+"χαρακτήρες (περιορισμός δομής βάσης δεδομένων)."
 
 #: lib/yit-cpt-unlimited.php:1084
 msgid "Taxonomy Rewrite"
-msgstr ""
+msgstr "Επανεγγραφή Ταξινομίας"
 
 #: lib/yit-cpt-unlimited.php:1085
 msgid "Set univocal name for each category page URL."
-msgstr ""
+msgstr "Ορίστε μονοσήμαντο όνομα για κάθε URL σελίδας κατηγορίας."
 
 #: lib/yit-cpt-unlimited.php:1090
 msgid "Single layout"
-msgstr ""
+msgstr "Μονή διάταξη"
 
 #: lib/yit-cpt-unlimited.php:1091
 msgid "Layout for single page of this portfolio"
-msgstr ""
+msgstr "Διάταξη μονής σελίδας του πορτφόλιο"
 
 #: lib/yit-cpt-unlimited.php:1132
 msgid "layout settings"
-msgstr ""
+msgstr "ρυθμίσεις διάταξης"
 
 #: lib/yit-cpt-unlimited.php:1224 lib/yit-cpt-unlimited.php:1237
 msgid "Quick links"
-msgstr ""
+msgstr "Γρήγορα λινκ"
 
 #: lib/yit-cpt-unlimited.php:1477
 #, php-format
 msgid "Show frontend of the %s"
-msgstr ""
+msgstr "Προβολή εμφάνισης του %s"
 
 #: lib/yit-cpt-unlimited.php:1484 templates/fields/customtabs.php:46
 #: templates/fields/customtabs.php:89
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: lib/yit-cpt-unlimited.php:1635
 #, php-format
 msgid "Add %s from images"
-msgstr ""
+msgstr "Προσθήκη %s από εικόνες"
 
 #: lib/yit-cpt-unlimited.php:1638
 msgid "Upload multiple files"
-msgstr ""
+msgstr "Ανέβασμα πολλαπλών αρχείων"
 
 #: lib/yit-plugin-panel-wc.php:397
 msgid "The changes you have made will be lost if you leave this page."
 msgstr ""
+"Οι αλλαγές που έχετε δημιουργήσει θα χαθούν αν αφήσετε αυτήν την σελίδα."
 
 #: lib/yit-plugin-panel.php:79
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Ρυθμίσεις Προσθέτου"
 
 #: lib/yit-plugin-panel.php:424 lib/yit-plugin-panel.php:427
 msgid "How to install premium version"
-msgstr ""
+msgstr "Πώς να εγκαταστήσετε την προηγμένη έκδοση"
 
 #: lib/yit-plugin-panel.php:571 lib/yit-plugin-subpanel.php:151
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid "Save Changes"
-msgstr ""
+msgstr "Αποθήκευση Αλλαγών"
 
 #: lib/yit-plugin-panel.php:574 lib/yit-plugin-subpanel.php:154
 #: templates/panel/woocommerce/woocommerce-form.php:17
-msgid "If you continue with this action, you will reset all options in this page."
+msgid ""
+"If you continue with this action, you will reset all options in this page."
 msgstr ""
+"Αν συνεχίσετε με αυτή την ενέργεια θα επαναφέρετε όλες τις επιλογές στη "
+"σελίδα."
 
 #: lib/yit-plugin-panel.php:576 lib/yit-plugin-subpanel.php:156
 msgid "Reset to default"
-msgstr ""
+msgstr "Επαναφορά σε προεπιλεγμένο"
 
 #: lib/yit-plugin-panel.php:577 lib/yit-plugin-subpanel.php:157
 #: templates/panel/woocommerce/woocommerce-form.php:21
 msgid "Are you sure?"
-msgstr ""
+msgstr "Είστε σίγουρος;"
 
 #: lib/yit-plugin-panel.php:775
-msgid "The element you have entered already exists. Please, enter another name."
-msgstr ""
+msgid ""
+"The element you have entered already exists. Please, enter another name."
+msgstr "Το στοιχείο που εισάγατε υπάρχει ήδη. Παρακαλώ, εισάγετε άλλο όνομα. "
 
 #: lib/yit-plugin-panel.php:776
 msgid "Settings saved"
-msgstr ""
+msgstr "Ρυθμίσεις αποθηκεύτηκαν"
 
 #: lib/yit-plugin-panel.php:777
 msgid "Settings reset"
-msgstr ""
+msgstr "Επαναφορά ρυθμίσεων"
 
 #: lib/yit-plugin-panel.php:778
 msgid "Element deleted correctly."
-msgstr ""
+msgstr "Το στοιχείο διαγράφηκε επιτυχώς."
 
 #: lib/yit-plugin-panel.php:779 lib/yit-plugin-panel.php:780
 msgid "Element updated correctly."
-msgstr ""
+msgstr "Το στοιχείο αναβαθμίστηκε επιτυχώς."
 
 #: lib/yit-plugin-panel.php:781
 msgid "Database imported correctly."
-msgstr ""
+msgstr "Επιτυχής εισαγωγή βάσης δεδομένων."
 
 #: lib/yit-plugin-panel.php:782
 msgid "An error has occurred during import. Please try again."
-msgstr ""
+msgstr "Παρουσιάστηκε σφάλμα κατά την εισαγωγή. Παρακαλώ προσπαθήστε ξανά."
 
 #: lib/yit-plugin-panel.php:783
 msgid "The added file is not valid."
-msgstr ""
+msgstr "Το προστιθέμενο αρχείο δεν είναι έγκυρο."
 
 #: lib/yit-plugin-panel.php:784
 msgid "Sorry, import is disabled."
@@ -367,13 +387,15 @@ msgstr ""
 
 #: lib/yit-pointers.php:85
 msgid ""
-"From now on, you can find the option panel of YITH plugins in YITH Plugins menu.\n"
-"                                    Every time one of our plugins is added, a new "
-"entry will be added to this menu.\n"
-"                                    For example, after the update, plugin options "
-"(such as for YITH WooCommerce Wishlist, YITH WooCommerce Ajax Search, etc.)\n"
-"                                    will be moved from previous location to YITH "
-"Plugins tab."
+"From now on, you can find the option panel of YITH plugins in YITH Plugins "
+"menu.\n"
+"                                    Every time one of our plugins is added, "
+"a new entry will be added to this menu.\n"
+"                                    For example, after the update, plugin "
+"options (such as for YITH WooCommerce Wishlist, YITH WooCommerce Ajax "
+"Search, etc.)\n"
+"                                    will be moved from previous location to "
+"YITH Plugins tab."
 msgstr ""
 
 #: lib/yith-dashboard.php:40
@@ -390,7 +412,8 @@ msgstr ""
 
 #: lib/yith-dashboard.php:71
 msgid ""
-"An error has occurred, which probably means the feed is down. Try again later."
+"An error has occurred, which probably means the feed is down. Try again "
+"later."
 msgstr ""
 
 #: lib/yith-dashboard.php:99
@@ -484,15 +507,16 @@ msgstr ""
 #: lib/yith-system-status.php:292
 #, php-format
 msgid ""
-"The system check has detected some compatibility issues on your installation. "
-"%sClick here%s to know more"
+"The system check has detected some compatibility issues on your "
+"installation. %sClick here%s to know more"
 msgstr ""
 
 #: templates/fields/ajax-customers.php:57
 msgid "Search Customers"
 msgstr ""
 
-#: templates/fields/ajax-customers.php:83 templates/fields/ajax-customers.php:93
+#: templates/fields/ajax-customers.php:83
+#: templates/fields/ajax-customers.php:93
 #, php-format
 msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr ""
@@ -676,7 +700,8 @@ msgstr ""
 #: templates/sysinfo/system-information-panel.php:137
 #: templates/sysinfo/system-information-panel.php:151
 #, php-format
-msgid "Read more %s here%s or contact your hosting company in order to increase it."
+msgid ""
+"Read more %s here%s or contact your hosting company in order to increase it."
 msgstr ""
 
 #: templates/sysinfo/system-information-panel.php:105
@@ -705,13 +730,14 @@ msgstr ""
 
 #: templates/sysinfo/system-information-panel.php:157
 msgid ""
-"We cannot determine which <b>TLS</b> version is installed because <b>cURL</b> "
-"module is disabled. Ask your hosting company to enable it."
+"We cannot determine which <b>TLS</b> version is installed because <b>cURL</"
+"b> module is disabled. Ask your hosting company to enable it."
 msgstr ""
 
 #: templates/sysinfo/system-information-panel.php:160
 msgid ""
-"<b>ImageMagick</b> module is not installed. Ask your hosting company to install it."
+"<b>ImageMagick</b> module is not installed. Ask your hosting company to "
+"install it."
 msgstr ""
 
 #: templates/sysinfo/system-information-panel.php:172

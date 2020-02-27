@@ -122,9 +122,9 @@ if ( ! class_exists( 'YIT_Gradients' ) ) {
          * @since 1.0
          */
         public function reverse_gradient() {
-            $colors_gradient = array_reverse( $this->get( 'colors_gradient' ) );
-
-            for ( $i = 0; $i < count( $colors_gradient ); $i ++ ) {
+            $colors_gradient       = array_reverse( $this->get( 'colors_gradient' ) );
+            $colors_gradient_count = count( $colors_gradient );
+            for ( $i = 0; $i < $colors_gradient_count; $i ++ ) {
                 $colors_gradient[$i]['position'] = 100 - $colors_gradient[$i]['position'];
             }
 
@@ -440,9 +440,9 @@ if ( ! class_exists( 'YIT_Gradients' ) ) {
         public function hex_lighter( $color, $factor = 30 ) {
             $color = str_replace( '#', '', $color );
 
-            $base['R'] = hexdec( $color{0} . $color{1} );
-            $base['G'] = hexdec( $color{2} . $color{3} );
-            $base['B'] = hexdec( $color{4} . $color{5} );
+            $base['R'] = hexdec( $color[0] . $color[1] );
+            $base['G'] = hexdec( $color[2] . $color[3] );
+            $base['B'] = hexdec( $color[4] . $color[5] );
 
             $color = '#';
 

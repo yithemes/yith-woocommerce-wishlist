@@ -138,8 +138,10 @@ class YIT_CPT_Unlimited {
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_assets' ) );
 
         // metaboxes
-        add_action( 'add_meta_boxes', array( $this, 'add_metabox_cptu' ), 2 );
-        add_action( 'add_meta_boxes', array( $this, 'add_metabox_item_fields' ), 2 );
+        if ( is_admin() ) {
+            add_action( 'init', array( $this, 'add_metabox_cptu' ) );
+            add_action( 'init', array( $this, 'add_metabox_item_fields' ) );
+        }
 
         // multiuploader
         if ( $this->_args['add_multiuploader'] ) {

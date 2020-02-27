@@ -1,5 +1,6 @@
 # Copyright (C) 2019 YITH WooCommerce Wishlist
 # This file is distributed under the same license as the YITH WooCommerce Wishlist package.
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
@@ -11,11 +12,15 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist Premium\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;__ngettext:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: plugin-fw\n"
 "X-Poedit-SearchPathExcluded-1: plugin-upgrade\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../includes/class.yith-wcwl-admin.php:125
 msgid "General settings"
@@ -37,7 +42,8 @@ msgstr ""
 msgid "YITH WooCommerce Wishlist"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-admin.php:213, ../includes/class.yith-wcwl-install.php:365
+#: ../includes/class.yith-wcwl-admin.php:213,
+#: ../includes/class.yith-wcwl-install.php:365
 msgid "Wishlist"
 msgstr ""
 
@@ -45,7 +51,8 @@ msgstr ""
 msgid "Allows your customers to create and share lists of products that they want to purchase on your e-commerce."
 msgstr ""
 
-#: ../includes/class.yith-wcwl-ajax-handler.php:123, ../includes/class.yith-wcwl-ajax-handler.php:157
+#: ../includes/class.yith-wcwl-ajax-handler.php:123,
+#: ../includes/class.yith-wcwl-ajax-handler.php:157
 msgid "Product successfully removed."
 msgstr ""
 
@@ -94,11 +101,14 @@ msgstr ""
 msgid "Our team members have access to this information to offer you better deals for the products you love."
 msgstr ""
 
-#: ../includes/class.yith-wcwl-privacy.php:82, ../includes/class.yith-wcwl-privacy.php:98
+#: ../includes/class.yith-wcwl-privacy.php:82,
+#: ../includes/class.yith-wcwl-privacy.php:98
 msgid "Customer wishlists"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-privacy.php:133, ../plugin-options/lists-options.php:23, ../plugin-options/lists-options.php:30
+#: ../includes/class.yith-wcwl-privacy.php:133,
+#: ../plugin-options/lists-options.php:23,
+#: ../plugin-options/lists-options.php:30
 msgid "Wishlists"
 msgstr ""
 
@@ -213,15 +223,18 @@ msgstr ""
 msgid "Share on:"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-shortcode.php:374, ../plugin-options/wishlist_page-options.php:136
+#: ../includes/class.yith-wcwl-shortcode.php:374,
+#: ../plugin-options/wishlist_page-options.php:136
 msgid "Share on Facebook"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-shortcode.php:394, ../plugin-options/wishlist_page-options.php:145
+#: ../includes/class.yith-wcwl-shortcode.php:394,
+#: ../plugin-options/wishlist_page-options.php:145
 msgid "Tweet on Twitter"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-shortcode.php:414, ../plugin-options/wishlist_page-options.php:154
+#: ../includes/class.yith-wcwl-shortcode.php:414,
+#: ../plugin-options/wishlist_page-options.php:154
 msgid "Pin on Pinterest"
 msgstr ""
 
@@ -229,11 +242,13 @@ msgstr ""
 msgid "Share via email"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-shortcode.php:444, ../includes/class.yith-wcwl-shortcode.php:447
+#: ../includes/class.yith-wcwl-shortcode.php:444,
+#: ../includes/class.yith-wcwl-shortcode.php:447
 msgid "My wishlist on "
 msgstr ""
 
-#: ../includes/class.yith-wcwl-shortcode.php:456, ../plugin-options/wishlist_page-options.php:172
+#: ../includes/class.yith-wcwl-shortcode.php:456,
+#: ../plugin-options/wishlist_page-options.php:172
 msgid "Share on WhatsApp"
 msgstr ""
 
@@ -267,7 +282,8 @@ msgstr ""
 msgid "Error. Unable to remove the product from the wishlist."
 msgstr ""
 
-#: ../includes/data-stores/class.yith-wcwl-wishlist-data-store.php:136, ../includes/data-stores/class.yith-wcwl-wishlist-data-store.php:158
+#: ../includes/data-stores/class.yith-wcwl-wishlist-data-store.php:136,
+#: ../includes/data-stores/class.yith-wcwl-wishlist-data-store.php:158
 msgid "Invalid wishlist."
 msgstr ""
 
@@ -357,7 +373,8 @@ msgstr ""
 msgid "while you are using the premium one."
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:18, ../plugin-options/settings-options.php:23
+#: ../plugin-options/add_to_wishlist-options.php:18,
+#: ../plugin-options/settings-options.php:23
 msgid "General Settings"
 msgstr ""
 
@@ -417,7 +434,8 @@ msgstr ""
 msgid "After \"Add to cart\" button"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:73, ../plugin-options/add_to_wishlist-options.php:106
+#: ../plugin-options/add_to_wishlist-options.php:73,
+#: ../plugin-options/add_to_wishlist-options.php:106
 msgid "Use shortcode"
 msgstr ""
 
@@ -445,7 +463,8 @@ msgstr ""
 msgid "After summary"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:116, ../plugin-options/wishlist_page-options.php:219
+#: ../plugin-options/add_to_wishlist-options.php:116,
+#: ../plugin-options/wishlist_page-options.php:219
 msgid "Text customization"
 msgstr ""
 
@@ -509,15 +528,18 @@ msgstr ""
 msgid "Choose if you want to show a textual \"Add to wishlist\" link or a button"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:171, ../plugin-options/wishlist_page-options.php:258
+#: ../plugin-options/add_to_wishlist-options.php:171,
+#: ../plugin-options/wishlist_page-options.php:258
 msgid "Textual (anchor)"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:172, ../plugin-options/wishlist_page-options.php:259
+#: ../plugin-options/add_to_wishlist-options.php:172,
+#: ../plugin-options/wishlist_page-options.php:259
 msgid "Button with theme style"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:173, ../plugin-options/wishlist_page-options.php:260
+#: ../plugin-options/add_to_wishlist-options.php:173,
+#: ../plugin-options/wishlist_page-options.php:260
 msgid "Button with custom style"
 msgstr ""
 
@@ -529,15 +551,33 @@ msgstr ""
 msgid "Choose colors for the \"Add to wishlist\" button"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:189, ../plugin-options/wishlist_page-options.php:276, ../plugin-options/wishlist_page-options.php:368, ../plugin-options/wishlist_page-options.php:418, ../plugin-options/wishlist_page-options.php:467, ../plugin-options/wishlist_page-options.php:557, ../plugin-options/wishlist_page-options.php:597, ../plugin-options/wishlist_page-options.php:637, ../plugin-options/wishlist_page-options.php:677, ../plugin-options/wishlist_page-options.php:717
+#: ../plugin-options/add_to_wishlist-options.php:189,
+#: ../plugin-options/wishlist_page-options.php:276,
+#: ../plugin-options/wishlist_page-options.php:368,
+#: ../plugin-options/wishlist_page-options.php:418,
+#: ../plugin-options/wishlist_page-options.php:467,
+#: ../plugin-options/wishlist_page-options.php:557,
+#: ../plugin-options/wishlist_page-options.php:597,
+#: ../plugin-options/wishlist_page-options.php:637,
+#: ../plugin-options/wishlist_page-options.php:677,
+#: ../plugin-options/wishlist_page-options.php:717
 msgid "Background"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:194, ../plugin-options/wishlist_page-options.php:281, ../plugin-options/wishlist_page-options.php:373, ../plugin-options/wishlist_page-options.php:423, ../plugin-options/wishlist_page-options.php:472, ../plugin-options/wishlist_page-options.php:511
+#: ../plugin-options/add_to_wishlist-options.php:194,
+#: ../plugin-options/wishlist_page-options.php:281,
+#: ../plugin-options/wishlist_page-options.php:373,
+#: ../plugin-options/wishlist_page-options.php:423,
+#: ../plugin-options/wishlist_page-options.php:472,
+#: ../plugin-options/wishlist_page-options.php:511
 msgid "Text"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:199, ../plugin-options/wishlist_page-options.php:286, ../plugin-options/wishlist_page-options.php:378, ../plugin-options/wishlist_page-options.php:428, ../plugin-options/wishlist_page-options.php:477
+#: ../plugin-options/add_to_wishlist-options.php:199,
+#: ../plugin-options/wishlist_page-options.php:286,
+#: ../plugin-options/wishlist_page-options.php:378,
+#: ../plugin-options/wishlist_page-options.php:428,
+#: ../plugin-options/wishlist_page-options.php:477
 msgid "Border"
 msgstr ""
 
@@ -545,19 +585,29 @@ msgstr ""
 msgid "Choose colors for the \"Add to wishlist\" button on hover state"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:207, ../plugin-options/wishlist_page-options.php:294, ../plugin-options/wishlist_page-options.php:386, ../plugin-options/wishlist_page-options.php:436
+#: ../plugin-options/add_to_wishlist-options.php:207,
+#: ../plugin-options/wishlist_page-options.php:294,
+#: ../plugin-options/wishlist_page-options.php:386,
+#: ../plugin-options/wishlist_page-options.php:436
 msgid "Background Hover"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:212, ../plugin-options/wishlist_page-options.php:299, ../plugin-options/wishlist_page-options.php:391, ../plugin-options/wishlist_page-options.php:441
+#: ../plugin-options/add_to_wishlist-options.php:212,
+#: ../plugin-options/wishlist_page-options.php:299,
+#: ../plugin-options/wishlist_page-options.php:391,
+#: ../plugin-options/wishlist_page-options.php:441
 msgid "Text Hover"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:217, ../plugin-options/wishlist_page-options.php:304, ../plugin-options/wishlist_page-options.php:396, ../plugin-options/wishlist_page-options.php:446
+#: ../plugin-options/add_to_wishlist-options.php:217,
+#: ../plugin-options/wishlist_page-options.php:304,
+#: ../plugin-options/wishlist_page-options.php:396,
+#: ../plugin-options/wishlist_page-options.php:446
 msgid "Border Hover"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:231, ../plugin-options/wishlist_page-options.php:318
+#: ../plugin-options/add_to_wishlist-options.php:231,
+#: ../plugin-options/wishlist_page-options.php:318
 msgid "Border radius"
 msgstr ""
 
@@ -577,7 +627,8 @@ msgstr ""
 msgid "\"Add to wishlist\" custom icon"
 msgstr ""
 
-#: ../plugin-options/add_to_wishlist-options.php:259, ../plugin-options/add_to_wishlist-options.php:284
+#: ../plugin-options/add_to_wishlist-options.php:259,
+#: ../plugin-options/add_to_wishlist-options.php:284
 msgid "Upload an icon you'd like to use for \"Add to wishlist\" button (suggested 32px x 32px)"
 msgstr ""
 
@@ -649,7 +700,13 @@ msgstr ""
 msgid "Wishlist Detail Page"
 msgstr ""
 
-#: ../plugin-options/wishlist_page-options.php:45, ../plugin-options/wishlist_page-options.php:54, ../plugin-options/wishlist_page-options.php:63, ../plugin-options/wishlist_page-options.php:72, ../plugin-options/wishlist_page-options.php:81, ../plugin-options/wishlist_page-options.php:90, ../plugin-options/wishlist_page-options.php:99
+#: ../plugin-options/wishlist_page-options.php:45,
+#: ../plugin-options/wishlist_page-options.php:54,
+#: ../plugin-options/wishlist_page-options.php:63,
+#: ../plugin-options/wishlist_page-options.php:72,
+#: ../plugin-options/wishlist_page-options.php:81,
+#: ../plugin-options/wishlist_page-options.php:90,
+#: ../plugin-options/wishlist_page-options.php:99
 msgid "In wishlist table show"
 msgstr ""
 
@@ -705,7 +762,11 @@ msgstr ""
 msgid "Enable this option to let users share their wishlist on social media"
 msgstr ""
 
-#: ../plugin-options/wishlist_page-options.php:135, ../plugin-options/wishlist_page-options.php:144, ../plugin-options/wishlist_page-options.php:153, ../plugin-options/wishlist_page-options.php:162, ../plugin-options/wishlist_page-options.php:171
+#: ../plugin-options/wishlist_page-options.php:135,
+#: ../plugin-options/wishlist_page-options.php:144,
+#: ../plugin-options/wishlist_page-options.php:153,
+#: ../plugin-options/wishlist_page-options.php:162,
+#: ../plugin-options/wishlist_page-options.php:171
 msgid "Share on social media"
 msgstr ""
 
@@ -729,7 +790,8 @@ msgstr ""
 msgid "Wishlist title used for sharing (only used on Twitter and Pinterest)"
 msgstr ""
 
-#: ../plugin-options/wishlist_page-options.php:192, ../plugin-options/wishlist_page-options.php:229
+#: ../plugin-options/wishlist_page-options.php:192,
+#: ../plugin-options/wishlist_page-options.php:229
 msgid "My wishlist on %s"
 msgstr ""
 
@@ -765,7 +827,9 @@ msgstr ""
 msgid "Enter a text for the \"Add to cart\" button"
 msgstr ""
 
-#: ../plugin-options/wishlist_page-options.php:237, ../templates/wishlist-view-footer-mobile.php:43, ../templates/wishlist-view-footer.php:43
+#: ../plugin-options/wishlist_page-options.php:237,
+#: ../templates/wishlist-view-footer-mobile.php:43,
+#: ../templates/wishlist-view-footer.php:43
 msgid "Add to cart"
 msgstr ""
 
@@ -829,7 +893,8 @@ msgstr ""
 msgid "Secondary button style"
 msgstr ""
 
-#: ../plugin-options/wishlist_page-options.php:416, ../plugin-options/wishlist_page-options.php:434
+#: ../plugin-options/wishlist_page-options.php:416,
+#: ../plugin-options/wishlist_page-options.php:434
 msgid "Choose colors of the secondary button<br/><small>This style will be applied to the buttons that allow showing and hiding the Edit title form on Wishlist view and \"Create new Wishlist\" button on Manage view</small>"
 msgstr ""
 
@@ -885,7 +950,11 @@ msgstr ""
 msgid "Choose colors for Facebook share button"
 msgstr ""
 
-#: ../plugin-options/wishlist_page-options.php:562, ../plugin-options/wishlist_page-options.php:602, ../plugin-options/wishlist_page-options.php:642, ../plugin-options/wishlist_page-options.php:682, ../plugin-options/wishlist_page-options.php:722
+#: ../plugin-options/wishlist_page-options.php:562,
+#: ../plugin-options/wishlist_page-options.php:602,
+#: ../plugin-options/wishlist_page-options.php:642,
+#: ../plugin-options/wishlist_page-options.php:682,
+#: ../plugin-options/wishlist_page-options.php:722
 msgid "Background hover"
 msgstr ""
 
@@ -993,11 +1062,13 @@ msgstr ""
 msgid "View &rsaquo;"
 msgstr ""
 
-#: ../templates/admin/wishlist-panel-premium.php:167, ../templates/admin/wishlist-panel-premium.php:308
+#: ../templates/admin/wishlist-panel-premium.php:167,
+#: ../templates/admin/wishlist-panel-premium.php:308
 msgid "Upgrade to the %1$spremium version%2$s%3$sof %1$sYITH WooCommerce Wishlist%2$s to benefit from all features!"
 msgstr ""
 
-#: ../templates/admin/wishlist-panel-premium.php:169, ../templates/admin/wishlist-panel-premium.php:310
+#: ../templates/admin/wishlist-panel-premium.php:169,
+#: ../templates/admin/wishlist-panel-premium.php:310
 msgid "Upgrade"
 msgstr ""
 
@@ -1161,31 +1232,38 @@ msgstr ""
 msgid "this wishlist link and share it anywhere)"
 msgstr ""
 
-#: ../templates/wishlist-view-footer-mobile.php:41, ../templates/wishlist-view-footer.php:41
+#: ../templates/wishlist-view-footer-mobile.php:41,
+#: ../templates/wishlist-view-footer.php:41
 msgid "Apply this action to all the selected items:"
 msgstr ""
 
-#: ../templates/wishlist-view-footer-mobile.php:46, ../templates/wishlist-view-footer.php:46
+#: ../templates/wishlist-view-footer-mobile.php:46,
+#: ../templates/wishlist-view-footer.php:46
 msgid "Remove from wishlist"
 msgstr ""
 
-#: ../templates/wishlist-view-footer-mobile.php:58, ../templates/wishlist-view-footer.php:58
+#: ../templates/wishlist-view-footer-mobile.php:58,
+#: ../templates/wishlist-view-footer.php:58
 msgid "Move to %s"
 msgstr ""
 
-#: ../templates/wishlist-view-footer-mobile.php:63, ../templates/wishlist-view-footer.php:63
+#: ../templates/wishlist-view-footer-mobile.php:63,
+#: ../templates/wishlist-view-footer.php:63
 msgid "Apply"
 msgstr ""
 
-#: ../templates/wishlist-view-footer-mobile.php:71, ../templates/wishlist-view-footer.php:71
+#: ../templates/wishlist-view-footer-mobile.php:71,
+#: ../templates/wishlist-view-footer.php:71
 msgid "Update"
 msgstr ""
 
-#: ../templates/wishlist-view-footer-mobile.php:77, ../templates/wishlist-view-footer.php:93
+#: ../templates/wishlist-view-footer-mobile.php:77,
+#: ../templates/wishlist-view-footer.php:93
 msgid "Add all to cart"
 msgstr ""
 
-#: ../templates/wishlist-view-footer-mobile.php:87, ../templates/wishlist-view-footer.php:87
+#: ../templates/wishlist-view-footer-mobile.php:87,
+#: ../templates/wishlist-view-footer.php:87
 msgid "Ask for an estimate"
 msgstr ""
 
@@ -1217,27 +1295,33 @@ msgstr ""
 msgid "Stock:"
 msgstr ""
 
-#: ../templates/wishlist-view-mobile.php:178, ../templates/wishlist-view.php:187
+#: ../templates/wishlist-view-mobile.php:178,
+#: ../templates/wishlist-view.php:187
 msgid "Out of stock"
 msgstr ""
 
-#: ../templates/wishlist-view-mobile.php:178, ../templates/wishlist-view.php:187
+#: ../templates/wishlist-view-mobile.php:178,
+#: ../templates/wishlist-view.php:187
 msgid "In Stock"
 msgstr ""
 
-#: ../templates/wishlist-view-mobile.php:197, ../templates/wishlist-view.php:209
+#: ../templates/wishlist-view-mobile.php:197,
+#: ../templates/wishlist-view.php:209
 msgid "Move"
 msgstr ""
 
-#: ../templates/wishlist-view-mobile.php:216, ../templates/wishlist-view.php:228
+#: ../templates/wishlist-view-mobile.php:216,
+#: ../templates/wishlist-view.php:228
 msgid "Move to another list &rsaquo;"
 msgstr ""
 
-#: ../templates/wishlist-view-mobile.php:224, ../templates/wishlist-view.php:135, ../templates/wishlist-view.php:235
+#: ../templates/wishlist-view-mobile.php:224,
+#: ../templates/wishlist-view.php:135, ../templates/wishlist-view.php:235
 msgid "Remove this product"
 msgstr ""
 
-#: ../templates/wishlist-view-mobile.php:234, ../templates/wishlist-view.php:252
+#: ../templates/wishlist-view-mobile.php:234,
+#: ../templates/wishlist-view.php:252
 msgid "No products added to the wishlist"
 msgstr ""
 
