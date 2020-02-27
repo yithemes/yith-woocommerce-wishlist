@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.1';
+		public $version = '3.0.2';
 
 		/**
 		 * Plugin database version
@@ -628,7 +628,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
          * @return string Filtered label
 		 */
 		public function alter_add_to_cart_text( $text, $product ) {
-			$label_option = get_option( 'yith_wcwl_add_to_cart_text' );
+			$label_option = get_option( 'yith_wcwl_add_to_cart_text', __( 'Add to cart', 'yith-woocommerce-wishlist' ) );
 			$label = $product->is_type( 'variable' ) ? $text : apply_filters( 'yith_wcwl_add_to_cart_label', $label_option );
 
 			return $label;
@@ -1285,6 +1285,10 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
             if( ! empty( $cookie ) ){
 
                 $default_list = YITH_WCWL_Wishlist_Factory::get_default_wishlist();
+
+                if( ! $default_list ){
+                	return false;
+                }
 
                 foreach ( $cookie as $item ){
                     if( $default_list->has_product( $item['prod_id'] ) ){

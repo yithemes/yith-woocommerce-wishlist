@@ -289,7 +289,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @return  string The premium landing link
 		 */
 		public function get_premium_landing_uri(){
-			return defined( 'YITH_REFER_ID' ) ? $this->premium_landing_url . '?refer_id=' . YITH_REFER_ID : $this->premium_landing_url . '?refer_id=1030585';
+			return $this->premium_landing_url;
 		}
 	}
 }

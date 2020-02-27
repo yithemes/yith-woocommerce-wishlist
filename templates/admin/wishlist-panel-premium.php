@@ -99,7 +99,7 @@
     }
     .wishlist-cta p{
         margin: 10px 0;
-	    line-height: normal;
+	    line-height: 1.5em;
         display: inline-block;
 	    text-align: left;
     }
@@ -111,7 +111,7 @@
         outline: none;
         color: #fff;
         position: relative;
-        padding: 15px 50px;
+        padding: 10px 50px 8px;
 	    text-align: center;
 	    text-transform: uppercase;
 	    font-weight: 600;

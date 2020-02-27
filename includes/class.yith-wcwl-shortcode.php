@@ -183,7 +183,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			$show_remove_product = get_option( 'yith_wcwl_show_remove', 'yes' ) == 'yes';
 			$show_variation = get_option( 'yith_wcwl_variation_show' ) == 'yes';
 			$repeat_remove_button = get_option( 'yith_wcwl_repeat_remove_button' ) == 'yes';
-			$add_to_cart_label = get_option( 'yith_wcwl_add_to_cart_text' );
+			$add_to_cart_label = get_option( 'yith_wcwl_add_to_cart_text', __( 'Add to cart', 'yith-woocommerce-wishlist' ) );
 			$price_excluding_tax = get_option( 'woocommerce_tax_display_cart' ) == 'excl';
 			$ajax_loading = get_option( 'yith_wcwl_ajax_enable', 'no' );
 
