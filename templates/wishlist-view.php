@@ -163,7 +163,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
                         }
                         ?>
 
-                        <?php do_action( 'yith_wcwl_table_after_product_name', $item ); ?>
+                        <?php do_action( 'yith_wcwl_table_after_product_name', $item, $wishlist ); ?>
                     </td>
 
                     <?php if( $show_price || $show_price_variations ) : ?>
@@ -257,7 +257,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         endforeach;
     else: ?>
         <tr>
-            <td colspan="<?php echo esc_attr( $column_count ) ?>" class="wishlist-empty"><?php echo apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ) ) ?></td>
+            <td colspan="<?php echo esc_attr( $column_count ) ?>" class="wishlist-empty"><?php echo apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ), $wishlist ) ?></td>
         </tr>
     <?php
     endif;
