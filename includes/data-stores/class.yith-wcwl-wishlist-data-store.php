@@ -727,22 +727,22 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			if( ! empty( $id ) && is_int( $id ) ){
 				$cache_key = 'wishlist-default-' . $id;
 				$wishlist_id = wp_cache_get( $cache_key, 'wishlists' );
-				$wishlist_id = $wishlist_id ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE user_id = %d AND is_default = 1", $id ) );
+				$wishlist_id = $wishlist_id !== false ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE user_id = %d AND is_default = 1", $id ) );
 			}
 			elseif( ! empty( $id ) && is_string( $id ) ){
 				$cache_key = 'wishlist-default-' . $id;
 				$wishlist_id = wp_cache_get( $cache_key, 'wishlists' );
-				$wishlist_id = $wishlist_id ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE session_id = %s AND expiration > NOW() AND is_default = 1", $id ) );
+				$wishlist_id = $wishlist_id !== false ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE session_id = %s AND expiration > NOW() AND is_default = 1", $id ) );
 			}
 			elseif( $user_id = get_current_user_id() ){
 				$cache_key = 'wishlist-default-' . $user_id;
 				$wishlist_id = wp_cache_get( $cache_key, 'wishlists' );
-				$wishlist_id = $wishlist_id ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE user_id = %d AND is_default = 1", $user_id ) );
+				$wishlist_id = $wishlist_id !== false ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE user_id = %d AND is_default = 1", $user_id ) );
 			}
 			elseif( $session_id = YITH_WCWL_Session()->get_session_id() ){
 				$cache_key = 'wishlist-default-' . $session_id;
 				$wishlist_id = wp_cache_get( $cache_key, 'wishlists' );
-				$wishlist_id = $wishlist_id ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE session_id = %s AND expiration > NOW() AND is_default = 1", $session_id ) );
+				$wishlist_id = $wishlist_id !== false ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE session_id = %s AND expiration > NOW() AND is_default = 1", $session_id ) );
 			}
 
 			if( $wishlist_id ){
@@ -753,9 +753,26 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				return YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_id );
 			}
 			elseif( 'edit' == $context ){
-				return $this->generate_default_wishlist( $id );
+				$wishlist = $this->generate_default_wishlist( $id );
+
+				if( $cache_key ) {
+					wp_cache_set( $cache_key, $wishlist->get_id(), 'wishlists' );
+				}
+
+				return $wishlist;
 			}
 			else{
+				/**
+				 * If no default wishlist was found, register null as cache value
+				 * This will be used until someone tries to edit the list (entering previous elseif),
+				 * causing a new default wishlist to be automatically generated and stored in cache, replacing null
+				 *
+				 * @since 3.0.6
+				 */
+				if( $cache_key ) {
+					wp_cache_set( $cache_key, null, 'wishlists' );
+				}
+
 				return false;
 			}
 		}

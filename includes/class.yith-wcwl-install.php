@@ -322,7 +322,7 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
                             dateadded timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                             on_sale tinyint NOT NULL DEFAULT 0,
                             PRIMARY KEY  ( ID ),
-                            KEY ( prod_id )
+                            KEY prod_id ( prod_id )
                         ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 
                 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

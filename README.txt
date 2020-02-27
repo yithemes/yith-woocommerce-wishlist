@@ -4,12 +4,12 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
 Tested up to: 5.3
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
-WooCommerce 3.8.x compatible.
+WooCommerce 3.9.x compatible.
 
 == Description ==
 
@@ -111,6 +111,26 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.0.6 – Released on 04 February 2020 =
+
+* Tweak: avoid guest redirect if wishlist page is set to my-account
+* Tweak: minor improvements to localization
+* Tweak: update wrong text domains
+* Tweak: changed default value for ATW icons
+* Tweak: set wishlist session cookie JIT
+* Tweak: use secure cookie for sessions, when possible (thanks to Ahmed)
+* Tweak: improved cache handling for get_default_wishlist method
+* Tweak: even if system cannot set session cookie, calculate session_id and use it for the entire execution
+* Update: Italian language
+* Update: plugin framework
+* Fix: prevent error if list doesn't exists
+* Fix: issue with wishlist_id query param
+* Fix: items query now search for product in original language
+* Fix: returning correct wishlist and user id to yith_wcwl_added_to_wishlist and yith_wcwl_removed_from_wishlist actions (thanks to danielbitzer)
+* Fix: issue with default value for yith_wcwl_positions option
+* Fix: added key name to avoid DB error during install or update procedure
+* Dev: added yith_wcwl_shortcode_share_link_url filter
 
 = 3.0.5 - Released on 23 December 2019 =
 

@@ -195,7 +195,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		        wp_cache_delete( 'wishlist-user-total-count-' . $user_id, 'wishlists' );
 	        }
 
-	        do_action( 'yith_wcwl_added_to_wishlist', $prod_id, $wishlist_id, $user_id );
+	        do_action( 'yith_wcwl_added_to_wishlist', $prod_id, $item->get_wishlist_id(), $item->get_user_id() );
         }
 
         /**
@@ -243,7 +243,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		        wp_cache_delete( 'wishlist-user-total-count-' . $user_id );
 	        }
 
-	        do_action( 'yith_wcwl_removed_from_wishlist', $prod_id, $wishlist_id, $user_id );
+	        do_action( 'yith_wcwl_removed_from_wishlist', $prod_id, $wishlist->get_id(), $wishlist->get_user_id() );
         }
 
 	    /**

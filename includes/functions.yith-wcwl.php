@@ -264,10 +264,12 @@ if( !function_exists( 'yith_setcookie' ) ) {
      * @param string $name
      * @param mixed $value
      * @param int $time
+     * @param bool $secure
+     * @param bool $httponly
      * @return bool
      * @since 1.0.0
      */
-    function yith_setcookie( $name, $value = array(), $time = null ) {
+    function yith_setcookie( $name, $value = array(), $time = null, $secure = false, $httponly = false ) {
     	if( ! apply_filters( 'yith_wcwl_set_cookie', true ) || empty( $name ) ){
     		return false;
 	    }
@@ -278,7 +280,7 @@ if( !function_exists( 'yith_setcookie' ) ) {
         $expiration = apply_filters( 'yith_wcwl_cookie_expiration_time', $time ); // Default 30 days
 
         $_COOKIE[ $name ] = $value;
-	    wc_setcookie( $name, $value, $expiration );
+	    wc_setcookie( $name, $value, $expiration, $secure, $httponly );
 
 	    return true;
     }
@@ -418,15 +420,15 @@ if( !function_exists( 'yith_wcwl_get_plugin_icons' ) ){
 	 * Return array of available icons
 	 *
 	 * @param $none_label string Label to use for none option
+	 * @param $custom_label string Label to use for custom option
 	 *
 	 * @return array Array of available icons, in class => name format
 	 */
-	function yith_wcwl_get_plugin_icons( $none_label = '' ){
+	function yith_wcwl_get_plugin_icons( $none_label = '', $custom_label = '' ){
 	    $icons = json_decode( file_get_contents( YITH_WCWL_DIR . 'assets/js/admin/yith-wcwl-icons.json' ), true );
 
-	    if( $none_label ){
-	    	$icons['none'] = $none_label;
-	    }
+		$icons['none'] = $none_label ? $none_label : __( 'None', 'yith-woocommerce-wishlist' );
+		$icons['custom'] = $custom_label ? $custom_label : __( 'Custom', 'yith-woocommerce-wishlist' );
 
 		return $icons;
 	}
@@ -512,6 +514,7 @@ if( !function_exists( 'yith_wcwl_get_privacy_label' ) ){
 	 * @since 3.0.0
 	 */
 	function yith_wcwl_get_privacy_label( $privacy, $extended = false ){
+
 		switch( $privacy ){
 			case 1:
 				$privacy_label = 'shared';
@@ -519,7 +522,7 @@ if( !function_exists( 'yith_wcwl_get_privacy_label' ) ){
 
 				if( $extended ){
 					$privacy_text = '<b>' . $privacy_text . '</b> - ';
-					$privacy_text .= __( 'Anyone can search for and see this list', 'yith-woocommerce-wishlist' );
+                    $privacy_text .= __( 'Only people with a link to this list can see it', 'yith-woocommerce-wishlist' );
 				}
 
 				break;
@@ -529,7 +532,7 @@ if( !function_exists( 'yith_wcwl_get_privacy_label' ) ){
 
 				if( $extended ){
 					$privacy_text = '<b>' . $privacy_text . '</b> - ';
-					$privacy_text .= __( 'Only people with a link to this list can see it', 'yith-woocommerce-wishlist' );
+                    $privacy_text .= __( 'Only you can see this list', 'yith-woocommerce-wishlist' );
 				}
 
 				break;
@@ -539,8 +542,8 @@ if( !function_exists( 'yith_wcwl_get_privacy_label' ) ){
 
 				if( $extended ){
 					$privacy_text = '<b>' . $privacy_text . '</b> - ';
-					$privacy_text .= __( 'Only you can see this list', 'yith-woocommerce-wishlist' );
-				}
+                    $privacy_text .= __( 'Anyone can search for and see this list', 'yith-woocommerce-wishlist' );
+                }
 
 				break;
 		}

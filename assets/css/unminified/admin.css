@@ -243,12 +243,15 @@
     overflow-x: hidden;
     overflow-y: scroll;
     margin: 30px 0;
-    pointer-events: none;
 }
 
 .yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview.plain{
     padding: 0 20px;
     background: #fff;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview .no-interactions{
+    pointer-events: none;
 }
 
 .yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview #wrapper{

@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.5';
+		public $version = '3.0.6';
 
 		/**
 		 * Plugin database version
@@ -136,6 +136,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function add_button() {
 			$positions = apply_filters( 'yith_wcwl_positions', array(
+				'after_add_to_cart' => array( 'hook' => 'woocommerce_single_product_summary', 'priority' => 31 ),
 				'add-to-cart' => array( 'hook' => 'woocommerce_single_product_summary', 'priority' => 31 ),
 				'thumbnails'  => array( 'hook' => 'woocommerce_product_thumbnails', 'priority' => 21 ),
 				'summary'     => array( 'hook' => 'woocommerce_after_single_product_summary', 'priority' => 11 )

@@ -1322,7 +1322,7 @@ jQuery( document ).ready( function( $ ){
                     popup.addClass( 'feedback' );
                     popup.css( 'left', ( ( $( window ).innerWidth() / 2 ) - ( popup.outerWidth() / 2 ) ) + 'px' );
 
-                    setTimeout( close_pretty_photo, 3000 );
+                    setTimeout( close_pretty_photo, yith_wcwl_l10n.popup_timeout );
                 }
             }
             else{
@@ -1353,7 +1353,7 @@ jQuery( document ).ready( function( $ ){
         msgPopup.css( 'margin-left', '-' + $( msgPopup ).width() + 'px' ).fadeIn();
         window.setTimeout( function() {
             msgPopup.fadeOut();
-        }, 2000 );
+        }, yith_wcwl_l10n.popup_timeout );
     }
 
     /**

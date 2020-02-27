@@ -308,7 +308,7 @@ jQuery( document ).ready( function( $ ) {
                     preview.unblock();
                 },
                 success: function( data ){
-                    preview.removeClass( 'html plain' ).addClass( template ).html( data );
+                    preview.removeClass( 'html plain' ).addClass( template ).find('.no-interactions').html( data );
                 }
             } );
         },

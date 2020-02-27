@@ -71,6 +71,7 @@ var updateMo = function () {
 
 exports.minify_js = gulp.series(minify_main_js, minify_admin_js);
 exports.minify = gulp.series(minify_css, minify_themes_css);
+exports.uppot = gulp.series(updatePot);
 exports.localize = gulp.series(updatePot, updatePo, updateMo);
 exports.deploy = gulp.series(minify_css, minify_themes_css, minify_main_js, minify_admin_js, updatePot, updatePo, updateMo);
 exports.default = gulp.series(minify_css, minify_themes_css, minify_main_js, minify_admin_js);
