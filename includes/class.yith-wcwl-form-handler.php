@@ -137,7 +137,7 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 				$wishlist->save();
 			}
 
-			$redirect_url = $wishlist->get_url();
+			$redirect_url = isset( $_REQUEST['redirect_to'] ) ? esc_url_raw( $_REQUEST['redirect_to'] ) : $wishlist->get_url();
 
 			wp_redirect( $redirect_url );
 			die;

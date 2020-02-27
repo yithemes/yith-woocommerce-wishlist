@@ -16,7 +16,7 @@ jQuery( document ).ready( function( $ ){
 
         t.on( 'click', '.add_to_wishlist', function( ev ) {
             var t = $( this),
-                product_id = t.data( 'product-id' ),
+                product_id = t.attr( 'data-product-id' ),
                 el_wrap = $( '.add-to-wishlist-' + product_id ),
                 data = {
                     add_to_wishlist: product_id,
@@ -162,7 +162,7 @@ jQuery( document ).ready( function( $ ){
 
         t.on( 'click', '.remove_from_all_wishlists', function( ev ){
             var t = $(this),
-                prod_id = t.data('product-id'),
+                prod_id = t.attr('data-product-id'),
                 wishlist_id = t.data('wishlist-id'),
                 content = t.closest( '.content' ),
                 data = {
@@ -226,7 +226,7 @@ jQuery( document ).ready( function( $ ){
 
         t.on( 'click', '.yith-wcwl-popup-footer .move_to_wishlist', function(){
             var t = $(this),
-                product_id = t.data('product-id'),
+                product_id = t.attr('data-product-id'),
                 wishlist_token = t.data('origin-wishlist-id'),
                 form = t.closest('form'),
                 to_token = form.find('.wishlist-select').val(),
@@ -281,7 +281,7 @@ jQuery( document ).ready( function( $ ){
 
         t.on( 'click', '.delete_item', function(){
             var t = $(this),
-                product_id = t.data('product-id'),
+                product_id = t.attr('data-product-id'),
                 item_id = t.data('item-id'),
                 el_wrap = $( '.add-to-wishlist-' + product_id );
 
@@ -425,8 +425,10 @@ jQuery( document ).ready( function( $ ){
                     container = t.closest( '.yith-wcwl-add-to-wishlist' ),
                     options;
 
-                t.data( 'original-product-id', product_id );
-                t.data( 'product-id', variation_id );
+                t.attr( 'data-original-product-id', product_id );
+                t.attr( 'data-product-id', variation_id );
+
+                console.log(t, t.attr('data-product-id'));
 
                 if( container.length ) {
                     options = container.data( 'fragment-options' );
@@ -458,11 +460,11 @@ jQuery( document ).ready( function( $ ){
             targets.each( function(){
                 var t = $(this),
                     container = t.closest( '.yith-wcwl-add-to-wishlist' ),
-                    variation_id = t.data( 'product-id' ),
+                    variation_id = t.attr( 'data-product-id' ),
                     options;
 
-                t.data( 'product-id', product_id );
-                t.data( 'original-product-id', '' );
+                t.attr( 'data-product-id', product_id );
+                t.attr( 'data-original-product-id', '' );
 
                 if( container.length ) {
                     options = container.data( 'fragment-options' );
@@ -478,6 +480,10 @@ jQuery( document ).ready( function( $ ){
                         .attr('data-fragment-ref', product_id);
                 }
             } );
+        } );
+
+        t.on( 'yith_wcwl_fragments_loaded', function( ev ){
+            $( '.variations_form' ).find( '.variations select' ).last().change();
         } );
 
         init_wishlist_popup();
@@ -1199,7 +1205,7 @@ jQuery( document ).ready( function( $ ){
      */
     function reload_wishlist_and_adding_elem( el, form ) {
 
-        var product_id = el.data( 'product-id' ),
+        var product_id = el.data( 'data-product-id' ),
             table = $(document).find( '.cart.wishlist_table' ),
             pagination = table.data( 'pagination' ),
             per_page = table.data( 'per-page' ),
@@ -1382,8 +1388,8 @@ jQuery( document ).ready( function( $ ){
                 wishlist_options = t.find( 'li' ),
                 container = t.closest( '.yith-wcwl-add-button' ),
                 default_button = container.children( 'a.add_to_wishlist' ),
-                product_id = default_button.data('product-id'),
-                product_type = default_button.data('product-type');
+                product_id = default_button.attr('data-product-id'),
+                product_type = default_button.attr('data-product-type');
 
             wishlist_options.remove();
             $.each( wishlists, function( i, v ) {

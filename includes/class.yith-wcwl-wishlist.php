@@ -434,7 +434,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return string Url to delete the wishlist
 		 */
 		public function get_delete_url() {
-			return wp_nonce_url( add_query_arg( 'wishlist_id', $this->get_id(), YITH_WCWL()->get_wishlist_url( 'manage' ) ), 'yith_wcwl_delete_action', 'yith_wcwl_delete' );
+			return apply_filters( 'yith_wcwl_wishlist_delete_url', wp_nonce_url( add_query_arg( 'wishlist_id', $this->get_id(), YITH_WCWL()->get_wishlist_url( 'manage' ) ), 'yith_wcwl_delete_action', 'yith_wcwl_delete' ) );
 		}
 
 		/* === SETTERS === */

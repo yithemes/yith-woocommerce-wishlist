@@ -164,13 +164,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 					'id'         => $wishlist_data->ID,
 					'privacy'    => $wishlist_data->wishlist_privacy,
 					'user_id'    => $wishlist_data->user_id,
-					'session_id' => $wishlist_data->session_id,
+					'session_id' => isset( $wishlist_data->session_id ) ? $wishlist_data->session_id : '',
 					'name'       => wc_clean( stripslashes( $wishlist_data->wishlist_name ) ),
 					'slug'       => $wishlist_data->wishlist_slug,
 					'token'      => $wishlist_data->wishlist_token,
 					'is_default' => $wishlist_data->is_default,
 					'date_added' => $wishlist_data->dateadded,
-					'expiration' => $wishlist_data->expiration
+					'expiration' => isset( $wishlist_data->expiration ) ? $wishlist_data->expiration : ''
 				)
 			);
 			$wishlist->set_object_read( true );

@@ -29,7 +29,14 @@ jQuery( document ).ready( function( $ ) {
                     return;
                 }
 
-                val ? target.removeClass('yith-disabled') : target.addClass('yith-disabled');
+                if( val ){
+                    target.show().fadeTo("slow", 1);
+                }
+                else{
+                    target.is( ':visible' ) ? target.fadeTo("slow", 0, function(){ target.hide() }) : target.css('opacity', 0).hide();
+                }
+
+                // val ? target.removeClass('yith-disabled') : target.addClass('yith-disabled');
             });
 
             if (typeof complete != 'undefined') {
@@ -451,10 +458,10 @@ jQuery( document ).ready( function( $ ) {
             options_field = t.closest( '.yith-toggle-content-row' ).next();
 
         if( v === 'radio' ||  v === 'select' ){
-            options_field.removeClass( 'yith-disabled' );
+            options_field.show().fadeTo('slow' , 1);
         }
         else{
-            options_field.addClass( 'yith-disabled' );
+            options_field.is( ':visible' ) ? options_field.fadeTo('slow', 0, function(){ options_field.hide() }) : options_field.css('opacity', 0).hide();
         }
     } ).change();
 
@@ -724,16 +731,17 @@ jQuery( document ).ready( function( $ ) {
 
     $(document).on( 'yith-add-box-button-toggle', function(){
         var ask_an_estimate_type_new = $('#new_type'),
-            ask_an_estimate_options_new = $('#new_options');
+            ask_an_estimate_options_new = $('#new_options'),
+            target = ask_an_estimate_options_new.closest('.yith-add-box-row');
 
         ask_an_estimate_type_new.on( 'change', function(){
             var v = ask_an_estimate_type_new.val();
 
             if( v === 'radio' ||  v === 'select' ){
-                ask_an_estimate_options_new.closest('.yith-add-box-row').removeClass('yith-disabled');
+                target.show().fadeTo('slow', 1);
             }
             else{
-                ask_an_estimate_options_new.closest('.yith-add-box-row').addClass('yith-disabled');
+                target.is( ':visible' ) ? target.fadeTo('slow', 0, function(){ $(this).hide() }) : target.css('opacity', 0).hide();
             }
         } ).change();
     } );

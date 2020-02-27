@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
 Tested up to: 5.3
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,19 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.0.4 - Released on 19 December 2019 =
+
+* Tweak: added isset on wishlist data store, to prevent notice
+* Tweak: removed transients for items count, to avoid load on wp-options table
+* Tweak: improved dependencies animation
+* Tweak: restored $atts variable inside template, for better compatibility with themes
+* Tweak: handling for redirect_to param in $_REQUEST for form-handler class
+* Update: plugin framework
+* Fix: default variation not being added to wishlist
+* Fix: add default variation to wishlist when Ajax loading is enabled
+* Fix: count_all_products not retrieving correct number
+* Dev: added yith_wcwl_wishlist_delete_url filter
 
 = 3.0.3 - Released on 12 December 2019 =
 

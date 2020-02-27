@@ -74,8 +74,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 			),
 			'deps'      => array(
 				'id'    => 'yith_wcwl_show_on_loop',
-				'value' => 'yes',
-				'type'  => 'disable'
+				'value' => 'yes'
 			)
 		),
 
@@ -222,8 +221,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 			),
 			'deps' => array(
 				'id'    => 'yith_wcwl_add_to_wishlist_style',
-				'value' => 'button_custom',
-				'type'  => 'disable'
+				'value' => 'button_custom'
 			)
 		),
 
@@ -238,8 +236,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 			'max'       => 100,
 			'deps' => array(
 				'id'    => 'yith_wcwl_add_to_wishlist_style',
-				'value' => 'button_custom',
-				'type'  => 'disable'
+				'value' => 'button_custom'
 			)
 		),
 
@@ -263,8 +260,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 			'yith-type' => 'upload',
 			'deps'      => array(
 				'id'    => 'yith_wcwl_add_to_wishlist_icon',
-				'value' => 'custom',
-				'type'  => 'disable'
+				'value' => 'custom'
 			)
 		),
 
@@ -288,8 +284,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 			'yith-type' => 'upload',
 			'deps'      => array(
 				'id'    => 'yith_wcwl_added_to_wishlist_icon',
-				'value' => 'custom',
-				'type'  => 'disable'
+				'value' => 'custom'
 			)
 		),
 

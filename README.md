@@ -72,11 +72,18 @@ We're also working hard to release a developer guide; please, follow our [social
 
 ## Changelog
 
-### 3.0.3 - Released on 12 December 2019
+### 3.0.4 - Released on 19 December 2019
 
-* Tweak: prevent yith_setcookie to process if cookie name is not set
-* Tweak: refactored session class to set up session cookie name on demand, when needed (avoid empty cookie name)
-* Tweak: minor improvements to functions that require session (count_products, get_default_wishlist..) as a consequence of changes applied to session class
+* Tweak: added isset on wishlist data store, to prevent notice
+* Tweak: removed transients for items count, to avoid load on wp-options table
+* Tweak: improved dependencies animation
+* Tweak: restored $atts variable inside template, for better compatibility with themes
+* Tweak: handling for redirect_to param in $_REQUEST for form-handler class
+* Update: plugin framework
+* Fix: default variation not being added to wishlist
+* Fix: add default variation to wishlist when Ajax loading is enabled
+* Fix: count_all_products not retrieving correct number
+* Dev: added yith_wcwl_wishlist_delete_url filter
 
 ## Support
 

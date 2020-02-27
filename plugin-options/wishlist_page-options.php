@@ -309,8 +309,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			),
 			'deps' => array(
 				'id' => 'yith_wcwl_add_to_cart_style',
-				'value' => 'button_custom',
-				'type' => 'disable'
+				'value' => 'button_custom'
 			)
 		),
 
@@ -325,8 +324,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'max'       => 100,
 			'deps' => array(
 				'id' => 'yith_wcwl_add_to_cart_style',
-				'value' => 'button_custom',
-				'type' => 'disable'
+				'value' => 'button_custom'
 			)
 		),
 
@@ -341,8 +339,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'options'   => yith_wcwl_get_plugin_icons(),
 			'deps' => array(
 				'id' => 'yith_wcwl_add_to_cart_style',
-				'value' => 'button_custom',
-				'type' => 'disable'
+				'value' => 'button_custom'
 			)
 
 		),
@@ -401,8 +398,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			),
 			'deps' => array(
 				'id' => 'yith_wcwl_add_to_cart_style',
-				'value' => 'button_custom',
-				'type' => 'disable'
+				'value' => 'button_custom'
 			)
 		),
 
@@ -451,8 +447,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			),
 			'deps' => array(
 				'id' => 'yith_wcwl_add_to_cart_style',
-				'value' => 'button_custom',
-				'type' => 'disable'
+				'value' => 'button_custom'
 			)
 		),
 
@@ -481,8 +476,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			),
 			'deps' => array(
 				'id' => 'yith_wcwl_add_to_cart_style',
-				'value' => 'button_custom',
-				'type' => 'disable'
+				'value' => 'button_custom'
 			)
 		),
 
@@ -495,8 +489,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'default'      => '#F4F4F4',
 			'deps' => array(
 				'id' => 'yith_wcwl_add_to_cart_style',
-				'value' => 'button_custom',
-				'type' => 'disable'
+				'value' => 'button_custom'
 			)
 		),
 
@@ -520,8 +513,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			),
 			'deps' => array(
 				'id' => 'yith_wcwl_enable_share',
-				'value' => 'yes',
-				'type' => 'disable'
+				'value' => 'yes'
 			)
 
 		),

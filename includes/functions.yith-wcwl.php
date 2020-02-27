@@ -86,6 +86,7 @@ if( !function_exists( 'yith_wcwl_get_template' ) ) {
         $located = yith_wcwl_locate_template( $path, $var );
 
         if ( $var && is_array( $var ) ) {
+        	$atts = $var;
 	        extract( $var );
         }
 

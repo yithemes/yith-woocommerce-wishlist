@@ -189,11 +189,10 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
             $wishlist->add_item( $item );
             $wishlist->save();
 
-	        delete_transient( 'yith_wcwl_wishlist_count_' . $wishlist->get_token() );
+	        wp_cache_delete( 'wishlist-count-' . $wishlist->get_token(), 'wishlists' );
 
 	        if( $user_id = $wishlist->get_user_id() ) {
-		        delete_transient( 'yith_wcwl_user_default_count_' . $user_id );
-		        delete_transient( 'yith_wcwl_user_total_count_' . $user_id );
+		        wp_cache_delete( 'wishlist-user-total-count-' . $user_id, 'wishlists' );
 	        }
 
 	        do_action( 'yith_wcwl_added_to_wishlist', $prod_id, $wishlist_id, $user_id );
@@ -238,11 +237,10 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 	        $wishlist->remove_product( $prod_id );
 	        $wishlist->save();
 
-	        delete_transient( 'yith_wcwl_wishlist_count_' . $wishlist->get_token() );
+	        wp_cache_delete( 'wishlist-count-' . $wishlist->get_token(), 'wishlists' );
 
 	        if( $user_id = $wishlist->get_user_id() ) {
-		        delete_transient( 'yith_wcwl_user_default_count_' . $user_id );
-		        delete_transient( 'yith_wcwl_user_total_count_' . $user_id );
+		        wp_cache_delete( 'wishlist-user-total-count-' . $user_id );
 	        }
 
 	        do_action( 'yith_wcwl_removed_from_wishlist', $prod_id, $wishlist_id, $user_id );
@@ -304,12 +302,11 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 	        	return 0;
 	        }
 
-	        $transient_name = 'yith_wcwl_wishlist_count_' . $wishlist->get_token();
-	        $count = get_transient( $transient_name );
+	        $count = wp_cache_get( 'wishlist-count-' . $wishlist->get_token(), 'wishlists' );
 
 	        if( false === $count ){
 	        	$count = $wishlist->count_items();
-		        set_transient( $transient_name, $count, WEEK_IN_SECONDS );
+		        wp_cache_set( 'wishlist-count-' . $wishlist->get_token(), $count, 'wishlists' );
 	        }
 
 	        return $count;
@@ -322,7 +319,9 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
          * @since 2.0.12
          */
         public function count_all_products() {
-            $args = array();
+            $args = array(
+            	'wishlist_id' => 'all'
+            );
 
             if( is_user_logged_in() ){
             	$id = get_current_user_id();
@@ -333,9 +332,9 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 	            $args['session_id'] = $id;
             }
 
-	        if( false === $count = get_transient( 'yith_wcwl_user_total_count_' . $id ) ) {
+	        if( false === $count = wp_cache_get( 'wishlist-user-total-count-' . $id, 'wishlists' ) ) {
 		        $count = YITH_WCWL_Wishlist_Factory::get_wishlist_items_count( $args );
-		        set_transient( 'yith_wcwl_user_total_count_' . $id, $count, WEEK_IN_SECONDS );
+		        wp_cache_set( 'wishlist-user-total-count-' . $id, $count, 'wishlists' );
 	        }
 
 	        return $count;
