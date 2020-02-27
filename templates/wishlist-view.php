@@ -65,14 +65,14 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
         <th class="product-name">
             <span class="nobr">
-                <?php echo apply_filters( 'yith_wcwl_wishlist_view_name_heading', __( 'Product name', 'yith-woocommerce-wishlist' ) ) ?>
+                <?php echo apply_filters( 'yith_wcwl_wishlist_view_name_heading', __( 'Product name', 'yith-woocommerce-wishlist' ), $wishlist ) ?>
             </span>
         </th>
 
         <?php if( $show_price || $show_price_variations ) : $column_count ++; ?>
             <th class="product-price">
                 <span class="nobr">
-                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_price_heading', __( 'Unit price', 'yith-woocommerce-wishlist' ) ) ?>
+                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_price_heading', __( 'Unit price', 'yith-woocommerce-wishlist' ), $wishlist ) ?>
                 </span>
             </th>
         <?php endif; ?>
@@ -80,7 +80,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         <?php if( $show_quantity ) : $column_count ++; ?>
             <th class="product-quantity">
                 <span class="nobr">
-                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_quantity_heading', __( 'Quantity', 'yith-woocommerce-wishlist' ) ) ?>
+                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_quantity_heading', __( 'Quantity', 'yith-woocommerce-wishlist' ), $wishlist ) ?>
                 </span>
             </th>
         <?php endif;?>
@@ -88,7 +88,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         <?php if( $show_stock_status ) : $column_count ++; ?>
             <th class="product-stock-status">
                 <span class="nobr">
-                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_stock_heading', __( 'Stock status', 'yith-woocommerce-wishlist' ) ) ?>
+                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_stock_heading', __( 'Stock status', 'yith-woocommerce-wishlist' ), $wishlist ) ?>
                 </span>
             </th>
         <?php endif; ?>
@@ -100,7 +100,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         <?php if( $enable_drag_n_drop ): $column_count ++; ?>
             <th class="product-arrange">
                 <span class="nobr">
-                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_arrange_heading', __( 'Arrange', 'yith-woocommerce-wishlist' ) )?>
+                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_arrange_heading', __( 'Arrange', 'yith-woocommerce-wishlist' ), $wishlist )?>
                 </span>
             </th>
         <?php endif; ?>
