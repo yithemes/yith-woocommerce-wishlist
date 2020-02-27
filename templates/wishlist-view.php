@@ -222,6 +222,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	                        <?php do_action( 'yith_wcwl_table_product_before_add_to_cart', $item, $wishlist ); ?>
 
                             <!-- Add to cart button -->
+	                        <?php $show_add_to_cart = apply_filters( 'yith_wcwl_table_product_show_add_to_cart', $show_add_to_cart, $item, $wishlist ) ?>
                             <?php if( $show_add_to_cart && isset( $stock_status ) && $stock_status != 'out-of-stock' ): ?>
                                 <?php woocommerce_template_loop_add_to_cart( array( 'quantity' => $show_quantity ? $item->get_quantity() : 1 ) ); ?>
                             <?php endif ?>
@@ -229,6 +230,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	                        <?php do_action( 'yith_wcwl_table_product_after_add_to_cart', $item, $wishlist ); ?>
 
                             <!-- Change wishlist -->
+	                        <?php $move_to_another_wishlist = apply_filters( 'yith_wcwl_table_product_move_to_another_wishlist', $move_to_another_wishlist, $item, $wishlist ) ?>
                             <?php if( $move_to_another_wishlist && $available_multi_wishlist && count( $users_wishlists ) > 1 ): ?>
                                 <?php if( 'select' == $move_to_another_wishlist_type ): ?>
                                     <select class="change-wishlist selectBox">
