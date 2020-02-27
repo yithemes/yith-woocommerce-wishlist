@@ -58,7 +58,11 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         <?php endif; ?>
 
         <?php if( $show_remove_product ): $column_count ++; ?>
-            <th class="product-remove"></th>
+            <th class="product-remove">
+                <span class="nobr">
+                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_remove_heading', '', $wishlist )?>
+                </span>
+			</th>
         <?php endif; ?>
 
         <th class="product-thumbnail"></th>
@@ -94,7 +98,11 @@ if ( ! defined( 'YITH_WCWL' ) ) {
         <?php endif; ?>
 
         <?php if( $show_last_column ) : $column_count ++; ?>
-            <th class="product-add-to-cart"></th>
+            <th class="product-add-to-cart">
+                <span class="nobr">
+                    <?php echo apply_filters( 'yith_wcwl_wishlist_view_cart_heading', '', $wishlist )?>
+                </span>
+			</th>
         <?php endif; ?>
 
         <?php if( $enable_drag_n_drop ): $column_count ++; ?>
