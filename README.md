@@ -72,30 +72,11 @@ We're also working hard to release a developer guide; please, follow our [social
 
 ## Changelog
 
-### 3.0.0 - Released on 09 December 2019
+### 3.0.3 - Released on 12 December 2019
 
-* New: option to show Add to Wishlist button on loops
-* New: Add to Wishlist button style when placed over product image
-* New: Add to Wishlist button can now turn into Remove from Wishlist after addition
-* New: plugin will add variation to wishlist, if user selected one before pressing the button
-* New: option to load wishlist templates via Ajax
-* New: select add to wishlist icon and/or upload  custom image
-* New: guest wishlists are now stored on db, within session id
-* New: unified experience for guests and logged in users
-* Tweak: improved admin panel, and settings UX
-* Dev: code refactoring of the entire plugin
-* Dev: new YITH_WCWL_Wishlist and YITH_WCWL_Wishlist_Item objects
-* Dev: now using Data_store classes to handle db operations
-* Dev: added filter yith_wcwl_loop_positions
-* Dev: added filter yith_wcwl_custom_css_rules
-* Dev: added filter yith_wcwl_session_cookie
-* Dev: added filter yith_wcwl_item_formatted_price
-* Dev: added filter yith_wcwl_wishlist_formatted_title
-* Dev: added filter yith_wcwl_wishlist_get_items
-* Dev: added filter yith_wcwl_user_cannot_add_to_wishlist_message
-* Dev: added filter yith_wcwl_can_user_add_to_wishlist
-* Dev: added filters yith_wcwl_add_wishlist_{property}
-* Dev: added filters yith_wcwl_adding_to_wishlist_{property}
+* Tweak: prevent yith_setcookie to process if cookie name is not set
+* Tweak: refactored session class to set up session cookie name on demand, when needed (avoid empty cookie name)
+* Tweak: minor improvements to functions that require session (count_products, get_default_wishlist..) as a consequence of changes applied to session class
 
 ## Support
 

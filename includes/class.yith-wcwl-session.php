@@ -68,18 +68,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * Construct session class
 		 */
 		public function __construct() {
-			add_action( 'init', array( $this, 'init' ), 0 );
-		}
-
-		/**
-		 * Init hooks and session data.
-		 *
-		 * @since 3.0.0
-		 */
-		public function init() {
-			$this->_cookie = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
-
-			$this->init_session_cookie();
+			add_action( 'init', array( $this, 'init_session_cookie' ), 0 );
 		}
 
 		/**
@@ -136,7 +125,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 				'session_expiring' => $this->_session_expiring,
 				'cookie_hash' => $hash
 			);
-			yith_setcookie( $this->_cookie, $cookie_value, $this->_session_expiration );
+			yith_setcookie( $this->get_session_cookie_name(), $cookie_value, $this->_session_expiration );
 
 			// cookie has been set
 			$this->_has_cookie = true;
@@ -150,7 +139,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @return bool|array
 		 */
 		public function get_session_cookie() {
-			$cookie_value = yith_getcookie( $this->_cookie ); // @codingStandardsIgnoreLine.
+			$cookie_value = yith_getcookie( $this->get_session_cookie_name() ); // @codingStandardsIgnoreLine.
 
 			if ( empty( $cookie_value ) || ! is_array( $cookie_value ) ) {
 				return false;
@@ -169,6 +158,20 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			}
 
 			return $cookie_value;
+		}
+
+		/**
+		 * Returns name for the session cookie
+		 *
+		 * @return string
+		 * @since 3.0.3
+		 */
+		public function get_session_cookie_name() {
+			if( empty( $this->_cookie ) ){
+				$this->_cookie = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
+			}
+
+			return $this->_cookie;
 		}
 
 		/**
@@ -290,7 +293,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * Forget all session data without destroying it.
 		 */
 		public function forget_session() {
-			yith_destroycookie( $this->_cookie );
+			yith_destroycookie( $this->get_session_cookie_name() );
 
 			$this->_session_id = $this->generate_session_id();
 		}

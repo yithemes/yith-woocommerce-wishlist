@@ -267,7 +267,7 @@ if( !function_exists( 'yith_setcookie' ) ) {
      * @since 1.0.0
      */
     function yith_setcookie( $name, $value = array(), $time = null ) {
-    	if( ! apply_filters( 'yith_wcwl_set_cookie', true ) ){
+    	if( ! apply_filters( 'yith_wcwl_set_cookie', true ) || empty( $name ) ){
     		return false;
 	    }
 

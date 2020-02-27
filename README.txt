@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
 Tested up to: 5.3
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,12 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.0.3 - Released on 12 December 2019 =
+
+* Tweak: prevent yith_setcookie to process if cookie name is not set
+* Tweak: refactored session class to set up session cookie name on demand, when needed (avoid empty cookie name)
+* Tweak: minor improvements to functions that require session (count_products, get_default_wishlist..) as a consequence of changes applied to session class
 
 = 3.0.2 - Released on 10 December 2019 =
 
