@@ -72,18 +72,12 @@ We're also working hard to release a developer guide; please, follow our [social
 
 ## Changelog
 
-### 3.0.4 - Released on 19 December 2019
+### 3.0.5 - Released on 23 December 2019 =
 
-* Tweak: added isset on wishlist data store, to prevent notice
-* Tweak: removed transients for items count, to avoid load on wp-options table
-* Tweak: improved dependencies animation
-* Tweak: restored $atts variable inside template, for better compatibility with themes
-* Tweak: handling for redirect_to param in $_REQUEST for form-handler class
+* New: support for WooCommerce 3.9
 * Update: plugin framework
-* Fix: default variation not being added to wishlist
-* Fix: add default variation to wishlist when Ajax loading is enabled
-* Fix: count_all_products not retrieving correct number
-* Dev: added yith_wcwl_wishlist_delete_url filter
+* Tweak: register original product id instead of translated one, when saving item in DB
+* Fix: customer not being redirected to cart after clicking Add to Cart button in wishlist
 
 ## Support
 

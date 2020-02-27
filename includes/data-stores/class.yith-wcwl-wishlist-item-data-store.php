@@ -28,7 +28,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		public function create( &$item ) {
 			global $wpdb;
 
-			if( ! ( $product_id = $item->get_product_id() ) || ! ( $wishlist_id = $item->get_wishlist_id() ) ){
+			if( ! ( $product_id = $item->get_original_product_id() ) || ! ( $wishlist_id = $item->get_wishlist_id() ) ){
 				return;
 			}
 
@@ -152,7 +152,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				$values = array(
 					$item->get_quantity(),
 					$item->get_wishlist_id(),
-					$item->get_product_id(),
+					$item->get_original_product_id(),
 					$item->get_user_id(),
 					$item->get_position(),
 					$item->is_on_sale(),

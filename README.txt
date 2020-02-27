@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
 Tested up to: 5.3
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,7 +94,7 @@ Try to regenerate permalinks from Settings -> Permalinks by simply saving them a
 This might depend on the fact that your theme overrides plugin templates. Check if the developer of your theme has released a compatibility update with version 3.0 or later of YITH WooCommerce Wishlist. As an alternative you can try the plugin in WordPress default theme to leave out any possible influences by the theme.
 
 = I am currently using Wishlist plugin with Catalog Mode enabled in my site. Prices for products should disappear, yet they still appear in the wishlist page. Can I remove them? =
-Yes, of course you can. To avoid Wishlist page to show product prices, you can hide price column from wishlist table. Go to YIT plugins -> wishlist -> settings and disable option "Show Unit price".
+Yes, of course you can. To avoid Wishlist page to show product prices, you can hide price column from wishlist table. Go to YITH -> Wishlist -> Wishlist Page Options and disable option "Product price".
 
 == Screenshots ==
 
@@ -111,6 +111,13 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.0.5 - Released on 23 December 2019 =
+
+* New: support for WooCommerce 3.9
+* Update: plugin framework
+* Tweak: register original product id instead of translated one, when saving item in DB
+* Fix: customer not being redirected to cart after clicking Add to Cart button in wishlist
 
 = 3.0.4 - Released on 19 December 2019 =
 

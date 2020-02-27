@@ -111,13 +111,22 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		}
 
 		/**
+		 * Get origin product ID for current item (no WPML filtering)
+		 *
+		 * @return int Wishlist ID
+		 */
+		public function get_original_product_id( $context = 'view' ) {
+			return intval( $this->get_prop( 'product_id', $context ) );
+		}
+
+		/**
 		 * Get product ID for current item
 		 *
 		 * @param $context string Context
 		 * @return int Product ID
 		 */
 		public function get_product_id( $context = 'view' ) {
-			return yit_wpml_object_id( intval( $this->get_prop( 'product_id', $context ) ), 'product', true );
+			return yit_wpml_object_id( $this->get_original_product_id( $context ), 'product', true );
 		}
 
 		/**

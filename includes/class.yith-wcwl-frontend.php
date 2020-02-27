@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.4';
+		public $version = '3.0.5';
 
 		/**
 		 * Plugin database version
@@ -376,7 +376,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		public function get_localize() {
             return apply_filters( 'yith_wcwl_localize_script', array(
 	            'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),
-	            'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ) == 'yes',
+	            'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ),
 	            'multi_wishlist' => false,
 	            'hide_add_button' => apply_filters( 'yith_wcwl_hide_add_button', true ),
 	            'enable_ajax_loading' => 'yes' == get_option( 'yith_wcwl_ajax_enable', 'no' ),
