@@ -233,14 +233,18 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			$args = wp_parse_args( $args, $default );
 			extract( $args );
 
-			$hidden_products = yith_wcwl_get_hidden_products();
-
-			$sql = "SELECT SQL_CALC_FOUND_ROWS i.`ID`
+			$sql = "SELECT SQL_CALC_FOUND_ROWS i.*
                     FROM `{$wpdb->yith_wcwl_items}` AS i
                     LEFT JOIN {$wpdb->yith_wcwl_wishlists} AS l ON l.`ID` = i.`wishlist_id`
                     INNER JOIN {$wpdb->posts} AS p ON p.ID = i.prod_id 
                     WHERE 1 AND p.post_type IN ( %s, %s ) AND p.post_status = %s";
-			$sql .= $hidden_products ? " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . " )" : "";
+
+			// remove hidden products from result
+			$hidden_products = yith_wcwl_get_hidden_products();
+
+			if( ! empty( $hidden_products ) && apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ) {
+				$sql .= " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . " )";
+			}
 
 			$sql_args = array(
 				'product',
@@ -341,10 +345,30 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				$sql_args[] = $limit;
 			}
 
-			$items = $wpdb->get_col( $wpdb->prepare( $sql, $sql_args ) );
+			$items = $wpdb->get_results( $wpdb->prepare( $sql, $sql_args ) );
+
+			/**
+			 * This filter was added to allow developer remove hidden products using a foreach loop, instead of the query
+			 * It is required when the store contains a huge number of hidden products, and the resulting query would fail
+			 * to be submitted to DBMS because of its size
+			 *
+			 * This code requires reasonable amount of products in the wishlist
+			 * A great number of products retrieved from the main query could easily degrade performance of the overall system
+			 *
+			 * @since 3.0.7
+			 */
+			if( ! empty( $hidden_products ) && ! empty( $items ) && ! apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ){
+				foreach( $items as $item_id => $item ){
+					if( ! in_array( $item->prod_id, $hidden_products ) ){
+						continue;
+					}
+
+					unset( $items[ $item_id ] );
+				}
+			}
 
 			if( ! empty( $items ) ){
-				$items = array_map( array( 'YITH_WCWL_Wishlist_Factory', 'get_wishlist_item' ), $items );
+				$items = array_map( array( 'YITH_WCWL_Wishlist_Factory', 'get_wishlist_item' ), array_combine( wp_list_pluck( $items, 'prod_id' ), $items ) );
 			} else {
 				$items = array();
 			}

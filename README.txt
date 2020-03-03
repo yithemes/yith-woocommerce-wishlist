@@ -3,13 +3,13 @@
 Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
-Tested up to: 5.3
-Stable tag: 3.0.6
+Tested up to: 5.4
+Stable tag: 3.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
-WooCommerce 3.9.x compatible.
+WooCommerce 4.0.x compatible.
 
 == Description ==
 
@@ -112,9 +112,28 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 == Changelog ==
 
+= 3.0.7 - Released on 03 March 2020 =
+
+* New: support for WordPress 5.4
+* New: support for WooCommerce 4.0
+* New: improved checks on user capabilities
+* New: added wishlist widgets to Elementor
+* Update: plugin framework
+* Tweak: added check on user permission level for all wishlist actions
+* Tweak: escape output on templates
+* Fix: custom css not being loaded in the page
+* Fix: compatibility with YITH Infinite Scrolling when ajax loading is enabled
+* Fix: hide share section on wishlist page when "Share wishlist" option is disabled
+* Fix: assign correct css rule to border color for Wishlist Table
+* Dev: added yith_wcwl_reload_fragments trigger to refresh wishlist fragments
+* Dev: added yith_wcwl_remove_hidden_products_via_query filter
+* Dev: added yith_wcwl_show_add_to_wishlist filter, to allow dev selectively hide Add to Wishlist buttons
+* Dev: new actions on wishlist-view.php template (thanks to Jory)
+* Dev: added .editorconfig (thanks to Jory)
+
 = 3.0.6 – Released on 04 February 2020 =
 
-* Tweak: avoid guest redirect if wishlist page is set to my-account
+* Tweak: avoid redirect for guest users if wishlist page is set to my-account
 * Tweak: minor improvements to localization
 * Tweak: update wrong text domains
 * Tweak: changed default value for ATW icons

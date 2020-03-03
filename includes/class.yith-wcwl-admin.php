@@ -155,7 +155,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 				// update database
 				YITH_WCWL_Install()->update( $stored_db_version );
 				do_action( 'yith_wcwl_updated' );
-            }
+			}
 
 			// Plugin installed
 			do_action( 'yith_wcwl_installed' );
@@ -234,17 +234,17 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * Adds yith-disabled class
 		 * Adds class to fields when required, and when disabled state cannot be achieved any other way (eg. by dependencies)
 		 *
-         * @param $classes array Array of field extra classes
-         * @param $field array Array of field data
-         *
-         * @return array Filtered array of extra classes
+		 * @param $classes array Array of field extra classes
+		 * @param $field array Array of field data
+		 *
+		 * @return array Filtered array of extra classes
 		 */
 		public function mark_options_disabled( $classes, $field ) {
-            if( isset( $field['id'] ) && 'yith_wfbt_enable_integration' == $field['id'] && ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) ){
-                $classes[] = 'yith-disabled';
-            }
+			if( isset( $field['id'] ) && 'yith_wfbt_enable_integration' == $field['id'] && ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) ){
+				$classes[] = 'yith-disabled';
+			}
 
-            return $classes;
+			return $classes;
 		}
 
 		/**

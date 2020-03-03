@@ -58,43 +58,44 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			try {
 				YITH_WCWL()->add();
 
-				$return = 'true';
+				$return  = 'true';
 				$message = apply_filters( 'yith_wcwl_product_added_to_wishlist_message', get_option( 'yith_wcwl_product_added_text' ) );
-			}
-			catch( YITH_WCWL_Exception $e ){
-				$return = $e->getTextualCode();
+			} catch ( YITH_WCWL_Exception $e ) {
+				$return  = $e->getTextualCode();
 				$message = apply_filters( 'yith_wcwl_error_adding_to_wishlist_message', $e->getMessage() );
-			}
-			catch( Exception $e ){
-				$return = 'error';
+			} catch ( Exception $e ) {
+				$return  = 'error';
 				$message = apply_filters( 'yith_wcwl_error_adding_to_wishlist_message', $e->getMessage() );
 			}
 
-			$product_id = isset( $_REQUEST['add_to_wishlist'] ) ? intval( $_REQUEST['add_to_wishlist'] ) : false;
-			$fragments = isset( $_REQUEST['fragments'] ) ? $_REQUEST['fragments'] : false;
+			$product_id   = isset( $_REQUEST['add_to_wishlist'] ) ? intval( $_REQUEST['add_to_wishlist'] ) : false;
+			$fragments    = isset( $_REQUEST['fragments'] ) ? $_REQUEST['fragments'] : false;
 			$wishlist_url = YITH_WCWL()->get_last_operation_url();
 
 			$wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
+
 			$wishlists_to_prompt = array();
 
-			foreach(  $wishlists as $wishlist ){
+			foreach ( $wishlists as $wishlist ) {
 				$wishlists_to_prompt[] = array(
-					'id' => $wishlist->get_id(),
-					'wishlist_name' => $wishlist->get_formatted_name(),
-					'add_to_this_wishlist_url' => $product_id ? add_query_arg( array(
-						'add_to_wishlist' => $product_id,
-						'wishlist_id' => $wishlist->get_id()
-					) ) : ''
+					'id'                       => $wishlist->get_id(),
+					'wishlist_name'            => $wishlist->get_formatted_name(),
+					'add_to_this_wishlist_url' => $product_id ? add_query_arg(
+						array(
+							'add_to_wishlist' => $product_id,
+							'wishlist_id'     => $wishlist->get_id(),
+						)
+					) : '',
 				);
 			}
 
-			if( in_array( $return, array( 'exists', 'true' ) ) ){
+			if ( in_array( $return, array( 'exists', 'true' ) ) ) {
 				// search for related fragments
-				if( ! empty( $fragments ) && ! empty( $product_id ) ){
-					foreach( $fragments as $id => $options ){
-						if( strpos( $id, 'add-to-wishlist-' . $product_id ) ){
-							$fragments[ $id ]['wishlist_url'] = $wishlist_url;
-							$fragments[ $id ]['added_to_wishlist'] = $return == 'true';
+				if ( ! empty( $fragments ) && ! empty( $product_id ) ) {
+					foreach ( $fragments as $id => $options ) {
+						if ( strpos( $id, 'add-to-wishlist-' . $product_id ) ) {
+							$fragments[ $id ]['wishlist_url']      = $wishlist_url;
+							$fragments[ $id ]['added_to_wishlist'] = 'true' == $return;
 						}
 					}
 				}
@@ -102,12 +103,12 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 
 			wp_send_json(
 				apply_filters( 'yith_wcwl_ajax_add_return_params', array(
-					'prod_id' => $product_id,
-					'result' => $return,
-					'message' => $message,
-					'fragments' => self::refresh_fragments( $fragments ),
+					'prod_id'        => $product_id,
+					'result'         => $return,
+					'message'        => $message,
+					'fragments'      => self::refresh_fragments( $fragments ),
 					'user_wishlists' => $wishlists_to_prompt,
-					'wishlist_url' => $wishlist_url
+					'wishlist_url'   => $wishlist_url,
 				) )
 			);
 		}
@@ -118,18 +119,17 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 * @return void
 		 */
 		public static function remove_from_wishlist() {
-			try{
+			try {
 				YITH_WCWL()->remove();
 				$message = apply_filters( 'yith_wcwl_product_removed_text', __( 'Product successfully removed.', 'yith-woocommerce-wishlist' ) );
-			}
-			catch( Exception $e ){
+			} catch ( Exception $e ) {
 				$message = $e->getMessage();
 			}
 
 			wc_add_notice( $message );
 
 			wp_send_json( array(
-				'fragments' => self::refresh_fragments( isset( $_REQUEST['fragments'] ) ? $_REQUEST['fragments'] : false )
+				'fragments' => self::refresh_fragments( isset( $_REQUEST['fragments'] ) ? $_REQUEST['fragments'] : false ),
 			) );
 		}
 
@@ -142,20 +142,20 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 */
 		public static function delete_item() {
 			$item_id = isset( $_POST['item_id'] ) ? intval( $_POST['item_id'] ) : false;
-			$return = array(
-				'result' => false
+			$return  = array(
+				'result' => false,
 			);
 
-			if( $item_id ){
+			if ( $item_id ) {
 				$item = YITH_WCWL_Wishlist_Factory::get_wishlist_item( $item_id );
 
-				if( $item ){
+				if ( $item ) {
 					$item->delete();
 
 					$return = array(
-						'result' => true,
-						'message' => apply_filters( 'yith_wcwl_product_removed_text', __( 'Product successfully removed.', 'yith-woocommerce-wishlist' ) ),
-						'fragments' => YITH_WCWL_Ajax_Handler::refresh_fragments( isset( $_REQUEST['fragments'] ) ? $_REQUEST['fragments'] : false )
+						'result'    => true,
+						'message'   => apply_filters( 'yith_wcwl_product_removed_text', __( 'Product successfully removed.', 'yith-woocommerce-wishlist' ) ),
+						'fragments' => YITH_WCWL_Ajax_Handler::refresh_fragments( isset( $_REQUEST['fragments'] ) ? $_REQUEST['fragments'] : false ),
 					);
 				}
 			}
@@ -171,7 +171,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 */
 		public static function load_fragments() {
 			wp_send_json( array(
-				'fragments' => self::refresh_fragments( isset( $_POST['fragments'] ) ? $_POST['fragments'] : false )
+				'fragments' => self::refresh_fragments( isset( $_POST['fragments'] ) ? $_POST['fragments'] : false ),
 			) );
 		}
 
@@ -182,29 +182,27 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function reload_wishlist_and_adding_elem() {
-			$type_msg   = 'success';
+			$type_msg = 'success';
 
 			try {
 				YITH_WCWL()->add();
 				$message = apply_filters( 'yith_wcwl_product_added_to_wishlist_message', get_option( 'yith_wcwl_product_added_text' ) );
-			}
-			catch( YITH_WCWL_Exception $e ){
-				$message = $e->getMessage();
+			} catch ( YITH_WCWL_Exception $e ) {
+				$message  = $e->getMessage();
 				$type_msg = $e->getTextualCode();
-			}
-			catch( Exception $e ){
-				$message = $e->getMessage();
+			} catch ( Exception $e ) {
+				$message  = $e->getMessage();
 				$type_msg = 'error';
 			}
 
 			$wishlist_token = isset( $_REQUEST['wishlist_token'] ) ? $_REQUEST['wishlist_token'] : false;
 
 			$atts = array( 'wishlist_id' => $wishlist_token );
-			if( isset( $_REQUEST['pagination'] ) ){
+			if ( isset( $_REQUEST['pagination'] ) ) {
 				$atts['pagination'] = $_REQUEST['pagination'];
 			}
 
-			if( isset( $_REQUEST['per_page'] ) ){
+			if ( isset( $_REQUEST['per_page'] ) ) {
 				$atts['per_page'] = $_REQUEST['per_page'];
 			}
 
@@ -212,7 +210,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 
 			wc_add_notice( $message, $type_msg );
 
-			echo '<div>'. YITH_WCWL_Shortcode::wishlist( $atts ) . '</div>';
+			echo '<div>' . YITH_WCWL_Shortcode::wishlist( $atts ) . '</div>';
 
 			echo ob_get_clean();
 			die();
@@ -229,10 +227,10 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			global $yith_wcwl_is_mobile;
 
 			$fragments = isset( $_POST['fragments'] ) ? $_POST['fragments'] : false;
-			$result = array();
+			$result    = array();
 
-			if( ! empty( $fragments ) ){
-				foreach( $fragments as $id => $options ){
+			if ( ! empty( $fragments ) ) {
+				foreach ( $fragments as $id => $options ) {
 					$yith_wcwl_is_mobile = isset( $options['is_mobile'] ) ? 'yes' == $options['is_mobile'] : false;
 
 					$result = array_merge( $result, self::refresh_fragments( array( $id => $options ) ) );
@@ -240,7 +238,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			}
 
 			wp_send_json( array(
-				'fragments' => $result
+				'fragments' => $result,
 			) );
 		}
 
@@ -253,16 +251,16 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		public static function refresh_fragments( $fragments ) {
 			$result = array();
 
-			if( ! empty( $fragments ) ){
-				foreach( $fragments as $id => $options ){
+			if ( ! empty( $fragments ) ) {
+				foreach ( $fragments as $id => $options ) {
 					$options = YITH_WCWL_Frontend()->decode_fragment_options( $options );
-					$item = isset( $options['item'] ) ? $options['item'] : false;
+					$item    = isset( $options['item'] ) ? $options['item'] : false;
 
-					if( ! $item ){
+					if ( ! $item ) {
 						continue;
 					}
 
-					switch( $item ){
+					switch ( $item ) {
 						case 'add_to_wishlist':
 						case 'wishlist':
 							$result[ $id ] = YITH_WCWL_Shortcode::$item( $options );

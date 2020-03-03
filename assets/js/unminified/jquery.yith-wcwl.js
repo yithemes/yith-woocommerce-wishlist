@@ -197,6 +197,10 @@ jQuery( document ).ready( function( $ ){
 
         t.on( 'click', '.hide-title-form', hide_title_form );
 
+        t.on( 'click', '.save-title-form', submit_title_form );
+
+        t.on( 'change', '.wishlist_manage_table .wishlist-visibility', save_privacy );
+
         t.on( 'change', '.change-wishlist', function(){
             var t = $(this),
                 table = t.parents( '.cart.wishlist_table'),
@@ -482,6 +486,15 @@ jQuery( document ).ready( function( $ ){
             } );
         } );
 
+        t.on( 'yith_wcwl_reload_fragments', load_fragments );
+
+        t.on( 'yith_infs_added_elem', function( ev, elem ){
+            load_fragments( {
+                container: elem,
+                firstLoad: false
+            } );
+        } );
+
         t.on( 'yith_wcwl_fragments_loaded', function( ev ){
             $( '.variations_form' ).find( '.variations select' ).last().change();
         } );
@@ -756,7 +769,7 @@ jQuery( document ).ready( function( $ ){
      * @since 2.0.0
      */
     function init_wishlist_popup() {
-        if( ! yith_wcwl_l10n.enable_notices ){
+        if( typeof yith_wcwl_l10n.enable_notices != 'undefined' && ! yith_wcwl_l10n.enable_notices ){
             return;
         }
 
@@ -811,7 +824,7 @@ jQuery( document ).ready( function( $ ){
             return;
         }
 
-        $('.wishlist_table').each( function(){
+        $('.wishlist_table').filter('.sortable').not('.no-interactions').each( function(){
             var t = $(this),
                 jqxhr = false;
 
@@ -1268,7 +1281,7 @@ jQuery( document ).ready( function( $ ){
             title = t.parents( '.wishlist-title' );
         }
 
-        title.next().show();
+        title.next().show().find('input[type="text"]').focus();
         title.hide();
     }
 
@@ -1284,7 +1297,103 @@ jQuery( document ).ready( function( $ ){
         ev.preventDefault();
 
         t.parents( '.hidden-title-form').hide();
-        t.parents( '.hidden-title-form').prev().show ();
+        t.parents( '.hidden-title-form').prev().show();
+    }
+
+    /**
+     * Submit form to save a new wishlist title
+     *
+     * @param ev event
+     * @return void
+     * @since 2.0.7
+     */
+    function submit_title_form( ev ) {
+        var t = $(this),
+            form = t.closest( '.hidden-title-form' ),
+            row = t.closest( '[data-wishlist-id]' ),
+            wishlist_id = row.data( 'wishlist-id' ),
+            title_input = form.find( 'input[type="text"]' ),
+            new_title = title_input.val(),
+            data = {};
+
+        ev.preventDefault();
+
+        if( ! new_title ){
+            form.addClass('woocommerce-invalid');
+            title_input.focus();
+            return;
+        }
+
+        data = {
+            action: yith_wcwl_l10n.actions.save_title_action,
+            wishlist_id: wishlist_id,
+            title: new_title,
+            fragments: retrieve_fragments()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: yith_wcwl_l10n.ajax_url,
+            data: data,
+            dataType: 'json',
+            beforeSend: function(){
+                block( form );
+            },
+            complete: function(){
+                unblock( form );
+            },
+            success: function( response ) {
+                var fragments = response.fragments,
+                    status = response.result;
+
+                if( status ) {
+                    form.hide();
+                    form.prev().find('.wishlist-anchor').text( new_title ).end().show();
+                }
+                else{
+                    form.addClass( 'woocommerce-invalid' );
+                    title_input.focus();
+                }
+
+                if( typeof fragments != 'undefined' ){
+                    replace_fragments( fragments );
+                }
+            }
+        });
+    }
+
+    /**
+     * Submit form to save a new wishlist privacy
+     *
+     * @param ev event
+     * @return void
+     * @since 2.0.7
+     */
+    function save_privacy( ev ){
+        var t = $(this),
+            new_privacy = t.val(),
+            row = t.closest( '[data-wishlist-id]' ),
+            wishlist_id = row.data( 'wishlist-id' ),
+            data = {
+                action: yith_wcwl_l10n.actions.save_privacy_action,
+                wishlist_id: wishlist_id,
+                privacy: new_privacy,
+                fragments: retrieve_fragments()
+            };
+
+        $.ajax({
+            type: 'POST',
+            url: yith_wcwl_l10n.ajax_url,
+            data: data,
+            dataType: 'json',
+            success: function( response ) {
+                var fragments = response.fragments;
+
+                if( typeof fragments != 'undefined' ){
+                    replace_fragments( fragments );
+                }
+            }
+        });
     }
 
     /* === UTILS === */
@@ -1343,9 +1452,10 @@ jQuery( document ).ready( function( $ ){
      */
     function print_message( response_message ) {
         var msgPopup = $( '#yith-wcwl-popup-message' ),
-            msg = $( '#yith-wcwl-message' );
+            msg = $( '#yith-wcwl-message' ),
+            timeout = typeof yith_wcwl_l10n.popup_timeout != 'undefined' ? yith_wcwl_l10n.popup_timeout : 3000;
 
-        if( ! yith_wcwl_l10n.enable_notices ){
+        if( typeof yith_wcwl_l10n.enable_notices != 'undefined' && ! yith_wcwl_l10n.enable_notices ){
             return;
         }
 
@@ -1353,7 +1463,7 @@ jQuery( document ).ready( function( $ ){
         msgPopup.css( 'margin-left', '-' + $( msgPopup ).width() + 'px' ).fadeIn();
         window.setTimeout( function() {
             msgPopup.fadeOut();
-        }, yith_wcwl_l10n.popup_timeout );
+        }, timeout );
     }
 
     /**
@@ -1467,14 +1577,17 @@ jQuery( document ).ready( function( $ ){
      */
     function retrieve_fragments( search ) {
         var options = {},
-            fragments = $('.wishlist-fragment');
+            fragments = null;
 
         if( search ){
             if( typeof search === 'object' ){
                 search = $.extend( {
                     s: '',
+                    container: $(document),
                     firstLoad: false
                 }, search );
+
+                fragments = search.container.find( '.wishlist-fragment' );
 
                 if( search.s ){
                     fragments = fragments.not('[data-fragment-ref]').add(fragments.filter('[data-fragment-ref="' + search.s + '"]'));
@@ -1484,9 +1597,16 @@ jQuery( document ).ready( function( $ ){
                     fragments = fragments.filter( '.on-first-load' );
                 }
             }
-            else if( typeof search == 'string' || typeof search == 'number' ) {
-                fragments = fragments.not('[data-fragment-ref]').add(fragments.filter('[data-fragment-ref="' + search + '"]'));
+            else {
+                fragments = $('.wishlist-fragment');
+
+                if (typeof search == 'string' || typeof search == 'number') {
+                    fragments = fragments.not('[data-fragment-ref]').add(fragments.filter('[data-fragment-ref="' + search + '"]'));
+                }
             }
+        }
+        else{
+            fragments = $('.wishlist-fragment');
         }
 
         fragments.each( function(){
@@ -1502,16 +1622,19 @@ jQuery( document ).ready( function( $ ){
     /**
      * Load fragments on page loading
      *
+     * @param search string Ref to search among all fragments in the page
      * @since 3.0.0
      */
-    function load_fragments() {
+    function load_fragments( search ) {
         if( ! yith_wcwl_l10n.enable_ajax_loading ){
             return;
         }
 
-        var fragments = retrieve_fragments( {
+        search = $.extend( {
             firstLoad: true
-        } );
+        }, search );
+
+        var fragments = retrieve_fragments( search );
 
         if( ! fragments ){
             return;

@@ -144,16 +144,12 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Check if current user is owner of this wishlist (works both for authenticated users & guests)
 		 *
-		 * @param $current_user string|int Optional user identfier, in the form of a User ID or session id
+		 * @param $current_user string|int|bool Optional user identifier, in the form of a User ID or session id; false for default
 		 * @return bool
 		 */
 		public function is_current_user_owner( $current_user = false ) {
 			$user_id = $this->get_user_id();
 			$session_id = $this->get_session_id();
-
-			if( current_user_can( 'manage_woocommerce' ) ){
-				return true;
-			}
 
 			if( $current_user && ( $current_user == $user_id || $current_user == $session_id ) ){
 				return true;
@@ -168,6 +164,47 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 			}
 
 			return false;
+		}
+
+		/**
+		 * Check whether current user can perform a specific action on wishlist
+		 *
+		 * Accepted capabilities:
+		 * * view
+		 * * update_wishlist
+		 * * add_to_wishlist
+		 * * remove_from_wishlist
+		 * * move_to_another_wishlist
+		 * * ask_an_estimate
+		 * * sort_items
+		 * * update_quantity
+		 * * download_pdf
+		 *
+		 * @param $capability string Capability to check; default "view"
+		 * @param $current_user string|int|bool Optional user identifier, in the form of a User ID or session id; false for default
+		 * @return bool
+		 */
+		public function current_user_can( $capability = 'view', $current_user = false ) {
+			// admin can do anything by default
+			if( is_user_logged_in() && current_user_can( 'manage_woocommerce' ) && apply_filters( 'yith_wcwl_admin_can', true, $capability, $current_user, $this ) ){
+				return true;
+			}
+
+			// for other users, perform checks over capability required
+			switch( $capability ){
+				case 'view';
+					$can = $this->is_current_user_owner( $current_user );
+
+					if( ! $can && $this->has_privacy( array( 'public', 'shared' ) ) ){
+						$can = true;
+					}
+				break;
+				default:
+					$can = $this->is_current_user_owner( $current_user );
+				break;
+			}
+
+			return apply_filters( 'yith_wcwl_current_user_can', $can, $capability, $current_user, $this );
 		}
 
 		/* === GETTERS === */
@@ -202,6 +239,35 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 			$formatted_privacy = yith_wcwl_get_privacy_label( $privacy );
 
 			return apply_filters( 'yith_wcwl_wishlist_formatted_privacy', $formatted_privacy, $privacy, $this, $context );
+		}
+
+		/**
+		 * Checks if current wishlist has a specific privacy value
+		 * Method will accept both numeric privacy values and privacy labels
+		 *
+		 * @param $privacy int|string|array Privacy value (0|1|2) or label (public|shared|private), or array of acceptable values
+		 * @return bool Whether wishlist matched privacy test
+		 */
+		public function has_privacy ( $privacy ) {
+			$wishlist_privacy = $this->get_privacy( 'edit' );
+			$has_privacy = false;
+
+			if( is_array( $privacy ) && ! empty( $privacy ) ){
+				foreach( $privacy as $test_value ){
+					// return true if wishlist has any of the privacy value submitted
+					if( $this->has_privacy( $test_value ) ){
+						return true;
+					}
+				}
+			}
+			elseif( is_string( $privacy ) ){
+				$has_privacy = yith_wcwl_get_privacy_value( $privacy ) == $wishlist_privacy;
+			}
+			else{
+				$has_privacy = $privacy == $wishlist_privacy;
+			}
+
+			return $has_privacy;
 		}
 
 		/**

@@ -37,11 +37,11 @@ global $product;
 <!-- ADDED TO WISHLIST MESSAGE -->
 <div class="yith-wcwl-wishlistaddedbrowse">
 	<span class="feedback">
-        <?php echo $icon ?>
-        <?php echo $product_added_text ?>
-    </span>
+		<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo esc_html( $product_added_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	</span>
 	<a href="<?php echo esc_url( $wishlist_url )?>" rel="nofollow" data-title="<?php echo esc_attr( $browse_wishlist_text ) ?>">
-		<?php echo ( ! $is_single && 'before_image' == $loop_position ) ? $icon : false ?>
-		<?php echo apply_filters( 'yith-wcwl-browse-wishlist-label', $browse_wishlist_text, $product_id, $icon ) ?>
+		<?php echo ( ! $is_single && 'before_image' == $loop_position ) ? $icon : false; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo esc_html( apply_filters( 'yith-wcwl-browse-wishlist-label', $browse_wishlist_text, $product_id, $icon ) ); ?>
 	</a>
 </div>

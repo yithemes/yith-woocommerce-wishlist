@@ -378,21 +378,9 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 						$sql_args[] = 0;
 						$sql_args[] = 1;
 						break;
-					case 'public':
-						$sql .= " AND l.`wishlist_privacy` = %d";
-						$sql_args[] = 0;
-						break;
-					case 'shared':
-						$sql .= " AND l.`wishlist_privacy` = %d";
-						$sql_args[] = 1;
-						break;
-					case 'private':
-						$sql .= " AND l.`wishlist_privacy` = %d";
-						$sql_args[] = 2;
-						break;
 					default:
 						$sql .= " AND l.`wishlist_privacy` = %d";
-						$sql_args[] = 0;
+						$sql_args[] = yith_wcwl_get_privacy_value( $wishlist_visibility );
 						break;
 				}
 			}
@@ -578,7 +566,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 				// remove hidden products from result
 				$hidden_products = yith_wcwl_get_hidden_products();
-				if( ! empty( $hidden_products ) ){
+
+				if( ! empty( $hidden_products ) && apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ){
 					$query .= " AND prod_id NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . " )";
 				}
 
@@ -591,6 +580,26 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 					'product_variation',
 					'publish'
 				) ) );
+
+				/**
+				 * This filter was added to allow developer remove hidden products using a foreach loop, instead of the query
+				 * It is required when the store contains a huge number of hidden products, and the resulting query would fail
+				 * to be submitted to DBMS because of its size
+				 *
+				 * This code requires reasonable amount of products in the wishlist
+				 * A great number of products retrieved from the main query could easily degrade performance of the overall system
+				 *
+				 * @since 3.0.7
+				 */
+				if( ! empty( $hidden_products ) && ! empty( $items ) && ! apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ){
+					foreach( $items as $item_id => $item ){
+						if( ! in_array( $item->prod_id, $hidden_products ) ){
+							continue;
+						}
+
+						unset( $items[ $item_id ] );
+					}
+				}
 
 				foreach ( $items as $item ) {
 					wp_cache_set( 'item-' . $item->ID, $item, 'wishlist-items' );

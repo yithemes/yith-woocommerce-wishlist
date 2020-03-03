@@ -132,7 +132,8 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
             global $pagenow, $post_type, $taxonomy;
             $tabs = false;
 
-            if ( in_array( $pagenow, array( 'post.php', 'post-new.php', 'edit.php' ), true ) ) {
+            if ( in_array( $pagenow, array( 'post.php', 'post-new.php', 'edit.php' ), true )
+                 && !in_array( $post_type, array( 'product', 'page', 'post' ) ) ) {
                 $tabs = $this->get_post_type_tabs( $post_type );
             } else if ( in_array( $pagenow, array( 'edit-tags.php', 'term.php' ), true ) ) {
                 $tabs = $this->get_taxonomy_tabs( $taxonomy );
@@ -948,9 +949,9 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
          */
         function get_tab_title() {
             $yit_options = $this->get_main_array_options();
-            $current_tab = $this->get_current_tab();
+            $option_key  = $this->get_current_option_key();
 
-            foreach ( $yit_options[ $current_tab ] as $sections => $data ) {
+            foreach ( $yit_options[ $option_key ] as $sections => $data ) {
                 foreach ( $data as $option ) {
                     if ( isset( $option[ 'type' ] ) && $option[ 'type' ] == 'title' ) {
                         return $option[ 'name' ];
@@ -971,9 +972,9 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
          */
         function get_section_title( $section ) {
             $yit_options = $this->get_main_array_options();
-            $current_tab = $this->get_current_tab();
+            $option_key  = $this->get_current_option_key();
 
-            foreach ( $yit_options[ $current_tab ][ $section ] as $option ) {
+            foreach ( $yit_options[ $option_key ][ $section ] as $option ) {
                 if ( isset( $option[ 'type' ] ) && $option[ 'type' ] == 'section' ) {
                     return $option[ 'name' ];
                 }
@@ -992,9 +993,9 @@ if ( !class_exists( 'YIT_Plugin_Panel' ) ) {
          */
         function get_section_description( $section ) {
             $yit_options = $this->get_main_array_options();
-            $current_tab = $this->get_current_tab();
+            $option_key  = $this->get_current_option_key();
 
-            foreach ( $yit_options[ $current_tab ][ $section ] as $option ) {
+            foreach ( $yit_options[ $option_key ][ $section ] as $option ) {
                 if ( isset( $option[ 'type' ] ) && $option[ 'type' ] == 'section' && isset( $option[ 'desc' ] ) ) {
                     return '<p>' . $option[ 'desc' ] . '</p>';
                 }

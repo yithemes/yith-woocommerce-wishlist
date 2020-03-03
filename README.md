@@ -150,25 +150,24 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-### 3.0.6 – Released on 04 February 2020
+### 3.0.7 - Released on 03 March 2020
 
-* Tweak: avoid redirect for guest users if wishlist page is set to my-account
-* Tweak: minor improvements to localization
-* Tweak: update wrong text domains
-* Tweak: changed default value for ATW icons
-* Tweak: set wishlist session cookie JIT
-* Tweak: use secure cookie for sessions, when possible (thanks to Ahmed)
-* Tweak: improved cache handling for get_default_wishlist method
-* Tweak: even if system cannot set session cookie, calculate session_id and use it for the entire execution
-* Update: Italian language
+* New: support for WordPress 5.4
+* New: support for WooCommerce 4.0
+* New: improved checks on user capabilities
+* New: added wishlist widgets to Elementor
 * Update: plugin framework
-* Fix: prevent error if list doesn't exists
-* Fix: issue with wishlist_id query param
-* Fix: items query now search for product in original language
-* Fix: returning correct wishlist and user id to yith_wcwl_added_to_wishlist and yith_wcwl_removed_from_wishlist actions (thanks to danielbitzer)
-* Fix: issue with default value for yith_wcwl_positions option
-* Fix: added key name to avoid DB error during install or update procedure
-* Dev: added yith_wcwl_shortcode_share_link_url filter
+* Tweak: added check on user permission level for all wishlist actions
+* Tweak: escape output on templates
+* Fix: custom css not being loaded in the page
+* Fix: compatibility with YITH Infinite Scrolling when ajax loading is enabled
+* Fix: hide share section on wishlist page when "Share wishlist" option is disabled
+* Fix: assign correct css rule to border color for Wishlist Table
+* Dev: added yith_wcwl_reload_fragments trigger to refresh wishlist fragments
+* Dev: added yith_wcwl_remove_hidden_products_via_query filter
+* Dev: added yith_wcwl_show_add_to_wishlist filter, to allow dev selectively hide Add to Wishlist buttons
+* Dev: new actions on wishlist-view.php template (thanks to Jory)
+* Dev: added .editorconfig (thanks to Jory)
 
 ## Support
 

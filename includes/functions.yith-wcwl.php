@@ -12,95 +12,95 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 } // Exit if accessed directly
 
 if( !function_exists( 'yith_wcwl_is_wishlist' ) ){
-    /**
-     * Check if we're printing wishlist shortcode
-     *
-     * @return bool
-     * @since 2.0.0
-     */
-    function yith_wcwl_is_wishlist(){
-        global $yith_wcwl_is_wishlist;
+	/**
+	 * Check if we're printing wishlist shortcode
+	 *
+	 * @return bool
+	 * @since 2.0.0
+	 */
+	function yith_wcwl_is_wishlist(){
+		global $yith_wcwl_is_wishlist;
 
-        return $yith_wcwl_is_wishlist;
-    }
+		return $yith_wcwl_is_wishlist;
+	}
 }
 
 if( !function_exists( 'yith_wcwl_is_wishlist_page' ) ){
-    /**
-     * Check if current page is wishlist
-     *
-     * @return bool
-     * @since 2.0.13
-     */
-    function yith_wcwl_is_wishlist_page(){
-        $wishlist_page_id = yith_wcwl_object_id( get_option( 'yith_wcwl_wishlist_page_id' ) );
+	/**
+	 * Check if current page is wishlist
+	 *
+	 * @return bool
+	 * @since 2.0.13
+	 */
+	function yith_wcwl_is_wishlist_page(){
+		$wishlist_page_id = yith_wcwl_object_id( get_option( 'yith_wcwl_wishlist_page_id' ) );
 
-        if( ! $wishlist_page_id ){
-            return false;
-        }
+		if( ! $wishlist_page_id ){
+			return false;
+		}
 
-        return apply_filters( 'yith_wcwl_is_wishlist_page', is_page( $wishlist_page_id ) );
-    }
+		return apply_filters( 'yith_wcwl_is_wishlist_page', is_page( $wishlist_page_id ) );
+	}
 }
 
 if( !function_exists( 'yith_wcwl_locate_template' ) ) {
-    /**
-     * Locate the templates and return the path of the file found
-     *
-     * @param string $path
-     * @param array $var
-     * @return string
-     * @since 1.0.0
-     */
-    function yith_wcwl_locate_template( $path, $var = NULL ){
-        $woocommerce_base = WC()->template_path();
+	/**
+	 * Locate the templates and return the path of the file found
+	 *
+	 * @param string $path
+	 * @param array $var
+	 * @return string
+	 * @since 1.0.0
+	 */
+	function yith_wcwl_locate_template( $path, $var = NULL ){
+		$woocommerce_base = WC()->template_path();
 
-    	$template_woocommerce_path =  $woocommerce_base . $path;
-        $template_path = '/' . $path;
-        $plugin_path = YITH_WCWL_DIR . 'templates/' . $path;
+		$template_woocommerce_path =  $woocommerce_base . $path;
+		$template_path = '/' . $path;
+		$plugin_path = YITH_WCWL_DIR . 'templates/' . $path;
 
-    	$located = locate_template( array(
-            $template_woocommerce_path, // Search in <theme>/woocommerce/
-            $template_path,             // Search in <theme>/
-        ) );
+		$located = locate_template( array(
+			$template_woocommerce_path, // Search in <theme>/woocommerce/
+			$template_path,             // Search in <theme>/
+		) );
 
-        if( ! $located && file_exists( $plugin_path ) ){
-            return apply_filters( 'yith_wcwl_locate_template', $plugin_path, $path );
-        }
+		if( ! $located && file_exists( $plugin_path ) ){
+			return apply_filters( 'yith_wcwl_locate_template', $plugin_path, $path );
+		}
 
-        return apply_filters( 'yith_wcwl_locate_template', $located, $path );
-    }
+		return apply_filters( 'yith_wcwl_locate_template', $located, $path );
+	}
 }
 
 if( !function_exists( 'yith_wcwl_get_template' ) ) {
-    /**
-     * Retrieve a template file.
-     *
-     * @param string $path
-     * @param mixed $var
-     * @param bool $return
-     * @return string|void
-     * @since 1.0.0
-     */
-    function yith_wcwl_get_template( $path, $var = null, $return = false ) {
-        $located = yith_wcwl_locate_template( $path, $var );
+	/**
+	 * Retrieve a template file.
+	 *
+	 * @param string $path
+	 * @param mixed $var
+	 * @param bool $return
+	 * @return string|void
+	 * @since 1.0.0
+	 */
+	function yith_wcwl_get_template( $path, $var = null, $return = false ) {
+		$located = yith_wcwl_locate_template( $path, $var );
 
-        if ( $var && is_array( $var ) ) {
-        	$atts = $var;
-	        extract( $var );
-        }
+		if ( $var && is_array( $var ) ) {
+			$atts = $var;
+			extract( $var );
+		}
 
-        if( $return ) {
-        	ob_start();
-        }
+		if( $return ) {
+			ob_start();
+		}
 
-        // include file located
-        include( $located );
+		// include file located
+		include( $located );
 
-        if( $return ) {
-        	return ob_get_clean();
-        }
-    }
+		if( $return ) {
+			return ob_get_clean();
+		}
+	}
 }
 
 if( !function_exists( 'yith_wcwl_get_template_part' ) ) {
@@ -145,43 +145,43 @@ if( !function_exists( 'yith_wcwl_get_template_part' ) ) {
 }
 
 if( !function_exists( 'yith_wcwl_count_products' ) ) {
-    /**
-     * Retrieve the number of products in the wishlist.
-     *
-     * @param $wishlist_token string|bool Optional wishlist token
-     *
-     * @return int
-     * @since 1.0.0
-     */
-    function yith_wcwl_count_products( $wishlist_token = false ) {
-        return YITH_WCWL()->count_products( $wishlist_token );
-    }
+	/**
+	 * Retrieve the number of products in the wishlist.
+	 *
+	 * @param $wishlist_token string|bool Optional wishlist token
+	 *
+	 * @return int
+	 * @since 1.0.0
+	 */
+	function yith_wcwl_count_products( $wishlist_token = false ) {
+		return YITH_WCWL()->count_products( $wishlist_token );
+	}
 }
 
 if( !function_exists( 'yith_wcwl_count_all_products' ) ) {
-    /**
-     * Retrieve the number of products in all the wishlists.
-     *
-     * @return int
-     * @since 2.0.13
-     */
-    function yith_wcwl_count_all_products() {
-        return YITH_WCWL()->count_all_products();
-    }
+	/**
+	 * Retrieve the number of products in all the wishlists.
+	 *
+	 * @return int
+	 * @since 2.0.13
+	 */
+	function yith_wcwl_count_all_products() {
+		return YITH_WCWL()->count_all_products();
+	}
 }
 
 if( !function_exists( 'yith_wcwl_count_add_to_wishlist' ) ){
-    /**
-     * Count number of times a product was added to users wishlists
-     *
-     * @param $product_id int|bool Product id
-     *
-     * @return int Number of times the product was added to wishlists
-     * @since 2.0.13
-     */
-    function yith_wcwl_count_add_to_wishlist( $product_id = false ){
-        return YITH_WCWL()->count_add_to_wishlist( $product_id );
-    }
+	/**
+	 * Count number of times a product was added to users wishlists
+	 *
+	 * @param $product_id int|bool Product id
+	 *
+	 * @return int Number of times the product was added to wishlists
+	 * @since 2.0.13
+	 */
+	function yith_wcwl_count_add_to_wishlist( $product_id = false ){
+		return YITH_WCWL()->count_add_to_wishlist( $product_id );
+	}
 }
 
 if( !function_exists( 'yith_wcwl_get_count_text' ) ){
@@ -220,35 +220,35 @@ if( !function_exists( 'yith_wcwl_get_count_text' ) ){
 }
 
 if( !function_exists( 'yith_frontend_css_color_picker' ) ) {
-    /**
-     * Output a colour picker input box.
-     *
-     * This function is not of the plugin YITH WCWL. It is from WooCommerce.
-     * We redeclare it only because it is needed in the tab "Styles" where it is not available.
-     * The original function name is woocommerce_frontend_css_colorpicker and it is declared in
-     * wp-content/plugins/woocommerce/admin/settings/settings-frontend-styles.php
-     *
-     * @access public
-     * @deprecated
-     * @param mixed $name
-     * @param mixed $id
-     * @param mixed $value
-     * @param string $desc (default: '')
-     * @return void
-     */
-    function yith_frontend_css_color_picker( $name, $id, $value, $desc = '' ) {
-    	_deprecated_function( 'yith_frontend_css_color_picker', '3.0.0' );
+	/**
+	 * Output a colour picker input box.
+	 *
+	 * This function is not of the plugin YITH WCWL. It is from WooCommerce.
+	 * We redeclare it only because it is needed in the tab "Styles" where it is not available.
+	 * The original function name is woocommerce_frontend_css_colorpicker and it is declared in
+	 * wp-content/plugins/woocommerce/admin/settings/settings-frontend-styles.php
+	 *
+	 * @access public
+	 * @deprecated
+	 * @param mixed $name
+	 * @param mixed $id
+	 * @param mixed $value
+	 * @param string $desc (default: '')
+	 * @return void
+	 */
+	function yith_frontend_css_color_picker( $name, $id, $value, $desc = '' ) {
+		_deprecated_function( 'yith_frontend_css_color_picker', '3.0.0' );
 
-    	$value = ! empty( $value ) ? $value : '#ffffff';
+		$value = ! empty( $value ) ? $value : '#ffffff';
 
-        echo '<div  class="color_box">
-                  <table><tr><td>
-                  <strong>' . $name . '</strong>
-       		      <input name="' . esc_attr( $id ). '" id="' . $id . '" type="text" value="' . esc_attr( $value ) . '" class="colorpick colorpickpreview" style="background-color: ' . $value . '" /> <div id="colorPickerDiv_' . esc_attr( $id ) . '" class="colorpickdiv"></div>
-       		      </td></tr></table>
-       		  </div>';
+		echo '<div  class="color_box">
+				  <table><tr><td>
+				  <strong>' . $name . '</strong>
+				  <input name="' . esc_attr( $id ). '" id="' . $id . '" type="text" value="' . esc_attr( $value ) . '" class="colorpick colorpickpreview" style="background-color: ' . $value . '" /> <div id="colorPickerDiv_' . esc_attr( $id ) . '" class="colorpickdiv"></div>
+				  </td></tr></table>
+			  </div>';
 
-    }
+	}
 }
 
 if( !function_exists( 'yith_wcwl_get_cookie_expiration' ) ){
@@ -258,125 +258,125 @@ if( !function_exists( 'yith_wcwl_get_cookie_expiration' ) ){
 }
 
 if( !function_exists( 'yith_setcookie' ) ) {
-    /**
-     * Create a cookie.
-     *
-     * @param string $name
-     * @param mixed $value
-     * @param int $time
-     * @param bool $secure
-     * @param bool $httponly
-     * @return bool
-     * @since 1.0.0
-     */
-    function yith_setcookie( $name, $value = array(), $time = null, $secure = false, $httponly = false ) {
-    	if( ! apply_filters( 'yith_wcwl_set_cookie', true ) || empty( $name ) ){
-    		return false;
-	    }
+	/**
+	 * Create a cookie.
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 * @param int $time
+	 * @param bool $secure
+	 * @param bool $httponly
+	 * @return bool
+	 * @since 1.0.0
+	 */
+	function yith_setcookie( $name, $value = array(), $time = null, $secure = false, $httponly = false ) {
+		if( ! apply_filters( 'yith_wcwl_set_cookie', true ) || empty( $name ) ){
+			return false;
+		}
 
-	    $time = $time != null ? $time : time() + yith_wcwl_get_cookie_expiration();
+		$time = $time != null ? $time : time() + yith_wcwl_get_cookie_expiration();
 
-        $value = json_encode( stripslashes_deep( $value ) );
-        $expiration = apply_filters( 'yith_wcwl_cookie_expiration_time', $time ); // Default 30 days
+		$value = json_encode( stripslashes_deep( $value ) );
+		$expiration = apply_filters( 'yith_wcwl_cookie_expiration_time', $time ); // Default 30 days
 
-        $_COOKIE[ $name ] = $value;
-	    wc_setcookie( $name, $value, $expiration, $secure, $httponly );
+		$_COOKIE[ $name ] = $value;
+		wc_setcookie( $name, $value, $expiration, $secure, $httponly );
 
-	    return true;
-    }
+		return true;
+	}
 }
 
 if( !function_exists( 'yith_getcookie' ) ) {
-    /**
-     * Retrieve the value of a cookie.
-     *
-     * @param string $name
-     * @return mixed
-     * @since 1.0.0
-     */
-    function yith_getcookie( $name ) {
-        if( isset( $_COOKIE[$name] ) ) {
-	        return json_decode( stripslashes( $_COOKIE[$name] ), true );
-        }
+	/**
+	 * Retrieve the value of a cookie.
+	 *
+	 * @param string $name
+	 * @return mixed
+	 * @since 1.0.0
+	 */
+	function yith_getcookie( $name ) {
+		if( isset( $_COOKIE[$name] ) ) {
+			return json_decode( stripslashes( $_COOKIE[$name] ), true );
+		}
 
-        return array();
-    }
+		return array();
+	}
 }
 
 if( !function_exists ( 'yith_destroycookie' ) ) {
-    /**
-     * Destroy a cookie.
-     *
-     * @param string $name
-     * @return void
-     * @since 1.0.0
-     */
-    function yith_destroycookie( $name ) {
-        yith_setcookie( $name, array(), time() - 3600 );
-    }
-}
+	/**
+	 * Destroy a cookie.
+	 *
+	 * @param string $name
+	 * @return void
+	 * @since 1.0.0
+	 */
+	function yith_destroycookie( $name ) {
+		yith_setcookie( $name, array(), time() - 3600 );
+	}
+	}
 
-if( !function_exists( 'yith_wcwl_object_id' ) ){
-    /**
-     * Retrieve translated page id, if wpml is installed
-     *
-     * @param $id int Original page id
-     * @return int Translation id
-     * @since 1.0.0
-     */
-    function yith_wcwl_object_id( $id ){
-        if( function_exists( 'wpml_object_id_filter' ) ){
-            return wpml_object_id_filter( $id, 'page', true );
-        }
-        elseif( function_exists( 'icl_object_id' ) ){
-            return icl_object_id( $id, 'page', true );
-        }
-        else{
-            return $id;
-        }
-    }
+	if( !function_exists( 'yith_wcwl_object_id' ) ){
+	/**
+	 * Retrieve translated page id, if wpml is installed
+	 *
+	 * @param $id int Original page id
+	 * @return int Translation id
+	 * @since 1.0.0
+	 */
+	function yith_wcwl_object_id( $id ){
+		if( function_exists( 'wpml_object_id_filter' ) ){
+			return wpml_object_id_filter( $id, 'page', true );
+		}
+		elseif( function_exists( 'icl_object_id' ) ){
+			return icl_object_id( $id, 'page', true );
+		}
+		else{
+			return $id;
+		}
+	}
 }
 
 if( !function_exists( 'yith_wcwl_get_hidden_products' ) ){
-    /**
-     * Retrieves a list of hidden products, whatever WC version is running
-     *
-     * WC switched from meta _visibility to product_visibility taxonomy since version 3.0.0,
-     * forcing a split handling (Thank you, WC!)
-     *
-     * @return array List of hidden product ids
-     * @since 2.1.1
-     */
-    function yith_wcwl_get_hidden_products(){
-        if( version_compare( WC()->version, '3.0.0', '<' ) ){
-            $hidden_products = get_posts( array(
-	        	'post_type' => 'product',
-		        'post_status' => 'publish',
-		        'posts_per_page' => -1,
-		        'fields' => 'ids',
-		        'meta_query' => array(
-		        	array(
-		        		'key' => '_visibility',
-				        'value' => 'visible'
-			        )
-		        )
-	        ) );
-        }
-        else{
-            $hidden_products = wc_get_products( array(
-	            'limit' => -1,
-	            'status' => 'publish',
-	            'return' => 'ids',
-	            'visibility' => 'hidden'
-            ) );
-        }
+	/**
+	 * Retrieves a list of hidden products, whatever WC version is running
+	 *
+	 * WC switched from meta _visibility to product_visibility taxonomy since version 3.0.0,
+	 * forcing a split handling (Thank you, WC!)
+	 *
+	 * @return array List of hidden product ids
+	 * @since 2.1.1
+	 */
+	function yith_wcwl_get_hidden_products(){
+		if( version_compare( WC()->version, '3.0.0', '<' ) ){
+			$hidden_products = get_posts( array(
+				'post_type' => 'product',
+				'post_status' => 'publish',
+				'posts_per_page' => -1,
+				'fields' => 'ids',
+				'meta_query' => array(
+					array(
+						'key' => '_visibility',
+						'value' => 'visible'
+					)
+				)
+			) );
+		}
+		else{
+			$hidden_products = wc_get_products( array(
+				'limit' => -1,
+				'status' => 'publish',
+				'return' => 'ids',
+				'visibility' => 'hidden'
+			) );
+		}
 
-        /**
-         * array_filter was added to prevent errors when previous query returns for some reason just 0 index
-         * @since 2.2.6
-         */
-        return apply_filters( 'yith_wcwl_hidden_products', array_filter( $hidden_products ) );
-    }
+		/**
+		 * array_filter was added to prevent errors when previous query returns for some reason just 0 index
+		 * @since 2.2.6
+		 */
+		return apply_filters( 'yith_wcwl_hidden_products', array_filter( $hidden_products ) );
+	}
 }
 
 if( !function_exists( 'yith_wcwl_get_wishlist' ) ){
@@ -542,13 +542,39 @@ if( !function_exists( 'yith_wcwl_get_privacy_label' ) ){
 
 				if( $extended ){
 					$privacy_text = '<b>' . $privacy_text . '</b> - ';
-                    $privacy_text .= __( 'Anyone can search for and see this list', 'yith-woocommerce-wishlist' );
-                }
+					$privacy_text .= __( 'Anyone can search for and see this list', 'yith-woocommerce-wishlist' );
+				}
 
 				break;
 		}
 
 		return apply_filters( "yith_wcwl_{$privacy_label}_wishlist_visibility", $privacy_text, $extended );
+	}
+}
+
+if( !function_exists( 'yith_wcwl_get_privacy_value' ) ){
+	/**
+	 * Returns privacy numeric value
+	 *
+	 * @param $privacy_label string Privacy label
+	 * @return int Privacy value
+	 * @since 3.0.0
+	 */
+	function yith_wcwl_get_privacy_value( $privacy_label ) {
+
+		switch ( $privacy_label ) {
+			case 'shared':
+				$privacy_value = 1;
+				break;
+			case 'private':
+				$privacy_value = 2;
+				break;
+			default:
+				$privacy_value = 0;
+				break;
+		}
+
+		return $privacy_value;
 	}
 }
 

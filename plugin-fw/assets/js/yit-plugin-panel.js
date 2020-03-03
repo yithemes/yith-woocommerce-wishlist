@@ -157,4 +157,13 @@ jQuery( function ( $ ) {
     // prevents the WC message for changes when leaving the panel page
     $( '.yith-plugin-fw-panel .woo-nav-tab-wrapper' ).removeClass( 'woo-nav-tab-wrapper' ).addClass( 'yith-nav-tab-wrapper' );
 
+    var wrap    = $( '.wrap.yith-plugin-ui' ).first(),
+        notices = $( 'div.updated, div.error, div.notice' );
+
+    // prevent moving notices into the wrapper
+    notices.addClass( 'inline' );
+    if ( wrap.length ) {
+        wrap.prepend( notices );
+    }
+
 } );

@@ -27,10 +27,15 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			add_shortcode( 'yith_wcwl_wishlist', array( 'YITH_WCWL_Shortcode', 'wishlist' ) );
 			add_shortcode( 'yith_wcwl_add_to_wishlist', array( 'YITH_WCWL_Shortcode', 'add_to_wishlist' ) );
 
-            // register gutenberg blocks
+			// register gutenberg blocks
 			add_action( 'init', array( 'YITH_WCWL_Shortcode', 'register_gutenberg_blocks' ) );
 			add_action( 'yith_plugin_fw_gutenberg_before_do_shortcode', array( 'YITH_WCWL_Shortcode', 'fix_for_gutenberg_blocks' ), 10, 1 );
+
+			// register elementor widgets
+			add_action( 'init', array( 'YITH_WCWL_Shortcode', 'init_elementor_widgets' ) );
 		}
+
+		/* === GUTENBERG BLOCKS === */
 
 		/**
 		 * Register available gutenberg blocks
@@ -143,6 +148,39 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			}
 		}
 
+		/* === ELEMENTOR WIDGETS === */
+
+		/**
+		 * Register custom widgets for Elementor
+		 *
+		 * @return void
+		 */
+		public static function init_elementor_widgets() {
+			// check if elementor is active
+			if( ! defined( 'ELEMENTOR_VERSION' ) ){
+				return;
+			}
+
+			// include widgets
+			include_once( YITH_WCWL_INC . 'widgets/elementor/class.yith-wcwl-elementor-add-to-wishlist.php' );
+			include_once( YITH_WCWL_INC . 'widgets/elementor/class.yith-wcwl-elementor-wishlist.php' );
+
+			// register widgets
+			add_action( 'elementor/widgets/widgets_registered', array( 'YITH_WCWL_Shortcode', 'register_elementor_widgets' ) );
+		}
+
+		/**
+		 * Register Elementor Widgets
+		 *
+		 * @return void
+		 */
+		public static function register_elementor_widgets() {
+			\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new YITH_WCWL_Elementor_Add_to_Wishlist() );
+			\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new YITH_WCWL_Elementor_Wishlist() );
+		}
+
+		/* === SHORTCODES == */
+
 		/**
 		 * Print the wishlist HTML.
 		 *
@@ -204,7 +242,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			$additional_params = array(
 				// wishlist data
 				'wishlist' => false,
-				'is_default' => true,
+				'is_default' => true, // @deprecated since 3.0.7
 				'is_custom_list' => false,
 				'wishlist_token' => '',
 				'wishlist_id' => false,
@@ -263,7 +301,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			$wishlist = YITH_WCWL_Wishlist_Factory::get_current_wishlist( $atts );
 
-			if( $wishlist ){
+			if( $wishlist && $wishlist->current_user_can( 'view' ) ){
 				// set global wishlist token
 				$yith_wcwl_wishlist_token = $wishlist->get_token();
 
@@ -315,10 +353,10 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 					// wishlist data
 					'wishlist' => $wishlist,
 					'is_default' => $is_default,
-					'is_custom_list' => $is_user_owner && ! $no_interactions,
+					'is_custom_list' => $is_user_owner && ! $no_interactions, // @deprecated since 3.0.7
 					'wishlist_token' => $wishlist_token,
 					'wishlist_id' => $wishlist->get_id(),
-					'is_private' => $wishlist->get_privacy() == 2,
+					'is_private' => $wishlist->has_privacy( 'private' ),
 					'ajax_loading' => $ajax_loading,
 
 					//page data
@@ -328,16 +366,18 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 					// user data
 					'is_user_owner' => $is_user_owner,
+					'can_user_edit_title' => $wishlist->current_user_can( 'update_wishlist' ) && ! $no_interactions,
 
 					// view data
-					'show_remove_product' => $show_remove_product && $is_user_owner && ! $no_interactions,
-					'repeat_remove_button' => $repeat_remove_button && $is_user_owner && ! $no_interactions,
+					'show_remove_product' => $show_remove_product && $wishlist->current_user_can( 'remove_from_wishlist' ) && ! $no_interactions,
+					'repeat_remove_button' => $repeat_remove_button && $wishlist->current_user_can( 'remove_from_wishlist' ) && ! $no_interactions,
 
 					// template data
 					'form_action' => $wishlist->get_url()
 				), $additional_params );
 
 				// share options
+				$enable_share = get_option( 'yith_wcwl_enable_share' ) == 'yes' && ! $wishlist->has_privacy( 'private' );
 				$share_facebook_enabled = get_option( 'yith_wcwl_share_fb' ) == 'yes';
 				$share_twitter_enabled = get_option( 'yith_wcwl_share_twitter' ) == 'yes';
 				$share_pinterest_enabled = get_option( 'yith_wcwl_share_pinterest' ) == 'yes';
@@ -345,7 +385,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				$share_whatsapp_enabled = get_option( 'yith_wcwl_share_whatsapp' ) == 'yes';
 				$share_url_enabled = get_option( 'yith_wcwl_share_url' ) == 'yes';
 
-				if( ! $no_interactions && ( $share_facebook_enabled || $share_twitter_enabled || $share_pinterest_enabled || $share_email_enabled || $share_whatsapp_enabled || $share_url_enabled ) ){
+				if( ! $no_interactions && $enable_share && ( $share_facebook_enabled || $share_twitter_enabled || $share_pinterest_enabled || $share_email_enabled || $share_whatsapp_enabled || $share_url_enabled ) ){
 					$share_title = apply_filters( 'yith_wcwl_socials_share_title', __( 'Share on:', 'yith-woocommerce-wishlist' ) );
 					$share_link_url = apply_filters('yith_wcwl_shortcode_share_link_url',$wishlist->get_url(),$wishlist);
 					$share_links_title = apply_filters( 'plugin_text', urlencode( get_option( 'yith_wcwl_socials_title' ) ) );
