@@ -262,6 +262,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				// user data
 				'is_user_logged_in' => is_user_logged_in(),
 				'is_user_owner' => true,
+				'can_user_edit_title' => false,
 
 				// view data
 				'no_interactions' => $no_interactions,
