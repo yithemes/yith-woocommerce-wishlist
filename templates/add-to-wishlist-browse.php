@@ -38,7 +38,7 @@ global $product;
 <div class="yith-wcwl-wishlistexistsbrowse">
 	<span class="feedback">
 		<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<?php echo esc_html( $already_in_wishslist_text ); ?>
+		<?php echo wp_kses_post( $already_in_wishslist_text ); ?>
 	</span>
 	<a href="<?php echo esc_url( $wishlist_url ); ?>" rel="nofollow" data-title="<?php echo esc_attr( $browse_wishlist_text ); ?>">
 		<?php echo ( ! $is_single && 'before_image' == $loop_position ) ? $icon : false; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

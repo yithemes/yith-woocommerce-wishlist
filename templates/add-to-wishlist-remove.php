@@ -42,7 +42,7 @@ global $product;
 <div class="yith-wcwl-add-button">
 	<a href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist', $product_id, $base_url ) ); ?>" rel="nofollow" data-item-id="<?php echo esc_attr( $found_item->get_id() ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" class="delete_item <?php echo esc_attr( $link_classes ); ?>" data-title="<?php echo esc_attr( apply_filters( 'yith_wcwl_add_to_wishlist_title', $label ) ); ?>">
 		<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<?php echo esc_html( $label ); ?>
+		<?php echo wp_kses_post( $label ); ?>
 	</a>
 
 	<?php if( $show_view ): ?>
