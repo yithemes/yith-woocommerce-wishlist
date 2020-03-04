@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
 Tested up to: 5.4
-Stable tag: 3.0.7
+Stable tag: 3.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,12 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.0.8 - Released on 04 March 2020 =
+
+* Tweak: use wp_kses_post sanitization instead of esc_html for button labels to allow developers to add HTML to them
+* Tweak: minor improvements for OceanWP theme style
+* Fix: notice on empty wishlist page (thanks to ashimhastech)
 
 = 3.0.7 - Released on 03 March 2020 =
 

@@ -150,24 +150,11 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-### 3.0.7 - Released on 03 March 2020
+### 3.0.8 - Released on 04 March 2020
 
-* New: support for WordPress 5.4
-* New: support for WooCommerce 4.0
-* New: improved checks on user capabilities
-* New: added wishlist widgets to Elementor
-* Update: plugin framework
-* Tweak: added check on user permission level for all wishlist actions
-* Tweak: escape output on templates
-* Fix: custom css not being loaded in the page
-* Fix: compatibility with YITH Infinite Scrolling when ajax loading is enabled
-* Fix: hide share section on wishlist page when "Share wishlist" option is disabled
-* Fix: assign correct css rule to border color for Wishlist Table
-* Dev: added yith_wcwl_reload_fragments trigger to refresh wishlist fragments
-* Dev: added yith_wcwl_remove_hidden_products_via_query filter
-* Dev: added yith_wcwl_show_add_to_wishlist filter, to allow dev selectively hide Add to Wishlist buttons
-* Dev: new actions on wishlist-view.php template (thanks to Jory)
-* Dev: added .editorconfig (thanks to Jory)
+* Tweak: use wp_kses_post sanitization instead of esc_html for button labels to allow developers to add HTML to them
+* Tweak: minor improvements for OceanWP theme style
+* Fix: notice on empty wishlist page (thanks to ashimhastech)
 
 ## Support
 
