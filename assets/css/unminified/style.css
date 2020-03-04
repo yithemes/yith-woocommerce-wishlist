@@ -1286,61 +1286,75 @@ table.wishlist_manage_table tfoot td{
 
 /* === 24. LISTS WIDGET === */
 
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown li,
 .widget_yith-wcwl-lists ul.dropdown li{
     padding: 0;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown > li a,
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown ul.lists > li a,
 .widget_yith-wcwl-lists ul.dropdown > li a,
 .widget_yith-wcwl-lists ul.dropdown ul.lists > li a{
     display: block;
     padding: 5px 15px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown ul.lists > li a,
 .widget_yith-wcwl-lists ul.dropdown ul.lists > li a{
     padding: 5px 25px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown > li.lists-section,
 .widget_yith-wcwl-lists ul.dropdown > li.lists-section{
     border-bottom: 1px solid #e7e7e7;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown ul.lists,
 .widget_yith-wcwl-lists ul.dropdown ul.lists{
     margin: 0;
 }
 
 /* === 25. ITEMS WIDGET === */
 
+.elementor-widget-wp-widget-yith-wcwl-items .mini,
 .widget_yith-wcwl-items .mini{
     position: relative;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .heading,
 .widget_yith-wcwl-items .heading {
     text-align: center;
     cursor: pointer;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .mini .heading,
 .widget_yith-wcwl-items .mini .heading{
     display: inline-block;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .heading a,
 .widget_yith-wcwl-items .heading a {
     color: inherit;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .extended .heading .items-counter,
 .widget_yith-wcwl-items .extended .heading .items-counter{
     position: relative;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .extended .heading .items-counter i,
 .widget_yith-wcwl-items .extended .heading .items-counter i{
     font-size: 70px;
     position: relative;
     margin-bottom: 10px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .mini .heading .items-counter i,
 .widget_yith-wcwl-items .mini .heading .items-counter i{
     font-size: 30px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .extended .heading .items-counter .items-count,
 .widget_yith-wcwl-items .extended .heading .items-counter .items-count{
     display: block;
     position: absolute;
@@ -1352,10 +1366,12 @@ table.wishlist_manage_table tfoot td{
     font-size: 1rem;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .mini .heading .items-counter .items-count,
 .widget_yith-wcwl-items .mini .heading .items-counter .items-count{
     font-size: 1rem;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .extended .heading h3:after,
 .widget_yith-wcwl-items .extended .heading h3:after{
     content: '';
     display: block;
@@ -1365,6 +1381,7 @@ table.wishlist_manage_table tfoot td{
     margin: 10px auto;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .mini .list,
 .widget_yith-wcwl-items .mini .list{
     position: absolute;
     z-index: 1;
@@ -1378,30 +1395,39 @@ table.wishlist_manage_table tfoot td{
     box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .mini:hover .list,
 .widget_yith-wcwl-items .mini:hover .list{
     display: block;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget,
 .widget_yith-wcwl-items ul.product_list_widget{
     margin-bottom: 40px!important;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items p.empty-wishlist,
 .widget_yith-wcwl-items p.empty-wishlist{
     margin-bottom: 0!important;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .mini ul.product_list_widget,
 .widget_yith-wcwl-items .mini ul.product_list_widget{
     margin-left: -20px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li,
 .widget_yith-wcwl-items ul.product_list_widget li{
     display: table;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li:not(:last-child),
 .widget_yith-wcwl-items ul.product_list_widget li:not(:last-child){
     margin-bottom: 10px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .remove_from_all_wishlists,
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .image-thumb,
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .mini-cart-item-info,
 .widget_yith-wcwl-items ul.product_list_widget li .remove_from_all_wishlists,
 .widget_yith-wcwl-items ul.product_list_widget li .image-thumb,
 .widget_yith-wcwl-items ul.product_list_widget li .mini-cart-item-info{
@@ -1409,38 +1435,47 @@ table.wishlist_manage_table tfoot td{
     vertical-align: middle;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .remove_from_all_wishlists,
 .widget_yith-wcwl-items ul.product_list_widget li .remove_from_all_wishlists{
     font-size: 1.2rem;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .image-thumb img.
 .widget_yith-wcwl-items ul.product_list_widget li .image-thumb img{
     margin-left: 10px;
     max-width: 40px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .mini-cart-item-info,
 .widget_yith-wcwl-items ul.product_list_widget li .mini-cart-item-info{
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .mini-cart-item-info a,
 .widget_yith-wcwl-items ul.product_list_widget li .mini-cart-item-info a{
     display: inline-block;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .mini-cart-item-info > *,
 .widget_yith-wcwl-items ul.product_list_widget li .mini-cart-item-info > * {
     display: block;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .show-wishlist,
+.elementor-widget-wp-widget-yith-wcwl-items a.add_all_to_cart,
 .widget_yith-wcwl-items .show-wishlist,
 .widget_yith-wcwl-items a.add_all_to_cart{
     display: block!important;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items .show-wishlist,
 .widget_yith-wcwl-items .show-wishlist{
     margin-bottom: 10px;
 }
 
+.elementor-widget-wp-widget-yith-wcwl-items a.add_all_to_cart,
 .widget_yith-wcwl-items a.add_all_to_cart{
     text-align: center;
 }
