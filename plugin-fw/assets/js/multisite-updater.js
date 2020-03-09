@@ -10,7 +10,7 @@
 
     var plugins_menu_item = $( '#menu-plugins' ),
         update            = plugins_menu_item.find( '.update-plugins' ),
-        count             = update.find( ".update-count" ).text(),
+        count             = update.find( ".plugin-count" ).text(),
         registered        = plugins.registered,
         activated         = plugins.activated;
 

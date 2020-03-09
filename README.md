@@ -150,11 +150,11 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-### 3.0.8 - Released on 04 March 2020
+### 3.0.9 - Released on 09 March 2020
 
-* Tweak: use wp_kses_post sanitization instead of esc_html for button labels to allow developers to add HTML to them
-* Tweak: minor improvements for OceanWP theme style
-* Fix: notice on empty wishlist page (thanks to ashimhastech)
+* Tweak: use wp_kses_post instead of esc_html for browse wishlist text
+* Update: plugin framework
+
 
 ## Support
 
