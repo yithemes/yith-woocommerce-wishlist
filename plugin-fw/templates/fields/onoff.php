@@ -21,8 +21,8 @@ extract( $field );
         <?php echo $custom_attributes ?>
     />
     <span class="yith-plugin-fw-onoff"
-          data-text-on="<?php echo esc_attr_x( 'ON', 'ON/OFF button: use MAX 3 characters!', 'yith-plugin-fw' ); ?>"
-          data-text-off="<?php echo esc_attr_x( 'OFF', 'ON/OFF button: use MAX 3 characters!', 'yith-plugin-fw' ); ?>"></span>
+          data-text-on="<?php echo esc_attr_x( 'YES', 'YES/NO button: use MAX 3 characters!', 'yith-plugin-fw' ); ?>"
+          data-text-off="<?php echo esc_attr_x( 'NO', 'YES/NO button: use MAX 3 characters!', 'yith-plugin-fw' ); ?>"></span>
 </div>
 <?php
 if ( isset( $field[ 'desc-inline' ] ) ) {

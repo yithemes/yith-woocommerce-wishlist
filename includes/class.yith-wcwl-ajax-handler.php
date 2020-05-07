@@ -60,6 +60,15 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 
 				$return  = 'true';
 				$message = apply_filters( 'yith_wcwl_product_added_to_wishlist_message', get_option( 'yith_wcwl_product_added_text' ) );
+
+				// append view and close links.
+				if ( apply_filters( 'yith_wcwl_show_popup_links', YITH_WCWL()->is_multi_wishlist_enabled() ) ) {
+					$message .= '<p class="after-links">
+					<a href="' . YITH_WCWL()->get_last_operation_url() . '">' . __( 'View &rsaquo;', 'yith-woocommerce-wishlist' ) . '</a>
+					<span class="separator">' . __( 'or', 'yith-woocommerce-wishlist' ) . '</span>
+					<a href="#" class="close-popup">' . __( 'Close', 'yith-woocommerce-wishlist' ) . '</a>
+					</p>';
+				}
 			} catch ( YITH_WCWL_Exception $e ) {
 				$return  = $e->getTextualCode();
 				$message = apply_filters( 'yith_wcwl_error_adding_to_wishlist_message', $e->getMessage() );
@@ -126,7 +135,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				$message = $e->getMessage();
 			}
 
-			wc_add_notice( $message );
+			yith_wcwl_add_notice( $message );
 
 			wp_send_json( array(
 				'fragments' => self::refresh_fragments( isset( $_REQUEST['fragments'] ) ? $_REQUEST['fragments'] : false ),
@@ -195,24 +204,24 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				$type_msg = 'error';
 			}
 
-			$wishlist_token = isset( $_REQUEST['wishlist_token'] ) ? $_REQUEST['wishlist_token'] : false;
+			$wishlist_token = isset( $_REQUEST['wishlist_token'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wishlist_token'] ) ) : false;
 
 			$atts = array( 'wishlist_id' => $wishlist_token );
 			if ( isset( $_REQUEST['pagination'] ) ) {
-				$atts['pagination'] = $_REQUEST['pagination'];
+				$atts['pagination'] = sanitize_text_field( wp_unslash( $_REQUEST['pagination'] ) );
 			}
 
 			if ( isset( $_REQUEST['per_page'] ) ) {
-				$atts['per_page'] = $_REQUEST['per_page'];
+				$atts['per_page'] = intval( $_REQUEST['per_page'] );
 			}
 
 			ob_start();
 
-			wc_add_notice( $message, $type_msg );
+			yith_wcwl_add_notice( $message, $type_msg );
 
-			echo '<div>' . YITH_WCWL_Shortcode::wishlist( $atts ) . '</div>';
+			echo '<div>' . YITH_WCWL_Shortcode::wishlist( $atts ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-			echo ob_get_clean();
+			echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			die();
 
 		}

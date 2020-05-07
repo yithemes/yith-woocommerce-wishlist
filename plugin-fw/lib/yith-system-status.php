@@ -129,7 +129,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		public function add_submenu_page() {
 
 			$system_info  = get_option( 'yith_system_info', array() );
-			$error_notice = ( $system_info['errors'] === true ? ' <span class="yith-system-info-menu update-plugins">!</span>' : '' );
+			$error_notice = ( isset( $system_info['errors'] ) && $system_info['errors'] === true ? ' <span class="yith-system-info-menu update-plugins">!</span>' : '' );
 			$settings     = array(
 				'parent_page' => 'yith_plugin_panel',
 				'page_title'  => __( 'System Status', 'yith-plugin-fw' ),

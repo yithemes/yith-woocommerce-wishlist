@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.9';
+		public $version = '3.0.10';
 
 		/**
 		 * Plugin database version
@@ -393,6 +393,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				'enable_ajax_loading' => 'yes' == get_option( 'yith_wcwl_ajax_enable', 'no' ),
 				'ajax_loader_url' => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
 				'remove_from_wishlist_after_add_to_cart' => get_option( 'yith_wcwl_remove_after_add_to_cart' ) == 'yes',
+				'is_wishlist_responsive' => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
 				'labels' => array(
 					'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
 					'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) )

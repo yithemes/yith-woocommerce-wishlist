@@ -28,6 +28,10 @@ return apply_filters( 'yith_wcwl_list_options', array(
 			'list_table_class' => 'YITH_WCWL_Admin_Table',
 			'list_table_class_dir' => YITH_WCWL_INC . 'tables/class.yith-wcwl-admin-table.php',
 			'title' => __( 'Wishlists', 'yith-woocommerce-wishlist' ),
+			'search_form' => array(
+				'text' => __( 'Search list', 'yith-woocommerce-wishlist' ),
+				'input_id' => 'search_list'
+			),
 			'id' => 'wishlist-filter'
 		),
 

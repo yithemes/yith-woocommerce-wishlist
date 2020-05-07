@@ -108,13 +108,13 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 <?php do_action( 'yith_wcwl_after_wishlist_form', $wishlist ); ?>
 
 <?php
-if ( apply_filters( 'yith_wcwl_ask_an_estimate_conditions', $show_ask_estimate_button && ( ! is_user_logged_in() || $additional_info ) ) ) {
+if ( apply_filters( 'yith_wcwl_ask_an_estimate_conditions', $wishlist && $show_ask_estimate_button && ( ! is_user_logged_in() || $additional_info ) ) ) {
 	yith_wcwl_get_template( 'wishlist-popup-ask-an-estimate.php', $var );
 }
 ?>
 
 <?php
-if ( apply_filters( 'yith_wcwl_move_to_another_wishlist_popup_conditions', $move_to_another_wishlist && 'popup' === $move_to_another_wishlist_type && $available_multi_wishlist && count( $users_wishlists ) > 1, $wishlist ) ) {
+if ( apply_filters( 'yith_wcwl_move_to_another_wishlist_popup_conditions', $wishlist && $move_to_another_wishlist && 'popup' === $move_to_another_wishlist_type && $available_multi_wishlist && count( $users_wishlists ) > 1, $wishlist ) ) {
 	yith_wcwl_get_template( 'wishlist-popup-move.php', $var );
 }
 ?>

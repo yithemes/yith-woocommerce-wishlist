@@ -46,7 +46,12 @@
     margin-right : 15px;
 }
 
-.yith-plugin-fw-panel-custom-tab-container > h2 {
+.yith-plugin-ui .yith-plugin-fw-panel-custom-tab-container{
+    border: 1px solid #ddd;
+    border-top   : 0;
+}
+
+.yith-plugin-ui .yith-plugin-fw-panel-custom-tab-container > h2 {
     border  : none;
     padding : 15px 0;
 }
@@ -124,7 +129,7 @@
     cursor           : pointer;
     background-color : #375f6b;
     color            : #fff;
-    margin-left: 10px !important;
+    margin-left      : 10px !important;
 }
 
 .yith-plugin-fw-wp-page-wrapper .wrap a.page-title-action:hover {

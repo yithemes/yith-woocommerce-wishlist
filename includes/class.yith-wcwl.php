@@ -181,6 +181,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			$item->set_product_id( $prod_id );
 			$item->set_quantity( $quantity );
+			$item->set_wishlist_id( $wishlist->get_id() );
+			$item->set_user_id( $wishlist->get_user_id() );
 
 			if( $dateadded ){
 				$item->set_date_added( $dateadded );

@@ -219,7 +219,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 							</div>
 						<?php endif; ?>
 
-						<?php if ( $show_remove_product ): ?>
+						<?php if ( $show_remove_product || $repeat_remove_button ): ?>
 							<div class="product-remove">
 								<a href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist', $item->get_product_id() ) ); ?>" class="remove_from_wishlist" title="<?php echo esc_html( apply_filters( 'yith_wcwl_remove_product_wishlist_message_title', __( 'Remove this product', 'yith-woocommerce-wishlist' ) ) ); ?>"><i class="fa fa-trash"></i></a>
 							</div>

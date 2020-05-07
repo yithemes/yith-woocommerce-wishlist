@@ -33,9 +33,9 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
 	if ( ! empty( $page_title ) ) :
 		?>
-		<div class="wishlist-title <?php echo ( $can_user_edit_title ) ? 'wishlist-title-with-form' : ''; ?>">
+			<div class="wishlist-title <?php echo ( $can_user_edit_title ) ? 'wishlist-title-with-form' : ''; ?>">
 			<?php echo apply_filters( 'yith_wcwl_wishlist_title', '<h2>' . esc_html( $page_title ) . '</h2>' ); ?>
-			<?php if( $can_user_edit_title ): ?>
+			<?php if ( $can_user_edit_title ) : ?>
 				<a class="btn button show-title-form">
 					<?php echo apply_filters( 'yith_wcwl_edit_title_icon', '<i class="fa fa-pencil"></i>' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					<?php esc_html_e( 'Edit title', 'yith-woocommerce-wishlist' ); ?>
@@ -52,7 +52,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 				</a>
 			</div>
 		<?php endif; ?>
-	<?php
+		<?php
 	endif;
 
 	do_action( 'yith_wcwl_before_wishlist', $wishlist );

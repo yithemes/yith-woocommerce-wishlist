@@ -22,7 +22,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 		),
 
 		'after_add_to_wishlist_behaviour' => array(
-			'name'      => __( 'When product is added to wishlist', 'yith-woocommerce-wishlist' ),
+			'name'      => __( 'After product is added to wishlist', 'yith-woocommerce-wishlist' ),
 			'desc'      => __( 'Choose the look of the Wishlist button when the product has already been added to a wishlist', 'yith-woocommerce-wishlist' ),
 			'id'        => 'yith_wcwl_after_add_to_wishlist_behaviour',
 			'options'   => array_merge(

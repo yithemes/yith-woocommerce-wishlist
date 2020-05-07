@@ -4,10 +4,11 @@ var uglify = require('gulp-uglify');
 var wpPot = require('gulp-wp-pot');
 var poSync = require('gulp-po-sync');
 var po2mo = require('gulp-po2mo');
+var jshint = require('gulp-jshint');
 
 /* Task to compile less */
 
-var minify_css = function () {
+var minifyCss = function () {
     return gulp.src('assets/css/unminified/*.css')
         .pipe(cleanCSS({debug: true}, (details) => {
             console.log(`${details.name}: ${details.stats.originalSize}kb => ${details.stats.minifiedSize} kb`);
@@ -15,7 +16,7 @@ var minify_css = function () {
         .pipe(gulp.dest('./assets/css/'));
 };
 
-var minify_themes_css = function () {
+var minifyThemesCss = function () {
     return gulp.src('assets/css/unminified/themes/*.css')
         .pipe(cleanCSS({debug: true}, (details) => {
             console.log(`${details.name}: ${details.stats.originalSize}kb => ${details.stats.minifiedSize} kb`);
@@ -23,13 +24,13 @@ var minify_themes_css = function () {
         .pipe(gulp.dest('./assets/css/themes/'));
 };
 
-var minify_main_js = function () {
+var minifyMainJs = function () {
     return gulp.src('./assets/js/unminified/jquery.yith-wcwl.js')
         .pipe(uglify())
         .pipe(gulp.dest('./assets/js/'))
 };
 
-var minify_admin_js = function () {
+var minifyAdminJs = function () {
     return gulp.src('./assets/js/unminified/admin/yith-wcwl.js')
         .pipe(uglify())
         .pipe(gulp.dest('./assets/js/admin/'))
@@ -46,7 +47,7 @@ var updatePot = function () {
                 "Project-Id-Version": "YITH WooCommerce Wishlist Premium",
                 "Content-Type": "text/plain; charset=UTF-8",
                 "Language-Team": "YITH <plugins@yithemes.com>",
-                "X-Poedit-KeywordsList": "__;_e;_n:1,2;__ngettext:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2",
+                "X-Poedit-KeywordsList": "__;_e;_n:1,2;__ngettext:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;esc_attr__;esc_attr_e;esc_html__;esc_html_e",
                 "X-Poedit-Basepath": "..",
                 "X-Poedit-SearchPath-0": ".",
                 "X-Poedit-SearchPathExcluded-0": "plugin-fw",
@@ -69,9 +70,16 @@ var updateMo = function () {
         .pipe(gulp.dest('./languages'));
 };
 
-exports.minify_js = gulp.series(minify_main_js, minify_admin_js);
-exports.minify = gulp.series(minify_css, minify_themes_css);
+var validateJs = function () {
+    return gulp.src('./assets/js/unminified/*yith*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+};
+
+exports.minify_js = gulp.series(minifyMainJs, minifyAdminJs);
+exports.minify = gulp.series(minifyCss, minifyThemesCss);
 exports.uppot = gulp.series(updatePot);
 exports.localize = gulp.series(updatePot, updatePo, updateMo);
-exports.deploy = gulp.series(minify_css, minify_themes_css, minify_main_js, minify_admin_js, updatePot, updatePo, updateMo);
-exports.default = gulp.series(minify_css, minify_themes_css, minify_main_js, minify_admin_js);
+exports.deploy = gulp.series(minifyCss, minifyThemesCss, minifyMainJs, minifyAdminJs, updatePot, updatePo, updateMo);
+exports.default = gulp.series(minifyCss, minifyThemesCss, validateJs, minifyMainJs, minifyAdminJs);
+exports.jshint = gulp.series(validateJs);

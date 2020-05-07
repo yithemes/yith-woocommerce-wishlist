@@ -58,7 +58,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				apply_filters( 'yith_wcwl_adding_to_wishlist_on_sale', $item->is_on_sale() ),
 			);
 
-			if( $user_id = $item->get_user_id() ){
+			if ( $user_id = $item->get_user_id() ) {
 				$columns['user_id'] = '%d';
 				$values[] = apply_filters( 'yith_wcwl_adding_to_wishlist_user_id', $user_id );
 			}
@@ -144,20 +144,23 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 					'quantity' => '%d',
 					'wishlist_id' => '%d',
 					'prod_id' => '%d',
-					'user_id' => '%d',
 					'position' => '%d',
 					'on_sale' => '%d',
 					'dateadded' => 'FROM_UNIXTIME( %d )',
+					'user_id' => $item->get_user_id() ? '%d' : 'NULL',
 				);
 				$values = array(
 					$item->get_quantity(),
 					$item->get_wishlist_id(),
 					$item->get_original_product_id(),
-					$item->get_user_id(),
 					$item->get_position(),
 					$item->is_on_sale(),
-					$item->get_date_added( 'edit' ) ? $item->get_date_added( 'edit' )->getTimestamp() : time()
+					$item->get_date_added( 'edit' ) ? $item->get_date_added( 'edit' )->getTimestamp() : time(),
 				);
+
+				if ( $user_id = $item->get_user_id() ) {
+					$values[] = $user_id;
+				}
 
 				$this->update_raw( $columns, $values, array( 'ID' => '%d' ), array( $item->get_id() ) );
 			}
@@ -368,7 +371,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			}
 
 			if( ! empty( $items ) ){
-				$items = array_map( array( 'YITH_WCWL_Wishlist_Factory', 'get_wishlist_item' ), array_combine( wp_list_pluck( $items, 'prod_id' ), $items ) );
+				$items = array_map( array( 'YITH_WCWL_Wishlist_Factory', 'get_wishlist_item' ), $items );
 			} else {
 				$items = array();
 			}
@@ -421,7 +424,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		            INNER JOIN {$wpdb->posts} AS p ON p.ID = i.prod_id
 		            LEFT JOIN ( 
 		                SELECT 
-		            	COUNT( DISTINCT user_id ) AS wishlist_count, 
+		                COUNT( DISTINCT ID ) AS wishlist_count, 
                         prod_id 
 		                FROM {$wpdb->yith_wcwl_items} 
 		                GROUP BY prod_id 
@@ -430,23 +433,23 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 
 			$sql_args = array( 'publish' );
 
-			if( ! empty( $search ) ){
-				$sql .= " AND p.post_title LIKE %s";
+			if ( ! empty( $search ) ) {
+				$sql .= ' AND p.post_title LIKE %s';
 				$sql_args[] = '%' . $search . '%';
 			}
 
-			if( ! empty( $orderby ) ){
+			if ( ! empty( $orderby ) ) {
 				$order = ! empty( $order ) ? $order : 'DESC';
-				$sql .= " ORDER BY " .  esc_sql( $orderby ) . " " . esc_sql( $order );
+				$sql .= ' ORDER BY ' . esc_sql( $orderby ) . ' ' . esc_sql( $order );
 			}
 
-			if( ! empty( $limit ) && isset( $offset ) ){
-				$sql .= " LIMIT %d, %d";
+			if ( ! empty( $limit ) && isset( $offset ) ) {
+				$sql .= ' LIMIT %d, %d';
 				$sql_args[] = $offset;
 				$sql_args[] = $limit;
 			}
 
-			$items = $wpdb->get_results( $wpdb->prepare( $sql, $sql_args ), ARRAY_A );
+			$items = $wpdb->get_results( $wpdb->prepare( $sql, $sql_args ), ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 			return $items;
 		}

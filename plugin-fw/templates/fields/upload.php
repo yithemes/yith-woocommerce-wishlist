@@ -18,7 +18,7 @@ extract( $field );
     <div class="yith-plugin-fw-upload-img-preview" style="margin-top:10px;">
         <?php
         $file = $value;
-        if ( preg_match( '/(jpg|jpeg|png|gif|ico)$/', $file ) ) {
+        if ( preg_match( '/(jpg|jpeg|png|gif|ico|svg)$/', $file ) ) {
             echo "<img src='$file' style='max-width:600px; max-height:300px;' />";
         }
         ?>

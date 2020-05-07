@@ -7,11 +7,11 @@
  * @version 3.0.0
  */
 
-if ( !defined( 'YITH_WCWL' ) ) {
+if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( !class_exists( 'YITH_WCWL_Install' ) ) {
+if ( ! class_exists( 'YITH_WCWL_Install' ) ) {
 	/**
 	 * Install plugin table and create the wishlist page
 	 *
@@ -51,8 +51,8 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		 * @return \YITH_WCWL_Install
 		 * @since 2.0.0
 		 */
-		public static function get_instance(){
-			if( is_null( self::$instance ) ){
+		public static function get_instance() {
+			if ( is_null( self::$instance ) ) {
 				self::$instance = new self();
 			}
 
@@ -67,15 +67,15 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		public function __construct() {
 			global $wpdb;
 
-			// define local private attribute
+			// define local private attribute.
 			$this->_table_items = $wpdb->prefix . 'yith_wcwl';
 			$this->_table_wishlists = $wpdb->prefix . 'yith_wcwl_lists';
 
-			// add custom field to global $wpdb
+			// add custom field to global $wpdb.
 			$wpdb->yith_wcwl_items = $this->_table_items;
 			$wpdb->yith_wcwl_wishlists = $this->_table_wishlists;
 
-			// define constant to use allover the application
+			// define constant to use allover the application.
 			define( 'YITH_WCWL_ITEMS_TABLE', $this->_table_items );
 			define( 'YITH_WCWL_WISHLISTS_TABLE', $this->_table_wishlists );
 
@@ -100,24 +100,24 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		/**
 		 * Update db structure of the plugin
 		 *
-		 * @param $current_version string Version from which we're updating
+		 * @param string $current_version Version from which we're updating.
 		 *
 		 * @ince 3.0.0
 		 */
 		public function update( $current_version ) {
-			if( version_compare( $current_version, '1.0.0', '<' ) ){
+			if ( version_compare( $current_version, '1.0.0', '<' ) ) {
 				$this->_update_100();
 			}
 
-			if( version_compare( $current_version, '2.0.0', '<' ) ){
+			if ( version_compare( $current_version, '2.0.0', '<' ) ) {
 				$this->_update_200();
 			}
 
-			if( version_compare( $current_version, '3.0.0', '<' ) ){
+			if ( version_compare( $current_version, '3.0.0', '<' ) ) {
 				$this->_update_300();
 			}
 
-			// TODO (3.1): _update_310() should call ->_add_tables(), to update db structure and size of external id columns
+			// TODO (3.1): _update_310() should call ->_add_tables(), to update db structure and size of external id columns.
 
 			$this->register_current_version();
 		}
@@ -143,9 +143,9 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		 */
 		public function is_installed() {
 			global $wpdb;
-			$number_of_tables = $wpdb->query("SHOW TABLES LIKE '{$this->_table_items}%'" );
+			$number_of_tables = $wpdb->query( $wpdb->prepare( 'SHOW TABLES LIKE %s', "{$this->_table_items}%" ) );
 
-			return (bool) ( $number_of_tables == 2 );
+			return (bool) ( 2 == $number_of_tables );
 		}
 
 		/**
@@ -161,7 +161,7 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		 * @since 2.0.0
 		 */
 		private function _update_200() {
-			// update tables
+			// update tables.
 			$this->_add_tables();
 		}
 
@@ -171,75 +171,76 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		 * @since 3.0.0
 		 */
 		private function _update_300() {
-			// update tables
+			// update tables.
 			$this->_add_tables();
 
-			// update color options
+			// update color options.
 			$options = array(
 				'color_add_to_wishlist',
 				'color_add_to_cart',
 				'color_button_style_1',
 				'color_button_style_2',
-				'color_wishlist_table'
+				'color_wishlist_table',
 			);
 
-			foreach( $options as $option ){
+			foreach ( $options as $option ) {
 				$base_option_name = "yith_wcwl_{$option}";
 
 				$background = get_option( "{$base_option_name}_background" );
 				$color = get_option( "{$base_option_name}_color" );
 				$border = get_option( "{$base_option_name}_border_color" );
 
-				if( 'color_wishlist_table' != $option ) {
+				if ( 'color_wishlist_table' != $option ) {
 					$background_hover = get_option( "{$base_option_name}_hover_background" );
 					$color_hover      = get_option( "{$base_option_name}_hover_color" );
 					$border_hover     = get_option( "{$base_option_name}_hover_border_color" );
 				}
 
-				update_option( $base_option_name, array_merge(
-					! empty( $background ) ? array( 'background' => $background ) : array(),
-					! empty( $color ) ? array( 'text' => $color ) : array(),
-					! empty( $border ) ? array( 'border' => $border ) : array(),
-					! empty( $background_hover ) ? array( 'background_hover' => $background_hover ) : array(),
-					! empty( $color_hover ) ? array( 'text_hover' => $color_hover ) : array(),
-					! empty( $border_hover ) ? array( 'border_hover' => $border_hover ) : array()
-				) );
+				update_option(
+					$base_option_name,
+					array_merge(
+						! empty( $background ) ? array( 'background' => $background ) : array(),
+						! empty( $color ) ? array( 'text' => $color ) : array(),
+						! empty( $border ) ? array( 'border' => $border ) : array(),
+						! empty( $background_hover ) ? array( 'background_hover' => $background_hover ) : array(),
+						! empty( $color_hover ) ? array( 'text_hover' => $color_hover ) : array(),
+						! empty( $border_hover ) ? array( 'border_hover' => $border_hover ) : array()
+					)
+				);
 			}
 
-			// duplicate options
+			// duplicate options.
 			$options = array(
 				'yith_wcwl_color_button_style_1' => array(
-					'yith_wcwl_color_ask_an_estimate'
+					'yith_wcwl_color_ask_an_estimate',
 				),
 				'yith_wcwl_color_button_style_1_hover' => array(
-					'yith_wcwl_color_ask_an_estimate_hover'
+					'yith_wcwl_color_ask_an_estimate_hover',
 				),
 				'woocommerce_promotion_mail_settings' => array(
-					'woocommerce_yith_wcwl_promotion_mail_settings'
-				)
+					'woocommerce_yith_wcwl_promotion_mail_settings',
+				),
 			);
 
-			foreach( $options as $original_option => $destinations ){
+			foreach ( $options as $original_option => $destinations ) {
 				$option_value = get_option( $option );
 
-				if( $option_value ){
-					foreach( $destinations as $destination ){
+				if ( $option_value ) {
+					foreach ( $destinations as $destination ) {
 						update_option( $destination, $option_value );
 					}
 				}
 			}
 
-			// button style options
+			// button style options.
 			$use_buttons = get_option( 'yith_wcwl_use_button' );
 			$use_theme_style = get_option( 'yith_wcwl_frontend_css' );
 
-			if( $use_buttons == 'yes' && $use_theme_style == 'no' ){
+			if ( 'yes' == $use_buttons && 'no' == $use_theme_style ) {
 				$destination_value = 'button_custom';
-			}
-			elseif( $use_buttons == 'yes' ){
+			} elseif ( 'yes' == $use_buttons ) {
 				$destination_value = 'button_default';
-			}
-			else {
+			} else {
 				$destination_value = 'link';
 			}
 
@@ -247,7 +248,7 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 			update_option( 'yith_wcwl_add_to_cart_style', $destination_value );
 			update_option( 'yith_wcwl_ask_an_estimate_style', $destination_value );
 
-			// rounded corners options
+			// rounded corners options.
 			$rounded_corners = get_option( 'yith_wcwl_rounded_corners' );
 			$radius_value = 'yes' == $rounded_corners ? 16 : 0;
 
@@ -278,7 +279,7 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		private function _add_wishlists_table() {
 			global $wpdb;
 
-			if( ! $this->is_installed() || version_compare( get_option( 'yith_wcwl_db_version' ), '3.0.0', '<' )  ){
+			if ( ! $this->is_installed() || version_compare( get_option( 'yith_wcwl_db_version' ), '3.0.0', '<' ) ) {
 				$sql = "CREATE TABLE {$this->_table_wishlists} (
 							ID BIGINT( 20 ) NOT NULL AUTO_INCREMENT,
 							user_id BIGINT( 20 ) NULL DEFAULT NULL,
@@ -311,7 +312,7 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		private function _add_items_table() {
 			global $wpdb;
 
-			if( ! $this->is_installed() || version_compare( get_option( 'yith_wcwl_db_version' ), '3.0.0', '<' ) ) {
+			if ( ! $this->is_installed() || version_compare( get_option( 'yith_wcwl_db_version' ), '3.0.0', '<' ) ) {
 				$sql = "CREATE TABLE {$this->_table_items} (
 							ID BIGINT( 20 ) NOT NULL AUTO_INCREMENT,
 							prod_id BIGINT( 20 ) NOT NULL,
@@ -341,38 +342,12 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
 		 * @since 1.0.0
 		 */
 		private function _add_pages() {
-			global $wpdb;
-
-			$option_value = get_option( 'yith-wcwl-page-id' );
-
-			if ( $option_value > 0 && get_post( $option_value ) ) {
-				return;
-			}
-
-			$page_found = $wpdb->get_var( "SELECT `ID` FROM `{$wpdb->posts}` WHERE `post_name` = 'wishlist' LIMIT 1;" );
-
-			if ( $page_found ) {
-				if ( ! $option_value ) {
-					update_option( 'yith-wcwl-page-id', $page_found );
-				}
-
-				return;
-			}
-
-			$page_data = array(
-				'post_status' 		=> 'publish',
-				'post_type' 		=> 'page',
-				'post_author' 		=> 1,
-				'post_name' 		=> esc_sql( _x( 'wishlist', 'page_slug', 'yith-woocommerce-wishlist' ) ),
-				'post_title' 		=> __( 'Wishlist', 'yith-woocommerce-wishlist' ),
-				'post_content' 		=> '[yith_wcwl_wishlist]',
-				'post_parent' 		=> 0,
-				'comment_status' 	=> 'closed'
+			wc_create_page(
+				sanitize_title_with_dashes( _x( 'wishlist', 'page_slug', 'yith-woocommerce-wishlist' ) ),
+				'yith_wcwl_wishlist_page_id',
+				__( 'Wishlist', 'yith-woocommerce-wishlist' ),
+				'<!-- wp:shortcode -->[yith_wcwl_wishlist]<!-- /wp:shortcode -->'
 			);
-			$page_id = wp_insert_post( $page_data );
-
-			update_option( 'yith-wcwl-page-id', $page_id );
-			update_option( 'yith_wcwl_wishlist_page_id', $page_id );
 		}
 	}
 }
@@ -383,6 +358,6 @@ if ( !class_exists( 'YITH_WCWL_Install' ) ) {
  * @return \YITH_WCWL_Install
  * @since 2.0.0
  */
-function YITH_WCWL_Install(){
-    return YITH_WCWL_Install::get_instance();
+function YITH_WCWL_Install() {
+	return YITH_WCWL_Install::get_instance();
 }

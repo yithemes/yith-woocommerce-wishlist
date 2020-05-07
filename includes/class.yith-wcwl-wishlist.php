@@ -491,7 +491,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return string Url to download
 		 */
 		public function get_download_url() {
-			return wp_nonce_url( add_query_arg( 'download_wishlist', $this->get_id() ), 'download_wishlist', 'download_nonce' );
+			return apply_filters( 'yith_wcwl_wishlist_download_url', wp_nonce_url( add_query_arg( 'download_wishlist', $this->get_id() ), 'download_wishlist', 'download_nonce' ), $this );
 		}
 
 		/**
@@ -500,7 +500,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return string Url to delete the wishlist
 		 */
 		public function get_delete_url() {
-			return apply_filters( 'yith_wcwl_wishlist_delete_url', wp_nonce_url( add_query_arg( 'wishlist_id', $this->get_id(), YITH_WCWL()->get_wishlist_url( 'manage' ) ), 'yith_wcwl_delete_action', 'yith_wcwl_delete' ) );
+			return apply_filters( 'yith_wcwl_wishlist_delete_url', wp_nonce_url( add_query_arg( 'wishlist_id', $this->get_id(), YITH_WCWL()->get_wishlist_url( 'manage' ) ), 'yith_wcwl_delete_action', 'yith_wcwl_delete' ), $this );
 		}
 
 		/* === SETTERS === */
@@ -675,7 +675,10 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 
 			// Add/save items.
 			foreach ( $this->items as $product_id => $item ) {
-				$item->set_wishlist_id( $this->get_id() );
+				if ( $item->get_wishlist_id() != $this->get_id() ) {
+					$item->set_wishlist_id( $this->get_id() );
+				}
+
 				$item->save();
 			}
 		}

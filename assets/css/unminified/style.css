@@ -109,6 +109,10 @@ select.selectBox.change-wishlist{
     overflow: hidden;
 }
 
+.yith-wcwl-with-pretty-photo .pp_content{
+    height: auto!important;
+}
+
 /* === 3. BLOCK STYLE === */
 
 .woocommerce .wishlist-fragment .blockUI.blockOverlay::before,
@@ -173,7 +177,7 @@ select.selectBox.change-wishlist{
 }
 
 .yith-wcwl-popup-footer {
-    margin-top: 15px;
+    margin: 15px 0;
 }
 
 .yith-wcwl-popup-footer .button.wishlist-submit{
@@ -944,8 +948,18 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
     float: left;
 }
 
+.yith_wcwl_wishlist_footer .yith_wcwl_wishlist_bulk_action label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
 .yith_wcwl_wishlist_footer .yith_wcwl_wishlist_bulk_action #bulk_actions{
     min-width: 250px;
+}
+
+.yith_wcwl_wishlist_footer .yith_wcwl_wishlist_bulk_action input[type="submit"]{
+    margin: 0;
+    margin-left: 10px;
 }
 
 .yith_wcwl_wishlist_footer .yith_wcwl_wishlist_update {
@@ -1125,6 +1139,21 @@ table.wishlist_manage_table tfoot td{
 .wishlist_manage_table.modern_grid li .item-details .hidden-title-form .edit-title-buttons a i{
     padding: 5px;
     margin: 0;
+}
+
+.wishlist_manage_table.modern_grid li .product-thumbnail .placeholder-item.empty-box{
+    display: flex;
+    background: #f2f2f2;
+    min-height: 400px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.wishlist_manage_table.modern_grid li .product-thumbnail .placeholder-item.empty-box p{
+    font-size: 1em;
+    line-height: 1.5em;
+    font-weight: 600;
 }
 
 .wishlist_manage_table.modern_grid li .product-thumbnail img:first-child{
@@ -1403,6 +1432,12 @@ table.wishlist_manage_table tfoot td{
 .elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget,
 .widget_yith-wcwl-items ul.product_list_widget{
     margin-bottom: 40px!important;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-items .mini ul.product_list_widget,
+.widget_yith-wcwl-items .mini ul.product_list_widget{
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .elementor-widget-wp-widget-yith-wcwl-items p.empty-wishlist,

@@ -4,12 +4,12 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.0
 Tested up to: 5.4
-Stable tag: 3.0.9
+Stable tag: 3.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
-WooCommerce 4.0.x compatible.
+WooCommerce 4.1.x compatible.
 
 == Description ==
 
@@ -112,6 +112,25 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.0.10 - Released on 07 May 2020 =
+
+* New: support for WooCommerce 4.1
+* New: prevent some UserAgents from triggering wishlist handling (avoid spam)
+* New: added minor css fixes for Storefront theme
+* Update: plugin framework
+* Tweak: review add process, to avoid unnecessary items update
+* Tweak: improved localized date on wishlist table
+* Tweak: added wishlist as gutenberg block in new wishlist page
+* Tweak: added "Wishlist page" post status
+* Tweak: added new check to avoid "Cannot read property contains of undefined" error
+* Tweak: added search box to All Wishlist view
+* Fix: show remove button on list mobile when at least one of the two buttons is shown on desktop
+* Fix: fatal error on empty wishlist page
+* Dev: added yith_wcwl_is_wishlist_responsive filter, to allow developers disable responsive behaviour for the wishlist
+* Dev: added yith_wcwl_generated_default_wishlist action
+* Dev: added yith_wcwl_default_wishlist filter
+* Dev: added yith_wcwl_add_notice wrapper function, to avoid possible fatal errors when calling wc_add_notice
 
 = 3.0.9 - Released on 09 March 2020 =
 

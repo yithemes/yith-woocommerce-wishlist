@@ -3,10 +3,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: YITH Plugin Starter 1.0.0 Plugin FW\n"
-"Report-Msgid-Bugs-To: Your Inspiration Themes <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2020-01-10 13:40+0100\n"
-"PO-Revision-Date: 2020-03-02 13:49+0000\n"
+"Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
+"POT-Creation-Date: 2020-04-23 06:38:32+00:00\n"
+"PO-Revision-Date: 2020-04-06 10:45+0200\n"
+"Last-Translator: \n"
 "Language-Team: Your Inspiration Themes <info@yithemes.com>\n"
+"Language: el_GR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,112 +20,46 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
-"Last-Translator: \n"
-"Language: el_GR\n"
 "X-Poedit-SearchPath-0: .\n"
-
-#: lib/privacy/yit-privacy.php:24
-msgctxt "Privacy Policy Guide Title"
-msgid "YITH Plugins"
-msgstr "Πρόσθετα YITH"
-
-#: lib/privacy/yit-privacy.php:59
-msgctxt "Privacy Policy Content"
-msgid ""
-"This sample language includes the basics around what personal data your "
-"store may be collecting, storing and sharing, as well as who may have access "
-"to that data. Depending on what settings are enabled and which additional "
-"plugins are used, the specific information shared by your store will vary. "
-"We recommend consulting with a lawyer when deciding what information to "
-"disclose on your privacy policy."
-msgstr ""
-"Αυτό το δείγμα γλώσσας περιλαμβάνει τα βασικά στοιχεία γύρω από το τι "
-"προσωπικά δεδομένα το κατάστημά σας μπορεί να συλλέγει, την αποθήκευση και "
-"την κοινή χρήση, καθώς και ποιοι μπορεί να έχουν πρόσβαση σε αυτά τα "
-"δεδομένα. Ανάλογα με τις ρυθμίσεις που είναι ενεργοποιημένες και ποια "
-"επιπλέον πρόσθετα χρησιμοποιούνται, οι συγκεκριμένες πληροφορίες που "
-"κοινοποιούνται από το κατάστημά σας θα ποικίλλουν. Συνιστούμε τη διαβούλευση "
-"με έναν δικηγόρο, όταν αποφασίζετε ποιες πληροφορίες να αποκαλύπτετε στην "
-"πολιτική απορρήτου σας."
-
-#: lib/privacy/yit-privacy.php:63
-msgctxt "Privacy Policy Content"
-msgid "What we collect and store"
-msgstr "Τι συλλέγουμε και αποθηκεύουμε"
-
-#: lib/privacy/yit-privacy.php:66
-msgctxt "Privacy Policy Content"
-msgid "Who on our team has access"
-msgstr "Ποιος στην ομάδα μας έχει πρόσβαση"
-
-#: lib/privacy/yit-privacy.php:69
-msgctxt "Privacy Policy Content"
-msgid "What we share with others"
-msgstr "Τι μοιραζόμαστε με τους άλλους"
-
-#: lib/privacy/yit-privacy.php:72
-msgctxt "Privacy Policy Content"
-msgid "Payments"
-msgstr "Πληρωμές"
 
 #: lib/yit-cpt-unlimited.php:462 lib/yit-cpt-unlimited.php:576
 #: lib/yit-cpt-unlimited.php:721 lib/yit-cpt-unlimited.php:1636
-#, php-format
 msgid "Add %s"
 msgstr "Προσθήκη %s"
 
 #: lib/yit-cpt-unlimited.php:463 lib/yit-cpt-unlimited.php:577
-#, php-format
 msgid "Add New %s"
 msgstr "Προσθήκη Νέου %s"
 
 #: lib/yit-cpt-unlimited.php:464 lib/yit-cpt-unlimited.php:578
 #: lib/yit-cpt-unlimited.php:1269 lib/yit-cpt-unlimited.php:1306
-#, php-format
 msgid "Edit %s"
 msgstr "Επεξεργασία %s"
 
 #: lib/yit-cpt-unlimited.php:465 lib/yit-cpt-unlimited.php:579
-#, php-format
 msgid "New %s"
 msgstr "Νέο %s"
 
 #: lib/yit-cpt-unlimited.php:466 lib/yit-cpt-unlimited.php:580
-#, php-format
 msgid "All %s"
 msgstr "Όλα %s"
 
 #: lib/yit-cpt-unlimited.php:467 lib/yit-cpt-unlimited.php:581
 #: lib/yit-cpt-unlimited.php:1253 lib/yit-cpt-unlimited.php:1307
-#, php-format
 msgid "View %s"
 msgstr "Προβολή %s"
 
 #: lib/yit-cpt-unlimited.php:468 lib/yit-cpt-unlimited.php:582
-#, php-format
 msgid "Search %s"
 msgstr "Αναζήτηση %s"
 
 #: lib/yit-cpt-unlimited.php:469 lib/yit-cpt-unlimited.php:583
-#, php-format
 msgid "No %s found"
 msgstr "Δεν βρέθηκε %s"
 
 #: lib/yit-cpt-unlimited.php:470 lib/yit-cpt-unlimited.php:584
-#, php-format
 msgid "No %s found in Trash"
 msgstr "Δεν βρέθηκε %s στον Κάδο Ανακύκλωσης"
-
-#: lib/yit-cpt-unlimited.php:627
-#, php-format
-msgctxt "taxonomy general name"
-msgid "%s Categories"
-msgstr "Κατηγορίες %s"
-
-#: lib/yit-cpt-unlimited.php:628
-msgctxt "taxonomy singular name"
-msgid "Category"
-msgstr "Κατηγορία"
 
 #: lib/yit-cpt-unlimited.php:629 templates/fields/ajax-terms.php:56
 msgid "Search Categories"
@@ -166,7 +102,6 @@ msgid "Categories"
 msgstr "Κατηγορίες"
 
 #: lib/yit-cpt-unlimited.php:1044
-#, php-format
 msgid "%s Settings"
 msgstr "Ρυθμίσεις %s"
 
@@ -180,7 +115,6 @@ msgid "Type"
 msgstr "Τύπος"
 
 #: lib/yit-cpt-unlimited.php:1054
-#, php-format
 msgid "Layout for this %s"
 msgstr "Διάταξη για %s"
 
@@ -252,7 +186,6 @@ msgid "Quick links"
 msgstr "Γρήγορα λινκ"
 
 #: lib/yit-cpt-unlimited.php:1477
-#, php-format
 msgid "Show frontend of the %s"
 msgstr "Προβολή εμφάνισης του %s"
 
@@ -262,7 +195,6 @@ msgid "Name"
 msgstr "Όνομα"
 
 #: lib/yit-cpt-unlimited.php:1635
-#, php-format
 msgid "Add %s from images"
 msgstr "Προσθήκη %s από εικόνες"
 
@@ -270,7 +202,7 @@ msgstr "Προσθήκη %s από εικόνες"
 msgid "Upload multiple files"
 msgstr "Ανέβασμα πολλαπλών αρχείων"
 
-#: lib/yit-plugin-panel-wc.php:397
+#: lib/yit-plugin-panel-wc.php:399
 msgid "The changes you have made will be lost if you leave this page."
 msgstr ""
 "Οι αλλαγές που έχετε δημιουργήσει θα χαθούν αν αφήσετε αυτήν την σελίδα."
@@ -279,16 +211,16 @@ msgstr ""
 msgid "Plugin Settings"
 msgstr "Ρυθμίσεις Προσθέτου"
 
-#: lib/yit-plugin-panel.php:424 lib/yit-plugin-panel.php:427
+#: lib/yit-plugin-panel.php:455 lib/yit-plugin-panel.php:458
 msgid "How to install premium version"
 msgstr "Πώς να εγκαταστήσετε την προηγμένη έκδοση"
 
-#: lib/yit-plugin-panel.php:571 lib/yit-plugin-subpanel.php:151
+#: lib/yit-plugin-panel.php:603 lib/yit-plugin-subpanel.php:151
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid "Save Changes"
 msgstr "Αποθήκευση Αλλαγών"
 
-#: lib/yit-plugin-panel.php:574 lib/yit-plugin-subpanel.php:154
+#: lib/yit-plugin-panel.php:606 lib/yit-plugin-subpanel.php:154
 #: templates/panel/woocommerce/woocommerce-form.php:17
 msgid ""
 "If you continue with this action, you will reset all options in this page."
@@ -296,70 +228,70 @@ msgstr ""
 "Αν συνεχίσετε με αυτή την ενέργεια θα επαναφέρετε όλες τις επιλογές στη "
 "σελίδα."
 
-#: lib/yit-plugin-panel.php:576 lib/yit-plugin-subpanel.php:156
+#: lib/yit-plugin-panel.php:608 lib/yit-plugin-subpanel.php:156
 msgid "Reset to default"
 msgstr "Επαναφορά σε προεπιλεγμένο"
 
-#: lib/yit-plugin-panel.php:577 lib/yit-plugin-subpanel.php:157
+#: lib/yit-plugin-panel.php:609 lib/yit-plugin-subpanel.php:157
 #: templates/panel/woocommerce/woocommerce-form.php:21
 msgid "Are you sure?"
 msgstr "Είστε σίγουρος;"
 
-#: lib/yit-plugin-panel.php:775
+#: lib/yit-plugin-panel.php:807
 msgid ""
 "The element you have entered already exists. Please, enter another name."
-msgstr "Το στοιχείο που εισάγατε υπάρχει ήδη. Παρακαλώ, εισάγετε άλλο όνομα. "
+msgstr "Το στοιχείο που εισάγατε υπάρχει ήδη. Παρακαλώ, εισάγετε άλλο όνομα."
 
-#: lib/yit-plugin-panel.php:776
+#: lib/yit-plugin-panel.php:808
 msgid "Settings saved"
 msgstr "Ρυθμίσεις αποθηκεύτηκαν"
 
-#: lib/yit-plugin-panel.php:777
+#: lib/yit-plugin-panel.php:809
 msgid "Settings reset"
 msgstr "Επαναφορά ρυθμίσεων"
 
-#: lib/yit-plugin-panel.php:778
+#: lib/yit-plugin-panel.php:810
 msgid "Element deleted correctly."
 msgstr "Το στοιχείο διαγράφηκε επιτυχώς."
 
-#: lib/yit-plugin-panel.php:779 lib/yit-plugin-panel.php:780
+#: lib/yit-plugin-panel.php:811 lib/yit-plugin-panel.php:812
 msgid "Element updated correctly."
 msgstr "Το στοιχείο αναβαθμίστηκε επιτυχώς."
 
-#: lib/yit-plugin-panel.php:781
+#: lib/yit-plugin-panel.php:813
 msgid "Database imported correctly."
 msgstr "Επιτυχής εισαγωγή βάσης δεδομένων."
 
-#: lib/yit-plugin-panel.php:782
+#: lib/yit-plugin-panel.php:814
 msgid "An error has occurred during import. Please try again."
 msgstr "Παρουσιάστηκε σφάλμα κατά την εισαγωγή. Παρακαλώ προσπαθήστε ξανά."
 
-#: lib/yit-plugin-panel.php:783
+#: lib/yit-plugin-panel.php:815
 msgid "The added file is not valid."
 msgstr "Το προστιθέμενο αρχείο δεν είναι έγκυρο."
 
-#: lib/yit-plugin-panel.php:784
+#: lib/yit-plugin-panel.php:816
 msgid "Sorry, import is disabled."
 msgstr "Συγνώμη, η εισαγωγή είναι απενεργοποιημένη."
 
-#: lib/yit-plugin-panel.php:785
+#: lib/yit-plugin-panel.php:817
 msgid "Sorting successful."
 msgstr "Διαλογή επιτυχής."
 
-#: lib/yit-plugin-panel.php:1233
+#: lib/yit-plugin-panel.php:1265
 msgid "We need your support"
 msgstr "Χρειαζόμαστε την υποστήριξή σας"
 
-#: lib/yit-plugin-panel.php:1234
+#: lib/yit-plugin-panel.php:1266
 msgid "to keep updating and improving the plugin. Please,"
 msgstr ""
-"για να διατηρήσετε την ενημέρωση και τη βελτίωση του πρόσθετου. Παρακαλώ"
+"για να διατηρήσετε την ενημέρωση και τη βελτίωση του πρόσθετου. Παρακαλώ,"
 
-#: lib/yit-plugin-panel.php:1236
+#: lib/yit-plugin-panel.php:1268
 msgid "help us by leaving a five-star rating"
-msgstr "Βοηθήστε μας αφήνοντας μια βαθμολογία πέντε αστέρων"
+msgstr "βοηθήστε μας αφήνοντας μια βαθμολογία πέντε αστέρων"
 
-#: lib/yit-plugin-panel.php:1237
+#: lib/yit-plugin-panel.php:1269
 msgid ":) Thanks!"
 msgstr ":) Ευχαριστώ!"
 
@@ -384,7 +316,7 @@ msgstr "Ανακαλύψτε όλα τα διαθέσιμά μας πρόσθε�
 
 #: lib/yit-pointers.php:74 lib/yit-pointers.php:90
 msgid "and"
-msgstr "Και"
+msgstr "και"
 
 #: lib/yit-pointers.php:84
 msgid "Plugins Upgraded"
@@ -432,96 +364,75 @@ msgstr ""
 "Παρουσιάστηκε σφάλμα, που πιθανότατα σημαίνει ότι έπεσε το τροφοδοτικό. "
 "Προσπαθήστε ξανά αργότερα."
 
-#: lib/yith-dashboard.php:99
-msgctxt "Plugin FW"
-msgid "View Changelog"
-msgstr "Προβολή Αρχείου Καταγραφής"
-
-#: lib/yith-dashboard.php:100
-msgctxt "Plugin FW"
-msgid "Latest update released on"
-msgstr "Τελευταία αναβάθμιση κυκλοφόρησε στις"
-
-#: lib/yith-dashboard.php:143
-msgctxt "Button label"
-msgid "Close"
-msgstr "Απενεργοποίηση"
-
-#: lib/yith-gutenberg.php:134
-msgctxt "[gutenberg]: Category Name"
-msgid "YITH"
-msgstr "YITH"
-
-#: lib/yith-system-status.php:97 lib/yith-system-status.php:98
-msgid "System Status"
-msgstr "Κατάσταση Συστήματος"
-
-#: lib/yith-system-status.php:104
+#: lib/yith-system-status.php:105
 msgid "WordPress Version"
 msgstr "Έκδοση WordPress"
 
-#: lib/yith-system-status.php:105
+#: lib/yith-system-status.php:106
 msgid "WooCommerce Version"
 msgstr "Έκδοση WooCommerce"
 
-#: lib/yith-system-status.php:106
+#: lib/yith-system-status.php:107
 msgid "Available Memory"
 msgstr "Διαθέσιμη Μνήμη"
 
-#: lib/yith-system-status.php:107
+#: lib/yith-system-status.php:108
 msgid "PHP Version"
 msgstr "Έκδοση PHP"
 
-#: lib/yith-system-status.php:108
+#: lib/yith-system-status.php:109
 msgid "TLS Version"
 msgstr "Έκδοση TLS"
 
-#: lib/yith-system-status.php:109
+#: lib/yith-system-status.php:110
 msgid "WordPress Cron"
 msgstr "WordPress Cron"
 
-#: lib/yith-system-status.php:110
+#: lib/yith-system-status.php:111
 msgid "SimpleXML"
 msgstr "SimpleXML"
 
-#: lib/yith-system-status.php:111
+#: lib/yith-system-status.php:112
 msgid "MultiByte String"
 msgstr "MultiByte String"
 
-#: lib/yith-system-status.php:112
+#: lib/yith-system-status.php:113
 msgid "ImageMagick Version"
 msgstr "Έκδοση ImageMagick"
 
-#: lib/yith-system-status.php:113
+#: lib/yith-system-status.php:114
 msgid "GD Library"
 msgstr "Βιβλιοθήκη GD"
 
-#: lib/yith-system-status.php:114
+#: lib/yith-system-status.php:115
 msgid "Iconv Module"
 msgstr "Άρθρωμα Iconv"
 
-#: lib/yith-system-status.php:115
+#: lib/yith-system-status.php:116
 msgid "OPCache Save Comments"
 msgstr "OPCache Save Comments"
 
-#: lib/yith-system-status.php:116
+#: lib/yith-system-status.php:117
 msgid "URL FOpen"
 msgstr "URL FOpen"
 
-#: lib/yith-system-status.php:173
+#: lib/yith-system-status.php:135 lib/yith-system-status.php:136
+msgid "System Status"
+msgstr "Κατάσταση Συστήματος"
+
+#: lib/yith-system-status.php:179
 msgid "YITH Plugins"
 msgstr "Πρόσθετα YITH"
 
-#: lib/yith-system-status.php:174
+#: lib/yith-system-status.php:180
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: lib/yith-system-status.php:291
+#: lib/yith-system-status.php:297
 msgid "Warning!"
 msgstr "Προσοχή!"
 
-#: lib/yith-system-status.php:292
-#, php-format
+#: lib/yith-system-status.php:298
 msgid ""
 "The system check has detected some compatibility issues on your "
 "installation. %sClick here%s to know more"
@@ -535,7 +446,6 @@ msgstr "Αναζήτηση Πελατών"
 
 #: templates/fields/ajax-customers.php:83
 #: templates/fields/ajax-customers.php:93
-#, php-format
 msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr "%1$s (#%2$s &ndash; %3$s)"
 
@@ -603,16 +513,6 @@ msgstr "Προσθέστε εικόνες"
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: templates/fields/onoff.php:24
-msgctxt "ON/OFF button: use MAX 3 characters!"
-msgid "ON"
-msgstr "ΕΝΕΡΓΟΠΟΙΗΣΗ"
-
-#: templates/fields/onoff.php:25
-msgctxt "ON/OFF button: use MAX 3 characters!"
-msgid "OFF"
-msgstr "ΑΠΕΝΕΡΓΟΠΟΙΗΣΗ"
-
 #: templates/fields/select-buttons.php:21
 msgid "Add All"
 msgstr "Προσθήκη Όλων"
@@ -659,12 +559,10 @@ msgid "Image preview"
 msgstr "Προεπισκόπηση εικόνας"
 
 #: templates/metaboxes/types/icon-list.php:90
-#, php-format
 msgid "(Default: %s <img src=\"%s\"/>)"
 msgstr "(Default: %s <img src=“%s”/>)"
 
 #: templates/metaboxes/types/icon-list.php:92
-#, php-format
 msgid "(Default: <i %s></i> )"
 msgstr "(Default: <i %s></i> )"
 
@@ -697,18 +595,15 @@ msgid "N/A"
 msgstr "N/A"
 
 #: templates/sysinfo/system-information-panel.php:96
-#, php-format
 msgid "%s needs %s enabled"
 msgstr "%s χρειάζεται %s ενεργοποιημένο"
 
 #: templates/sysinfo/system-information-panel.php:98
-#, php-format
 msgid "%s needs at least %s of available memory"
 msgstr "%s χρειάζεται τουλάχιστον %s διαθέσιμης μνήμης"
 
 #: templates/sysinfo/system-information-panel.php:100
 #: templates/sysinfo/system-information-panel.php:149
-#, php-format
 msgid ""
 "For optimal functioning of our plugins, we suggest setting at least %s of "
 "available memory"
@@ -719,7 +614,6 @@ msgstr ""
 #: templates/sysinfo/system-information-panel.php:102
 #: templates/sysinfo/system-information-panel.php:137
 #: templates/sysinfo/system-information-panel.php:151
-#, php-format
 msgid ""
 "Read more %s here%s or contact your hosting company in order to increase it."
 msgstr ""
@@ -727,7 +621,6 @@ msgstr ""
 "να το βελτιώσετε."
 
 #: templates/sysinfo/system-information-panel.php:105
-#, php-format
 msgid "%s needs at least %s version"
 msgstr "%s χρειάζεται τουλάχιστον %s έκδοση"
 
@@ -744,7 +637,6 @@ msgid "Contact your hosting company in order to update it."
 msgstr "Επικοινωνήστε με την εταιρεία hosting σας για να αναβαθμίσετε."
 
 #: templates/sysinfo/system-information-panel.php:126
-#, php-format
 msgid "Remove %s from %s file"
 msgstr "Αφαίρεση %s από αρχείο %s"
 
@@ -781,6 +673,123 @@ msgstr "Πίσω στο πάνελ Συστήματος"
 msgid "Back to top"
 msgstr "Πίσω στην κορυφή"
 
+#: yit-plugin.php:194
+msgid "License"
+msgstr "Άδεια χρήσης προϊόντος"
+
+#. Author of the plugin/theme
+msgid "YITH"
+msgstr "YITH"
+
+#: lib/privacy/yit-privacy.php:24
+msgctxt "Privacy Policy Guide Title"
+msgid "YITH Plugins"
+msgstr "Πρόσθετα YITH"
+
+#: lib/privacy/yit-privacy.php:59
+msgctxt "Privacy Policy Content"
+msgid ""
+"This sample language includes the basics around what personal data your "
+"store may be collecting, storing and sharing, as well as who may have access "
+"to that data. Depending on what settings are enabled and which additional "
+"plugins are used, the specific information shared by your store will vary. "
+"We recommend consulting with a lawyer when deciding what information to "
+"disclose on your privacy policy."
+msgstr ""
+"Αυτό το δείγμα γλώσσας περιλαμβάνει τα βασικά στοιχεία γύρω από το τι "
+"προσωπικά δεδομένα το κατάστημά σας μπορεί να συλλέγει, την αποθήκευση και "
+"την κοινή χρήση, καθώς και ποιοι μπορεί να έχουν πρόσβαση σε αυτά τα "
+"δεδομένα. Ανάλογα με τις ρυθμίσεις που είναι ενεργοποιημένες και ποια "
+"επιπλέον πρόσθετα χρησιμοποιούνται, οι συγκεκριμένες πληροφορίες που "
+"κοινοποιούνται από το κατάστημά σας θα ποικίλλουν. Συνιστούμε τη διαβούλευση "
+"με έναν δικηγόρο, όταν αποφασίζετε ποιες πληροφορίες να αποκαλύπτετε στην "
+"πολιτική απορρήτου σας."
+
+#: lib/privacy/yit-privacy.php:63
+msgctxt "Privacy Policy Content"
+msgid "What we collect and store"
+msgstr "Τι συλλέγουμε και αποθηκεύουμε"
+
+#: lib/privacy/yit-privacy.php:66
+msgctxt "Privacy Policy Content"
+msgid "Who on our team has access"
+msgstr "Ποιος στην ομάδα μας έχει πρόσβαση"
+
+#: lib/privacy/yit-privacy.php:69
+msgctxt "Privacy Policy Content"
+msgid "What we share with others"
+msgstr "Τι μοιραζόμαστε με τους άλλους"
+
+#: lib/privacy/yit-privacy.php:72
+msgctxt "Privacy Policy Content"
+msgid "Payments"
+msgstr "Πληρωμές"
+
+#: lib/yit-cpt-unlimited.php:627
+msgctxt "taxonomy general name"
+msgid "%s Categories"
+msgstr "Κατηγορίες %s"
+
+#: lib/yit-cpt-unlimited.php:628
+msgctxt "taxonomy singular name"
+msgid "Category"
+msgstr "Κατηγορία"
+
+#: lib/yith-dashboard.php:99
+msgctxt "Plugin FW"
+msgid "View Changelog"
+msgstr "Προβολή Αρχείου Καταγραφής"
+
+#: lib/yith-dashboard.php:100
+msgctxt "Plugin FW"
+msgid "Latest update released on"
+msgstr "Τελευταία αναβάθμιση κυκλοφόρησε στις"
+
+#: lib/yith-dashboard.php:143
+msgctxt "Button label"
+msgid "Close"
+msgstr "Απενεργοποίηση"
+
+#: lib/yith-gutenberg.php:134
+msgctxt "[gutenberg]: Category Name"
+msgid "YITH"
+msgstr "YITH"
+
+#: templates/fields/dimensions.php:16
+msgctxt "Position in the \"Dimensions\" field"
+msgid "Top"
+msgstr ""
+
+#: templates/fields/dimensions.php:17
+msgctxt "Position in the \"Dimensions\" field"
+msgid "Right"
+msgstr ""
+
+#: templates/fields/dimensions.php:18
+msgctxt "Position in the \"Dimensions\" field"
+msgid "Bottom"
+msgstr ""
+
+#: templates/fields/dimensions.php:19
+msgctxt "Position in the \"Dimensions\" field"
+msgid "Left"
+msgstr ""
+
+#: templates/fields/dimensions.php:117
+msgctxt "Tooltip in the \"Dimensions\" field"
+msgid "Link values together"
+msgstr ""
+
+#: templates/fields/onoff.php:24
+msgctxt "YES/NO button: use MAX 3 characters!"
+msgid "YES"
+msgstr "ΝΑΙ"
+
+#: templates/fields/onoff.php:25
+msgctxt "YES/NO button: use MAX 3 characters!"
+msgid "NO"
+msgstr "ΟΧΙ"
+
 #: yit-plugin.php:83
 msgctxt "Plugin Row Meta"
 msgid "Live Demo"
@@ -806,6 +815,10 @@ msgctxt "Action links"
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: yit-plugin.php:194
-msgid "License"
-msgstr "Άδεια χρήσης προϊόντος"
+#~ msgctxt "ON/OFF button: use MAX 3 characters!"
+#~ msgid "ON"
+#~ msgstr "ΕΝΕΡΓΟΠΟΙΗΣΗ"
+
+#~ msgctxt "ON/OFF button: use MAX 3 characters!"
+#~ msgid "OFF"
+#~ msgstr "ΑΠΕΝΕΡΓΟΠΟΙΗΣΗ"

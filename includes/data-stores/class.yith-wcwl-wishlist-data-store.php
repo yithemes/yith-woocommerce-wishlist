@@ -191,7 +191,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			$data = $wishlist->get_data();
 			$changes = $wishlist->get_changes();
 
-			if ( array_intersect( array( 'user_id', 'session_id', 'slug', 'name', 'token', 'privacy', 'expiration', 'date_added' ), array_keys( $changes ) ) ) {
+			if ( array_intersect( array( 'user_id', 'session_id', 'slug', 'name', 'token', 'privacy', 'expiration', 'date_added', 'is_default' ), array_keys( $changes ) ) ) {
 				$columns = array(
 					'wishlist_privacy' => '%d',
 					'wishlist_name' => '%s',
@@ -248,12 +248,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 		/**
 		 * Delete a wishlist from DB
 		 *
-		 * @param $wishlist \YITH_WCWL_Wishlist
+		 * @param \YITH_WCWL_Wishlist $wishlist Wishlist to delete.
 		 */
-		public function delete( &$wishlist ){
+		public function delete( &$wishlist ) {
 			global $wpdb;
 
-			$id   = $wishlist->get_id();
+			$id         = $wishlist->get_id();
+			$is_default = $wishlist->is_default();
+			$user_id    = $wishlist->get_user_id();
+			$session_id = $wishlist->get_session_id();
 
 			if ( ! $id ) {
 				return;
@@ -261,14 +264,36 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			do_action( 'yith_wcwl_before_delete_wishlist', $wishlist->get_id() );
 
-			// delete wishlist and all its items
+			// delete wishlist and all its items.
 			$wpdb->delete( $wpdb->yith_wcwl_items, array( 'wishlist_id' => $id ) );
 			$wpdb->delete( $wpdb->yith_wcwl_wishlists, array( 'ID' => $id ) );
 
 			do_action( 'yith_wcwl_delete_wishlist', $wishlist->get_id() );
 
 			$wishlist->set_id( 0 );
-			do_action( 'yith_wcwl_delete_wishlist', $id );
+
+			do_action( 'yith_wcwl_deleted_wishlist', $id );
+
+			if ( $is_default && ( $user_id || $session_id ) ) {
+				// retrieve other lists for the same user.
+				$other_lists = $this->query(
+					array_merge(
+						array(
+							'orderby' => 'dateadded',
+							'order'   => 'asc',
+						),
+						$user_id ? array( 'user_id' => $user_id ) : array(),
+						$session_id ? array( 'session_id' => $session_id ) : array()
+					)
+				);
+
+				if ( ! empty( $other_lists ) ) {
+					$new_default = $other_lists[0];
+
+					$new_default->set_is_default( 1 );
+					$new_default->save();
+				}
+			}
 		}
 
 		/**
@@ -285,13 +310,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 		/**
 		 * Query database to search
+		 *
+		 * @return \YITH_WCWL_Wishlist[] Array of matched wishlists.
 		 */
 		public function query( $args = array() ) {
 			global $wpdb;
 
 			$default = array(
 				'id' => false,
-				'user_id' => ( is_user_logged_in() ) ? get_current_user_id(): false,
+				'user_id' => ( is_user_logged_in() ) ? get_current_user_id() : false,
 				'session_id' => ( ! is_user_logged_in() ) ? YITH_WCWL_Session()->get_session_id() : false,
 				'wishlist_slug' => false,
 				'wishlist_name' => false,
@@ -799,10 +826,17 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				if ( ! empty( $id ) && is_int( $id ) ) {
 					$default_wishlist->set_user_id( $id );
 				} elseif ( ! empty( $id ) && is_string( $id ) ) {
-					$default_wishlist->get_session_id( $id );
+					$default_wishlist->set_session_id( $id );
 				}
 
 				$default_wishlist->save();
+
+				/**
+				 * Let developers perform processing when default wishlist is created
+				 *
+				 * @since 3.0.10
+				 */
+				do_action( 'yith_wcwl_generated_default_wishlist', $default_wishlist, $id );
 			}
 			catch( Exception $e ){
 				return false;

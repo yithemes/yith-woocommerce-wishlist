@@ -393,7 +393,7 @@ jQuery( document ).ready( function( $ ){
             return false;
         } );
 
-        t.on('click', '.yith-wfbt-add-wishlist', function(e){
+        t.on( 'click', '.yith-wfbt-add-wishlist', function(e){
             e.preventDefault();
             var t    = $(this),
                 form = $( '#yith-wcwl-form' );
@@ -498,6 +498,10 @@ jQuery( document ).ready( function( $ ){
         t.on( 'yith_wcwl_fragments_loaded', function( ev ){
             $( '.variations_form' ).find( '.variations select' ).last().change();
         } );
+
+        t.on( 'click', '.yith-wcwl-popup-feedback .close-popup', function(){
+            close_pretty_photo();
+        } )
 
         init_wishlist_popup();
 
@@ -631,13 +635,13 @@ jQuery( document ).ready( function( $ ){
                 var mutation = mutationsList[ i ];
                 if ( mutation.type === 'childList' ) {
                   typeof mutation.addedNodes !== 'undefined' && mutation.addedNodes.forEach( function( currentValue ){
-                      if( currentValue.classList.contains( 'yith-wcwl-overlay' ) ){
+                      if( typeof currentValue.classList !== 'undefined' && currentValue.classList.contains( 'yith-wcwl-overlay' ) ){
                           $('body').addClass( 'yith-wcwl-with-pretty-photo' );
                       }
                   } );
 
                   typeof mutation.removedNodes !== 'undefined' && mutation.removedNodes.forEach( function( currentValue ){
-                      if( currentValue.classList.contains( 'yith-wcwl-overlay' ) ){
+                      if( typeof currentValue.classList !== 'undefined' && currentValue.classList.contains( 'yith-wcwl-overlay' ) ){
                           $('body').removeClass( 'yith-wcwl-with-pretty-photo' );
                       }
                   } );
@@ -1077,6 +1081,10 @@ jQuery( document ).ready( function( $ ){
     function init_wishlist_responsive() {
         var jqxhr = false;
 
+        if( ! yith_wcwl_l10n.is_wishlist_responsive ){
+            return;
+        }
+
         $( window ).on( 'resize', function( ev ){
             var table = $('.wishlist_table.responsive'),
                 mobile = table.is('.mobile'),
@@ -1431,7 +1439,9 @@ jQuery( document ).ready( function( $ ){
                     popup.addClass( 'feedback' );
                     popup.css( 'left', ( ( $( window ).innerWidth() / 2 ) - ( popup.outerWidth() / 2 ) ) + 'px' );
 
-                    setTimeout( close_pretty_photo, yith_wcwl_l10n.popup_timeout );
+                    if( typeof yith_wcwl_l10n.auto_close_popup == 'undefined' || yith_wcwl_l10n.auto_close_popup ) {
+                        setTimeout(close_pretty_photo, yith_wcwl_l10n.popup_timeout);
+                    }
                 }
             }
             else{

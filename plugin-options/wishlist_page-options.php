@@ -226,7 +226,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'name'    => __( 'Default wishlist name', 'yith-woocommerce-wishlist' ),
 			'desc'    => __( 'Enter a name for the default wishlist. This is the wishlist that will be automatically generated for all users if they do not create any custom one', 'yith-woocommerce-wishlist' ),
 			'id'      => 'yith_wcwl_wishlist_title',
-			'default' => sprintf( __( 'My wishlist on %s', 'yith-woocommerce-wishlist' ), get_bloginfo( 'name' ) ), // for woocommerce >= 2.0
+			'default' => __( 'My wishlist', 'yith-woocommerce-wishlist' ),
 			'type'    => 'text',
 		),
 

@@ -96,6 +96,7 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                 add_action( 'admin_action_yith_plugin_fw_save_toggle_element', array( $this, 'save_toggle_element_options' ) );
 
                 add_action( 'admin_enqueue_scripts', array( $this, 'init_wp_with_tabs' ), 11 );
+				add_action( 'admin_init', array( $this, 'maybe_redirect_to_proper_wp_page' ) );
 
                 // init actions once to prevent multiple actions
                 static::_init_actions();
@@ -136,7 +137,6 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
          * @author   Antonio La Rocca   <antonio.larocca@yithemes.com>
          */
         public function yit_panel() {
-            $this->maybe_redirect_to_proper_wp_page();
             $additional_info = array(
                 'current_tab'     => $this->get_current_tab(),
                 'current_sub_tab' => $this->get_current_sub_tab(),

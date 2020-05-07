@@ -178,15 +178,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Retrieve default wishlist for current user (or current session)
 		 *
-		 * @param $id string|int|bool Customer or session id; false if you want to use current customer or session
-		 * @param $context string Context; when on edit context, wishlist will be created, if not exists
+		 * @param string|int|bool $id      Customer or session id; false if you want to use current customer or session.
+		 * @param string          $context Context; when on edit context, wishlist will be created, if not exists.
+		 *
 		 * @return \YITH_WCWL_Wishlist|bool Wishlist object or false on failure
 		 */
 		public static function get_default_wishlist( $id = false, $context = 'read' ) {
 			try {
-				$token = WC_Data_Store::load( 'wishlist' )->get_default_wishlist( $id, $context );
-				return $token;
-			} catch( Exception $e ){
+				$default_wishlist = WC_Data_Store::load( 'wishlist' )->get_default_wishlist( $id, $context );
+				return apply_filters( 'yith_wcwl_default_wishlist', $default_wishlist, $id, $context );
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return false;
 			}
