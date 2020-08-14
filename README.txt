@@ -2,14 +2,14 @@
 
 Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
-Requires at least: 4.0
-Tested up to: 5.4
-Stable tag: 3.0.11
+Requires at least: 4.5
+Tested up to: 5.5
+Stable tag: 3.0.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
-WooCommerce 4.2.x compatible.
+WooCommerce 4.4.x compatible.
 
 == Description ==
 
@@ -112,6 +112,19 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.0.12 - Released on 14 August 2020 =
+
+* New: support for WordPress 5.5
+* New: support for WooCommerce 4.4
+* New: support for Polylang PRO
+* New: load correct Add to Wishlist (ATW) template for selected variation, and refresh it when changing variations on product page
+* Update: plugin framework
+* Fix: upsells are now correctly identified as loop by wishlist
+* Fix: icon select at backend showing [Object object]
+* Fix: changed fragments indexes to work with a greater set of configurations
+* Fix: notice when using custom icons for ATW buttons
+* Dev: added new filter yith_wcwl_fragments_index_glue
 
 = 3.0.11 - Released on 08 Jun 2020 =
 

@@ -11,6 +11,8 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
 
+/* === TESTER FUNCTIONS === */
+
 if ( ! function_exists( 'yith_wcwl_is_wishlist' ) ) {
 	/**
 	 * Check if we're printing wishlist shortcode
@@ -33,7 +35,7 @@ if ( ! function_exists( 'yith_wcwl_is_wishlist_page' ) ) {
 	 * @since 2.0.13
 	 */
 	function yith_wcwl_is_wishlist_page() {
-		$wishlist_page_id = yith_wcwl_object_id( get_option( 'yith_wcwl_wishlist_page_id' ) );
+		$wishlist_page_id = YITH_WCWL()->get_wishlist_page_id();
 
 		if ( ! $wishlist_page_id ) {
 			return false;
@@ -42,6 +44,35 @@ if ( ! function_exists( 'yith_wcwl_is_wishlist_page' ) ) {
 		return apply_filters( 'yith_wcwl_is_wishlist_page', is_page( $wishlist_page_id ) );
 	}
 }
+
+if ( ! function_exists( 'yith_wcwl_is_single' ) ) {
+	/**
+	 * Returns true if it finds that you're printing a single product
+	 * Should return false in any loop (including the ones inside single product page)
+	 *
+	 * @return bool Whether you're currently on single product template
+	 * @since 3.0.0
+	 */
+	function yith_wcwl_is_single() {
+		return apply_filters( 'yith_wcwl_is_single', is_product() && ! in_array( wc_get_loop_prop( 'name' ), array( 'related', 'up-sells' ) ) && ! wc_get_loop_prop( 'is_shortcode' ) );
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_is_mobile' ) ) {
+	/**
+	 * Returns true if we're currently on mobile view
+	 *
+	 * @return bool Whether you're currently on mobile view
+	 * @since 3.0.0
+	 */
+	function yith_wcwl_is_mobile() {
+		global $yith_wcwl_is_mobile;
+
+		return apply_filters( 'yith_wcwl_is_wishlist_responsive', true ) && ( wp_is_mobile() || $yith_wcwl_is_mobile );
+	}
+}
+
+/* === TEMPLATE FUNCTIONS === */
 
 if ( ! function_exists( 'yith_wcwl_locate_template' ) ) {
 	/**
@@ -156,6 +187,8 @@ if ( ! function_exists( 'yith_wcwl_get_template_part' ) ) {
 	}
 }
 
+/* === COUNT FUNCTIONS === */
+
 if ( ! function_exists( 'yith_wcwl_count_products' ) ) {
 	/**
 	 * Retrieve the number of products in the wishlist.
@@ -221,7 +254,7 @@ if ( ! function_exists( 'yith_wcwl_get_count_text' ) ) {
 		} else {
 			$other_count = $count - $current_user_count;
 			// translators: 1. Count of users when many, or "another" when only one.
-			$count_text = sprintf( _n( 'You and %s user', 'You and %d users', $other_count, 'yith-woocommerce-wishlist' ), 1 == $other_count ? 'another' : $other_count );
+			$count_text = sprintf( _n( 'You and %s user', 'You and %d users', $other_count, 'yith-woocommerce-wishlist' ), 1 == $other_count ? __( 'another', 'yith-woocommerce-wishlist' ) : $other_count );
 			$text       = __( 'have this item in wishlist', 'yith-woocommerce-wishlist' );
 		}
 
@@ -231,39 +264,7 @@ if ( ! function_exists( 'yith_wcwl_get_count_text' ) ) {
 	}
 }
 
-if ( ! function_exists( 'yith_frontend_css_color_picker' ) ) {
-	/**
-	 * Output a colour picker input box.
-	 *
-	 * This function is not of the plugin YITH WCWL. It is from WooCommerce.
-	 * We redeclare it only because it is needed in the tab "Styles" where it is not available.
-	 * The original function name is woocommerce_frontend_css_colorpicker and it is declared in
-	 * wp-content/plugins/woocommerce/admin/settings/settings-frontend-styles.php
-	 *
-	 * @access public
-	 *
-	 * @param mixed  $name  Name for the input field.
-	 * @param mixed  $id    Id for the input field.
-	 * @param mixed  $value Value for the input field.
-	 * @param string $desc  Description to show under input field (default '').
-	 *
-	 * @return void
-	 * @deprecated
-	 */
-	function yith_frontend_css_color_picker( $name, $id, $value, $desc = '' ) {
-		_deprecated_function( 'yith_frontend_css_color_picker', '3.0.0' );
-
-		$value = ! empty( $value ) ? $value : '#ffffff';
-
-		echo '<div  class="color_box">
-				  <table><tr><td>
-				  <strong>' . esc_html( $name ) . '</strong>
-				  <input name="' . esc_attr( $id ) . '" id="' . esc_attr( $id ) . '" type="text" value="' . esc_attr( $value ) . '" class="colorpick colorpickpreview" style="background-color: ' . esc_attr( $value ) . '" /> <div id="colorPickerDiv_' . esc_attr( $id ) . '" class="colorpickdiv"></div>
-				  </td></tr></table>
-			  </div>';
-
-	}
-}
+/* === COOKIE FUNCTIONS === */
 
 if ( ! function_exists( 'yith_wcwl_get_cookie_expiration' ) ) {
 	/**
@@ -338,25 +339,7 @@ if ( ! function_exists( 'yith_destroycookie' ) ) {
 	}
 }
 
-if ( ! function_exists( 'yith_wcwl_object_id' ) ) {
-	/**
-	 * Retrieve translated page id, if wpml is installed
-	 *
-	 * @param int $id Original page id.
-	 *
-	 * @return int Translation id
-	 * @since 1.0.0
-	 */
-	function yith_wcwl_object_id( $id ) {
-		if ( function_exists( 'wpml_object_id_filter' ) ) {
-			return wpml_object_id_filter( $id, 'page', true );
-		} elseif ( function_exists( 'icl_object_id' ) ) {
-			return icl_object_id( $id, 'page', true );
-		} else {
-			return $id;
-		}
-	}
-}
+/* === GET FUNCTIONS === */
 
 if ( ! function_exists( 'yith_wcwl_get_hidden_products' ) ) {
 	/**
@@ -417,34 +400,6 @@ if ( ! function_exists( 'yith_wcwl_get_wishlist' ) ) {
 	}
 }
 
-if ( ! function_exists( 'yith_wcwl_merge_in_array' ) ) {
-	/**
-	 * Merges an array of items into a specific position of an array
-	 *
-	 * @param array  $array    Origin array.
-	 * @param array  $element  Elements to merge.
-	 * @param string $pivot    Index to use as pivot.
-	 * @param string $position Where elements should be merged (before or after the pivot).
-	 *
-	 * @return array Result of the merge
-	 */
-	function yith_wcwl_merge_in_array( $array, $element, $pivot, $position = 'after' ) {
-		// search for the pivot inside array.
-		$pos = array_search( $pivot, array_keys( $array ) );
-
-		if ( false === $pos ) {
-			return $array;
-		}
-
-		// separate array into chunks.
-		$i      = 'after' == $position ? 1 : 0;
-		$part_1 = array_slice( $array, 0, $pos + $i );
-		$part_2 = array_slice( $array, $pos + $i );
-
-		return array_merge( $part_1, $element, $part_2 );
-	}
-}
-
 if ( ! function_exists( 'yith_wcwl_get_plugin_icons' ) ) {
 	/**
 	 * Return array of available icons
@@ -461,77 +416,6 @@ if ( ! function_exists( 'yith_wcwl_get_plugin_icons' ) ) {
 		$icons['custom'] = $custom_label ? $custom_label : __( 'Custom', 'yith-woocommerce-wishlist' );
 
 		return $icons;
-	}
-}
-
-if ( ! function_exists( 'yith_wcwl_maybe_format_field_array' ) ) {
-	/**
-	 * Take a field structure from plugin saved data, and format it as required by WC to print fields
-	 *
-	 * @param array $field_structure Array of fields as saved on db.
-	 *
-	 * @return array Array of fields as required by WC
-	 */
-	function yith_wcwl_maybe_format_field_array( $field_structure ) {
-		$fields = array();
-
-		if ( empty( $field_structure ) ) {
-			return array();
-		}
-
-		foreach ( $field_structure as $field ) {
-			if ( isset( $field['active'] ) && 'yes' != $field['active'] ) {
-				continue;
-			}
-
-			if ( empty( $field['label'] ) ) {
-				continue;
-			}
-
-			// format type.
-			$field_id = sanitize_title_with_dashes( $field['label'] );
-
-			// format options, if needed.
-			if ( ! empty( $field['options'] ) ) {
-				$options     = array();
-				$raw_options = explode( '|', $field['options'] );
-
-				if ( ! empty( $raw_options ) ) {
-					foreach ( $raw_options as $raw_option ) {
-						if ( strpos( $raw_option, '::' ) === false ) {
-							continue;
-						}
-
-						list( $id, $value ) = explode( '::', $raw_option );
-						$options[ $id ] = $value;
-					}
-				}
-
-				$field['options'] = $options;
-			}
-
-			// format class.
-			$field['class'] = array( 'form-row-' . $field['position'] );
-
-			// format requires.
-			$field['required'] = isset( $field['required'] ) && 'yes' == $field['required'];
-
-			// set custom attributes when field is required.
-			if ( $field['required'] ) {
-				$field['custom_attributes'] = array(
-					'required' => 'required',
-				);
-			}
-
-			// if type requires options, but no options was defined, skip field printing.
-			if ( in_array( $field['type'], array( 'select', 'radio' ) ) && empty( $field['options'] ) ) {
-				continue;
-			}
-
-			$fields[ $field_id ] = $field;
-		}
-
-		return $fields;
 	}
 }
 
@@ -621,34 +505,114 @@ if ( ! function_exists( 'yith_wcwl_get_current_url' ) ) {
 	function yith_wcwl_get_current_url() {
 		global $wp;
 
-		return add_query_arg( $wp->query_vars, home_url( $wp->request ) );
+		/**
+		 * Returns empty string by default, to avoid problems with unexpected redirects
+		 * Added filter to change default behaviour, passing what we think is current page url
+		 *
+		 * @since 3.0.12
+		 */
+		return apply_filters( 'yith_wcwl_current_url', '', add_query_arg( $wp->query_vars, home_url( $wp->request ) ) );
 	}
 }
 
-if ( ! function_exists( 'yith_wcwl_is_single' ) ) {
+/* === UTILITY FUNCTIONS === */
+
+if ( ! function_exists( 'yith_wcwl_merge_in_array' ) ) {
 	/**
-	 * Returns true if it finds that you're printing a single product
-	 * Should return false in any loop (including the ones inside single product page)
+	 * Merges an array of items into a specific position of an array
 	 *
-	 * @return bool Whether you're currently on single product template
-	 * @since 3.0.0
+	 * @param array  $array    Origin array.
+	 * @param array  $element  Elements to merge.
+	 * @param string $pivot    Index to use as pivot.
+	 * @param string $position Where elements should be merged (before or after the pivot).
+	 *
+	 * @return array Result of the merge
 	 */
-	function yith_wcwl_is_single() {
-		return apply_filters( 'yith_wcwl_is_single', is_product() && 'related' != wc_get_loop_prop( 'name' ) && ! wc_get_loop_prop( 'is_shortcode' ) );
+	function yith_wcwl_merge_in_array( $array, $element, $pivot, $position = 'after' ) {
+		// search for the pivot inside array.
+		$pos = array_search( $pivot, array_keys( $array ) );
+
+		if ( false === $pos ) {
+			return $array;
+		}
+
+		// separate array into chunks.
+		$i      = 'after' == $position ? 1 : 0;
+		$part_1 = array_slice( $array, 0, $pos + $i );
+		$part_2 = array_slice( $array, $pos + $i );
+
+		return array_merge( $part_1, $element, $part_2 );
 	}
 }
 
-if ( ! function_exists( 'yith_wcwl_is_mobile' ) ) {
+if ( ! function_exists( 'yith_wcwl_maybe_format_field_array' ) ) {
 	/**
-	 * Returns true if we're currently on mobile view
+	 * Take a field structure from plugin saved data, and format it as required by WC to print fields
 	 *
-	 * @return bool Whether you're currently on mobile view
-	 * @since 3.0.0
+	 * @param array $field_structure Array of fields as saved on db.
+	 *
+	 * @return array Array of fields as required by WC
 	 */
-	function yith_wcwl_is_mobile() {
-		global $yith_wcwl_is_mobile;
+	function yith_wcwl_maybe_format_field_array( $field_structure ) {
+		$fields = array();
 
-		return apply_filters( 'yith_wcwl_is_wishlist_responsive', true ) && ( wp_is_mobile() || $yith_wcwl_is_mobile );
+		if ( empty( $field_structure ) ) {
+			return array();
+		}
+
+		foreach ( $field_structure as $field ) {
+			if ( isset( $field['active'] ) && 'yes' != $field['active'] ) {
+				continue;
+			}
+
+			if ( empty( $field['label'] ) ) {
+				continue;
+			}
+
+			// format type.
+			$field_id = sanitize_title_with_dashes( $field['label'] );
+
+			// format options, if needed.
+			if ( ! empty( $field['options'] ) ) {
+				$options     = array();
+				$raw_options = explode( '|', $field['options'] );
+
+				if ( ! empty( $raw_options ) ) {
+					foreach ( $raw_options as $raw_option ) {
+						if ( strpos( $raw_option, '::' ) === false ) {
+							continue;
+						}
+
+						list( $id, $value ) = explode( '::', $raw_option );
+						$options[ $id ] = $value;
+					}
+				}
+
+				$field['options'] = $options;
+			}
+
+			// format class.
+			$field['class'] = array( 'form-row-' . $field['position'] );
+
+			// format requires.
+			$field['required'] = isset( $field['required'] ) && 'yes' == $field['required'];
+
+			// set custom attributes when field is required.
+			if ( $field['required'] ) {
+				$field['custom_attributes'] = array(
+					'required' => 'required',
+				);
+			}
+
+			// if type requires options, but no options was defined, skip field printing.
+			if ( in_array( $field['type'], array( 'select', 'radio' ) ) && empty( $field['options'] ) ) {
+				continue;
+			}
+
+			$fields[ $field_id ] = $field;
+		}
+
+		return $fields;
 	}
 }
 
@@ -664,5 +628,77 @@ if ( ! function_exists( 'yith_wcwl_add_notice' ) ) {
 	 */
 	function yith_wcwl_add_notice( $message, $notice_type = 'success', $data = array() ) {
 		function_exists( 'wc_add_notice' ) && wc_add_notice( $message, $notice_type, $data );
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_object_id' ) ) {
+	/**
+	 * Retrieve translated object id, if a translation plugin is active
+	 *
+	 * @param int    $id              Original object id.
+	 * @param string $type            Object type.
+	 * @param bool   $return_original Whether to return original object if no translation is found.
+	 * @param string $lang            Language to use for translation ().
+	 *
+	 * @return int Translation id
+	 * @since 1.0.0
+	 */
+	function yith_wcwl_object_id( $id, $type = 'page', $return_original = true, $lang = null ) {
+
+		// process special value for $lang.
+		if ( 'default' === $lang ) {
+			if ( defined('ICL_SITEPRESS_VERSION') ) { // wpml default language.
+				global $sitepress;
+				$lang = $sitepress->get_default_language();
+			} elseif( function_exists( 'pll_default_language' ) ) { // polylang default language.
+				$lang = pll_default_language( 'locale' );
+			} else { // cannot determine default language.
+				$lang = null;
+			}
+		}
+
+		// Should work with WPML and PolyLang.
+		$id = apply_filters( 'wpml_object_id', $id, $type, $return_original, $lang );
+
+		// Space for additional translations
+		$id = apply_filters( 'yith_wcwl_object_id', $id, $type, $return_original, $lang );
+
+		return $id;
+	}
+}
+
+/* === DEPRECATED FUNCTIONS === */
+
+if ( ! function_exists( 'yith_frontend_css_color_picker' ) ) {
+	/**
+	 * Output a colour picker input box.
+	 *
+	 * This function is not of the plugin YITH WCWL. It is from WooCommerce.
+	 * We redeclare it only because it is needed in the tab "Styles" where it is not available.
+	 * The original function name is woocommerce_frontend_css_colorpicker and it is declared in
+	 * wp-content/plugins/woocommerce/admin/settings/settings-frontend-styles.php
+	 *
+	 * @access public
+	 *
+	 * @param mixed  $name  Name for the input field.
+	 * @param mixed  $id    Id for the input field.
+	 * @param mixed  $value Value for the input field.
+	 * @param string $desc  Description to show under input field (default '').
+	 *
+	 * @return void
+	 * @deprecated
+	 */
+	function yith_frontend_css_color_picker( $name, $id, $value, $desc = '' ) {
+		_deprecated_function( 'yith_frontend_css_color_picker', '3.0.0' );
+
+		$value = ! empty( $value ) ? $value : '#ffffff';
+
+		echo '<div  class="color_box">
+				  <table><tr><td>
+				  <strong>' . esc_html( $name ) . '</strong>
+				  <input name="' . esc_attr( $id ) . '" id="' . esc_attr( $id ) . '" type="text" value="' . esc_attr( $value ) . '" class="colorpick colorpickpreview" style="background-color: ' . esc_attr( $value ) . '" /> <div id="colorPickerDiv_' . esc_attr( $id ) . '" class="colorpickdiv"></div>
+				  </td></tr></table>
+			  </div>';
+
 	}
 }

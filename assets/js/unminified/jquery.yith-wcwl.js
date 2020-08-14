@@ -6,6 +6,8 @@
  * @version 3.0.0
  */
 
+/* globals yith_wcwl_l10n, wc_add_to_cart_params, yith_wccl_general */
+
 jQuery( document ).ready( function( $ ){
 
     /* === MAIN INIT === */
@@ -56,7 +58,7 @@ jQuery( document ).ready( function( $ ){
             }
 
             if( ! is_cookie_enabled() ){
-                alert( yith_wcwl_l10n.labels.cookie_disabled );
+                window.alert( yith_wcwl_l10n.labels.cookie_disabled );
                 return;
             }
 
@@ -80,7 +82,7 @@ jQuery( document ).ready( function( $ ){
                         close_pretty_photo( response_message );
 
                         // update options for all wishlist selects
-                        if( typeof( response.user_wishlists ) != 'undefined' ) {
+                        if( typeof( response.user_wishlists ) !== 'undefined' ) {
                             update_wishlists( response.user_wishlists );
                         }
                     }
@@ -88,8 +90,8 @@ jQuery( document ).ready( function( $ ){
                         print_message(response_message);
                     }
 
-                    if( response_result === "true" || response_result === "exists" ) {
-                        if( typeof response.fragments != 'undefined' ) {
+                    if( response_result === 'true' || response_result === 'exists' ) {
+                        if( typeof response.fragments !== 'undefined' ) {
                             replace_fragments( response.fragments );
                         }
 
@@ -121,7 +123,7 @@ jQuery( document ).ready( function( $ ){
         } );
 
         t.on( 'adding_to_cart', 'body', function( ev, button, data ){
-            if( typeof button != 'undefined' && typeof data != 'undefined' && button.closest( '.wishlist_table' ).length ){
+            if( typeof button !== 'undefined' && typeof data !== 'undefined' && button.closest( '.wishlist_table' ).length ){
                 data.remove_from_wishlist_after_add_to_cart = button.closest( '[data-row-id]' ).data( 'row-id' );
                 data.wishlist_id = button.closest( '.wishlist_table' ).data( 'id' );
                 typeof wc_add_to_cart_params !== 'undefined' && ( wc_add_to_cart_params.cart_redirect_after_add = yith_wcwl_l10n.redirect_to_cart );
@@ -130,7 +132,7 @@ jQuery( document ).ready( function( $ ){
         } );
 
         t.on( 'added_to_cart', 'body', function( ev, fragments, carthash, button ){
-            if( typeof button != 'undefined' && button.closest( '.wishlist_table' ).length ) {
+            if( typeof button !== 'undefined' && button.closest( '.wishlist_table' ).length ) {
                 typeof wc_add_to_cart_params !== 'undefined' && ( wc_add_to_cart_params.cart_redirect_after_add = cart_redirect_after_add );
                 typeof yith_wccl_general !== 'undefined' && ( yith_wccl_general.cart_redirect = cart_redirect_after_add );
 
@@ -191,7 +193,7 @@ jQuery( document ).ready( function( $ ){
                 dataType: 'json',
                 method: 'post',
                 success: function( data ){
-                    if( typeof data.fragments != 'undefined' ){
+                    if( typeof data.fragments !== 'undefined' ){
                         replace_fragments( data.fragments );
                     }
 
@@ -225,7 +227,7 @@ jQuery( document ).ready( function( $ ){
                     block( table );
                 },
                 function( data ){
-                    if( typeof data.fragments != 'undefined' ) {
+                    if( typeof data.fragments !== 'undefined' ) {
                         replace_fragments( data.fragments );
                     }
 
@@ -270,7 +272,7 @@ jQuery( document ).ready( function( $ ){
                     if( yith_wcwl_l10n.multi_wishlist ) {
                         close_pretty_photo( response_message );
 
-                        if( typeof( response.user_wishlists ) != 'undefined' ){
+                        if( typeof( response.user_wishlists ) !== 'undefined' ){
                             update_wishlists( response.user_wishlists );
                         }
                     }
@@ -278,7 +280,7 @@ jQuery( document ).ready( function( $ ){
                         print_message(response_message);
                     }
 
-                    if( typeof response.fragments != 'undefined' ) {
+                    if( typeof response.fragments !== 'undefined' ) {
                         replace_fragments( response.fragments );
                     }
 
@@ -304,7 +306,7 @@ jQuery( document ).ready( function( $ ){
                 },
                 dataType: 'json',
                 beforeSend: function(){
-                    block( t )
+                    block( t );
                 },
                 complete: function(){
                     unblock( t );
@@ -322,7 +324,7 @@ jQuery( document ).ready( function( $ ){
                         print_message(response_message);
                     }
 
-                    if( typeof fragments != 'undefined' ){
+                    if( typeof fragments !== 'undefined' ){
                         replace_fragments( fragments );
                     }
 
@@ -375,22 +377,22 @@ jQuery( document ).ready( function( $ ){
                 dataType: 'json',
                 method: 'post',
                 success: function( data ){
-                    if( typeof data.result != 'undefined' && data.result ){
+                    if( typeof data.result !== 'undefined' && data.result ){
                         var template = data.template;
 
-                        if( typeof template != 'undefined' ){
+                        if( typeof template !== 'undefined' ){
                             form.replaceWith( template );
                             pp_content.css('height', 'auto');
 
-                            setTimeout( close_pretty_photo, 3000 );
+                            setTimeout( close_pretty_photo, yith_wcwl_l10n.time_to_close_prettyphoto );
                         }
                     }
-                    else if( typeof data.message != 'undefined' ){
+                    else if( typeof data.message !== 'undefined' ){
                         form.find( '.woocommerce-error' ).remove();
                         form.find( '.popup-description' ).after( $('<div>', {
-                            text: data.message,
-                            class: 'woocommerce-error'
-                        } ) )
+                            'text' : data.message,
+                            'class': 'woocommerce-error'
+                        } ) );
                     }
                 },
                 url: yith_wcwl_l10n.ajax_url
@@ -424,7 +426,8 @@ jQuery( document ).ready( function( $ ){
             var t = $( ev.target ),
                 product_id = t.data( 'product_id' ),
                 variation_id = variation.variation_id,
-                targets = $('.add_to_wishlist[data-product-id="' + product_id + '"]').add('.add_to_wishlist[data-original-product-id="' + product_id + '"]');
+                targets = $('[data-product-id="' + product_id + '"]').add('[data-original-product-id="' + product_id + '"]'),
+                fragments = targets.closest( '.wishlist-fragment' );
 
             if( ! product_id || ! variation_id || ! targets.length ){
                 return;
@@ -441,7 +444,7 @@ jQuery( document ).ready( function( $ ){
                 if( container.length ) {
                     options = container.data( 'fragment-options' );
 
-                    if( typeof options != 'undefined' ){
+                    if( typeof options !== 'undefined' ){
                         options.product_id = variation_id;
                         container.data( 'fragment-options', options );
                     }
@@ -454,12 +457,20 @@ jQuery( document ).ready( function( $ ){
                         .attr('data-fragment-ref', variation_id);
                 }
             } );
+
+            block( fragments );
+
+            load_fragments( {
+                fragments: fragments,
+                firstLoad: false
+            } );
         } );
 
         t.on( 'reset_data', function( ev ){
             var t = $( ev.target ),
                 product_id = t.data( 'product_id' ),
-                targets = $('.add_to_wishlist[data-original-product-id="' + product_id + '"]');
+                targets = $('[data-original-product-id="' + product_id + '"]'),
+                fragments = targets.closest( '.wishlist-fragment' );
 
             if( ! product_id || ! targets.length ){
                 return;
@@ -477,7 +488,7 @@ jQuery( document ).ready( function( $ ){
                 if( container.length ) {
                     options = container.data( 'fragment-options' );
 
-                    if( typeof options != 'undefined' ){
+                    if( typeof options !== 'undefined' ){
                         options.product_id = product_id;
                         container.data( 'fragment-options', options );
                     }
@@ -487,6 +498,13 @@ jQuery( document ).ready( function( $ ){
                         .addClass('add-to-wishlist-' + product_id)
                         .attr('data-fragment-ref', product_id);
                 }
+            } );
+
+            block( fragments );
+
+            load_fragments( {
+                fragments: fragments,
+                firstLoad: false
             } );
         } );
 
@@ -499,13 +517,19 @@ jQuery( document ).ready( function( $ ){
             } );
         } );
 
-        t.on( 'yith_wcwl_fragments_loaded', function( ev ){
+        t.on( 'yith_wcwl_fragments_loaded', function( ev, original, update, firstLoad ){
+            if ( ! firstLoad ) {
+               return;
+            }
+
             $( '.variations_form' ).find( '.variations select' ).last().change();
         } );
 
-        t.on( 'click', '.yith-wcwl-popup-feedback .close-popup', function(){
+        t.on( 'click', '.yith-wcwl-popup-feedback .close-popup', function(ev){
+            ev.preventDefault();
+
             close_pretty_photo();
-        } )
+        } );
 
         init_wishlist_popup();
 
@@ -546,7 +570,7 @@ jQuery( document ).ready( function( $ ){
      * @since 3.0.0
      */
     function init_select_box() {
-        if( typeof $.fn.selectBox != 'undefined' ) {
+        if( typeof $.fn.selectBox !== 'undefined' ) {
             $('select.selectBox').filter(':visible').not('.enhanced').selectBox().addClass('enhanced');
         }
     }
@@ -558,7 +582,7 @@ jQuery( document ).ready( function( $ ){
      * @since 2.0.16
      */
     function init_wishlist_pretty_photo() {
-        if( typeof $.prettyPhoto == 'undefined' ){
+        if( typeof $.prettyPhoto === 'undefined' ){
             return;
         }
 
@@ -574,7 +598,7 @@ jQuery( document ).ready( function( $ ){
             changepicturecallback : function(){
                 init_select_box();
 
-                $('.wishlist-select').change();
+                $('.wishlist-select').filter(':visible').change();
                 $(document).trigger( 'yith_wcwl_popup_opened', [ this ] );
             },
             markup: '<div class="pp_pic_holder">' +
@@ -634,24 +658,29 @@ jQuery( document ).ready( function( $ ){
         } ).prettyPhoto( ppParams );
 
         // add & remove class to body when popup is opened
-        var observer = new MutationObserver( function( mutationsList, observer ){
-            for ( var i in mutationsList ) {
-                var mutation = mutationsList[ i ];
-                if ( mutation.type === 'childList' ) {
-                  typeof mutation.addedNodes !== 'undefined' && mutation.addedNodes.forEach( function( currentValue ){
-                      if( typeof currentValue.classList !== 'undefined' && currentValue.classList.contains( 'yith-wcwl-overlay' ) ){
-                          $('body').addClass( 'yith-wcwl-with-pretty-photo' );
-                      }
-                  } );
+        var callback = function( node, op ){
+                if( typeof node.classList !== 'undefined' && node.classList.contains( 'yith-wcwl-overlay' ) ){
+                    var method = 'remove' === op ? 'removeClass' : 'addClass';
 
-                  typeof mutation.removedNodes !== 'undefined' && mutation.removedNodes.forEach( function( currentValue ){
-                      if( typeof currentValue.classList !== 'undefined' && currentValue.classList.contains( 'yith-wcwl-overlay' ) ){
-                          $('body').removeClass( 'yith-wcwl-with-pretty-photo' );
-                      }
-                  } );
+                    $('body')[method]( 'yith-wcwl-with-pretty-photo' );
                 }
-            }
-        } );
+            },
+            callbackAdd = function( node ) {
+                callback( node, 'add' );
+            },
+            callbackRemove = function( node ) {
+                callback( node, 'remove' );
+            },
+            observer = new MutationObserver( function( mutationsList ){
+                for ( var i in mutationsList ) {
+                    var mutation = mutationsList[ i ];
+                    if ( mutation.type === 'childList' ) {
+                      typeof mutation.addedNodes !== 'undefined' && mutation.addedNodes.forEach( callbackAdd);
+
+                      typeof mutation.removedNodes !== 'undefined' && mutation.removedNodes.forEach( callbackRemove );
+                    }
+                }
+            } );
 
         observer.observe( document.body, {
           childList: true
@@ -690,14 +719,14 @@ jQuery( document ).ready( function( $ ){
                 icon;
 
             if( data.match( /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi ) ){
-                icon = $( '<img/>', { src: data } );
+                icon = $( '<img/>', { 'src': data } );
             }
             else{
-                icon = $( '<i/>', { class: 'fa ' + data } );
+                icon = $( '<i/>', { 'class': 'fa ' + data } );
             }
 
             t.prepend( icon ).addClass('icon-added');
-        } )
+        } );
     }
 
     /**
@@ -715,6 +744,7 @@ jQuery( document ).ready( function( $ ){
         init_wishlist_tooltip();
         init_wishlist_details_popup();
         init_wishlist_drag_n_drop();
+        init_quantity();
         init_copy_wishlist_link();
 
         $(document).trigger( 'yith_wcwl_init_after_ajax' );
@@ -746,7 +776,7 @@ jQuery( document ).ready( function( $ ){
                         left = 0,
                         width = 0;
 
-                    tooltip = $('<span>', {class: 'yith-wcwl-tooltip', text: t.data('title')});
+                    tooltip = $('<span>', {'class': 'yith-wcwl-tooltip', 'text': t.data('title')});
 
                     t.append(tooltip);
 
@@ -777,7 +807,7 @@ jQuery( document ).ready( function( $ ){
      * @since 2.0.0
      */
     function init_wishlist_popup() {
-        if( typeof yith_wcwl_l10n.enable_notices != 'undefined' && ! yith_wcwl_l10n.enable_notices ){
+        if( typeof yith_wcwl_l10n.enable_notices !== 'undefined' && ! yith_wcwl_l10n.enable_notices ){
             return;
         }
 
@@ -902,7 +932,7 @@ jQuery( document ).ready( function( $ ){
             clearTimeout( timeout );
 
             // set add to cart link to add specific qty to cart
-            row.find( '.add_to_cart' ).data('quantity', t.val());
+            row.find( '.add_to_cart' ).attr('data-quantity', t.val());
 
             timeout = setTimeout( function(){
                 if( jqxhr ){
@@ -949,7 +979,7 @@ jQuery( document ).ready( function( $ ){
                     } else {
                         obj_to_copy.select();
                     }
-                    document.execCommand("copy");
+                    document.execCommand( 'copy' );
                 } else {
 
                     var hidden = $('<input/>', {
@@ -957,7 +987,7 @@ jQuery( document ).ready( function( $ ){
                         type: 'text'
                     });
 
-                    b('body').append(hidden);
+                    $('body').append(hidden);
 
                     if (isOS()) {
                         hidden[0].setSelectionRange(0, 9999);
@@ -1058,7 +1088,7 @@ jQuery( document ).ready( function( $ ){
             }
         } );
 
-        $(document).on( 'change', '.wishlist-select', function(ev){
+        $(document).on( 'change', '.wishlist-select', function(){
             var t = $(this),
                 container = t.closest('.yith-wcwl-popup-content'),
                 tab = t.closest( '.tab' ),
@@ -1077,7 +1107,7 @@ jQuery( document ).ready( function( $ ){
                 t.find('option').removeProp( 'selected' );
                 t.change();
             }
-        } )
+        } );
     }
 
     /**
@@ -1093,7 +1123,7 @@ jQuery( document ).ready( function( $ ){
             return;
         }
 
-        $( window ).on( 'resize', function( ev ){
+        $( window ).on( 'resize', function(){
             var table = $('.wishlist_table.responsive'),
                 mobile = table.is('.mobile'),
                 media = window.matchMedia( '(max-width: 768px)' ),
@@ -1121,7 +1151,7 @@ jQuery( document ).ready( function( $ ){
                     jqxhr.abort();
                 }
 
-                fragments[ id ] = options;
+                fragments[ id.split( ' ' ).join( yith_wcwl_l10n.fragments_index_glue ) ] = options;
 
                 jqxhr = $.ajax( {
                     beforeSend: function(){
@@ -1136,7 +1166,7 @@ jQuery( document ).ready( function( $ ){
                     },
                     method: 'post',
                     success: function( data ){
-                        if( typeof data.fragments != 'undefined' ){
+                        if( typeof data.fragments !== 'undefined' ){
                             replace_fragments( data.fragments );
 
                             init_handling_after_ajax();
@@ -1212,7 +1242,7 @@ jQuery( document ).ready( function( $ ){
             data: data,
             method: 'post',
             success: function( data ){
-                if( typeof data.fragments != 'undefined' ){
+                if( typeof data.fragments !== 'undefined' ){
                     replace_fragments( data.fragments );
                 }
 
@@ -1234,7 +1264,7 @@ jQuery( document ).ready( function( $ ){
      */
     function reload_wishlist_and_adding_elem( el, form ) {
 
-        var product_id = el.data( 'data-product-id' ),
+        var product_id = el.attr( 'data-product-id' ),
             table = $(document).find( '.cart.wishlist_table' ),
             pagination = table.data( 'pagination' ),
             per_page = table.data( 'per-page' ),
@@ -1247,12 +1277,13 @@ jQuery( document ).ready( function( $ ){
                 wishlist_id: wishlist_id,
                 wishlist_token: wishlist_token,
                 add_to_wishlist: product_id,
+                context: 'frontend',
                 product_type: el.data( 'product-type' )
             };
 
         if( ! is_cookie_enabled() ){
-            alert( yith_wcwl_l10n.labels.cookie_disabled );
-            return
+            window.alert( yith_wcwl_l10n.labels.cookie_disabled );
+            return;
         }
 
         $.ajax({
@@ -1267,11 +1298,15 @@ jQuery( document ).ready( function( $ ){
                 unblock( table );
             },
             success: function(res) {
-                var obj      = $(res),
-                    new_form = obj.find('#yith-wcwl-form'); // get new form
+                var obj         = $(res),
+                    new_form    = obj.find('#yith-wcwl-form'), // get new form
+                    shortcode   = obj.find('.yith-wfbt-slider-wrapper'); // get new form
 
                 form.replaceWith( new_form );
+                $('.yith-wfbt-slider-wrapper').replaceWith( shortcode );
                 init_handling_after_ajax();
+
+                $(document).trigger( 'yith_wcwl_reload_wishlist_from_frequently' );
             }
         });
     }
@@ -1371,7 +1406,7 @@ jQuery( document ).ready( function( $ ){
                     title_input.focus();
                 }
 
-                if( typeof fragments != 'undefined' ){
+                if( typeof fragments !== 'undefined' ){
                     replace_fragments( fragments );
                 }
             }
@@ -1381,11 +1416,10 @@ jQuery( document ).ready( function( $ ){
     /**
      * Submit form to save a new wishlist privacy
      *
-     * @param ev event
      * @return void
      * @since 2.0.7
      */
-    function save_privacy( ev ){
+    function save_privacy(){
         var t = $(this),
             new_privacy = t.val(),
             row = t.closest( '[data-wishlist-id]' ),
@@ -1405,7 +1439,7 @@ jQuery( document ).ready( function( $ ){
             success: function( response ) {
                 var fragments = response.fragments;
 
-                if( typeof fragments != 'undefined' ){
+                if( typeof fragments !== 'undefined' ){
                     replace_fragments( fragments );
                 }
             }
@@ -1421,8 +1455,8 @@ jQuery( document ).ready( function( $ ){
      * @since 3.0.0
      */
     function close_pretty_photo( message ) {
-        if( typeof $.prettyPhoto != 'undefined' && typeof $.prettyPhoto.close != 'undefined' ) {
-            if( typeof message != 'undefined' ){
+        if( typeof $.prettyPhoto !== 'undefined' && typeof $.prettyPhoto.close !== 'undefined' ) {
+            if( typeof message !== 'undefined' ){
                 var container = $('.pp_content_container'),
                     content = container.find('.pp_content'),
                     form = container.find('.yith-wcwl-popup-form'),
@@ -1430,11 +1464,11 @@ jQuery( document ).ready( function( $ ){
 
                 if( form.length ){
                     var new_content = $( '<div/>', {
-                        class: 'yith-wcwl-popup-feedback'
+                        'class': 'yith-wcwl-popup-feedback'
                     } );
 
-                    new_content.append( $( '<i/>', { class: 'fa fa-check heading-icon' } ) );
-                    new_content.append( $( '<p/>', { class: 'feedback', html: message } ) );
+                    new_content.append( $( '<i/>', { 'class': 'fa fa-check heading-icon' } ) );
+                    new_content.append( $( '<p/>', { 'class': 'feedback', 'html': message } ) );
                     new_content.css( 'display', 'none' );
 
                     content.css( 'height', 'auto' );
@@ -1447,7 +1481,7 @@ jQuery( document ).ready( function( $ ){
                     popup.addClass( 'feedback' );
                     popup.css( 'left', ( ( $( window ).innerWidth() / 2 ) - ( popup.outerWidth() / 2 ) ) + 'px' );
 
-                    if( typeof yith_wcwl_l10n.auto_close_popup == 'undefined' || yith_wcwl_l10n.auto_close_popup ) {
+                    if( typeof yith_wcwl_l10n.auto_close_popup === 'undefined' || yith_wcwl_l10n.auto_close_popup ) {
                         setTimeout(close_pretty_photo, yith_wcwl_l10n.popup_timeout);
                     }
                 }
@@ -1471,9 +1505,9 @@ jQuery( document ).ready( function( $ ){
     function print_message( response_message ) {
         var msgPopup = $( '#yith-wcwl-popup-message' ),
             msg = $( '#yith-wcwl-message' ),
-            timeout = typeof yith_wcwl_l10n.popup_timeout != 'undefined' ? yith_wcwl_l10n.popup_timeout : 3000;
+            timeout = typeof yith_wcwl_l10n.popup_timeout !== 'undefined' ? yith_wcwl_l10n.popup_timeout : 3000;
 
-        if( typeof yith_wcwl_l10n.enable_notices != 'undefined' && ! yith_wcwl_l10n.enable_notices ){
+        if( typeof yith_wcwl_l10n.enable_notices !== 'undefined' && ! yith_wcwl_l10n.enable_notices ){
             return;
         }
 
@@ -1501,7 +1535,7 @@ jQuery( document ).ready( function( $ ){
                 wishlist_options = t.find( 'option' ),
                 new_option = wishlist_options.filter( '[value="new"]' );
 
-            wishlist_options.not(new_option ).remove();
+            wishlist_options.not( new_option ).remove();
 
             $.each( wishlists, function( i, v ){
                 $('<option>', { value: v.id, html: v.wishlist_name } ).appendTo(t);
@@ -1521,11 +1555,15 @@ jQuery( document ).ready( function( $ ){
 
             wishlist_options.remove();
             $.each( wishlists, function( i, v ) {
+                if ( v['default'] ) {
+                    return;
+                }
+
                 $('<li>').append( $('<a>', {
-                    rel: 'nofollow',
-                    html: v.wishlist_name,
-                    class: 'add_to_wishlist',
-                    href: v.add_to_this_wishlist_url,
+                    'rel': 'nofollow',
+                    'html': v.wishlist_name,
+                    'class': 'add_to_wishlist',
+                    'href': v.add_to_this_wishlist_url,
                     'data-product-id': product_id,
                     'data-product-type': product_type,
                     'data-wishlist-id': v.id
@@ -1542,7 +1580,7 @@ jQuery( document ).ready( function( $ ){
      * @since 3.0.0
      */
     function block( item ) {
-        if( typeof $.fn.block != 'undefined' ) {
+        if( typeof $.fn.block !== 'undefined' ) {
             item.fadeTo('400', '0.6').block( {
                 message: null,
                 overlayCSS : {
@@ -1562,7 +1600,7 @@ jQuery( document ).ready( function( $ ){
      * @since 3.0.0
      */
     function unblock( item ) {
-        if( typeof $.fn.unblock != 'undefined' ) {
+        if( typeof $.fn.unblock !== 'undefined' ) {
             item.stop(true).css('opacity', '1').unblock();
         }
     }
@@ -1574,14 +1612,16 @@ jQuery( document ).ready( function( $ ){
      * @since 2.0.0
      */
     function is_cookie_enabled() {
-        if (navigator.cookieEnabled) return true;
+        if ( navigator.cookieEnabled ) {
+            return true;
+        }
 
         // set and read cookie
-        document.cookie = "cookietest=1";
-        var ret = document.cookie.indexOf("cookietest=") !== -1;
+        document.cookie = 'cookietest=1';
+        var ret = document.cookie.indexOf('cookietest=') !== -1;
 
         // delete cookie
-        document.cookie = "cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        document.cookie = 'cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT';
 
         return ret;
     }
@@ -1600,12 +1640,17 @@ jQuery( document ).ready( function( $ ){
         if( search ){
             if( typeof search === 'object' ){
                 search = $.extend( {
+                    fragments: null,
                     s: '',
                     container: $(document),
                     firstLoad: false
                 }, search );
 
-                fragments = search.container.find( '.wishlist-fragment' );
+                if( ! search.fragments ) {
+                    fragments = search.container.find('.wishlist-fragment');
+                } else {
+                    fragments = search.fragments;
+                }
 
                 if( search.s ){
                     fragments = fragments.not('[data-fragment-ref]').add(fragments.filter('[data-fragment-ref="' + search.s + '"]'));
@@ -1618,7 +1663,7 @@ jQuery( document ).ready( function( $ ){
             else {
                 fragments = $('.wishlist-fragment');
 
-                if (typeof search == 'string' || typeof search == 'number') {
+                if (typeof search === 'string' || typeof search === 'number') {
                     fragments = fragments.not('[data-fragment-ref]').add(fragments.filter('[data-fragment-ref="' + search + '"]'));
                 }
             }
@@ -1629,7 +1674,7 @@ jQuery( document ).ready( function( $ ){
 
         fragments.each( function(){
             var t = $(this),
-                id = t.attr('class');
+                id = t.attr( 'class' ).split( ' ' ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( yith_wcwl_l10n.fragments_index_glue );
 
             options[ id ] = t.data('fragment-options');
         } );
@@ -1665,12 +1710,12 @@ jQuery( document ).ready( function( $ ){
             },
             method: 'post',
             success: function( data ){
-                if( typeof data.fragments != 'undefined' ){
+                if( typeof data.fragments !== 'undefined' ){
                     replace_fragments( data.fragments );
 
                     init_handling_after_ajax();
 
-                    $(document).trigger( 'yith_wcwl_fragments_loaded', [ fragments, data.fragments ] );
+                    $(document).trigger( 'yith_wcwl_fragments_loaded', [ fragments, data.fragments, search.firstLoad ] );
                 }
             },
             url: yith_wcwl_l10n.ajax_url
@@ -1685,7 +1730,7 @@ jQuery( document ).ready( function( $ ){
      */
     function replace_fragments( fragments ) {
        $.each( fragments, function( i, v ){
-           var itemSelector = '.' + i.split( ' ' ).filter( function(val){ return val.length && val !== 'exists' } ).join( '.' ),
+           var itemSelector = '.' + i.split( yith_wcwl_l10n.fragments_index_glue ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( '.' ),
                toReplace = $( itemSelector );
 
            // find replace tempalte

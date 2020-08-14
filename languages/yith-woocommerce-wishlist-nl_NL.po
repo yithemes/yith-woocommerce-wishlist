@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/init\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-06-08 18:49+0200\n"
+"PO-Revision-Date: 2020-08-14 12:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
 "Language: nl_NL\n"
@@ -62,12 +62,12 @@ msgstr ""
 "commerce, maken en delen."
 
 #: ../includes/class.yith-wcwl-ajax-handler.php:67,
-#: ../templates/add-to-wishlist-remove.php:50
+#: ../templates/add-to-wishlist-remove.php:51
 msgid "View &rsaquo;"
 msgstr "Bekijk &rsaquo;"
 
 #: ../includes/class.yith-wcwl-ajax-handler.php:68,
-#: ../templates/add-to-wishlist-remove.php:49
+#: ../templates/add-to-wishlist-remove.php:50
 msgid "or"
 msgstr "of"
 
@@ -75,8 +75,8 @@ msgstr "of"
 msgid "Close"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-ajax-handler.php:133,
-#: ../includes/class.yith-wcwl-ajax-handler.php:166
+#: ../includes/class.yith-wcwl-ajax-handler.php:134,
+#: ../includes/class.yith-wcwl-ajax-handler.php:167
 msgid "Product successfully removed."
 msgstr "Product succesvol verwijderd."
 
@@ -84,7 +84,7 @@ msgstr "Product succesvol verwijderd."
 msgid "Please, make sure to enter a valid title"
 msgstr "let op dat u een geldige titel invoert"
 
-#: ../includes/class.yith-wcwl-frontend.php:398
+#: ../includes/class.yith-wcwl-frontend.php:400
 msgid ""
 "We are sorry, but this feature is available only if cookies on your browser "
 "are enabled."
@@ -92,11 +92,11 @@ msgstr ""
 "Sorry, deze optie is alleen beschikbaar als cookies in uw browser zijn "
 "ingeschakeld."
 
-#: ../includes/class.yith-wcwl-frontend.php:399
+#: ../includes/class.yith-wcwl-frontend.php:401
 msgid "Product added to cart successfully"
 msgstr "Product succesvol toegevoegd aan winkelwagen"
 
-#: ../includes/class.yith-wcwl-frontend.php:645,
+#: ../includes/class.yith-wcwl-frontend.php:648,
 #: ../includes/class.yith-wcwl-shortcode.php:237,
 #: ../plugin-options/wishlist_page-options.php:237,
 #: ../templates/wishlist-view-footer-mobile.php:44,
@@ -348,31 +348,31 @@ msgstr "Verwijderen van lijst"
 msgid "Free!"
 msgstr "Gratis!"
 
-#: ../includes/class.yith-wcwl-wishlist-item.php:416
+#: ../includes/class.yith-wcwl-wishlist-item.php:415
 msgctxt ""
 "Part of the template that shows price variation since addition to list; "
 "placeholder will be replaced with a percentage"
 msgid "Price is %1$s%%"
 msgstr ""
 
-#: ../includes/class.yith-wcwl-wishlist-item.php:417
+#: ../includes/class.yith-wcwl-wishlist-item.php:416
 msgctxt ""
 "Part of the template that shows price variation since addition to list; "
 "placeholder will be replaced with a price"
 msgid "(Was %2$s when added  in list)"
 msgstr ""
 
-#: ../includes/class.yith-wcwl.php:161
+#: ../includes/class.yith-wcwl.php:164
 msgid "The item cannot be added to this wishlist"
 msgstr "Het item kan niet worden toegevoegd aan deze verlanglijst"
 
-#: ../includes/class.yith-wcwl.php:165, ../includes/class.yith-wcwl.php:171
+#: ../includes/class.yith-wcwl.php:168, ../includes/class.yith-wcwl.php:174
 msgid "An error occurred while adding the products to the wishlist."
 msgstr ""
 "Er is een fout opgetreden tijdens het toevoegen van het product aan de "
 "verlanglijst."
 
-#: ../includes/class.yith-wcwl.php:230, ../includes/class.yith-wcwl.php:236
+#: ../includes/class.yith-wcwl.php:233, ../includes/class.yith-wcwl.php:239
 msgid "Error. Unable to remove the product from the wishlist."
 msgstr "Fout. Het product kon niet van de verlanglijst worden verwijderd."
 
@@ -386,68 +386,72 @@ msgid "Invalid wishlist item."
 msgstr "Ongeldig verlanglijst item."
 
 #. translators: 1. Number of users.
-#: ../includes/functions.yith-wcwl.php:216
+#: ../includes/functions.yith-wcwl.php:249
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d gebruiker"
 msgstr[1] "%d gebruikers"
 
-#: ../includes/functions.yith-wcwl.php:217
+#: ../includes/functions.yith-wcwl.php:250
 msgid "has this item in wishlist"
 msgid_plural "have this item in wishlist"
 msgstr[0] "heeft dit item in de verlanglijst"
 msgstr[1] "hebben dit item in de verlanglijst"
 
-#: ../includes/functions.yith-wcwl.php:219
+#: ../includes/functions.yith-wcwl.php:252
 msgid "You're the first"
 msgstr "U bent de eerste"
 
-#: ../includes/functions.yith-wcwl.php:220
+#: ../includes/functions.yith-wcwl.php:253
 msgid "to add this item in wishlist"
 msgstr "dit item toevoegen aan verlanglijst"
 
 #. translators: 1. Count of users when many, or "another" when only one.
-#: ../includes/functions.yith-wcwl.php:224
+#: ../includes/functions.yith-wcwl.php:257
 msgid "You and %s user"
 msgid_plural "You and %d users"
 msgstr[0] "U en %s gebruiker"
 msgstr[1] "U en %s gebruikers"
 
-#: ../includes/functions.yith-wcwl.php:225
+#: ../includes/functions.yith-wcwl.php:257
+msgid "another"
+msgstr ""
+
+#: ../includes/functions.yith-wcwl.php:258
 msgid "have this item in wishlist"
 msgstr "hebben dit item in de verlanglijst"
 
-#: ../includes/functions.yith-wcwl.php:460
+#: ../includes/functions.yith-wcwl.php:415
 msgid "None"
 msgstr ""
 
-#: ../includes/functions.yith-wcwl.php:461
+#: ../includes/functions.yith-wcwl.php:416
 #, fuzzy
 #| msgid "Custom CSS"
 msgid "Custom"
 msgstr "Custom CSS"
 
-#: ../includes/functions.yith-wcwl.php:553
+#: ../includes/functions.yith-wcwl.php:437
 msgid "Shared"
 msgstr "Gedeeld"
 
-#: ../includes/functions.yith-wcwl.php:557
+#: ../includes/functions.yith-wcwl.php:441
 msgid "Only people with a link to this list can see it"
 msgstr "Alleen mensen met een link naar deze lijst kunnen hem zien"
 
-#: ../includes/functions.yith-wcwl.php:563
+#: ../includes/functions.yith-wcwl.php:447
 msgid "Private"
 msgstr "Prive"
 
-#: ../includes/functions.yith-wcwl.php:567
+#: ../includes/functions.yith-wcwl.php:451
 msgid "Only you can see this list"
 msgstr "Alleen u kunt deze lijst zien"
 
-#: ../includes/functions.yith-wcwl.php:573
+#: ../includes/functions.yith-wcwl.php:457
 msgid "Public"
 msgstr "Openbaar"
 
-#: ../includes/functions.yith-wcwl.php:577
+#: ../includes/functions.yith-wcwl.php:461
 msgid "Anyone can search for and see this list"
 msgstr "Iedereen kan zoeken naar deze verlanglijst en deze lijst zien"
 

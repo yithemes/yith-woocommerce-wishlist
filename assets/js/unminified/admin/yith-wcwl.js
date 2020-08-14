@@ -485,8 +485,7 @@ jQuery( document ).ready( function( $ ) {
             };
 
         t.select2({
-            templateResult: renderOption,
-            templateSelection: renderOption
+            templateResult: renderOption
         });
     } );
 

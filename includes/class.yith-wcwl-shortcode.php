@@ -676,6 +676,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			if ( 'custom' == $atts['icon'] && $atts['exists'] && $custom_added_icon ) {
 				$icon_html = '<img class="yith-wcwl-icon" src="' . $custom_added_icon . '" width="32" />';
+				$heading_icon_html = ! empty( $custom_icon ) ? '<img class="yith-wcwl-icon" src="' . $custom_icon . '" width="32" />' : '';
 			} elseif ( 'custom' == $atts['icon'] && $custom_icon ) {
 				$icon_html = '<img class="yith-wcwl-icon" src="' . $custom_icon . '" width="32" />';
 				$heading_icon_html = $icon_html;
@@ -684,6 +685,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				$heading_icon_html = ! empty( $atts['heading_icon'] ) ? '<i class="yith-wcwl-icon fa ' . $atts['heading_icon'] . '"></i>' : '';
 			} else {
 				$icon_html = '';
+				$heading_icon_html = '';
 			}
 
 			// set fragment options.

@@ -89,6 +89,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				$wishlists_to_prompt[] = array(
 					'id'                       => $wishlist->get_id(),
 					'wishlist_name'            => $wishlist->get_formatted_name(),
+					'default'                  => $wishlist->is_default(),
 					'add_to_this_wishlist_url' => $product_id ? add_query_arg(
 						array(
 							'add_to_wishlist' => $product_id,

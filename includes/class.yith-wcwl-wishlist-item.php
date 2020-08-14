@@ -35,7 +35,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			'position'          => 0,
 			'original_price'    => 0,
 			'original_currency' => '',
-			'on_sale'           => 0
+			'on_sale'           => 0,
 		);
 
 		/**
@@ -84,7 +84,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 				$this->data_store->read( $this );
 			}
 
-			if( $this->get_object_read() ){
+			if ( $this->get_object_read() ) {
 				$this->origin_wishlist_id = $this->get_wishlist_id();
 			}
 		}
@@ -136,10 +136,10 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return \WC_Product Product
 		 */
 		public function get_product( $context = 'view' ) {
-			if( empty( $this->product ) ){
+			if ( empty( $this->product ) ) {
 				$product = wc_get_product( $this->get_product_id( $context ) );
 
-				if( $product ){
+				if ( $product ) {
 					$this->product = $product;
 				}
 			}
@@ -156,11 +156,11 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_product_price( $context = 'view' ) {
 			$product = $this->get_product( $context );
 
-			if( ! $product ){
+			if ( ! $product ) {
 				return 0;
 			}
 
-			switch( $product->get_type() ){
+			switch ( $product->get_type() ) {
 				case 'variable':
 					/**
 					 * @var $product \WC_Product_Variable
@@ -184,7 +184,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			$base_price = $product->is_type( 'variable' ) ? $product->get_variation_regular_price( 'max' ) : $product->get_price();
 			$formatted_price = $base_price ? $product->get_price_html() : apply_filters( 'yith_free_text', __( 'Free!', 'yith-woocommerce-wishlist' ), $product );
 
-			return apply_filters( 'yith_wcwl_item_formatted_price', $formatted_price, $base_price );
+			return apply_filters( 'yith_wcwl_item_formatted_price', $formatted_price, $base_price, $product );
 		}
 
 		/**
@@ -196,7 +196,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_formatted_product_name( $context = 'view' ) {
 			$product = $this->get_product( $context );
 
-			if( ! $product ){
+			if ( ! $product ) {
 				return '';
 			}
 
@@ -232,7 +232,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_user( $context = 'view' ) {
 			$user_id = intval( $this->get_prop( 'user_id', $context ) );
 
-			if( ! $user_id ){
+			if ( ! $user_id ) {
 				return false;
 			}
 
@@ -248,10 +248,9 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_date_added( $context = 'view' ) {
 			$date_added = $this->get_prop( 'date_added', $context );
 
-			if( $date_added && 'view' == $context ){
+			if ( $date_added && 'view' === $context ) {
 				return $date_added->date_i18n( 'Y-m-d H:i:s' );
-			}
-			else{
+			} else {
 				return $date_added;
 			}
 		}
@@ -394,7 +393,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 				return '';
 			}
 
-			$product = $this->get_product();
+			$product       = $this->get_product();
 			$current_price = $this->get_product_price();
 
 			if( ! is_numeric( $current_price ) ){
@@ -457,11 +456,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @param $product_id int Product ID
 		 */
 		public function set_product_id( $product_id ) {
-			global $sitepress;
-
-			if( defined('ICL_SITEPRESS_VERSION') ) {
-				$product_id = yit_wpml_object_id( $product_id, 'product', true, $sitepress->get_default_language() );
-			}
+			$product_id = yith_wcwl_object_id( $product_id, 'product', true, 'default' );
 
 			if( ! empty( $this->product ) ){
 				$this->product = null;

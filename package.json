@@ -21,13 +21,11 @@
   "devDependencies": {
     "gulp": "^4.0.0",
     "gulp-clean-css": "^4.0.0",
+    "gulp-jshint": "^2.1.0",
     "gulp-po-sync": "^0.1.0",
     "gulp-po2mo": "^1.0.3",
-    "gulp-uglify": "^3.0.2",
-    "gulp-wp-pot": "^2.3.5"
-  },
-  "dependencies": {
-    "gulp-jshint": "^2.1.0",
+    "gulp-uglify-es": "^2.0.0",
+    "gulp-wp-pot": "^2.3.5",
     "jshint": "^2.11.0"
   }
 }

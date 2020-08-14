@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var cleanCSS = require('gulp-clean-css');
-var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify-es').default;
 var wpPot = require('gulp-wp-pot');
 var poSync = require('gulp-po-sync');
 var po2mo = require('gulp-po2mo');

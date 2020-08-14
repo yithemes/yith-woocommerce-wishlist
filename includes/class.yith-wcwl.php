@@ -87,6 +87,9 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			// add rewrite rule
 			add_action( 'init', array( $this, 'add_rewrite_rules' ), 0 );
 			add_filter( 'query_vars', array( $this, 'add_public_query_var' ) );
+
+			// Polylang integration
+			add_filter( 'pll_translation_url', array( $this, 'get_pll_wishlist_url' ), 10, 1 );
 		}
 
 		/* === PLUGIN FW LOADER === */
@@ -587,6 +590,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Checks whether current user can add to the wishlist
 		 *
+		 * TODO: merge this into \YITH_WCWL_Wishlist::current_user_can
+		 *
 		 * @param $user_id int|bool User id to test; false to use current user id
 		 * @return bool Whether current user can add to wishlist
 		 * @since 3.0.0
@@ -629,7 +634,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			$this->wishlist_param = apply_filters( 'yith_wcwl_wishlist_param', $this->wishlist_param );
 
 			$wishlist_page_id = isset( $_POST['yith_wcwl_wishlist_page_id'] ) ? $_POST['yith_wcwl_wishlist_page_id'] : get_option( 'yith_wcwl_wishlist_page_id' );
-			$wishlist_page_id = yith_wcwl_object_id( $wishlist_page_id );
+			$wishlist_page_id = yith_wcwl_object_id( $wishlist_page_id, 'page', true, 'default' );
 
 			if( empty( $wishlist_page_id ) ){
 				return;
@@ -674,6 +679,18 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		}
 
 		/**
+		 * Return wishlist page id, if any
+		 *
+		 * @return int Wishlist page id.
+		 */
+		public function get_wishlist_page_id() {
+			$wishlist_page_id = get_option( 'yith_wcwl_wishlist_page_id' );
+			$wishlist_page_id = yith_wcwl_object_id( $wishlist_page_id );
+
+			return apply_filters( 'yith_wcwl_wishlist_page_id', $wishlist_page_id );
+		}
+
+		/**
 		 * Build wishlist page URL.
 		 *
 		 * @param $action string
@@ -683,7 +700,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 */
 		public function get_wishlist_url( $action = '' ) {
 			global $sitepress;
-			$wishlist_page_id = yith_wcwl_object_id( get_option( 'yith_wcwl_wishlist_page_id' ) );
+			$wishlist_page_id = $this->get_wishlist_page_id();
 			$wishlist_permalink = get_the_permalink( $wishlist_page_id );
 
 			$action_params = explode( '/', $action );
@@ -807,6 +824,33 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 */
 		public function is_multi_wishlist_enabled() {
 			return false;
+		}
+
+		/* === POLYLANG INTEGRATION === */
+
+		/**
+		 * Filters translation url for the wishlist page, when PolyLang is enabled
+		 *
+		 * @param  string $url Translation url.
+		 * @return string Filtered translation url for current page/post.
+		 */
+		public function get_pll_wishlist_url( $url ) {
+			if( yith_wcwl_is_wishlist_page() && isset( $_GET[ $this->wishlist_param ] ) ) {
+				$wishlist_action = sanitize_text_field( wp_unslash( $_GET[ $this->wishlist_param ] ) );
+				$user_id = isset( $_GET[ 'user_id' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'user_id' ] ) ) : '';
+				$wishlist_id = isset( $_GET[ 'wishlist_id' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'wishlist_id' ] ) ) : '';
+
+				$params = array_filter(
+					array(
+						$this->wishlist_param => $wishlist_action,
+						'user_id'             => $user_id,
+						'wishlist_id'         => $wishlist_id,
+					)
+				);
+
+				$url = add_query_arg( $params, $url );
+			}
+			return $url;
 		}
 	}
 }

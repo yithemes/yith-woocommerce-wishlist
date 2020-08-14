@@ -266,10 +266,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			}
 
 			if( ! empty( $product_id ) ){
-				if( defined('ICL_SITEPRESS_VERSION') ) {
-					global $sitepress;
-					$product_id = yit_wpml_object_id( $product_id, 'product', true, $sitepress->get_default_language() );
-				}
+				$product_id = yith_wcwl_object_id( $product_id, 'product', true, 'default' );
 
 				$sql .= " AND i.`prod_id` = %d";
 				$sql_args[] = $product_id;

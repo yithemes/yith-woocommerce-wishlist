@@ -4,7 +4,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 3.0.0
+ * @version 3.0.12
  */
 
 /**
@@ -14,6 +14,7 @@
  * @var $exists                    bool Whether current product is already in wishlist
  * @var $show_exists               bool Whether to show already in wishlist link on multi wishlist
  * @var $product_id                int Current product id
+ * @var $parent_product_id         int Parent for current product
  * @var $product_type              string Current product type
  * @var $label                     string Button label
  * @var $browse_wishlist_text      string Browse wishlist text
@@ -35,7 +36,7 @@ global $product;
 ?>
 
 <!-- BROWSE WISHLIST MESSAGE -->
-<div class="yith-wcwl-wishlistexistsbrowse">
+<div class="yith-wcwl-wishlistexistsbrowse" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-original-product-id="<?php echo esc_attr( $parent_product_id ); ?>">
 	<span class="feedback">
 		<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php echo wp_kses_post( $already_in_wishslist_text ); ?>

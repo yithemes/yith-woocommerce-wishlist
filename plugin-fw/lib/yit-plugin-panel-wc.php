@@ -343,17 +343,40 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                 $option_key  = $this->get_current_option_key();
 	            $yit_options = $this->check_for_save_single_option( $yit_options );
 
+	            // Collect an array of options to be saved as array and not as single option.
+	            $array_options = array();
+
                 foreach ( $yit_options[ $option_key ] as $id => $option ) {
-                    if ( isset( $option[ 'yith-type' ] ) && $option[ 'yith-type' ] == 'multi-colorpicker' && !empty( $option[ 'colorpickers' ] ) ) {
-                        $default = [];
-                        foreach ( $option[ 'colorpickers' ] as $colorpicker ) {
-                            $default[ $colorpicker[ 'id' ] ] = isset( $colorpicker[ 'default' ] ) ? $colorpicker[ 'default' ] : '';
-                        }
-                        update_option( $option[ 'id' ], $default );
-                    } elseif ( isset( $option[ 'default' ] ) ) {
-                        update_option( $option[ 'id' ], $option[ 'default' ] );
-                    }
+
+                	// make sure option id is not an array
+	                $matches = array();
+	                isset( $option['id'] ) && preg_match('/(.*)\[(.*)\]/', $option['id'], $matches );
+
+	                if( ! empty( $matches ) && isset( $option['default'] ) ) {
+	                	if( ! empty( $matches[2] ) ) {
+			                $array_options[ $matches[1] ][ $matches[2] ] = $option[ 'default' ];
+		                } else {
+			                $array_options[ $matches[1] ][] = $option[ 'default' ];
+		                }
+	                }
+	                else {
+		                if ( isset( $option['yith-type'] ) && $option['yith-type'] == 'multi-colorpicker' && ! empty( $option['colorpickers'] ) ) {
+			                $default = [];
+			                foreach ( $option['colorpickers'] as $colorpicker ) {
+				                $default[ $colorpicker['id'] ] = isset( $colorpicker['default'] ) ? $colorpicker['default'] : '';
+			                }
+			                update_option( $option['id'], $default );
+		                } elseif ( isset( $option['default'] ) ) {
+			                update_option( $option['id'], $option['default'] );
+		                }
+	                }
                 }
+
+                // Save array options if any
+	            foreach ( $array_options as $key => $value ) {
+		            update_option( $key, $value );
+	            }
+
 
                 do_action( 'yit_panel_wc_after_reset' );
             }
@@ -622,6 +645,9 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                     }
                 }
                 $field[ 'value' ] = $value;
+
+                // let's filter field data just before print
+                $field = apply_filters( 'yith_plugin_fw_wc_panel_field_data', $field );
 
                 require( YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/woocommerce/woocommerce-option-row.php' );
             }

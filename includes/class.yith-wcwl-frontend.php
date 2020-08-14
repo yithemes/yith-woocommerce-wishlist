@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.11';
+		public $version = '3.0.12';
 
 		/**
 		 * Plugin database version
@@ -85,7 +85,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			add_action( 'init', array( $this, 'init' ), 0 );
 
 			// templates
-			add_action( 'wp_head', array( $this, 'add_button' ) );
+			add_action( 'init', array( $this, 'add_button' ) );
 			add_filter( 'body_class', array( $this, 'add_body_class' ) );
 			add_action( 'template_redirect', array( $this, 'add_nocache_headers' ) );
 			add_action( 'yith_wcwl_before_wishlist_title', array( $this, 'print_notices' ) );
@@ -213,7 +213,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 1.0.0
 		 */
 		public function add_body_class( $classes ) {
-			$wishlist_page_id = yith_wcwl_object_id( get_option( 'yith_wcwl_wishlist_page_id' ) );
+			$wishlist_page_id = YITH_WCWL()->get_wishlist_page_id();
 
 			if ( ! empty( $wishlist_page_id ) && is_page( $wishlist_page_id ) ) {
 				$classes[] = 'woocommerce-wishlist';
@@ -249,7 +249,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			// register dependencies
 			wp_register_style( 'jquery-selectBox', YITH_WCWL_URL . 'assets/css/jquery.selectBox.css', array(), '1.2.0' );
-			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.min.css', array(), '4.7.0' );
+			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.css', array(), '4.7.0' );
 			wp_register_style( 'woocommerce_prettyPhoto_css', $assets_path . 'css/prettyPhoto.css' );
 
 			// register main style
@@ -394,6 +394,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				'ajax_loader_url' => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
 				'remove_from_wishlist_after_add_to_cart' => get_option( 'yith_wcwl_remove_after_add_to_cart' ) == 'yes',
 				'is_wishlist_responsive' => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
+				'time_to_close_prettyphoto' => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
+				'fragments_index_glue' => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
 				'labels' => array(
 					'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
 					'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) )
@@ -539,6 +541,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						unset( $options['found_in_list'] );
 						unset( $options['found_item'] );
 						unset( $options['popup_title'] );
+						unset( $options['wishlist_url'] );
 						break;
 				}
 			}
