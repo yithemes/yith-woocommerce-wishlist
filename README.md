@@ -151,19 +151,9 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-###3.0.12 - Released on 14 August 2020
+### 3.0.13 - Released on 17 August 2020
 
-* New: support for WordPress 5.5
-* New: support for WooCommerce 4.4
-* New: support for Polylang PRO
-* New: load correct Add to Wishlist (ATW) template for selected variation, and refresh it when changing variations on product page
-* Update: plugin framework
-* Fix: upsells are now correctly identified as loop by wishlist
-* Fix: icon select at backend showing \[Object object\]
-* Fix: changed fragments indexes to work with a greater set of configurations
-* Fix: notice when using custom icons for ATW buttons
-* Dev: added new filter yith_wcwl_fragments_index_glue
-
+* Fix: moved check over Ajax Loading option on first wishlist init only, to avoid problems when dynamically loading ATW on variable products
 
 ## Support
 

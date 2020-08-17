@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 4.5
 Tested up to: 5.5
-Stable tag: 3.0.12
+Stable tag: 3.0.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,6 +112,10 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.0.13 - Released on 17 August 2020 =
+
+* Fix: moved check over Ajax Loading option on first wishlist init only, to avoid problems when dynamically loading ATW on variable products
 
 = 3.0.12 - Released on 14 August 2020 =
 
