@@ -338,12 +338,12 @@ if ( !function_exists( 'yit_get_post_meta' ) ) {
      *
      * @param int    $id   Post ID.
      * @param string $meta The meta key to retrieve.
-     * @return mixed Single value or array
+     * @return mixed Single value or array. Return false is the meta doesn't exists.
      * @since    2.0.0
      */
     function yit_get_post_meta( $id, $meta ) {
         if ( !strpos( $meta, '[' ) ) {
-            return get_post_meta( $id, $meta, true );
+            return metadata_exists( 'post', $id, $meta ) ? get_post_meta( $id, $meta, true ) : false;
         }
 
         $sub_meta = explode( '[', $meta );

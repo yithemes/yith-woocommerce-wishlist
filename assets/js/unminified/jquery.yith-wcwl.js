@@ -22,10 +22,11 @@ jQuery( document ).ready( function( $ ){
                 el_wrap = $( '.add-to-wishlist-' + product_id ),
                 filtered_data = null,
                 data = {
+                    action: yith_wcwl_l10n.actions.add_to_wishlist_action,
+                    context: 'frontend',
                     add_to_wishlist: product_id,
                     product_type: t.data( 'product-type' ),
                     wishlist_id: t.data( 'wishlist-id' ),
-                    action: yith_wcwl_l10n.actions.add_to_wishlist_action,
                     fragments: retrieve_fragments( product_id )
                 };
 
@@ -127,14 +128,14 @@ jQuery( document ).ready( function( $ ){
                 data.remove_from_wishlist_after_add_to_cart = button.closest( '[data-row-id]' ).data( 'row-id' );
                 data.wishlist_id = button.closest( '.wishlist_table' ).data( 'id' );
                 typeof wc_add_to_cart_params !== 'undefined' && ( wc_add_to_cart_params.cart_redirect_after_add = yith_wcwl_l10n.redirect_to_cart );
-                typeof yith_wccl_general !== 'undefined' && ( yith_wccl_general.cart_redirect = yith_wcwl_l10n.redirect_to_cart );
+                typeof yith_wccl_general !== 'undefined' && ( yith_wccl_general.cart_redirect = isTrue( yith_wcwl_l10n.redirect_to_cart ) );
             }
         } );
 
         t.on( 'added_to_cart', 'body', function( ev, fragments, carthash, button ){
             if( typeof button !== 'undefined' && button.closest( '.wishlist_table' ).length ) {
                 typeof wc_add_to_cart_params !== 'undefined' && ( wc_add_to_cart_params.cart_redirect_after_add = cart_redirect_after_add );
-                typeof yith_wccl_general !== 'undefined' && ( yith_wccl_general.cart_redirect = cart_redirect_after_add );
+                typeof yith_wccl_general !== 'undefined' && ( yith_wccl_general.cart_redirect = isTrue( cart_redirect_after_add ) );
 
                 var tr = button.closest('[data-row-id]'),
                     table = tr.closest('.wishlist-fragment'),
@@ -175,6 +176,7 @@ jQuery( document ).ready( function( $ ){
                 content = t.closest( '.content' ),
                 data = {
                     action: yith_wcwl_l10n.actions.remove_from_all_wishlists,
+                    context: 'frontend',
                     prod_id: prod_id,
                     wishlist_id: wishlist_id,
                     fragments: retrieve_fragments( prod_id )
@@ -295,15 +297,17 @@ jQuery( document ).ready( function( $ ){
             var t = $(this),
                 product_id = t.attr('data-product-id'),
                 item_id = t.data('item-id'),
-                el_wrap = $( '.add-to-wishlist-' + product_id );
+                el_wrap = $( '.add-to-wishlist-' + product_id ),
+                data = {
+                    action: yith_wcwl_l10n.actions.delete_item_action,
+                    context: 'frontend',
+                    item_id: item_id,
+                    fragments: retrieve_fragments( product_id )
+                };
 
             $.ajax( {
                 url: yith_wcwl_l10n.ajax_url,
-                data : {
-                    action: yith_wcwl_l10n.actions.delete_item_action,
-                    item_id: item_id,
-                    fragments: retrieve_fragments( product_id )
-                },
+                data : data,
                 dataType: 'json',
                 beforeSend: function(){
                     block( t );
@@ -364,7 +368,10 @@ jQuery( document ).ready( function( $ ){
             var t = $(this),
                 form = t.closest( 'form' ),
                 pp_content = t.closest('.pp_content'),
-                data = form.serialize();
+                data = form.serializeArray().reduce( ( data, field ) => { data[ field.name ] = field.value; return data; }, {} );
+
+            data.action  = yith_wcwl_l10n.actions.ask_an_estimate;
+            data.context = 'frontend';
 
             $.ajax({
                 beforeSend: function(){
@@ -373,7 +380,7 @@ jQuery( document ).ready( function( $ ){
                 complete: function(){
                     unblock( form );
                 },
-                data: data + '&action=' + yith_wcwl_l10n.actions.ask_an_estimate,
+                data: data,
                 dataType: 'json',
                 method: 'post',
                 success: function( data ){
@@ -470,7 +477,7 @@ jQuery( document ).ready( function( $ ){
             var t = $( ev.target ),
                 product_id = t.data( 'product_id' ),
                 targets = $('[data-original-product-id="' + product_id + '"]'),
-                fragments = targets.closest( '.wishlist-fragment' );
+                fragments = targets.closest( '.wishlist-fragment' ).filter(':visible');
 
             if( ! product_id || ! targets.length ){
                 return;
@@ -901,6 +908,7 @@ jQuery( document ).ready( function( $ ){
                     jqxhr = $.ajax({
                         data: {
                             action: yith_wcwl_l10n.actions.sort_wishlist_items,
+                            context: 'frontend',
                             positions: positions,
                             wishlist_token: t.data('token'),
                             page: t.data('page'),
@@ -924,7 +932,7 @@ jQuery( document ).ready( function( $ ){
         var jqxhr,
             timeout;
 
-        $('.wishlist_table').on( 'change', '.product-quantity input', function(){
+        $('.wishlist_table').on( 'change', '.product-quantity :input', function(){
             var t = $(this),
                 row = t.closest('[data-row-id]'),
                 product_id = row.data('row-id'),
@@ -949,10 +957,11 @@ jQuery( document ).ready( function( $ ){
                         unblock( table );
                     },
                     data: {
+                        action: yith_wcwl_l10n.actions.update_item_quantity,
+                        context: 'frontend',
                         product_id: product_id,
                         wishlist_token: token,
-                        quantity: t.val(),
-                        action: yith_wcwl_l10n.actions.update_item_quantity
+                        quantity: t.val()
                     },
                     method: 'POST',
                     url: yith_wcwl_l10n.ajax_url
@@ -1164,6 +1173,7 @@ jQuery( document ).ready( function( $ ){
                     },
                     data: {
                         action: yith_wcwl_l10n.actions.load_mobile_action,
+                        context: 'frontend',
                         fragments: fragments
                     },
                     method: 'post',
@@ -1191,7 +1201,8 @@ jQuery( document ).ready( function( $ ){
      * @since 3.0.0
      */
     function call_ajax_move_item_to_another_wishlist( data, beforeSend, complete ) {
-        data.action = yith_wcwl_l10n.actions.move_to_another_wishlist_action;
+        data.action  = yith_wcwl_l10n.actions.move_to_another_wishlist_action;
+        data.context = 'frontend';
 
         if( data.wishlist_token === '' || data.destination_wishlist_token === '' || data.item_id === '' ){
             return;
@@ -1228,6 +1239,7 @@ jQuery( document ).ready( function( $ ){
             wishlist_token = table.data( 'token' ),
             data = {
                 action: yith_wcwl_l10n.actions.remove_from_wishlist_action,
+                context: 'frontend',
                 remove_from_wishlist: data_row_id,
                 wishlist_id: wishlist_id,
                 wishlist_token: wishlist_token,
@@ -1274,12 +1286,12 @@ jQuery( document ).ready( function( $ ){
             wishlist_token = table.data( 'token' ),
             data = {
                 action: yith_wcwl_l10n.actions.reload_wishlist_and_adding_elem_action,
+                context: 'frontend',
                 pagination: pagination,
                 per_page: per_page,
                 wishlist_id: wishlist_id,
                 wishlist_token: wishlist_token,
                 add_to_wishlist: product_id,
-                context: 'frontend',
                 product_type: el.data( 'product-type' )
             };
 
@@ -1379,6 +1391,7 @@ jQuery( document ).ready( function( $ ){
 
         data = {
             action: yith_wcwl_l10n.actions.save_title_action,
+            context: 'frontend',
             wishlist_id: wishlist_id,
             title: new_title,
             fragments: retrieve_fragments()
@@ -1428,6 +1441,7 @@ jQuery( document ).ready( function( $ ){
             wishlist_id = row.data( 'wishlist-id' ),
             data = {
                 action: yith_wcwl_l10n.actions.save_privacy_action,
+                context: 'frontend',
                 wishlist_id: wishlist_id,
                 privacy: new_privacy,
                 fragments: retrieve_fragments()
@@ -1704,6 +1718,7 @@ jQuery( document ).ready( function( $ ){
         $.ajax( {
             data: {
                 action: yith_wcwl_l10n.actions.load_fragments,
+                context: 'frontend',
                 fragments: fragments
             },
             method: 'post',
@@ -1750,5 +1765,13 @@ jQuery( document ).ready( function( $ ){
      */
     function isOS() {
         return navigator.userAgent.match(/ipad|iphone/i);
+    }
+
+    /**
+     * Check if passed value could be considered true
+     * @since 3.0.14
+     */
+    function isTrue( value ) {
+        return true === value || 'yes' === value || '1' === value || 1 === value;
     }
 });

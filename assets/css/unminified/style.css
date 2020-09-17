@@ -505,6 +505,19 @@ p.wishlist-empty{
     z-index: 10;
 }
 
+.wishlist_table.images_grid.products li.product.first,
+.wishlist_table.images_grid.products li.product.last {
+    clear: none;
+}
+
+.wishlist_table.images_grid.columns-2.products li.product:nth-of-type(2n+1),
+.wishlist_table.images_grid.columns-3.products li.product:nth-of-type(3n+1),
+.wishlist_table.images_grid.columns-4.products li.product:nth-of-type(4n+1),
+.wishlist_table.images_grid.columns-5.products li.product:nth-of-type(5n+1),
+.wishlist_table.images_grid.columns-6.products li.product:nth-of-type(6n+1){
+    clear: both;
+}
+
 .wishlist_table.modern_grid li .item-wrapper{
     display: table;
     margin: 0 -7px;

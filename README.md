@@ -151,9 +151,13 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-### 3.0.13 - Released on 17 August 2020
+### 3.0.14 - Released on 17 September 2020
 
-* Fix: moved check over Ajax Loading option on first wishlist init only, to avoid problems when dynamically loading ATW on variable products
+* New: support for WooCommerce 4.5
+* Update: plugin framework
+* Tweak: filter fragments to update only visible ATW when reset_data js event occurs
+* Tweak: added error message when trying to add variable products to cart
+* Fix: issue with cart redirect when using YITH WCCL
 
 ## Support
 

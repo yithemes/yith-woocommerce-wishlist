@@ -73,11 +73,11 @@ do_action( 'yit_before_metaboxes_tab' ) ?>
                 if ( $pos = strpos( $field_name, ']' ) ) {
                     $field_name = substr_replace( $field_name, '', $pos, 1 );
                 }
-                $value                    = yit_get_post_meta( $post->ID, $field_name );
-                $field[ 'value' ]         = $value != '' ? $value : ( isset( $field[ 'std' ] ) ? $field[ 'std' ] : '' );
-                $field[ 'checkboxgroup' ] = ( $field[ 'type' ] == 'checkbox' && isset( $field[ 'checkboxgroup' ] ) ) ? " " . $field[ 'checkboxgroup' ] : "";
-                $container_classes        = "the-metabox " . $field[ 'type' ] . $field[ 'checkboxgroup' ] . " clearfix ";
-                $container_classes        .= empty( $field[ 'label' ] ) ? 'no-label' : '';
+				$value                  = yit_get_post_meta( $post->ID, $field_name );
+				$field['value']         = false === $value ? ( isset( $field['std'] ) ? $field['std'] : '' ) : $value;
+				$field['checkboxgroup'] = ( $field['type'] == 'checkbox' && isset( $field['checkboxgroup'] ) ) ? " " . $field['checkboxgroup'] : "";
+				$container_classes      = "the-metabox " . $field['type'] . $field['checkboxgroup'] . " clearfix ";
+				$container_classes      .= empty( $field['label'] ) ? 'no-label' : '';
 
                 ?>
                 <div class="<?php echo $container_classes ?>">

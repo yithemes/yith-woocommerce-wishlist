@@ -10,8 +10,10 @@ $panel_content_class = apply_filters( 'yit_admin_panel_content_class', 'yit-admi
     <div class="<?php echo $panel_content_class; ?>">
         <form id="plugin-fw-wc" method="post">
             <?php $this->add_fields() ?>
-            <?php wp_nonce_field( 'yit_panel_wc_options_' . $this->settings[ 'page' ], 'yit_panel_wc_options_nonce' ); ?>
-            <input style="float: left; margin-right: 10px;" class="button-primary" type="submit" value="<?php _e( 'Save Changes', 'yith-plugin-fw' ) ?>"/>
+            <p class="submit" style="float: left;margin: 0 10px 0 0;">
+	            <?php wp_nonce_field( 'yit_panel_wc_options_' . $this->settings[ 'page' ], 'yit_panel_wc_options_nonce' ); ?>
+				<input class="button-primary" type="submit" value="<?php _e( 'Save Changes', 'yith-plugin-fw' ) ?>"/>
+			</p>
         </form>
         <form id="plugin-fw-wc-reset" method="post">
             <?php $warning = __( 'If you continue with this action, you will reset all options in this page.', 'yith-plugin-fw' ) ?>

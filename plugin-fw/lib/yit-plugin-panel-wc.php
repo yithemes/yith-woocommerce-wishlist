@@ -213,12 +213,13 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
         public function get_current_tab() {
             global $pagenow;
             $tabs = $this->get_available_tabs();
+			$tab = $tabs[0];
 
-            if ( $pagenow == 'admin.php' && isset( $_REQUEST[ 'tab' ] ) && in_array( $_REQUEST[ 'tab' ], $tabs ) ) {
-                return $_REQUEST[ 'tab' ];
-            } else {
-                return $tabs[ 0 ];
+	        if ( $pagenow == 'admin.php' && isset( $_REQUEST[ 'tab' ] ) && in_array( $_REQUEST[ 'tab' ], $tabs ) ) {
+                $tab = esc_html( $_REQUEST[ 'tab' ] );
             }
+
+	        return apply_filters('yith_wc_plugin_panel_current_tab', $tab );
         }
 
         /**

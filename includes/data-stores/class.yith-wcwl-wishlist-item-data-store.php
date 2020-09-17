@@ -430,9 +430,26 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 
 			$sql_args = array( 'publish' );
 
+			if ( ! empty( $product_id ) ) {
+				$sql       .= ' AND i.prod_id = %d';
+				$sql_args[] = $product_id;
+			}
+
 			if ( ! empty( $search ) ) {
 				$sql .= ' AND p.post_title LIKE %s';
 				$sql_args[] = '%' . $search . '%';
+			}
+
+			if ( ! empty( $args['interval'] ) && is_array( $args['interval'] ) && ( isset( $args['interval']['start_date'] ) || isset( $args['interval']['end_date'] ) ) ) {
+				if ( ! empty( $args['interval']['start_date'] ) ) {
+					$sql       .= ' AND i.dateadded >= %s';
+					$sql_args[] = $args['interval']['start_date'];
+				}
+
+				if ( ! empty( $args['interval']['end_date'] ) ) {
+					$sql       .= ' AND i.dateadded <= %s';
+					$sql_args[] = $args['interval']['end_date'];
+				}
 			}
 
 			if ( ! empty( $orderby ) ) {

@@ -50,11 +50,11 @@ if ( !class_exists( 'YITH_Privacy' ) ) {
             if ( file_exists( $privacy_content_path ) )
                 include $privacy_content_path;
 
-            return apply_filters( 'yith_wcbk_privacy_policy_content', ob_get_clean() );
+            return apply_filters( 'yith_plugin_fw_privacy_policy_content', ob_get_clean() );
         }
 
         public function get_sections() {
-            return apply_filters( 'yith_wcbk_privacy_policy_content_sections', array(
+            return apply_filters( 'yith_plugin_fw_privacy_policy_content_sections', array(
                 'general'           => array(
                     'tutorial'    => _x( 'This sample language includes the basics around what personal data your store may be collecting, storing and sharing, as well as who may have access to that data. Depending on what settings are enabled and which additional plugins are used, the specific information shared by your store will vary. We recommend consulting with a lawyer when deciding what information to disclose on your privacy policy.', 'Privacy Policy Content', 'yith-plugin-fw' ),
                     'description' => '',

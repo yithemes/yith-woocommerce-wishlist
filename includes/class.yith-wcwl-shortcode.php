@@ -647,7 +647,6 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'loop_position' => $loop_position,
 				'template_part' => $template_part,
 			);
-
 			// let third party developer filter options.
 			$additional_params = apply_filters( 'yith_wcwl_add_to_wishlist_params', $additional_params, $atts );
 

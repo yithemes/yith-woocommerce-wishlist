@@ -696,11 +696,22 @@
         toggle.saveToggleElement();
     } );
 
-    // Radio
-    $( document ).on( 'click', '.yith-plugin-fw-radio input[type=radio]', function () {
-        $( this ).closest( '.yith-plugin-fw-radio' ).val( $( this ).val() ).trigger( 'change' );
-    } );
+	// Radio
+	$( document ).on( 'click', '.yith-plugin-fw-radio input[type=radio]', function () {
+		var _radioContainer = $( this ).closest( '.yith-plugin-fw-radio' ),
+			_value          = $( this ).val();
 
+		_radioContainer.val( _value ).data( 'value', _value ).trigger( 'change' );
+	} );
+
+	$( document.body ).on( 'yith-plugin-fw-init-radio', function () {
+		$( '.yith-plugin-fw-radio:not(.yith-plugin-fw-radio--initialized)' ).each( function () {
+			$( this ).val( $( this ).data( 'value' ) );
+			$( this ).addClass( 'yith-plugin-fw-radio--initialized' );
+		} );
+	} ).trigger( 'yith-plugin-fw-init-radio' );
+
+ 	// Password Eye field
     $( document ).on( 'click', '.yith-password-eye', function () {
         var $this = $( this ),
             inp   = $( this ).closest( '.yith-password-wrapper' ).find( 'input' );
@@ -712,13 +723,6 @@
             $this.removeClass( 'yith-password-eye-closed' );
         }
     } );
-
-    $( document.body ).on( 'yith-plugin-fw-init-radio', function () {
-        $( '.yith-plugin-fw-radio:not(.yith-plugin-fw-radio--initialized)' ).each( function () {
-            $( this ).val( $( this ).attr( 'value' ) );
-            $( this ).addClass( 'yith-plugin-fw-radio--initialized' );
-        } );
-    } ).trigger( 'yith-plugin-fw-init-radio' );
 
     /**
      * Select2 - add class to stylize it with the new plugin-fw style

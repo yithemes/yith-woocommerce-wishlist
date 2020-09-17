@@ -52,12 +52,12 @@ global $product;
 			?>
 
 		<?php else: ?>
-
-			<a href="<?php echo esc_url( add_query_arg( array( 'wishlist_notice' => 'true', 'add_to_wishlist' => $product_id ), get_permalink( wc_get_page_id( 'myaccount' ) ) ) )?>" rel="nofollow" class="disabled_item <?php echo str_replace( array( 'add_to_wishlist', 'single_add_to_wishlist' ), '', $link_classes ) ?>" >
-				<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				<?php echo esc_html( $label ); ?>
-			</a>
-
+			<div class="yith-wcwl-add-button">
+				<a href="<?php echo esc_url( add_query_arg( array( 'wishlist_notice' => 'true', 'add_to_wishlist' => $product_id ), get_permalink( wc_get_page_id( 'myaccount' ) ) ) )?>" rel="nofollow" class="disabled_item <?php echo str_replace( array( 'add_to_wishlist', 'single_add_to_wishlist' ), '', $link_classes ) ?>" >
+					<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo esc_html( $label ); ?>
+				</a>
+			</div>
 		<?php endif; ?>
 	<?php endif; ?>
 </div>

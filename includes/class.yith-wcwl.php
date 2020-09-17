@@ -138,12 +138,12 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 */
 		public function add( $atts = array() ) {
 			$defaults = array(
-				'add_to_wishlist' => 0,
-				'wishlist_id' => 0,
-				'quantity' => 1,
-				'user_id' => false,
-				'dateadded' => '',
-				'wishlist_name' => '',
+				'add_to_wishlist'     => 0,
+				'wishlist_id'         => 0,
+				'quantity'            => 1,
+				'user_id'             => false,
+				'dateadded'           => '',
+				'wishlist_name'       => '',
 				'wishlist_visibility' => 0
 			);
 
@@ -152,11 +152,11 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			$atts = wp_parse_args( $atts, $defaults );
 
 			// filtering params
-			$prod_id = apply_filters( 'yith_wcwl_adding_to_wishlist_prod_id', intval( $atts['add_to_wishlist'] ) );
+			$prod_id     = apply_filters( 'yith_wcwl_adding_to_wishlist_prod_id', intval( $atts['add_to_wishlist'] ) );
 			$wishlist_id = apply_filters( 'yith_wcwl_adding_to_wishlist_wishlist_id', $atts['wishlist_id'] );
-			$quantity = apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', intval( $atts['quantity'] ) );
-			$user_id = apply_filters( 'yith_wcwl_adding_to_wishlist_user_id', intval( $atts['user_id'] ) );
-			$dateadded = apply_filters( 'yith_wcwl_adding_to_wishlist_dateadded', $atts['dateadded'] );
+			$quantity    = apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', intval( $atts['quantity'] ) );
+			$user_id     = apply_filters( 'yith_wcwl_adding_to_wishlist_user_id', intval( $atts['user_id'] ) );
+			$dateadded   = apply_filters( 'yith_wcwl_adding_to_wishlist_dateadded', $atts['dateadded'] );
 
 			do_action( 'yith_wcwl_adding_to_wishlist', $prod_id, $wishlist_id, $user_id );
 
