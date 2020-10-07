@@ -21,7 +21,7 @@ The wishlist is one of the most powerful and popular tools in an ecommerce shop.
 
 This means that you’ll be able to loyalise customers, push them to buy and attract new customers any time a wishlist is shared. Not bad for one plugin only, don’t you think?
 
-Our YITH WooCommerce Wishlist has more than **700,000 active installations** and that’s why it’s **the most popular wishlist plugin ever.**
+Our YITH WooCommerce Wishlist has more than **800,000 active installations** and that’s why it’s **the most popular wishlist plugin ever.**
 
 To celebrate this record and say thanks to all the plugin users, we’ve decided to release a new 3.0 version that has improved the design tremendously  and added many new options.
 
