@@ -357,10 +357,10 @@ jQuery( document ).ready( function( $ ){
                 checkboxes = t.closest( '.wishlist_table' ).find( '[data-row-id]' ).find( 'input[type="checkbox"]:not(:disabled)' );
 
             if( t.is( ':checked' ) ){
-                checkboxes.attr( 'checked','checked').change();
+                checkboxes.prop( 'checked','checked').change();
             }
             else{
-                checkboxes.removeAttr( 'checked').change();
+                checkboxes.removeProp( 'checked').change();
             }
         } );
 

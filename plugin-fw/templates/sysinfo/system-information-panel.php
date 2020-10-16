@@ -104,7 +104,7 @@ if ( 'n/a' === $output_ip && function_exists( 'curl_init' ) && apply_filters( 'y
 						<?php esc_html_e( 'Site URL', 'yith-plugin-fw' ); ?>
 					</th>
 					<td class="requirement-value">
-						<?php echo get_site_url(); ?>
+						<?php echo esc_attr( get_site_url() ); ?>
 					</td>
 				</tr>
 				<tr>
@@ -112,7 +112,7 @@ if ( 'n/a' === $output_ip && function_exists( 'curl_init' ) && apply_filters( 'y
 						<?php esc_html_e( 'Output IP Address', 'yith-plugin-fw' ); ?>
 					</th>
 					<td class="requirement-value">
-						<?php echo $output_ip; ?>
+						<?php echo esc_attr( $output_ip ); ?>
 					</td>
 				</tr>
 				<tr>
@@ -121,6 +121,14 @@ if ( 'n/a' === $output_ip && function_exists( 'curl_init' ) && apply_filters( 'y
 					</th>
 					<td class="requirement-value">
 						<?php echo( defined( 'WP_CACHE' ) && WP_CACHE ? esc_html__( 'Yes', 'yith-plugin-fw' ) : esc_html__( 'No', 'yith-plugin-fw' ) ); ?>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<?php esc_html_e( 'External object cache', 'yith-plugin-fw' ); ?>
+					</th>
+					<td class="requirement-value">
+						<?php echo( wp_using_ext_object_cache() ? esc_html__( 'Yes', 'yith-plugin-fw' ) : esc_html__( 'No', 'yith-plugin-fw' ) ); ?>
 					</td>
 				</tr>
 			</table>

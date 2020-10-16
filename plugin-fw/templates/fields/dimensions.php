@@ -57,25 +57,7 @@ if ( $allow_linked && 'yes' === $linked ) {
 	<?php echo $custom_attributes ?>
 	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
 >
-	<div class="yith-plugin-fw-dimensions__units">
-		<input class='yith-plugin-fw-dimensions__unit__value' type="hidden" name="<?php echo $name ?>[unit]" value="<?php echo isset( $value['unit'] ) ? $value['unit'] : current( array_keys( $units ) ) ?>">
-		<?php foreach ( $units as $key => $label ) : ?>
-			<?php
-			$key     = sanitize_title( $key );
-			$classes = array(
-				'yith-plugin-fw-dimensions__unit',
-				"yith-plugin-fw-dimensions__unit--{$key}-unit",
-			);
-			if ( $unit_value === $key ) {
-				$classes[] = 'yith-plugin-fw-dimensions__unit--selected';
-			}
-			$classes = implode( ' ', $classes );
-			?>
-			<span class="<?php echo $classes; ?>" data-value="<?php echo $key; ?>"><?php echo $label; ?></span>
-		<?php endforeach ?>
-	</div>
-
-	<ul class="yith-plugin-fw-dimensions__dimensions">
+	<div class="yith-plugin-fw-dimensions__dimensions">
 		<?php foreach ( $dimensions as $key => $dimension ) : ?>
 			<?php
 			$d_id         = "{$id}-dimension-" . sanitize_title( $key );
@@ -104,20 +86,37 @@ if ( $allow_linked && 'yes' === $linked ) {
 			}
 
 			?>
-			<li class="yith-plugin-fw-dimensions__dimension yith-plugin-fw-dimensions__dimension--<?php echo sanitize_title( $key ); ?>">
+			<div class="yith-plugin-fw-dimensions__dimension yith-plugin-fw-dimensions__dimension--<?php echo sanitize_title( $key ); ?>">
+				<label for="<?php echo $d_id; ?>" class="yith-plugin-fw-dimensions__dimension__label"><?php echo $d_label; ?></label>
 				<input id="<?php echo $d_id; ?>" class="yith-plugin-fw-dimensions__dimension__number"
 						type="number" name="<?php echo $d_name; ?>" value="<?php echo $d_value; ?>"
 					<?php echo $d_attributes; ?>
 				>
-				<label for="<?php echo $d_id; ?>" class="yith-plugin-fw-dimensions__dimension__label"><?php echo $d_label; ?></label>
-			</li>
+			</div>
 		<?php endforeach ?>
 
 		<?php if ( $allow_linked ): ?>
-			<li class="yith-plugin-fw-dimensions__linked" title="<?php _ex( 'Link values together', 'Tooltip in the "Dimensions" field', 'yith-plugin-fw' ); ?>">
+			<div class="yith-plugin-fw-dimensions__linked" title="<?php _ex( 'Link values together', 'Tooltip in the "Dimensions" field', 'yith-plugin-fw' ); ?>">
 				<input class='yith-plugin-fw-dimensions__linked__value' type="hidden" name="<?php echo $name ?>[linked]" value="<?php echo $linked ?>">
 				<span class="dashicons dashicons-admin-links"></span>
-			</li>
+			</div>
 		<?php endif; ?>
-	</ul>
+	</div>
+	<div class="yith-plugin-fw-dimensions__units">
+		<input class='yith-plugin-fw-dimensions__unit__value' type="hidden" name="<?php echo $name ?>[unit]" value="<?php echo isset( $value['unit'] ) ? $value['unit'] : current( array_keys( $units ) ) ?>">
+		<?php foreach ( $units as $key => $label ) : ?>
+			<?php
+			$key     = sanitize_title( $key );
+			$classes = array(
+				'yith-plugin-fw-dimensions__unit',
+				"yith-plugin-fw-dimensions__unit--{$key}-unit",
+			);
+			if ( $unit_value === $key ) {
+				$classes[] = 'yith-plugin-fw-dimensions__unit--selected';
+			}
+			$classes = implode( ' ', $classes );
+			?>
+			<span class="<?php echo $classes; ?>" data-value="<?php echo $key; ?>"><?php echo $label; ?></span>
+		<?php endforeach ?>
+	</div>
 </div>

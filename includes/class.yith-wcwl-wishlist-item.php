@@ -151,7 +151,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * Return price of the produce related to current item
 		 *
 		 * @param $context string Context
-		 * @return string
+		 * @return float
 		 */
 		public function get_product_price( $context = 'view' ) {
 			$product = $this->get_product( $context );
@@ -165,10 +165,10 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 					/**
 					 * @var $product \WC_Product_Variable
 					 */
-					return $product->get_variation_price( 'min' );
+					return (float) $product->get_variation_price( 'min' );
 				default:
 					$sale_price = $product->get_sale_price();
-					return $sale_price ? $sale_price : $product->get_price();
+					return $sale_price ? (float) $sale_price : (float) $product->get_price();
 			}
 		}
 

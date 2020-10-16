@@ -41,15 +41,15 @@
 
         /* Colorpicker */
         $colorpicker.wpColorPicker( {
-                                        palettes: false,
-                                        width   : 200,
-                                        mode    : 'hsl',
-                                        clear   : function () {
-                                            var input = $( this );
-                                            input.val( input.data( 'default-color' ) );
-                                            input.change();
-                                        }
-                                    } );
+            palettes: false,
+            width   : 200,
+            mode    : 'hsl',
+            clear   : function () {
+                var input = $( this );
+                input.val( input.data( 'default-color' ) );
+                input.change();
+            }
+        } );
 
 
         $colorpicker.each( function () {
@@ -64,15 +64,15 @@
 
             if ( !wrap1.find( '.wp-picker-clear-custom' ).length ) {
                 var button = $( '<span/>' ).attr( {
-                                                      class: "wp-picker-default-custom"
-                                                  } );
+                    class: "wp-picker-default-custom"
+                } );
                 wrap1.find( '.wp-picker-default' ).wrap( button );
             }
 
             if ( !wrap2.find( '.wp-picker-clear-custom' ).length ) {
                 var button = $( '<span/>' ).attr( {
-                                                      class: "wp-picker-default-custom"
-                                                  } );
+                    class: "wp-picker-default-custom"
+                } );
                 wrap2.find( '.wp-picker-default' ).wrap( button );
             }
         } );
@@ -84,7 +84,7 @@
             // preview
             $upload.imgUrl.change( function () {
                 var url     = $( this ).val(),
-					re      = new RegExp( "(http|ftp|https)://[a-zA-Z0-9@?^=%&amp;:/~+#-_.]*.(gif|jpg|jpeg|png|ico|svg)" ),
+                    re      = new RegExp( "(http|ftp|https)://[a-zA-Z0-9@?^=%&amp;:/~+#-_.]*.(gif|jpg|jpeg|png|ico|svg)" ),
                     preview = $( this ).parent().find( $upload.imgPreviewHandler ).first();
 
                 if ( preview.length < 1 ) {
@@ -103,7 +103,7 @@
 
                 var t  = $( this ),
                     custom_uploader,
-                    id = t.attr( 'id' ).replace( /-button$/, '' );
+                    id = t.attr( 'id' ).replace( /-button$/, '' ).replace(/(\[|\])/g, '\\$1');
 
                 //If the uploader object has already been created, reopen the dialog
                 if ( custom_uploader ) {
@@ -114,27 +114,27 @@
                 var custom_uploader_states = [
                     // Main states.
                     new wp.media.controller.Library( {
-                                                         library   : wp.media.query(),
-                                                         multiple  : false,
-                                                         title     : 'Choose Image',
-                                                         priority  : 20,
-                                                         filterable: 'uploaded'
-                                                     } )
+                        library   : wp.media.query(),
+                        multiple  : false,
+                        title     : 'Choose Image',
+                        priority  : 20,
+                        filterable: 'uploaded'
+                    } )
                 ];
 
                 // Create the media frame.
                 custom_uploader = wp.media.frames.downloadable_file = wp.media( {
-                                                                                    // Set the title of the modal.
-                                                                                    title   : 'Choose Image',
-                                                                                    library : {
-                                                                                        type: ''
-                                                                                    },
-                                                                                    button  : {
-                                                                                        text: 'Choose Image'
-                                                                                    },
-                                                                                    multiple: false,
-                                                                                    states  : custom_uploader_states
-                                                                                } );
+                    // Set the title of the modal.
+                    title   : 'Choose Image',
+                    library : {
+                        type: ''
+                    },
+                    button  : {
+                        text: 'Choose Image'
+                    },
+                    multiple: false,
+                    states  : custom_uploader_states
+                } );
 
                 //When a file is selected, grab the URL and set it as the text field's value
                 custom_uploader.on( 'select', function () {
@@ -154,8 +154,8 @@
 
             $( document ).on( 'click', $upload.resetButtonHandler, function ( e ) {
                 var t             = $( this ),
-                    id            = t.attr( 'id' ),
-                    input_id      = t.attr( 'id' ).replace( /-button-reset$/, '' ),
+                    id            = t.attr( 'id' ).replace(/(\[|\])/g, '\\$1'),
+                    input_id      = t.attr( 'id' ).replace( /-button-reset$/, '' ).replace(/(\[|\])/g, '\\$1'),
                     default_value = $( '#' + id ).data( 'default' );
 
                 $( "#" + input_id ).val( default_value );
@@ -178,19 +178,19 @@
 
                 // Create the media frame.
                 var image_gallery_frame = wp.media.frames.image_gallery = wp.media( {
-                                                                                        // Set the title of the modal.
-                                                                                        title : $t.data( 'choose' ),
-                                                                                        button: {
-                                                                                            text: $t.data( 'update' )
-                                                                                        },
-                                                                                        states: [
-                                                                                            new wp.media.controller.Library( {
-                                                                                                                                 title     : $t.data( 'choose' ),
-                                                                                                                                 filterable: 'all',
-                                                                                                                                 multiple  : true
-                                                                                                                             } )
-                                                                                        ]
-                                                                                    } );
+                    // Set the title of the modal.
+                    title : $t.data( 'choose' ),
+                    button: {
+                        text: $t.data( 'update' )
+                    },
+                    states: [
+                        new wp.media.controller.Library( {
+                            title     : $t.data( 'choose' ),
+                            filterable: 'all',
+                            multiple  : true
+                        } )
+                    ]
+                } );
 
                 // When an image is selected, run a callback.
                 image_gallery_frame.on( 'select', function () {
@@ -215,30 +215,30 @@
             $imageGallery.sliderWrapper.each( function () {
                 var $t = $( this );
                 $t.sortable( {
-                                 items               : 'li.image',
-                                 cursor              : 'move',
-                                 scrollSensitivity   : 40,
-                                 forcePlaceholderSize: true,
-                                 forceHelperSize     : false,
-                                 helper              : 'clone',
-                                 opacity             : 0.65,
-                                 start               : function ( event, ui ) {
-                                     ui.item.css( 'background-color', '#f6f6f6' );
-                                 },
-                                 stop                : function ( event, ui ) {
-                                     ui.item.removeAttr( 'style' );
-                                 },
-                                 update              : function ( event, ui ) {
-                                     var attachment_ids = '';
+                    items               : 'li.image',
+                    cursor              : 'move',
+                    scrollSensitivity   : 40,
+                    forcePlaceholderSize: true,
+                    forceHelperSize     : false,
+                    helper              : 'clone',
+                    opacity             : 0.65,
+                    start               : function ( event, ui ) {
+                        ui.item.css( 'background-color', '#f6f6f6' );
+                    },
+                    stop                : function ( event, ui ) {
+                        ui.item.removeAttr( 'style' );
+                    },
+                    update              : function ( event, ui ) {
+                        var attachment_ids = '';
 
-                                     $t.find( 'li.image' ).css( 'cursor', 'default' ).each( function () {
-                                         var attachment_id = $( this ).attr( 'data-attachment_id' );
-                                         attachment_ids    = attachment_ids + attachment_id + ',';
-                                     } );
+                        $t.find( 'li.image' ).css( 'cursor', 'default' ).each( function () {
+                            var attachment_id = $( this ).attr( 'data-attachment_id' );
+                            attachment_ids    = attachment_ids + attachment_id + ',';
+                        } );
 
-                                     $t.closest( '.image-gallery' ).find( '.image_gallery_ids' ).val( attachment_ids );
-                                 }
-                             } );
+                        $t.closest( '.image-gallery' ).find( '.image_gallery_ids' ).val( attachment_ids );
+                    }
+                } );
             } );
 
             // Remove images
@@ -304,23 +304,23 @@
                 labels   = $( this ).data( 'labels' );
 
             $( this ).slider( {
-                                  value: val,
-                                  min  : minValue,
-                                  max  : maxValue,
-                                  range: 'min',
-                                  step : step,
+                value: val,
+                min  : minValue,
+                max  : maxValue,
+                range: 'min',
+                step : step,
 
-                                  create: function () {
-                                      $( this ).find( '.ui-slider-handle' ).text( $( this ).slider( "value" ) );
-                                  },
+                create: function () {
+                    $( this ).find( '.ui-slider-handle' ).text( $( this ).slider( "value" ) );
+                },
 
 
-                                  slide: function ( event, ui ) {
-                                      $( this ).find( 'input' ).val( ui.value );
-                                      $( this ).find( '.ui-slider-handle' ).text( ui.value );
-                                      $( this ).siblings( '.feedback' ).find( 'strong' ).text( ui.value + labels );
-                                  }
-                              } );
+                slide: function ( event, ui ) {
+                    $( this ).find( 'input' ).val( ui.value );
+                    $( this ).find( '.ui-slider-handle' ).text( ui.value );
+                    $( this ).siblings( '.feedback' ).find( 'strong' ).text( ui.value + labels );
+                }
+            } );
         } );
 
         /* codemirror */
@@ -459,29 +459,29 @@
             yit_metaboxes_nonce = $( this ).closest( 'form#post' ).find( '#yit_metaboxes_nonce' ).val();
             metabox_tab         = $( this ).closest( '.tabs-panel' ).attr( 'id' );
             url                 = yith_framework_fw_fields.ajax_url +
-                                  '?action=' + action +
-                                  "&post_ID=" + post_id +
-                                  '&yit_metaboxes_nonce=' + yit_metaboxes_nonce +
-                                  "&toggle_id=" + id +
-                                  "&metabox_tab=" + metabox_tab;
+                '?action=' + action +
+                "&post_ID=" + post_id +
+                '&yit_metaboxes_nonce=' + yit_metaboxes_nonce +
+                "&toggle_id=" + id +
+                "&metabox_tab=" + metabox_tab;
         } else {
             url = yith_framework_fw_fields.admin_url + '?action=' + action + '&tab=' + current_tab + "&toggle_id=" + id;
         }
 
         $.ajax( {
-                    type       : "POST",
-                    url        : url,
-                    data       : formdata,
-                    contentType: false,
-                    processData: false,
-                    success    : function ( result ) {
-                        if ( spinner ) {
-                            spinner.removeClass( 'show' );
-                        }
+            type       : "POST",
+            url        : url,
+            data       : formdata,
+            contentType: false,
+            processData: false,
+            success    : function ( result ) {
+                if ( spinner ) {
+                    spinner.removeClass( 'show' );
+                }
 
-                        $( document ).trigger( 'yith_save_toggle_element_done', [result, toggle] );
-                    }
-                } );
+                $( document ).trigger( 'yith_save_toggle_element_done', [result, toggle] );
+            }
+        } );
     };
 
     $.fn.serializeToggleElement = function () {
@@ -696,22 +696,22 @@
         toggle.saveToggleElement();
     } );
 
-	// Radio
-	$( document ).on( 'click', '.yith-plugin-fw-radio input[type=radio]', function () {
-		var _radioContainer = $( this ).closest( '.yith-plugin-fw-radio' ),
-			_value          = $( this ).val();
+    // Radio
+    $( document ).on( 'click', '.yith-plugin-fw-radio input[type=radio]', function () {
+        var _radioContainer = $( this ).closest( '.yith-plugin-fw-radio' ),
+            _value          = $( this ).val();
 
-		_radioContainer.val( _value ).data( 'value', _value ).trigger( 'change' );
-	} );
+        _radioContainer.val( _value ).data( 'value', _value ).trigger( 'change' );
+    } );
 
-	$( document.body ).on( 'yith-plugin-fw-init-radio', function () {
-		$( '.yith-plugin-fw-radio:not(.yith-plugin-fw-radio--initialized)' ).each( function () {
-			$( this ).val( $( this ).data( 'value' ) );
-			$( this ).addClass( 'yith-plugin-fw-radio--initialized' );
-		} );
-	} ).trigger( 'yith-plugin-fw-init-radio' );
+    $( document.body ).on( 'yith-plugin-fw-init-radio', function () {
+        $( '.yith-plugin-fw-radio:not(.yith-plugin-fw-radio--initialized)' ).each( function () {
+            $( this ).val( $( this ).data( 'value' ) );
+            $( this ).addClass( 'yith-plugin-fw-radio--initialized' );
+        } );
+    } ).trigger( 'yith-plugin-fw-init-radio' );
 
- 	// Password Eye field
+    // Password Eye field
     $( document ).on( 'click', '.yith-password-eye', function () {
         var $this = $( this ),
             inp   = $( this ).closest( '.yith-password-wrapper' ).find( 'input' );
@@ -732,70 +732,70 @@
             $( '.select2-results' ).closest( '.select2-container' ).addClass( 'yith-plugin-fw-select2-container' );
         }
     } );
-	/**
-	 * Dimensions
-	 */
-	var fw_dimensions = {
-		selectors   : {
-			wrapper   : '.yith-plugin-fw-dimensions',
-			units     : {
-				wrapper      : '.yith-plugin-fw-dimensions__units',
-				single       : '.yith-plugin-fw-dimensions__unit',
-				value        : '.yith-plugin-fw-dimensions__unit__value',
-				selectedClass: 'yith-plugin-fw-dimensions__unit--selected'
-			},
-			linked    : {
-				button            : '.yith-plugin-fw-dimensions__linked',
-				value             : '.yith-plugin-fw-dimensions__linked__value',
-				wrapperActiveClass: 'yith-plugin-fw-dimensions--linked-active'
-			},
-			dimensions: {
-				number: '.yith-plugin-fw-dimensions__dimension__number'
-			}
-		},
-		init        : function () {
-			var self = fw_dimensions;
-			$( document ).on( 'click', self.selectors.units.single, self.unitChange );
-			$( document ).on( 'click', self.selectors.linked.button, self.linkedChange );
-			$( document ).on( 'change keyup', self.selectors.dimensions.number, self.numberChange );
-		},
-		unitChange  : function ( e ) {
-			var unit        = $( this ).closest( fw_dimensions.selectors.units.single ),
-				wrapper     = unit.closest( fw_dimensions.selectors.units.wrapper ),
-				units       = wrapper.find( fw_dimensions.selectors.units.single ),
-				valueField  = wrapper.find( fw_dimensions.selectors.units.value ).first(),
-				value       = unit.data( 'value' );
+    /**
+     * Dimensions
+     */
+    var fw_dimensions = {
+        selectors   : {
+            wrapper   : '.yith-plugin-fw-dimensions',
+            units     : {
+                wrapper      : '.yith-plugin-fw-dimensions__units',
+                single       : '.yith-plugin-fw-dimensions__unit',
+                value        : '.yith-plugin-fw-dimensions__unit__value',
+                selectedClass: 'yith-plugin-fw-dimensions__unit--selected'
+            },
+            linked    : {
+                button            : '.yith-plugin-fw-dimensions__linked',
+                value             : '.yith-plugin-fw-dimensions__linked__value',
+                wrapperActiveClass: 'yith-plugin-fw-dimensions--linked-active'
+            },
+            dimensions: {
+                number: '.yith-plugin-fw-dimensions__dimension__number'
+            }
+        },
+        init        : function () {
+            var self = fw_dimensions;
+            $( document ).on( 'click', self.selectors.units.single, self.unitChange );
+            $( document ).on( 'click', self.selectors.linked.button, self.linkedChange );
+            $( document ).on( 'change keyup', self.selectors.dimensions.number, self.numberChange );
+        },
+        unitChange  : function ( e ) {
+            var unit        = $( this ).closest( fw_dimensions.selectors.units.single ),
+                wrapper     = unit.closest( fw_dimensions.selectors.units.wrapper ),
+                units       = wrapper.find( fw_dimensions.selectors.units.single ),
+                valueField  = wrapper.find( fw_dimensions.selectors.units.value ).first(),
+                value       = unit.data( 'value' );
 
-			units.removeClass( fw_dimensions.selectors.units.selectedClass );
-			unit.addClass( fw_dimensions.selectors.units.selectedClass );
-			valueField.val( value );
-		},
-		linkedChange: function () {
-			var button      = $( this ).closest( fw_dimensions.selectors.linked.button ),
-				mainWrapper = button.closest( fw_dimensions.selectors.wrapper ),
-				valueField  = button.find( fw_dimensions.selectors.linked.value ),
-				value       = valueField.val();
+            units.removeClass( fw_dimensions.selectors.units.selectedClass );
+            unit.addClass( fw_dimensions.selectors.units.selectedClass );
+            valueField.val( value );
+        },
+        linkedChange: function () {
+            var button      = $( this ).closest( fw_dimensions.selectors.linked.button ),
+                mainWrapper = button.closest( fw_dimensions.selectors.wrapper ),
+                valueField  = button.find( fw_dimensions.selectors.linked.value ),
+                value       = valueField.val();
 
-			if ( 'yes' === value ) {
-				mainWrapper.removeClass( fw_dimensions.selectors.linked.wrapperActiveClass );
-				valueField.val( 'no' );
-			} else {
-				mainWrapper.addClass( fw_dimensions.selectors.linked.wrapperActiveClass );
-				valueField.val( 'yes' );
+            if ( 'yes' === value ) {
+                mainWrapper.removeClass( fw_dimensions.selectors.linked.wrapperActiveClass );
+                valueField.val( 'no' );
+            } else {
+                mainWrapper.addClass( fw_dimensions.selectors.linked.wrapperActiveClass );
+                valueField.val( 'yes' );
 
-				mainWrapper.find( fw_dimensions.selectors.dimensions.number ).first().trigger( 'change' );
-			}
-		},
-		numberChange: function ( e ) {
-			var number      = $( this ).closest( fw_dimensions.selectors.dimensions.number ),
-				mainWrapper = number.closest( fw_dimensions.selectors.wrapper );
-			if ( mainWrapper.hasClass( fw_dimensions.selectors.linked.wrapperActiveClass ) ) {
-				var numbers = mainWrapper.find( fw_dimensions.selectors.dimensions.number );
+                mainWrapper.find( fw_dimensions.selectors.dimensions.number ).first().trigger( 'change' );
+            }
+        },
+        numberChange: function ( e ) {
+            var number      = $( this ).closest( fw_dimensions.selectors.dimensions.number ),
+                mainWrapper = number.closest( fw_dimensions.selectors.wrapper );
+            if ( mainWrapper.hasClass( fw_dimensions.selectors.linked.wrapperActiveClass ) ) {
+                var numbers = mainWrapper.find( fw_dimensions.selectors.dimensions.number );
 
-				numbers.val( number.val() );
-			}
-		}
-	};
-	fw_dimensions.init();
+                numbers.val( number.val() );
+            }
+        }
+    };
+    fw_dimensions.init();
 
 } )( jQuery );

@@ -6,12 +6,18 @@
   "scripts": {
     "build": "npm run js && npm run i18n",
     "js": "grunt js",
-    "i18n": "grunt i18n"
+    "i18n": "npm run -s i18n:build && npm run -s i18n:translations",
+    "i18n:build": "grunt makepot",
+    "i18n:translations": "npm run -s i18n:download-translations && npm run -s i18n:update-po && npm run -s i18n:clean",
+    "i18n:download-translations": "node ./bin/download-translations.js",
+    "i18n:update-po": "grunt update_po",
+    "i18n:clean": "node ./bin/clean-language-files.js"
   },
   "author": "YITH",
   "license": "GPL-3.0+",
   "keywords": [],
   "devDependencies": {
+    "axios": "^0.19.2",
     "grunt": "^1.0.3",
     "grunt-cli": "^1.3.2",
     "grunt-contrib-jshint": "^2.0.0",

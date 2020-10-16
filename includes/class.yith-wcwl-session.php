@@ -111,7 +111,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @return void
 		 */
 		public function set_session_cookie() {
-			if ( headers_sent() ) {
+			if ( headers_sent() || ! apply_filters( 'yith_wcwl_set_session_cookie', true ) ) {
 				return;
 			}
 

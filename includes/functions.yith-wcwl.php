@@ -464,7 +464,7 @@ if ( ! function_exists( 'yith_wcwl_get_privacy_label' ) ) {
 				break;
 		}
 
-		return apply_filters( "yith_wcwl_{$privacy_label}_wishlist_visibility", $privacy_text, $extended );
+		return apply_filters( "yith_wcwl_{$privacy_label}_wishlist_visibility", $privacy_text, $extended, $privacy );
 	}
 }
 
@@ -491,7 +491,7 @@ if ( ! function_exists( 'yith_wcwl_get_privacy_value' ) ) {
 				break;
 		}
 
-		return $privacy_value;
+		return apply_filters( 'yith_wcwl_privacy_value', $privacy_value, $privacy_label );
 	}
 }
 

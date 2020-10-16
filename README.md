@@ -151,13 +151,16 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-### 3.0.14 - Released on 17 September 2020
+### 3.0.15 - Released on 16 October 2020
 
-* New: support for WooCommerce 4.5
+* New: support for WooCommerce 4.6
 * Update: plugin framework
-* Tweak: filter fragments to update only visible ATW when reset_data js event occurs
-* Tweak: added error message when trying to add variable products to cart
-* Fix: issue with cart redirect when using YITH WCCL
+* Tweak: return product price as float in item class
+* Fix: prevent possible fatal error when printing ATW button
+* Fix: original price being sent to database as int instead of float
+* Dev: added new filter yith_wcwl_set_session_cookie
+* Dev: added new filter yith_wcwl_privacy_value
+* Dev: added new parameter to yith_wcwl_{privacy}_wishlist_visibility filter
 
 ## Support
 
