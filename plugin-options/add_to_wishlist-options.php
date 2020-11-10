@@ -27,7 +27,7 @@ return apply_filters( 'yith_wcwl_add_to_wishlist_options', array(
 			'id'        => 'yith_wcwl_after_add_to_wishlist_behaviour',
 			'options'   => array_merge(
 				array(
-					'add'    => __( 'Show "Add to wishilist" button', 'yith-woocommerce-wishlist' ),
+					'add'    => __( 'Show "Add to wishlist" button', 'yith-woocommerce-wishlist' ),
 					'view'   => __( 'Show "View wishlist" link', 'yith-woocommerce-wishlist' ),
 					'remove' => __( 'Show "Remove from list" link', 'yith-woocommerce-wishlist' ),
 				)

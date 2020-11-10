@@ -25,6 +25,7 @@ $class = isset( $class ) ? $class : 'yith-plugin-fw-select';
             id="<?php echo $id ?>"
         name="<?php echo $name ?><?php if ( $multiple ) echo "[]" ?>" <?php if ( isset( $std ) ) : ?>
         data-std="<?php echo ( $multiple ) ? implode( ' ,', $std ) : $std ?>"<?php endif ?>
+		data-value="<?php echo ( $multiple ) ? implode( ' ,', $value ) : $value; ?>"
 
         class="<?php echo $class ?>"
 	    <?php echo $placeholder ?>

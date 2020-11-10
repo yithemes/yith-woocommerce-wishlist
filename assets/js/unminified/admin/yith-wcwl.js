@@ -6,7 +6,7 @@
  * @version 3.0.0
  */
 
-jQuery( document ).ready( function( $ ) {
+jQuery( function( $ ) {
 
     /* === CUSTOM DEPENDENCIES HANDLER === */
 

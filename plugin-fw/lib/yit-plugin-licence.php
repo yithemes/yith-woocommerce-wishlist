@@ -87,8 +87,8 @@ if ( ! class_exists( 'YIT_Plugin_Licence' ) ) {
 	     * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	     * @since 3.0.17
 	     */
-	    public static function get_license_activation_url(){
-		    return function_exists( 'YITH_Plugin_Licence' ) ? YITH_Plugin_Licence()->get_license_activation_url() : false;
+	    public static function get_license_activation_url( $plugin_slug = '' ){
+		    return function_exists( 'YITH_Plugin_Licence' ) ? YITH_Plugin_Licence()->get_license_activation_url( $plugin_slug ) : false;
 	    }
 
 	    /**

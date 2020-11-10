@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.15';
+		public $version = '3.0.16';
 
 		/**
 		 * Plugin database version
@@ -385,32 +385,36 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 2.2.3
 		 */
 		public function get_localize() {
-			return apply_filters( 'yith_wcwl_localize_script', array(
-				'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),
-				'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ),
-				'multi_wishlist' => false,
-				'hide_add_button' => apply_filters( 'yith_wcwl_hide_add_button', true ),
-				'enable_ajax_loading' => 'yes' == get_option( 'yith_wcwl_ajax_enable', 'no' ),
-				'ajax_loader_url' => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
-				'remove_from_wishlist_after_add_to_cart' => get_option( 'yith_wcwl_remove_after_add_to_cart' ) == 'yes',
-				'is_wishlist_responsive' => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
-				'time_to_close_prettyphoto' => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
-				'fragments_index_glue' => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
-				'labels' => array(
-					'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
-					'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) )
-				),
-				'actions' => array(
-					'add_to_wishlist_action' => 'add_to_wishlist',
-					'remove_from_wishlist_action' => 'remove_from_wishlist',
-					'reload_wishlist_and_adding_elem_action'  => 'reload_wishlist_and_adding_elem',
-					'load_mobile_action' => 'load_mobile',
-					'delete_item_action' => 'delete_item',
-					'save_title_action' => 'save_title',
-					'save_privacy_action' => 'save_privacy',
-					'load_fragments' => 'load_fragments'
+			return apply_filters(
+				'yith_wcwl_localize_script',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),
+					'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ),
+					'multi_wishlist' => false,
+					'hide_add_button' => apply_filters( 'yith_wcwl_hide_add_button', true ),
+					'enable_ajax_loading' => 'yes' == get_option( 'yith_wcwl_ajax_enable', 'no' ),
+					'ajax_loader_url' => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
+					'remove_from_wishlist_after_add_to_cart' => get_option( 'yith_wcwl_remove_after_add_to_cart' ) == 'yes',
+					'is_wishlist_responsive' => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
+					'time_to_close_prettyphoto' => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
+					'fragments_index_glue' => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
+					'reload_on_found_variation' => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
+					'labels' => array(
+						'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
+						'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) ),
+					),
+					'actions' => array(
+						'add_to_wishlist_action' => 'add_to_wishlist',
+						'remove_from_wishlist_action' => 'remove_from_wishlist',
+						'reload_wishlist_and_adding_elem_action'  => 'reload_wishlist_and_adding_elem',
+						'load_mobile_action' => 'load_mobile',
+						'delete_item_action' => 'delete_item',
+						'save_title_action' => 'save_title',
+						'save_privacy_action' => 'save_privacy',
+						'load_fragments' => 'load_fragments',
+					),
 				)
-			) );
+			);
 		}
 
 		/**

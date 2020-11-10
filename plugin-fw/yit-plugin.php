@@ -184,14 +184,14 @@ if( ! function_exists( 'yith_add_action_links' ) ){
 	 * @return mixed
 	 * @use      plugin_action_links_{$plugin_file_name}
 	 */
-	function yith_add_action_links( $links, $panel_page = '', $is_premium = false ) {
+	function yith_add_action_links( $links, $panel_page = '', $is_premium = false, $plugin_slug = '' ) {
 		$links = is_array( $links ) ? $links : array();
 		if( ! empty( $panel_page )  ){
 			$links[] = sprintf( '<a href="%s">%s</a>', admin_url( "admin.php?page={$panel_page}" ), _x( 'Settings', 'Action links',  'yith-plugin-fw' ) );
 		}
 
 		if( $is_premium && class_exists( 'YIT_Plugin_Licence' ) ){
-			$links[] = sprintf( '<a href="%s">%s</a>', YIT_Plugin_Licence()->get_license_activation_url(),__( 'License',  'yith-plugin-fw' ) );
+			$links[] = sprintf( '<a href="%s">%s</a>', YIT_Plugin_Licence()->get_license_activation_url( $plugin_slug ),__( 'License',  'yith-plugin-fw' ) );
 		}
 
 		return $links;

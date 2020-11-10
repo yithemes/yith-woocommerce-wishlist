@@ -62,14 +62,14 @@
             wrap1.length && wrap_main1.find( 'a.wp-color-result' ).attr( 'title', select_label );
             wrap_main2.length && wrap_main2.find( 'a.wp-color-result' ).attr( 'title', select_label );
 
-            if ( !wrap1.find( '.wp-picker-clear-custom' ).length ) {
+            if ( ! wrap1.find( '.wp-picker-default-custom' ).length ) {
                 var button = $( '<span/>' ).attr( {
                     class: "wp-picker-default-custom"
                 } );
                 wrap1.find( '.wp-picker-default' ).wrap( button );
             }
 
-            if ( !wrap2.find( '.wp-picker-clear-custom' ).length ) {
+            if ( ! wrap2.find( '.wp-picker-default-custom' ).length ) {
                 var button = $( '<span/>' ).attr( {
                     class: "wp-picker-default-custom"
                 } );
@@ -572,8 +572,8 @@
             target_id    = $this.data( 'box_id' ),
             closed_label = $this.data( 'closed_label' ),
             label        = $this.data( 'opened_label' ),
-            id           = $this.closest( '.yith-toggle_wrapper' ).attr( 'id' );
-        template         = wp.template( 'yith-toggle-element-add-box-content-' + id );
+            id           = $this.closest( '.yith-toggle_wrapper' ).attr( 'id' ),
+            template     = wp.template( 'yith-toggle-element-add-box-content-' + id );
 
         if ( '' !== target_id ) {
             $( '#' + target_id ).html( template( { index: 'box_id' } ) ).slideToggle();

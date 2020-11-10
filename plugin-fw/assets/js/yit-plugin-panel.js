@@ -8,52 +8,28 @@
  */
 
 jQuery( function ( $ ) {
-    //dependencies handler
-    $( '[data-dep-target]' ).each( function () {
-        var t = $( this );
-
-        var field = '#' + t.data( 'dep-target' ),
-            dep   = '#' + t.data( 'dep-id' ),
-            value = t.data( 'dep-value' ),
-            type  = t.data( 'dep-type' ),
-            event = 'change',
-            wrapper = $( dep + '-wrapper' ),
-            field_type = wrapper.data( 'type' );
-
-        if( field_type === 'select-images' ){
-          event = 'yith_select_images_value_changed';
-        }
-
-        dependencies_handler( field, dep, value.toString(), type );
-
-        $( dep ).on( event, function () {
-            dependencies_handler( field, dep, value.toString(), type );
-        } ).trigger( event );
-
-    } );
-
-    //Handle dependencies.
+    // Handle dependencies.
     function dependencies_handler( id, deps, values, type ) {
         var result = true;
         //Single dependency
         if ( typeof ( deps ) == 'string' ) {
+            // ??
             if ( deps.substr( 0, 6 ) == ':radio' ) {
                 deps = deps + ':checked';
             }
 
-            var val = $( deps ).val();
+            var input_type  = $( deps ).data( 'type' ),
+                val         = $( deps ).val();
 
-            if ( $( deps ).attr( 'type' ) == 'checkbox' ) {
-                var thisCheck = $( deps );
-                if ( thisCheck.is( ':checked' ) ) {
-                    val = 'yes';
-                } else {
-                    val = 'no';
-                }
+            if ( 'checkbox' === input_type ) {
+                val = $( deps ).is( ':checked' ) ? 'yes' : 'no';
+            }
+            else if ( 'radio' === input_type ) {
+                val = $( deps ).find('input[type="radio"]').filter(':checked').val();
             }
 
             if( $( deps + '-wrapper' ).data( 'type' ) === 'select-images' ){
-              val = $( deps + '-wrapper' ).find( 'select' ).first().val();
+                val = $( deps + '-wrapper' ).find( 'select' ).first().val();
             }
 
             values = values.split( ',' );
@@ -73,7 +49,7 @@ jQuery( function ( $ ) {
 
         if ( $current_container.length < 1 ) {
             // container for YIT Plugin Panel WooCommerce
-            $current_container = $current_field.closest( '.yith-plugin-fw-panel-wc-row' );
+            $current_container = $current_field.closest( '.yith-plugin-fw-panel-wc-row, .yith-toggle-content-row' );
         }
 
         var types = type.split( '-' ), j;
@@ -97,7 +73,7 @@ jQuery( function ( $ ) {
                         $current_container.hide();
                         break;
                     default:
-                        if ( !$current_container.hasClass( 'fade-in' ) ) {
+                        if ( ! $current_container.hasClass( 'fade-in' ) ) {
                             $current_container.hide();
                             $current_container.css( { 'opacity': '0' } );
                         } else {
@@ -131,6 +107,34 @@ jQuery( function ( $ ) {
             }
         }
     }
+    function init_dependencies() {
+        $( '[data-dep-target]:not( .deps-initialized )' ).each( function () {
+            var t = $( this );
+
+            // init field deps
+            t.addClass( 'deps-initialized' );
+
+            var field = '#' + t.data( 'dep-target' ),
+                dep   = '#' + t.data( 'dep-id' ),
+                value = t.data( 'dep-value' ),
+                type  = t.data( 'dep-type' ),
+                event = 'change',
+                wrapper = $( dep + '-wrapper' ),
+                field_type = wrapper.data( 'type' );
+
+            if( field_type === 'select-images' ){
+                event = 'yith_select_images_value_changed';
+            }
+
+            $( dep ).on( event, function () {
+                dependencies_handler( field, dep, value.toString(), type );
+            } ).trigger( event );
+        } );
+    }
+
+    init_dependencies();
+    // re-init deps after an add toggle action
+    $( document ).on( 'yith-add-box-button-toggle', init_dependencies );
 
     //connected list
     $( '.rm_connectedlist' ).each( function () {

@@ -189,7 +189,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @return array
 		 */
 		public function action_links( $links ) {
-			$links = yith_add_action_links( $links, 'yith_wcwl_panel', defined( 'YITH_WCWL_PREMIUM' ) );
+			$links = yith_add_action_links( $links, 'yith_wcwl_panel', defined( 'YITH_WCWL_PREMIUM' ), YITH_WCWL_SLUG );
 			return $links;
 		}
 

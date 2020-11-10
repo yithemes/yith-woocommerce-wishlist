@@ -325,50 +325,57 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				'wishlist_slug' => false,
 				'wishlist_name' => false,
 				'wishlist_token' => false,
-				'wishlist_visibility' => apply_filters( 'yith_wcwl_wishlist_visibility_string_value', 'all'), // all, visible, public, shared, private
+				'wishlist_visibility' => apply_filters( 'yith_wcwl_wishlist_visibility_string_value', 'all' ), // all, visible, public, shared, private
 				'user_search' => false,
 				's' => false,
 				'is_default' => false,
 				'orderby' => '',
 				'order' => 'DESC',
-				'limit' =>  false,
+				'limit' => false,
 				'offset' => 0,
-				'show_empty' => true
+				'show_empty' => true,
 			);
 
 			$args = wp_parse_args( $args, $default );
 			extract( $args );
 
-			$sql = "SELECT SQL_CALC_FOUND_ROWS l.ID";
-
+			$sql  = 'SELECT SQL_CALC_FOUND_ROWS l.ID';
 			$sql .= " FROM `{$wpdb->yith_wcwl_wishlists}` AS l";
 
-			if( ! empty( $user_search ) || ! empty( $s ) || ( ! empty($orderby ) && $orderby == 'user_login' ) ) {
+			if ( ! empty( $user_search ) || ! empty( $s ) || ( ! empty( $orderby ) && 'user_login' === $orderby ) ) {
 				$sql .= " LEFT JOIN `{$wpdb->users}` AS u ON l.`user_id` = u.ID";
 			}
 
-			if( ! empty( $user_search ) || ! empty( $s ) ){
+			if ( ! empty( $user_search ) || ! empty( $s ) ) {
 				$sql .= " LEFT JOIN `{$wpdb->usermeta}` AS umn ON umn.`user_id` = u.`ID`";
 				$sql .= " LEFT JOIN `{$wpdb->usermeta}` AS ums ON ums.`user_id` = u.`ID`";
 			}
 
-			$sql .= " WHERE 1";
+			$sql .= ' WHERE 1';
 			$sql_args = array();
 
-			if( ! empty( $user_id ) ){
-				$sql .= " AND l.`user_id` = %d";
+			if ( ! empty( $user_id ) ) {
+				$sql .= ' AND l.`user_id` = %d';
 
 				$sql_args[] = $user_id;
 			}
 
-			if( ! empty( $session_id ) ){
-				$sql .= " AND l.`session_id` = %s AND l.`expiration` > NOW()";
+			if ( ! empty( $session_id ) ) {
+				$sql .= ' AND l.`session_id` = %s AND l.`expiration` > NOW()';
 
 				$sql_args[] = $session_id;
 			}
 
-			if( ! empty( $user_search ) && empty( $s ) ){
-				$sql .= " AND ( umn.`meta_key` LIKE %s AND ums.`meta_key` LIKE %s AND ( u.`user_email` LIKE %s OR umn.`meta_value` LIKE %s OR ums.`meta_value` LIKE %s ) )";
+			if ( ! empty( $user_search ) && empty( $s ) ) {
+				$sql .= ' AND (
+							umn.`meta_key` = %s AND
+							ums.`meta_key` = %s AND
+							(
+								u.`user_email` LIKE %s OR
+								umn.`meta_value` LIKE %s OR
+								ums.`meta_value` LIKE %s
+							)
+						)';
 
 				$search_value = '%' . esc_sql( $user_search ) . '%';
 
@@ -379,8 +386,22 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				$sql_args[] = $search_value;
 			}
 
-			if( ! empty( $s ) ) {
-				$sql .= " AND ( ( umn.`meta_key` LIKE %s AND ums.`meta_key` LIKE %s AND ( u.`user_email` LIKE %s OR umn.`meta_value` LIKE %s OR ums.`meta_value` LIKE %s ) ) OR l.wishlist_name LIKE %s OR l.wishlist_slug LIKE %s OR l.wishlist_token LIKE %s )";
+			if ( ! empty( $s ) ) {
+				$sql .= ' AND ( 
+							( 
+								umn.`meta_key` = %s AND 
+								ums.`meta_key` = %s AND 
+								( 
+									u.`user_email` LIKE %s OR
+									u.`user_login` LIKE %s OR
+									umn.`meta_value` LIKE %s OR
+									ums.`meta_value` LIKE %s
+								) 
+							) OR 
+							l.wishlist_name LIKE %s OR 
+							l.wishlist_slug LIKE %s OR 
+							l.wishlist_token LIKE %s 
+						)';
 
 				$search_value = '%' . esc_sql( $s ) . '%';
 
@@ -392,74 +413,74 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				$sql_args[] = $search_value;
 				$sql_args[] = $search_value;
 				$sql_args[] = $search_value;
+				$sql_args[] = $search_value;
 			}
 
-			if( ! empty( $is_default ) ){
-				$sql .= " AND l.`is_default` = %d";
+			if ( ! empty( $is_default ) ) {
+				$sql .= ' AND l.`is_default` = %d';
 				$sql_args[] = $is_default;
 			}
 
-			if( ! empty( $id ) ){
-				$sql .= " AND l.`ID` = %d";
+			if ( ! empty( $id ) ) {
+				$sql .= ' AND l.`ID` = %d';
 				$sql_args[] = $id;
 			}
 
-			if( isset( $wishlist_slug ) && $wishlist_slug !== false ){
-				$sql .= " AND l.`wishlist_slug` = %s";
+			if ( isset( $wishlist_slug ) && false !== $wishlist_slug ) {
+				$sql .= ' AND l.`wishlist_slug` = %s';
 				$sql_args[] = sanitize_title_with_dashes( $wishlist_slug );
 			}
 
-			if( ! empty( $wishlist_token ) ){
-				$sql .= " AND l.`wishlist_token` = %s";
+			if ( ! empty( $wishlist_token ) ) {
+				$sql .= ' AND l.`wishlist_token` = %s';
 				$sql_args[] = $wishlist_token;
 			}
 
-			if( ! empty( $wishlist_name ) ){
-				$sql .= " AND l.`wishlist_name` LIKE %s";
-				$sql_args[] = "%" . esc_sql( $wishlist_name ) . "%";
+			if ( ! empty( $wishlist_name ) ) {
+				$sql .= ' AND l.`wishlist_name` LIKE %s';
+				$sql_args[] = '%' . esc_sql( $wishlist_name ) . '%';
 			}
 
-			if( ! empty( $wishlist_visibility ) && $wishlist_visibility != 'all' ){
-				switch( $wishlist_visibility ){
+			if ( ! empty( $wishlist_visibility ) && 'all' !== $wishlist_visibility ) {
+				switch ( $wishlist_visibility ) {
 					case 'visible':
-						$sql .= " AND ( l.`wishlist_privacy` = %d OR l.`is_public` = %d )";
+						$sql .= ' AND ( l.`wishlist_privacy` = %d OR l.`is_public` = %d )';
 						$sql_args[] = 0;
 						$sql_args[] = 1;
 						break;
 					default:
-						$sql .= " AND l.`wishlist_privacy` = %d";
+						$sql .= ' AND l.`wishlist_privacy` = %d';
 						$sql_args[] = yith_wcwl_get_privacy_value( $wishlist_visibility );
 						break;
 				}
 			}
 
-			if( empty( $show_empty ) ){
+			if ( empty( $show_empty ) ) {
 				$sql .= " AND l.`ID` IN ( SELECT wishlist_id FROM {$wpdb->yith_wcwl_items} )";
 			}
 
-			$sql .= " GROUP BY l.ID";
+			$sql .= ' GROUP BY l.ID';
+			$sql .= ' ORDER BY';
 
-			$sql .= " ORDER BY";
-
-			if( ! empty( $orderby ) && isset( $order ) ) {
-				$sql .= " " . esc_sql( $orderby ) . " " . esc_sql( $order ) . ", ";
+			if ( ! empty( $orderby ) && isset( $order ) ) {
+				$sql .= ' ' . esc_sql( $orderby ) . ' ' . esc_sql( $order ) . ', ';
 			}
 
-			$sql .= " is_default DESC";
+			$sql .= ' is_default DESC';
 
-			if( ! empty( $limit ) && isset( $offset ) ){
-				$sql .= " LIMIT %d, %d";
+			if ( ! empty( $limit ) && isset( $offset ) ) {
+				$sql .= ' LIMIT %d, %d';
 				$sql_args[] = $offset;
 				$sql_args[] = $limit;
 			}
 
-			if( ! empty( $sql_args ) ){
+			if ( ! empty( $sql_args ) ) {
 				$sql = $wpdb->prepare( $sql, $sql_args );
 			}
 
 			$lists = $wpdb->get_col( $sql );
 
-			if( ! empty( $lists ) ){
+			if ( ! empty( $lists ) ) {
 				$lists = array_map( array( 'YITH_WCWL_Wishlist_Factory', 'get_wishlist' ), $lists );
 			} else {
 				$lists = array();
@@ -497,7 +518,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			$default = array(
 				'search' => false,
 				'limit' => false,
-				'offset' => 0
+				'offset' => 0,
 			);
 
 			$args = wp_parse_args( $args, $default );
@@ -507,27 +528,39 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
                     FROM {$wpdb->yith_wcwl_items} AS i
                     LEFT JOIN {$wpdb->yith_wcwl_wishlists} AS l ON i.wishlist_id = l.ID";
 
-			if( ! empty( $search ) ){
+			if ( ! empty( $search ) ) {
 				$sql .= " LEFT JOIN `{$wpdb->users}` AS u ON l.`user_id` = u.ID";
 				$sql .= " LEFT JOIN `{$wpdb->usermeta}` AS umn ON umn.`user_id` = u.`ID`";
 				$sql .= " LEFT JOIN `{$wpdb->usermeta}` AS ums ON ums.`user_id` = u.`ID`";
 			}
 
-			$sql .= " WHERE l.wishlist_privacy = %d";
+			$sql .= ' WHERE l.wishlist_privacy = %d';
 			$sql_args = array( 0 );
 
-			if( ! empty( $search ) ){
-				$sql .= " AND ( umn.`meta_key` LIKE %s AND ums.`meta_key` LIKE %s AND ( u.`user_email` LIKE %s OR u.`user_login` LIKE %s OR umn.`meta_value` LIKE %s OR ums.`meta_value` LIKE %s ) )";
+			if ( ! empty( $search ) ) {
+				$sql .= ' AND ( 
+							umn.`meta_key` = %s AND 
+							ums.`meta_key` = %s AND 
+							( 
+								u.`user_email` LIKE %s OR 
+								u.`user_login` LIKE %s OR 
+								umn.`meta_value` LIKE %s OR 
+								ums.`meta_value` LIKE %s
+							)
+						)';
+
+				$search_string = '%' . esc_sql( $search ) . '%';
+
 				$sql_args[] = 'first_name';
 				$sql_args[] = 'last_name';
-				$sql_args[] = "%" . esc_sql( $search ) . "%";
-				$sql_args[] = "%" . esc_sql( $search ) . "%";
-				$sql_args[] = "%" . esc_sql( $search ) . "%";
-				$sql_args[] = "%" . esc_sql( $search ) . "%";
+				$sql_args[] = $search_string;
+				$sql_args[] = $search_string;
+				$sql_args[] = $search_string;
+				$sql_args[] = $search_string;
 			}
 
-			if( ! empty( $limit ) && isset( $offset ) ){
-				$sql .= " LIMIT " . $offset . ", " . $limit;
+			if ( ! empty( $limit ) && isset( $offset ) ) {
+				$sql .= " LIMIT {$offset}, {$limit}";
 			}
 
 			$res = $wpdb->get_col( $wpdb->prepare( $sql, $sql_args ) );
@@ -614,7 +647,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				}
 
 				// order by statement
-				$query .= " ORDER BY position ASC, ID ASC;";
+				$query .= " ORDER BY position ASC, ID DESC;";
 
 				$items = $wpdb->get_results( $wpdb->prepare( $query, array(
 					$wishlist->get_id(),

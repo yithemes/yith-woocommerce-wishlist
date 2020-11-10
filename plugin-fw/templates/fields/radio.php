@@ -21,7 +21,7 @@ $class = 'yith-plugin-fw-radio ' . $class;
 ?>
 <div class="<?php echo $class ?>" id="<?php echo $id ?>"
     <?php echo $custom_attributes ?>
-    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?> data-value="<?php echo $value ?>">
+    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?> data-value="<?php echo $value ?>" data-type="radio">
     <?php foreach ( $options as $key => $label ) :
         $radio_id = sanitize_key( $id . '-' . $key );
         ?>

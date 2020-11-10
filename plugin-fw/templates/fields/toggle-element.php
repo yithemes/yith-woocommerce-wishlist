@@ -70,18 +70,21 @@ if ( empty( $values ) && !$show_add_button && $elements ) {
                 $element[ 'id' ]    = 'new_' . $element[ 'id' ];
                 $element[ 'name' ]  = $name . "[{{{data.index}}}][" . $element[ 'id' ] . "]";
                 $class_element      = isset( $element[ 'class_row' ] ) ? $element[ 'class_row' ] : '';
+	            // handle deps if any
+	            ! empty( $element[ 'deps' ]['id'] ) && $element[ 'deps' ]['id'] = 'new_' . $element[ 'deps' ]['id'];
+	            ! empty( $element[ 'deps' ]['target-id'] ) && $element[ 'deps' ]['target-id'] = 'new_' . $element[ 'deps' ]['target-id'];
+	            $deps = yith_field_deps_data( $element );
 
                 $is_required = !empty( $element[ 'required' ] );
                 if ( $is_required ) {
                     $class_element .= ' yith-plugin-fw--required';
                 }
                 ?>
-                <div class="yith-add-box-row <?php echo $class_element ?> <?php echo '{{{data.index}}}' ?>">
+                <div class="yith-add-box-row yith-toggle-content-row <?php echo $class_element ?> <?php echo '{{{data.index}}}' ?>" <?php echo $deps ?>>
 
                     <label for="<?php echo $element[ 'id' ]; ?>"><?php echo( $element[ 'title' ] ); ?></label>
                     <div class="yith-plugin-fw-option-with-description">
-                        <?php
-                        echo yith_plugin_fw_get_field( $element, true ); ?>
+                        <?php yith_plugin_fw_get_field( $element, true ); ?>
                         <span class="description"><?php echo !empty( $element[ 'desc' ] ) ? $element[ 'desc' ] : ''; ?></span>
                     </div>
                 </div>
@@ -126,16 +129,14 @@ if ( empty( $values ) && !$show_add_button && $elements ) {
                         <?php
                         if ( !empty( $onoff_field ) && is_array( $onoff_field ) ):
                             $action = !empty( $onoff_field[ 'ajax_action' ] ) ? 'data-ajax_action="' . $onoff_field[ 'ajax_action' ] . '"' : '';
-                            $onoff_field[ 'value' ] = isset( $value[ $onoff_id ] ) ? $value[ $onoff_id ] : $onoff_field[ 'default' ];
+                            $onoff_field[ 'value' ] = isset( $value[ $onoff_id ] ) ? $value[ $onoff_id ] : ( isset( $onoff_field[ 'default' ] ) ? $onoff_field[ 'default' ] : '' );
                             $onoff_field[ 'type' ] = 'onoff';
                             $onoff_field[ 'name' ] = $name . "[$i][" . $onoff_id . "]";
                             $onoff_field[ 'id' ] = $onoff_id . '_' . $i;
                             unset( $onoff_field[ 'yith-type' ] );
                             ?>
                             <span class="yith-toggle-onoff" <?php echo $action; ?> >
-                    <?php
-                    echo yith_plugin_fw_get_field( $onoff_field, true );
-                    ?>
+                    <?php yith_plugin_fw_get_field( $onoff_field, true ); ?>
                 </span>
 
                             <?php if ( $sortable ): ?>
@@ -152,16 +153,21 @@ if ( empty( $values ) && !$show_add_button && $elements ) {
                                 unset( $element[ 'yith-type' ] );
                                 $element[ 'title' ]     = $element[ 'name' ];
                                 $element[ 'name' ]      = $name . "[$i][" . $element[ 'id' ] . "]";
-                                $element[ 'value' ]     = isset( $value[ $element[ 'id' ] ] ) ? $value[ $element[ 'id' ] ] : $element[ 'default' ];
+                                $element[ 'value' ]     = isset( $value[ $element[ 'id' ] ] ) ? $value[ $element[ 'id' ] ] : ( isset( $element[ 'default' ] ) ? $element[ 'default' ] : '' );
                                 $element[ 'id' ]        = $element[ 'id' ] . '_' . $i;
                                 $element[ 'class_row' ] = isset( $element[ 'class_row' ] ) ? $element[ 'class_row' ] : '';
+                                // handle deps if any
+	                            ! empty( $element[ 'deps' ]['id'] ) && $element[ 'deps' ]['id'] = $element[ 'deps' ]['id'] . '_' . $i;
+	                            ! empty( $element[ 'deps' ]['target-id'] ) && $element[ 'deps' ]['target-id'] = $element[ 'deps' ]['target-id'] . '_' . $i;
+	                            $deps = yith_field_deps_data( $element );
 
                                 $is_required = !empty( $element[ 'required' ] );
                                 if ( $is_required ) {
                                     $element[ 'class_row' ] .= ' yith-plugin-fw--required';
                                 }
+
                                 ?>
-                                <div class="yith-toggle-content-row <?php echo $element[ 'class_row' ] . ' ' . $element[ 'type' ] ?>">
+                                <div class="yith-toggle-content-row <?php echo $element[ 'class_row' ] . ' ' . $element[ 'type' ] ?>" <?php echo $deps; ?>>
                                     <label for="<?php echo $element[ 'id' ]; ?>"><?php echo $element[ 'title' ]; ?></label>
                                     <div class="yith-plugin-fw-option-with-description">
                                         <?php echo yith_plugin_fw_get_field( $element, true ); ?>
@@ -179,7 +185,7 @@ if ( empty( $values ) && !$show_add_button && $elements ) {
                                 $save_button_name = isset( $save_button[ 'name' ] ) ? $save_button[ 'name' ] : '';
                                 ?>
                                 <button id="<?php echo $save_button[ 'id' ]; ?>"
-                                        class="yith-save-button <?php echo $save_button_class; ?>">
+                                        class="button-primary yith-save-button <?php echo $save_button_class; ?>">
                                     <?php echo $save_button_name; ?>
                                 </button>
                             <?php endif; ?>
@@ -223,16 +229,14 @@ if ( empty( $values ) && !$show_add_button && $elements ) {
                 <?php
                 if ( !empty( $onoff_field ) && is_array( $onoff_field ) ):
                     $action = !empty( $onoff_field[ 'ajax_action' ] ) ? 'data-ajax_action="' . $onoff_field[ 'ajax_action' ] . '"' : '';
-                    $onoff_field[ 'value' ] = $onoff_field[ 'default' ];
+                    $onoff_field[ 'value' ] = isset( $onoff_field[ 'default' ] ) ? $onoff_field[ 'default' ] : '';
                     $onoff_field[ 'type' ] = 'onoff';
                     $onoff_field[ 'name' ] = $name . "[{{{data.index}}}][" . $onoff_id . "]";
                     $onoff_field[ 'id' ] = $onoff_id;
                     unset( $onoff_field[ 'yith-type' ] );
                     ?>
                     <span class="yith-toggle-onoff" <?php echo $action; ?> >
-                    <?php
-                    echo yith_plugin_fw_get_field( $onoff_field, true );
-                    ?>
+                    <?php yith_plugin_fw_get_field( $onoff_field, true ); ?>
                 </span>
 
                 <?php endif; ?>
@@ -250,12 +254,17 @@ if ( empty( $values ) && !$show_add_button && $elements ) {
                         $element[ 'name' ]  = $name . "[{{{data.index}}}][" . $element[ 'id' ] . "]";
                         $element[ 'id' ]    = $element[ 'id' ] . '_{{{data.index}}}';
                         $class_element      = isset( $element[ 'class_row' ] ) ? $element[ 'class_row' ] : '';
+	                    // handle deps if any
+	                    ! empty( $element[ 'deps' ]['id'] ) && $element[ 'deps' ]['id'] = $element[ 'deps' ]['id'] . '_{{{data.index}}}';
+	                    ! empty( $element[ 'deps' ]['target-id'] ) && $element[ 'deps' ]['target-id'] = $element[ 'deps' ]['target-id'] . '_{{{data.index}}}';
+	                    $deps = yith_field_deps_data( $element );
                         $is_required = !empty( $element[ 'required' ] );
                         if ( $is_required ) {
                             $class_element .= ' yith-plugin-fw--required';
                         }
+
                         ?>
-                        <div class="yith-toggle-content-row <?php echo $class_element . ' ' . $element[ 'type' ] ?>">
+                        <div class="yith-toggle-content-row <?php echo $class_element . ' ' . $element[ 'type' ] ?>" <?php echo $deps; ?>>
                             <label for="<?php echo $element[ 'id' ]; ?>"><?php echo $element[ 'title' ]; ?></label>
                             <div class="yith-plugin-fw-option-with-description">
                                 <?php echo yith_plugin_fw_get_field( $element, true ); ?>
