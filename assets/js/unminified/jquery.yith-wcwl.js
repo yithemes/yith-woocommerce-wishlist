@@ -1696,12 +1696,16 @@ jQuery( function( $ ){
             fragments = $('.wishlist-fragment');
         }
 
-        fragments.each( function(){
-            var t = $(this),
-                id = t.attr( 'class' ).split( ' ' ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( yith_wcwl_l10n.fragments_index_glue );
+        if(fragments.length > 0) {
+            fragments.each( function(){
+                var t = $(this),
+                    id = t.attr( 'class' ).split( ' ' ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( yith_wcwl_l10n.fragments_index_glue );
 
-            options[ id ] = t.data('fragment-options');
-        } );
+                options[ id ] = t.data('fragment-options');
+            } );
+        }else{
+            return null;
+        }
 
         return options;
     }
