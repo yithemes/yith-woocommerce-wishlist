@@ -26,7 +26,7 @@ if( isset($std) && !empty( $std) && empty($default) ){
 <input type="text" name="<?php echo $name ?>"
        id="<?php echo $id ?>" value="<?php echo esc_attr( $value ) ?>"
        <?php if ( isset( $default ) ) : ?> data-default-color="<?php echo $default ?>"<?php endif ?>
-       class="<?php echo $class ?>" data-alpha="true"
+       class="<?php echo $class ?>" data-alpha-enabled="true"
     <?php echo $custom_attributes ?>
     <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>/>
 

@@ -62,6 +62,9 @@ jQuery( function ( $ ) {
                         $current_container.addClass( 'yith-disabled' );
                         $current_field.attr( 'disabled', true );
                         break;
+                    case 'hideNow':
+                        $current_container.hide();
+                        break;
                     case 'hideme':
                         $current_field.hide();
                         break;
@@ -89,6 +92,9 @@ jQuery( function ( $ ) {
                     case 'disable':
                         $current_container.removeClass( 'yith-disabled' );
                         $current_field.attr( 'disabled', false );
+                        break;
+                    case 'hideNow':
+                        $current_container.hide();
                         break;
                     case 'hideme':
                         $current_field.show();
@@ -161,7 +167,7 @@ jQuery( function ( $ ) {
     } );
 
     //google analytics generation
-    $( document ).ready( function () {
+    $( function () {
         $( '.google-analytic-generate' ).click( function () {
             var editor   = $( '#' + $( this ).data( 'textarea' ) ).data( 'codemirrorInstance' );
             var gatc     = $( '#' + $( this ).data( 'input' ) ).val();
@@ -177,8 +183,8 @@ jQuery( function ( $ ) {
                 text,
                 editor.getCursor( 'start' ),
                 editor.getCursor( 'end' )
-            )
-        } )
+            );
+        } );
     } );
 
 

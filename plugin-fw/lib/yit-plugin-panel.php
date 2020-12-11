@@ -170,7 +170,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				$tabs = $this->get_taxonomy_tabs( $taxonomy );
 			}
 
-			$is_block_editor = function_exists( 'get_current_screen' ) && get_current_screen() && get_current_screen()->is_block_editor();
+			$screen          = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
+			$is_block_editor = ! ! $screen && is_callable( array( $screen, 'is_block_editor' ) ) && $screen->is_block_editor();
 
 			if ( $tabs ) {
 				// tabs_in_edit

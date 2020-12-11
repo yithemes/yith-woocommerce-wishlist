@@ -125,6 +125,9 @@
                         $current_container.addClass( 'yith-disabled' );
                         $current_field.attr( 'disabled', true );
                         break;
+                    case 'hideNow':
+                        $current_container.hide();
+                        break;
                     case 'hideme':
                         $current_field.hide();
                         break;
@@ -151,6 +154,9 @@
                     case 'disable':
                         $current_container.removeClass( 'yith-disabled' );
                         $current_field.attr( 'disabled', false );
+                        break;
+                    case 'hideNow':
+                        $current_container.show();
                         break;
                     case 'hideme':
                         $current_field.show();

@@ -1,4 +1,4 @@
-jQuery(document).ready( function($) {
+jQuery( function($) {
     var pointers    = custom_pointer.pointers[0],
         options     = pointers.options,
         target      = $(pointers.target),

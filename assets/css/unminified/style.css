@@ -334,23 +334,59 @@ select.selectBox.change-wishlist{
 .wishlist-title{
     display: inline-block;
 }
+
 .wishlist-title h2{
     display: inline-block;
     padding: 5px;
 }
+
 .wishlist-title.wishlist-title-with-form h2:hover{
     background: #efefef;
 }
+
 .wishlist-title a.show-title-form{
     cursor: pointer;
     visibility: hidden;
 }
+
 .wishlist-title:hover a.show-title-form{
     visibility: visible;
 }
-.yes-js #yith-wcwl-form .hidden-title-form{
-    display: none;
+
+.hidden-title-form {
+    position: relative;
     margin: 25px 0 39px;
+}
+
+.yes-js .hidden-title-form{
+    display: none;
+}
+
+.hidden-title-form .edit-title-buttons{
+    position: absolute;
+    right: 5px;
+    top: calc(50% - 15px);
+}
+
+.hidden-title-form > input[type="text"] {
+    padding-right: 65px;
+    line-height: 1;
+}
+
+.hidden-title-form a{
+    cursor: pointer;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.3em;
+}
+
+.hidden-title-form a i{
+    margin: 0;
+    display: inline-block;
 }
 
 /* === 9. WISHLIST TABLE TEMPLATE === */
@@ -779,7 +815,6 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
 .wishlist_table .add_to_cart.button i,
 .wishlist_table .ask-an-estimate-button i,
 .wishlist-title a.show-title-form i,
-.hidden-title-form a.hide-title-form i,
 .hidden-title-form button i,
 .yith-wcwl-wishlist-new button i,
 .wishlist_manage_table tfoot button.submit-wishlist-changes i,
@@ -865,11 +900,6 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
 
 .woocommerce .hidden-title-form button:active{
     top: 1px;
-}
-
-.woocommerce .hidden-title-form a.hide-title-form{
-    vertical-align: middle;
-    line-height: normal;
 }
 
 .woocommerce .back-to-all-wishlists{
@@ -1076,6 +1106,7 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
 
 .wishlist_manage_table td.wishlist-name .hidden-title-form{
     margin: 0!important;
+    width: 100%;
 }
 
 .wishlist_manage_table td.wishlist-name .hidden-title-form input[type="text"]{
@@ -1085,23 +1116,6 @@ div.product .woocommerce-price-and-add .single_add_to_wishlist.button {
 
 .wishlist_manage_table td.wishlist-name .hidden-title-form{
     position: relative;
-}
-
-.wishlist_manage_table td.wishlist-name .hidden-title-form .edit-title-buttons{
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-.wishlist_manage_table td.wishlist-name .hidden-title-form a{
-    float: right;
-    cursor: pointer;
-    margin-left: 5px;
-}
-
-.wishlist_manage_table td.wishlist-name .hidden-title-form a i{
-    padding: 5px;
-    margin: 0;
 }
 
 table.wishlist_manage_table tfoot td{
@@ -1149,25 +1163,7 @@ table.wishlist_manage_table tfoot td{
 }
 
 .wishlist_manage_table.modern_grid li .item-details .hidden-title-form{
-    position: relative;
-}
-
-.wishlist_manage_table.modern_grid li .item-details .hidden-title-form .edit-title-buttons{
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-.wishlist_manage_table.modern_grid li .item-details .hidden-title-form .edit-title-buttons a{
-    float: right;
-    line-height: 1;
-    cursor: pointer;
-    margin-left: 5px;
-}
-
-.wishlist_manage_table.modern_grid li .item-details .hidden-title-form .edit-title-buttons a i{
-    padding: 5px;
-    margin: 0;
+    width: 100%;
 }
 
 .wishlist_manage_table.modern_grid li .product-thumbnail .placeholder-item.empty-box{
@@ -1243,24 +1239,6 @@ table.wishlist_manage_table tfoot td{
 
 .wishlist_manage_table.mobile li .item-details .hidden-title-form input[type="text"]{
     width: 100%;
-}
-
-.wishlist_manage_table.mobile li .item-details .hidden-title-form .edit-title-buttons{
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-.wishlist_manage_table.mobile li .item-details .hidden-title-form .edit-title-buttons a{
-    float: right;
-    line-height: 1;
-    cursor: pointer;
-    margin-left: 5px;
-}
-
-.wishlist_manage_table.mobile li .item-details .hidden-title-form .edit-title-buttons a i{
-    padding: 5px;
-    margin: 0;
 }
 
 .wishlist_manage_table.mobile li .item-wrapper .item-details .wishlist-title{
@@ -1517,7 +1495,7 @@ table.wishlist_manage_table tfoot td{
     font-size: 1.2rem;
 }
 
-.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .image-thumb img.
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .image-thumb img,
 .widget_yith-wcwl-items ul.product_list_widget li .image-thumb img{
     margin-left: 10px;
     max-width: 40px;

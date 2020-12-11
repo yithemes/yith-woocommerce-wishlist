@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/init\n"
-"POT-Creation-Date: 2020-11-10 10:37:11+00:00\n"
+"POT-Creation-Date: 2020-12-11 14:39:59+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:05+0200\n"
 "Last-Translator: Nicola Mustone <mail@nicolamustone.it>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -62,22 +62,22 @@ msgstr ""
 "Permette ai tuoi clienti di creare e condividere delle liste di prodotti che "
 "desiderano acquistare sul tuo e-commerce."
 
-#: includes/class.yith-wcwl-ajax-handler.php:67
+#: includes/class.yith-wcwl-ajax-handler.php:71
 #: templates/add-to-wishlist-remove.php:51
 msgid "View &rsaquo;"
 msgstr "Vedi &rsaquo;"
 
-#: includes/class.yith-wcwl-ajax-handler.php:68
+#: includes/class.yith-wcwl-ajax-handler.php:72
 #: templates/add-to-wishlist-remove.php:50
 msgid "or"
 msgstr "oppure"
 
-#: includes/class.yith-wcwl-ajax-handler.php:69
+#: includes/class.yith-wcwl-ajax-handler.php:73
 msgid "Close"
 msgstr ""
 
-#: includes/class.yith-wcwl-ajax-handler.php:134
-#: includes/class.yith-wcwl-ajax-handler.php:167
+#: includes/class.yith-wcwl-ajax-handler.php:143
+#: includes/class.yith-wcwl-ajax-handler.php:179
 msgid "Product successfully removed."
 msgstr "Prodotto rimosso con successo."
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Product added to cart successfully"
 msgstr "Prodotto aggiunto al carrello con successo"
 
-#: includes/class.yith-wcwl-frontend.php:652
+#: includes/class.yith-wcwl-frontend.php:653
 #: includes/class.yith-wcwl-shortcode.php:237
 #: plugin-options/wishlist_page-options.php:237
 #: templates/wishlist-view-footer-mobile.php:44
@@ -581,15 +581,15 @@ msgctxt "yith-woocommerce-wishlist"
 msgid "Items per page"
 msgstr "Articoli aggiunti"
 
-#: init.php:141
-msgid "is enabled but not effective. It requires WooCommerce in order to work."
+#: init.php:160
+msgid "is enabled but not effective. It requires WooCommerce to work."
 msgstr ""
 
-#: init.php:151
+#: init.php:176
 msgid "You can't activate the free version of"
 msgstr ""
 
-#: init.php:151
+#: init.php:176
 msgid "while you are using the premium one."
 msgstr ""
 
@@ -1605,23 +1605,23 @@ msgstr "Pinterest"
 msgid "Email"
 msgstr "Email"
 
-#: templates/share.php:78
+#: templates/share.php:77
 msgid "WhatsApp"
 msgstr "WhatsApp"
 
-#: templates/share.php:79
+#: templates/share.php:78
 msgid "Whatsapp"
 msgstr "Whatsapp"
 
-#: templates/share.php:89
+#: templates/share.php:87
 msgid "(Now"
 msgstr "(Ora"
 
-#: templates/share.php:89
+#: templates/share.php:87
 msgid "copy"
 msgstr "copia"
 
-#: templates/share.php:89
+#: templates/share.php:87
 msgid "this wishlist link and share it anywhere)"
 msgstr "questo URL e condividilo dove vuoi)"
 
@@ -1656,17 +1656,9 @@ msgstr "Aggiorna"
 msgid "Add all to cart"
 msgstr "Aggiungi tutti al carrello"
 
-#: templates/wishlist-view-header.php:41
+#: templates/wishlist-view-header.php:42
 msgid "Edit title"
 msgstr "Modifica titolo"
-
-#: templates/wishlist-view-header.php:48
-msgid "Save"
-msgstr "Salva"
-
-#: templates/wishlist-view-header.php:51
-msgid "Cancel"
-msgstr "Annulla"
 
 #: templates/wishlist-view-mobile.php:126
 msgid "Added on:"
@@ -1758,6 +1750,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://yithemes.com/"
 msgstr ""
+
+#~ msgid "Save"
+#~ msgstr "Salva"
+
+#~ msgid "Cancel"
+#~ msgstr "Annulla"
 
 #~ msgid "Ask for an estimate"
 #~ msgstr "Richiedi un preventivo"

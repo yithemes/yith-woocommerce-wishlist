@@ -1354,7 +1354,7 @@ jQuery( function( $ ){
             title = t.parents( '.wishlist-title' );
         }
 
-        title.next().show().find('input[type="text"]').focus();
+        title.next().css( 'display', 'inline-block' ).find('input[type="text"]').focus();
         title.hide();
     }
 
@@ -1397,6 +1397,10 @@ jQuery( function( $ ){
             return;
         }
 
+        if( ! wishlist_id ) {
+            wishlist_id = $( '#wishlist_id' ).val();
+        }
+
         data = {
             action: yith_wcwl_l10n.actions.save_title_action,
             context: 'frontend',
@@ -1422,7 +1426,7 @@ jQuery( function( $ ){
 
                 if( status ) {
                     form.hide();
-                    form.prev().find('.wishlist-anchor').text( new_title ).end().show();
+                    form.prev().find('.wishlist-anchor, h1, h2').text( new_title ).end().show();
                 }
                 else{
                     form.addClass( 'woocommerce-invalid' );
@@ -1696,12 +1700,18 @@ jQuery( function( $ ){
             fragments = $('.wishlist-fragment');
         }
 
-        fragments.each( function(){
-            var t = $(this),
-                id = t.attr( 'class' ).split( ' ' ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( yith_wcwl_l10n.fragments_index_glue );
+        if ( fragments.length ) {
+            fragments.each( function () {
+                var t = $( this ),
+                    id = t.attr( 'class' ).split( ' ' ).filter( ( val ) => {
+                        return val.length && val !== 'exists';
+                    } ).join( yith_wcwl_l10n.fragments_index_glue );
 
-            options[ id ] = t.data('fragment-options');
-        } );
+                options[ id ] = t.data( 'fragment-options' );
+            } );
+        } else {
+            return null;
+        }
 
         return options;
     }

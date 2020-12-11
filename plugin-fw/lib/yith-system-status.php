@@ -1,11 +1,13 @@
-<?php
+<?php //phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
- * This file belongs to the YIT Plugin Framework.
+ * This file belongs to the YIT Framework.
  *
  * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://www.gnu.org/licenses/gpl-3.0.txt
+ *
+ * @package YIT Plugin Framework
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,24 +29,32 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 	class YITH_System_Status {
 
 		/**
-		 * @var string the page slug
+		 * The page slug
+		 *
+		 * @var string
 		 */
-		protected $_page = 'yith_system_info';
+		protected $page = 'yith_system_info';
 
 		/**
-		 * @var array plugins requirements list
+		 * Plugins requirements list
+		 *
+		 * @var array
 		 */
-		protected $_plugins_requirements = array();
+		protected $plugins_requirements = array();
 
 		/**
-		 * @var array requirements labels
+		 * Requirements labels
+		 *
+		 * @var array
 		 */
-		public $_requirement_labels = array();
+		public $requirement_labels = array();
 
 		/**
-		 * @var int recommended memory amount 134217728 = 128M
+		 * Recommended memory amount 134217728 = 128M
+		 *
+		 * @var integer
 		 */
-		private $_recommended_memory = 134217728;
+		private $recommended_memory = 134217728;
 
 		/**
 		 * Single instance of the class
@@ -52,7 +62,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		 * @since 1.0.0
 		 * @var YITH_System_Status
 		 */
-		protected static $_instance = null;
+		protected static $instance = null;
 
 		/**
 		 * Main plugin Instance
@@ -62,11 +72,11 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		 * @author Alberto Ruggiero
 		 */
 		public static function instance() {
-			if ( is_null( self::$_instance ) ) {
-				self::$_instance = new self();
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
 			}
 
-			return self::$_instance;
+			return self::$instance;
 		}
 
 		/**
@@ -93,8 +103,9 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 			add_action( 'admin_menu', array( $this, 'add_submenu_page' ), 99 );
 			add_action( 'admin_init', array( $this, 'check_system_status' ) );
 			add_action( 'admin_notices', array( $this, 'activate_system_notice' ), 15 );
-			add_action( 'admin_enqueue_scripts', array( $this, 'dismissable_notice' ), 20 );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ), 20 );
 			add_action( 'init', array( $this, 'set_requirements_labels' ) );
+			add_action( 'wp_ajax_yith_create_log_file', array( $this, 'create_log_file' ) );
 
 		}
 
@@ -107,7 +118,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		 */
 		public function set_requirements_labels() {
 
-			$this->_requirement_labels = array(
+			$this->requirement_labels = array(
 				'min_wp_version'    => esc_html__( 'WordPress Version', 'yith-plugin-fw' ),
 				'min_wc_version'    => esc_html__( 'WooCommerce Version', 'yith-plugin-fw' ),
 				'wp_memory_limit'   => esc_html__( 'Available Memory', 'yith-plugin-fw' ),
@@ -141,7 +152,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				'page_title'  => esc_html__( 'System Status', 'yith-plugin-fw' ),
 				'menu_title'  => esc_html__( 'System Status', 'yith-plugin-fw' ) . $error_notice,
 				'capability'  => 'manage_options',
-				'page'        => $this->_page,
+				'page'        => $this->page,
 			);
 
 			add_submenu_page(
@@ -165,7 +176,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 
 			$path = defined( 'YIT_CORE_PLUGIN_PATH' ) ? YIT_CORE_PLUGIN_PATH : get_template_directory() . '/core/plugin-fw/';
 
-			require_once( $path . '/templates/sysinfo/system-information-panel.php' );
+			require_once $path . '/templates/sysinfo/system-information-panel.php';
 
 		}
 
@@ -178,7 +189,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		 */
 		public function check_system_status() {
 
-			if ( '' === get_option( 'yith_system_info' ) || ( isset( $_GET['page'] ) && $_GET['page'] === $this->_page ) ) {
+			if ( '' === get_option( 'yith_system_info' ) || ( isset( $_GET['page'] ) && $_GET['page'] === $this->page ) ) { //phpcs:ignore
 
 				$this->add_requirements(
 					esc_html__( 'YITH Plugins', 'yith-plugin-fw' ),
@@ -202,9 +213,9 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				foreach ( $system_info as $key => $value ) {
 					$check_results[ $key ] = array( 'value' => $value );
 
-					if ( isset( $this->_plugins_requirements[ $key ] ) ) {
+					if ( isset( $this->plugins_requirements[ $key ] ) ) {
 
-						foreach ( $this->_plugins_requirements[ $key ] as $plugin_name => $required_value ) {
+						foreach ( $this->plugins_requirements[ $key ] as $plugin_name => $required_value ) {
 
 							switch ( $key ) {
 								case 'wp_cron_enabled':
@@ -227,7 +238,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 										$check_results[ $key ]['errors'][ $plugin_name ] = $required_value;
 										$errors ++;
 
-									} elseif ( $this->_recommended_memory > $value && $value > $required_value ) {
+									} elseif ( $this->recommended_memory > $value && $value > $required_value ) {
 										$check_results[ $key ]['warnings'] = 'yes';
 									}
 									break;
@@ -270,8 +281,8 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		/**
 		 * Handle plugin requirements
 		 *
-		 * @param $plugin_name  string
-		 * @param $requirements array
+		 * @param string $plugin_name  The name of the plugin.
+		 * @param array  $requirements Array of plugin requirements.
 		 *
 		 * @return void
 		 * @since  1.0.0
@@ -280,12 +291,12 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		 */
 		public function add_requirements( $plugin_name, $requirements ) {
 
-			$allowed_requirements = array_keys( $this->_requirement_labels );
+			$allowed_requirements = array_keys( $this->requirement_labels );
 
 			foreach ( $requirements as $requirement => $value ) {
 
 				if ( in_array( $requirement, $allowed_requirements, true ) ) {
-					$this->_plugins_requirements[ $requirement ][ $plugin_name ] = $value;
+					$this->plugins_requirements[ $requirement ][ $plugin_name ] = $value;
 				}
 			}
 
@@ -298,9 +309,23 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		 * @since   1.0.0
 		 * @author  Alberto Ruggiero
 		 */
-		public function dismissable_notice() {
+		public function enqueue_scripts() {
 			$script_path = defined( 'YIT_CORE_PLUGIN_URL' ) ? YIT_CORE_PLUGIN_URL : get_template_directory_uri() . '/core/plugin-fw';
 			wp_register_script( 'yith-system-info', yit_load_js_file( $script_path . '/assets/js/yith-system-info.js' ), array( 'jquery' ), '1.0.0', true );
+
+			if ( isset( $_GET['page'] ) && 'yith_system_info' === $_GET['page'] ) { //phpcs:ignore
+				wp_enqueue_style( 'yit-plugin-style' );
+				wp_enqueue_style( 'yith-plugin-fw-fields' );
+				wp_enqueue_script( 'yith-system-info' );
+
+				$params = array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+				);
+
+				wp_localize_script( 'yith-system-info', 'yith_sysinfo', $params );
+
+			}
+
 		}
 
 		/**
@@ -314,7 +339,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 
 			$system_info = get_option( 'yith_system_info', '' );
 
-			if ( ( isset( $_GET['page'] ) && $_GET['page'] === $this->_page ) || ( ! empty( $_COOKIE['hide_yith_system_alert'] ) && 'yes' === $_COOKIE['hide_yith_system_alert'] ) || ( '' === $system_info ) || ( '' !== $system_info && false === $system_info['errors'] ) ) {
+			if ( ( isset( $_GET['page'] ) && $_GET['page'] === $this->page ) || ( ! empty( $_COOKIE['hide_yith_system_alert'] ) && 'yes' === $_COOKIE['hide_yith_system_alert'] ) || ( '' === $system_info ) || ( '' !== $system_info && false === $system_info['errors'] ) ) { //phpcs:ignore
 				return;
 			}
 
@@ -325,13 +350,13 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				?>
 				<div id="yith-system-alert" class="notice notice-error is-dismissible" style="position: relative;">
 					<p>
-						<span class="yith-logo"><img src="<?php echo yith_plugin_fw_get_default_logo(); ?>" /></span>
+						<span class="yith-logo"><img src="<?php echo esc_attr( yith_plugin_fw_get_default_logo() ); ?>" /></span>
 						<b>
 							<?php esc_html_e( 'Warning!', 'yith-plugin-fw' ); ?>
 						</b><br />
 						<?php
 						/* translators: %1$s open link tag, %2$s open link tag*/
-						echo sprintf( esc_html__( 'The system check has detected some compatibility issues on your installation.%1$sClick here%2$s to know more', 'yith-plugin-fw' ), '<a href="' . esc_url( add_query_arg( array( 'page' => $this->_page ), admin_url( 'admin.php' ) ) ) . '">', '</a>' );
+						echo sprintf( esc_html__( 'The system check has detected some compatibility issues on your installation.%1$sClick here%2$s to know more', 'yith-plugin-fw' ), '<a href="' . esc_url( add_query_arg( array( 'page' => $this->page ), admin_url( 'admin.php' ) ) ) . '">', '</a>' );
 						?>
 					</p>
 					<span class="notice-dismiss"></span>
@@ -354,7 +379,8 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 			$imagick_version = 'n/a';
 
 			if ( function_exists( 'curl_init' ) && apply_filters( 'yith_system_status_check_ssl', true ) ) {
-				//Get TLS version
+				// Get TLS version.
+				//phpcs:disable
 				$ch = curl_init();
 				curl_setopt( $ch, CURLOPT_URL, 'https://www.howsmyssl.com/a/check' );
 				curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
@@ -362,6 +388,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
 				$data = curl_exec( $ch );
 				curl_close( $ch );
+				//phpcs:enable
 				$json = json_decode( $data );
 
 				if ( is_string( $json ) && strpos( $json, '<!DOCTYPE html>' ) !== false ) {
@@ -371,7 +398,8 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				}
 
 				if ( 'n/a' === $tls || '' === $tls ) {
-					//run backup service
+					// Run backup service.
+					//phpcs:disable
 					$ch = curl_init();
 					curl_setopt( $ch, CURLOPT_URL, 'https://ttl-version.yithemes.workers.dev/' );
 					curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
@@ -379,6 +407,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 					curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
 					$data = curl_exec( $ch );
 					curl_close( $ch );
+					//phpcs:enable
 					$json = json_decode( $data );
 
 					if ( is_string( $json ) && strpos( $json, '<!DOCTYPE html>' ) !== false ) {
@@ -389,7 +418,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				}
 			}
 
-			//Get PHP version
+			// Get PHP version.
 			preg_match( '#^\d+(\.\d+)*#', PHP_VERSION, $match );
 			$php_version = $match[0];
 
@@ -426,9 +455,51 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		}
 
 		/**
+		 * Get log file
+		 *
+		 * @return  void
+		 * @since   1.0.0
+		 * @author  Alberto Ruggiero
+		 */
+		public function create_log_file() {
+			try {
+
+				global $wp_filesystem;
+
+				if ( empty( $wp_filesystem ) ) {
+					require_once ABSPATH . '/wp-admin/includes/file.php';
+					WP_Filesystem();
+				}
+
+				$download_file  = false;
+				$file_content   = '';
+				$requested_file = $_POST['file']; //phpcs:ignore
+
+				switch ( $requested_file ) {
+					case 'error_log':
+						$file_content = $wp_filesystem->get_contents( ABSPATH . 'error_log' );
+						break;
+					case 'debug.log':
+						$file_content = $wp_filesystem->get_contents( WP_CONTENT_DIR . '/debug.log' );
+						break;
+				}
+
+				if ( '' !== $file_content ) {
+					$file          = wp_upload_dir()['basedir'] . '/' . $requested_file . '.txt';
+					$download_file = wp_upload_dir()['baseurl'] . '/' . $requested_file . '.txt';
+					$wp_filesystem->put_contents( $file, $file_content );
+				}
+
+				wp_send_json( array( 'file' => $download_file ) );
+			} catch ( Exception $e ) {
+				wp_send_json( array( 'file' => false ) );
+			}
+		}
+
+		/**
 		 * Convert size into number
 		 *
-		 * @param   $memory_size string
+		 * @param string $memory_size Memory size to convert.
 		 *
 		 * @return  integer
 		 * @since   1.0.0
@@ -459,10 +530,10 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		/**
 		 * Format requirement value
 		 *
-		 * @param   $key   string
-		 * @param   $value mixed
+		 * @param string $key   Requirement Key.
+		 * @param mixed  $value Requirement value.
 		 *
-		 * @return  string
+		 * @return  void
 		 * @since   1.0.0
 		 *
 		 * @author  Alberto Ruggiero
@@ -470,14 +541,14 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		public function format_requirement_value( $key, $value ) {
 
 			if ( strpos( $key, '_enabled' ) !== false ) {
-				return $value ? esc_html__( 'Enabled', 'yith-plugin-fw' ) : esc_html__( 'Disabled', 'yith-plugin-fw' );
+				echo esc_attr( $value ) ? esc_html__( 'Enabled', 'yith-plugin-fw' ) : esc_html__( 'Disabled', 'yith-plugin-fw' );
 			} elseif ( 'wp_memory_limit' === $key ) {
-				return esc_html( size_format( $value ) );
+				echo esc_html( size_format( $value ) );
 			} else {
 				if ( 'n/a' === $value ) {
-					return esc_html__( 'N/A', 'yith-plugin-fw' );
+					echo esc_html__( 'N/A', 'yith-plugin-fw' );
 				} else {
-					return $value;
+					echo esc_attr( $value );
 				}
 			}
 
@@ -486,9 +557,9 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		/**
 		 * Print error messages
 		 *
-		 * @param   $key   string
-		 * @param   $item  array
-		 * @param   $label string
+		 * @param string $key   Requirement key.
+		 * @param array  $item  Requirement item.
+		 * @param string $label Requirement label.
 		 *
 		 * @return  void
 		 * @since   1.0.0
@@ -503,13 +574,13 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 						<?php
 						if ( strpos( $key, '_enabled' ) !== false ) {
 							/* translators: %1$s plugin name, %2$s requirement name */
-							echo sprintf( esc_html__( '%1$s needs %2$s enabled', 'yith-plugin-fw' ), '<b>' . $plugin . '</b>', '<b>' . $label . '</b>' );
+							echo sprintf( esc_html__( '%1$s needs %2$s enabled', 'yith-plugin-fw' ), '<b>' . esc_attr( $plugin ) . '</b>', '<b>' . esc_attr( $label ) . '</b>' );
 						} elseif ( 'wp_memory_limit' === $key ) {
 							/* translators: %1$s plugin name, %2$s required memory amount */
-							echo sprintf( esc_html__( '%1$s needs at least %2$s of available memory', 'yith-plugin-fw' ), '<b>' . $plugin . '</b>', '<span class="error">' . esc_html( size_format( $this->memory_size_to_num( $requirement ) ) ) . '</span>' );
+							echo sprintf( esc_html__( '%1$s needs at least %2$s of available memory', 'yith-plugin-fw' ), '<b>' . esc_attr( $plugin ) . '</b>', '<span class="error">' . esc_html( size_format( $this->memory_size_to_num( $requirement ) ) ) . '</span>' );
 						} else {
 							/* translators: %1$s plugin name, %2$s version number */
-							echo sprintf( esc_html__( '%1$s needs at least %2$s version', 'yith-plugin-fw' ), '<b>' . $plugin . '</b>', '<span class="error">' . $requirement . '</span>' );
+							echo sprintf( esc_html__( '%1$s needs at least %2$s version', 'yith-plugin-fw' ), '<b>' . esc_attr( $plugin ) . '</b>', '<span class="error">' . esc_attr( $requirement ) . '</span>' );
 						}
 						?>
 					</li>
@@ -521,9 +592,9 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 		/**
 		 * Print solution suggestions
 		 *
-		 * @param   $key   string
-		 * @param   $item  array
-		 * @param   $label string
+		 * @param string $key   Requirement key.
+		 * @param array  $item  Requirement item.
+		 * @param string $label Requirement label.
 		 *
 		 * @return  void
 		 * @since   1.0.0
@@ -564,14 +635,14 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 					echo sprintf( esc_html__( 'Read more %1$shere%2$s or contact your hosting company in order to increase it.', 'yith-plugin-fw' ), '<a href="https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">', '</a>' );
 					break;
 				default:
-					echo apply_filters( 'yith_system_generic_message', '', $key, $item, $label );
+					echo esc_attr( apply_filters( 'yith_system_generic_message', '', $key, $item, $label ) );
 			}
 		}
 
 		/**
 		 * Print warning messages
 		 *
-		 * @param   $key   string
+		 * @param string $key Requirement Key.
 		 *
 		 * @return  void
 		 * @since   1.0.0
@@ -582,7 +653,7 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 			switch ( $key ) {
 				case 'wp_memory_limit':
 					/* translators: %s recommended memory amount */
-					echo sprintf( esc_html__( 'For optimal functioning of our plugins, we suggest setting at least %s of available memory', 'yith-plugin-fw' ), '<span class="warning">' . esc_html( size_format( $this->_recommended_memory ) ) . '</span>' );
+					echo sprintf( esc_html__( 'For optimal functioning of our plugins, we suggest setting at least %s of available memory', 'yith-plugin-fw' ), '<span class="warning">' . esc_html( size_format( $this->recommended_memory ) ) . '</span>' );
 					echo '<br/>';
 					/* translators: %1$s opening link tag, %2$s closing link tag */
 					echo sprintf( esc_html__( 'Read more %1$shere%2$s or contact your hosting company in order to increase it.', 'yith-plugin-fw' ), '<a href="https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">', '</a>' );

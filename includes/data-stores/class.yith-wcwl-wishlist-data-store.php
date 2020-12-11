@@ -896,15 +896,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 		/**
 		 * Generate unique slug for the wishlisst
 		 *
-		 * @param string Original slug assigned to the wishlist (it cuold be custom assigned, or generated from the title)
+		 * @param string $slug Original slug assigned to the wishlist (it cuold be custom assigned, or generated from the title).
 		 * @return string Unique slug, derived from original one adding ordinal number when necessary
 		 */
 		public function generate_slug( $slug ) {
-			if( empty( $slug ) ){
+			if ( empty( $slug ) ) {
 				return '';
 			}
 
-			while( $this->slug_exists( $slug ) ){
+			while ( $this->slug_exists( $slug ) ) {
 				$match = array();
 
 				if ( ! preg_match( '/([a-z-]+)-([0-9]+)/', $slug, $match ) ) {
@@ -914,7 +914,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 					$slug = $match[1];
 				}
 
-				$slug = $slug . '-' . $i;
+				$suffix = '-' . $i;
+				$slug   = substr( $slug, 0, 200 - strlen( $suffix ) ) . $suffix;
 			}
 
 			return $slug;
@@ -923,7 +924,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 		/**
 		 * Checks if a slug already exists
 		 *
-		 * @param $slug string Slug to check on db
+		 * @param string $slug Slug to check on db.
 		 *
 		 * @return bool Whether slug already exists for current session or not
 		 */

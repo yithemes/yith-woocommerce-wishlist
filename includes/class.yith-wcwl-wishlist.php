@@ -556,7 +556,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @param $slug string Wishlist slug
 		 */
 		public function set_slug( $slug ) {
-			$this->set_prop( 'slug', $slug );
+			$this->set_prop( 'slug', substr( $slug, 0, 200 ) );
 		}
 
 		/**

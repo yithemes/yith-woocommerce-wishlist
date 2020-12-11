@@ -1,6 +1,6 @@
 /* global yith_framework_enhanced_select_params */
 
-jQuery( document ).ready( function ( $ ) {
+jQuery( function ( $ ) {
     "use strict";
 
     $( document.body )

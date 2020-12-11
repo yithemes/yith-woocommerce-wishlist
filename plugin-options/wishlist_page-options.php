@@ -55,7 +55,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'desc'     => __( 'Product price', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_price_show',
 			'type'     => 'checkbox',
-			'default'  => '',
+			'default'  => 'yes',
 			'checkboxgroup' => 'wishlist_info'
 		),
 
@@ -64,7 +64,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'desc'     => __( 'Product stock (show if the product is available or not)', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_stock_show',
 			'type'     => 'checkbox',
-			'default'  => '',
+			'default'  => 'yes',
 			'checkboxgroup' => 'wishlist_info'
 		),
 
@@ -82,7 +82,7 @@ return apply_filters( 'yith_wcwl_wishlist_page_options', array(
 			'desc'     => __( 'Add to cart option for each product', 'yith-woocommerce-wishlist' ),
 			'id'       => 'yith_wcwl_add_to_cart_show',
 			'type'     => 'checkbox',
-			'default'  => '',
+			'default'  => 'yes',
 			'checkboxgroup' => 'wishlist_info'
 		),
 

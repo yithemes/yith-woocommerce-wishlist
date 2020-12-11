@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.16';
+		public $version = '3.0.17';
 
 		/**
 		 * Plugin database version
@@ -556,17 +556,18 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		/**
 		 * Decode options that comes from the fragment
 		 *
-		 * @param $options array Options for the fragments
+		 * @param array $options Options for the fragments.
 		 * @return array Filtered options for the fragment
 		 */
 		public function decode_fragment_options( $options ) {
-			if( ! empty( $options ) ){
-				foreach( $options as $id => $value ){
-					if( 'true' == $value ){
+			if ( ! empty( $options ) ) {
+				foreach ( $options as $id => $value ) {
+					if ( 'true' == $value ) {
 						$options[ $id ] = true;
-					}
-					elseif( 'false' == $value ){
+					} elseif ( 'false' == $value ) {
 						$options[ $id ] = false;
+					} else {
+						$options[ $id ] = sanitize_text_field( wp_unslash( $value ) );
 					}
 				}
 			}
