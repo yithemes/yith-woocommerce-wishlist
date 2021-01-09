@@ -210,6 +210,31 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/* === GETTERS === */
 
 		/**
+		 * Returns all data for this wishlist.
+		 *
+		 * @return array
+		 */
+		public function get_data() {
+			$products = $this->get_items();
+
+			$arr = array();
+			if( ! empty( $products ) ) {
+				foreach( $products as $product ) {
+					$prod = $product->get_data();
+
+					if( ! $prod['product_id'] ) {
+						continue;
+					}
+
+					$prod['product'] = wc_get_product( $prod['product_id'] )->get_data();
+					$arr[] = $prod;
+				}
+			}
+
+			return array_merge( $this->data, array('id' => $this->get_id(), 'token' => $this->get_token() ), array( 'products' =>  $arr ) );
+		}
+
+		/**
 		 * Get wishlist token
 		 *
 		 * @return string Wishlist unique token
