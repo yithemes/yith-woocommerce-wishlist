@@ -1,28 +1,25 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the checkbox field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
- *
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
 
-extract( $field );
-?>
-<input type="checkbox" id="<?php echo $id ?>"
-       name="<?php echo $name ?>" value="1"
-    <?php echo !empty( $class ) ? "class='$class'" : ''; ?>
-       <?php if ( isset( $std ) ) : ?>data-std="<?php echo $std ?>" <?php endif; ?>
-    <?php checked( true, yith_plugin_fw_is_true( $value ) ) ?>
-    <?php echo $custom_attributes ?>
-    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>/>
-<?php
-if ( isset( $field[ 'desc-inline' ] ) )
-    echo "<span class='description inline'>" . $field[ 'desc-inline' ] . "</span>";
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
+list ( $field_id, $name, $class, $std, $value, $data, $custom_attributes, $desc_inline ) = yith_plugin_fw_extract( $field, 'id', 'name', 'class', 'std', 'value', 'data', 'custom_attributes', 'desc-inline' );
 ?>
+<input type="checkbox" id="<?php echo esc_attr( $field_id ); ?>"
+		name="<?php echo esc_attr( $name ); ?>" value="1"
+		class="<?php echo ! empty( $class ) ? esc_attr( $class ) : ''; ?>"
+	<?php if ( isset( $std ) ) : ?>
+		data-std="<?php echo esc_attr( $std ); ?>"
+	<?php endif; ?>
+	<?php checked( true, yith_plugin_fw_is_true( $value ) ); ?>
+	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+/>
+<?php if ( isset( $desc_inline ) ) : ?>
+	<span class='description inline'><?php echo wp_kses_post( $desc_inline ); ?></span>
+<?php endif; ?>

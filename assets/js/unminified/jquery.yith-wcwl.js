@@ -521,6 +521,7 @@ jQuery( function( $ ){
                 fragments: fragments,
                 firstLoad: false
             } );
+
         } );
 
         t.on( 'yith_wcwl_reload_fragments', load_fragments );
@@ -1747,6 +1748,7 @@ jQuery( function( $ ){
                     init_handling_after_ajax();
 
                     $(document).trigger( 'yith_wcwl_fragments_loaded', [ fragments, data.fragments, search.firstLoad ] );
+
                 }
             },
             url: yith_wcwl_l10n.ajax_url

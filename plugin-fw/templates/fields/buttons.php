@@ -1,27 +1,27 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the buttons field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
-
-if ( !empty( $buttons ) && is_array( $buttons ) ):
-    foreach ( $buttons as $button ) :
-        $button_default_args = array(
-            'name'  => '',
-            'class' => '',
-            'data'  => array(),
-        );
-        $button = wp_parse_args( $button, $button_default_args );
-        ?>
-        <input type="button" class="<?php echo $button[ 'class' ]; ?> button button-secondary"
-               value="<?php echo esc_attr( $button[ 'name' ] ) ?>" <?php echo yith_plugin_fw_html_data_to_string( $button[ 'data' ] ) ?>/>
-    <?php endforeach;
-endif; ?>
+list ( $buttons ) = yith_plugin_fw_extract( $field, 'buttons' );
+?>
+<?php if ( ! empty( $buttons ) && is_array( $buttons ) ) : ?>
+	<?php foreach ( $buttons as $button ) : ?>
+		<?php
+		$button_default_args = array(
+			'name'  => '',
+			'class' => '',
+			'data'  => array(),
+		);
+		$button              = wp_parse_args( $button, $button_default_args );
+		list ( $button_class, $button_name, $button_data ) = yith_plugin_fw_extract( $button, 'class', 'name', 'data' );
+		?>
+		<input type="button" class="<?php echo esc_attr( $button_class ); ?> button button-secondary"
+				value="<?php echo esc_attr( $button_name ); ?>" <?php echo yith_plugin_fw_html_data_to_string( $button_data ); ?>/>
+	<?php endforeach; ?>
+<?php endif; ?>

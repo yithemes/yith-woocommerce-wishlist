@@ -113,7 +113,8 @@
 
                 $.each($props.attributes, function ($attribute_name, $attribute_args) {
                     var ComponentControl = null,
-                        block_type = $attribute_args.blocktype;
+                        block_type = $attribute_args.blocktype,
+                        name = $attribute_name;
                     if (typeof block_type != 'undefined') {
                         switch (block_type) {
                             case 'select':
@@ -176,11 +177,11 @@
                                         min: $attribute_args.min,
                                         max: $attribute_args.max,
                                         multiple: $attribute_args.multiple,
-                                        onChange: function (new_value, attribute_name = $attribute_name) {
-                                            args = onChangeEvent(new_value, attribute_name, args, block_type);
+                                        onChange: function (new_value) {
+                                            args = onChangeEvent(new_value, name, args, block_type);
                                         },
-                                        onChangeComplete: function (new_value, attribute_name = $attribute_name) {
-                                            args = onChangeEvent(new_value, attribute_name, args, block_type);
+                                        onChangeComplete: function (new_value) {
+                                            args = onChangeEvent(new_value, name, args, block_type);
                                         },
                                     },
                                 )

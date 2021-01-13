@@ -1,24 +1,21 @@
 <?php
 /**
- * This file belongs to the YIT Framework.
+ * The Template for displaying the Error Log.
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @package YIT Plugin Framework
+ * @package YITH\PluginFramework\Templates\SysInfo
  */
+
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 $debug_files = array(
 	// WordPress' debug.log file.
 	'debug.log' => array(
-		'label' => esc_html__( 'WP debug.log file', 'yith-plugin-fw' ),
+		'label' => __( 'WP debug.log file', 'yith-plugin-fw' ),
 		'path'  => WP_CONTENT_DIR . '/debug.log',
 	),
 	// PHP error_log file.
 	'error_log' => array(
-		'label' => esc_html__( 'PHP error_log file', 'yith-plugin-fw' ),
+		'label' => __( 'PHP error_log file', 'yith-plugin-fw' ),
 		'path'  => ABSPATH . 'error_log',
 	),
 );
@@ -29,7 +26,6 @@ $debug_files = array(
 </h2>
 <table class="form-table" role="presentation">
 	<?php
-
 	global $wp_filesystem;
 
 	if ( empty( $wp_filesystem ) ) {
@@ -37,11 +33,12 @@ $debug_files = array(
 		WP_Filesystem();
 	}
 
-	$max_file_size = 8388608; // 8 MB
+	$max_file_size = 8388608; // 8 MB.
 	$missing_files = 0;
+	?>
 
-	foreach ( $debug_files as $key => $debug_file ) {
-
+	<?php foreach ( $debug_files as $key => $debug_file ) : ?>
+		<?php
 		if ( ! file_exists( $debug_file['path'] ) ) {
 			$missing_files ++;
 			continue;
@@ -50,27 +47,24 @@ $debug_files = array(
 		$file_size = filesize( $debug_file['path'] );
 		?>
 		<tr>
-			<th scope="row"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_attr( $debug_file['label'] ); ?></label></th>
+			<th scope="row"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $debug_file['label'] ); ?></label></th>
 			<td>
 				<?php
 				if ( $file_size > $max_file_size ) {
-
 					yith_plugin_fw_get_field(
 						array(
-							'id'      => esc_attr( $key ),
+							'id'      => $key,
 							'type'    => 'buttons',
 							'buttons' => array(
 								array(
-									'name'  => esc_html__( 'Download', 'yith-plugin-fw' ),
+									'name'  => __( 'Download', 'yith-plugin-fw' ),
 									'class' => 'yith-download-log',
 									'data'  => array(
 										'action' => 'yith_create_log_file',
 										'file'   => $key,
 									),
 								),
-
 							),
-
 						),
 						true
 					);
@@ -78,10 +72,9 @@ $debug_files = array(
 					echo '<span class="description">' . esc_html__( 'The file size exceeds 8 megabytes so it must be downloaded', 'yith-plugin-fw' ) . '</span>';
 
 				} else {
-
 					yith_plugin_fw_get_field(
 						array(
-							'id'                => esc_attr( $key ),
+							'id'                => $key,
 							'type'              => 'textarea',
 							'value'             => $wp_filesystem->get_contents( $debug_file['path'] ),
 							'class'             => 'yith-system-info-debug',
@@ -89,33 +82,28 @@ $debug_files = array(
 						),
 						true
 					);
-
 				}
 				?>
 			</td>
 		</tr>
-		<?php
-	}
+	<?php endforeach; ?>
 
-	if ( 2 === $missing_files ) {
-		?>
+	<?php if ( 2 === $missing_files ) : ?>
 		<tr>
 			<td>
 				<?php
-				/* translators: %s file name */
+				// translators: %s file name.
 				echo sprintf( esc_html__( 'No Log file available. Enable the WordPress debug by adding this in the %s file of your installation', 'yith-plugin-fw' ), '<code>wp-config.php</code>' );
 				?>
-				<br />
-				<br />
+				<br/>
+				<br/>
 				<span class="debug-code">
-					define( 'WP_DEBUG', true );<br />
-					define( 'WP_DEBUG_LOG', true );<br />
-					define( 'WP_DEBUG_DISPLAY', false );<br />
+					define( 'WP_DEBUG', true );<br/>
+					define( 'WP_DEBUG_LOG', true );<br/>
+					define( 'WP_DEBUG_DISPLAY', false );<br/>
 				</span>
-				<a href="#" data-tooltip="<?php esc_html_e( 'Copied!', 'yith-plugin-fw' ); ?>" class="copy-link"><?php esc_html_e( 'Copy Code', 'yith-plugin-fw' ); ?></a>
+				<a href="#" data-tooltip="<?php esc_attr_e( 'Copied!', 'yith-plugin-fw' ); ?>" class="copy-link"><?php esc_html_e( 'Copy Code', 'yith-plugin-fw' ); ?></a>
 			</td>
 		</tr>
-		<?php
-	}
-	?>
+	<?php endif; ?>
 </table>

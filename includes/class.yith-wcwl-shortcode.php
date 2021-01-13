@@ -694,7 +694,7 @@ if( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			$template = yith_wcwl_get_template( 'add-to-wishlist.php', $atts, true );
 
-			return apply_filters( 'yith_wcwl_add_to_wishlisth_button_html', $template, $wishlist_url, $product_type, $exists );
+			return apply_filters( 'yith_wcwl_add_to_wishlisth_button_html', $template, $wishlist_url, $product_type, $exists, $atts );
 		}
 
 	}

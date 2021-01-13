@@ -151,17 +151,12 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-### 3.0.17 - Released on 11 December 2020
+### 3.0.18 - Released on 13 January 2021
 
-* New: support for WooCommerce 4.8
+* New: support for WooCommerce 4.9
 * Update: plugin framework
-* Update: Spanish translation
-* Tweak: added rel="noopener" attribute to sharing links (thanks to onetimelord)
-* Tweak: avoid slugs that overflow column width
-* Tweak: changed set of default columns for wishlist table
-* Tweak: improved style for Edit Title form in wishlist page
-* Fix: prevent load_fragments ajax call when no fragment is found for current page (thanks to powernic)
-* Fix: correctly sanitize fragments options
+* Tweak: improved product name sanitization on wishlist template
+* Dev: added fifth parameter for yith_wcwl_add_to_wishlist_button_html filter
 
 ## Support
 

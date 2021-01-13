@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/init\n"
-"POT-Creation-Date: 2020-12-11 14:39:59+00:00\n"
+"POT-Creation-Date: 2021-01-13 16:23:11+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:06+0200\n"
 "Last-Translator: YIThemes <support@yithemes.com>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -1529,73 +1529,73 @@ msgstr ""
 msgid "Edit title"
 msgstr "Titulo da lista de desejos"
 
-#: templates/wishlist-view-mobile.php:126
+#: templates/wishlist-view-mobile.php:136
 msgid "Added on:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:137
+#: templates/wishlist-view-mobile.php:147
 msgid "Price:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:164
+#: templates/wishlist-view-mobile.php:174
 msgid "Quantity:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:179
+#: templates/wishlist-view-mobile.php:189
 msgid "Stock:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:182 templates/wishlist-view.php:224
+#: templates/wishlist-view-mobile.php:192 templates/wishlist-view.php:227
 msgid "Out of stock"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:182 templates/wishlist-view.php:224
+#: templates/wishlist-view-mobile.php:192 templates/wishlist-view.php:227
 msgid "In Stock"
 msgstr "Em estoque"
 
-#: templates/wishlist-view-mobile.php:201 templates/wishlist-view.php:257
+#: templates/wishlist-view-mobile.php:211 templates/wishlist-view.php:260
 msgid "Move"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:220 templates/wishlist-view.php:277
+#: templates/wishlist-view-mobile.php:232 templates/wishlist-view.php:280
 msgid "Move to another list &rsaquo;"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:228 templates/wishlist-view.php:155
-#: templates/wishlist-view.php:287
+#: templates/wishlist-view-mobile.php:240 templates/wishlist-view.php:156
+#: templates/wishlist-view.php:290
 msgid "Remove this product"
 msgstr "Remover este produto"
 
-#: templates/wishlist-view-mobile.php:238 templates/wishlist-view.php:307
+#: templates/wishlist-view-mobile.php:251 templates/wishlist-view.php:310
 msgid "No products added to the wishlist"
 msgstr ""
 
-#: templates/wishlist-view.php:78
+#: templates/wishlist-view.php:79
 msgid "Product name"
 msgstr ""
 
-#: templates/wishlist-view.php:86
+#: templates/wishlist-view.php:87
 msgid "Unit price"
 msgstr ""
 
-#: templates/wishlist-view.php:95
+#: templates/wishlist-view.php:96
 msgid "Quantity"
 msgstr ""
 
-#: templates/wishlist-view.php:104
+#: templates/wishlist-view.php:105
 msgid "Stock status"
 msgstr ""
 
-#: templates/wishlist-view.php:122
+#: templates/wishlist-view.php:123
 msgid "Arrange"
 msgstr ""
 
 #. translators: date added label: 1 date added.
-#: templates/wishlist-view.php:238
+#: templates/wishlist-view.php:241
 msgid "Added on: %s"
 msgstr ""
 
-#: templates/wishlist-view.php:287
+#: templates/wishlist-view.php:290
 msgid "Remove"
 msgstr ""
 

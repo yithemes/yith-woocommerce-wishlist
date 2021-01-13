@@ -8,59 +8,59 @@
  */
 ( function ( $ ) {
 
-    $( '.metaboxes-tab' ).each( function () {
-        $( '.tabs-panel', this ).hide();
+	$( '.metaboxes-tab' ).each( function () {
+		$( '.tabs-panel', this ).hide();
 
-        var active_tab = wpCookies.get( 'active_metabox_tab' );
-        if ( active_tab == null ) {
-            active_tab = $( 'ul.metaboxes-tabs li:first-child a', this ).attr( 'href' );
-        } else {
-            active_tab = '#' + active_tab;
-        }
+		var active_tab = wpCookies.get( 'active_metabox_tab' );
+		if ( active_tab == null ) {
+			active_tab = $( 'ul.metaboxes-tabs li:first-child a', this ).attr( 'href' );
+		} else {
+			active_tab = '#' + active_tab;
+		}
 
-        $( active_tab ).show();
+		$( active_tab ).show();
 
-        $( '.metaboxes-tabs a', this ).click( function ( e ) {
-            if ( $( this ).parent().hasClass( 'tabs' ) ) {
-                e.preventDefault();
-                return;
-            }
+		$( '.metaboxes-tabs a', this ).click( function ( e ) {
+			if ( $( this ).parent().hasClass( 'tabs' ) ) {
+				e.preventDefault();
+				return;
+			}
 
-            var t = $( this ).attr( 'href' );
-            $( this ).parent().addClass( 'tabs' ).siblings( 'li' ).removeClass( 'tabs' );
-            $( this ).closest( '.metaboxes-tab' ).find( '.tabs-panel' ).hide();
-            $( t ).show();
+			var t = $( this ).attr( 'href' );
+			$( this ).parent().addClass( 'tabs' ).siblings( 'li' ).removeClass( 'tabs' );
+			$( this ).closest( '.metaboxes-tab' ).find( '.tabs-panel' ).hide();
+			$( t ).show();
 
-            return false;
-        } );
-    } );
+			return false;
+		} );
+	} );
 
-    var act_page_option = $( '#_active_page_options-container' ).parent().html();
-    $( '#_active_page_options-container' ).parent().remove();
-    $( act_page_option ).insertAfter( '#yit-post-setting .handlediv' );
-    $( act_page_option ).insertAfter( '#yit-page-setting .handlediv' );
-
-
-    $( '#_active_page_options-container' ).on( 'click', function () {
-        if ( $( '#_active_page_options' ).is( ":checked" ) ) {
-            $( '#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab' ).css( {
-                                                                                                               'opacity'       : 1,
-                                                                                                               'pointer-events': 'auto'
-                                                                                                           } );
-        } else {
-            $( '#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab' ).css( {
-                                                                                                               'opacity'       : 0.5,
-                                                                                                               'pointer-events': 'none'
-                                                                                                           } );
-        }
-    } ).click();
+	var act_page_option = $( '#_active_page_options-container' ).parent().html();
+	$( '#_active_page_options-container' ).parent().remove();
+	$( act_page_option ).insertAfter( '#yit-post-setting .handlediv' );
+	$( act_page_option ).insertAfter( '#yit-page-setting .handlediv' );
 
 
-    //dependencies handler
-    $( document.body ).on( 'yith-plugin-fw-metabox-init-deps', function () {
-        $( document.body ).trigger( 'yith-plugin-fw-init-radio' );
-        $( '.metaboxes-tab [data-dep-target]:not(.yith-plugin-fw-metabox-deps-initialized)' ).each( function () {
-            var t = $( this );
+	$( '#_active_page_options-container' ).on( 'click', function () {
+		if ( $( '#_active_page_options' ).is( ":checked" ) ) {
+			$( '#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab' ).css( {
+																											   'opacity'       : 1,
+																											   'pointer-events': 'auto'
+																										   } );
+		} else {
+			$( '#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab' ).css( {
+																											   'opacity'       : 0.5,
+																											   'pointer-events': 'none'
+																										   } );
+		}
+	} ).click();
+
+
+	//dependencies handler
+	$( document.body ).on( 'yith-plugin-fw-metabox-init-deps', function () {
+		$( document.body ).trigger( 'yith-plugin-fw-init-radio' );
+		$( '.metaboxes-tab [data-dep-target]:not(.yith-plugin-fw-metabox-deps-initialized)' ).each( function () {
+			var t = $( this );
 
             var field = '#' + t.data( 'dep-target' ),
                 dep   = '#' + t.data( 'dep-id' ),
@@ -68,112 +68,101 @@
                 type  = t.data( 'dep-type' );
 
 
-            dependencies_handler( field, dep, value.toString(), type );
+			dependencies_handler( field, dep, value.toString(), type );
 
             $( dep ).on( 'change', function () {
                 dependencies_handler( field, dep, value.toString(), type );
             } ).change();
 
-            t.addClass( 'yith-plugin-fw-metabox-deps-initialized' );
-        } );
-    } ).trigger( 'yith-plugin-fw-metabox-init-deps' );
+			t.addClass( 'yith-plugin-fw-metabox-deps-initialized' );
+		} );
+	} ).trigger( 'yith-plugin-fw-metabox-init-deps' );
 
-    //Handle dependencies.
-    function dependencies_handler( id, deps, values, type ) {
-        var result = true;
+	//Handle dependencies.
+	function dependencies_handler( id, deps, values, type ) {
+		var result = true;
 
 
-        //Single dependency
-        if ( typeof ( deps ) == 'string' ) {
-            if ( deps.substr( 0, 6 ) == ':radio' ) {
-                deps = deps + ':checked';
-            }
+		//Single dependency
+		if ( typeof ( deps ) == 'string' ) {
+			if ( deps.substr( 0, 6 ) == ':radio' ) {
+				deps = deps + ':checked';
+			}
 
-            var val = $( deps ).val();
+			var val = $( deps ).val();
 
-            if ( $( deps ).attr( 'type' ) == 'checkbox' ) {
-                var thisCheck = $( deps );
-                if ( thisCheck.is( ':checked' ) ) {
-                    val = 'yes';
-                } else {
-                    val = 'no';
-                }
-            }
+			if ( $( deps ).attr( 'type' ) == 'checkbox' ) {
+				var thisCheck = $( deps );
+				if ( thisCheck.is( ':checked' ) ) {
+					val = 'yes';
+				} else {
+					val = 'no';
+				}
+			}
 
-            values = values.split( ',' );
+			values = values.split( ',' );
 
-            for ( var i = 0; i < values.length; i++ ) {
-                if ( val != values[ i ] ) {
-                    result = false;
-                } else {
-                    result = true;
-                    break;
-                }
-            }
-        }
+			for ( var i = 0; i < values.length; i++ ) {
+				if ( val != values[ i ] ) {
+					result = false;
+				} else {
+					result = true;
+					break;
+				}
+			}
+		}
 
-        var $current_field     = $( id ),
-            $current_container = $( id + '-container' ).parent();
+		var $current_field     = $( id ),
+			$current_container = $( id + '-container' ).parent();
 
-        var types = type.split( '-' ), j;
-        for ( j in types ) {
-            var current_type = types[ j ];
+		var types = type.split( '-' ), j;
+		for ( j in types ) {
+			var current_type = types[ j ];
 
-            if ( !result ) {
-                switch ( current_type ) {
-                    case 'disable':
-                        $current_container.addClass( 'yith-disabled' );
-                        $current_field.attr( 'disabled', true );
-                        break;
-                    case 'hideNow':
-                        $current_container.hide();
-                        break;
-                    case 'hideme':
-                        $current_field.hide();
-                        break;
-                    case 'fadeInOut':
-                    case 'fadeOut':
-                        $current_container.hide( 500 );
-                        break;
-                    case 'fadeIn':
-                        $current_container.hide();
-                        break;
-                    default:
-                        if( ! $current_container.hasClass('fade-in')){
-                            $current_container.hide();
-                            $current_container.css({'opacity':'0'});
-                        }else{
-                            $current_container.fadeTo("slow" , 0, function(){
-                                $(this).hide().removeClass('fade-in');
-                            });
-                        }
-                }
-
-            } else {
-                switch ( current_type ) {
-                    case 'disable':
-                        $current_container.removeClass( 'yith-disabled' );
-                        $current_field.attr( 'disabled', false );
-                        break;
-                    case 'hideNow':
-                        $current_container.show();
-                        break;
-                    case 'hideme':
-                        $current_field.show();
-                        break;
-                    case 'fadeInOut':
-                    case 'fadeIn':
-                        $current_container.show( 500 );
-                        break;
-                    case 'fadeOut':
-                        $current_container.show();
-                        break;
-                    default:
-                        $current_container.show();
-                        $current_container.fadeTo("slow" , 1).addClass('fade-in');
-                }
-            }
-        }
-    }
+			if ( !result ) {
+				switch ( current_type ) {
+					case 'disable':
+						$current_container.addClass( 'yith-disabled' );
+						$current_field.attr( 'disabled', true );
+						break;
+					case 'hide':
+					case 'hideNow':
+						$current_container.hide();
+						break;
+					case 'hideme':
+						$current_field.hide();
+						break;
+					case 'fadeInOut':
+					case 'fadeOut':
+						$current_container.hide( 500 );
+						break;
+					case 'fadeIn':
+					default:
+						$current_container.hide();
+				}
+			} else {
+				switch ( current_type ) {
+					case 'disable':
+						$current_container.removeClass( 'yith-disabled' );
+						$current_field.attr( 'disabled', false );
+						break;
+					case 'hide':
+					case 'hideNow':
+						$current_container.show();
+						break;
+					case 'hideme':
+						$current_field.show();
+						break;
+					case 'fadeOut':
+						$current_container.show();
+						break;
+					case 'fadeInOut':
+					case 'fadeIn':
+					default:
+						$current_container.show( 500 );
+				}
+			}
+		}
+	}
 
 } )( jQuery );

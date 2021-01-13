@@ -1,30 +1,40 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the text field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
+list ( $field_id, $class, $name, $value, $std, $custom_attributes, $data ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'value', 'std', 'custom_attributes', 'data' );
+
+$file = $value;
 ?>
-<div  class="yith-plugin-fw-upload-container <?php echo !empty( $class ) ? $class : ''; ?>">
-    <div class="yith-plugin-fw-upload-img-preview" style="margin-top:10px;">
-        <?php
-        $file = $value;
-        if ( preg_match( '/(jpg|jpeg|png|gif|ico|svg)$/', $file ) ) {
-            echo "<img src='$file' style='max-width:600px; max-height:300px;' />";
-        }
-        ?>
-    </div>
-    <input type="text" id="<?php echo $id ?>" name="<?php echo $name ?>" value="<?php echo esc_attr( $value ) ?>" <?php if ( isset( $default ) ) : ?>data-std="<?php echo $default ?>"<?php endif ?> class="yith-plugin-fw-upload-img-url"/>
-    <button class="button-secondary yith-plugin-fw-upload-button" id="<?php echo $id ?>-button"><?php _e( 'Upload', 'yith-plugin-fw' ) ?></button>
-    <button type="button"  id="<?php echo $id ?>-button-reset" class="yith-plugin-fw-upload-button-reset button"
-            data-default="<?php echo isset( $default ) ? $default : '' ?>"><?php _e( 'Reset', 'yith-plugin-fw' ) ?></button>
+<div class="yith-plugin-fw-upload-container <?php echo ! empty( $class ) ? esc_attr( $class ) : ''; ?>">
+	<div class="yith-plugin-fw-upload-img-preview" style="margin-top:10px;">
+		<?php if ( preg_match( '/(jpg|jpeg|png|gif|ico|svg)$/', $file ) ) : ?>
+			<img src="<?php echo esc_url( $file ); ?>" style="max-width:600px; max-height:300px;"/>
+		<?php endif ?>
+	</div>
+	<input type="text"
+			id="<?php echo esc_attr( $field_id ); ?>"
+			name="<?php echo esc_attr( $name ); ?>"
+			class="yith-plugin-fw-upload-img-url"
+			value="<?php echo esc_attr( $value ); ?>"
+
+		<?php if ( isset( $default ) ) : ?>
+			data-std="<?php echo esc_attr( $default ); ?>"
+		<?php endif; ?>
+
+		<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	/>
+	<button class="button-secondary yith-plugin-fw-upload-button" id="<?php echo esc_attr( $field_id ); ?>-button"><?php esc_html_e( 'Upload', 'yith-plugin-fw' ); ?></button>
+	<button type="button"
+			id="<?php echo esc_attr( $field_id ); ?>-button-reset"
+			class="yith-plugin-fw-upload-button-reset button"
+			data-default="<?php echo isset( $default ) ? esc_attr( $default ) : ''; ?>"
+	><?php esc_html_e( 'Reset', 'yith-plugin-fw' ); ?></button>
 </div>

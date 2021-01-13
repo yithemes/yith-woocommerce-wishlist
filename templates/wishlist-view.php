@@ -15,6 +15,8 @@
  * @var $wishlist_token                string Current wishlist token
  * @var $wishlist_id                   int Current wishlist id
  * @var $users_wishlists               array Array of current user wishlists
+ * @var $pagination                    string yes/no
+ * @var $per_page                      int Items per page
  * @var $current_page                  int Current page
  * @var $page_links                    array Array of page links
  * @var $is_user_owner                 bool Whether current user is wishlist owner
@@ -47,9 +49,8 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 <!-- WISHLIST TABLE -->
 <table
 	class="shop_table cart wishlist_table wishlist_view traditional responsive <?php echo $no_interactions ? 'no-interactions' : ''; ?> <?php echo $enable_drag_n_drop ? 'sortable' : ''; ?> "
-	data-pagination="<?php echo esc_attr( $pagination ); ?>" data-per-page="<?php echo esc_attr( $per_page ); ?>"
-	data-page="<?php echo esc_attr( $current_page ); ?>" data-id="<?php echo esc_attr( $wishlist_id ); ?>"
-	data-token="<?php echo esc_attr( $wishlist_token ); ?>">
+	data-pagination="<?php echo esc_attr( $pagination ); ?>" data-per-page="<?php echo esc_attr( $per_page ); ?>" data-page="<?php echo esc_attr( $current_page ); ?>"
+	data-id="<?php echo esc_attr( $wishlist_id ); ?>" data-token="<?php echo esc_attr( $wishlist_token ); ?>">
 
 	<?php $column_count = 2; ?>
 
@@ -170,7 +171,9 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 					<td class="product-name">
 						<?php do_action( 'yith_wcwl_table_before_product_name', $item, $wishlist ); ?>
 
-						<a href="<?php echo esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product', $item->get_product_id() ) ) ); ?>"><?php echo esc_html( apply_filters( 'woocommerce_in_cartproduct_obj_title', $product->get_title(), $product ) ); ?></a>
+						<a href="<?php echo esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product', $item->get_product_id() ) ) ); ?>">
+							<?php echo wp_kses_post( apply_filters( 'woocommerce_in_cartproduct_obj_title', $product->get_title(), $product ) ); ?>
+						</a>
 
 						<?php
 						if ( $show_variation && $product->is_type( 'variation' ) ) {

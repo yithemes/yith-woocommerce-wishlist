@@ -1,28 +1,35 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the text-array field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
+list ( $field_id, $name, $value, $fields, $size ) = yith_plugin_fw_extract( $field, 'id', 'name', 'value', 'fields', 'size' );
 
-$size = isset( $size ) ? " style=\"width:{$size}px;\"" : '';
+$value = isset( $value ) && is_array( $value ) ? $value : array();
 ?>
 <table class="yith-plugin-fw-text-array-table">
-    <?php foreach ( $fields as $field_name => $field_label ) : ?>
-        <tr>
-            <td><?php echo $field_label ?></td>
-            <td>
-                <input type="text" name="<?php echo $name ?>[<?php echo $field_name ?>]" id="<?php echo $id ?>_<?php echo $field_name ?>" value="<?php echo isset( $value[ $field_name ] ) ? esc_attr( $value[ $field_name ] ) : '' ?>"<?php echo $size ?> />
-            </td>
-        </tr>
-    <?php endforeach ?>
+	<?php foreach ( $fields as $field_name => $field_label ) : ?>
+		<?php
+		$current_name  = "{$name}[{$field_name}]";
+		$current_id    = "{$field_id}_{$field_name}";
+		$current_value = isset( $value[ $field_name ] ) ? $value[ $field_name ] : '';
+		?>
+		<tr>
+			<td><?php echo esc_html( $field_label ); ?></td>
+			<td>
+				<input type="text" id="<?php echo esc_attr( $current_id ); ?>"
+						name="<?php echo esc_attr( $current_name ); ?>"
+						value="<?php echo esc_attr( $current_value ); ?>"
+					<?php if ( isset( $size ) ) : ?>
+						style="width: <?php echo absint( $size ); ?>px"
+					<?php endif; ?>
+				/>
+			</td>
+		</tr>
+	<?php endforeach ?>
 </table>
