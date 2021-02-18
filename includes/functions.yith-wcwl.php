@@ -352,38 +352,47 @@ if ( ! function_exists( 'yith_wcwl_get_hidden_products' ) ) {
 	 * @since 2.1.1
 	 */
 	function yith_wcwl_get_hidden_products() {
-		if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-			$hidden_products = get_posts(
-				array(
-					'post_type'      => 'product',
-					'post_status'    => 'publish',
-					'posts_per_page' => - 1,
-					'fields'         => 'ids',
-					'meta_query'     => array(
-						array(
-							'key'   => '_visibility',
-							'value' => 'visible',
+		$hidden_products = get_transient( 'yith_wcwl_hidden_products' );
+
+		if ( false === $hidden_products ) {
+			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
+				$hidden_products = get_posts(
+					array(
+						'post_type'      => 'product',
+						'post_status'    => 'publish',
+						'posts_per_page' => - 1,
+						'fields'         => 'ids',
+						'meta_query'     => array(
+							array(
+								'key'   => '_visibility',
+								'value' => 'visible',
+							),
 						),
-					),
-				)
-			);
-		} else {
-			$hidden_products = wc_get_products(
-				array(
-					'limit'      => - 1,
-					'status'     => 'publish',
-					'return'     => 'ids',
-					'visibility' => 'hidden',
-				)
-			);
+					)
+				);
+			} else {
+				$hidden_products = wc_get_products(
+					array(
+						'limit'      => - 1,
+						'status'     => 'publish',
+						'return'     => 'ids',
+						'visibility' => 'hidden',
+					)
+				);
+			}
+
+			/**
+			 * Array_filter was added to prevent errors when previous query returns for some reason just 0 index.
+			 *
+			 * @since 2.2.6
+			 */
+			$hidden_products = array_filter( $hidden_products );
+
+			set_transient( 'yith_wcwl_hidden_products', $hidden_products, 30 * DAY_IN_SECONDS );
 		}
 
-		/**
-		 * array_filter was added to prevent errors when previous query returns for some reason just 0 index
-		 *
-		 * @since 2.2.6
-		 */
-		return apply_filters( 'yith_wcwl_hidden_products', array_filter( $hidden_products ) );
+
+		return apply_filters( 'yith_wcwl_hidden_products', $hidden_products );
 	}
 }
 

@@ -360,7 +360,7 @@ jQuery( function( $ ){
                 checkboxes.prop( 'checked','checked').change();
             }
             else{
-                checkboxes.removeProp( 'checked').change();
+				checkboxes.prop('checked', false).change();
             }
         } );
 
@@ -1146,7 +1146,7 @@ jQuery( function( $ ){
         $( window ).on( 'resize', function(){
             var table = $('.wishlist_table.responsive'),
                 mobile = table.is('.mobile'),
-                media = window.matchMedia( '(max-width: 768px)' ),
+                media = window.matchMedia( '(max-width: ' + yith_wcwl_l10n.mobile_media_query + 'px)' ),
                 form = table.closest('form'),
                 id = form.attr('class'),
                 options = form.data('fragment-options'),

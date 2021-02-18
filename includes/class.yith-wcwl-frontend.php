@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.18';
+		public $version = '3.0.19';
 
 		/**
 		 * Plugin database version
@@ -307,7 +307,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$main_script_deps = apply_filters( 'yith_wcwl_main_script_deps', array( 'jquery', 'jquery-selectBox' ) );
 
 			if ( ! $located ) {
-				wp_register_script( 'jquery-yith-wcwl', YITH_WCWL_URL . 'assets/js/' . $prefix . 'jquery.yith-wcwl.js', $main_script_deps, $this->version, true );
+				wp_register_script( 'jquery-yith-wcwl', YITH_WCWL_URL . 'assets/js/' . $prefix . 'jquery.yith-wcwl' . $suffix . '.js', $main_script_deps, $this->version, true );
 				wp_localize_script( 'jquery-yith-wcwl', 'yith_wcwl_l10n', $yith_wcwl_l10n );
 			}
 			else {
@@ -399,6 +399,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					'time_to_close_prettyphoto' => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
 					'fragments_index_glue' => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
 					'reload_on_found_variation' => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
+					'mobile_media_query' => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
 					'labels' => array(
 						'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
 						'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) ),

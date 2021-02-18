@@ -126,6 +126,7 @@
     width       : auto !important;
     display     : inline-block;
     font-weight : normal;
+    float       : none;
 }
 
 .metaboxes-tab input[type="checkbox"] {

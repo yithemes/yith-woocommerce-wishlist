@@ -1435,9 +1435,11 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
 .yith-plugin-ui .yith-plugin-fw-onoff-container input + span {
     border           : 1px solid #d8d8d8;
     background-color : #fff;
-    width            : 58px;
+    width            : 60px;
     height           : 24px;
     line-height      : 14px;
+    padding          : 4px;
+    box-sizing       : border-box;
 }
 
 .yith-plugin-ui .yith-plugin-fw-onoff-container input + span:before {
@@ -1445,8 +1447,8 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
 }
 
 .yith-plugin-ui .yith-plugin-fw-onoff-container input + span:before {
-    width            : 14px;
-    height           : 14px;
+    width            : 13px;
+    height           : 13px;
     top              : 5px;
     left             : 6px;
     background-color : #d8d8d8;
@@ -1454,15 +1456,14 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
 
 .yith-plugin-ui .yith-plugin-fw-onoff-container input + span:after {
     content      : attr(data-text-off);
-    width        : 14px;
     height       : 14px;
-    font-size    : 13px;
+    font-size    : 12px;
     font-weight  : 600;
-    padding-left : 27px;
+    padding-left : 18px;
     color        : #979797;
-    margin-top   : 5px;
-    display      : inline-block;
+    display      : block;
     white-space  : nowrap;
+    text-align   : center;
 }
 
 .yith-plugin-ui .yith-plugin-fw-onoff-container input:checked + span,
@@ -1479,16 +1480,16 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
 
 .yith-plugin-ui .yith-plugin-fw-onoff-container input:checked + span:after,
 .yith-plugin-ui.yith-plugin-fw-onoff-container input.onoffchecked + span:after {
-    content     : attr(data-text-on);
-    color       : #98aa36;
-    width       : 14px;
-    height      : 14px;
-    display     : inline-block;
-    font-size   : 13px;
-    font-weight : 600;
-    padding     : 0 10px;
-    margin-top  : 5px;
-    white-space : nowrap;
+    content       : attr(data-text-on);
+    color         : #98aa36;
+    height        : 14px;
+    font-size     : 12px;
+    font-weight   : 600;
+    padding-left  : 0;
+    padding-right : 18px;
+    display       : block;
+    white-space   : nowrap;
+    text-align    : center;
 }
 
 .yith-plugin-ui .yith-plugin-fw-onoff-container input + span {
@@ -2209,6 +2210,11 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 .yith-plugin-fw-dimensions__unit--selected {
     text-decoration : underline;
     color           : #007694;
+}
+
+.yith-plugin-fw-dimensions__unit--unique {
+    text-decoration : none;
+    cursor          : default;
 }
 
 .yith-plugin-fw-dimensions__dimensions {

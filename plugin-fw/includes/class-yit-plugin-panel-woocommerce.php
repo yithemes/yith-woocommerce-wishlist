@@ -304,7 +304,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 				if ( version_compare( WC()->version, '2.4.0', '>=' ) ) {
 					if ( ! empty( $yit_options[ $option_key ] ) ) {
 						foreach ( $yit_options[ $option_key ] as $option ) {
-							if ( isset( $option['id'] ) && isset( $_POST[ $option['id'] ], $option['type'] ) && ! in_array( $option['type'], self::$wc_type, true ) ) {
+							if ( isset( $option['id'] ) && isset( $_POST[ $option['id'] ], $option['type'] ) && ! in_array( $option['type'], self::$wc_type, true ) && 'yith-field' !== $option['type'] ) {
 								$_POST[ $option['id'] ] = maybe_serialize( $_POST[ $option['id'] ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 							}
 						}
@@ -511,7 +511,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 		 * @since  2.0
 		 */
 		public function maybe_unserialize_panel_data( $value, $option, $raw_value ) {
-			if ( ! version_compare( WC()->version, '2.4.0', '>=' ) || ! isset( $option['type'] ) || in_array( $option['type'], self::$wc_type, true ) ) {
+			if ( ! version_compare( WC()->version, '2.4.0', '>=' ) || ! isset( $option['type'] ) || in_array( $option['type'], self::$wc_type, true ) || 'yith-field' === $option['type'] ) {
 				return $value;
 			}
 
@@ -532,9 +532,9 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 		/**
 		 * Sanitize Option
 		 *
-		 * @param mixed  $value     Option value.
-		 * @param mixed  $option    Option settings array.
-		 * @param string $raw_value Raw option value.
+		 * @param mixed $value     Option value.
+		 * @param mixed $option    Option settings array.
+		 * @param mixed $raw_value Raw option value.
 		 *
 		 * @return mixed Filtered return value
 		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
@@ -542,55 +542,58 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 		 */
 		public static function sanitize_option( $value, $option, $raw_value ) {
 			if ( isset( $option['type'] ) && 'yith-field' === $option['type'] ) {
-				if ( ! empty( $option['multiple'] ) && is_null( $value ) ) {
+				$value    = $raw_value; // We need the raw value to avoid the wc_clean. Note: the raw_value is already un-slashed.
+				$type     = isset( $option['yith-type'] ) ? $option['yith-type'] : false;
+				$multiple = ! empty( $option['multiple'] );
+
+				switch ( $type ) {
+					case 'checkbox':
+					case 'onoff':
+						$value = yith_plugin_fw_is_true( $value ) ? 'yes' : 'no';
+						break;
+					case 'checkbox-array':
+						$value = ! ! $value && is_array( $value ) ? $value : array();
+						break;
+					case 'select-buttons':
+						$value = ! empty( $value ) ? $value : array();
+						break;
+					case 'date-format':
+						if ( '\c\u\s\t\o\m' === $value ) {
+							// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+							$custom = isset( $_REQUEST[ $option['id'] . '_text' ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ $option['id'] . '_text' ] ) ) : $option['default'];
+							$value  = $custom;
+						}
+						break;
+					case 'toggle-element':
+						if ( $value && isset( $option['elements'] ) && ! empty( $option['elements'] ) ) {
+
+							if ( isset( $value['box_id'] ) ) {
+								unset( $value['box_id'] );
+							}
+
+							foreach ( $value as $index => $single_toggle ) {
+
+								if ( $value && isset( $option['onoff_field'] ) && ! empty( $option['onoff_field'] ) ) {
+									$on_off              = $option['onoff_field'];
+									$on_off['type']      = 'yith-field';
+									$on_off['yith-type'] = 'onoff';
+									$on_off_id           = $on_off['id'];
+
+									$value[ $index ][ $on_off_id ] = isset( $single_toggle[ $on_off_id ] ) ? self::sanitize_option( $single_toggle[ $on_off_id ], $on_off, $single_toggle[ $on_off_id ] ) : 'no';
+								}
+
+								foreach ( $option['elements'] as $element ) {
+									$element_value = isset( $value[ $index ][ $element['id'] ] ) ? $value[ $index ][ $element['id'] ] : false;
+									// We don't need to un-slash the value, since it's already un-slashed.
+									$value[ $index ][ $element['id'] ] = self::sanitize_option( $element_value, $element, $element_value );
+								}
+							}
+						}
+						break;
+				}
+
+				if ( $multiple && empty( $value ) ) {
 					$value = array();
-				}
-
-				// Sanitize the option for the checkbox field: 'yes' or 'no'.
-				if ( isset( $option['yith-type'] ) && in_array( $option['yith-type'], array( 'checkbox', 'onoff' ), true ) ) {
-					$value = yith_plugin_fw_is_true( $raw_value ) ? 'yes' : 'no';
-				}
-
-				if ( isset( $option['yith-type'] ) && 'checkbox-array' === $option['yith-type'] ) {
-					$value = maybe_unserialize( $raw_value );
-					$value = ! ! $value && is_array( $value ) ? $value : array();
-				}
-
-				if ( isset( $option['yith-type'] ) && in_array( $option['yith-type'], array( 'textarea', 'textarea-editor', 'textarea-codemirror' ), true ) ) {
-					$value = $raw_value;
-				}
-
-				// Sanitize the option date-format when the user choose the custom option.
-				if ( isset( $option['yith-type'] ) && in_array( $option['yith-type'], array( 'date-format' ), true ) && '\c\u\s\t\o\m' === $raw_value ) {
-					$custom = isset( $_REQUEST[ $option['id'] . '_text' ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ $option['id'] . '_text' ] ) ) : $option['default']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					$value  = $custom;
-				}
-
-				if ( isset( $option['yith-type'] ) && in_array( $option['yith-type'], array( 'toggle-element' ), true ) ) {
-					if ( $value && isset( $option['elements'] ) && ! empty( $option['elements'] ) ) {
-						$value = maybe_unserialize( $value );
-
-						if ( isset( $value['box_id'] ) ) {
-							unset( $value['box_id'] );
-						}
-
-						foreach ( $value as $index => $single_toggle ) {
-
-							if ( $value && isset( $option['onoff_field'] ) && ! empty( $option['onoff_field'] ) ) {
-								$onoff              = $option['onoff_field'];
-								$onoff['type']      = 'yith-field';
-								$onoff['yith-type'] = 'onoff';
-								$onoff_id           = $onoff['id'];
-
-								$value[ $index ][ $onoff_id ] = isset( $single_toggle[ $onoff_id ] ) ? self::sanitize_option( $single_toggle[ $onoff_id ], $onoff, $single_toggle[ $onoff_id ] ) : 'no';
-							}
-
-							foreach ( $option['elements'] as $element ) {
-								$element_value                     = isset( $value[ $index ][ $element['id'] ] ) ? $value[ $index ][ $element['id'] ] : false;
-								$value[ $index ][ $element['id'] ] = self::sanitize_option( $element_value, $element, $element_value );
-							}
-						}
-					}
 				}
 
 				if ( ! empty( $option['yith-sanitize-callback'] ) && is_callable( $option['yith-sanitize-callback'] ) ) {
@@ -598,7 +601,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 				}
 			}
 
-			return $value;
+			return apply_filters( 'yith_plugin_fw_wc_panel_sanitize_option', $value, $option, $raw_value );
 		}
 
 		/**
@@ -683,6 +686,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 
 						$value = $new_value;
 					}
+
+					$value   = wp_unslash( $value ); // The value must be un-slashed before using it in self::sanitize_option.
 					$value   = self::sanitize_option( $value, $option_array[ $option_id ], $value );
 					$updated = update_option( $option_id, $value );
 				}

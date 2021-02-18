@@ -25,8 +25,8 @@ list ( $field_id, $class, $name, $std, $value, $custom_attributes, $data, $desc_
 		<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	/>
 	<span class="yith-plugin-fw-onoff"
-			data-text-on="<?php echo esc_attr_x( 'YES', 'YES/NO button: use MAX 3 characters!', 'yith-plugin-fw' ); ?>"
-			data-text-off="<?php echo esc_attr_x( 'NO', 'YES/NO button: use MAX 3 characters!', 'yith-plugin-fw' ); ?>"></span>
+			data-text-on="<?php echo esc_attr_x( 'YES', 'YES/NO button: use MAX 4 characters!', 'yith-plugin-fw' ); ?>"
+			data-text-off="<?php echo esc_attr_x( 'NO', 'YES/NO button: use MAX 4 characters!', 'yith-plugin-fw' ); ?>"></span>
 </div>
 
 <?php if ( isset( $desc_inline ) ) : ?>

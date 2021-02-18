@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-01-12 12:19:55+00:00\n"
-"PO-Revision-Date: 2020-09-25 09:16:07+0000\n"
+"POT-Creation-Date: 2021-02-15 07:49:38+00:00\n"
+"PO-Revision-Date: 2021-02-11 18:09:18+0000\n"
 "Language: el_GR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,229 +37,6 @@ msgstr "Επιλογή Χρώματος"
 msgid "Color value"
 msgstr "Αξία χρώματος"
 
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#. translators: %s is the singular name of the post type.
-#. translators: %s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:486
-#: includes/class-yit-cpt-unlimited.php:619
-#: includes/class-yit-cpt-unlimited.php:768
-#: includes/class-yit-cpt-unlimited.php:1755
-msgid "Add %s"
-msgstr "Προσθήκη %s"
-
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:488
-#: includes/class-yit-cpt-unlimited.php:621
-msgid "Add New %s"
-msgstr "Προσθήκη Νέου %s"
-
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#. translators: %s is the post title.
-#. translators: %s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:490
-#: includes/class-yit-cpt-unlimited.php:623
-#: includes/class-yit-cpt-unlimited.php:1350
-#: includes/class-yit-cpt-unlimited.php:1401
-msgid "Edit %s"
-msgstr "Επεξεργασία %s"
-
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:492
-#: includes/class-yit-cpt-unlimited.php:625
-msgid "New %s"
-msgstr "Νέο %s"
-
-#. translators: %s is the plural name of the post type.
-#. translators: $s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:494
-#: includes/class-yit-cpt-unlimited.php:627
-msgid "All %s"
-msgstr "Όλα %s"
-
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#. translators: %s is the plural label of the post type.
-#. translators: %s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:496
-#: includes/class-yit-cpt-unlimited.php:629
-#: includes/class-yit-cpt-unlimited.php:1323
-#: includes/class-yit-cpt-unlimited.php:1406
-msgid "View %s"
-msgstr "Προβολή %s"
-
-#. translators: %s is the plural name of the post type.
-#. translators: $s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:498
-#: includes/class-yit-cpt-unlimited.php:631
-msgid "Search %s"
-msgstr "Αναζήτηση %s"
-
-#. translators: %s is the plural name of the post type.
-#. translators: $s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:500
-#: includes/class-yit-cpt-unlimited.php:633
-msgid "No %s found"
-msgstr "Δεν βρέθηκε %s"
-
-#. translators: %s is the plural name of the post type.
-#. translators: $s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:502
-#: includes/class-yit-cpt-unlimited.php:635
-msgid "No %s found in Trash"
-msgstr "Δεν βρέθηκε %s στον Κάδο Ανακύκλωσης"
-
-#: includes/class-yit-cpt-unlimited.php:678 templates/fields/ajax-terms.php:41
-msgid "Search Categories"
-msgstr "Αναζήτηση Κατηγοριών"
-
-#: includes/class-yit-cpt-unlimited.php:679
-msgid "All Categories"
-msgstr "Όλες οι Κατηγορίες"
-
-#: includes/class-yit-cpt-unlimited.php:680
-msgid "Parent Category"
-msgstr "Γονική Κατηγορία"
-
-#: includes/class-yit-cpt-unlimited.php:681
-msgid "Parent Category:"
-msgstr "Γονική Κατηγορία:"
-
-#: includes/class-yit-cpt-unlimited.php:682
-msgid "Edit Category"
-msgstr "Επεξεργασία Kατηγορίας"
-
-#: includes/class-yit-cpt-unlimited.php:683
-msgid "Update Category"
-msgstr "Ενημέρωση Κατηγορίας"
-
-#: includes/class-yit-cpt-unlimited.php:684
-msgid "Add New Category"
-msgstr "Προσθήκη Νέας Κατηγορίας"
-
-#: includes/class-yit-cpt-unlimited.php:685
-msgid "New Category Name"
-msgstr "Όνομα Νέας Κατηγορίας"
-
-#: includes/class-yit-cpt-unlimited.php:686
-msgid "Category"
-msgstr "Κατηγορία"
-
-#: includes/class-yit-cpt-unlimited.php:778
-msgid "Categories"
-msgstr "Κατηγορίες"
-
-#. translators: %s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:1098
-msgid "%s Settings"
-msgstr "Ρυθμίσεις %s"
-
-#: includes/class-yit-cpt-unlimited.php:1106
-#: includes/class-yit-cpt-unlimited.php:1260
-#: includes/class-yit-cpt-unlimited.php:1266
-#: includes/class-yit-plugin-panel.php:84
-msgid "Settings"
-msgstr "Ρυθμίσεις"
-
-#: includes/class-yit-cpt-unlimited.php:1111
-msgid "Type"
-msgstr "Τύπος"
-
-#. translators: %s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:1114
-msgid "Layout for this %s"
-msgstr "Διάταξη για %s"
-
-#: includes/class-yit-cpt-unlimited.php:1122
-msgid "Rewrite"
-msgstr "Επανεγγραφή"
-
-#: includes/class-yit-cpt-unlimited.php:1123
-msgid ""
-"Univocal identification name in the URL for each product (slug from post if "
-"empty)"
-msgstr ""
-"Μονοσήμαντο όνομα ταυτοποίησης URL για κάθε προϊόν (slug από άρθρο αν είναι "
-"κενό)"
-
-#: includes/class-yit-cpt-unlimited.php:1128
-msgid "Label in Singular"
-msgstr "Επιγραφή σε Ενικό"
-
-#: includes/class-yit-cpt-unlimited.php:1129
-msgid "Set a label in singular (title of portfolio if empty)"
-msgstr "Ορίστε μια επιγραφή στον ενικό (τίτλος πορτφόλιο αν είναι κενό)"
-
-#: includes/class-yit-cpt-unlimited.php:1134
-msgid "Label in Plural"
-msgstr "Επιγραφή σε Πληθυντικό"
-
-#: includes/class-yit-cpt-unlimited.php:1135
-msgid "Set a label in plural (title of portfolio if empty)"
-msgstr "Ορίστε μια επιγραφή στον πληθυντικό (τίτλος πορτφόλιο αν είναι κενό)"
-
-#: includes/class-yit-cpt-unlimited.php:1140
-msgid "Taxonomy"
-msgstr "Ταξινομία"
-
-#: includes/class-yit-cpt-unlimited.php:1141
-msgid ""
-"If you want to use categories in the portfolio, set a name for taxonomy. "
-"Name should be a slug (must not contain capital letters nor spaces) and must "
-"not be more than 32 characters long (database structure restriction)."
-msgstr ""
-"Αν θέλετε να χρησιμοποιήσετε κατηγορίες στο πορτφόλιο, ορίστε ένα όνομα για "
-"την ταξινομία. Το όνομα πρέπει να είναι slug (δεν πρέπει να περιλαμβάνει "
-"κεφαλαία γράμματα ή κενά) και δεν πρέπει να είναι μεγαλύτερο από 32 "
-"χαρακτήρες (περιορισμός δομής βάσης δεδομένων)."
-
-#: includes/class-yit-cpt-unlimited.php:1146
-msgid "Taxonomy Rewrite"
-msgstr "Επανεγγραφή Ταξινομίας"
-
-#: includes/class-yit-cpt-unlimited.php:1147
-msgid "Set univocal name for each category page URL."
-msgstr "Ορίστε μονοσήμαντο όνομα για κάθε URL σελίδας κατηγορίας."
-
-#: includes/class-yit-cpt-unlimited.php:1152
-msgid "Single layout"
-msgstr "Μονή διάταξη"
-
-#: includes/class-yit-cpt-unlimited.php:1153
-msgid "Layout for single page of this portfolio"
-msgstr "Διάταξη μονής σελίδας του πορτφόλιο"
-
-#: includes/class-yit-cpt-unlimited.php:1196
-msgid "layout settings"
-msgstr "ρυθμίσεις διάταξης"
-
-#: includes/class-yit-cpt-unlimited.php:1286
-#: includes/class-yit-cpt-unlimited.php:1297
-msgid "Quick links"
-msgstr "Γρήγορα λινκ"
-
-#. translators: %s is the name of the post type.
-#: includes/class-yit-cpt-unlimited.php:1593
-msgid "Show frontend of the %s"
-msgstr "Προβολή εμφάνισης του %s"
-
-#: includes/class-yit-cpt-unlimited.php:1602 templates/fields/customtabs.php:34
-#: templates/fields/customtabs.php:76
-msgid "Name"
-msgstr "Όνομα"
-
-#. translators: %s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:1749
-msgid "Add %s from images"
-msgstr "Προσθήκη %s από εικόνες"
-
-#: includes/class-yit-cpt-unlimited.php:1769
-msgid "Upload multiple files"
-msgstr "Ανέβασμα πολλαπλών αρχείων"
-
 #: includes/class-yit-plugin-panel-woocommerce.php:419
 msgid "The changes you have made will be lost if you leave this page."
 msgstr ""
@@ -268,6 +45,10 @@ msgstr ""
 #: includes/class-yit-plugin-panel.php:83
 msgid "Plugin Settings"
 msgstr "Ρυθμίσεις Προσθέτου"
+
+#: includes/class-yit-plugin-panel.php:84
+msgid "Settings"
+msgstr "Ρυθμίσεις"
 
 #: includes/class-yit-plugin-panel.php:450
 #: includes/class-yit-plugin-panel.php:453
@@ -366,19 +147,17 @@ msgstr "Ενεργοποιημένα Πρόσθετα"
 #: includes/class-yit-pointers.php:81
 #, fuzzy
 msgid ""
-"From now on, you can find all plugin options in YITH Plugins menu. Plugin "
-"customization settings will be available as a new entry in YITH Plugins menu."
+"From now on, you can find all plugin options in YITH menu. Plugin "
+"customization settings will be available as a new entry in YITH menu."
 msgstr ""
-"Πλέον μπορείτε να βρείτε όλες τις επιλογές του προσθέτου μέσω του μενού YITH "
-"Plugins.\n"
-"                                     Οι ρυθμίσεις προσαρμογής του προσθέτου "
-"θα είναι διαθέσιμες ως νέα εγγραφή στο μενού YITH Plugins."
+"Πλέον θα μπορείτε να βρείτε όλες τις επιλογές πρόσθετων στο μενού YITH "
+"Plugins. Οι ρυθμίσεις προσαρμογής πρόσθετων θα είναι διαθέσιμη ως νέα "
+"είσοδος στο μενού YITH Plugins."
 
 #. translators: 1. YITH site link; 2. WordPress site link.
 #: includes/class-yit-pointers.php:84 includes/class-yit-pointers.php:100
-#, fuzzy
 msgid "Discover all our plugins available on: %1$s and %2$s"
-msgstr "Ανακαλύψτε όλα τα διαθέσιμά μας πρόσθετα στο:"
+msgstr "Ανακαλύψτε όλα τα διαθέσιμά μας πρόσθετα στο: %1$s και %2$s"
 
 #: includes/class-yit-pointers.php:96
 msgid "Plugins Upgraded"
@@ -387,21 +166,18 @@ msgstr "Αναβαθμισμένα Πρόσθετα"
 #: includes/class-yit-pointers.php:97
 #, fuzzy
 msgid ""
-"From now on, you can find the option panel of YITH plugins in YITH Plugins "
-"menu. Every time one of our plugins is added, a new entry will be added to "
-"this menu. For example, after the update, plugin options (such as for YITH "
+"From now on, you can find the option panel of YITH plugins in YITH menu. "
+"Every time one of our plugins is added, a new entry will be added to this "
+"menu. For example, after the update, plugin options (such as for YITH "
 "WooCommerce Wishlist, YITH WooCommerce Ajax Search, etc.) will be moved from "
-"previous location to YITH Plugins tab."
+"previous location to YITH menu."
 msgstr ""
-"Πλέον μπορείτε να βρείτε όλες τις επιλογές του προσθέτου μέσω του μενού YITH "
-"Plugins.\n"
-"                                    Κάθε φορά που προστίθεται ένα από τα "
-"πρόσθετά μας, μια νέα εγγραφή θα προστίθεται στο μενού.\n"
-"                                    Για παράδειγμα, μετά την αναβάθμιση, οι "
-"επιλογές των προσθέτων (όπως YITH WooCommerce Wishlist, YITH WooCommerce "
-"Ajax Search, etc.)\n"
-"                                    θα μεταφέρονται από την προηγούμενη "
-"τοποθεσία στην καρτέλα YITH Plugins."
+"Πλέον θα μπορείτε να βρείτε το πάνελ επιλογών πρόσθετων YITH στο μενού YITH "
+"Plugins. Κάθε φορά που ένα απο τα πρόσθετά μας προστίθεται, θα προστίθεται "
+"και μια νέα είσοδος σε αυτό το μενού. Για παράδειγμα, μετά την ενημέρωση, οι "
+"επιλογές πρόσθετου (όπως για το YITH WooCommerce Wishlist, YITH WooCommerce "
+"Ajax Search, κλπ.) θα μεταφερθούν από την προηγούμενη τοποθεσία στην καρτέλα "
+"YITH Plugins."
 
 #: includes/class-yith-dashboard.php:35
 msgid "YITH Latest Updates"
@@ -612,6 +388,10 @@ msgstr "Αναζήτηση Άρθρου"
 msgid "Search Product"
 msgstr "Αναζήτηση Προϊόντος"
 
+#: templates/fields/ajax-terms.php:41
+msgid "Search Categories"
+msgstr "Αναζήτηση Κατηγοριών"
+
 #: templates/fields/customtabs.php:17
 msgid "Close all"
 msgstr "Απενεργοποίηση όλων"
@@ -623,6 +403,10 @@ msgstr "Ανάπτυξη όλων"
 #: templates/fields/customtabs.php:25 templates/fields/customtabs.php:68
 msgid "Remove"
 msgstr "Αφαίρεση"
+
+#: templates/fields/customtabs.php:34 templates/fields/customtabs.php:76
+msgid "Name"
+msgstr "Όνομα"
 
 #: templates/fields/customtabs.php:40 templates/fields/customtabs.php:81
 msgid "Value"
@@ -646,7 +430,7 @@ msgstr "Προσαρμογή:"
 
 #: templates/fields/date-format.php:70
 msgid "Preview:"
-msgstr ""
+msgstr "Προεπισκόπηση:"
 
 #: templates/fields/icons.php:63
 msgid "Set Default"
@@ -719,13 +503,12 @@ msgstr "Επαναφορά Προεπιλεγμένων"
 
 #: templates/sysinfo/system-information-panel.php:12
 msgid "PHPInfo"
-msgstr ""
+msgstr "PHPInfo"
 
 #: templates/sysinfo/system-information-panel.php:13
 #: templates/sysinfo/tabs/error-log.php:25
-#, fuzzy
 msgid "Log Files"
-msgstr "Εμφάνιση αρχείων καταγραφής"
+msgstr "Αρχεία Καταγραφής"
 
 #: templates/sysinfo/system-information-panel.php:22
 msgid "YITH System Information"
@@ -741,11 +524,12 @@ msgstr "Αρχείο PHP error_log"
 
 #: templates/sysinfo/tabs/error-log.php:60
 msgid "Download"
-msgstr ""
+msgstr "Κατέβασμα"
 
 #: templates/sysinfo/tabs/error-log.php:72
 msgid "The file size exceeds 8 megabytes so it must be downloaded"
 msgstr ""
+"Το μέγεθος αρχείου υπερβαίνει τα 8 megabytes οπότε θα πρέπει να το κατεβάσετε"
 
 #. translators: %s file name.
 #: templates/sysinfo/tabs/error-log.php:96
@@ -753,18 +537,20 @@ msgid ""
 "No Log file available. Enable the WordPress debug by adding this in the %s "
 "file of your installation"
 msgstr ""
+"Δεν υπάρχει διαθέσιμο αρχείο Καταγραφής. Ενεργοποιήστε την αποσφαλμάτωση "
+"WordPress προσθέτοντάς το στο αρχείο %s της εγκατάστασής σας"
 
 #: templates/sysinfo/tabs/error-log.php:105
 msgid "Copied!"
-msgstr ""
+msgstr "Έγινε αντιγραφή!"
 
 #: templates/sysinfo/tabs/error-log.php:105
 msgid "Copy Code"
-msgstr ""
+msgstr "Αντιγραφή Κώδικα"
 
 #: templates/sysinfo/tabs/main.php:15
 msgid "Site Info"
-msgstr ""
+msgstr "Στοιχεία Ιστότοπου"
 
 #: templates/sysinfo/tabs/main.php:20
 msgid "Site URL"
@@ -788,12 +574,11 @@ msgstr "Όχι"
 
 #: templates/sysinfo/tabs/main.php:45
 msgid "External object cache"
-msgstr ""
+msgstr "Cache εξωτερικού αντικειμένου"
 
 #: templates/sysinfo/tabs/main.php:54
-#, fuzzy
 msgid "Plugins Requirements"
-msgstr "Ρυθμίσεις Προσθέτου"
+msgstr "Προϋποθέσεις Πρόσθετων"
 
 #: yit-plugin.php:187
 msgid "License"
@@ -802,17 +587,6 @@ msgstr "Άδεια χρήσης προϊόντος"
 #. Author of the plugin/theme
 msgid "YITH"
 msgstr "YITH"
-
-#. translators: %s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:676
-msgctxt "taxonomy general name"
-msgid "%s Categories"
-msgstr "Κατηγορίες %s"
-
-#: includes/class-yit-cpt-unlimited.php:677
-msgctxt "taxonomy singular name"
-msgid "Category"
-msgstr "Κατηγορία"
 
 #: includes/class-yith-dashboard.php:96
 msgctxt "Plugin FW"
@@ -898,18 +672,18 @@ msgctxt "Position in the \"Dimensions\" field"
 msgid "Left"
 msgstr "Αριστερά"
 
-#: templates/fields/dimensions.php:88
+#: templates/fields/dimensions.php:94
 msgctxt "Tooltip in the \"Dimensions\" field"
 msgid "Link values together"
 msgstr "Συνδέστε αξίες"
 
 #: templates/fields/onoff.php:28
-msgctxt "YES/NO button: use MAX 3 characters!"
+msgctxt "YES/NO button: use MAX 4 characters!"
 msgid "YES"
 msgstr "ΝΑΙ"
 
 #: templates/fields/onoff.php:29
-msgctxt "YES/NO button: use MAX 3 characters!"
+msgctxt "YES/NO button: use MAX 4 characters!"
 msgid "NO"
 msgstr "ΟΧΙ"
 
@@ -937,24 +711,3 @@ msgstr "Premium έκδοση"
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Ρυθμίσεις"
-
-#~ msgid "Show full PHPInfo"
-#~ msgstr "Πλήρης εμφάνιση PHPInfo"
-
-#~ msgid "Back to top"
-#~ msgstr "Πίσω στην κορυφή"
-
-#~ msgid "Back to System panel"
-#~ msgstr "Πίσω στο πάνελ Συστήματος"
-
-#~ msgid "(Default: <i %s></i> )"
-#~ msgstr "(Προεπιλεγμένο: <i %s></i> )"
-
-#~ msgid "(Default: %s <img src=\"%s\"/>)"
-#~ msgstr "(Προεπιλεγμένο: %s <img src=\"%s\"/>)"
-
-#~ msgid "Image preview"
-#~ msgstr "Προεπισκόπηση εικόνας"
-
-#~ msgid "and"
-#~ msgstr "και"

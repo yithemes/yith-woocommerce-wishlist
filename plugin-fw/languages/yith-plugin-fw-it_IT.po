@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-01-12 12:19:55+00:00\n"
-"PO-Revision-Date: 2020-09-24 14:56:37+0000\n"
+"POT-Creation-Date: 2021-02-15 07:49:38+00:00\n"
+"PO-Revision-Date: 2021-02-05 21:18:46+0000\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,229 +37,6 @@ msgstr "Seleziona il colore"
 msgid "Color value"
 msgstr "Valore del colore"
 
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#. translators: %s is the singular name of the post type.
-#. translators: %s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:486
-#: includes/class-yit-cpt-unlimited.php:619
-#: includes/class-yit-cpt-unlimited.php:768
-#: includes/class-yit-cpt-unlimited.php:1755
-msgid "Add %s"
-msgstr "Aggiungi %s"
-
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:488
-#: includes/class-yit-cpt-unlimited.php:621
-msgid "Add New %s"
-msgstr "Aggiungi nuovo %s"
-
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#. translators: %s is the post title.
-#. translators: %s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:490
-#: includes/class-yit-cpt-unlimited.php:623
-#: includes/class-yit-cpt-unlimited.php:1350
-#: includes/class-yit-cpt-unlimited.php:1401
-msgid "Edit %s"
-msgstr "Modifica %s"
-
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:492
-#: includes/class-yit-cpt-unlimited.php:625
-msgid "New %s"
-msgstr "Nuovo %s"
-
-#. translators: %s is the plural name of the post type.
-#. translators: $s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:494
-#: includes/class-yit-cpt-unlimited.php:627
-msgid "All %s"
-msgstr "Tutti %s"
-
-#. translators: %s is the singular name of the post type.
-#. translators: $s is the singular name of the post type.
-#. translators: %s is the plural label of the post type.
-#. translators: %s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:496
-#: includes/class-yit-cpt-unlimited.php:629
-#: includes/class-yit-cpt-unlimited.php:1323
-#: includes/class-yit-cpt-unlimited.php:1406
-msgid "View %s"
-msgstr "Visualizza %s"
-
-#. translators: %s is the plural name of the post type.
-#. translators: $s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:498
-#: includes/class-yit-cpt-unlimited.php:631
-msgid "Search %s"
-msgstr "Cerca %s"
-
-#. translators: %s is the plural name of the post type.
-#. translators: $s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:500
-#: includes/class-yit-cpt-unlimited.php:633
-msgid "No %s found"
-msgstr "Nessun %s trovato"
-
-#. translators: %s is the plural name of the post type.
-#. translators: $s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:502
-#: includes/class-yit-cpt-unlimited.php:635
-msgid "No %s found in Trash"
-msgstr "Nessun %s trovato nel cestino"
-
-#: includes/class-yit-cpt-unlimited.php:678 templates/fields/ajax-terms.php:41
-msgid "Search Categories"
-msgstr "Cerca categorie"
-
-#: includes/class-yit-cpt-unlimited.php:679
-msgid "All Categories"
-msgstr "Tutte le categorie"
-
-#: includes/class-yit-cpt-unlimited.php:680
-msgid "Parent Category"
-msgstr "Categoria genitore"
-
-#: includes/class-yit-cpt-unlimited.php:681
-msgid "Parent Category:"
-msgstr "Categoria genitore:"
-
-#: includes/class-yit-cpt-unlimited.php:682
-msgid "Edit Category"
-msgstr "Modifica categoria"
-
-#: includes/class-yit-cpt-unlimited.php:683
-msgid "Update Category"
-msgstr "Aggiorna categoria"
-
-#: includes/class-yit-cpt-unlimited.php:684
-msgid "Add New Category"
-msgstr "Aggiungi nuova categoria"
-
-#: includes/class-yit-cpt-unlimited.php:685
-msgid "New Category Name"
-msgstr "Nuovo nome categoria"
-
-#: includes/class-yit-cpt-unlimited.php:686
-msgid "Category"
-msgstr "Categoria"
-
-#: includes/class-yit-cpt-unlimited.php:778
-msgid "Categories"
-msgstr "Categorie"
-
-#. translators: %s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:1098
-msgid "%s Settings"
-msgstr "Impostazioni %s"
-
-#: includes/class-yit-cpt-unlimited.php:1106
-#: includes/class-yit-cpt-unlimited.php:1260
-#: includes/class-yit-cpt-unlimited.php:1266
-#: includes/class-yit-plugin-panel.php:84
-msgid "Settings"
-msgstr "Impostazioni"
-
-#: includes/class-yit-cpt-unlimited.php:1111
-msgid "Type"
-msgstr "Tipologia"
-
-#. translators: %s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:1114
-msgid "Layout for this %s"
-msgstr "Layout per questo %s"
-
-#: includes/class-yit-cpt-unlimited.php:1122
-msgid "Rewrite"
-msgstr "Riscrivi"
-
-#: includes/class-yit-cpt-unlimited.php:1123
-msgid ""
-"Univocal identification name in the URL for each product (slug from post if "
-"empty)"
-msgstr ""
-"Nome identificativo univoco nell'URL per singolo prodotto (usa slug dal post "
-"se vuoto)"
-
-#: includes/class-yit-cpt-unlimited.php:1128
-msgid "Label in Singular"
-msgstr "Etichetta singolare"
-
-#: includes/class-yit-cpt-unlimited.php:1129
-msgid "Set a label in singular (title of portfolio if empty)"
-msgstr "Imposta un'etichetta singolare (titolo del portfolio se vuoto)"
-
-#: includes/class-yit-cpt-unlimited.php:1134
-msgid "Label in Plural"
-msgstr "Etichetta plurale"
-
-#: includes/class-yit-cpt-unlimited.php:1135
-msgid "Set a label in plural (title of portfolio if empty)"
-msgstr "Imposta un'etichetta plurale (titolo del portfolio se vuoto)"
-
-#: includes/class-yit-cpt-unlimited.php:1140
-msgid "Taxonomy"
-msgstr "Tassonomia"
-
-#: includes/class-yit-cpt-unlimited.php:1141
-msgid ""
-"If you want to use categories in the portfolio, set a name for taxonomy. "
-"Name should be a slug (must not contain capital letters nor spaces) and must "
-"not be more than 32 characters long (database structure restriction)."
-msgstr ""
-"Se vuoi aggiungere delle categorie nel portfolio, imposta un nome per la "
-"tassonomia. Il nome dovrà essere in forma di slug (non deve contenere "
-"caratteri maiuscoli né spazi) e non più lungo di 32 caratteri (restrizione "
-"di database)."
-
-#: includes/class-yit-cpt-unlimited.php:1146
-msgid "Taxonomy Rewrite"
-msgstr "Riscrivi tassonomia"
-
-#: includes/class-yit-cpt-unlimited.php:1147
-msgid "Set univocal name for each category page URL."
-msgstr "Imposta un nome univoco per l'URL della pagina di ciascuna categoria."
-
-#: includes/class-yit-cpt-unlimited.php:1152
-msgid "Single layout"
-msgstr "Layout singolo"
-
-#: includes/class-yit-cpt-unlimited.php:1153
-msgid "Layout for single page of this portfolio"
-msgstr "Layout per pagina singola per questo portfolio"
-
-#: includes/class-yit-cpt-unlimited.php:1196
-msgid "layout settings"
-msgstr "impostazioni di layout"
-
-#: includes/class-yit-cpt-unlimited.php:1286
-#: includes/class-yit-cpt-unlimited.php:1297
-msgid "Quick links"
-msgstr "Link rapidi"
-
-#. translators: %s is the name of the post type.
-#: includes/class-yit-cpt-unlimited.php:1593
-msgid "Show frontend of the %s"
-msgstr "Mostra front end di %s"
-
-#: includes/class-yit-cpt-unlimited.php:1602 templates/fields/customtabs.php:34
-#: templates/fields/customtabs.php:76
-msgid "Name"
-msgstr "Nome"
-
-#. translators: %s is the plural name of the post type.
-#: includes/class-yit-cpt-unlimited.php:1749
-msgid "Add %s from images"
-msgstr "Aggiungi %s dalla immagini"
-
-#: includes/class-yit-cpt-unlimited.php:1769
-msgid "Upload multiple files"
-msgstr "Carica file multipli"
-
 #: includes/class-yit-plugin-panel-woocommerce.php:419
 msgid "The changes you have made will be lost if you leave this page."
 msgstr "Perderai tutti i cambiamenti effettuati se lasci questa pagina."
@@ -267,6 +44,10 @@ msgstr "Perderai tutti i cambiamenti effettuati se lasci questa pagina."
 #: includes/class-yit-plugin-panel.php:83
 msgid "Plugin Settings"
 msgstr "Impostazioni plugin"
+
+#: includes/class-yit-plugin-panel.php:84
+msgid "Settings"
+msgstr "Impostazioni"
 
 #: includes/class-yit-plugin-panel.php:450
 #: includes/class-yit-plugin-panel.php:453
@@ -362,42 +143,28 @@ msgid "Plugins Activated"
 msgstr "Plugin attivati"
 
 #: includes/class-yit-pointers.php:81
-#, fuzzy
 msgid ""
-"From now on, you can find all plugin options in YITH Plugins menu. Plugin "
-"customization settings will be available as a new entry in YITH Plugins menu."
+"From now on, you can find all plugin options in YITH menu. Plugin "
+"customization settings will be available as a new entry in YITH menu."
 msgstr ""
-"Da ora in poi, puoi trovare tutte le opzioni dei tuoi plugin nel menu YITH "
-"Plugins.\n"
-"Troverai le impostazioni di personalizzazione sotto una nuova voce nel menu "
-"YITH Plugins."
 
 #. translators: 1. YITH site link; 2. WordPress site link.
 #: includes/class-yit-pointers.php:84 includes/class-yit-pointers.php:100
-#, fuzzy
 msgid "Discover all our plugins available on: %1$s and %2$s"
-msgstr "Scopri tutti i plugin disponibili su:"
+msgstr "Scopri tutti i nostri plugin disponibili su: %1$s and %2$s"
 
 #: includes/class-yit-pointers.php:96
 msgid "Plugins Upgraded"
 msgstr "Plugin aggiornati"
 
 #: includes/class-yit-pointers.php:97
-#, fuzzy
 msgid ""
-"From now on, you can find the option panel of YITH plugins in YITH Plugins "
-"menu. Every time one of our plugins is added, a new entry will be added to "
-"this menu. For example, after the update, plugin options (such as for YITH "
+"From now on, you can find the option panel of YITH plugins in YITH menu. "
+"Every time one of our plugins is added, a new entry will be added to this "
+"menu. For example, after the update, plugin options (such as for YITH "
 "WooCommerce Wishlist, YITH WooCommerce Ajax Search, etc.) will be moved from "
-"previous location to YITH Plugins tab."
+"previous location to YITH menu."
 msgstr ""
-"Da ora in poi, troverai tutte le opzioni dei tuoi plugin nel menu YITH "
-"Plugins.\n"
-"Ogni volta che aggiornerai i nostri plugin, troverai una nuova voce in "
-"questo menu.\n"
-"Per esempio, dopo l'aggiornamento, le opzioni del plugin (come per esempio "
-"quelle di YITH WooCommerce Wishlist, YITH WooCommerce Ajax Search etc.)\n"
-"saranno trasferite nella scheda YITH Plugins."
 
 #: includes/class-yith-dashboard.php:35
 msgid "YITH Latest Updates"
@@ -607,6 +374,10 @@ msgstr "Cerca articoli"
 msgid "Search Product"
 msgstr "Cerca un prodotto"
 
+#: templates/fields/ajax-terms.php:41
+msgid "Search Categories"
+msgstr "Cerca categorie"
+
 #: templates/fields/customtabs.php:17
 msgid "Close all"
 msgstr "Chiudi tutti"
@@ -618,6 +389,10 @@ msgstr "Espandi tutti"
 #: templates/fields/customtabs.php:25 templates/fields/customtabs.php:68
 msgid "Remove"
 msgstr "Rimuovi"
+
+#: templates/fields/customtabs.php:34 templates/fields/customtabs.php:76
+msgid "Name"
+msgstr "Nome"
 
 #: templates/fields/customtabs.php:40 templates/fields/customtabs.php:81
 msgid "Value"
@@ -641,7 +416,7 @@ msgstr "Personalizzato:"
 
 #: templates/fields/date-format.php:70
 msgid "Preview:"
-msgstr ""
+msgstr "Anteprima"
 
 #: templates/fields/icons.php:63
 msgid "Set Default"
@@ -714,13 +489,12 @@ msgstr "Ripristina impostazioni iniziali"
 
 #: templates/sysinfo/system-information-panel.php:12
 msgid "PHPInfo"
-msgstr ""
+msgstr "PHPInfo"
 
 #: templates/sysinfo/system-information-panel.php:13
 #: templates/sysinfo/tabs/error-log.php:25
-#, fuzzy
 msgid "Log Files"
-msgstr "Mostra i log"
+msgstr "File log"
 
 #: templates/sysinfo/system-information-panel.php:22
 msgid "YITH System Information"
@@ -736,11 +510,13 @@ msgstr "PHP error_log file"
 
 #: templates/sysinfo/tabs/error-log.php:60
 msgid "Download"
-msgstr ""
+msgstr "Scarica"
 
 #: templates/sysinfo/tabs/error-log.php:72
 msgid "The file size exceeds 8 megabytes so it must be downloaded"
 msgstr ""
+"La dimensione del file supera gli 8 megabyte ed è quindi necessario "
+"scaricarlo"
 
 #. translators: %s file name.
 #: templates/sysinfo/tabs/error-log.php:96
@@ -748,18 +524,20 @@ msgid ""
 "No Log file available. Enable the WordPress debug by adding this in the %s "
 "file of your installation"
 msgstr ""
+"Nessun file log disponibile. Abilita il debug WordPress aggiungendo questo "
+"nel file %s della tua installazione"
 
 #: templates/sysinfo/tabs/error-log.php:105
 msgid "Copied!"
-msgstr ""
+msgstr "Copiato!"
 
 #: templates/sysinfo/tabs/error-log.php:105
 msgid "Copy Code"
-msgstr ""
+msgstr "Copia codice"
 
 #: templates/sysinfo/tabs/main.php:15
 msgid "Site Info"
-msgstr ""
+msgstr "Info sito"
 
 #: templates/sysinfo/tabs/main.php:20
 msgid "Site URL"
@@ -783,12 +561,11 @@ msgstr "No"
 
 #: templates/sysinfo/tabs/main.php:45
 msgid "External object cache"
-msgstr ""
+msgstr "External object cache"
 
 #: templates/sysinfo/tabs/main.php:54
-#, fuzzy
 msgid "Plugins Requirements"
-msgstr "Impostazioni plugin"
+msgstr "Requisiti plugin"
 
 #: yit-plugin.php:187
 msgid "License"
@@ -797,17 +574,6 @@ msgstr "Chiave di licenza"
 #. Author of the plugin/theme
 msgid "YITH"
 msgstr "YITH"
-
-#. translators: %s is the singular name of the post type.
-#: includes/class-yit-cpt-unlimited.php:676
-msgctxt "taxonomy general name"
-msgid "%s Categories"
-msgstr "%s Categorie"
-
-#: includes/class-yit-cpt-unlimited.php:677
-msgctxt "taxonomy singular name"
-msgid "Category"
-msgstr "Categoria"
 
 #: includes/class-yith-dashboard.php:96
 msgctxt "Plugin FW"
@@ -892,18 +658,18 @@ msgctxt "Position in the \"Dimensions\" field"
 msgid "Left"
 msgstr "A sinistra"
 
-#: templates/fields/dimensions.php:88
+#: templates/fields/dimensions.php:94
 msgctxt "Tooltip in the \"Dimensions\" field"
 msgid "Link values together"
 msgstr "Collega i valori"
 
 #: templates/fields/onoff.php:28
-msgctxt "YES/NO button: use MAX 3 characters!"
+msgctxt "YES/NO button: use MAX 4 characters!"
 msgid "YES"
 msgstr "SÌ"
 
 #: templates/fields/onoff.php:29
-msgctxt "YES/NO button: use MAX 3 characters!"
+msgctxt "YES/NO button: use MAX 4 characters!"
 msgid "NO"
 msgstr "NO"
 
@@ -931,24 +697,3 @@ msgstr "Versione premium"
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Impostazioni"
-
-#~ msgid "Show full PHPInfo"
-#~ msgstr "Mostra tutto il contenuto di PHPInfo"
-
-#~ msgid "Back to top"
-#~ msgstr "Torna su"
-
-#~ msgid "Back to System panel"
-#~ msgstr "Torna al pannello di Sistema"
-
-#~ msgid "(Default: <i %s></i> )"
-#~ msgstr "(Default: <i %s></i> )"
-
-#~ msgid "(Default: %s <img src=\"%s\"/>)"
-#~ msgstr "(Default: %s <img src=\"%s\"/>)"
-
-#~ msgid "Image preview"
-#~ msgstr "Anteprima immagine"
-
-#~ msgid "and"
-#~ msgstr "e"

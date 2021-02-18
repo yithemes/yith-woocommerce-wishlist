@@ -203,7 +203,8 @@
 					} );
 
 					$image_gallery_ids.val( attachment_ids );
-				} );
+          $image_gallery_ids.trigger( 'change' );
+        } );
 
 				image_gallery_frame.open();
 

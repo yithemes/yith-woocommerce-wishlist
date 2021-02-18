@@ -67,11 +67,11 @@ if ( $allow_linked && 'yes' === $linked ) {
 			}
 
 			if ( false !== $d_max ) {
-				$d_attributes = " max='{$d_max}' . $d_attributes";
+				$d_attributes = " max={$d_max} " . $d_attributes;
 			}
 
 			if ( false !== $d_min ) {
-				$d_attributes = " min='{$d_min}' " . $d_attributes;
+				$d_attributes = " min={$d_min} " . $d_attributes;
 			}
 
 			?>
@@ -79,7 +79,13 @@ if ( $allow_linked && 'yes' === $linked ) {
 				<label for="<?php echo esc_attr( $d_id ); ?>" class="yith-plugin-fw-dimensions__dimension__label"><?php echo esc_html( $d_label ); ?></label>
 				<input id="<?php echo esc_attr( $d_id ); ?>" class="yith-plugin-fw-dimensions__dimension__number"
 						type="number" name="<?php echo esc_attr( $d_name ); ?>" value="<?php echo esc_attr( $d_value ); ?>"
-					<?php echo esc_html( $d_attributes ); ?>
+					<?php if ( false !== $d_max ) : ?>
+						max="<?php echo esc_attr( $d_max ); ?>"
+					<?php endif; ?>
+					<?php if ( false !== $d_min ) : ?>
+						min="<?php echo esc_attr( $d_min ); ?>"
+					<?php endif; ?>
+					<?php echo $d_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				>
 			</div>
 		<?php endforeach ?>
@@ -103,6 +109,11 @@ if ( $allow_linked && 'yes' === $linked ) {
 			if ( $unit_value === $key ) {
 				$classes[] = 'yith-plugin-fw-dimensions__unit--selected';
 			}
+
+			if ( count( $units ) < 2 ) {
+				$classes[] = 'yith-plugin-fw-dimensions__unit--unique';
+			}
+
 			$classes = implode( ' ', $classes );
 			?>
 			<span class="<?php echo esc_attr( $classes ); ?>" data-value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></span>

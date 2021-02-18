@@ -140,6 +140,8 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 */
 		public function init() {
 			$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'unminified/' : '';
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 			$this->available_tabs = apply_filters(
 				'yith_wcwl_available_admin_tabs',
 				array(
@@ -153,7 +155,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.min.css', array(), '4.7.0' );
 			wp_register_style( 'yith-wcwl-material-icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), '3.0.1' );
 			wp_register_style( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/css/admin.css', array( 'yith-wcwl-font-awesome' ), YITH_WCWL_Frontend()->version );
-			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/' . $prefix . 'admin/yith-wcwl.js', array( 'jquery', 'wc-backbone-modal', 'jquery-blockui' ), YITH_WCWL_Frontend()->version );
+			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/' . $prefix . 'admin/yith-wcwl' . $suffix . '.js', array( 'jquery', 'wc-backbone-modal', 'jquery-blockui' ), YITH_WCWL_Frontend()->version );
 		}
 
 		/**

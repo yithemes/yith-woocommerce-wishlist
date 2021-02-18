@@ -125,7 +125,7 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 			if ( ! empty( $args['wishlist_id'] ) ) {
 				$wishlist = yith_wcwl_get_wishlist( $args['wishlist_id'] );
 
-				if ( $wishlist && $wishlist->is_current_user_owner() ) {
+				if ( apply_filters( 'yith_wcwl_remove_after_add_to_cart', $wishlist && $wishlist->is_current_user_owner(), $wishlist ) ) {
 					try {
 						YITH_WCWL()->remove( $args );
 					} catch ( Exception $e ) {
