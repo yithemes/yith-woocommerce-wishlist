@@ -1330,7 +1330,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			?>
 			<?php if ( $this->is_free() && isset( $this->settings['plugin_slug'] ) ) : ?>
 				<?php
-				$rate_link = apply_filters( 'yith_plugin_fw_rate_url', 'https://wordpress.org/support/plugin/' . $this->settings['plugin_slug'] . '/reviews/?rate=5#new-post' );
+				$rate_link = apply_filters( 'yith_plugin_fw_rate_url', 'https://wordpress.org/support/plugin/' . $this->settings['plugin_slug'] . '/reviews/#new-post' );
 				?>
 				<h1 class="notice-container"></h1>
 				<div class="yith-plugin-fw-banner">

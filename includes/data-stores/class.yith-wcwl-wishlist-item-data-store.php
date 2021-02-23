@@ -46,7 +46,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				'position' => '%d',
 				'original_price' => '%f',
 				'original_currency' => '%s',
-				'on_sale' => '%s'
+				'on_sale' => '%d',
 			);
 			$values = array(
 				apply_filters( 'yith_wcwl_adding_to_wishlist_product_id', $product_id ),

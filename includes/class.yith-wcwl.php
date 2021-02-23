@@ -233,7 +233,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				throw new YITH_WCWL_Exception( apply_filters( 'yith_wcwl_unable_to_remove_product_message', __( 'Error. Unable to remove the product from the wishlist.', 'yith-woocommerce-wishlist' ) ), 0 );
 			}
 
-			$wishlist = YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_id );
+			$wishlist = apply_filters( 'yith_wcwl_get_wishlist_on_remove', YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_id ), $atts );
 
 			if ( apply_filters( 'yith_wcwl_allow_remove_after_add_to_cart', ! $wishlist instanceof YITH_WCWL_Wishlist || ! $wishlist->current_user_can( 'remove_from_wishlist' ), $wishlist ) ) {
 				throw new YITH_WCWL_Exception( apply_filters( 'yith_wcwl_unable_to_remove_product_message', __( 'Error. Unable to remove the product from the wishlist.', 'yith-woocommerce-wishlist' ) ), 0 );

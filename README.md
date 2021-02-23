@@ -151,14 +151,14 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-### 3.0.19 - Released on 18 February 2021
+### 3.0.20 - Released on 22 February 2021
 
-* New: support for WooCommerce 5.0
+* New: support for WordPress 5.7
+* New: support for WooCommerce 5.1
 * Update: YITH plugin framework
-* Tweak: added transient for hidden products
-* Dev: fixed issue when unchecking all products in wishlist page
-* Dev: added yith_wcwl_mobile_media_query filter
-* Dev: added new filters yith_wcwl_remove_after_add_to_cart and yith_wcwl_allow_remove_after_add_to_cart
+* Fix: wrong data type for item insert query (thanks to jonatanmenendez)
+* Dev: added new yith_wcwl_get_wishlist_on_remove filter
+
 ## Support
 
 This repository should be considered as a development tool.
