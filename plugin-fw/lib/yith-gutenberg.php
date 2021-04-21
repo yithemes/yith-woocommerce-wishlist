@@ -8,4 +8,4 @@
 /**
  * Require the correct file
  */
-require_once __DIR__ . '/../includes/class-yith-gutenberg.php';
+require_once __DIR__ . '/../includes/builders/gutenberg/class-yith-gutenberg.php';

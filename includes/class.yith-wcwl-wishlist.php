@@ -65,13 +65,12 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Constructor
 		 *
-		 * @param $wishlist int|string|\YITH_WCWL_Wishlist Wishlist identifier
-		 * @return \YITH_WCWL_Wishlist
+		 * @param int|string|\YITH_WCWL_Wishlist $wishlist Wishlist identifier.
 		 *
-		 * @throws Exception When not able to load Data Store class
+		 * @throws Exception When not able to load Data Store class.
 		 */
 		public function __construct( $wishlist = 0 ) {
-			// set default values
+			// set default values.
 			$this->data = array(
 				'privacy'            => apply_filters( 'yith_wcwl_default_wishlist_privacy', 0 ),
 				'user_id'            => 0,
@@ -81,7 +80,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 				'token'              => '',
 				'is_default'         => 0,
 				'date_added'         => '',
-				'expiration'         => ''
+				'expiration'         => '',
 			);
 
 			parent::__construct();
@@ -144,22 +143,22 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Check if current user is owner of this wishlist (works both for authenticated users & guests)
 		 *
-		 * @param $current_user string|int|bool Optional user identifier, in the form of a User ID or session id; false for default
+		 * @param string|int|bool $current_user Optional user identifier, in the form of a User ID or session id; false for default.
 		 * @return bool
 		 */
 		public function is_current_user_owner( $current_user = false ) {
 			$user_id = $this->get_user_id();
 			$session_id = $this->get_session_id();
 
-			if( $current_user && ( $current_user == $user_id || $current_user == $session_id ) ){
+			if ( $current_user && ( $current_user == $user_id || $current_user == $session_id ) ) {
 				return true;
 			}
 
-			if( $this->has_owner() && is_user_logged_in() && get_current_user_id() == $user_id ){
+			if ( $this->has_owner() && is_user_logged_in() && get_current_user_id() == $user_id ) {
 				return true;
 			}
 
-			if( $this->is_session_based() && YITH_WCWL_Session()->get_session_id() == $session_id ){
+			if ( $this->is_session_based() && YITH_WCWL_Session()->maybe_get_session_id() == $session_id ) {
 				return true;
 			}
 
@@ -180,28 +179,28 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * * update_quantity
 		 * * download_pdf
 		 *
-		 * @param $capability string Capability to check; default "view"
-		 * @param $current_user string|int|bool Optional user identifier, in the form of a User ID or session id; false for default
+		 * @param string          $capability Capability to check; default "view".
+		 * @param string|int|bool $current_user Optional user identifier, in the form of a User ID or session id; false for default.
 		 * @return bool
 		 */
 		public function current_user_can( $capability = 'view', $current_user = false ) {
-			// admin can do anything by default
-			if( is_user_logged_in() && current_user_can( 'manage_woocommerce' ) && apply_filters( 'yith_wcwl_admin_can', true, $capability, $current_user, $this ) ){
+			// admin can do anything by default.
+			if ( is_user_logged_in() && current_user_can( 'manage_woocommerce' ) && apply_filters( 'yith_wcwl_admin_can', true, $capability, $current_user, $this ) ) {
 				return true;
 			}
 
-			// for other users, perform checks over capability required
-			switch( $capability ){
-				case 'view';
+			// for other users, perform checks over capability required.
+			switch ( $capability ) {
+				case 'view':
 					$can = $this->is_current_user_owner( $current_user );
 
-					if( ! $can && $this->has_privacy( array( 'public', 'shared' ) ) ){
+					if ( ! $can && $this->has_privacy( array( 'public', 'shared' ) ) ) {
 						$can = true;
 					}
-				break;
+					break;
 				default:
 					$can = $this->is_current_user_owner( $current_user );
-				break;
+					break;
 			}
 
 			return apply_filters( 'yith_wcwl_current_user_can', $can, $capability, $current_user, $this );
@@ -221,7 +220,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get privacy visibility
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return int Wishlist visibility (0 => public, 1 => shared, 2 => private)
 		 */
 		public function get_privacy( $context = 'view' ) {
@@ -231,7 +230,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get formatted privacy name
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return string Formatted privacy value
 		 */
 		public function get_formatted_privacy( $context = 'view' ) {
@@ -245,25 +244,23 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * Checks if current wishlist has a specific privacy value
 		 * Method will accept both numeric privacy values and privacy labels
 		 *
-		 * @param $privacy int|string|array Privacy value (0|1|2) or label (public|shared|private), or array of acceptable values
+		 * @param int|string|array $privacy Privacy value (0|1|2) or label (public|shared|private), or array of acceptable values.
 		 * @return bool Whether wishlist matched privacy test
 		 */
-		public function has_privacy ( $privacy ) {
+		public function has_privacy( $privacy ) {
 			$wishlist_privacy = $this->get_privacy( 'edit' );
 			$has_privacy = false;
 
-			if( is_array( $privacy ) && ! empty( $privacy ) ){
-				foreach( $privacy as $test_value ){
-					// return true if wishlist has any of the privacy value submitted
-					if( $this->has_privacy( $test_value ) ){
+			if ( is_array( $privacy ) && ! empty( $privacy ) ) {
+				foreach ( $privacy as $test_value ) {
+					// return true if wishlist has any of the privacy value submitted.
+					if ( $this->has_privacy( $test_value ) ) {
 						return true;
 					}
 				}
-			}
-			elseif( is_string( $privacy ) ){
+			} elseif ( is_string( $privacy ) ) {
 				$has_privacy = yith_wcwl_get_privacy_value( $privacy ) == $wishlist_privacy;
-			}
-			else{
+			} else {
 				$has_privacy = $privacy == $wishlist_privacy;
 			}
 
@@ -273,7 +270,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get owner id
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return int Wishlist owner id
 		 */
 		public function get_user_id( $context = 'view' ) {
@@ -283,7 +280,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get session id
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return int Wishlist owner id
 		 */
 		public function get_session_id( $context = 'view' ) {
@@ -293,7 +290,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get wishlist name
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return string Wishlist name
 		 */
 		public function get_name( $context = 'view' ) {
@@ -303,13 +300,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get wishlist formatted name
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return string Formatted name
 		 */
 		public function get_formatted_name( $context = 'view' ) {
 			$name = $this->get_name( $context );
 
-			if( $this->is_default() && ! $name ){
+			if ( $this->is_default() && ! $name ) {
 				$name = apply_filters( 'yith_wcwl_default_wishlist_formatted_title', get_option( 'yith_wcwl_wishlist_title' ) );
 			}
 
@@ -319,7 +316,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get wishlist slug
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return string Wishlist slug
 		 */
 		public function get_slug( $context = 'view' ) {
@@ -329,7 +326,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Check if wishlist is default one for the user
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return bool Whether wishlist is default one or not
 		 */
 		public function get_is_default( $context = 'view' ) {
@@ -339,13 +336,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get wishlist date added
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return \WC_DateTime|string Wishlist date of creation
 		 */
 		public function get_date_added( $context = 'view' ) {
 			$date_added = $this->get_prop( 'date_added', $context );
 
-			if( $date_added && 'view' == $context ){
+			if ( $date_added && 'view' == $context ) {
 				return $date_added->date_i18n( 'Y-m-d H:i:s' );
 			}
 
@@ -355,13 +352,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get formatted wishlist date added
 		 *
-		 * @param $format string Date format (if empty, WP date format will be applied)
+		 * @param string $format Date format (if empty, WP date format will be applied).
 		 * @return string Wishlist date of creation
 		 */
 		public function get_date_added_formatted( $format = '' ) {
 			$date_added = $this->get_date_added( 'edit' );
 
-			if( $date_added ){
+			if ( $date_added ) {
 				$format = $format ? $format : get_option( 'date_format' );
 				return $date_added->date_i18n( $format );
 			}
@@ -372,13 +369,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get wishlist date added
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return \WC_DateTime|string Wishlist date of creation
 		 */
 		public function get_expiration( $context = 'view' ) {
 			$expiration = $this->get_prop( 'expiration', $context );
 
-			if( $expiration && 'view' == $context ){
+			if ( $expiration && 'view' == $context ) {
 				return $expiration->date_i18n( 'Y-m-d H:i:s' );
 			}
 
@@ -388,13 +385,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Get formatted wishlist expiration added
 		 *
-		 * @param $format string Date format (if empty, WP date format will be applied)
+		 * @param string $format Date format (if empty, WP date format will be applied).
 		 * @return string Wishlist date of expiration
 		 */
 		public function get_expiration_formatted( $format = '' ) {
 			$expiration = $this->get_expiration( 'edit' );
 
-			if( $expiration ){
+			if ( $expiration ) {
 				$format = $format ? $format : get_option( 'date_format' );
 				return $expiration->date_i18n( $format );
 			}
@@ -410,7 +407,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		public function get_user_email() {
 			$user_id = $this->get_user_id();
 
-			if( ! $user_id ){
+			if ( ! $user_id ) {
 				return false;
 			}
 
@@ -426,7 +423,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		public function get_user_first_name() {
 			$user_id = $this->get_user_id();
 
-			if( ! $user_id ){
+			if ( ! $user_id ) {
 				return false;
 			}
 
@@ -442,7 +439,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		public function get_user_last_name() {
 			$user_id = $this->get_user_id();
 
-			if( ! $user_id ){
+			if ( ! $user_id ) {
 				return false;
 			}
 
@@ -458,7 +455,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		public function get_user_formatted_name() {
 			$user_id = $this->get_user_id();
 
-			if( ! $user_id ){
+			if ( ! $user_id ) {
 				return false;
 			}
 
@@ -469,7 +466,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 
 			$formatted_name = $email;
 
-			if( ! empty( $first_name ) || ! empty( $last_name ) ){
+			if ( ! empty( $first_name ) || ! empty( $last_name ) ) {
 				$formatted_name .= " <{$first_name} {$last_name}>";
 			}
 
@@ -508,7 +505,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set wishlist token
 		 *
-		 * @param $token string Wishlist unique token
+		 * @param string $token Wishlist unique token.
 		 */
 		public function set_token( $token ) {
 			$this->token = (string) $token;
@@ -517,7 +514,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set privacy visibility
 		 *
-		 * @param $privacy int Wishlist visibility (0 => public, 1 => shared, 2 => private)
+		 * @param int $privacy Wishlist visibility (0 => public, 1 => shared, 2 => private).
 		 */
 		public function set_privacy( $privacy ) {
 			$this->set_prop( 'privacy', $privacy );
@@ -526,7 +523,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set owner id
 		 *
-		 * @param $user_id int Wishlist owner id
+		 * @param int $user_id Wishlist owner id.
 		 */
 		public function set_user_id( $user_id ) {
 			$this->set_prop( 'user_id', $user_id );
@@ -535,7 +532,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set session id
 		 *
-		 * @param $user_id int Wishlist owner id
+		 * @param int $session_id Wishlist session.
 		 */
 		public function set_session_id( $session_id ) {
 			$this->set_prop( 'session_id', $session_id );
@@ -544,7 +541,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set wishlist name
 		 *
-		 * @param $name string Wishlist name
+		 * @param string $name Wishlist name.
 		 */
 		public function set_name( $name ) {
 			$this->set_prop( 'name', $name );
@@ -553,7 +550,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set wishlist slug
 		 *
-		 * @param $slug string Wishlist slug
+		 * @param string $slug Wishlist slug.
 		 */
 		public function set_slug( $slug ) {
 			$this->set_prop( 'slug', substr( $slug, 0, 200 ) );
@@ -562,7 +559,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set if wishlist is default one for the user
 		 *
-		 * @param $is_default bool Whether wishlist is default one or not
+		 * @param bool $is_default Whether wishlist is default one or not.
 		 */
 		public function set_is_default( $is_default ) {
 			$this->set_prop( 'is_default', $is_default );
@@ -571,7 +568,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set wishlist date added
 		 *
-		 * @param int|string Wishlist date of creation (timestamp or date)
+		 * @param int|string $date_added Wishlist date of creation (timestamp or date).
 		 */
 		public function set_date_added( $date_added ) {
 			$this->set_date_prop( 'date_added', $date_added );
@@ -580,7 +577,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Set wishlist date added
 		 *
-		 * @param int|string Wishlist date of creation (timestamp or date)
+		 * @param int|string $expiration Wishlist date of creation (timestamp or date).
 		 */
 		public function set_expiration( $expiration ) {
 			$this->set_date_prop( 'expiration', $expiration );
@@ -599,7 +596,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		protected function set_prop( $prop, $value ) {
 			parent::set_prop( $prop, $value );
 
-			if( 'name' == $prop ){
+			if ( 'name' == $prop ) {
 				$this->set_slug( sanitize_title_with_dashes( $this->get_name() ) );
 			}
 		}
@@ -643,19 +640,19 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Return an array of items/products within this wishlist.
 		 *
-		 * @param $limit int When differs from 0, method will return at most this number of items
-		 * @param $offset int When @see $limit is set, this will be used as offset to retrieve items
+		 * @param int $limit  When differs from 0, method will return at most this number of items.
+		 * @param int $offset When @see $limit is set, this will be used as offset to retrieve items.
 		 *
 		 * @return YITH_WCWL_Wishlist_Item[]
 		 */
 		public function get_items( $limit = 0, $offset = 0 ) {
-			if( ! $this->items ) {
+			if ( ! $this->items ) {
 				$this->items = array_filter( $this->data_store->read_items( $this ) );
 			}
 
 			$items = apply_filters( 'yith_wcwl_wishlist_get_items', $this->items, $this );
 
-			if( $limit ){
+			if ( $limit ) {
 				$items = array_slice( $items, $offset, $limit );
 			}
 
@@ -686,7 +683,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Check whether a product is already in list
 		 *
-		 * @param $product_id int
+		 * @param int $product_id Product id.
 		 * @return bool Whether product is already in list
 		 */
 		public function has_product( $product_id ) {
@@ -698,13 +695,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Retrieves a product from the list (if set)
 		 *
-		 * @param $product_id int Product ID
+		 * @param int $product_id Product ID.
 		 * @return \YITH_WCWL_Wishlist_Item|bool Item on success, false on failure
 		 */
 		public function get_product( $product_id ) {
 			$product_id = yith_wcwl_object_id( $product_id, 'product', true, 'default' );
 
-			if( ! $this->has_product( $product_id ) ){
+			if ( ! $this->has_product( $product_id ) ) {
 				return false;
 			}
 
@@ -715,7 +712,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Add a product to the list
 		 *
-		 * @param $product_id int Product id
+		 * @param int $product_id Product id.
 		 *
 		 * @return \YITH_WCWL_Wishlist_Item|bool Item on success; false on failure
 		 */
@@ -724,7 +721,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 
 			$product = wc_get_product( $product_id );
 
-			if( ! $product || $this->has_product( $product_id ) ){
+			if ( ! $product || $this->has_product( $product_id ) ) {
 				return false;
 			}
 
@@ -737,8 +734,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 				$this->items[ $product_id ] = $item;
 
 				return $item;
-			}
-			catch( Exception $e ){
+			} catch ( Exception $e ) {
 				return false;
 			}
 		}
@@ -746,13 +742,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Remove product from the list
 		 *
-		 * @param $product_id int Product id
+		 * @param int $product_id Product id.
 		 * @return bool Status of the operation
 		 */
 		public function remove_product( $product_id ) {
 			$product_id = yith_wcwl_object_id( $product_id, 'product', true, 'default' );
 
-			if( ! $this->has_product( $product_id ) ){
+			if ( ! $this->has_product( $product_id ) ) {
 				return false;
 			}
 
@@ -765,7 +761,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Check whether an item is already in list (by item id)
 		 *
-		 * @param $item_id int Item id
+		 * @param int $item_id Item id.
 		 * @return bool Whether item is already in list
 		 */
 		public function has_item( $item_id ) {
@@ -775,11 +771,11 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Retrieve a specific item of the list, by item id
 		 *
-		 * @param $item_id int Item id
+		 * @param int $item_id Item id.
 		 * @return \YITH_WCWL_Wishlist_Item|bool Item to retrieve, or false on error
 		 */
 		public function get_item( $item_id ) {
-			if( ! $this->has_item( $item_id ) ){
+			if ( ! $this->has_item( $item_id ) ) {
 				return false;
 			}
 
@@ -790,11 +786,11 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Add new item to the list
 		 *
-		 * @param $item \YITH_WCWL_Wishlist_Item
+		 * @param \YITH_WCWL_Wishlist_Item $item Wishlist item.
 		 * @return \YITH_WCWL_Wishlist_Item|bool Item on success; false on failure
 		 */
 		public function add_item( $item ) {
-			if( ! $item->get_product_id() || $this->has_item( $item->get_id() ) ){
+			if ( ! $item->get_product_id() || $this->has_item( $item->get_id() ) ) {
 				return false;
 			}
 
@@ -808,11 +804,11 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Remove item from the list
 		 *
-		 * @param $item_id int Item id
+		 * @param int $item_id Item id.
 		 * @return bool status of the operation
 		 */
 		public function remove_item( $item_id ) {
-			if( ! $this->has_item( $item_id ) ){
+			if ( ! $this->has_item( $item_id ) ) {
 				return false;
 			}
 
@@ -897,25 +893,25 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Map legacy indexes to new properties, for ArrayAccess
 		 *
-		 * @param $offset string Offset to search
+		 * @param string $offset Offset to search.
 		 * @return string Mapped offset
 		 */
 		protected function map_legacy_offsets( $offset ) {
 			$legacy_offset = $offset;
 
-			if( false !== strpos( $offset, 'wishlist_' ) ){
+			if ( false !== strpos( $offset, 'wishlist_' ) ) {
 				$offset = str_replace( 'wishlist_', '', $offset );
 			}
 
-			if( 'dateadded' === $offset ){
+			if ( 'dateadded' === $offset ) {
 				$offset = 'date_added';
 			}
 
-			if( 'first_name' === $offset ){
+			if ( 'first_name' === $offset ) {
 				$offset = 'user_first_name';
 			}
 
-			if( 'last_name' === $offset ){
+			if ( 'last_name' === $offset ) {
 				$offset = 'user_last_name';
 			}
 

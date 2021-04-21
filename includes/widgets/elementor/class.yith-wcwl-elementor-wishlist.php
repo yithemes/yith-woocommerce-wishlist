@@ -11,7 +11,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if( ! class_exists( 'YITH_WCWL_Elementor_Wishlist' ) ) {
+if ( ! class_exists( 'YITH_WCWL_Elementor_Wishlist' ) ) {
 	class YITH_WCWL_Elementor_Wishlist extends \Elementor\Widget_Base {
 
 		/**
@@ -63,7 +63,7 @@ if( ! class_exists( 'YITH_WCWL_Elementor_Wishlist' ) ) {
 		 * @access public
 		 */
 		public function get_categories() {
-			return [ 'general', 'yith' ];
+			return array( 'general', 'yith' );
 		}
 
 		/**
@@ -78,53 +78,53 @@ if( ! class_exists( 'YITH_WCWL_Elementor_Wishlist' ) ) {
 
 			$this->start_controls_section(
 				'product_section',
-				[
+				array(
 					'label' => _x( 'Wishlist', 'Elementor section title', 'yith-woocommerce-wishlist' ),
 					'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
-				]
+				)
 			);
 
 			$this->add_control(
 				'wishlist_id',
-				[
+				array(
 					'label'       => _x( 'Wishlist ID', 'Elementor control label', 'yith-woocommerce-wishlist' ),
 					'type'        => \Elementor\Controls_Manager::TEXT,
 					'input_type'  => 'text',
 					'placeholder' => 'K6EOWXB888ZD',
-				]
+				)
 			);
 
 			$this->end_controls_section();
 
 			$this->start_controls_section(
 				'labels_section',
-				[
+				array(
 					'label' => _x( 'Pagination', 'Elementor section title', 'yith-woocommerce-wishlist' ),
 					'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
-				]
+				)
 			);
 
 			$this->add_control(
 				'pagination',
-				[
+				array(
 					'label'   => _x( 'Paginate items', 'Elementor control label', 'yith-woocommerce-wishlist' ),
 					'type'    => \Elementor\Controls_Manager::SELECT,
-					'options' => [
+					'options' => array(
 						'yes' => __( 'Paginate', 'yith-woocommerce-wishlist' ),
 						'no'  => __( 'Do not paginate', 'yith-woocommerce-wishlist' ),
-					],
+					),
 					'default' => 'no',
-				]
+				)
 			);
 
 			$this->add_control(
 				'per_page',
-				[
+				array(
 					'label'       => _x( 'Items per page', 'yith-woocommerce-wishlist' ),
 					'type'        => \Elementor\Controls_Manager::NUMBER,
 					'input_type'  => 'number',
 					'placeholder' => 5,
-				]
+				)
 			);
 
 			$this->end_controls_section();

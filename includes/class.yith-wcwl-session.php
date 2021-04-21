@@ -41,6 +41,13 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 *
 		 * @var string cookie name
 		 */
+		protected $_cookie_name;
+
+		/**
+		 * Cookie content.
+		 *
+		 * @var array cookie content.
+		 */
 		protected $_cookie;
 
 		/**
@@ -68,6 +75,10 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * Construct session class
 		 */
 		public function __construct() {
+			// prefetch session cookie.
+			add_action( 'init', array( $this, 'get_session_cookie' ), 5 );
+
+			// add action to finalize session.
 			add_action( 'init', array( $this, 'finalize_session' ) );
 		}
 
@@ -80,10 +91,6 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			$cookie = $this->get_session_cookie();
 
 			if ( is_array( $cookie ) && ! empty( $cookie['session_id'] ) && ! empty( $cookie['session_expiration'] ) ) {
-				$this->_session_id         = $cookie['session_id'];
-				$this->_session_expiration = $cookie['session_expiration'];
-				$this->_session_expiring   = $cookie['session_expiring'];
-
 				if ( is_user_logged_in() ) {
 					// If the user logs in, forget session.
 					/**
@@ -127,6 +134,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			yith_setcookie( $this->get_session_cookie_name(), $cookie_value, $this->_session_expiration, $this->use_secure_cookie(), true );
 
 			// cookie has been set.
+			$this->_cookie = $cookie_value;
 			$this->_has_cookie = true;
 		}
 
@@ -138,6 +146,10 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @return bool|array
 		 */
 		public function get_session_cookie() {
+			if ( ! empty( $this->_cookie ) ) {
+				return $this->_cookie;
+			}
+
 			$cookie_value = yith_getcookie( $this->get_session_cookie_name() ); // @codingStandardsIgnoreLine.
 
 			if ( empty( $cookie_value ) || ! is_array( $cookie_value ) ) {
@@ -155,6 +167,13 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			if ( empty( $cookie_value['cookie_hash'] ) || ! hash_equals( $hash, $cookie_value['cookie_hash'] ) ) {
 				return false;
 			}
+
+			$this->_cookie = $cookie_value;
+			$this->_has_cookie = true;
+
+			$this->_session_id         = $cookie_value['session_id'];
+			$this->_session_expiration = $cookie_value['session_expiration'];
+			$this->_session_expiring   = $cookie_value['session_expiring'];
 
 			return $cookie_value;
 		}
@@ -175,11 +194,11 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @since 3.0.3
 		 */
 		public function get_session_cookie_name() {
-			if ( empty( $this->_cookie ) ) {
-				$this->_cookie = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
+			if ( empty( $this->_cookie_name ) ) {
+				$this->_cookie_name = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
 			}
 
-			return $this->_cookie;
+			return $this->_cookie_name;
 		}
 
 		/**
@@ -225,6 +244,19 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			} elseif ( ! is_user_logged_in() ) {
 				$this->init_session_cookie();
 
+				return $this->_session_id;
+			}
+
+			return false;
+		}
+
+		/**
+		 * Returns current session id, if any; false otherwise (won't create a session)
+		 *
+		 * @return string|bool Current customer id, or false, if none
+		 */
+		public function maybe_get_session_id() {
+			if ( $this->has_session() ) {
 				return $this->_session_id;
 			}
 
@@ -312,6 +344,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			yith_destroycookie( $this->get_session_cookie_name() );
 
 			$this->_session_id = $this->generate_session_id();
+			$this->_cookie = null;
 		}
 
 		/**

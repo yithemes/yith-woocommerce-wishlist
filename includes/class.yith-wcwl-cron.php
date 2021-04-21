@@ -48,12 +48,12 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 		 * @return array Array of registered crons ans callbacks
 		 */
 		public function get_crons() {
-			if( empty( $this->_crons ) ){
+			if ( empty( $this->_crons ) ) {
 				$this->_crons = array(
 					'yith_wcwl_delete_expired_wishlists' => array(
 						'schedule' => 'daily',
-						'callback' => array( $this, 'delete_expired_wishlists' )
-					)
+						'callback' => array( $this, 'delete_expired_wishlists' ),
+					),
 				);
 			}
 
@@ -68,12 +68,12 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 		public function schedule() {
 			$crons = $this->get_crons();
 
-			if( ! empty( $crons ) ){
-				foreach( $crons as $hook => $data ){
+			if ( ! empty( $crons ) ) {
+				foreach ( $crons as $hook => $data ) {
 
 					add_action( $hook, $data['callback'] );
 
-					if( ! wp_next_scheduled( $hook ) ){
+					if ( ! wp_next_scheduled( $hook ) ) {
 						wp_schedule_event( time() + MINUTE_IN_SECONDS, $data['schedule'], $hook );
 					}
 				}
@@ -86,10 +86,9 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 		 * @return void
 		 */
 		public function delete_expired_wishlists() {
-			try{
+			try {
 				WC_Data_Store::load( 'wishlist' )->delete_expired();
-			}
-			catch( Exception $e ){
+			} catch ( Exception $e ) {
 				return;
 			}
 		}
@@ -100,8 +99,8 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 		 * @return \YITH_WCWL_Cron
 		 * @since 3.0.0
 		 */
-		public static function get_instance(){
-			if( is_null( self::$instance ) ){
+		public static function get_instance() {
+			if ( is_null( self::$instance ) ) {
 				self::$instance = new self();
 			}
 
@@ -116,6 +115,6 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
  * @return \YITH_WCWL_Cron
  * @since 3.0.0
  */
-function YITH_WCWL_Cron(){
+function YITH_WCWL_Cron() {
 	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Cron_Premium::get_instance() : YITH_WCWL_Cron::get_instance();
 }

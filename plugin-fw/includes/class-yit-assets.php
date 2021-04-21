@@ -44,7 +44,19 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 		 */
 		private function __construct() {
 			$this->version = yith_plugin_fw_get_version();
+			add_action( 'admin_enqueue_scripts', array( $this, 'register_common_scripts' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'register_common_scripts' ) );
+			add_action( 'elementor/editor/before_enqueue_styles', array( $this, 'register_common_scripts' ) );
+
 			add_action( 'admin_enqueue_scripts', array( $this, 'register_styles_and_scripts' ) );
+		}
+
+		/**
+		 * Register common scripts
+		 */
+		public function register_common_scripts() {
+			wp_register_style( 'yith-plugin-fw-icon-font', YIT_CORE_PLUGIN_URL . '/assets/css/yith-icon.css', array(), $this->version );
+			wp_register_style( 'yith-plugin-fw-elementor', YIT_CORE_PLUGIN_URL . '/assets/css/elementor.css', array(), $this->version );
 		}
 
 		/**
@@ -72,7 +84,7 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 			wp_register_style( 'colorbox', YIT_CORE_PLUGIN_URL . '/assets/css/colorbox.css', array(), $this->version );
 			wp_register_style( 'yit-upgrade-to-pro', YIT_CORE_PLUGIN_URL . '/assets/css/yit-upgrade-to-pro.css', array( 'colorbox' ), $this->version );
 			wp_register_style( 'yit-plugin-metaboxes', YIT_CORE_PLUGIN_URL . '/assets/css/metaboxes.css', array(), $this->version );
-			wp_register_style( 'yith-plugin-fw-fields', YIT_CORE_PLUGIN_URL . '/assets/css/yith-fields.css', false, $this->version );
+			wp_register_style( 'yith-plugin-fw-fields', YIT_CORE_PLUGIN_URL . '/assets/css/yith-fields.css', array( 'yith-plugin-fw-icon-font' ), $this->version );
 
 			wp_register_style( 'raleway-font', '//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900', array(), $this->version );
 

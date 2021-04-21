@@ -658,7 +658,7 @@ jQuery( function( $ ){
         $('a[data-rel^="prettyPhoto[add_to_wishlist_"]')
             .add('a[data-rel="prettyPhoto[ask_an_estimate]"]')
             .add('a[data-rel="prettyPhoto[create_wishlist]"]')
-            .unbind( 'click' )
+            .off( 'click' )
             .prettyPhoto( ppParams );
 
         $('a[data-rel="prettyPhoto[move_to_another_wishlist]"]').on( 'click', function(){
@@ -693,9 +693,8 @@ jQuery( function( $ ){
                 for ( var i in mutationsList ) {
                     var mutation = mutationsList[ i ];
                     if ( mutation.type === 'childList' ) {
-                      typeof mutation.addedNodes !== 'undefined' && mutation.addedNodes.forEach( callbackAdd);
-
-                      typeof mutation.removedNodes !== 'undefined' && mutation.removedNodes.forEach( callbackRemove );
+                      typeof mutation.addedNodes !== 'undefined' && typeof mutation.addedNodes.forEach === 'function' && mutation.addedNodes.forEach( callbackAdd );
+                      typeof mutation.removedNodes !== 'undefined' && typeof mutation.addedNodes.forEach === 'function' && mutation.removedNodes.forEach( callbackRemove );
                     }
                 }
             } );
@@ -1029,18 +1028,21 @@ jQuery( function( $ ){
      * @since 3.0.0
      */
     function init_wishlist_details_popup() {
+
         $('.wishlist_table').filter('.images_grid').not('.enhanced')
             .on( 'click', '[data-row-id] .product-thumbnail a', function(ev){
-                var t = $(this),
-                    item = t.closest('[data-row-id]'),
-                    items = item.siblings( '[data-row-id]' ),
-                    popup = item.find('.item-details');
+                if ( ! yith_wcwl_l10n.disable_popup_grid_view ){
+                    var t = $(this),
+                        item = t.closest('[data-row-id]'),
+                        items = item.siblings( '[data-row-id]' ),
+                        popup = item.find('.item-details');
 
-                ev.preventDefault();
+                    ev.preventDefault();
 
-                if( popup.length ){
-                    items.removeClass('show');
-                    item.toggleClass( 'show' );
+                    if( popup.length ){
+                        items.removeClass('show');
+                        item.toggleClass( 'show' );
+                    }
                 }
             } )
             .on( 'click', '[data-row-id] a.close', function (ev){

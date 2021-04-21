@@ -391,7 +391,6 @@ if ( ! function_exists( 'yith_wcwl_get_hidden_products' ) ) {
 			set_transient( 'yith_wcwl_hidden_products', $hidden_products, 30 * DAY_IN_SECONDS );
 		}
 
-
 		return apply_filters( 'yith_wcwl_hidden_products', $hidden_products );
 	}
 }
@@ -656,10 +655,10 @@ if ( ! function_exists( 'yith_wcwl_object_id' ) ) {
 
 		// process special value for $lang.
 		if ( 'default' === $lang ) {
-			if ( defined('ICL_SITEPRESS_VERSION') ) { // wpml default language.
+			if ( defined( 'ICL_SITEPRESS_VERSION' ) ) { // wpml default language.
 				global $sitepress;
 				$lang = $sitepress->get_default_language();
-			} elseif( function_exists( 'pll_default_language' ) ) { // polylang default language.
+			} elseif ( function_exists( 'pll_default_language' ) ) { // polylang default language.
 				$lang = pll_default_language( 'locale' );
 			} else { // cannot determine default language.
 				$lang = null;

@@ -9,39 +9,46 @@
 ( function ( $ ) {
 
 	$( '.metaboxes-tab' ).each( function () {
-		$( '.tabs-panel', this ).hide();
+		var theMetaBox = $( this ),
+			panels     = theMetaBox.find( '.tabs-panel' )
 
-		var active_tab = wpCookies.get( 'active_metabox_tab' );
-		if ( active_tab == null ) {
-			active_tab = $( 'ul.metaboxes-tabs li:first-child a', this ).attr( 'href' );
+		panels.hide();
+
+		// TODO: check if someone is directly using it, otherwise it could be removed because: 1. it doesn't take into account the possibility to have more than one meta-box in the same page; 2. it's not set anywhere.
+		var activeTab = wpCookies.get( 'active_metabox_tab' );
+		if ( activeTab == null ) {
+			activeTab = theMetaBox.find( 'ul.metaboxes-tabs li:first-child a' ).attr( 'href' );
 		} else {
-			active_tab = '#' + active_tab;
+			activeTab = '#' + activeTab;
 		}
 
-		$( active_tab ).show();
+		theMetaBox.find( activeTab ).show();
 
-		$( '.metaboxes-tabs a', this ).click( function ( e ) {
-			if ( $( this ).parent().hasClass( 'tabs' ) ) {
-				e.preventDefault();
-				return;
+		theMetaBox.find( '.metaboxes-tabs a' ).on( 'click', function ( e ) {
+			e.preventDefault();
+
+			var wrapper  = $( this ).parent(),
+				isActive = wrapper.hasClass( 'tabs' );
+
+			if ( !isActive ) {
+				var tabID = $( this ).attr( 'href' );
+
+				wrapper.addClass( 'tabs' ).siblings( 'li' ).removeClass( 'tabs' );
+
+				panels.hide();
+				$( tabID ).show();
 			}
-
-			var t = $( this ).attr( 'href' );
-			$( this ).parent().addClass( 'tabs' ).siblings( 'li' ).removeClass( 'tabs' );
-			$( this ).closest( '.metaboxes-tab' ).find( '.tabs-panel' ).hide();
-			$( t ).show();
-
-			return false;
 		} );
 	} );
 
-	var act_page_option = $( '#_active_page_options-container' ).parent().html();
-	$( '#_active_page_options-container' ).parent().remove();
-	$( act_page_option ).insertAfter( '#yit-post-setting .handlediv' );
-	$( act_page_option ).insertAfter( '#yit-page-setting .handlediv' );
+	// TODO: check if someone is directly using it, otherwise it could be removed, since it's not used by the fw.
+	var actPageOptionContainer = $( '#_active_page_options-container' ),
+		actPageOption          = actPageOptionContainer.parent().html();
+	actPageOptionContainer.parent().remove();
+	$( actPageOption ).insertAfter( '#yit-post-setting .handlediv' );
+	$( actPageOption ).insertAfter( '#yit-page-setting .handlediv' );
 
-
-	$( '#_active_page_options-container' ).on( 'click', function () {
+	actPageOptionContainer.on( 'click', function () {
 		if ( $( '#_active_page_options' ).is( ":checked" ) ) {
 			$( '#yit-page-setting .inside .metaboxes-tab, #yit-post-setting .inside .metaboxes-tab' ).css( {
 																											   'opacity'       : 1,
@@ -53,7 +60,7 @@
 																											   'pointer-events': 'none'
 																										   } );
 		}
-	} ).click();
+	} ).trigger( 'click' );
 
 
 	//dependencies handler
@@ -62,17 +69,17 @@
 		$( '.metaboxes-tab [data-dep-target]:not(.yith-plugin-fw-metabox-deps-initialized)' ).each( function () {
 			var t = $( this );
 
-            var field = '#' + t.data( 'dep-target' ),
-                dep   = '#' + t.data( 'dep-id' ),
-                value = t.data( 'dep-value' ),
-                type  = t.data( 'dep-type' );
+			var field = '#' + t.data( 'dep-target' ),
+				dep   = '#' + t.data( 'dep-id' ),
+				value = t.data( 'dep-value' ),
+				type  = t.data( 'dep-type' );
 
 
 			dependencies_handler( field, dep, value.toString(), type );
 
-            $( dep ).on( 'change', function () {
-                dependencies_handler( field, dep, value.toString(), type );
-            } ).change();
+			$( dep ).on( 'change', function () {
+				dependencies_handler( field, dep, value.toString(), type );
+			} ).change();
 
 			t.addClass( 'yith-plugin-fw-metabox-deps-initialized' );
 		} );

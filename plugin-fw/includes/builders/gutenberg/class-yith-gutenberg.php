@@ -64,6 +64,7 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 		 * YITH_Gutenberg constructor.
 		 */
 		private function __construct() {
+			add_action( 'init', array( $this, 'init' ) );
 			add_action( 'init', array( $this, 'register_blocks' ), 30 );
 			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 			add_action( 'wp_ajax_yith_plugin_fw_gutenberg_do_shortcode', array( $this, 'do_shortcode' ) );
@@ -71,23 +72,38 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 		}
 
 		/**
+		 * Initialization
+		 */
+		public function init() {
+
+		}
+
+		/**
 		 * Enqueue scripts for gutenberg
 		 */
 		public function enqueue_block_editor_assets() {
-			$ajax_url = function_exists( 'WC' ) ? add_query_arg( 'wc-ajax', 'yith_plugin_fw_gutenberg_do_shortcode', trailingslashit( site_url() ) ) : admin_url( 'admin-ajax.php' );
-			$suffix   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			$deps     = apply_filters(
-				'yith_plugin_fw_gutenberg_script_deps',
-				array(
-					'wp-blocks',
-					'wp-element',
-					'yith-js-md5',
-				)
+			$ajax_url   = function_exists( 'WC' ) ? add_query_arg( 'wc-ajax', 'yith_plugin_fw_gutenberg_do_shortcode', trailingslashit( site_url() ) ) : admin_url( 'admin-ajax.php' );
+			$gutenberg  = array( 'ajaxurl' => $ajax_url );
+			$asset_file = include YIT_CORE_PLUGIN_PATH . '/dist/gutenberg/index.asset.php';
+
+			$gutenberg_assets_url = YIT_CORE_PLUGIN_URL . '/dist/gutenberg';
+
+			wp_register_script(
+				'yith-gutenberg',
+				$gutenberg_assets_url . '/index.js',
+				$asset_file['dependencies'],
+				$asset_file['version'],
+				true
 			);
-			wp_register_script( 'yith-js-md5', YIT_CORE_PLUGIN_URL . '/assets/js/javascript-md5/md5.min.js', array(), '2.10.0', true );
-			wp_enqueue_script( 'yith-gutenberg', YIT_CORE_PLUGIN_URL . '/assets/js/yith-gutenberg' . $suffix . '.js', $deps, yith_plugin_fw_get_version(), true );
-			wp_localize_script( 'yith-gutenberg', 'yith_gutenberg', $this->blocks_args );
-			wp_localize_script( 'yith-gutenberg', 'yith_gutenberg_ajax', array( 'ajaxurl' => $ajax_url ) );
+
+			wp_localize_script( 'yith-gutenberg', 'yith_gutenberg_ajax', $gutenberg ); // Deprecated! Kept for backward compatibility.
+			wp_localize_script( 'yith-gutenberg', 'yith_gutenberg', $this->blocks_args ); // Deprecated! Kept for backward compatibility.
+
+			wp_localize_script( 'yith-gutenberg', 'yithGutenberg', $gutenberg );
+			wp_localize_script( 'yith-gutenberg', 'yithGutenbergBlocks', $this->blocks_args );
+
+			wp_enqueue_script( 'yith-gutenberg' );
+			wp_enqueue_style( 'yith-gutenberg', $gutenberg_assets_url . '/style-index.css', array(), yith_plugin_fw_get_version() );
 		}
 
 		/**
@@ -224,12 +240,10 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 					$args[ $block ]['category'] = $this->get_default_blocks_category_slug();
 				}
 
+				$args[ $block ]['do_shortcode'] = isset( $block_args['do_shortcode'] ) ? ! ! $block_args['do_shortcode'] : true;
+
 				if ( isset( $block_args['attributes'] ) ) {
 					foreach ( $block_args['attributes'] as $attr_name => $attributes ) {
-						// Set the do_shortcode args.
-						if ( ! empty( $attributes['do_shortcode'] ) ) {
-							$args[ $block ]['attributes'][ $attr_name ] = true;
-						}
 
 						if ( ! empty( $attributes['options'] ) && is_array( $attributes['options'] ) ) {
 							$options = array();
@@ -249,8 +263,8 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 
 						// Special Requirements for Block Type.
 						if ( ! empty( $attributes['type'] ) ) {
-							$args[ $block ]['attributes'][ $attr_name ]['blocktype'] = $attributes['type'];
-							$args[ $block ]['attributes'][ $attr_name ]['type']      = 'string';
+							$args[ $block ]['attributes'][ $attr_name ]['controlType'] = $attributes['type'];
+							$args[ $block ]['attributes'][ $attr_name ]['type']        = 'string';
 
 							switch ( $attributes['type'] ) {
 								case 'select':
@@ -293,20 +307,23 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 		 * Get a do_shortcode in ajax call to show block preview
 		 **/
 		public function do_shortcode() {
-			// phpcs:disable WordPress.Security.NonceVerification.Missing
+			// phpcs:disable WordPress.Security.NonceVerification
 			$current_action = current_action();
-			$shortcode      = ! empty( $_POST['shortcode'] ) ? wp_unslash( $_POST['shortcode'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$shortcode      = ! empty( $_REQUEST['shortcode'] ) ? wp_unslash( $_REQUEST['shortcode'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 			if ( ! apply_filters( 'yith_plugin_fw_gutenberg_skip_shortcode_sanitize', false ) ) {
 				$shortcode = sanitize_text_field( stripslashes( $shortcode ) );
 			}
 
+			ob_start();
+
 			do_action( 'yith_plugin_fw_gutenberg_before_do_shortcode', $shortcode, $current_action );
 			echo do_shortcode( apply_filters( 'yith_plugin_fw_gutenberg_shortcode', $shortcode, $current_action ) );
 			do_action( 'yith_plugin_fw_gutenberg_after_do_shortcode', $shortcode, $current_action );
 
+			$html = ob_get_clean();
 			if ( is_ajax() ) {
-				die();
+				wp_send_json( array( 'html' => $html ) );
 			}
 
 			// phpcs:enable

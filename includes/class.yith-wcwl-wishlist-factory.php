@@ -21,8 +21,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Retrieve a specific wishlist from ID or token
 		 *
-		 * @param $wishlist_id string|int|bool Wishlist id or token or false, when you want to retrieve default
-		 * @param $context string Context; when on edit context, and no wishlist matches selection, default wishlist will be created and returned
+		 * @param string|int|bool $wishlist_id Wishlist id or token or false, when you want to retrieve default.
+		 * @param string          $context Context; when on edit context, and no wishlist matches selection, default wishlist will be created and returned.
 		 * @return \YITH_WCWL_Wishlist|bool Wishlist object or false on failure
 		 */
 		public static function get_wishlist( $wishlist_id = false, $context = 'view' ) {
@@ -41,7 +41,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Query database to search for wishlists that matches specific parameters
 		 *
-		 * @param $args mixed Array of valid arguments<br/>
+		 * @param array $args Array of valid arguments<br/>
 		 *              [<br/>
 		 *              'id'                  // Wishlist id to search, if any<br/>
 		 *              'user_id'             // User owner<br/>
@@ -56,7 +56,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		 *              'limit'               // Pagination param: maximum number of elements in the set. 0 to retrieve all elements<br/>
 		 *              'offset'              // Pagination param: offset for the current set. 0 to start from the first item<br/>
 		 *              'show_empty'          // Whether to show empty lists os not<br/>
-		 *              ]
+		 *              ].
 		 *
 		 * @return \YITH_WCWL_Wishlist[]|bool A list of matching wishlists or false on failure
 		 */
@@ -66,7 +66,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 			try {
 				$results = WC_Data_Store::load( 'wishlist' )->query( $args );
 				return apply_filters( 'yith_wcwl_wishlist_query', $results, $args );
-			} catch( Exception $e ){
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return false;
 			}
@@ -75,7 +75,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Query database to count wishlists that matches specific parameters
 		 *
-		 * @param $args array Same parameters allowed for {@see get_wishlists}
+		 * @param array $args Same parameters allowed for {@see get_wishlists}.
 		 * @return int Count
 		 */
 		public static function get_wishlists_count( $args = array() ) {
@@ -84,7 +84,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 			try {
 				$result = WC_Data_Store::load( 'wishlist' )->count( $args );
 				return apply_filters( 'yith_wcwl_wishlist_count_query', $result, $args );
-			} catch( Exception $e ){
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return 0;
 			}
@@ -94,12 +94,12 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		 * Search user ids whose wishlists match passed parameters
 		 * NOTE: this will only retrieve wishlists for a logged in user, while guests wishlist will be ignored
 		 *
-		 * @param $args mixed Array of valid arguments<br/>
+		 * @param array $args Array of valid arguments<br/>
 		 * [<br/>
 		 *     'search' // String to match against first name / last name / user login or user email of wishlist owner<br/>
 		 *     'limit'  // Pagination param: number of items to show in one page. 0 to show all items<br/>
 		 *     'offset' // Pagination param: offset for the current set. 0 to start from the first item<br/>
-		 * ]
+		 * ].
 		 * @return int[]|bool Array of user ids, or false on failure
 		 */
 		public static function get_wishlist_users( $args = array() ) {
@@ -108,7 +108,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 			try {
 				$results = WC_Data_Store::load( 'wishlist' )->search_users( $args );
 				return apply_filters( 'yith_wcwl_wishlist_user_query', $results, $args );
-			} catch( Exception $e ){
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return false;
 			}
@@ -117,50 +117,52 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Retrieve current wishlist, basing on query string parameters, user or session
 		 *
-		 * @param $args array Array of arguments<br/>
+		 * @param array $args Array of arguments<br/>
 		 *              [<br/>
 		 *              'action_params' // query string parameters
 		 *              'user_id'       // user we need to retrieve wishlist for
 		 *              'wishlist_id'   // id of the wishlist we need to retrieve
-		 *              ]
+		 *              ].
 		 * @return YITH_WCWL_Wishlist|bool
 		 */
 		public static function get_current_wishlist( $args = array() ) {
 			$defaults = array(
 				'action_params' => get_query_var( YITH_WCWL()->wishlist_param, false ),
-				'user_id' => isset( $_GET['user_id'] ) ? $_GET['user_id'] : false,
-				'wishlist_id' => false
+				'user_id' => isset( $_GET['user_id'] ) ? intval( $_GET['user_id'] ) : false,
+				'wishlist_id' => false,
 			);
 
 			/**
+			 * Extracted variables:
+			 *
 			 * @var $action_params
 			 * @var $user_id
 			 * @var $wishlist_id
 			 */
 			$args = wp_parse_args( $args, $defaults );
-			extract( $args );
+			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract
 
-			// retrieve options from query string
+			// retrieve options from query string.
 			$action_params = explode( '/', apply_filters( 'yith_wcwl_current_wishlist_view_params', $action_params ) );
 
 			$action = ( isset( $action_params[0] ) ) ? $action_params[0] : 'view';
 			$value = ( isset( $action_params[1] ) ) ? $action_params[1] : '';
 
-			if( ! empty( $wishlist_id ) ){
+			if ( ! empty( $wishlist_id ) ) {
 				return self::get_wishlist( $wishlist_id );
 			}
 
-			if( ! empty( $user_id ) ){
+			if ( ! empty( $user_id ) ) {
 				return self::get_default_wishlist( $user_id );
 			}
 
-			if(
+			if (
 				empty( $action ) ||
 				! in_array( $action, YITH_WCWL()->get_available_views() ) ||
 				in_array( $action, array( 'view', 'user' ) ) ||
 				( in_array( $action, array( 'manage', 'create' ) ) && ! YITH_WCWL()->is_multi_wishlist_enabled() )
-			){
-				switch( $action ){
+			) {
+				switch ( $action ) {
 					case 'user':
 						$user_id = $value;
 						$user_id = ( ! $user_id ) ? get_query_var( $user_id, false ) : $user_id;
@@ -196,7 +198,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Retrieve default wishlist for current user (or current session)
 		 *
-		 * @param $id string|int|bool Customer or session id; false if you want to use current customer or session
+		 * @param string|int|bool $id Customer or session id; false if you want to use current customer or session.
 		 * @return \YITH_WCWL_Wishlist|bool Wishlist object or false on failure
 		 */
 		public static function generate_default_wishlist( $id = false ) {
@@ -212,7 +214,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 			try {
 				$token = WC_Data_Store::load( 'wishlist' )->generate_token();
 				return $token;
-			} catch( Exception $e ){
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return false;
 			}
@@ -221,7 +223,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Retrieve a specific wishlist item from ID
 		 *
-		 * @param $item_id int|\YITH_WCWL_Wishlist_Item|stdClass Item identifier, or item itself
+		 * @param int|\YITH_WCWL_Wishlist_Item|stdClass $item_id Item identifier, or item itself.
 		 * @return \YITH_WCWL_Wishlist_Item|bool Wishlist item, or false on failure
 		 */
 		public static function get_wishlist_item( $item_id = 0 ) {
@@ -248,14 +250,14 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Retrieve item from a wishlist by product id
 		 *
-		 * @param $wishlist_id int|string Wishlist id or token
-		 * @param $product_id int Product ID
+		 * @param int|string $wishlist_id Wishlist id or token.
+		 * @param int        $product_id  Product ID.
 		 * @return YITH_WCWL_Wishlist_Item|bool Item, or false when no item found
 		 */
 		public static function get_wishlist_item_by_product_id( $wishlist_id, $product_id ) {
 			$wishlist = self::get_wishlist( $wishlist_id );
 
-			if( $wishlist ){
+			if ( $wishlist ) {
 				return $wishlist->get_product( $product_id );
 			}
 
@@ -265,7 +267,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Query database to search for wishlist items that matches specific parameters
 		 *
-		 * @param $args mixed Arguments array; it may contains any of the following:<br/>
+		 * @param array $args Arguments array; it may contains any of the following:<br/>
 		 * [<br/>
 		 *     'user_id'             // Owner of the wishlist; default to current user logged in (if any), or false for cookie wishlist<br/>
 		 *     'product_id'          // Product to search in the wishlist<br/>
@@ -276,7 +278,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		 *     'id' => false,        // only for table select<br/>
 		 *     'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
 		 *     'offset' => 0         // pagination param; offset for the current set. 0 to start from the first item<br/>
-		 * ]
+		 * ].
 		 *
 		 * @return \YITH_WCWL_Wishlist_Item[]|bool A list of matching items or false on failure
 		 */
@@ -286,7 +288,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 			try {
 				$results = WC_Data_Store::load( 'wishlist-item' )->query( $args );
 				return apply_filters( 'yith_wcwl_wishlist_item_query', $results, $args );
-			} catch( Exception $e ){
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return false;
 			}
@@ -295,7 +297,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Query database to count wishlist items that matches specific parameters
 		 *
-		 * @param $args array Same parameters allowed for {@see get_wishlist_items}
+		 * @param array $args Same parameters allowed for {@see get_wishlist_items}.
 		 * @return int Count
 		 */
 		public static function get_wishlist_items_count( $args = array() ) {
@@ -304,7 +306,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 			try {
 				$result = WC_Data_Store::load( 'wishlist-item' )->count( $args );
 				return apply_filters( 'yith_wcwl_wishlist_item_count_query', $result, $args );
-			} catch( Exception $e ){
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return 0;
 			}
@@ -313,14 +315,14 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Count how many times a specific product was added to wishlist
 		 *
-		 * @param $product_id int Product id
+		 * @param int $product_id Product id.
 		 * @return int Count of times product was added to cart
 		 */
 		public static function get_times_added_count( $product_id ) {
 			try {
 				$result = WC_Data_Store::load( 'wishlist-item' )->count_times_added( $product_id );
 				return apply_filters( 'yith_wcwl_wishlist_times_added_count_query', $result, $product_id );
-			} catch( Exception $e ){
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return 0;
 			}
@@ -329,14 +331,14 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		/**
 		 * Count how many times a specific product was added to wishlist by the current user
 		 *
-		 * @param $product_id int Product id
+		 * @param int $product_id Product id.
 		 * @return int Count of times product was added to cart
 		 */
 		public static function get_times_current_user_added_count( $product_id ) {
 			try {
 				$result = WC_Data_Store::load( 'wishlist-item' )->count_times_added( $product_id, 'current' );
 				return apply_filters( 'yith_wcwl_wishlist_times_current_user_added_count_query', $result, $product_id );
-			} catch( Exception $e ){
+			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return 0;
 			}

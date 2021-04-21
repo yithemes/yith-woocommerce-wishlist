@@ -23,7 +23,9 @@
 
 		/* Datepicker */
 		$datepicker.each( function () {
-			var args = $( this ).data();
+			var currentDatePicker = $( this ),
+				args              = currentDatePicker.data(),
+				icon              = currentDatePicker.next( '.yith-icon-calendar' );
 
 			// set animation to false to prevent style 'glitches' when removing class on closing
 			args.showAnim   = false;
@@ -34,7 +36,12 @@
 				instance.dpDiv.removeClass( 'yith-plugin-fw-datepicker-div' );
 			};
 
-			$( this ).datepicker( args );
+			currentDatePicker.datepicker( args );
+			if ( icon ) {
+				icon.on( 'click', function () {
+					currentDatePicker.datepicker( 'show' );
+				} )
+			}
 		} );
 
 		/* Colorpicker */
@@ -388,7 +395,7 @@
 				select  = wrapper.find( 'select' ).first();
 
 			if ( select.length ) {
-				select.val( key ).trigger( 'yith_select_images_value_changed' );
+				select.val( key ).trigger( 'yith_select_images_value_changed' ).trigger( 'change' );
 				items.removeClass( 'yith-plugin-fw-select-images__item--selected' );
 				item.addClass( 'yith-plugin-fw-select-images__item--selected' );
 			}
@@ -427,20 +434,23 @@
 	/* on-off */
 	$( document ).on( 'click', '.yith-plugin-fw-onoff-container span', function () {
 		var input    = $( this ).prev( 'input' ),
-			checked  = input.prop( 'checked' ),
 			disabled = input.prop( 'disabled' );
 
 		if ( disabled ) {
 			return;
 		}
 
-		if ( checked ) {
-			input.prop( 'checked', false ).attr( 'value', 'no' ).removeClass( 'onoffchecked' );
-		} else {
-			input.prop( 'checked', true ).attr( 'value', 'yes' ).addClass( 'onoffchecked' );
-		}
+		input.trigger( 'click' );
+	} );
 
-		input.change();
+	// Useful for triggering deps when clicking on field label.
+	$( document ).on( 'click', '.yith-plugin-fw-onoff-container input', function ( e ) {
+		if ( $( this ).is( ':checked' ) ) {
+			$( this ).attr( 'value', 'yes' ).addClass( 'onoffchecked' );
+		} else {
+			$( this ).attr( 'value', 'no' ).removeClass( 'onoffchecked' );
+		}
+		$( this ).trigger( 'change' );
 	} );
 
 
@@ -813,5 +823,42 @@
 		}
 	};
 	fw_dimensions.init();
+
+	/**
+	 * Copy to clip-board
+	 */
+	var clearSelection = function () {
+		var selection = 'getSelection' in window ? window.getSelection() : false;
+		if ( selection ) {
+			if ( 'empty' in selection ) {  // Chrome.
+				selection.empty();
+			} else if ( 'removeAllRanges' in selection ) {  // Firefox.
+				selection.removeAllRanges();
+			}
+		} else if ( 'selection' in document ) {  // IE.
+			document.selection.empty();
+		}
+	}
+
+	$( document ).on( 'click', '.yith-plugin-fw-copy-to-clipboard__copy', function () {
+		var wrap    = $( this ).closest( '.yith-plugin-fw-copy-to-clipboard' ),
+			input   = wrap.find( '.yith-plugin-fw-copy-to-clipboard__field' ),
+			tip     = wrap.find( '.yith-plugin-fw-copy-to-clipboard__tip' ),
+			timeout = wrap.data( 'tip-timeout' );
+
+		timeout && clearTimeout( timeout );
+
+		input.select();
+		document.execCommand( 'copy' );
+		clearSelection();
+
+		tip.fadeIn( 400 );
+
+		// Use timeout instead of delay to prevent issues with multiple clicks.
+		timeout = setTimeout( function () {
+			tip.fadeOut( 400 );
+		}, 1500 );
+		wrap.data( 'tip-timeout', timeout );
+	} )
 
 } )( jQuery );

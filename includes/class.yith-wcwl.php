@@ -48,8 +48,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @return \YITH_WCWL
 		 * @since 2.0.0
 		 */
-		public static function get_instance(){
-			if( is_null( self::$instance ) ){
+		public static function get_instance() {
+			if ( is_null( self::$instance ) ) {
 				self::$instance = new self();
 			}
 
@@ -63,32 +63,32 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @since 1.0.0
 		 */
 		public function __construct() {
-			// register data stores
+			// register data stores.
 			add_filter( 'woocommerce_data_stores', array( $this, 'register_data_stores' ) );
 
-			// init frontend class
+			// init frontend class.
 			$this->wcwl_frontend = YITH_WCWL_Frontend();
 
-			// init crons
+			// init crons.
 			$this->wcwl_cron = YITH_WCWL_Cron();
 
-			// init session
+			// init session.
 			$this->wcwl_session = YITH_WCWL_Session();
 
-			// init admin handling
-			if( is_admin() ){
+			// init admin handling.
+			if ( is_admin() ) {
 				$this->wcwl_admin = YITH_WCWL_Admin();
 			}
 
-			// load plugin-fw
+			// load plugin-fw.
 			add_action( 'plugins_loaded', array( $this, 'plugin_fw_loader' ), 15 );
 			add_action( 'plugins_loaded', array( $this, 'privacy_loader' ), 20 );
 
-			// add rewrite rule
+			// add rewrite rule.
 			add_action( 'init', array( $this, 'add_rewrite_rules' ), 0 );
 			add_filter( 'query_vars', array( $this, 'add_public_query_var' ) );
 
-			// Polylang integration
+			// Polylang integration.
 			add_filter( 'pll_translation_url', array( $this, 'get_pll_wishlist_url' ), 10, 1 );
 		}
 
@@ -103,7 +103,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		public function plugin_fw_loader() {
 			if ( ! defined( 'YIT_CORE_PLUGIN' ) ) {
 				global $plugin_fw_data;
-				if( ! empty( $plugin_fw_data ) ){
+				if ( ! empty( $plugin_fw_data ) ) {
 					$plugin_fw_file = array_shift( $plugin_fw_data );
 					require_once( $plugin_fw_file );
 				}
@@ -119,7 +119,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @since 2.0.0
 		 */
 		public function privacy_loader() {
-			if( class_exists( 'YITH_Privacy_Plugin_Abstract' ) ) {
+			if ( class_exists( 'YITH_Privacy_Plugin_Abstract' ) ) {
 				require_once( YITH_WCWL_INC . 'class.yith-wcwl-privacy.php' );
 				new YITH_WCWL_Privacy();
 			}
@@ -130,10 +130,10 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Add a product in the wishlist.
 		 *
-		 * @param $atts array Array of parameters; when not passed, params will be searched in $_REQUEST
+		 * @param array $atts Array of parameters; when not passed, params will be searched in $_REQUEST.
 		 * @return void
-		 * @throws Exception When an error occurs with Add to Wishlist operation
-		 * @throws YITH_WCWL_Exception When an error occurs with Add to Wishlist operation
+		 * @throws YITH_WCWL_Exception When an error occurs with Add to Wishlist operation.
+		 *
 		 * @since 1.0.0
 		 */
 		public function add( $atts = array() ) {
@@ -144,14 +144,14 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				'user_id'             => false,
 				'dateadded'           => '',
 				'wishlist_name'       => '',
-				'wishlist_visibility' => 0
+				'wishlist_visibility' => 0,
 			);
 
 			$atts = empty( $atts ) && ! empty( $this->details ) ? $this->details : $atts;
 			$atts = ! empty( $atts ) ? $atts : $_REQUEST;
 			$atts = wp_parse_args( $atts, $defaults );
 
-			// filtering params
+			// filtering params.
 			$prod_id     = apply_filters( 'yith_wcwl_adding_to_wishlist_prod_id', intval( $atts['add_to_wishlist'] ) );
 			$wishlist_id = apply_filters( 'yith_wcwl_adding_to_wishlist_wishlist_id', $atts['wishlist_id'] );
 			$quantity    = apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', intval( $atts['quantity'] ) );
@@ -160,23 +160,23 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			do_action( 'yith_wcwl_adding_to_wishlist', $prod_id, $wishlist_id, $user_id );
 
-			if( ! $this->can_user_add_to_wishlist() ){
+			if ( ! $this->can_user_add_to_wishlist() ) {
 				throw new YITH_WCWL_Exception( apply_filters( 'yith_wcwl_user_cannot_add_to_wishlist_message', __( 'The item cannot be added to this wishlist', 'yith-woocommerce-wishlist' ) ), 1 );
 			}
 
-			if ( $prod_id == false ) {
+			if ( ! $prod_id ) {
 				throw new YITH_WCWL_Exception( __( 'An error occurred while adding the products to the wishlist.', 'yith-woocommerce-wishlist' ), 0 );
 			}
 
 			$wishlist = 'new' === $wishlist_id ? $this->add_wishlist( $atts ) : YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_id, 'edit' );
 
-			if( ! $wishlist instanceof YITH_WCWL_Wishlist || ! $wishlist->current_user_can( 'add_to_wishlist' ) ){
+			if ( ! $wishlist instanceof YITH_WCWL_Wishlist || ! $wishlist->current_user_can( 'add_to_wishlist' ) ) {
 				throw new YITH_WCWL_Exception( __( 'An error occurred while adding the products to the wishlist.', 'yith-woocommerce-wishlist' ), 0 );
 			}
 
 			$this->last_operation_token = $wishlist->get_token();
 
-			if( $wishlist->has_product( $prod_id ) ) {
+			if ( $wishlist->has_product( $prod_id ) ) {
 				throw new YITH_WCWL_Exception( apply_filters( 'yith_wcwl_product_already_in_wishlist_message', get_option( 'yith_wcwl_already_in_wishlist_text' ) ), 1 );
 			}
 
@@ -187,7 +187,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			$item->set_wishlist_id( $wishlist->get_id() );
 			$item->set_user_id( $wishlist->get_user_id() );
 
-			if( $dateadded ){
+			if ( $dateadded ) {
 				$item->set_date_added( $dateadded );
 			}
 
@@ -196,7 +196,9 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			wp_cache_delete( 'wishlist-count-' . $wishlist->get_token(), 'wishlists' );
 
-			if( $user_id = $wishlist->get_user_id() ) {
+			$user_id = $wishlist->get_user_id();
+
+			if ( $user_id ) {
 				wp_cache_delete( 'wishlist-user-total-count-' . $user_id, 'wishlists' );
 			}
 
@@ -206,17 +208,17 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Remove an entry from the wishlist.
 		 *
-		 * @param $atts array Array of parameters; when not passed, parameters will be retrieved from $_REQUEST
+		 * @param array $atts Array of parameters; when not passed, parameters will be retrieved from $_REQUEST.
 		 *
 		 * @return void
-		 * @throws Exception When something was wrong with removal
+		 * @throws YITH_WCWL_Exception When something was wrong with removal.
 		 * @since 1.0.0
 		 */
 		public function remove( $atts = array() ) {
 			$defaults = array(
 				'remove_from_wishlist' => 0,
 				'wishlist_id' => 0,
-				'user_id' => false
+				'user_id' => false,
 			);
 
 			$atts = empty( $atts ) && ! empty( $this->details ) ? $this->details : $atts;
@@ -229,7 +231,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			do_action( 'yith_wcwl_removing_from_wishlist', $prod_id, $wishlist_id, $user_id );
 
-			if( $prod_id == false ){
+			if ( ! $prod_id ) {
 				throw new YITH_WCWL_Exception( apply_filters( 'yith_wcwl_unable_to_remove_product_message', __( 'Error. Unable to remove the product from the wishlist.', 'yith-woocommerce-wishlist' ) ), 0 );
 			}
 
@@ -244,7 +246,9 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			wp_cache_delete( 'wishlist-count-' . $wishlist->get_token(), 'wishlists' );
 
-			if( $user_id = $wishlist->get_user_id() ) {
+			$user_id = $wishlist->get_user_id();
+
+			if ( $user_id ) {
 				wp_cache_delete( 'wishlist-user-total-count-' . $user_id );
 			}
 
@@ -254,15 +258,15 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Check if the product exists in the wishlist.
 		 *
-		 * @param int $product_id Product id to check
-		 * @param int|bool $wishlist_id Wishlist where to search (use false to search in default wishlist)
+		 * @param int      $product_id  Product id to check.
+		 * @param int|bool $wishlist_id Wishlist where to search (use false to search in default wishlist).
 		 * @return bool
 		 * @since 1.0.0
 		 */
 		public function is_product_in_wishlist( $product_id, $wishlist_id = false ) {
 			$wishlist = YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_id );
 
-			if( ! $wishlist ){
+			if ( ! $wishlist ) {
 				return false;
 			}
 
@@ -272,7 +276,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Retrieve elements of the wishlist for a specific user
 		 *
-		 * @param $args mixed Arguments array; it may contains any of the following:<br/>
+		 * @param array $args Arguments array; it may contains any of the following:<br/>
 		 * [<br/>
 		 *     'user_id'             // Owner of the wishlist; default to current user logged in (if any), or false for cookie wishlist<br/>
 		 *     'product_id'          // Product to search in the wishlist<br/>
@@ -283,7 +287,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 *     'id' => false,        // only for table select<br/>
 		 *     'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
 		 *     'offset' => 0         // pagination param; offset for the current set. 0 to start from the first item<br/>
-		 * ]
+		 * ].
 		 *
 		 * @return YITH_WCWL_Wishlist_Item[]|bool
 		 * @since 2.0.0
@@ -295,21 +299,21 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Retrieve the number of products in the wishlist.
 		 *
-		 * @param $wishlist_token string|bool Wishlist token if any; false for default wishlist
+		 * @param string|bool $wishlist_token Wishlist token if any; false for default wishlist.
 		 *
 		 * @return int
 		 * @since 1.0.0
 		 */
 		public function count_products( $wishlist_token = false ) {
-		   $wishlist = YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_token );
+			$wishlist = YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_token );
 
-			if( ! $wishlist ){
+			if ( ! $wishlist ) {
 				return 0;
 			}
 
 			$count = wp_cache_get( 'wishlist-count-' . $wishlist->get_token(), 'wishlists' );
 
-			if( false === $count ){
+			if ( false === $count ) {
 				$count = $wishlist->count_items();
 				wp_cache_set( 'wishlist-count-' . $wishlist->get_token(), $count, 'wishlists' );
 			}
@@ -325,19 +329,24 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 */
 		public function count_all_products() {
 			$args = array(
-				'wishlist_id' => 'all'
+				'wishlist_id' => 'all',
 			);
 
-			if( is_user_logged_in() ){
+			if ( is_user_logged_in() ) {
 				$id = get_current_user_id();
 				$args['user_id'] = $id;
-			}
-			else{
+			} elseif ( YITH_WCWL_Session()->has_session() ) {
 				$id = YITH_WCWL_Session()->get_session_id();
 				$args['session_id'] = $id;
 			}
 
-			if( false === $count = wp_cache_get( 'wishlist-user-total-count-' . $id, 'wishlists' ) ) {
+			if ( ! isset( $id ) ) {
+				return 0;
+			}
+
+			$count = wp_cache_get( 'wishlist-user-total-count-' . $id, 'wishlists' );
+
+			if ( false === $count ) {
 				$count = YITH_WCWL_Wishlist_Factory::get_wishlist_items_count( $args );
 				wp_cache_set( 'wishlist-user-total-count-' . $id, $count, 'wishlists' );
 			}
@@ -348,7 +357,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Count number of times a product was added to users wishlists
 		 *
-		 * @param $product_id int|bool Product id; false will force method to use global product
+		 * @param int|bool $product_id Product id; false will force method to use global product.
 		 *
 		 * @return int Number of times the product was added to wishlist
 		 * @since 2.0.13
@@ -358,7 +367,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			$product_id = ! ( $product_id ) ? yit_get_product_id( $product ) : $product_id;
 
-			if( ! $product_id ){
+			if ( ! $product_id ) {
 				return 0;
 			}
 
@@ -370,7 +379,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Count product occurrences in users wishlists
 		 *
-		 * @param $product_id int|bool Product id; false will force method to use global product
+		 * @param int|bool $product_id Product id; false will force method to use global product.
 		 *
 		 * @return int
 		 * @since 2.0.0
@@ -380,11 +389,18 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			$product_id = ! ( $product_id ) ? yit_get_product_id( $product ) : $product_id;
 
-			if( ! $product_id ){
+			if ( ! $product_id ) {
 				return 0;
 			}
 
-			$count = YITH_WCWL_Wishlist_Factory::get_wishlist_items_count( array( 'product_id' => $product_id, 'user_id' => false, 'session_id' => false, 'wishlist_id' => 'all' ) );
+			$count = YITH_WCWL_Wishlist_Factory::get_wishlist_items_count(
+				array(
+					'product_id' => $product_id,
+					'user_id' => false,
+					'session_id' => false,
+					'wishlist_id' => 'all',
+				)
+			);
 
 			return $count;
 		}
@@ -392,8 +408,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Retrieve details of a product in the wishlist.
 		 *
-		 * @param int $product_id
-		 * @param int|bool $wishlist_id
+		 * @param int      $product_id  Product id.
+		 * @param int|bool $wishlist_id Wishlist id, or false when default should be applied.
 		 * @return YITH_WCWL_Wishlist_Item|bool
 		 * @since 1.0.0
 		 */
@@ -401,11 +417,11 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			$product = $this->get_products(
 				array(
 					'prod_id' => $product_id,
-					'wishlist_id' => $wishlist_id
+					'wishlist_id' => $wishlist_id,
 				)
 			);
 
-			if( empty( $product ) ){
+			if ( empty( $product ) ) {
 				return false;
 			}
 
@@ -417,13 +433,13 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Add a new wishlist for the user.
 		 *
-		 * @param $atts array Array of params for wishlist creation
+		 * @param array $atts Array of params for wishlist creation.
 		 * @return int Id of the wishlist created
 		 * @since 2.0.0
 		 */
 		public function add_wishlist( $atts = array() ) {
 			$defaults = array(
-				'user_id' => false
+				'user_id' => false,
 			);
 
 			$atts = empty( $atts ) && ! empty( $this->details ) ? $this->details : $atts;
@@ -438,8 +454,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Update wishlist with arguments passed as second parameter
 		 *
-		 * @param $wishlist_id int
-		 * @param $args array Array of parameters to use in update process
+		 * @param int   $wishlist_id Wishlist id.
+		 * @param array $args Array of parameters to use in update process.
 		 * @return void
 		 * @since 2.0.0
 		 */
@@ -450,7 +466,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Delete indicated wishlist
 		 *
-		 * @param $wishlist_id int
+		 * @param int $wishlist_id Wishlist id.
 		 * @return void
 		 * @since 2.0.0
 		 */
@@ -461,7 +477,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Retrieve all the wishlist matching specified arguments
 		 *
-		 * @param $args mixed Array of valid arguments<br/>
+		 * @param array $args Array of valid arguments<br/>
 		 * [<br/>
 		 *     'id'                  // Wishlist id to search, if any<br/>
 		 *     'user_id'             // User owner<br/>
@@ -476,12 +492,12 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 *     'limit'               // Pagination param: maximum number of elements in the set. 0 to retrieve all elements<br/>
 		 *     'offset'              // Pagination param: offset for the current set. 0 to start from the first item<br/>
 		 *     'show_empty'          // Whether to show empty lists os not<br/>
-		 * ]
+		 * ].
 		 *
 		 * @return YITH_WCWL_Wishlist[]
 		 * @since 2.0.0
 		 */
-		public function get_wishlists( $args = array() ){
+		public function get_wishlists( $args = array() ) {
 			return YITH_WCWL_Wishlist_Factory::get_wishlists( $args );
 		}
 
@@ -492,7 +508,11 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @since 2.0.0
 		 */
 		public function get_current_user_wishlists() {
-			$id = is_user_logged_in() ? get_current_user_id() : YITH_WCWL_Session()->get_session_id();
+			$id = is_user_logged_in() ? get_current_user_id() : YITH_WCWL_Session()->maybe_get_session_id();
+
+			if ( ! $id ) {
+				return array();
+			}
 
 			$lists = wp_cache_get( 'user-wishlists-' . $id, 'wishlists' );
 
@@ -513,7 +533,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Returns details of a wishlist, searching it by wishlist id
 		 *
-		 * @param $wishlist_id int
+		 * @param int $wishlist_id Wishlist id.
 		 * @return YITH_WCWL_Wishlist
 		 * @since 2.0.0
 		 */
@@ -524,7 +544,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Returns details of a wishlist, searching it by wishlist token
 		 *
-		 * @param $wishlist_token string
+		 * @param string $wishlist_token Wishlist token.
 		 * @return YITH_WCWL_Wishlist
 		 * @since 2.0.0
 		 */
@@ -535,13 +555,15 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Generate default wishlist for current user or session
 		 *
+		 * @param int|bool $id User or session id; false if you want to use current user/session.
+		 *
 		 * @return int Default wishlist id
 		 * @since 2.0.0
 		 */
-		public function generate_default_wishlist( $id = false ){
+		public function generate_default_wishlist( $id = false ) {
 			$wishlist = YITH_WCWL_Wishlist_Factory::generate_default_wishlist( $id );
 
-			if( $wishlist ){
+			if ( $wishlist ) {
 				return $wishlist->get_id();
 			}
 
@@ -554,34 +576,34 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @return string token
 		 * @since 2.0.0
 		 */
-		public function generate_wishlist_token(){
+		public function generate_wishlist_token() {
 			return YITH_WCWL_Wishlist_Factory::generate_wishlist_token();
 		}
 
 		/**
 		 * Returns an array of users that created and populated a public wishlist
 		 *
-		 * @param $args mixed Array of valid arguments<br/>
+		 * @param array $args Array of valid arguments<br/>
 		 * [<br/>
 		 *     'search' // String to match against first name / last name / user login or user email of wishlist owner<br/>
 		 *     'limit'  // Pagination param: number of items to show in one page. 0 to show all items<br/>
 		 *     'offset' // Pagination param: offset for the current set. 0 to start from the first item<br/>
-		 * ]
+		 * ].
 		 * @return array
 		 * @since 2.0.0
 		 */
-		public function get_users_with_wishlist( $args = array() ){
+		public function get_users_with_wishlist( $args = array() ) {
 			return YITH_WCWL_Wishlist_Factory::get_wishlist_users( $args );
 		}
 
 		/**
 		 * Count users that have public wishlists
 		 *
-		 * @param $search string
+		 * @param string $search Search string.
 		 * @return int
 		 * @since 2.0.0
 		 */
-		public function count_users_with_wishlists( $search  ){
+		public function count_users_with_wishlists( $search ) {
 			return count( $this->get_users_with_wishlist( array( 'search' => $search ) ) );
 		}
 
@@ -592,7 +614,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 *
 		 * TODO: merge this into \YITH_WCWL_Wishlist::current_user_can
 		 *
-		 * @param $user_id int|bool User id to test; false to use current user id
+		 * @param int|bool $user_id User id to test; false to use current user id.
 		 * @return bool Whether current user can add to wishlist
 		 * @since 3.0.0
 		 */
@@ -601,7 +623,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			$disable_wishlist_for_unauthenticated_users = get_option( 'yith_wcwl_disable_wishlist_for_unauthenticated_users' );
 			$return = true;
 
-			if( 'yes' == $disable_wishlist_for_unauthenticated_users && ! $user_id ){
+			if ( 'yes' == $disable_wishlist_for_unauthenticated_users && ! $user_id ) {
 				$return = false;
 			}
 
@@ -611,7 +633,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Register custom plugin Data Stores classes
 		 *
-		 * @param $data_stores array Array of registered data stores
+		 * @param array $data_stores Array of registered data stores.
 		 * @return array Array of filtered data store
 		 */
 		public function register_data_stores( $data_stores ) {
@@ -630,24 +652,24 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		public function add_rewrite_rules() {
 			global $wp_query;
 
-			// filter wishlist param
+			// filter wishlist param.
 			$this->wishlist_param = apply_filters( 'yith_wcwl_wishlist_param', $this->wishlist_param );
 
-			$wishlist_page_id = isset( $_POST['yith_wcwl_wishlist_page_id'] ) ? $_POST['yith_wcwl_wishlist_page_id'] : get_option( 'yith_wcwl_wishlist_page_id' );
+			$wishlist_page_id = isset( $_POST['yith_wcwl_wishlist_page_id'] ) ? intval( $_POST['yith_wcwl_wishlist_page_id'] ) : get_option( 'yith_wcwl_wishlist_page_id' ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$wishlist_page_id = yith_wcwl_object_id( $wishlist_page_id, 'page', true, 'default' );
 
-			if( empty( $wishlist_page_id ) ){
+			if ( empty( $wishlist_page_id ) ) {
 				return;
 			}
 
 			$wishlist_page = get_post( $wishlist_page_id );
 			$wishlist_page_slug = $wishlist_page ? $wishlist_page->post_name : false;
 
-			if ( empty( $wishlist_page_slug ) ){
+			if ( empty( $wishlist_page_slug ) ) {
 				return;
 			}
 
-			if( defined( 'POLYLANG_VERSION' ) || defined( 'ICL_PLUGIN_PATH' ) ){
+			if ( defined( 'POLYLANG_VERSION' ) || defined( 'ICL_PLUGIN_PATH' ) ) {
 				return;
 			}
 
@@ -659,7 +681,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			$rewrite_rules = get_option( 'rewrite_rules' );
 
-			if( ! is_array( $rewrite_rules ) || ! array_key_exists( $regex_paged, $rewrite_rules ) || ! array_key_exists( $regex_simple, $rewrite_rules ) ){
+			if ( ! is_array( $rewrite_rules ) || ! array_key_exists( $regex_paged, $rewrite_rules ) || ! array_key_exists( $regex_simple, $rewrite_rules ) ) {
 				flush_rewrite_rules();
 			}
 		}
@@ -667,7 +689,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Adds public query var for wishlist
 		 *
-		 * @param $public_var array
+		 * @param array $public_var Array of available query vars.
 		 * @return array
 		 * @since 2.0.0
 		 */
@@ -693,7 +715,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Build wishlist page URL.
 		 *
-		 * @param $action string
+		 * @param string $action Action string to use in the url.
 		 *
 		 * @return string
 		 * @since 1.0.0
@@ -707,36 +729,33 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			$view = $action_params[0];
 			$data = isset( $action_params[1] ) ? $action_params[1] : '';
 
-			if( $action == 'view' && empty( $data ) ){
+			if ( 'view' === $action && empty( $data ) ) {
 				return $wishlist_permalink;
 			}
 
-			if( get_option( 'permalink_structure' ) && ! defined( 'ICL_PLUGIN_PATH' ) && ! defined( 'POLYLANG_VERSION' ) ) {
+			if ( get_option( 'permalink_structure' ) && ! defined( 'ICL_PLUGIN_PATH' ) && ! defined( 'POLYLANG_VERSION' ) ) {
 				$wishlist_permalink = trailingslashit( $wishlist_permalink );
 				$base_url = trailingslashit( $wishlist_permalink . $action );
-			}
-			else{
+			} else {
 				$base_url = $wishlist_permalink;
 				$params = array();
 
-				if( ! empty( $data ) ){
+				if ( ! empty( $data ) ) {
 					$params[ $this->wishlist_param ] = $view;
 
-					if( $view == 'view' ){
+					if ( 'view' === $view ) {
 						$params['wishlist_id'] = $data;
-					}
-					elseif( $view == 'user' ){
+					} elseif ( 'user' === $view ) {
 						$params['user_id'] = $data;
 					}
-				}
-				else{
+				} else {
 					$params[ $this->wishlist_param ] = $view;
 				}
 
 				$base_url = add_query_arg( $params, $base_url );
 			}
 
-			if( defined( 'ICL_PLUGIN_PATH' ) && $sitepress->get_current_language() != $sitepress->get_default_language() ){
+			if ( defined( 'ICL_PLUGIN_PATH' ) && $sitepress->get_current_language() != $sitepress->get_default_language() ) {
 				$base_url = add_query_arg( 'lang', $sitepress->get_current_language(), $base_url );
 			}
 
@@ -751,7 +770,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		public function get_last_operation_url() {
 			$action = 'view';
 
-			if( ! empty( $this->last_operation_token ) ){
+			if ( ! empty( $this->last_operation_token ) ) {
 				$action .= "/{$this->last_operation_token}";
 			}
 
@@ -761,8 +780,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Generates Add to Wishlist url, to use when customer do not have js enabled
 		 *
-		 * @param $product_id int Product id to add to wishlist
-		 * @param $args array Any of the following parameters
+		 * @param int   $product_id Product id to add to wishlist.
+		 * @param array $args       Any of the following parameters
 		 * [
 		 *     'base_url' => ''
 		 *     'wishlist_id' => 0,
@@ -771,24 +790,23 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 *     'dateadded' => '',
 		 *     'wishlist_name' => '',
 		 *     'wishlist_visibility' => 0
-		 * ]
+		 * ].
 		 * @return string Add to wishlist url
 		 */
 		public function get_add_to_wishlist_url( $product_id, $args = array() ) {
 			$args = array_merge(
 				array(
-					'add_to_wishlist' => $product_id
+					'add_to_wishlist' => $product_id,
 				),
 				$args
 			);
 
-			if( isset( $args['base_url'] ) ){
+			if ( isset( $args['base_url'] ) ) {
 				$base_url = $args['base_url'];
 				unset( $args['base_url'] );
 
 				$url = add_query_arg( $args, $base_url );
-			}
-			else{
+			} else {
 				$url = add_query_arg( $args );
 			}
 
@@ -798,7 +816,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		/**
 		 * Build the URL used to remove an item from the wishlist.
 		 *
-		 * @param int $item_id
+		 * @param int $item_id Id of the item to remove.
 		 * @return string
 		 * @since 1.0.0
 		 */
@@ -835,10 +853,10 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @return string Filtered translation url for current page/post.
 		 */
 		public function get_pll_wishlist_url( $url ) {
-			if( yith_wcwl_is_wishlist_page() && isset( $_GET[ $this->wishlist_param ] ) ) {
+			if ( yith_wcwl_is_wishlist_page() && isset( $_GET[ $this->wishlist_param ] ) ) {
 				$wishlist_action = sanitize_text_field( wp_unslash( $_GET[ $this->wishlist_param ] ) );
-				$user_id = isset( $_GET[ 'user_id' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'user_id' ] ) ) : '';
-				$wishlist_id = isset( $_GET[ 'wishlist_id' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'wishlist_id' ] ) ) : '';
+				$user_id = isset( $_GET['user_id'] ) ? sanitize_text_field( wp_unslash( $_GET['user_id'] ) ) : '';
+				$wishlist_id = isset( $_GET['wishlist_id'] ) ? sanitize_text_field( wp_unslash( $_GET['wishlist_id'] ) ) : '';
 
 				$params = array_filter(
 					array(
@@ -861,6 +879,6 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
  * @return \YITH_WCWL|\YITH_WCWL_Premium
  * @since 2.0.0
  */
-function YITH_WCWL(){
+function YITH_WCWL() {
 	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Premium::get_instance() : YITH_WCWL::get_instance();
 }

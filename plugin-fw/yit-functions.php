@@ -1600,3 +1600,62 @@ if ( ! function_exists( 'yith_plugin_fw_extract' ) ) {
 		);
 	}
 }
+
+
+if ( ! function_exists( 'yith_plugin_fw_register_elementor_widget' ) ) {
+	/**
+	 * Register Elementor widget
+	 *
+	 * @param string $widget_name    The widget name.
+	 * @param array  $widget_options The widget options.
+	 *
+	 * @since 3.6.0
+	 */
+	function yith_plugin_fw_register_elementor_widget( $widget_name, $widget_options ) {
+		YITH_Elementor::instance()->register_widget( $widget_name, $widget_options );
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_register_elementor_widgets' ) ) {
+	/**
+	 * Register Elementor widgets
+	 *
+	 * @param array $widgets            The widgets.
+	 * @param bool  $map_from_gutenberg Set to true if you need to map options from Gutenberg blocks array.
+	 *
+	 * @since 3.6.0
+	 */
+	function yith_plugin_fw_register_elementor_widgets( $widgets, $map_from_gutenberg = false ) {
+		foreach ( $widgets as $widget_name => $widget_options ) {
+			if ( $map_from_gutenberg ) {
+				$widget_options = array_merge( array( 'map_from_gutenberg' => true ), $widget_options );
+			}
+			yith_plugin_fw_register_elementor_widget( $widget_name, $widget_options );
+		}
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_copy_to_clipboard' ) ) {
+	/**
+	 * Print a field with a button to copy its content to clipboard
+	 *
+	 * @param string $value The text to be shown.
+	 * @param array  $field The field attributes.
+	 *
+	 * @since 3.6.2
+	 */
+	function yith_plugin_fw_copy_to_clipboard( $value, $field = array() ) {
+		$defaults      = array(
+			'id'    => '',
+			'value' => $value,
+		);
+		$field         = wp_parse_args( $field, $defaults );
+		$field['type'] = 'copy-to-clipboard';
+
+		// Enqueue style and script if not enqueued.
+		wp_enqueue_style( 'yith-plugin-fw-fields' );
+		wp_enqueue_script( 'yith-plugin-fw-fields' );
+
+		yith_plugin_fw_get_field( $field, true, false );
+	}
+}

@@ -217,7 +217,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 
 			$return = array(
 				'result' => true,
-				'fragments' => YITH_WCWL_Ajax_Handler::refresh_fragments( $fragments ),
+				'fragments' => self::refresh_fragments( $fragments ),
 			);
 
 			wp_send_json( $return );

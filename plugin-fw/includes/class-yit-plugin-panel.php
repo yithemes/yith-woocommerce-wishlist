@@ -1343,7 +1343,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 						esc_html__( 'We need your support', 'yith-plugin-fw' ),
 						esc_html__( 'to keep updating and improving the plugin. Please,', 'yith-plugin-fw' ),
 						esc_url( $rate_link ),
-						esc_html__( 'help us by leaving a five-star rating', 'yith-plugin-fw' ),
+						esc_html__( 'help us by leaving a good review', 'yith-plugin-fw' ),
 						esc_html__( ':) Thanks!', 'yith-plugin-fw' )
 					);
 					?>

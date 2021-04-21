@@ -18,16 +18,26 @@ if ( ! class_exists( 'YITH_WCWL_Exception' ) ) {
 	 * @since 1.0.0
 	 */
 	class YITH_WCWL_Exception extends Exception {
-		private $_errorCodes = array(
+		/**
+		 * Available error codes
+		 *
+		 * @var array
+		 */
+		private $_error_codes = array(
 			0 => 'error',
-			1 => 'exists'
+			1 => 'exists',
 		);
 
+		/**
+		 * Returns textual code for the error
+		 *
+		 * @return string Textual code of the error.
+		 */
 		public function getTextualCode() {
 			$code = $this->getCode();
 
-			if( array_key_exists( $code, $this->_errorCodes ) ){
-				return $this->_errorCodes[ $code ];
+			if ( array_key_exists( $code, $this->_error_codes ) ) {
+				return $this->_error_codes[ $code ];
 			}
 
 			return 'error';

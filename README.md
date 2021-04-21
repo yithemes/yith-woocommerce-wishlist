@@ -151,13 +151,16 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 ## Changelog
 
-### 3.0.20 - Released on 22 February 2021
+### 3.0.21 - Released on 21 April 2021
 
-* New: support for WordPress 5.7
-* New: support for WooCommerce 5.1
+* New: support for WooCommerce 5.2
+* New: added no-robots headers for add_to_wishlist url (thanks to brix720)
 * Update: YITH plugin framework
-* Fix: wrong data type for item insert query (thanks to jonatanmenendez)
-* Dev: added new yith_wcwl_get_wishlist_on_remove filter
+* Tweak: code refactoring according to PHPCS
+* Fix: avoid setting session_id, until guest performs any edit operation over the lists
+* Fix: removed deprecated unbind from scripts
+* Dev: added yith_wcwl_main_style_deps filter to allow devs remove unnecessary deps
+* Dev: added yith_wcwl_custom_icon_alt and yith_wcwl_custom_width filters, to allow dev customize ATW custom icon
 
 ## Support
 

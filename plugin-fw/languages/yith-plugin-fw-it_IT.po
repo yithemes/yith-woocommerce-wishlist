@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-02-15 07:49:38+00:00\n"
-"PO-Revision-Date: 2021-02-05 21:18:46+0000\n"
+"POT-Creation-Date: 2021-04-12 11:06:33+00:00\n"
+"PO-Revision-Date: 2021-04-02 11:09:29+0000\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,27 +13,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 
-#: includes/class-yit-assets.php:117
+#: includes/class-yit-assets.php:129
 msgid "Clear"
 msgstr "Rimuovi"
 
-#: includes/class-yit-assets.php:118
+#: includes/class-yit-assets.php:130
 msgid "Clear color"
 msgstr "Rimuovi colore"
 
-#: includes/class-yit-assets.php:119
+#: includes/class-yit-assets.php:131
 msgid "Default"
 msgstr "Predefinito"
 
-#: includes/class-yit-assets.php:120
+#: includes/class-yit-assets.php:132
 msgid "Select default color"
 msgstr "Seleziona il colore predefinito"
 
-#: includes/class-yit-assets.php:121
+#: includes/class-yit-assets.php:133
 msgid "Select Color"
 msgstr "Seleziona il colore"
 
-#: includes/class-yit-assets.php:122
+#: includes/class-yit-assets.php:134
 msgid "Color value"
 msgstr "Valore del colore"
 
@@ -131,7 +131,8 @@ msgid "to keep updating and improving the plugin. Please,"
 msgstr "per poter continuare ad aggiornare e migliorare il plugin."
 
 #: includes/class-yit-plugin-panel.php:1346
-msgid "help us by leaving a five-star rating"
+#, fuzzy
+msgid "help us by leaving a good review"
 msgstr "Puoi darci una mano lasciando una recensione a 5 stelle"
 
 #: includes/class-yit-plugin-panel.php:1347
@@ -147,6 +148,9 @@ msgid ""
 "From now on, you can find all plugin options in YITH menu. Plugin "
 "customization settings will be available as a new entry in YITH menu."
 msgstr ""
+"D'ora in poi puoi trovare tutte le opzioni dei plugin nel menù YITH. Le "
+"impostazioni di personalizzazione saranno disponibili come una nuova voce in "
+"YITH."
 
 #. translators: 1. YITH site link; 2. WordPress site link.
 #: includes/class-yit-pointers.php:84 includes/class-yit-pointers.php:100
@@ -165,6 +169,11 @@ msgid ""
 "WooCommerce Wishlist, YITH WooCommerce Ajax Search, etc.) will be moved from "
 "previous location to YITH menu."
 msgstr ""
+"D'ora in poi puoi trovare il pannello opzioni dei plugin YITH nel menù YITH. "
+"Ogni volta che viene aggiunto uno dei nostri plugin comparirà una nuova voce "
+"in questo menù. Ad esempio, dopo l'aggiornamento, le opzioni del plugin "
+"(come per YITH WooCommerce Wishlist, YITH WooCommerce Ajax Search, etc.) "
+"saranno spostate dalla posizione precedente al menù YITH."
 
 #: includes/class-yith-dashboard.php:35
 msgid "YITH Latest Updates"
@@ -567,11 +576,22 @@ msgstr "External object cache"
 msgid "Plugins Requirements"
 msgstr "Requisiti plugin"
 
-#: yit-plugin.php:187
+#: yit-plugin.php:190
 msgid "License"
 msgstr "Chiave di licenza"
 
 #. Author of the plugin/theme
+msgid "YITH"
+msgstr "YITH"
+
+#. translators: %s it the Elementor Widget title.
+#: includes/builders/elementor/class-yith-elementor-widget.php:252
+msgctxt "Elementor Widget - section title"
+msgid "%s - Options"
+msgstr "%s - Opzioni"
+
+#: includes/builders/gutenberg/class-yith-gutenberg.php:147
+msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr "YITH"
 
@@ -589,11 +609,6 @@ msgstr "Ultimo aggiornamento rilasciato il"
 msgctxt "Button label"
 msgid "Close"
 msgstr "Chiudi"
-
-#: includes/class-yith-gutenberg.php:131
-msgctxt "[gutenberg]: Category Name"
-msgid "YITH"
-msgstr "YITH"
 
 #: includes/privacy/class-yith-privacy.php:61
 msgctxt "Privacy Policy Guide Title"
@@ -638,6 +653,16 @@ msgctxt "Privacy Policy Content"
 msgid "Payments"
 msgstr "Pagamenti"
 
+#: templates/fields/copy-to-clipboard.php:41
+msgctxt "Copy-to-clipboard message"
+msgid "Copied!"
+msgstr "Copiato!"
+
+#: templates/fields/copy-to-clipboard.php:45
+msgctxt "Copy-to-clipboard button text"
+msgid "Copy"
+msgstr "Copia"
+
 #: templates/fields/dimensions.php:13
 msgctxt "Position in the \"Dimensions\" field"
 msgid "Top"
@@ -673,27 +698,27 @@ msgctxt "YES/NO button: use MAX 4 characters!"
 msgid "NO"
 msgstr "NO"
 
-#: yit-plugin.php:75
+#: yit-plugin.php:78
 msgctxt "Plugin Row Meta"
 msgid "Live Demo"
 msgstr "Live Demo"
 
-#: yit-plugin.php:79
+#: yit-plugin.php:82
 msgctxt "Plugin Row Meta"
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: yit-plugin.php:83
+#: yit-plugin.php:86
 msgctxt "Plugin Row Meta"
 msgid "Support"
 msgstr "Assistenza"
 
-#: yit-plugin.php:87
+#: yit-plugin.php:90
 msgctxt "Plugin Row Meta"
 msgid "Premium version"
 msgstr "Versione premium"
 
-#: yit-plugin.php:183
+#: yit-plugin.php:186
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Impostazioni"

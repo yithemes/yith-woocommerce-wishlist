@@ -65,7 +65,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * Constructor.
 		 *
 		 * @param int|object|array $item ID to load from the DB, or YITH_WCWL_Wishlist_Item object.
-		 * @throws Exception When cannot loading correct Data Store object
+		 * @throws Exception When cannot loading correct Data Store object.
 		 */
 		public function __construct( $item = 0 ) {
 			parent::__construct( $item );
@@ -94,7 +94,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get wishlist ID for current item
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return int Wishlist ID
 		 */
 		public function get_wishlist_id( $context = 'view' ) {
@@ -113,6 +113,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get origin product ID for current item (no WPML filtering)
 		 *
+		 * @param string $context Context.
+		 *
 		 * @return int Wishlist ID
 		 */
 		public function get_original_product_id( $context = 'view' ) {
@@ -122,7 +124,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get product ID for current item
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return int Product ID
 		 */
 		public function get_product_id( $context = 'view' ) {
@@ -132,7 +134,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Return product object related to current item
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return \WC_Product Product
 		 */
 		public function get_product( $context = 'view' ) {
@@ -150,7 +152,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Return price of the produce related to current item
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return float
 		 */
 		public function get_product_price( $context = 'view' ) {
@@ -163,6 +165,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			switch ( $product->get_type() ) {
 				case 'variable':
 					/**
+					 * Product used is a variation; we can then retrieve minimum variation price
+					 *
 					 * @var $product \WC_Product_Variable
 					 */
 					return (float) $product->get_variation_price( 'min' );
@@ -175,7 +179,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Retrieve formatted price for current item
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return string Formatter price
 		 */
 		public function get_formatted_product_price( $context = 'view' ) {
@@ -190,7 +194,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Return formatted product name
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return string Formatted name; empty string on failure
 		 */
 		public function get_formatted_product_name( $context = 'view' ) {
@@ -206,7 +210,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get quantity for current item
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return int Quantity
 		 */
 		public function get_quantity( $context = 'view' ) {
@@ -216,7 +220,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get user ID for current item
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return int User ID
 		 */
 		public function get_user_id( $context = 'view' ) {
@@ -226,7 +230,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get user for current item
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return \WP_User|bool User
 		 */
 		public function get_user( $context = 'view' ) {
@@ -242,7 +246,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get wishlist date added
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return \WC_DateTime|string Wishlist date of creation
 		 */
 		public function get_date_added( $context = 'view' ) {
@@ -258,13 +262,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get formatted wishlist date added
 		 *
-		 * @param $format string Date format (if empty, WP date format will be applied)
+		 * @param string $format Date format (if empty, WP date format will be applied).
 		 * @return string Wishlist date of creation
 		 */
 		public function get_date_added_formatted( $format = '' ) {
 			$date_added = $this->get_date_added( 'edit' );
 
-			if( $date_added ){
+			if ( $date_added ) {
 				$format = $format ? $format : get_option( 'date_format' );
 				return $date_added->date_i18n( $format );
 			}
@@ -280,7 +284,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_wishlist() {
 			$wishlist_id = $this->get_wishlist_id();
 
-			if( ! $wishlist_id ){
+			if ( ! $wishlist_id ) {
 				return false;
 			}
 
@@ -295,7 +299,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_wishlist_slug() {
 			$wishlist = $this->get_wishlist();
 
-			if( ! $wishlist ){
+			if ( ! $wishlist ) {
 				return false;
 			}
 
@@ -310,7 +314,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_wishlist_name() {
 			$wishlist = $this->get_wishlist();
 
-			if( ! $wishlist ){
+			if ( ! $wishlist ) {
 				return false;
 			}
 
@@ -325,7 +329,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_wishlist_token() {
 			$wishlist = $this->get_wishlist();
 
-			if( ! $wishlist ){
+			if ( ! $wishlist ) {
 				return false;
 			}
 
@@ -335,6 +339,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Return item position inside the list
 		 *
+		 * @param string $context Context.
 		 * @return int Position
 		 */
 		public function get_position( $context = 'view' ) {
@@ -344,15 +349,19 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Return original price
 		 *
+		 * @param string $context Context.
 		 * @return string Original price
 		 */
 		public function get_original_price( $context = 'view' ) {
 			$price = $this->get_prop( 'original_price', 'edit' );
 
-			if( 'view' == $context ){
-				return wc_price( $price, array(
-					'currency' => $this->get_original_currency()
-				) );
+			if ( 'view' == $context ) {
+				return wc_price(
+					$price,
+					array(
+						'currency' => $this->get_original_currency(),
+					)
+				);
 			}
 
 			return $price;
@@ -361,12 +370,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Return original currency
 		 *
+		 * @param string $context Context.
 		 * @return string Original price
 		 */
 		public function get_original_currency( $context = 'view' ) {
 			$currency = $this->get_prop( 'original_currency', 'edit' );
 
-			if( 'view' == $context && ! $currency ){
+			if ( 'view' == $context && ! $currency ) {
 				$currency = get_woocommerce_currency();
 			}
 
@@ -381,40 +391,49 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_price_variation() {
 			$original_currency = $this->get_original_currency( 'edit' );
 
-			// if currency changed, makes no sense to make comparisons
-			if( $original_currency != get_woocommerce_currency() ){
+			// if currency changed, makes no sense to make comparisons.
+			if ( get_woocommerce_currency() != $original_currency ) {
 				return '';
 			}
 
 			$original_price = $this->get_original_price( 'edit' );
 
-			// original price wasn't stored in the wishlist
-			if( ! $original_price ){
+			// original price wasn't stored in the wishlist.
+			if ( ! $original_price ) {
 				return '';
 			}
 
 			$product       = $this->get_product();
 			$current_price = $this->get_product_price();
 
-			if( ! is_numeric( $current_price ) ){
+			if ( ! is_numeric( $current_price ) ) {
 				return '';
 			}
 
 			$difference = $original_price - $current_price;
 
-			if( $difference <= 0 && apply_filters( 'yith_wcwl_hide_price_increase', true, $product, $original_price, $original_currency ) ){
+			if ( $difference <= 0 && apply_filters( 'yith_wcwl_hide_price_increase', true, $product, $original_price, $original_currency ) ) {
 				return '';
 			}
 
 			$percentage_difference = -1 * round( $difference / $original_price * 100, 2 );
 			$class = $percentage_difference > 0 ? 'increase' : 'decrease';
 
-			$template = apply_filters( 'yith_wcwl_price_variation_template', sprintf(
-				'<small class="price-variation %s"><span class="variation-rate">%s</span><span class="old-price">%s</span></small>',
+			$template = apply_filters(
+				'yith_wcwl_price_variation_template',
+				sprintf(
+					'<small class="price-variation %s"><span class="variation-rate">%s</span><span class="old-price">%s</span></small>',
+					$class,
+					// translators: 1. % of reduction/increase in price.
+					_x( 'Price is %1$s%%', 'Part of the template that shows price variation since addition to list; placeholder will be replaced with a percentage', 'yith-woocommerce-wishlist' ),
+					// translators: 2: original product price.
+					_x( '(Was %2$s when added  in list)', 'Part of the template that shows price variation since addition to list; placeholder will be replaced with a price', 'yith-woocommerce-wishlist' )
+				),
 				$class,
-				_x( 'Price is %1$s%%', 'Part of the template that shows price variation since addition to list; placeholder will be replaced with a percentage', 'yith-woocommerce-wishlist' ),
-				_x( '(Was %2$s when added  in list)', 'Part of the template that shows price variation since addition to list; placeholder will be replaced with a price', 'yith-woocommerce-wishlist' )
-			), $class, $percentage_difference, $original_price, $original_currency );
+				$percentage_difference,
+				$original_price,
+				$original_currency
+			);
 			$template = sprintf( $template, $percentage_difference, wc_price( $original_price, array( 'currency' => $original_currency ) ) );
 
 			return $template;
@@ -426,7 +445,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * current on_sale status for the product
 		 * Plugins checks every day to find on_sale products, and to schedule email sending
 		 *
-		 * @param $context string Context
+		 * @param string $context Context.
 		 * @return bool Whether product was on sale during last check that plugin performed
 		 */
 		public function is_on_sale( $context = 'view' ) {
@@ -438,14 +457,14 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set wishlist ID for current item
 		 *
-		 * @param $wishlist_id int Wishlist ID
+		 * @param int $wishlist_id Wishlist ID.
 		 */
 		public function set_wishlist_id( $wishlist_id ) {
 			$this->set_prop( 'wishlist_id', $wishlist_id );
 
 			$wishlist = yith_wcwl_get_wishlist( $wishlist_id );
 
-			if( $wishlist && $this->get_user_id() != $wishlist->get_user_id() ){
+			if ( $wishlist && $this->get_user_id() != $wishlist->get_user_id() ) {
 				$this->set_user_id( $wishlist->get_user_id() );
 			}
 		}
@@ -453,12 +472,12 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set product ID for current item
 		 *
-		 * @param $product_id int Product ID
+		 * @param int $product_id Product ID.
 		 */
 		public function set_product_id( $product_id ) {
 			$product_id = yith_wcwl_object_id( $product_id, 'product', true, 'default' );
 
-			if( ! empty( $this->product ) ){
+			if ( ! empty( $this->product ) ) {
 				$this->product = null;
 			}
 
@@ -468,7 +487,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set quantity for current item
 		 *
-		 * @param $quantity int Quantity
+		 * @param int $quantity Quantity.
 		 */
 		public function set_quantity( $quantity ) {
 			$this->set_prop( 'quantity', $quantity );
@@ -477,7 +496,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set user ID for current item
 		 *
-		 * @param $user_id int User ID
+		 * @param int $user_id User ID.
 		 */
 		public function set_user_id( $user_id ) {
 			$this->set_prop( 'user_id', $user_id );
@@ -486,7 +505,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set date added for current item
 		 *
-		 * @param $date_added int Date added
+		 * @param int $date_added Date added.
 		 */
 		public function set_date_added( $date_added ) {
 			$this->set_date_prop( 'date_added', $date_added );
@@ -495,7 +514,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set position in wishlist for current item
 		 *
-		 * @param $position int Position
+		 * @param int $position Position.
 		 */
 		public function set_position( $position ) {
 			$this->set_prop( 'position', intval( $position ) );
@@ -504,7 +523,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set original price
 		 *
-		 * @param $original_price double Price
+		 * @param double $original_price Price.
 		 */
 		public function set_original_price( $original_price ) {
 			$this->set_prop( 'original_price', $original_price );
@@ -513,7 +532,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set original currency
 		 *
-		 * @param $original_currency string Currency
+		 * @param string $original_currency Currency.
 		 */
 		public function set_original_currency( $original_currency ) {
 			$this->set_prop( 'original_currency', $original_currency );
@@ -522,11 +541,11 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Set on sale value
 		 *
-		 * @param $on_sale bool Whether product was found as on sale
+		 * @param bool $on_sale Whether product was found as on sale.
 		 * @return void
 		 */
 		public function set_on_sale( $on_sale ) {
-			if( $this->get_object_read() && $on_sale && $this->is_on_sale() != $on_sale ){
+			if ( $this->get_object_read() && $on_sale && $this->is_on_sale() != $on_sale ) {
 				do_action( 'yith_wcwl_item_is_on_sale', $this );
 			}
 
@@ -606,16 +625,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Map legacy indexes to new properties, for ArrayAccess
 		 *
-		 * @param $offset string Offset to search
+		 * @param string $offset Offset to search.
 		 * @return string Mapped offset
 		 */
 		protected function map_legacy_offsets( $offset ) {
 			$legacy_offset = $offset;
 
-			if( 'prod_id' === $offset ){
+			if ( 'prod_id' === $offset ) {
 				$offset = 'product_id';
-			}
-			elseif( 'dateadded' === $offset ){
+			} elseif ( 'dateadded' === $offset ) {
 				$offset = 'date_added';
 			}
 

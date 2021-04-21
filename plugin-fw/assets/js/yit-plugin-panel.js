@@ -113,23 +113,16 @@ jQuery( function ( $ ) {
 			// init field deps
 			t.addClass( 'deps-initialized' );
 
-			var field       = '#' + t.data( 'dep-target' ),
-				dep         = '#' + t.data( 'dep-id' ),
-				value       = t.data( 'dep-value' ),
-				type        = t.data( 'dep-type' ),
-				event       = 'change',
-				wrapper     = $( dep + '-wrapper' ),
-				field_type  = wrapper.data( 'type' );
+			var field = '#' + t.data( 'dep-target' ),
+				dep   = '#' + t.data( 'dep-id' ),
+				value = t.data( 'dep-value' ),
+				type  = t.data( 'dep-type' );
 
-			if ( field_type === 'select-images' ) {
-				event = 'yith_select_images_value_changed';
-			}
-
-            $( dep ).on( event, function () {
-                dependencies_handler( field, dep, value.toString(), type );
-            } ).trigger( event );
-        } );
-    }
+			$( dep ).on( 'change', function () {
+				dependencies_handler( field, dep, value.toString(), type );
+			} ).trigger( 'change' );
+		} );
+	}
 
 	init_dependencies();
 	// re-init deps after an add toggle action

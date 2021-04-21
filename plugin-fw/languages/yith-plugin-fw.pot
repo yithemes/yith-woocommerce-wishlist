@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-02-15 07:49:38+00:00\n"
+"POT-Creation-Date: 2021-04-12 11:06:33+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,27 +24,27 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: includes/class-yit-assets.php:117
+#: includes/class-yit-assets.php:129
 msgid "Clear"
 msgstr ""
 
-#: includes/class-yit-assets.php:118
+#: includes/class-yit-assets.php:130
 msgid "Clear color"
 msgstr ""
 
-#: includes/class-yit-assets.php:119
+#: includes/class-yit-assets.php:131
 msgid "Default"
 msgstr ""
 
-#: includes/class-yit-assets.php:120
+#: includes/class-yit-assets.php:132
 msgid "Select default color"
 msgstr ""
 
-#: includes/class-yit-assets.php:121
+#: includes/class-yit-assets.php:133
 msgid "Select Color"
 msgstr ""
 
-#: includes/class-yit-assets.php:122
+#: includes/class-yit-assets.php:134
 msgid "Color value"
 msgstr ""
 
@@ -138,7 +138,7 @@ msgid "to keep updating and improving the plugin. Please,"
 msgstr ""
 
 #: includes/class-yit-plugin-panel.php:1346
-msgid "help us by leaving a five-star rating"
+msgid "help us by leaving a good review"
 msgstr ""
 
 #: includes/class-yit-plugin-panel.php:1347
@@ -555,11 +555,22 @@ msgstr ""
 msgid "Plugins Requirements"
 msgstr ""
 
-#: yit-plugin.php:187
+#: yit-plugin.php:190
 msgid "License"
 msgstr ""
 
 #. Author of the plugin/theme
+msgid "YITH"
+msgstr ""
+
+#: includes/builders/elementor/class-yith-elementor-widget.php:252
+#. translators: %s it the Elementor Widget title.
+msgctxt "Elementor Widget - section title"
+msgid "%s - Options"
+msgstr ""
+
+#: includes/builders/gutenberg/class-yith-gutenberg.php:147
+msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr ""
 
@@ -576,11 +587,6 @@ msgstr ""
 #: includes/class-yith-dashboard.php:137
 msgctxt "Button label"
 msgid "Close"
-msgstr ""
-
-#: includes/class-yith-gutenberg.php:131
-msgctxt "[gutenberg]: Category Name"
-msgid "YITH"
 msgstr ""
 
 #: includes/privacy/class-yith-privacy.php:61
@@ -619,6 +625,16 @@ msgctxt "Privacy Policy Content"
 msgid "Payments"
 msgstr ""
 
+#: templates/fields/copy-to-clipboard.php:41
+msgctxt "Copy-to-clipboard message"
+msgid "Copied!"
+msgstr ""
+
+#: templates/fields/copy-to-clipboard.php:45
+msgctxt "Copy-to-clipboard button text"
+msgid "Copy"
+msgstr ""
+
 #: templates/fields/dimensions.php:13
 msgctxt "Position in the \"Dimensions\" field"
 msgid "Top"
@@ -654,27 +670,27 @@ msgctxt "YES/NO button: use MAX 4 characters!"
 msgid "NO"
 msgstr ""
 
-#: yit-plugin.php:75
+#: yit-plugin.php:78
 msgctxt "Plugin Row Meta"
 msgid "Live Demo"
 msgstr ""
 
-#: yit-plugin.php:79
+#: yit-plugin.php:82
 msgctxt "Plugin Row Meta"
 msgid "Documentation"
 msgstr ""
 
-#: yit-plugin.php:83
+#: yit-plugin.php:86
 msgctxt "Plugin Row Meta"
 msgid "Support"
 msgstr ""
 
-#: yit-plugin.php:87
+#: yit-plugin.php:90
 msgctxt "Plugin Row Meta"
 msgid "Premium version"
 msgstr ""
 
-#: yit-plugin.php:183
+#: yit-plugin.php:186
 msgctxt "Action links"
 msgid "Settings"
 msgstr ""

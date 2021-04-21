@@ -271,7 +271,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 											<option value="<?php echo esc_attr( $wl->get_token() ); ?>">
 												<?php echo sprintf( '%s - %s', esc_html( $wl->get_formatted_name() ), esc_html( $wl->get_formatted_privacy() ) ); ?>
 											</option>
-										<?php
+											<?php
 										endforeach;
 										?>
 									</select>
@@ -301,19 +301,19 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 						</td>
 					<?php endif; ?>
 				</tr>
-			<?php
+				<?php
 			endif;
 		endforeach;
 	else :
-	?>
+		?>
 		<tr>
 			<td colspan="<?php echo esc_attr( $column_count ); ?>" class="wishlist-empty"><?php echo esc_html( apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ), $wishlist ) ); ?></td>
 		</tr>
-	<?php
+		<?php
 	endif;
 
 	if ( ! empty( $page_links ) ) :
-	?>
+		?>
 		<tr class="pagination-row wishlist-pagination">
 			<td colspan="<?php echo esc_attr( $column_count ); ?>"><?php echo $page_links; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 		</tr>

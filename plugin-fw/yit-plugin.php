@@ -39,8 +39,11 @@ require_once 'includes/class-yith-system-status.php';
 
 // Gutenberg Support.
 if ( class_exists( 'WP_Block_Type_Registry' ) ) {
-	require_once 'includes/class-yith-gutenberg.php';
+	require_once 'includes/builders/gutenberg/class-yith-gutenberg.php';
 }
+
+require_once 'includes/builders/elementor/class-yith-elementor.php';
+
 // load from theme folder...
 load_textdomain( 'yith-plugin-fw', get_template_directory() . '/core/plugin-fw/yith-plugin-fw-' . apply_filters( 'plugin_locale', get_locale(), 'yith-plugin-fw' ) . '.mo' ) ||
 // ...or from plugin folder.

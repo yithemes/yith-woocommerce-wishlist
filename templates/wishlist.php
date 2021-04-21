@@ -45,4 +45,4 @@ do_action( 'yith_wcwl_wishlist_main_wishlist_content', $var );
  * @hooked \YITH_WCWL_Frontend::wishlist_footer - 10
  */
 do_action( 'yith_wcwl_wishlist_after_wishlist_content', $var );
-?>
+

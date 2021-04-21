@@ -17,7 +17,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 	 *
 	 * @since 3.0.0
 	 */
-	class YITH_WCWL_Wishlist_Item_Data_Store{
+	class YITH_WCWL_Wishlist_Item_Data_Store {
 
 		/**
 		 * Create a new wishlist item in the database.
@@ -28,11 +28,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		public function create( &$item ) {
 			global $wpdb;
 
-			if( ! ( $product_id = $item->get_original_product_id() ) || ! ( $wishlist_id = $item->get_wishlist_id() ) ){
+			$product_id = $item->get_original_product_id();
+			$wishlist_id = $item->get_wishlist_id();
+
+			if ( ! $product_id || ! $wishlist_id ) {
 				return;
 			}
 
-			if( $item_id = YITH_WCWL_Wishlist_Factory::get_wishlist_item_by_product_id( $wishlist_id, $product_id ) ){
+			$item_id = YITH_WCWL_Wishlist_Factory::get_wishlist_item_by_product_id( $wishlist_id, $product_id );
+
+			if ( $item_id ) {
 				$item->set_id( $item_id );
 
 				$this->update( $item );
@@ -58,12 +63,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				apply_filters( 'yith_wcwl_adding_to_wishlist_on_sale', $item->is_on_sale() ),
 			);
 
-			if ( $user_id = $item->get_user_id() ) {
+			$user_id = $item->get_user_id();
+
+			if ( $user_id ) {
 				$columns['user_id'] = '%d';
 				$values[] = apply_filters( 'yith_wcwl_adding_to_wishlist_user_id', $user_id );
 			}
 
-			if( $date_added = $item->get_date_added( 'edit' ) ){
+			$date_added = $item->get_date_added( 'edit' );
+
+			if ( $date_added ) {
 				$columns['dateadded'] = 'FROM_UNIXTIME( %d )';
 				$values[] = apply_filters( 'yith_wcwl_adding_to_wishlist_date_added', $date_added->getTimestamp() );
 			}
@@ -72,9 +81,9 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			$query_values = implode( ', ', array_values( $columns ) );
 			$query = "INSERT INTO {$wpdb->yith_wcwl_items} ( {$query_columns} ) VALUES ( {$query_values} ) ";
 
-			$res = $wpdb->query( $wpdb->prepare( $query, $values ) );
+			$res = $wpdb->query( $wpdb->prepare( $query, $values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-			if( $res ) {
+			if ( $res ) {
 				$item->set_id( $wpdb->insert_id );
 				$item->apply_changes();
 				$this->clear_cache( $item );
@@ -88,7 +97,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		 *
 		 * @param WC_Order_Item_Product $item Product order item object.
 		 *
-		 * @throws Exception When wishlist item is not found
+		 * @throws Exception When wishlist item is not found.
 		 * @since 3.0.0
 		 */
 		public function read( &$item ) {
@@ -118,7 +127,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 					'position' => $data->position,
 					'original_price' => $data->original_price,
 					'original_currency' => $data->original_currency,
-					'on_sale' => $data->on_sale
+					'on_sale' => $data->on_sale,
 				)
 			);
 			$item->set_object_read( true );
@@ -131,9 +140,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		 * @param YITH_WCWL_Wishlist_Item $item Wishlist item object.
 		 */
 		public function update( &$item ) {
-			global $wpdb;
-
-			if( ! $item->get_id() ){
+			if ( ! $item->get_id() ) {
 				return;
 			}
 
@@ -158,7 +165,9 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 					$item->get_date_added( 'edit' ) ? $item->get_date_added( 'edit' )->getTimestamp() : time(),
 				);
 
-				if ( $user_id = $item->get_user_id() ) {
+				$user_id = $item->get_user_id();
+
+				if ( $user_id ) {
 					$values[] = $user_id;
 				}
 
@@ -182,7 +191,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 
 			$id = $item->get_id();
 
-			if( ! $id ){
+			if ( ! $id ) {
 				return;
 			}
 
@@ -199,7 +208,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Retrieves wishlist items that match a set of conditions
 		 *
-		 * @param $args mixed Arguments array; it may contains any of the following:<br/>
+		 * @param array $args Arguments array; it may contains any of the following:<br/>
 		 * [<br/>
 		 *     'user_id'             // Owner of the wishlist; default to current user logged in (if any), or false for cookie wishlist<br/>
 		 *     'product_id'          // Product to search in the wishlist<br/>
@@ -210,7 +219,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		 *     'id' => false,        // only for table select<br/>
 		 *     'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
 		 *     'offset' => 0         // pagination param; offset for the current set. 0 to start from the first item<br/>
-		 * ]
+		 * ].
 		 *
 		 * @return YITH_WCWL_Wishlist_Item[]
 		 */
@@ -218,23 +227,28 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			global $wpdb;
 
 			$default = array(
-				'user_id' => ( is_user_logged_in() ) ? get_current_user_id(): false,
-				'session_id' => ( ! is_user_logged_in() ) ? YITH_WCWL_Session()->get_session_id() : false,
+				'user_id' => ( is_user_logged_in() ) ? get_current_user_id() : false,
+				'session_id' => ( ! is_user_logged_in() ) ? YITH_WCWL_Session()->maybe_get_session_id() : false,
 				'product_id' => false,
-				'wishlist_id' => false, //wishlist_id for a specific wishlist, false for default, or all for any wishlist
+				'wishlist_id' => false, // wishlist_id for a specific wishlist, false for default, or all for any wishlist.
 				'wishlist_token' => false,
-				'wishlist_visibility' => apply_filters( 'yith_wcwl_wishlist_visibility_string_value', 'all'), // all, visible, public, shared, private
+				'wishlist_visibility' => apply_filters( 'yith_wcwl_wishlist_visibility_string_value', 'all' ), // all, visible, public, shared, private.
 				'is_default' => false,
 				'on_sale' => false,
-				'id' => false, // only for table select
+				'id' => false, // only for table select..
 				'limit' => false,
 				'offset' => 0,
 				'orderby' => '',
 				'order' => 'DESC',
 			);
 
+			// if there is no current wishlist, and user was asking for current one, short-circuit query, as pointless.
+			if ( ! is_user_logged_in() && ! YITH_WCWL_Session()->has_session() && ! isset( $args['user_id'] ) && ! isset( $args['session_id'] ) ) {
+				return array();
+			}
+
 			$args = wp_parse_args( $args, $default );
-			extract( $args );
+			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			$sql = "SELECT SQL_CALC_FOUND_ROWS i.*
                     FROM `{$wpdb->yith_wcwl_items}` AS i
@@ -242,108 +256,104 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
                     INNER JOIN {$wpdb->posts} AS p ON p.ID = i.prod_id 
                     WHERE 1 AND p.post_type IN ( %s, %s ) AND p.post_status = %s";
 
-			// remove hidden products from result
+			// remove hidden products from result.
 			$hidden_products = yith_wcwl_get_hidden_products();
 
-			if( ! empty( $hidden_products ) && apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ) {
-				$sql .= " AND p.ID NOT IN ( " . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . " )";
+			if ( ! empty( $hidden_products ) && apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ) {
+				$sql .= ' AND p.ID NOT IN ( ' . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . ' )';
 			}
 
 			$sql_args = array(
 				'product',
 				'product_variation',
-				'publish'
+				'publish',
 			);
 
-			if( ! empty( $user_id ) ){
-				$sql .= " AND i.`user_id` = %d";
+			if ( ! empty( $user_id ) ) {
+				$sql .= ' AND i.`user_id` = %d';
 				$sql_args[] = $user_id;
 			}
 
-			if( ! empty( $session_id ) ){
-				$sql .= " AND l.`session_id` = %s AND l.`expiration` > NOW()";
+			if ( ! empty( $session_id ) ) {
+				$sql .= ' AND l.`session_id` = %s AND l.`expiration` > NOW()';
 				$sql_args[] = $session_id;
 			}
 
-			if( ! empty( $product_id ) ){
+			if ( ! empty( $product_id ) ) {
 				$product_id = yith_wcwl_object_id( $product_id, 'product', true, 'default' );
 
-				$sql .= " AND i.`prod_id` = %d";
+				$sql .= ' AND i.`prod_id` = %d';
 				$sql_args[] = $product_id;
 			}
 
-			if( ! empty( $wishlist_id ) && $wishlist_id != 'all' ){
-				$sql .= " AND i.`wishlist_id` = %d";
+			if ( ! empty( $wishlist_id ) && 'all' != $wishlist_id ) {
+				$sql .= ' AND i.`wishlist_id` = %d';
 				$sql_args[] = $wishlist_id;
-			}
-			elseif( ( empty( $wishlist_id ) ) && empty( $wishlist_token ) && empty( $is_default ) ){
-				$sql .= " AND i.`wishlist_id` IS NULL";
+			} elseif ( ( empty( $wishlist_id ) ) && empty( $wishlist_token ) && empty( $is_default ) ) {
+				$sql .= ' AND i.`wishlist_id` IS NULL';
 			}
 
-			if( ! empty( $wishlist_token ) ){
-				$sql .= " AND l.`wishlist_token` = %s";
+			if ( ! empty( $wishlist_token ) ) {
+				$sql .= ' AND l.`wishlist_token` = %s';
 				$sql_args[] = $wishlist_token;
 			}
 
-			if( ! empty( $wishlist_visibility ) && $wishlist_visibility != 'all' ){
-				switch( $wishlist_visibility ){
+			if ( ! empty( $wishlist_visibility ) && 'all' != $wishlist_visibility ) {
+				switch ( $wishlist_visibility ) {
 					case 'visible':
-						$sql .= " AND ( l.`wishlist_privacy` = %d OR l.`wishlist_privacy` = %d )";
+						$sql .= ' AND ( l.`wishlist_privacy` = %d OR l.`wishlist_privacy` = %d )';
 						$sql_args[] = 0;
 						$sql_args[] = 1;
 						break;
-					case 'public':
-						$sql .= " AND l.`wishlist_privacy` = %d";
-						$sql_args[] = 0;
-						break;
 					case 'shared':
-						$sql .= " AND l.`wishlist_privacy` = %d";
+						$sql .= ' AND l.`wishlist_privacy` = %d';
 						$sql_args[] = 1;
 						break;
 					case 'private':
-						$sql .= " AND l.`wishlist_privacy` = %d";
+						$sql .= ' AND l.`wishlist_privacy` = %d';
 						$sql_args[] = 2;
 						break;
+					case 'public':
 					default:
-						$sql .= " AND l.`wishlist_privacy` = %d";
+						$sql .= ' AND l.`wishlist_privacy` = %d';
 						$sql_args[] = 0;
 						break;
 				}
 			}
 
-			if( ! empty( $is_default ) ){
+			if ( ! empty( $is_default ) ) {
 				YITH_WCWL_Wishlist_Factory::generate_default_wishlist();
 
-				$sql .= " AND l.`is_default` = %d";
+				$sql .= ' AND l.`is_default` = %d';
 				$sql_args[] = $is_default;
 			}
 
-			if( isset( $on_sale ) && $on_sale !== false ){
-				$sql .= " AND i.`on_sale` = %d";
+			if ( isset( $on_sale ) && false !== $on_sale ) {
+				$sql .= ' AND i.`on_sale` = %d';
 				$sql_args[] = $on_sale;
 			}
 
-			if( ! empty( $id ) ){
-				$sql .= " AND `i.ID` = %d";
+			if ( ! empty( $id ) ) {
+				$sql .= ' AND `i.ID` = %d';
 				$sql_args[] = $id;
 			}
 
-			$sql .= " GROUP BY i.prod_id, l.ID";
+			$sql .= ' GROUP BY i.prod_id, l.ID';
 
-			if( ! empty( $orderby ) ){
+			if ( ! empty( $orderby ) ) {
 				$order = ! empty( $order ) ? $order : 'DESC';
-				$sql .= " ORDER BY i." .  esc_sql( $orderby ) . " " . esc_sql( $order ) . ", i.position ASC";
+				$sql .= ' ORDER BY i.' . esc_sql( $orderby ) . ' ' . esc_sql( $order ) . ', i.position ASC';
 			} else {
-				$sql .= " ORDER BY i.position ASC, i.ID DESC";
+				$sql .= ' ORDER BY i.position ASC, i.ID DESC';
 			}
 
-			if( ! empty( $limit ) && isset( $offset ) ){
-				$sql .= " LIMIT %d, %d";
+			if ( ! empty( $limit ) && isset( $offset ) ) {
+				$sql .= ' LIMIT %d, %d';
 				$sql_args[] = $offset;
 				$sql_args[] = $limit;
 			}
 
-			$items = $wpdb->get_results( $wpdb->prepare( $sql, $sql_args ) );
+			$items = $wpdb->get_results( $wpdb->prepare( $sql, $sql_args ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 			/**
 			 * This filter was added to allow developer remove hidden products using a foreach loop, instead of the query
@@ -355,9 +365,9 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			 *
 			 * @since 3.0.7
 			 */
-			if( ! empty( $hidden_products ) && ! empty( $items ) && ! apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ){
-				foreach( $items as $item_id => $item ){
-					if( ! in_array( $item->prod_id, $hidden_products ) ){
+			if ( ! empty( $hidden_products ) && ! empty( $items ) && ! apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ) {
+				foreach ( $items as $item_id => $item ) {
+					if ( ! in_array( $item->prod_id, $hidden_products ) ) {
 						continue;
 					}
 
@@ -365,7 +375,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				}
 			}
 
-			if( ! empty( $items ) ){
+			if ( ! empty( $items ) ) {
 				$items = array_map( array( 'YITH_WCWL_Wishlist_Factory', 'get_wishlist_item' ), $items );
 			} else {
 				$items = array();
@@ -377,7 +387,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Counts items that matches
 		 *
-		 * @param $args array Same parameters allowed for {@see query} method
+		 * @param array $args Same parameters allowed for {@see query} method.
 		 * @return int Count of items
 		 */
 		public function count( $args = array() ) {
@@ -387,16 +397,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Query items table to retrieve distinct products added to wishlist, with count of occurrences
 		 *
-		 * @param $args mixed Arguments array; it may contains any of the following:<br/>
+		 * @param array $args Arguments array; it may contains any of the following:<br/>
 		 * [<br/>
 		 *     'product_id'          // Product to search in the wishlist<br/>
 		 *     'search' => '',       // search string; will be matched against product name<br/>
 		 *     'interval' => '',     // Interval of dates; this should be an associative array, that may contain start_date or end_date<br/>
 		 *     'orderby' => 'ID',    // order param; a valid column in the result set<br/>
 		 *     'order' => 'desc',    // order param; asc or desc<br/>
- 		 *     'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
+		 *     'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
 		 *     'offset' => 0         // pagination param; offset for the current set. 0 to start from the first item<br/>
-		 * ]
+		 * ].
 		 * @return mixed Result set
 		 */
 		public function query_products( $args ) {
@@ -405,7 +415,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			$default = array(
 				'product_id' => '',
 				'search'     => '',
-				'interval'   => [],
+				'interval'   => array(),
 				'limit'      => false,
 				'offset'     => 0,
 				'orderby'    => 'ID',
@@ -413,7 +423,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			);
 
 			$args = wp_parse_args( $args, $default );
-			extract( $args );
+			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			$sql = "SELECT
 		            DISTINCT i.prod_id AS id,
@@ -473,7 +483,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Counts total number of distinct products added to wishlist
 		 *
-		 * @param $args array Same parameters allowed for {@see query_products} method
+		 * @param array $args Same parameters allowed for {@see query_products} method.
 		 * @return int Count of items
 		 */
 		public function count_products( $args ) {
@@ -483,7 +493,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Counts how many distinct users added a product in wishlist
 		 *
-		 * @param $product_id int Product id
+		 * @param int        $product_id Product id.
+		 * @param string|int $user User to use in query; it could be a user id, a session id or 'current' (for current user/session).
 		 * @return int Count of times product was added to wishlist
 		 */
 		public function count_times_added( $product_id, $user = false ) {
@@ -492,24 +503,23 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			$query_args = array();
 			$user_condition = '';
 
-			if( $user ){
-				if( 'current' == $user ){
-					if( is_user_logged_in() ){
-						$user_condition = " AND l.`user_id` = %d";
+			if ( $user ) {
+				if ( 'current' == $user ) {
+					if ( is_user_logged_in() ) {
+						$user_condition = ' AND l.`user_id` = %d';
 						$query_args[] = get_current_user_id();
-					}
-					else{
-						$user_condition = " AND l.`session_id` = %s";
+					} elseif ( YITH_WCWL_Session()->has_session() ) {
+						$user_condition = ' AND l.`session_id` = %s';
 						$query_args[] = YITH_WCWL_Session()->get_session_id();
+					} else {
+						return 0;
 					}
-				}
-				elseif( is_int( $user ) ){
-					$user_condition = " AND l.`user_id` = %d";
-					$query_args[] = get_current_user_id();
-				}
-				elseif( is_string( $user ) ){
-					$user_condition = " AND l.`session_id` = %s";
-					$query_args[] = YITH_WCWL_Session()->get_session_id();
+				} elseif ( is_int( $user ) ) {
+					$user_condition = ' AND l.`user_id` = %d';
+					$query_args[] = $user;
+				} elseif ( is_string( $user ) ) {
+					$user_condition = ' AND l.`session_id` = %s';
+					$query_args[] = $user;
 				}
 			}
 
@@ -527,7 +537,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 
 			$query_args[] = $product_id;
 
-			$res = $wpdb->get_var( $wpdb->prepare( $query, $query_args ) );
+			$res = $wpdb->get_var( $wpdb->prepare( $query, $query_args ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 			return (int) $res;
 		}
@@ -535,55 +545,55 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Raw update method; useful when it is needed to update a bunch of items
 		 *
-		 * @param $columns array Array of columns to update, in the following format: 'column_id' => 'column_type'
-		 * @param $column_values array Array of values to apply to the query; must have same number of elements of columns, and they must respect defined tpe
-		 * @param $conditions array Array of where conditions, in the following format: 'column_id' => 'columns_type'
-		 * @param $conditions_values array Array of values to apply to where condition; must have same number of elements of columns, and they must respect defined tpe
-		 * @pram $clear_caches bool Whether system should clear caches (this is optional since other methods may want to run more optimized clear)
+		 * @param array $columns Array of columns to update, in the following format: 'column_id' => 'column_type'.
+		 * @param array $column_values Array of values to apply to the query; must have same number of elements of columns, and they must respect defined tpe.
+		 * @param array $conditions Array of where conditions, in the following format: 'column_id' => 'columns_type'.
+		 * @param array $conditions_values Array of values to apply to where condition; must have same number of elements of columns, and they must respect defined type.
+		 * @param bool  $clear_caches Whether system should clear caches (this is optional since other methods may want to run more optimized clear).
 		 *
 		 * @return void
 		 */
 		public function update_raw( $columns, $column_values, $conditions = array(), $conditions_values = array(), $clear_caches = false ) {
 			global $wpdb;
 
-			// calculate where statement
+			// calculate where statement.
 			$query_where = '';
 
-			if( ! empty( $conditions ) ){
+			if ( ! empty( $conditions ) ) {
 				$query_where = array();
 
-				foreach( $conditions as $column => $value ){
+				foreach ( $conditions as $column => $value ) {
 					$query_where[] = $column . '=' . $value;
 				}
 
-				$query_where = " WHERE " . implode( ' AND ', $query_where );
+				$query_where = ' WHERE ' . implode( ' AND ', $query_where );
 			}
 
-			// retrieves wishlists that will be affected by the changes
-			if( $clear_caches ){
+			// retrieves wishlists that will be affected by the changes.
+			if ( $clear_caches ) {
 				$query = "SELECT ID FROM {$wpdb->yith_wcwl_items} {$query_where}";
-				$query = $conditions ? $wpdb->prepare( $query, $conditions_values ) : $query;
-				$ids = $wpdb->get_col( $query );
+				$query = $conditions ? $wpdb->prepare( $query, $conditions_values ) : $query; // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				$ids = $wpdb->get_col( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			}
 
-			// calculate set statement
+			// calculate set statement.
 			$query_columns = array();
 
-			foreach( $columns as $column => $value ){
+			foreach ( $columns as $column => $value ) {
 				$query_columns[] = $column . '=' . $value;
 			}
 
 			$query_columns = implode( ', ', $query_columns );
 
-			// build query, and execute it
+			// build query, and execute it.
 			$query = "UPDATE {$wpdb->yith_wcwl_items} SET {$query_columns} {$query_where}";
 			$values = $conditions ? array_merge( $column_values, $conditions_values ) : $column_values;
 
-			$wpdb->query( $wpdb->prepare( $query, $values ) );
+			$wpdb->query( $wpdb->prepare( $query, $values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-			// clear cache for updated items
-			if( $clear_caches && $ids ){
-				foreach( $ids as $id ){
+			// clear cache for updated items.
+			if ( $clear_caches && $ids ) {
+				foreach ( $ids as $id ) {
 					$this->clear_cache( $id );
 				}
 			}
@@ -595,7 +605,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		 * @param YITH_WCWL_Wishlist_Item|int $item Wishlist item object, or id of the item.
 		 */
 		public function clear_cache( &$item ) {
-			if( ! $item instanceof YITH_WCWL_Wishlist_Item ){
+			if ( ! $item instanceof YITH_WCWL_Wishlist_Item ) {
 				$item = YITH_WCWL_Wishlist_Factory::get_wishlist_item( $item );
 			}
 
@@ -615,7 +625,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Alter join section of the query, for ordering purpose
 		 *
-		 * @param $join string
+		 * @param string $join Join statement of the query.
 		 * @return string
 		 * @since 2.0.0
 		 */
@@ -628,12 +638,12 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Alter orderby section of the query, for ordering purpose
 		 *
-		 * @param $orderby string
+		 * @param string $orderby Orderby statement of the query.
 		 * @return string
 		 * @since 2.0.0
 		 */
 		public static function filter_orderby_for_wishlist_count( $orderby ) {
-			$orderby = "i.wishlist_count " . ( isset( $_REQUEST['order'] ) ? $_REQUEST['order'] : 'ASC' );
+			$orderby = 'i.wishlist_count ' . ( isset( $_REQUEST['order'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['order'] ) ) : 'ASC' );
 			return $orderby;
 		}
 	}

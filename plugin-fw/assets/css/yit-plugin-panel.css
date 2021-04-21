@@ -117,9 +117,9 @@
 }
 
 .yith-plugin-fw-wp-page-wrapper .wrap h1.wp-heading-inline {
-    color          : #2a8db0;
-    font-size      : 16px;
-    font-weight    : 600;
+    color       : #2a8db0;
+    font-size   : 16px;
+    font-weight : 600;
 }
 
 .yith-plugin-fw-wp-page-wrapper .wrap a.page-title-action,
@@ -514,9 +514,9 @@
 }
 
 #wpwrap h2.nav-tab-wrapper, #wpbody-content h2.nav-tab-wrapper {
-    border-bottom : 1px solid #ccc;
-    margin-right  : 15px;
-    text-transform: uppercase;
+    border-bottom  : 1px solid #ccc;
+    margin-right   : 15px;
+    text-transform : uppercase;
 }
 
 /* === YIT FRAMEWORK === */
@@ -535,9 +535,7 @@
 .yith-plugin-ui .yit-admin-panel-container {
     position     : relative;
     margin-right : 15px;
-    margin-top   : -3px;
     z-index      : 0;
-    border-top   : 1px solid #dbdada;
 }
 
 .yit-admin-panel-content-wrap {
@@ -576,12 +574,11 @@
  */
 .yith-plugin-ui .yith-plugin-fw-sub-tabs-nav {
     background   : #fff;
-    padding      : 10px 14px 0px 20px;
+    padding      : 10px 14px 0 20px;
     box-sizing   : border-box;
     margin-right : 15px;
     border-left  : 1px solid #d8d8d8;
     border-right : 1px solid #d8d8d8;
-    margin-top   : -2px;
 }
 
 .yith-plugin-ui .yith-plugin-fw-wp-page-wrapper .wrap {
@@ -683,13 +680,12 @@ li.yith-plugin-fw-tab-element {
     margin   : 0;
     padding  : 0;
     display  : inline-block;
-    height   : 37px;
     overflow : visible;
     z-index  : 10;
 }
 
-.yith-plugin-fw-panel-custom-tab-container {
-    margin-top : -2px;
+.yith-plugin-ui li.yith-plugin-fw-tab-element {
+    margin-bottom: -1px;
 }
 
 li.yith-plugin-fw-tab-element:hover {
@@ -734,10 +730,6 @@ li.yith-plugin-fw-tab-element a.nav-tab i {
 
 li.yith-plugin-fw-tab-element a.nav-tab i:before {
     color : #fff;
-}
-
-.yith-plugin-fw-panel .woocommerce-page {
-    margin-top : -2px;
 }
 
 .yith-plugin-ui .yith-plugin-fw-sub-tabs-nav ~ .yit-admin-panel-container {

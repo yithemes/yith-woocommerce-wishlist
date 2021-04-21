@@ -12,7 +12,7 @@ list ( $field_id, $name, $class, $fields, $value ) = yith_plugin_fw_extract( $fi
 
 $class         = ! ! $class ? $class : '';
 $value         = maybe_unserialize( $value );
-$allowed_types = array( 'select', 'select-buttons', 'number', 'text', 'slider', 'hidden', 'html' );
+$allowed_types = array( 'select', 'select-buttons', 'number', 'text', 'slider', 'hidden', 'html', 'datepicker' );
 $default_args  = array( 'type' => 'select' );
 ?>
 <?php if ( ! empty( $fields ) && is_array( $fields ) ) : ?>

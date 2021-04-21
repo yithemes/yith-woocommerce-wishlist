@@ -80,6 +80,8 @@ if ( ! class_exists( 'YITH_WCWL_Install' ) ) {
 			define( 'YITH_WCWL_WISHLISTS_TABLE', $this->_table_wishlists );
 
 			/**
+			 * Deprecated constant
+			 *
 			 * @deprecated
 			 */
 			define( 'YITH_WCWL_TABLE', $this->_table_items );
