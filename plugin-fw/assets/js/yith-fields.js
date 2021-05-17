@@ -17,7 +17,7 @@
 				sliderWrapper : $( '.yith-plugin-fw-image-gallery ul.slides-wrapper' )
 			},
 			$sidebars     = $( '.yith-plugin-fw-sidebar-layout' ),
-			$slider       = $( '.yith-plugin-fw .yith-plugin-fw-slider-container .ui-slider-horizontal' ),
+			$slider       = $( '.yith-plugin-fw-slider-container .ui-slider-horizontal' ),
 			$icons        = $( '.yit-icons-manager-wrapper' ),
 			$checkgroup   = $( ".yith-plugin-ui td.forminp-checkbox" );
 
@@ -859,6 +859,92 @@
 			tip.fadeOut( 400 );
 		}, 1500 );
 		wrap.data( 'tip-timeout', timeout );
-	} )
+	} );
+
+	/**
+	 * Action buttons
+	 */
+	var actionButtons = {
+		init           : function () {
+			$( document ).on( 'click', '.yith-plugin-fw__action-button--has-menu', actionButtons.open );
+			$( document ).on( 'click', '.yith-plugin-fw__action-button__menu', actionButtons.stopPropagation );
+			$( document ).on( 'click', actionButtons.closeAll );
+		},
+		closeAll       : function () {
+			$( '.yith-plugin-fw__action-button--opened' ).removeClass( 'yith-plugin-fw__action-button--opened' );
+		},
+		open           : function ( e ) {
+			var button    = $( this ).closest( '.yith-plugin-fw__action-button' ),
+				wasOpened = button.hasClass( 'yith-plugin-fw__action-button--opened' );
+			e.preventDefault();
+			e.stopPropagation();
+
+			actionButtons.closeAll();
+
+			if ( !wasOpened ) {
+				button.addClass( 'yith-plugin-fw__action-button--opened' );
+			}
+		},
+		stopPropagation: function ( e ) {
+			e.stopPropagation();
+		}
+	};
+	actionButtons.init();
+
+	/**
+	 * Require confirmation link
+	 */
+	$( document ).on( 'click', 'a.yith-plugin-fw__require-confirmation-link', function ( e ) {
+		var link = $( this ).closest( 'a.yith-plugin-fw__require-confirmation-link' ),
+			url  = link.attr( 'href' );
+
+		if ( url && '#' !== url ) {
+			e.preventDefault();
+			e.stopPropagation();
+			if ( 'yith' in window && 'ui' in yith ) {
+				var dataForOptions = [
+						'title',
+						'message',
+						'confirmButtonType',
+						'cancelButton',
+						'confirmButton'
+					],
+					options        = {}, i;
+
+				for ( i in dataForOptions ) {
+					var key   = dataForOptions[ i ],
+						value = link.data( key );
+
+					if ( typeof value !== 'undefined' ) {
+						options[ key ] = value;
+					}
+				}
+
+				options.onConfirm = function () {
+					window.location.href = url;
+				};
+
+				options.closeAfterConfirm = false;
+
+				yith.ui.confirm( options );
+
+			}
+		}
+
+	} );
+
+	/**
+	 * Tips
+	 */
+	$( document ).on( 'yith-plugin-fw-tips-init', function () {
+		$( '.yith-plugin-fw__tips' ).tipTip(
+			{
+				attribute: 'data-tip',
+				fadeIn   : 50,
+				fadeOut  : 50,
+				delay    : 200
+			}
+		);
+	} ).trigger( 'yith-plugin-fw-tips-init' );
 
 } )( jQuery );

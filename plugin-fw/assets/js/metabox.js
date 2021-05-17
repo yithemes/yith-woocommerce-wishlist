@@ -89,22 +89,22 @@
 	function dependencies_handler( id, deps, values, type ) {
 		var result = true;
 
-
-		//Single dependency
 		if ( typeof ( deps ) == 'string' ) {
-			if ( deps.substr( 0, 6 ) == ':radio' ) {
+			if ( deps.substr( 0, 6 ) === ':radio' ) {
 				deps = deps + ':checked';
 			}
 
-			var val = $( deps ).val();
+			var depsOn     = $( deps ),
+				depsOnType = depsOn.attr( 'type' ),
+				val        = depsOn.val();
 
-			if ( $( deps ).attr( 'type' ) == 'checkbox' ) {
-				var thisCheck = $( deps );
-				if ( thisCheck.is( ':checked' ) ) {
-					val = 'yes';
-				} else {
-					val = 'no';
-				}
+			switch ( depsOnType ){
+				case 'checkbox':
+					val = depsOn.is( ':checked' ) ? 'yes' : 'no';
+					break;
+				case 'radio':
+					val = depsOn.find( 'input[type="radio"]' ).filter( ':checked' ).val();
+					break;
 			}
 
 			values = values.split( ',' );

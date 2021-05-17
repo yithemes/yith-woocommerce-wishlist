@@ -11,24 +11,22 @@ jQuery( function ( $ ) {
 	// Handle dependencies.
 	function dependencies_handler( id, deps, values, type ) {
 		var result = true;
-		//Single dependency
 		if ( typeof ( deps ) == 'string' ) {
-			// ??
-			if ( deps.substr( 0, 6 ) == ':radio' ) {
+			if ( deps.substr( 0, 6 ) === ':radio' ) {
 				deps = deps + ':checked';
 			}
 
-			var input_type = $( deps ).data( 'type' ),
-				val        = $( deps ).val();
+			var depsOn     = $( deps ),
+				depsOnType = depsOn.attr( 'type' ),
+				val        = depsOn.val();
 
-			if ( 'checkbox' === input_type ) {
-				val = $( deps ).is( ':checked' ) ? 'yes' : 'no';
-			} else if ( 'radio' === input_type ) {
-				val = $( deps ).find( 'input[type="radio"]' ).filter( ':checked' ).val();
-			}
-
-			if ( $( deps + '-wrapper' ).data( 'type' ) === 'select-images' ) {
-				val = $( deps + '-wrapper' ).find( 'select' ).first().val();
+			switch ( depsOnType ) {
+				case 'checkbox':
+					val = depsOn.is( ':checked' ) ? 'yes' : 'no';
+					break;
+				case 'radio':
+					val = depsOn.find( 'input[type="radio"]' ).filter( ':checked' ).val();
+					break;
 			}
 
 			values = values.split( ',' );
@@ -174,38 +172,109 @@ jQuery( function ( $ ) {
 	} );
 
 
-	// prevents the WC message for changes when leaving the panel page
+	// Prevent the WC message for changes when leaving the panel page
 	$( '.yith-plugin-fw-panel .woo-nav-tab-wrapper' ).removeClass( 'woo-nav-tab-wrapper' ).addClass( 'yith-nav-tab-wrapper' );
 
 	var wrap    = $( '.wrap.yith-plugin-ui' ).first(),
 		notices = $( 'div.updated, div.error, div.notice' );
 
-	// prevent moving notices into the wrapper
+	// Prevent moving notices into the wrapper
 	notices.addClass( 'inline' );
 	if ( wrap.length ) {
 		wrap.prepend( notices );
 	}
 
 
-	// TAB MENU AND SUB TABS
-	var active_subnav = $( document ).find( '.yith-nav-sub-tab.nav-tab-active' );
+	// Additional wrapping just in case 'wrap' div is placed within a sub-tab and it's not already wrapped twice.
+	// TODO: Deprecated usage, it'll be removed, since also custom panels should use the automatic-wrapping through 'show_container' param.
+	( function () {
+		var active_subnav = $( '.yith-nav-sub-tab.nav-tab-active' ),
+			subnav_wrap   = $( '.yith-plugin-fw-wp-page__sub-tab-wrap' );
 
-	if ( active_subnav.length ) {
-		// WP page
-		var mainWrapper = $( document ).find( '.yith-plugin-fw-wp-page-wrapper' );
-		if ( !mainWrapper.length ) {
-			mainWrapper = $( document ).find( '#wpbody-content > .yith-plugin-ui' );
-		}
+		if ( active_subnav.length && !subnav_wrap.length ) {
+			var mainWrapper = $( '.yith-plugin-fw-wp-page-wrapper' );
+			if ( !mainWrapper.length ) {
+				mainWrapper = $( '#wpbody-content > .yith-plugin-ui' );
+			}
 
-		if ( mainWrapper ) {
-			// serach first for deafult wrap
-			var wrap = mainWrapper.find( '.yit-admin-panel-content-wrap' );
-			if ( wrap.length ) {
-				wrap.addClass( 'has-subnav' );
-			} else {
-				// try to wrap a generic wrap div in main wrapper
-				mainWrapper.find( '.wrap' ).wrap( '<div class="wrap subnav-wrap"></div>' );
+			if ( mainWrapper ) {
+				var defaultWrap = mainWrapper.find( '.yit-admin-panel-content-wrap' ); // at first, search for default wrap.
+				if ( defaultWrap.length ) {
+					defaultWrap.addClass( 'has-subnav' );
+				} else {
+					// try to wrap a generic wrap div in main wrapper
+					mainWrapper.find( '.wrap' ).wrap( '<div class="yith-plugin-fw-wp-page__sub-tab-wrap"></div>' );
+				}
 			}
 		}
-	}
+	} )();
+
+	// Float save button.
+	( function () {
+		var floatSaveButton = $( '#yith-plugin-fw-float-save-button' ),
+			mainForm        = $( '#plugin-fw-wc' ),
+			saveButton      = document.querySelector( '#main-save-button' );
+
+		function checkButtonPosition() {
+			if ( isInViewport( saveButton ) ) {
+				floatSaveButton.fadeOut( 150 );
+			} else {
+				floatSaveButton.fadeIn( 300 );
+			}
+		}
+
+		function isInViewport( el ) {
+			var rect     = el.getBoundingClientRect(),
+				viewport = {
+					width : window.innerWidth || document.documentElement.clientWidth,
+					height: window.innerHeight || document.documentElement.clientHeight
+				};
+			return (
+				rect.top >= 0 &&
+				rect.left >= 0 &&
+				rect.top <= viewport.height &&
+				rect.left <= viewport.width
+			);
+		}
+
+		if ( floatSaveButton.length > 0 && mainForm.length > 0 ) {
+			floatSaveButton.hide();
+			checkButtonPosition();
+			document.addEventListener( 'scroll', checkButtonPosition, { passive: true } );
+
+			$( document ).on( 'click', '#yith-plugin-fw-float-save-button', function ( e ) {
+				e.preventDefault();
+				floatSaveButton.block(
+					{
+						message   : null,
+						overlayCSS: {
+							background: 'transparent',
+							opacity   : 0.6
+						}
+					}
+				);
+				$.post( document.location.href, mainForm.serialize() )
+					.done( function ( result ) {
+						floatSaveButton.unblock()
+							.addClass( 'green' )
+							.fadeOut( 300 )
+							.html( '<i class="yith-icon yith-icon-check"></i>' + floatSaveButton.data( 'saved-label' ) )
+							.fadeIn( 300 )
+							.delay( 2500 )
+							.queue(
+								function ( next ) {
+									floatSaveButton.fadeOut(
+										500,
+										function () {
+											$( this ).removeClass( 'green' );
+											$( this ).html( '<i class="yith-icon yith-icon-save"></i>' + $( this ).data( 'default-label' ) ).fadeIn( 500 );
+										}
+									);
+									next();
+								} );
+					} );
+			} )
+		}
+	} )();
+
 } );

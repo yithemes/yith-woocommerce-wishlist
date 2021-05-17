@@ -80,7 +80,7 @@ jQuery( function( $ ){
 
                     if( yith_wcwl_l10n.multi_wishlist ) {
                         // close PrettyPhoto popup
-                        close_pretty_photo( response_message );
+                        close_pretty_photo( response_message, response_result );
 
                         // update options for all wishlist selects
                         if( typeof( response.user_wishlists ) !== 'undefined' ) {
@@ -433,7 +433,11 @@ jQuery( function( $ ){
             var t = $( ev.target ),
                 product_id = t.data( 'product_id' ),
                 variation_id = variation.variation_id,
-                targets = $('[data-product-id="' + product_id + '"]').add('[data-original-product-id="' + product_id + '"]'),
+                target1 = $('.yith-wcwl-add-to-wishlist')
+                    .find('[data-product-id="' + product_id + '"]'),
+                target2 = $('.yith-wcwl-add-to-wishlist')
+                    .find('[data-original-product-id="' + product_id + '"]'),
+                targets = target1.add( target2 ),
                 fragments = targets.closest( '.wishlist-fragment' ).filter(':visible');
 
             if( ! product_id || ! variation_id || ! targets.length ){
@@ -1485,7 +1489,7 @@ jQuery( function( $ ){
      * @return void
      * @since 3.0.0
      */
-    function close_pretty_photo( message ) {
+    function close_pretty_photo( message, status ) {
         if( typeof $.prettyPhoto !== 'undefined' && typeof $.prettyPhoto.close !== 'undefined' ) {
             if( typeof message !== 'undefined' ){
                 var container = $('.pp_content_container'),
@@ -1498,7 +1502,7 @@ jQuery( function( $ ){
                         'class': 'yith-wcwl-popup-feedback'
                     } );
 
-                    new_content.append( $( '<i/>', { 'class': 'fa fa-check heading-icon' } ) );
+                    new_content.append( $( '<i/>', { 'class': 'fa heading-icon ' + ( 'error' === status ? 'fa-exclamation-triangle' : 'fa-check' ) } ) );
                     new_content.append( $( '<p/>', { 'class': 'feedback', 'html': message } ) );
                     new_content.css( 'display', 'none' );
 
@@ -1765,7 +1769,7 @@ jQuery( function( $ ){
      */
     function replace_fragments( fragments ) {
        $.each( fragments, function( i, v ){
-           var itemSelector = '.' + i.split( yith_wcwl_l10n.fragments_index_glue ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( '.' ),
+           var itemSelector = '.' + i.split( yith_wcwl_l10n.fragments_index_glue ).filter( ( val ) => { return val.length && val !== 'exists' && val !== 'with-count'; } ).join( '.' ),
                toReplace = $( itemSelector );
 
            // find replace tempalte

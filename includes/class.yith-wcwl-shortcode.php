@@ -495,9 +495,9 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 						$share_whatsapp_url = '';
 
 						if ( wp_is_mobile() ) {
-							$share_whatsapp_url = 'whatsapp://send?text=' . __( 'My wishlist on ', 'yith-woocommerce-wishlist' ) . ' – ' . urlencode( $share_link_url );
+							$share_whatsapp_url = 'whatsapp://send?text=' . $share_link_title . ' - ' . urlencode( $share_link_url );
 						} else {
-							$share_whatsapp_url = 'https://web.whatsapp.com/send?text=' . __( 'My wishlist on ', 'yith-woocommerce-wishlist' ) . ' – ' . urlencode( $share_link_url );
+							$share_whatsapp_url = 'https://web.whatsapp.com/send?text=' . $share_link_title . ' - ' . urlencode( $share_link_url );
 						}
 
 						$share_atts['share_whatsapp_url'] = $share_whatsapp_url;
@@ -541,6 +541,9 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			// remove filters for add to cart buttons.
 			YITH_WCWL_Frontend()->restore_add_to_cart_button();
+
+			// enqueue scripts.
+			YITH_WCWL_Frontend()->enqueue_scripts();
 
 			return apply_filters( 'yith_wcwl_wishlisth_html', $template, array(), true );
 		}
@@ -702,6 +705,9 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			$atts['heading_icon'] = apply_filters( 'yith_wcwl_add_to_wishlist_heading_icon_html', $heading_icon_html, $atts );
 
 			$template = yith_wcwl_get_template( 'add-to-wishlist.php', $atts, true );
+
+			// enqueue scripts.
+			YITH_WCWL_Frontend()->enqueue_scripts();
 
 			return apply_filters( 'yith_wcwl_add_to_wishlisth_button_html', $template, $wishlist_url, $product_type, $exists, $atts );
 		}

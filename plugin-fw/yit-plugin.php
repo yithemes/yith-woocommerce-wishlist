@@ -36,6 +36,7 @@ require_once 'includes/privacy/class-yith-privacy.php';
 require_once 'includes/privacy/class-yith-privacy-plugin-abstract.php';
 require_once 'includes/promo/yith-promo.php';
 require_once 'includes/class-yith-system-status.php';
+require_once 'includes/class-yith-post-type-admin.php';
 
 // Gutenberg Support.
 if ( class_exists( 'WP_Block_Type_Registry' ) ) {
@@ -65,6 +66,11 @@ if ( ! function_exists( 'yit_plugin_fw_row_meta' ) ) {
 	 * @since  3.0.17
 	 */
 	function yit_plugin_fw_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
+		if ( false === strstr( $plugin_file, 'yith' ) ) {
+			// Not an YITH plugin.
+			return $plugin_meta;
+		}
+
 		$base_uri = array(
 			'live_demo'       => 'https://plugins.yithemes.com/',
 			'documentation'   => 'https://docs.yithemes.com/',
@@ -155,13 +161,20 @@ if ( ! function_exists( 'yit_plugin_fw_row_meta' ) ) {
 			}
 
 			if ( ! empty( $url ) && ! empty( $label ) ) {
-				$url           = trailingslashit( $url );
+				$url           = yith_plugin_fw_add_utm_data( $url, $slug, 'plugin-version-author-uri', 'wp-dashboard' );
 				$plugin_meta[] = sprintf( '<a href="%s" target="_blank"><span class="%s"></span>%s</a>', $url, $icon, $label );
 			}
 		}
 
-		// Author Name Hack.
-		$plugin_meta = preg_replace( '/>YITHEMES</', '>YITH<', $plugin_meta );
+		if ( isset( $plugin_meta[1] ) ) {
+			$utm_author_uri = yith_plugin_fw_add_utm_data( $plugin_data['AuthorURI'], $slug, 'plugin-version-author-uri', 'wp-dashboard' );
+			$plugin_meta[1] = str_replace( $plugin_data['AuthorURI'], $utm_author_uri, $plugin_meta[1] );
+		}
+
+		if ( isset( $plugin_meta[2] ) ) {
+			$utm_plugin_uri = yith_plugin_fw_add_utm_data( $plugin_data['PluginURI'], $slug, 'plugin-version-author-uri', 'wp-dashboard' );
+			$plugin_meta[2] = str_replace( $plugin_data['PluginURI'], $utm_plugin_uri, $plugin_meta[2] );
+		}
 
 		return $plugin_meta;
 	}

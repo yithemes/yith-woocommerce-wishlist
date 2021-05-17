@@ -1352,17 +1352,29 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_logo' ) ) {
 	}
 }
 
+if ( ! function_exists( 'yith_get_wrapper_class' ) ) {
+	/**
+	 * Return the wrapper class for the UI style.
+	 *
+	 * @return string
+	 * @since 3.7.0
+	 */
+	function yith_get_wrapper_class() {
+		return 'yith-plugin-ui';
+	}
+}
+
 if ( ! function_exists( 'yith_set_wrapper_class' ) ) {
 	/**
-	 * Return the class for the new plugin panel style.
+	 * Return the wrapper class for the UI style, by setting any additional class passed through the $class parameter.
 	 *
-	 * @param array|string $class List of additional classes to add inside the panel wrapper.
+	 * @param array|string $class List of additional classes to add to the UI style class.
 	 *
 	 * @return string
 	 * @author Emanuela Castorina
 	 */
 	function yith_set_wrapper_class( $class = '' ) {
-		$new_class = 'yith-plugin-ui';
+		$new_class = yith_get_wrapper_class();
 		$class     = ( ! empty( $class ) && is_array( $class ) ) ? implode( ' ', $class ) : $class;
 
 		return $new_class . ' ' . $class;
@@ -1657,5 +1669,411 @@ if ( ! function_exists( 'yith_plugin_fw_copy_to_clipboard' ) ) {
 		wp_enqueue_script( 'yith-plugin-fw-fields' );
 
 		yith_plugin_fw_get_field( $field, true, false );
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_add_utm_data' ) ) {
+	/**
+	 * Add UTM data in backend url
+	 *
+	 * @param string $url      The url that want to track.
+	 * @param string $slug     Plugin slug.
+	 * @param string $campaign Campaign to track. Default: plugin-version-author-uri.
+	 * @param string $source   Where the link came from. Default: wp-dashboard.
+	 *
+	 * @since 3.6.10
+	 */
+	function yith_plugin_fw_add_utm_data( $url, $slug, $campaign = 'plugin-version-author-uri', $source = 'wp-dashboard' ) {
+		$url = trailingslashit( $url );
+		if ( ! empty( $slug ) ) {
+			$utm_track_data = array(
+				'utm_source'   => $source,
+				'utm_medium'   => $slug,
+				'utm_campaign' => $campaign,
+			);
+
+			$url = add_query_arg( $utm_track_data, $url );
+		}
+
+		return $url;
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_include_fw_template' ) ) {
+	/**
+	 * Include a FW template
+	 *
+	 * @param string $template The template.
+	 * @param array  $args     Arguments.
+	 *
+	 * @since 3.7.0
+	 */
+	function yith_plugin_fw_include_fw_template( $template, $args = array() ) {
+		$_template_path = trailingslashit( YIT_CORE_PLUGIN_TEMPLATE_PATH ) . $template;
+
+		if ( file_exists( $_template_path ) ) {
+			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+			include $_template_path;
+		}
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_html_attributes_to_string' ) ) {
+	/**
+	 * Transform attributes array to HTML attributes string.
+	 *
+	 * @param array $attributes The array of attributes.
+	 * @param bool  $echo       Set to true to print it directly; false otherwise.
+	 *
+	 * @return string
+	 * @since 3.7.0
+	 */
+	function yith_plugin_fw_html_attributes_to_string( $attributes = array(), $echo = false ) {
+		$html_attributes = '';
+
+		if ( is_array( $attributes ) ) {
+			$html_attributes = array();
+			foreach ( $attributes as $key => $value ) {
+				$html_attributes[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+			}
+			$html_attributes = implode( ' ', $html_attributes );
+		}
+
+		if ( $echo ) {
+			echo $html_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+
+		return $html_attributes;
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_get_component' ) ) {
+	/**
+	 * Retrieve a component.
+	 *
+	 * @param array $component The component.
+	 * @param bool  $echo      Set to true to print the component directly; false otherwise.
+	 *
+	 * @return false|string
+	 * @since 3.7.0
+	 */
+	function yith_plugin_fw_get_component( $component, $echo = true ) {
+		if ( ! empty( $component['type'] ) ) {
+			$type     = sanitize_title( $component['type'] );
+			$defaults = array(
+				'id'         => '',
+				'class'      => '',
+				'attributes' => array(),
+				'data'       => array(),
+			);
+
+			$component = wp_parse_args( $component, $defaults );
+
+			$component['html_attributes'] = yith_plugin_fw_html_attributes_to_string( $component['attributes'] );
+			$component['html_data']       = yith_plugin_fw_html_data_to_string( $component['data'] );
+
+			$component_template = '/components/' . $type . '.php';
+
+			if ( ! $echo ) {
+				ob_start();
+			}
+
+			yith_plugin_fw_include_fw_template( $component_template, compact( 'component' ) );
+
+			if ( ! $echo ) {
+				return ob_get_clean();
+			}
+		}
+
+		return '';
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_get_default_post_actions' ) ) {
+	/**
+	 * Retrieve the default post actions to be used in WP List tables to show action buttons.
+	 *
+	 * @param WP_Post|int $post                   The post.
+	 * @param array       $args                   {
+	 *                                            Optional. Arguments to retrieve actions.
+	 *
+	 * @type array        $more-menu              Array of more-menu items.
+	 * @type array|bool   $more-menu-in-trash     false: the menu will be not shown in trash | true: the menu will be shown in trash | array: set specific menu for trash.
+	 * @type string|false $duplicate-url          The Duplicate URL. Default: false (the duplicate action will be not shown).
+	 * @type string|false $confirm-trash-message  The 'confirm trash' message. Set to false to not ask for trash confirmation.
+	 * @type string|false $confirm-delete-message The 'confirm delete' message. Set to false to not ask for delete confirmation.
+	 * }
+	 *
+	 * @return array
+	 * @since 3.7.0
+	 */
+	function yith_plugin_fw_get_default_post_actions( $post, $args = array() ) {
+		$post    = get_post( $post );
+		$actions = array();
+		if ( $post ) {
+			$title            = _draft_or_post_title( $post );
+			$post_type_object = get_post_type_object( $post->post_type );
+			$can_edit_post    = current_user_can( 'edit_post', $post->ID );
+
+			$defaults = array(
+				'more-menu'              => array(),
+				'more-menu-in-trash'     => false,
+				'duplicate-url'          => false,
+				// translators: %s is the title of the post object.
+				'confirm-trash-message'  => sprintf( __( 'Are you sure you want to move "%s" to trash?', 'yith-plugin-fw' ), '<strong>' . $title . '</strong>' ),
+				// translators: %s is the title of the post object.
+				'confirm-delete-message' => sprintf( __( 'Are you sure you want to delete "%s"?', 'yith-plugin-fw' ), '<strong>' . $title . '</strong>' ) . '<br /><br />' . __( 'This action cannot be undone and you will be not able to recover this data.', 'yith-plugin-fw' ),
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			if ( is_post_type_viewable( $post_type_object ) ) {
+				if ( in_array( $post->post_status, array( 'pending', 'draft', 'future' ), true ) ) {
+					if ( $can_edit_post ) {
+						$preview_link = get_preview_post_link( $post );
+
+						$actions['view'] = array(
+							'type'   => 'action-button',
+							'title'  => _x( 'Preview', 'Post action', 'yith-plugin-fw' ),
+							'action' => 'view',
+							'icon'   => 'eye',
+							'url'    => $preview_link,
+						);
+					}
+				} elseif ( 'trash' !== $post->post_status ) {
+					$actions['view'] = array(
+						'type'   => 'action-button',
+						'title'  => _x( 'View', 'Post action', 'yith-plugin-fw' ),
+						'action' => 'view',
+						'icon'   => 'eye',
+						'url'    => get_permalink( $post->ID ),
+					);
+				}
+			}
+
+			if ( $can_edit_post && 'trash' !== $post->post_status ) {
+				$actions['edit'] = array(
+					'type'   => 'action-button',
+					'title'  => _x( 'Edit', 'Post action', 'yith-plugin-fw' ),
+					'action' => 'edit',
+					'url'    => get_edit_post_link( $post->ID ),
+				);
+
+				if ( $args['duplicate-url'] ) {
+					$actions['duplicate'] = array(
+						'type'   => 'action-button',
+						'title'  => _x( 'Duplicate', 'Post action', 'yith-plugin-fw' ),
+						'action' => 'duplicate',
+						'icon'   => 'clone',
+						'url'    => $args['duplicate-url'],
+					);
+				}
+			}
+
+			if ( current_user_can( 'delete_post', $post->ID ) ) {
+				if ( 'trash' === $post->post_status ) {
+					$actions['untrash'] = array(
+						'type'   => 'action-button',
+						'title'  => _x( 'Restore', 'Post action', 'yith-plugin-fw' ),
+						'action' => 'untrash',
+						'icon'   => 'reply',
+						'url'    => wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ),
+					);
+				} elseif ( EMPTY_TRASH_DAYS ) {
+					$actions['trash'] = array(
+						'type'   => 'action-button',
+						'title'  => _x( 'Trash', 'Post action', 'yith-plugin-fw' ),
+						'action' => 'trash',
+						'url'    => get_delete_post_link( $post->ID ),
+					);
+					if ( $args['confirm-trash-message'] ) {
+						$actions['trash']['confirm_data'] = array(
+							'title'               => __( 'Confirm trash', 'yith-plugin-fw' ),
+							'message'             => $args['confirm-trash-message'],
+							'confirm-button'      => _x( 'Yes, trash', 'Trash confirmation action', 'yith-plugin-fw' ),
+							'confirm-button-type' => 'delete',
+						);
+					}
+				}
+				if ( 'trash' === $post->post_status || ! EMPTY_TRASH_DAYS ) {
+					$actions['delete'] = array(
+						'type'   => 'action-button',
+						'title'  => _x( 'Delete Permanently', 'Post action', 'yith-plugin-fw' ),
+						'action' => 'delete',
+						'icon'   => 'trash',
+						'url'    => get_delete_post_link( $post->ID, '', true ),
+					);
+					if ( $args['confirm-delete-message'] ) {
+						$actions['delete']['confirm_data'] = array(
+							'title'               => __( 'Confirm delete', 'yith-plugin-fw' ),
+							'message'             => $args['confirm-delete-message'],
+							'confirm-button'      => _x( 'Yes, delete', 'Delete confirmation action', 'yith-plugin-fw' ),
+							'confirm-button-type' => 'delete',
+						);
+					}
+				}
+			}
+
+			if ( $args['more-menu'] ) {
+				if ( 'trash' !== $post->post_status || true === $args['more-menu-in-trash'] ) {
+					$actions['more'] = array(
+						'type'   => 'action-button',
+						'title'  => __( 'Further actions', 'yith-plugin-fw' ),
+						'action' => 'more',
+						'url'    => '#',
+						'menu'   => $args['more-menu'],
+					);
+				} elseif ( ! ! $args['more-menu-in-trash'] ) {
+					$actions['more'] = array(
+						'type'   => 'action-button',
+						'title'  => __( 'Further actions', 'yith-plugin-fw' ),
+						'action' => 'more',
+						'url'    => '#',
+						'menu'   => $args['more-menu-in-trash'],
+					);
+				}
+			}
+		}
+
+		return $actions;
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_get_default_term_actions' ) ) {
+	/**
+	 * Retrieve the default term actions to be used in WP List tables to show action buttons.
+	 *
+	 * @param WP_Term|int $term                   The term.
+	 * @param array       $args                   {
+	 *                                            Optional. Arguments to retrieve actions.
+	 *
+	 * @type string       $taxonomy               The taxonomy. If not set, the taxonomy will be retrieved by $_REQUEST.
+	 * @type string       $object-type            The object type the term is assigned to (ex: the post-type).
+	 * @type array        $more-menu              Array of more-menu items.
+	 * @type string|false $duplicate-url          The Duplicate URL. Default: false (the duplicate action will be not shown).
+	 * @type string|false $confirm-delete-message The 'confirm delete' message. Set to false to not ask for delete confirmation.
+	 * }
+	 *
+	 * @return array
+	 * @since 3.7.0
+	 */
+	function yith_plugin_fw_get_default_term_actions( $term, $args = array() ) {
+		if ( isset( $args['taxonomy'] ) ) {
+			$taxonomy = $args['taxonomy'];
+		} else {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$taxonomy = isset( $_REQUEST['taxonomy'] ) ? sanitize_title( wp_unslash( $_REQUEST['taxonomy'] ) ) : false;
+		}
+
+		if ( is_numeric( $term ) ) {
+			$term_id = absint( $term );
+			$term    = get_term_by( 'id', $term_id, $taxonomy );
+		}
+
+		$actions = array();
+		$tax     = get_taxonomy( $taxonomy );
+		if ( ! empty( $term->term_id ) && $tax ) {
+			$title    = $term->name;
+			$uri      = wp_doing_ajax() ? wp_get_referer() : esc_url_raw( wp_unslash( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '' ) );
+			$defaults = array(
+				'object-type'            => '',
+				'more-menu'              => array(),
+				'duplicate-url'          => false,
+				// translators: %s is the title of the post object.
+				'confirm-delete-message' => sprintf( __( 'Are you sure you want to delete "%s"?', 'yith-plugin-fw' ), '<strong>' . $title . '</strong>' ) . '<br /><br />' . __( 'This action cannot be undone and you will be not able to recover this data.', 'yith-plugin-fw' ),
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			$edit_link = add_query_arg(
+				'wp_http_referer',
+				$uri,
+				get_edit_term_link( $term->term_id, $taxonomy, $args['object-type'] )
+			);
+
+			if ( is_taxonomy_viewable( $tax ) ) {
+				$actions['view'] = array(
+					'type'   => 'action-button',
+					'title'  => _x( 'View', 'Term action', 'yith-plugin-fw' ),
+					'action' => 'view',
+					'icon'   => 'eye',
+					'url'    => get_term_link( $term ),
+				);
+			}
+
+			if ( current_user_can( 'edit_term', $term->term_id ) ) {
+				$actions['edit'] = array(
+					'type'   => 'action-button',
+					'title'  => _x( 'Edit', 'Term action', 'yith-plugin-fw' ),
+					'action' => 'edit',
+					'url'    => $edit_link,
+				);
+
+				if ( $args['duplicate-url'] ) {
+					$actions['duplicate'] = array(
+						'type'   => 'action-button',
+						'title'  => _x( 'Duplicate', 'Term action', 'yith-plugin-fw' ),
+						'action' => 'duplicate',
+						'icon'   => 'clone',
+						'url'    => $args['duplicate-url'],
+					);
+				}
+			}
+
+			if ( current_user_can( 'delete_term', $term->term_id ) ) {
+				$delete_url = wp_nonce_url( "edit-tags.php?action=delete&amp;taxonomy=$taxonomy&amp;tag_ID=$term->term_id", 'delete-tag_' . $term->term_id );
+
+				$actions['delete'] = array(
+					'type'   => 'action-button',
+					'title'  => _x( 'Delete', 'Term action', 'yith-plugin-fw' ),
+					'action' => 'delete',
+					'icon'   => 'trash',
+					'url'    => $delete_url,
+				);
+				if ( $args['confirm-delete-message'] ) {
+					$actions['delete']['confirm_data'] = array(
+						'title'               => __( 'Confirm delete', 'yith-plugin-fw' ),
+						'message'             => $args['confirm-delete-message'],
+						'confirm-button'      => _x( 'Yes, delete', 'Delete confirmation action', 'yith-plugin-fw' ),
+						'confirm-button-type' => 'delete',
+					);
+				}
+			}
+
+			if ( $args['more-menu'] ) {
+				$actions['more'] = array(
+					'type'   => 'action-button',
+					'title'  => __( 'Further actions', 'yith-plugin-fw' ),
+					'action' => 'more',
+					'url'    => '#',
+					'menu'   => $args['more-menu'],
+				);
+			}
+		}
+
+		return $actions;
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_get_action_buttons' ) ) {
+	/**
+	 * Retrieve action buttons.
+	 *
+	 * @param array $actions The actions.
+	 * @param bool  $echo    Set to true to print the field directly; false otherwise.
+	 *
+	 * @return string
+	 * @since 3.7.0
+	 */
+	function yith_plugin_fw_get_action_buttons( $actions, $echo = true ) {
+		$actions_html = '';
+
+		foreach ( $actions as $action ) {
+			$action['type'] = 'action-button';
+
+			$actions_html .= yith_plugin_fw_get_component( $action, $echo );
+		}
+
+		return $actions_html;
 	}
 }

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2021-04-21 10:12:47+00:00\n"
+"POT-Creation-Date: 2021-05-17 13:07:15+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:04+0200\n"
 "Last-Translator: Nicola Mustone <mail@nicolamustone.it>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -80,7 +80,7 @@ msgstr "Producto eliminado satisfactoriamente."
 msgid "Please, make sure to enter a valid title"
 msgstr "Por favor, asegúrate de haber introducido un título válido"
 
-#: includes/class.yith-wcwl-frontend.php:470
+#: includes/class.yith-wcwl-frontend.php:469
 msgid ""
 "We are sorry, but this feature is available only if cookies on your browser "
 "are enabled."
@@ -88,11 +88,11 @@ msgstr ""
 "Lo siento, pero esta característica solo está disponible si las cookies de "
 "tu navegador están habilitadas."
 
-#: includes/class.yith-wcwl-frontend.php:471
+#: includes/class.yith-wcwl-frontend.php:470
 msgid "Product added to cart successfully"
 msgstr "Producto añadido al carrito con éxito"
 
-#: includes/class.yith-wcwl-frontend.php:724
+#: includes/class.yith-wcwl-frontend.php:723
 #: includes/class.yith-wcwl-shortcode.php:239
 #: plugin-options/wishlist_page-options.php:239
 #: templates/wishlist-view-footer-mobile.php:44
@@ -296,17 +296,12 @@ msgstr "Pinear en Pinterest"
 msgid "Share via email"
 msgstr "Compartir por correo electrónico"
 
-#: includes/class.yith-wcwl-shortcode.php:498
-#: includes/class.yith-wcwl-shortcode.php:500
-msgid "My wishlist on "
-msgstr "Mi lista de deseos en "
-
 #: includes/class.yith-wcwl-shortcode.php:508
 #: plugin-options/wishlist_page-options.php:174
 msgid "Share on WhatsApp"
 msgstr "Compartir en WhatsApp"
 
-#: includes/class.yith-wcwl-shortcode.php:615
+#: includes/class.yith-wcwl-shortcode.php:618
 msgid "Remove from list"
 msgstr "Eliminar de la lista"
 
@@ -1738,6 +1733,9 @@ msgstr "Paginar"
 msgctxt "yith-woocommerce-wishlist"
 msgid "Items per page"
 msgstr "Artículos añadidos"
+
+#~ msgid "My wishlist on "
+#~ msgstr "Mi lista de deseos en "
 
 #~ msgid "YITH WooCommerce Wishlist"
 #~ msgstr "YITH WooCommerce Wishlist"

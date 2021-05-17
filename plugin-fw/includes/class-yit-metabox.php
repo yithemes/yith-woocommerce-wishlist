@@ -293,14 +293,21 @@ if ( ! class_exists( 'YIT_Metabox' ) ) {
 
 		/**
 		 * Show the meta-box
+		 *
+		 * @param WP_Post $post     The post.
+		 * @param array   $meta_box The meta-box info array.
 		 */
-		public function show() {
+		public function show( $post, $meta_box ) {
 			$this->reorder_tabs();
 
 			$args = array(
 				'tabs'  => $this->tabs,
 				'class' => isset( $this->options['class'] ) ? $this->options['class'] : '',
 			);
+
+			if ( isset( $meta_box, $meta_box['id'] ) ) {
+				do_action( "yith_plugin_fw_metabox_before_render_{$meta_box['id']}", $post, $meta_box );
+			}
 
 			yit_plugin_get_template( YIT_CORE_PLUGIN_PATH, 'metaboxes/tab.php', $args );
 		}

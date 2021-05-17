@@ -178,6 +178,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 					'page'            => $this->settings['page'],
 					'current_tab'     => isset( $tabs['tab'] ) ? $tabs['tab'] : '',
 					'current_sub_tab' => isset( $tabs['sub_tab'] ) ? $tabs['sub_tab'] : '',
+					'options'         => isset( $tabs['options'] ) ? $tabs['options'] : array(),
 				);
 
 				if ( ! $is_block_editor ) {
@@ -692,8 +693,10 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 */
 		public function get_tab_info_by_options( $tab_options ) {
 			$type  = $this->get_tab_type_by_options( $tab_options );
-			$info  = array( 'type' => $type );
 			$first = ! ! $tab_options && is_array( $tab_options ) ? current( $tab_options ) : array();
+			$info  = $first;
+
+			$info['type'] = $type;
 			if ( 'post_type' === $type ) {
 				$info['post_type'] = isset( $first['post_type'] ) ? $first['post_type'] : '';
 			} elseif ( 'taxonomy' === $type ) {
@@ -1376,7 +1379,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			if ( 'admin.php' === $pagenow && $screen && strpos( $screen->id, $this->settings['page'] ) !== false ) {
 				switch ( $field['type'] ) {
 					case 'datepicker':
-						echo '<span class="yith-icon yith-icon-calendar"></span>';
+						echo '<span class="yith-icon yith-icon-calendar yith-icon--right-overlay"></span>';
 						break;
 					default:
 						break;
@@ -1400,9 +1403,13 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 						$tabs = array(
 							'tab'     => $info['parent'],
 							'sub_tab' => $key,
+							'options' => $info,
 						);
 					} else {
-						$tabs = array( 'tab' => $key );
+						$tabs = array(
+							'tab'     => $key,
+							'options' => $info,
+						);
 					}
 					break;
 				}
@@ -1429,9 +1436,13 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 						$tabs = array(
 							'tab'     => $info['parent'],
 							'sub_tab' => $key,
+							'options' => $info,
 						);
 					} else {
-						$tabs = array( 'tab' => $key );
+						$tabs = array(
+							'tab'     => $key,
+							'options' => $info,
+						);
 					}
 					break;
 				}
@@ -1478,17 +1489,45 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 */
 		public function print_panel_tabs_in_wp_pages() {
 			if ( self::$panel_tabs_in_wp_pages ) {
+				global $pagenow;
+
 				wp_enqueue_style( 'yit-plugin-style' );
 				wp_enqueue_script( 'yit-plugin-panel' );
 
 				$wrap_class = isset( $this->settings['class'] ) ? $this->settings['class'] : '';
-				?>
-				<div class="yith-plugin-fw-wp-page-wrapper">
-				<?php
+				$options    = isset( self::$panel_tabs_in_wp_pages['options'] ) ? self::$panel_tabs_in_wp_pages['options'] : array();
+
+				$options_to_classes   = array( 'type', 'post_type', 'taxonomy' );
+				$page_wrapper_classes = array(
+					'yith-plugin-fw-wp-page-wrapper',
+					isset( $options['wrapper-class'] ) ? $options['wrapper-class'] : '',
+				);
+
+				if ( in_array( $pagenow, array( 'edit.php', 'edit-tags.php' ), true ) ) {
+					$options_to_classes[]   = 'wp-list-style';
+					$page_wrapper_classes[] = 'yith-plugin-ui';
+				}
+
+				foreach ( $options_to_classes as $key ) {
+					if ( isset( $options[ $key ] ) ) {
+						$option                 = $options[ $key ];
+						$page_wrapper_classes[] = "yith-plugin-ui--{$option}-{$key}";
+					}
+				}
+
+				$page_wrapper_classes = implode( ' ', array_filter( $page_wrapper_classes ) );
+
+				echo '<div class="' . esc_attr( $page_wrapper_classes ) . '">';
+
 				echo '<div class="' . esc_attr( $wrap_class ) . '">';
+
 				$this->add_plugin_banner( $this->settings['page'] );
 				$this->print_tabs_nav( self::$panel_tabs_in_wp_pages );
 				echo '</div>';
+
+				if ( self::$panel_tabs_in_wp_pages['current_sub_tab'] ) {
+					echo '<div class="yith-plugin-fw-wp-page__sub-tab-wrap">';
+				}
 			}
 		}
 
@@ -1500,6 +1539,11 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 */
 		public function print_panel_tabs_in_wp_pages_end() {
 			if ( self::$panel_tabs_in_wp_pages ) {
+
+				if ( self::$panel_tabs_in_wp_pages['current_sub_tab'] ) {
+					echo '</div><!-- /yith-plugin-fw-wp-page__sub-tab-wrap -->';
+				}
+
 				echo '</div><!-- /yith-plugin-fw-wp-page-wrapper -->';
 			}
 		}

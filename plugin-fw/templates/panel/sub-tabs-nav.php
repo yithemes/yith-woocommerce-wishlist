@@ -36,7 +36,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 				<a href="<?php echo esc_url( $_tab->url ); ?>" class="yith-nav-sub-tab nav-tab <?php echo esc_attr( $_tab->class ); ?>">
 					<span class="yith-nav-sub-tab__title"><?php echo esc_html( $_tab->title ); ?></span>
 					<?php if ( $_tab->icon ) : ?>
-						<span class="yith-nav-sub-tab__icon yith-icon-<?php echo esc_attr( $_tab->icon ); ?>"></span>
+						<span class="yith-nav-sub-tab__icon yith-icon yith-icon-<?php echo esc_attr( $_tab->icon ); ?>"></span>
 					<?php endif; ?>
 				</a>
 			<?php endforeach; ?>

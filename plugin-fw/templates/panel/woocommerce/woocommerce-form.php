@@ -25,8 +25,12 @@ $reset_warning = __( 'If you continue with this action, you will reset all optio
 
 			<p class="submit" style="float: left;margin: 0 10px 0 0;">
 				<?php wp_nonce_field( 'yit_panel_wc_options_' . $this->settings['page'], 'yit_panel_wc_options_nonce' ); ?>
-				<input class="button-primary" type="submit" value="<?php esc_html_e( 'Save Changes', 'yith-plugin-fw' ); ?>"/>
+				<input class="button-primary" id="main-save-button" type="submit" value="<?php esc_html_e( 'Save Options', 'yith-plugin-fw' ); ?>"/>
 			</p>
+
+			<?php if ( apply_filters( 'yit_framework_show_float_save_button', true ) ) : ?>
+				<button id="yith-plugin-fw-float-save-button" class="button-primary" data-default-label="<?php esc_attr_e( 'Save Options', 'yith-plugin-fw' ); ?>" data-saved-label="<?php esc_attr_e( 'Options Saved', 'yith-plugin-fw' ); ?>"><i class="yith-icon yith-icon-save"></i> <?php esc_html_e( 'Save Options', 'yith-plugin-fw' ); ?></button>
+			<?php endif; ?>
 		</form>
 		<form id="plugin-fw-wc-reset" method="post">
 			<input type="hidden" name="yit-action" value="wc-options-reset"/>

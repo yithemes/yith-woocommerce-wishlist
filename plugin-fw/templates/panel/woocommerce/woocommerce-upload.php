@@ -35,7 +35,7 @@ $hidden_val = get_option( $id . '-yith-attachment-id', 0 );
 						value="<?php echo in_array( $value, array( '1', 1 ), true ) ? '' : esc_attr( $value ); ?>" class="yith-plugin-fw-upload-img-url"/>
 				<input type="hidden" name="<?php echo esc_attr( $id ); ?>-yith-attachment-id" id="<?php echo esc_attr( $id ); ?>-yith-attachment-id" value="<?php echo esc_attr( $hidden_val ); ?>"/>
 				<input type="button" value="<?php esc_attr_e( 'Upload', 'yith-plugin-fw' ); ?>" id="<?php echo esc_attr( $id ); ?>-button"
-						class="yith-plugin-fw-upload-button button"/>
+						class="yith-plugin-fw-upload-button"/>
 			</div>
 			<div class="clear"></div>
 			<span class="description"><?php echo wp_kses_post( $desc ); ?></span>

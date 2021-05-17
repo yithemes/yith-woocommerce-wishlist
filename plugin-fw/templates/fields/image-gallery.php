@@ -33,7 +33,7 @@ $image_ids = ! empty( $value ) ? array_filter( explode( ',', $value ) ) : array(
 	</ul>
 	<input type="button"
 			id="<?php echo esc_attr( $field_id ); ?>-button"
-			class="image-gallery-button button"
+			class="image-gallery-button button button-secondary"
 			data-choose="<?php esc_attr_e( 'Add Images to Gallery', 'yith-plugin-fw' ); ?>"
 			data-update="<?php esc_attr_e( 'Add to gallery', 'yith-plugin-fw' ); ?>"
 			value="<?php esc_attr_e( 'Add images', 'yith-plugin-fw' ); ?>"

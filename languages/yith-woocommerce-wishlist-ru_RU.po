@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WCWL\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2021-04-21 10:12:47+00:00\n"
+"POT-Creation-Date: 2021-05-17 13:07:15+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:06+0200\n"
 "Last-Translator: Valentyn Zubenko <valentyn.zubenko@gmail.com>\n"
 "Language-Team: Your Inspiration Themes <support@yithemes.com>\n"
@@ -76,17 +76,17 @@ msgstr "Продукт успешно удален из избранного"
 msgid "Please, make sure to enter a valid title"
 msgstr ""
 
-#: includes/class.yith-wcwl-frontend.php:470
+#: includes/class.yith-wcwl-frontend.php:469
 msgid ""
 "We are sorry, but this feature is available only if cookies on your browser "
 "are enabled."
 msgstr ""
 
-#: includes/class.yith-wcwl-frontend.php:471
+#: includes/class.yith-wcwl-frontend.php:470
 msgid "Product added to cart successfully"
 msgstr ""
 
-#: includes/class.yith-wcwl-frontend.php:724
+#: includes/class.yith-wcwl-frontend.php:723
 #: includes/class.yith-wcwl-shortcode.php:239
 #: plugin-options/wishlist_page-options.php:239
 #: templates/wishlist-view-footer-mobile.php:44
@@ -260,17 +260,12 @@ msgstr "Поделиться в Pinterest"
 msgid "Share via email"
 msgstr ""
 
-#: includes/class.yith-wcwl-shortcode.php:498
-#: includes/class.yith-wcwl-shortcode.php:500
-msgid "My wishlist on "
-msgstr "Мои закладки на  %s"
-
 #: includes/class.yith-wcwl-shortcode.php:508
 #: plugin-options/wishlist_page-options.php:174
 msgid "Share on WhatsApp"
 msgstr ""
 
-#: includes/class.yith-wcwl-shortcode.php:615
+#: includes/class.yith-wcwl-shortcode.php:618
 msgid "Remove from list"
 msgstr ""
 
@@ -1600,6 +1595,9 @@ msgstr ""
 msgctxt "yith-woocommerce-wishlist"
 msgid "Items per page"
 msgstr ""
+
+#~ msgid "My wishlist on "
+#~ msgstr "Мои закладки на  %s"
 
 #~ msgid "YITH WooCommerce Wishlist"
 #~ msgstr "Мои закладки на  %s"

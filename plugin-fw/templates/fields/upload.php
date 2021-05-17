@@ -31,10 +31,10 @@ $file = $value;
 		<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
 	/>
-	<button class="button-secondary yith-plugin-fw-upload-button" id="<?php echo esc_attr( $field_id ); ?>-button"><?php esc_html_e( 'Upload', 'yith-plugin-fw' ); ?></button>
+	<button class="yith-plugin-fw-upload-button" id="<?php echo esc_attr( $field_id ); ?>-button"><?php esc_html_e( 'Upload', 'yith-plugin-fw' ); ?></button>
 	<button type="button"
 			id="<?php echo esc_attr( $field_id ); ?>-button-reset"
-			class="yith-plugin-fw-upload-button-reset button"
+			class="yith-plugin-fw-upload-button-reset"
 			data-default="<?php echo isset( $default ) ? esc_attr( $default ) : ''; ?>"
 	><?php esc_html_e( 'Reset', 'yith-plugin-fw' ); ?></button>
 </div>

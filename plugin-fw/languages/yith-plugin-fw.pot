@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-04-12 11:06:33+00:00\n"
+"POT-Creation-Date: 2021-05-17 13:16:23+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,27 +24,27 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: includes/class-yit-assets.php:129
+#: includes/class-yit-assets.php:143
 msgid "Clear"
 msgstr ""
 
-#: includes/class-yit-assets.php:130
+#: includes/class-yit-assets.php:144
 msgid "Clear color"
 msgstr ""
 
-#: includes/class-yit-assets.php:131
+#: includes/class-yit-assets.php:145
 msgid "Default"
 msgstr ""
 
-#: includes/class-yit-assets.php:132
+#: includes/class-yit-assets.php:146
 msgid "Select default color"
 msgstr ""
 
-#: includes/class-yit-assets.php:133
+#: includes/class-yit-assets.php:147
 msgid "Select Color"
 msgstr ""
 
-#: includes/class-yit-assets.php:134
+#: includes/class-yit-assets.php:148
 msgid "Color value"
 msgstr ""
 
@@ -60,88 +60,87 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:450
-#: includes/class-yit-plugin-panel.php:453
+#: includes/class-yit-plugin-panel.php:451
+#: includes/class-yit-plugin-panel.php:454
 msgid "How to install premium version"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:619
+#: includes/class-yit-plugin-panel.php:620
 #: includes/class-yit-plugin-subpanel.php:132
-#: templates/panel/woocommerce/woocommerce-form.php:28
 msgid "Save Changes"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:624
+#: includes/class-yit-plugin-panel.php:625
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid "If you continue with this action, you will reset all options in this page."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:624
+#: includes/class-yit-plugin-panel.php:625
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:628
+#: includes/class-yit-plugin-panel.php:629
 #: includes/class-yit-plugin-subpanel.php:139
 msgid "Reset to default"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:865
+#: includes/class-yit-plugin-panel.php:868
 msgid "The element you have entered already exists. Please, enter another name."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:866
+#: includes/class-yit-plugin-panel.php:869
 msgid "Settings saved"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:867
+#: includes/class-yit-plugin-panel.php:870
 msgid "Settings reset"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:868
+#: includes/class-yit-plugin-panel.php:871
 msgid "Element deleted correctly."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:869
-#: includes/class-yit-plugin-panel.php:870
+#: includes/class-yit-plugin-panel.php:872
+#: includes/class-yit-plugin-panel.php:873
 msgid "Element updated correctly."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:871
+#: includes/class-yit-plugin-panel.php:874
 msgid "Database imported correctly."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:872
+#: includes/class-yit-plugin-panel.php:875
 msgid "An error has occurred during import. Please try again."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:873
+#: includes/class-yit-plugin-panel.php:876
 msgid "The added file is not valid."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:874
+#: includes/class-yit-plugin-panel.php:877
 msgid "Sorry, import is disabled."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:875
+#: includes/class-yit-plugin-panel.php:878
 msgid "Sorting successful."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1343
+#: includes/class-yit-plugin-panel.php:1346
 msgid "We need your support"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1344
+#: includes/class-yit-plugin-panel.php:1347
 msgid "to keep updating and improving the plugin. Please,"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1346
+#: includes/class-yit-plugin-panel.php:1349
 msgid "help us by leaving a good review"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1347
+#: includes/class-yit-plugin-panel.php:1350
 msgid ":) Thanks!"
 msgstr ""
 
@@ -189,6 +188,16 @@ msgstr ""
 msgid ""
 "An error has occurred, which probably means the feed is down. Try again "
 "later."
+msgstr ""
+
+#: includes/class-yith-post-type-admin.php:286
+#. translators: %s is the name of the post type (example Back to "Membership
+#. Plans").
+msgid "Back to \"%s\""
+msgstr ""
+
+#: includes/class-yith-post-type-admin.php:286
+msgid "Back to the list"
 msgstr ""
 
 #: includes/class-yith-system-status.php:110
@@ -475,7 +484,16 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: templates/panel/woocommerce/woocommerce-form.php:34
+#: templates/panel/woocommerce/woocommerce-form.php:28
+#: templates/panel/woocommerce/woocommerce-form.php:32
+msgid "Save Options"
+msgstr ""
+
+#: templates/panel/woocommerce/woocommerce-form.php:32
+msgid "Options Saved"
+msgstr ""
+
+#: templates/panel/woocommerce/woocommerce-form.php:38
 msgid "Reset Defaults"
 msgstr ""
 
@@ -555,7 +573,33 @@ msgstr ""
 msgid "Plugins Requirements"
 msgstr ""
 
-#: yit-plugin.php:190
+#: yit-functions.php:1823
+#. translators: %s is the title of the post object.
+msgid "Are you sure you want to move \"%s\" to trash?"
+msgstr ""
+
+#: yit-functions.php:1825 yit-functions.php:1983
+#. translators: %s is the title of the post object.
+msgid "Are you sure you want to delete \"%s\"?"
+msgstr ""
+
+#: yit-functions.php:1825 yit-functions.php:1983
+msgid "This action cannot be undone and you will be not able to recover this data."
+msgstr ""
+
+#: yit-functions.php:1891
+msgid "Confirm trash"
+msgstr ""
+
+#: yit-functions.php:1908 yit-functions.php:2035
+msgid "Confirm delete"
+msgstr ""
+
+#: yit-functions.php:1921 yit-functions.php:1929 yit-functions.php:2046
+msgid "Further actions"
+msgstr ""
+
+#: yit-plugin.php:203
 msgid "License"
 msgstr ""
 
@@ -572,6 +616,16 @@ msgstr ""
 #: includes/builders/gutenberg/class-yith-gutenberg.php:147
 msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
+msgstr ""
+
+#: includes/class-yit-assets.php:131
+msgctxt "Button text"
+msgid "Confirm"
+msgstr ""
+
+#: includes/class-yit-assets.php:132
+msgctxt "Button text"
+msgid "Cancel"
 msgstr ""
 
 #: includes/class-yith-dashboard.php:96
@@ -670,27 +724,92 @@ msgctxt "YES/NO button: use MAX 4 characters!"
 msgid "NO"
 msgstr ""
 
-#: yit-plugin.php:78
+#: yit-functions.php:1837
+msgctxt "Post action"
+msgid "Preview"
+msgstr ""
+
+#: yit-functions.php:1846
+msgctxt "Post action"
+msgid "View"
+msgstr ""
+
+#: yit-functions.php:1857
+msgctxt "Post action"
+msgid "Edit"
+msgstr ""
+
+#: yit-functions.php:1865
+msgctxt "Post action"
+msgid "Duplicate"
+msgstr ""
+
+#: yit-functions.php:1877
+msgctxt "Post action"
+msgid "Restore"
+msgstr ""
+
+#: yit-functions.php:1885
+msgctxt "Post action"
+msgid "Trash"
+msgstr ""
+
+#: yit-functions.php:1901
+msgctxt "Post action"
+msgid "Delete Permanently"
+msgstr ""
+
+#: yit-functions.php:1893
+msgctxt "Trash confirmation action"
+msgid "Yes, trash"
+msgstr ""
+
+#: yit-functions.php:1910 yit-functions.php:2037
+msgctxt "Delete confirmation action"
+msgid "Yes, delete"
+msgstr ""
+
+#: yit-functions.php:1997
+msgctxt "Term action"
+msgid "View"
+msgstr ""
+
+#: yit-functions.php:2007
+msgctxt "Term action"
+msgid "Edit"
+msgstr ""
+
+#: yit-functions.php:2015
+msgctxt "Term action"
+msgid "Duplicate"
+msgstr ""
+
+#: yit-functions.php:2028
+msgctxt "Term action"
+msgid "Delete"
+msgstr ""
+
+#: yit-plugin.php:84
 msgctxt "Plugin Row Meta"
 msgid "Live Demo"
 msgstr ""
 
-#: yit-plugin.php:82
+#: yit-plugin.php:88
 msgctxt "Plugin Row Meta"
 msgid "Documentation"
 msgstr ""
 
-#: yit-plugin.php:86
+#: yit-plugin.php:92
 msgctxt "Plugin Row Meta"
 msgid "Support"
 msgstr ""
 
-#: yit-plugin.php:90
+#: yit-plugin.php:96
 msgctxt "Plugin Row Meta"
 msgid "Premium version"
 msgstr ""
 
-#: yit-plugin.php:186
+#: yit-plugin.php:199
 msgctxt "Action links"
 msgid "Settings"
 msgstr ""

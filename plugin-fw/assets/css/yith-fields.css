@@ -553,19 +553,32 @@ YITH UI
     background-color : #207a92;
 }
 
-.yith-plugin-ui .nav-tab-active {
+.yith-plugin-ui .yith-nav-tab-wrapper .yith-plugin-fw-tab-element:hover > a.nav-tab.yith-premium:not(.nav-tab-active),
+.yith-plugin-ui .yith-nav-tab-wrapper .nav-tab.yith-premium:not(.nav-tab-active):hover {
+    background-color : #d24318;
+}
+
+.yith-plugin-ui .nav-tab-active,
+.yith-plugin-ui .nav-tab-active:hover,
+.yith-plugin-ui .nav-tab-active:focus,
+.yith-plugin-ui .nav-tab-active:focus:active {
     background-color : #fff;
     color            : #336374;
     box-shadow       : 0 3px 0 -1px #fff;
+    border-bottom    : 0;
+}
+
+.yith-plugin-ui .nav-tab-active.yith-premium,
+.yith-plugin-ui .nav-tab-active.yith-premium:hover,
+.yith-plugin-ui .nav-tab-active.yith-premium:focus,
+.yith-plugin-ui .nav-tab-active.yith-premium:focus:active {
+    background-color : #fff;
+    color            : #be421c;
+    box-shadow       : none;
 }
 
 .yith-plugin-ui .yith-plugin-fw-tab-element:first-child .nav-tab-active {
     border-left : 1px solid #ddd;
-}
-
-.yith-plugin-ui .nav-tab-active.yith-premium {
-    background-color : #fff;
-    color            : #be421c;
 }
 
 .yith-plugin-ui #plugin-fw-wc {
@@ -683,10 +696,11 @@ YITH UI
 }
 
 /*** Icon ***/
-.yith-plugin-ui span.yith-icon {
-    margin-left : -36px;
+.yith-plugin-ui .yith-icon--right-overlay {
+    position    : relative;
+    left        : -33px;
     line-height : 36px;
-    font-size   : 20px;
+    width       : 0;
 }
 
 /*** General Input Style ***/
@@ -745,8 +759,16 @@ YITH UI
 
 
 .yith-plugin-ui select:focus,
-.yith-plugin-ui input:focus {
-    border-color : #a7d9ec !important;
+.yith-plugin-ui .yith-plugin-fw select:focus,
+.woocommerce .yith-plugin-ui table.form-table select:focus,
+.woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table select:focus,
+.yith-plugin-ui input[type=text]:not(.select2-search__field):focus,
+.woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=text]:not(.select2-search__field):focus,
+.yith-plugin-ui input[type=number]:focus,
+.woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=number]:focus,
+.yith-plugin-ui textarea:not(.wp-editor-area):focus,
+.woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table textarea:not(.wp-editor-area):focus {
+    border-color : #a7d9ec;
 }
 
 .woocommerce .yith-plugin-ui table.form-table select,
@@ -755,7 +777,7 @@ YITH UI
     -webkit-appearance : none;
     line-height        : 1.2em;
     min-height         : 35px;
-    background         : url("../images/arrow_down.svg") no-repeat right center;
+    background         : #fff url("../images/arrow_down.svg") no-repeat right center;
     background-size    : 35px 13px;
     border-radius      : 8px;
     padding-right      : 30px;
@@ -764,211 +786,6 @@ YITH UI
 .yith-plugin-ui .form-table th {
     width         : 200px;
     padding-right : 50px;
-}
-
-/** BUTTONS **/
-.wp-core-ui .yith-plugin-ui .button-primary,
-.wp-core-ui .yith-plugin-ui .button-secondary,
-.yith-plugin-ui .yith-add-button,
-.yith-plugin-ui .yith-save-button,
-.yith-plugin-ui .yith-edit-button,
-.yith-plugin-ui .yith-update-button,
-.yith-plugin-ui .yith-plugin-fw-select-all,
-.yith-plugin-ui .yith-plugin-fw-deselect-all,
-.yith-plugin-ui .yith-plugin-fw-upload-button,
-.yith-plugin-ui .yith-plugin-fw-upload-button-reset {
-    border-radius    : 3px;
-    text-transform   : uppercase;
-    box-shadow       : none;
-    border           : 0;
-    font-weight      : 700;
-    font-size        : 11px;
-    padding          : 0px 14px;
-    outline          : none;
-    height           : auto;
-    transition       : all ease 0.3s;
-    background-color : #d6d6d6;
-    color            : #656565;
-    text-shadow      : none;
-    vertical-align   : middle;
-    line-height      : 26px;
-    display          : inline-block;
-    text-decoration  : none;
-    cursor           : pointer;
-}
-
-.wp-core-ui .yith-plugin-ui .button-secondary.yith-plugin-fw-upload-button-reset,
-.wp-core-ui .yith-plugin-ui .button-secondary.yith-plugin-fw-upload-button,
-.yith-plugin-ui .yith-plugin-fw-upload-button-reset,
-.yith-plugin-ui .button-secondary.yith-plugin-fw-upload-button-reset,
-.yith-plugin-ui .button-secondary.yith-plugin-fw-upload-button {
-    height : 38px;
-}
-
-.wp-core-ui .yith-plugin-ui .button:focus,
-.wp-core-ui .yith-plugin-ui .button-primary:focus,
-.yith-plugin-ui .yith-add-button:focus,
-.yith-plugin-ui .yith-save-button:focus,
-.yith-plugin-ui .yith-edit-button:focus,
-.yith-plugin-ui .yith-update-button:focus,
-.wp-core-ui .yith-plugin-ui .button-secondary:focus {
-    outline    : none;
-    box-shadow : none;
-}
-
-.wp-core-ui .yith-plugin-ui .button-xl {
-    padding     : 0px 20px;
-    font-size   : 14px;
-    line-height : 38px;
-    display     : inline-block;
-    font-weight : 600;
-}
-
-/** button with inside a span with icon class */
-.yith-plugin-ui .button-secondary span.yith-icon {
-    margin-left  : 0px;
-    margin-right : 10px;
-    line-height  : normal;
-}
-
-.yith-plugin-ui .button-secondary span.yith-icon:before {
-    color     : #656565;
-    font-size : 15px;
-}
-
-
-.wp-core-ui .yith-plugin-ui .button:focus,
-.wp-core-ui .yith-plugin-ui .button-secondary:focus,
-.yith-plugin-ui .yith-save-button:hover,
-.wp-core-ui .yith-plugin-ui .button-secondary:hover,
-.yith-plugin-ui .yith-plugin-fw-upload-button-reset:hover {
-    background-color : #cacaca;
-    color            : #515151;
-}
-
-.wp-core-ui .yith-plugin-ui .button-primary,
-.yith-plugin-ui .button-secondary.yith-plugin-fw-select-all,
-.yith-plugin-ui .button-secondary.yith-plugin-fw-upload-button {
-    background-color : #007694;
-    color            : #fff;
-}
-
-
-.yith-plugin-ui .yith-add-button,
-.wp-core-ui .yith-plugin-ui .button-primary:focus,
-.wp-core-ui .yith-plugin-ui .button-primary:hover {
-    background-color : #375f6b;
-    color            : #fff;
-    cursor           : pointer;
-}
-
-
-.yith-plugin-ui .yith-add-button:hover,
-.wp-core-ui .yith-plugin-ui .yith-plugin-fw-upload-button:focus,
-.yith-plugin-ui .button-secondary.yith-plugin-fw-select-all:hover,
-.yith-plugin-ui .button-secondary.yith-plugin-fw-select-all:focus,
-.yith-plugin-ui .yith-plugin-fw-upload-button:hover {
-    border-color : #007694;
-    background   : #007694;
-    color        : #fff;
-    line-height  : 26px;
-    margin-left  : 0;
-}
-
-.yith-plugin-ui .button-primary:before,
-.yith-plugin-ui .yith-add-button:before,
-.yith-plugin-ui .yith-save-button:before,
-.yith-plugin-ui .yith-edit-button:before,
-.yith-plugin-ui .yith-update-button:before,
-.yith-plugin-ui .button-secondary:before {
-    font-family    : 'yith-icon';
-    font-size      : 10px;
-    font-weight    : 700;
-    margin-right   : 10px;
-    vertical-align : bottom;
-    display        : inline-block;
-}
-
-/** yith-edit-button **/
-.yith-plugin-ui .yith-edit-button {
-    background-color : #7f9298;
-    color            : #fff;
-}
-
-.yith-plugin-ui .yith-edit-button:focus,
-.yith-plugin-ui .yith-edit-button:hover {
-    background-color : #718085;
-    color            : #fff;
-}
-
-.yith-plugin-ui .yith-edit-button:before {
-    content : "\e907";
-}
-
-/** yith-update-button **/
-.yith-plugin-ui .yith-update-button {
-    background-color : #94aa09;
-    color            : #fff;
-}
-
-.yith-plugin-ui .yith-update-button:focus,
-.yith-plugin-ui .yith-update-button:hover {
-    background-color : #7a9009;
-    color            : #fff;
-}
-
-.yith-plugin-ui .yith-update-button:before {
-    content   : "\e90b";
-    font-size : 15px;
-}
-
-/** yith-save-button **/
-
-.yith-plugin-ui .yith-save-button {
-    background-color : #267390;
-    color            : #fff;
-}
-
-.yith-plugin-ui .yith-save-button:focus,
-.yith-plugin-ui .yith-save-button:hover {
-    background-color : #1c4863;
-    color            : #fff;
-}
-
-
-/** yith-remove-button **/
-
-.yith-plugin-ui .button-secondary.yith-remove-button:before {
-    content   : "\e90d";
-    font-size : 15px;
-}
-
-
-/** yith-add-button **/
-.yith-plugin-ui .yith-add-button:before {
-    content : "\e90a";
-}
-
-.yith-plugin-ui .yith-add-button.closed {
-    background-color : #fff;
-    color            : #375f6b;
-    border           : 1px solid #375f6b;
-}
-
-.yith-plugin-ui .yith-add-button.closed:before {
-    content : "\e906";
-}
-
-
-/** yith-plugin-fw-upload-button **/
-.yith-plugin-ui button.yith-plugin-fw-upload-button:before {
-    content        : "\e90c";
-    font-family    : 'yith-icon';
-    font-size      : 17px;
-    font-weight    : 400;
-    margin-right   : 10px;
-    vertical-align : middle;
-    display        : inline-block;
 }
 
 /** SELECT 2 **/
@@ -1014,9 +831,10 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
 
 .woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=text].select2-search__field,
 .yith-plugin-ui .yith-plugin-fw table.form-table input.select2-search__field {
-    border  : 0;
-    padding : 0;
-    height  : initial;
+    border    : 0;
+    padding   : 0;
+    height    : initial;
+    min-width : 380px;
 }
 
 .yith-plugin-ui .select2-container--default .select2-selection--multiple .select2-selection__choice,
@@ -1041,6 +859,10 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
 }
 
 .yith-plugin-ui .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    display : none;
+}
+
+.yith-plugin-fw-select2-container.select2-container--open .select2-dropdown:after {
     display : none;
 }
 
@@ -1105,8 +927,10 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
 }
 
 .yith-plugin-ui .select2-container .select2-selection--multiple,
-.yith-plugin-ui .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border : 0;
+.yith-plugin-ui .select2-container--default.select2-container--focus .select2-selection--multiple,
+.wc-wp-version-gte-53 .yith-plugin-ui .select2-container.select2-container--open .select2-selection--multiple {
+    border     : 0;
+    box-shadow : none;
 }
 
 .yith-plugin-fw .select2-search input[type=text] {
@@ -1225,10 +1049,11 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
 .yith-plugin-ui input[type="checkbox"]:checked:after {
     content     : "\e905";
     font-family : 'yith-icon';
-    font-size   : 15px;
+    font-size   : 10px;
     position    : absolute;
+    font-weight : 600;
     top         : 8px;
-    left        : 1px;
+    left        : 3px;
     color       : #fff;
 }
 
@@ -1546,25 +1371,34 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 }
 
 .yith-plugin-ui .iris-picker .iris-square-inner {
-    box-shadow : none;
-    border     : 1px solid #d9d9d9;
+    box-shadow : 0 0 0 1px #d9d9d9 inset;
 }
 
-.yith-plugin-ui .yith-plugin-fw-multi-colorpicker {
-    margin-top : -20px;
+.yith-plugin-ui .iris-picker .iris-square-value {
+    width      : 0;
+    height     : 0;
+    background : transparent;
+    border     : 0;
 }
 
 .yith-plugin-ui .yith-single-colorpicker {
-    display    : inline-block;
-    width      : 220px;
-    margin-top : 20px;
+    display       : inline-block;
+    width         : 220px;
+    margin-bottom : 10px;
 }
 
 .yith-plugin-ui .yith-single-colorpicker > label {
-    display     : block;
-    font-size   : 11px;
-    font-weight : 600;
-    margin      : 0 0 10px 0;
+    display        : block;
+    font-size      : 11px;
+    font-weight    : 600;
+    margin         : 0 0 10px 0;
+    text-transform : uppercase;
+}
+
+.yith-plugin-ui .the-metabox.multi-colorpicker span.description,
+.yith-plugin-ui .yith-plugin-fw-panel-wc-row.multi-colorpicker span.description,
+.yith-plugin-ui .yith-plugin-fw-multi-colorpicker-field-wrapper span.description {
+    margin-top : 0;
 }
 
 /* RANGE SLIDER */
@@ -1680,10 +1514,10 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 
 .yith-plugin-ui #plugin-fw-wc .yith-toggle-title h3,
 .yith-plugin-ui.metaboxes-tab h3,
-.yith-plugin-ui .yith-toggle-title h3 {
-    padding        : 0px 20px 0px 25px;
+.yith-plugin-ui .yith-toggle-title h3,
+.metaboxes-tab.yith-plugin-ui .yith-toggle-title h3 {
+    padding        : 0px 20px 0px 30px;
     margin         : 3px 0;
-
     display        : inline-block;
     position       : relative;
     min-width      : 173px;
@@ -1701,15 +1535,18 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 }
 
 .yith-plugin-ui .yith-toggle {
-    position    : absolute;
-    width       : 30px;
-    cursor      : pointer;
-    left        : 0;
-    top         : 0;
-    bottom      : 0;
-    margin      : auto;
-    display     : flex;
-    align-items : center;
+    position        : absolute;
+    width           : 25px;
+    cursor          : pointer;
+    left            : 0;
+    top             : 0;
+    bottom          : 0;
+    margin          : auto;
+    display         : flex;
+    align-items     : center;
+    box-sizing      : border-box;
+    align-items     : center;
+    justify-content : center;
 }
 
 .yith-plugin-ui .yith-toggle > span:before {
@@ -1718,9 +1555,11 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 
 .yith-plugin-ui .yith-toggle > span {
     position    : absolute;
-    right       : 50%;
+    /* right       : 50%; */
     transition  : transform .3s;
     line-height : 1;
+    font-size   : 13px;
+    font-weight : 600;
 }
 
 
@@ -1788,11 +1627,11 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 }
 
 .yith-plugin-ui .yith-toggle-row .yith-icon-drag {
-    position    : absolute;
-    right       : 0;
-    top         : 25%;
-    bottom      : 0;
-    line-height : 1;
+    position  : absolute;
+    right     : 2px;
+    top       : 50%;
+    transform : translateY(-50%);
+    font-size : 18px;
 }
 
 .yith-plugin-ui .yith-toggle-row.with-subtitle .yith-toggle-onoff {
@@ -1875,9 +1714,6 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 .yith-plugin-ui #post-query-submit,
 .yith-plugin-ui #search-submit,
 .yith-plugin-ui .button.filter-button {
-    margin-left : 0;
-    height      : 33px;
-    padding     : 0 10px;
     line-height : 33px;
 }
 
@@ -2153,6 +1989,7 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 
 
 .yith-plugin-fw-copy-to-clipboard input[type=text].yith-plugin-fw-copy-to-clipboard__field,
+.yith-plugin-fw.yith-plugin-ui .yith-plugin-fw-copy-to-clipboard input[type=text].yith-plugin-fw-copy-to-clipboard__field,
 .woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=text].yith-plugin-fw-copy-to-clipboard__field {
     height        : 38px;
     width         : 100%;
@@ -2160,6 +1997,8 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
     padding       : 0 10px 0 0;
     border        : 0;
     border-radius : 0;
+    box-shadow    : none;
+    outline       : none;
 }
 
 .yith-plugin-fw-copy-to-clipboard.yith-plugin-fw-copy-to-clipboard--readonly input[type=text].yith-plugin-fw-copy-to-clipboard__field,

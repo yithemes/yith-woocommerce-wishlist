@@ -8,16 +8,27 @@
  */
 
 jQuery( function ( $ ) {
-    var wrap    = $( '.yith-plugin-fw-wp-page-wrapper' ),
-        notices = $( 'div.updated, div.error, div.notice' );
+	var wrap    = $( '.yith-plugin-fw-wp-page-wrapper' ),
+		notices = $( 'div.updated, div.error, div.notice' ).not( '#message' ),
+		message = $( 'div#message.updated' );
 
-    // prevents the WC message for changes when leaving the panel page
-    $( '.yith-plugin-fw-wp-page-wrapper .woo-nav-tab-wrapper' ).removeClass( 'woo-nav-tab-wrapper' ).addClass( 'yith-nav-tab-wrapper' );
+	// prevents the WC message for changes when leaving the panel page
+	$( '.yith-plugin-fw-wp-page-wrapper .woo-nav-tab-wrapper' ).removeClass( 'woo-nav-tab-wrapper' ).addClass( 'yith-nav-tab-wrapper' );
 
-    // prevent moving notices withing the tab in WP Pages and move them into the wrapper
-    notices.addClass( 'inline' );
-    if ( wrap.length ) {
-        wrap.prepend( notices );
-    }
+	// prevent moving notices withing the tab in WP Pages and move them into the wrapper
+	notices.addClass( 'inline' );
+	if ( wrap.length ) {
+		wrap.prepend( notices );
+	}
+
+	// Update message animation.
+	if ( message.length ) {
+		message.addClass( 'yith-plugin-fw-animate__appear-from-top' ).show();
+		message.on( 'click', '.notice-dismiss', function ( e ) {
+			e.stopPropagation();
+			message.removeClass( 'yith-plugin-fw-animate__appear-from-top' ).slideUp( 200 );
+		} )
+
+	}
 
 } );

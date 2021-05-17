@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-04-12 11:06:33+00:00\n"
-"PO-Revision-Date: 2021-04-05 19:01:01+0000\n"
+"POT-Creation-Date: 2021-05-17 13:16:23+00:00\n"
+"PO-Revision-Date: 2021-05-17 13:15:16+0000\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,27 +13,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 
-#: includes/class-yit-assets.php:129
+#: includes/class-yit-assets.php:143
 msgid "Clear"
 msgstr "Wissen"
 
-#: includes/class-yit-assets.php:130
+#: includes/class-yit-assets.php:144
 msgid "Clear color"
 msgstr "Kleur wissen"
 
-#: includes/class-yit-assets.php:131
+#: includes/class-yit-assets.php:145
 msgid "Default"
 msgstr "Standaard"
 
-#: includes/class-yit-assets.php:132
+#: includes/class-yit-assets.php:146
 msgid "Select default color"
 msgstr "Standaardkleur selecteren"
 
-#: includes/class-yit-assets.php:133
+#: includes/class-yit-assets.php:147
 msgid "Select Color"
 msgstr "Kleur selecteren"
 
-#: includes/class-yit-assets.php:134
+#: includes/class-yit-assets.php:148
 msgid "Color value"
 msgstr "Kleurwaarde"
 
@@ -49,18 +49,17 @@ msgstr "Plugin instellingen"
 msgid "Settings"
 msgstr "Instellingen"
 
-#: includes/class-yit-plugin-panel.php:450
-#: includes/class-yit-plugin-panel.php:453
+#: includes/class-yit-plugin-panel.php:451
+#: includes/class-yit-plugin-panel.php:454
 msgid "How to install premium version"
 msgstr "Hoe installeer ik de premium versie"
 
-#: includes/class-yit-plugin-panel.php:619
+#: includes/class-yit-plugin-panel.php:620
 #: includes/class-yit-plugin-subpanel.php:132
-#: templates/panel/woocommerce/woocommerce-form.php:28
 msgid "Save Changes"
 msgstr "Wijzigingen opslaan"
 
-#: includes/class-yit-plugin-panel.php:624
+#: includes/class-yit-plugin-panel.php:625
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid ""
@@ -68,73 +67,72 @@ msgid ""
 msgstr ""
 "Als je doorgaat met deze actie, zal je alle opties op deze pagina resetten."
 
-#: includes/class-yit-plugin-panel.php:624
+#: includes/class-yit-plugin-panel.php:625
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid "Are you sure?"
 msgstr "Weet je het zeker?"
 
-#: includes/class-yit-plugin-panel.php:628
+#: includes/class-yit-plugin-panel.php:629
 #: includes/class-yit-plugin-subpanel.php:139
 msgid "Reset to default"
 msgstr "Resetten naar standaard"
 
-#: includes/class-yit-plugin-panel.php:865
+#: includes/class-yit-plugin-panel.php:868
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr "Het element dat je hebt ingevoerd bestaat al. Voer een andere naam in."
 
-#: includes/class-yit-plugin-panel.php:866
+#: includes/class-yit-plugin-panel.php:869
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
-#: includes/class-yit-plugin-panel.php:867
+#: includes/class-yit-plugin-panel.php:870
 msgid "Settings reset"
 msgstr "Instellingen resetten"
 
-#: includes/class-yit-plugin-panel.php:868
+#: includes/class-yit-plugin-panel.php:871
 msgid "Element deleted correctly."
 msgstr "Element juist verwijderd."
 
-#: includes/class-yit-plugin-panel.php:869
-#: includes/class-yit-plugin-panel.php:870
+#: includes/class-yit-plugin-panel.php:872
+#: includes/class-yit-plugin-panel.php:873
 msgid "Element updated correctly."
 msgstr "Element juist geüpdatet."
 
-#: includes/class-yit-plugin-panel.php:871
+#: includes/class-yit-plugin-panel.php:874
 msgid "Database imported correctly."
 msgstr "Database juist geïmporteerd."
 
-#: includes/class-yit-plugin-panel.php:872
+#: includes/class-yit-plugin-panel.php:875
 msgid "An error has occurred during import. Please try again."
 msgstr "Er is een fout opgetreden tijdens importeren. Probeer opnieuw."
 
-#: includes/class-yit-plugin-panel.php:873
+#: includes/class-yit-plugin-panel.php:876
 msgid "The added file is not valid."
 msgstr "Het toegevoegde bestand is niet geldig."
 
-#: includes/class-yit-plugin-panel.php:874
+#: includes/class-yit-plugin-panel.php:877
 msgid "Sorry, import is disabled."
 msgstr "Sorry, importeren is uitgeschakeld."
 
-#: includes/class-yit-plugin-panel.php:875
+#: includes/class-yit-plugin-panel.php:878
 msgid "Sorting successful."
 msgstr "Succesvol gesorteerd."
 
-#: includes/class-yit-plugin-panel.php:1343
+#: includes/class-yit-plugin-panel.php:1346
 msgid "We need your support"
 msgstr "We hebben je hulp nodig"
 
-#: includes/class-yit-plugin-panel.php:1344
+#: includes/class-yit-plugin-panel.php:1347
 msgid "to keep updating and improving the plugin. Please,"
 msgstr "om de plugin te blijven bijwerken en verbeteren. A.u.b.,"
 
-#: includes/class-yit-plugin-panel.php:1346
-#, fuzzy
+#: includes/class-yit-plugin-panel.php:1349
 msgid "help us by leaving a good review"
-msgstr "help ons door een 5-sterren waardering achter te laten"
+msgstr "help ons door een goede beoordeling achter te laten"
 
-#: includes/class-yit-plugin-panel.php:1347
+#: includes/class-yit-plugin-panel.php:1350
 msgid ":) Thanks!"
 msgstr ":) Bedankt!"
 
@@ -193,6 +191,16 @@ msgid ""
 msgstr ""
 "Er is een fout opgetreden, wat waarschijnlijk betekent dat de feed niet "
 "werkt. Probeer het later opnieuw."
+
+#. translators: %s is the name of the post type (example Back to "Membership
+#. Plans").
+#: includes/class-yith-post-type-admin.php:286
+msgid "Back to \"%s\""
+msgstr "Terug naar \"%s\""
+
+#: includes/class-yith-post-type-admin.php:286
+msgid "Back to the list"
+msgstr "Terug naar de lijst"
 
 #: includes/class-yith-system-status.php:110
 msgid "WordPress Version"
@@ -490,7 +498,16 @@ msgstr "Upload"
 msgid "Reset"
 msgstr "Resetten"
 
-#: templates/panel/woocommerce/woocommerce-form.php:34
+#: templates/panel/woocommerce/woocommerce-form.php:28
+#: templates/panel/woocommerce/woocommerce-form.php:32
+msgid "Save Options"
+msgstr "Opties opslaan"
+
+#: templates/panel/woocommerce/woocommerce-form.php:32
+msgid "Options Saved"
+msgstr "Opties opgeslagen"
+
+#: templates/panel/woocommerce/woocommerce-form.php:38
 msgid "Reset Defaults"
 msgstr "Reset Standaard instellingen"
 
@@ -573,7 +590,36 @@ msgstr "Externe object cache"
 msgid "Plugins Requirements"
 msgstr "Plugin benodigdheden"
 
-#: yit-plugin.php:190
+#. translators: %s is the title of the post object.
+#: yit-functions.php:1823
+msgid "Are you sure you want to move \"%s\" to trash?"
+msgstr "Weet je zeker dat je \"%s\" naar de prullenbak wilt verplaatsen?"
+
+#. translators: %s is the title of the post object.
+#: yit-functions.php:1825 yit-functions.php:1983
+msgid "Are you sure you want to delete \"%s\"?"
+msgstr "Weet je zeker dat je \"%s\" wilt verwijderen?"
+
+#: yit-functions.php:1825 yit-functions.php:1983
+msgid ""
+"This action cannot be undone and you will be not able to recover this data."
+msgstr ""
+"Deze actie kan niet ongedaan gemaakt worden and je zult deze gegevens niet "
+"kunnen herstellen."
+
+#: yit-functions.php:1891
+msgid "Confirm trash"
+msgstr "Verplaatsen naar prullenbak bevestigen"
+
+#: yit-functions.php:1908 yit-functions.php:2035
+msgid "Confirm delete"
+msgstr "Verwijderen bevestigen"
+
+#: yit-functions.php:1921 yit-functions.php:1929 yit-functions.php:2046
+msgid "Further actions"
+msgstr "Verdere acties"
+
+#: yit-plugin.php:203
 msgid "License"
 msgstr "Licentie"
 
@@ -591,6 +637,16 @@ msgstr "%s - Opties"
 msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr "YITH"
+
+#: includes/class-yit-assets.php:131
+msgctxt "Button text"
+msgid "Confirm"
+msgstr "Bevestigen"
+
+#: includes/class-yit-assets.php:132
+msgctxt "Button text"
+msgid "Cancel"
+msgstr "Annuleren"
 
 #: includes/class-yith-dashboard.php:96
 msgctxt "Plugin FW"
@@ -694,27 +750,92 @@ msgctxt "YES/NO button: use MAX 4 characters!"
 msgid "NO"
 msgstr "NEE"
 
-#: yit-plugin.php:78
+#: yit-functions.php:1837
+msgctxt "Post action"
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: yit-functions.php:1846
+msgctxt "Post action"
+msgid "View"
+msgstr "Bekijken"
+
+#: yit-functions.php:1857
+msgctxt "Post action"
+msgid "Edit"
+msgstr "Bewerken"
+
+#: yit-functions.php:1865
+msgctxt "Post action"
+msgid "Duplicate"
+msgstr "Dupliceren"
+
+#: yit-functions.php:1877
+msgctxt "Post action"
+msgid "Restore"
+msgstr "Herstellen"
+
+#: yit-functions.php:1885
+msgctxt "Post action"
+msgid "Trash"
+msgstr "Prullenbak"
+
+#: yit-functions.php:1901
+msgctxt "Post action"
+msgid "Delete Permanently"
+msgstr "Permanent verijwderen"
+
+#: yit-functions.php:1893
+msgctxt "Trash confirmation action"
+msgid "Yes, trash"
+msgstr "Ja, verplaatsen naar prullenbak"
+
+#: yit-functions.php:1910 yit-functions.php:2037
+msgctxt "Delete confirmation action"
+msgid "Yes, delete"
+msgstr "Ja, verwijderen"
+
+#: yit-functions.php:1997
+msgctxt "Term action"
+msgid "View"
+msgstr "Bekijken"
+
+#: yit-functions.php:2007
+msgctxt "Term action"
+msgid "Edit"
+msgstr "Bewerken"
+
+#: yit-functions.php:2015
+msgctxt "Term action"
+msgid "Duplicate"
+msgstr "Dupliceren"
+
+#: yit-functions.php:2028
+msgctxt "Term action"
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: yit-plugin.php:84
 msgctxt "Plugin Row Meta"
 msgid "Live Demo"
 msgstr "Live Demo"
 
-#: yit-plugin.php:82
+#: yit-plugin.php:88
 msgctxt "Plugin Row Meta"
 msgid "Documentation"
 msgstr "Documentatie"
 
-#: yit-plugin.php:86
+#: yit-plugin.php:92
 msgctxt "Plugin Row Meta"
 msgid "Support"
 msgstr "Ondersteuning"
 
-#: yit-plugin.php:90
+#: yit-plugin.php:96
 msgctxt "Plugin Row Meta"
 msgid "Premium version"
 msgstr "Premium versie"
 
-#: yit-plugin.php:186
+#: yit-plugin.php:199
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Instellingen"

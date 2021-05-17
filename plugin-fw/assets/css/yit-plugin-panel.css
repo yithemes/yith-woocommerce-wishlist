@@ -56,12 +56,15 @@
     box-sizing : border-box;
     border     : 1px solid #ccc;
     border-top : 0;
-    margin     : -20px 15px 0 0;
+    margin     : -20px 0 0 0;
 }
 
 .yith-plugin-fw-panel-custom-tab-container > h2,
+.yith-plugin-fw-panel-custom-tab-container h2,
 .yith-plugin-ui .yith-plugin-fw-panel-custom-tab-container > h2,
-.yith-plugin-ui .yith-plugin-fw-panel-custom-sub-tab-container > h2 {
+.yith-plugin-ui .yith-plugin-fw-panel-custom-tab-container h2,
+.yith-plugin-ui .yith-plugin-fw-panel-custom-sub-tab-container > h2,
+.yith-plugin-ui .yith-plugin-fw-panel-custom-sub-tab-container h2 {
     border  : none;
     padding : 15px 0;
 }
@@ -90,17 +93,17 @@
     margin : 5px 15px 15px 0;
 }
 
-.yith-plugin-fw-wp-page-wrapper .wrap {
+.yith-plugin-fw-wp-page-wrapper .wrap, .yith-plugin-fw-wp-page__sub-tab-wrap {
     border     : 1px solid #d8d8d8;
     border-top : 0;
-    margin     : 0px 15px 0 0;
+    margin     : 0 15px 0 0;
     background : #fff;
     padding    : 20px;
     box-sizing : border-box;
 }
 
-.yith-plugin-fw-wp-page-wrapper .wrap.subnav-wrap .wrap {
-    margin-top : -20px;
+.yith-plugin-fw-wp-page-wrapper .yith-plugin-fw-wp-page__sub-tab-wrap .wrap {
+    margin : -20px 0 0 0;
 }
 
 #wpwrap .yith-plugin-fw-wp-page-wrapper .yith-plugin-ui h2.nav-tab-wrapper, #wpbody-content .yith-plugin-fw-wp-page-wrapper .yith-plugin-ui h2.nav-tab-wrapper {
@@ -574,7 +577,7 @@
  */
 .yith-plugin-ui .yith-plugin-fw-sub-tabs-nav {
     background   : #fff;
-    padding      : 10px 14px 0 20px;
+    padding      : 10px 20px 0;
     box-sizing   : border-box;
     margin-right : 15px;
     border-left  : 1px solid #d8d8d8;
@@ -589,13 +592,12 @@
     text-transform   : uppercase;
     line-height      : inherit;
     font-weight      : 600;
-    margin-right     : 21px;
+    margin           : 20px 0 0 0;
     box-sizing       : border-box;
     background-color : #f1f1f1;
     padding-top      : 0;
     border           : 1px solid #ccc;
     border-bottom    : 0;
-    margin-top       : 20px;
 }
 
 .yith-plugin-ui .yith-plugin-fw-sub-tabs-nav .nav-tab {
@@ -632,7 +634,7 @@
 .yith-plugin-ui .yith-plugin-fw-sub-tabs-nav .nav-tab-active {
     color         : #2a8db0;
     background    : #fff;
-    border-bottom : 2px solid #fff;
+    border-bottom : 0;
 }
 
 .yith-plugin-ui .yith-plugin-fw-sub-tabs-nav .nav-tab:first-child {
@@ -685,7 +687,7 @@ li.yith-plugin-fw-tab-element {
 }
 
 .yith-plugin-ui li.yith-plugin-fw-tab-element {
-    margin-bottom: -1px;
+    margin-bottom : -1px;
 }
 
 li.yith-plugin-fw-tab-element:hover {
@@ -726,6 +728,7 @@ li.yith-plugin-fw-tab-element:hover ul.nav-subtab {
 li.yith-plugin-fw-tab-element a.nav-tab i {
     margin-left : 10px;
     font-size   : 12px;
+    font-weight : 600;
 }
 
 li.yith-plugin-fw-tab-element a.nav-tab i:before {
@@ -738,18 +741,51 @@ li.yith-plugin-fw-tab-element a.nav-tab i:before {
 }
 
 .yith-plugin-ui .yith-plugin-fw-sub-tabs-nav ~ .yit-admin-panel-container,
-.yith-plugin-ui .yith-plugin-fw-sub-tabs-nav ~ .wrap.subnav-wrap {
+.yith-plugin-ui .yith-plugin-fw-sub-tabs-nav ~ .yith-plugin-fw-wp-page__sub-tab-wrap {
     border     : 1px solid #d8d8d8;
     border-top : 0;
-    margin     : -2px 15px 0 0;
+    margin     : 0 15px 0 0;
     background : #fff;
-    padding    : 20px;
+    padding    : 0 20px 20px 20px;
     box-sizing : border-box;
 }
 
-.yith-plugin-ui .yith-plugin-fw-sub-tabs-nav ~ .wrap.subnav-wrap .wrap,
-.yith-plugin-ui .yit-admin-panel-content-wrap.has-subnav {
-    margin : -20px 15px 0 0;
+
+.yith-plugin-ui .yith-plugin-fw-sub-tabs-nav ~ .yith-plugin-fw-wp-page__sub-tab-wrap .wrap {
+    margin : 0;
+}
+
+/**
+ * Float Save Button
+ */
+
+button#yith-plugin-fw-float-save-button {
+    align-items    : center;
+    border-radius  : 20px;
+    bottom         : 50px;
+    box-shadow     : 0 0 6px 3px rgba(0, 121, 159, .2);
+    display        : flex;
+    padding        : 6px 20px;
+    position       : fixed;
+    right          : 70px;
+    text-transform : uppercase;
+    z-index        : 2;
+}
+
+button#yith-plugin-fw-float-save-button i {
+    font-size    : 15px;
+    margin-right : 8px;
+}
+
+button#yith-plugin-fw-float-save-button:hover {
+    box-shadow : 0 0 6px 3px rgba(0, 121, 159, .4);
+}
+
+button#yith-plugin-fw-float-save-button.green {
+    background-color : #98aa36;
+    border-color     : #98aa36;
+    box-shadow       : 0 0 6px 3px rgba(152, 170, 54, .2);
+    transition       : all 0.8s linear;
 }
 
 /* === Responsive === */

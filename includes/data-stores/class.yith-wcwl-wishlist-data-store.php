@@ -484,18 +484,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				$sql_args[] = '%' . esc_sql( $wishlist_name ) . '%';
 			}
 
-			if ( ! empty( $wishlist_visibility ) && 'all' !== $wishlist_visibility ) {
-				switch ( $wishlist_visibility ) {
-					case 'visible':
-						$sql .= ' AND ( l.`wishlist_privacy` = %d OR l.`is_public` = %d )';
-						$sql_args[] = 0;
-						$sql_args[] = 1;
-						break;
-					default:
-						$sql .= ' AND l.`wishlist_privacy` = %d';
-						$sql_args[] = yith_wcwl_get_privacy_value( $wishlist_visibility );
-						break;
+			if ( isset( $wishlist_visibility ) && 'all' !== $wishlist_visibility ) {
+				if ( ! is_int( $wishlist_visibility ) ) {
+					$wishlist_visibility = yith_wcwl_get_privacy_value( $wishlist_visibility );
 				}
+
+				$sql .= ' AND l.`wishlist_privacy` = %d';
+				$sql_args[] = $wishlist_visibility;
 			}
 
 			if ( empty( $show_empty ) ) {

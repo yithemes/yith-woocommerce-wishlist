@@ -11,8 +11,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 list ( $field_id, $class, $name, $value,
 	/**
 	 * Array of option containing min and max value
-	 *
-	 * @deprecated 'option' since 3.5 | use 'min' and 'max' instead
+	 * This is deprecated since 3.5 | use 'min' and 'max' instead.
 	 */
 	$option,
 	$min, $max, $step, $custom_attributes, $data ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'value', 'option', 'min', 'max', 'step', 'custom_attributes', 'data' );

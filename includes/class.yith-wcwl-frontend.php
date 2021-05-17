@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.21';
+		public $version = '3.0.22';
 
 		/**
 		 * Plugin database version
@@ -101,7 +101,6 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			// scripts.
 			add_action( 'wp_head', array( $this, 'detect_javascript' ), 0 );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles_and_stuffs' ) );
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 			// add YITH WooCommerce Frequently Bought Together Premium shortcode.
 			add_action( 'yith_wcwl_after_wishlist_form', array( $this, 'yith_wcfbt_shortcode' ), 10, 1 );
