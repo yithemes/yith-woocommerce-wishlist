@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2021-05-17 13:07:15+00:00\n"
+"POT-Creation-Date: 2021-06-18 13:59:22+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:06+0200\n"
 "Last-Translator: YIThemes <support@yithemes.com>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -78,17 +78,17 @@ msgstr "Produto removido com sucesso."
 msgid "Please, make sure to enter a valid title"
 msgstr ""
 
-#: includes/class.yith-wcwl-frontend.php:469
+#: includes/class.yith-wcwl-frontend.php:461
 msgid ""
 "We are sorry, but this feature is available only if cookies on your browser "
 "are enabled."
 msgstr ""
 
-#: includes/class.yith-wcwl-frontend.php:470
+#: includes/class.yith-wcwl-frontend.php:462
 msgid "Product added to cart successfully"
 msgstr ""
 
-#: includes/class.yith-wcwl-frontend.php:723
+#: includes/class.yith-wcwl-frontend.php:715
 #: includes/class.yith-wcwl-shortcode.php:239
 #: plugin-options/wishlist_page-options.php:239
 #: templates/wishlist-view-footer-mobile.php:44

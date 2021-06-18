@@ -216,6 +216,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 
 			if ( 'admin.php' === $pagenow && isset( $_REQUEST['tab'] ) && in_array( $_REQUEST['tab'], $tabs, true ) ) {
 				$tab = sanitize_key( wp_unslash( $_REQUEST['tab'] ) );
+			} elseif ( isset( $_REQUEST['tab'] ) && 'help' === $_REQUEST['tab'] && ! empty( $this->settings['help_tab'] ) ) {
+				$tab = 'help';
 			}
 
 			return apply_filters( 'yith_wc_plugin_panel_current_tab', $tab );
@@ -277,6 +279,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 
 			if ( $custom_tab_options ) {
 				$this->print_custom_tab( $custom_tab_options );
+			} elseif ( $this->is_help_tab() ) {
+				$this->print_help_tab();
 			} else {
 				include YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/woocommerce/woocommerce-form.php';
 			}

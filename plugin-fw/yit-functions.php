@@ -905,6 +905,76 @@ if ( ! function_exists( 'yit_wpml_object_id' ) ) {
 	}
 }
 
+if ( ! function_exists( 'yit_get_language_from_locale' ) ) {
+	/**
+	 * Returns language name from locale code
+	 *
+	 * @param  string $locale      Locale to search for.
+	 * @param  bool   $show_native Whether to return native language instead of english one.
+	 * @return string Language name for passed locale; if can't find any, local itself is returned.
+	 * @since 3.7.1
+	 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
+	 */
+	function yit_get_language_from_locale( $locale, $show_native = false ) {
+		require_once ABSPATH . 'wp-admin/includes/translation-install.php';
+		$translations = wp_get_available_translations();
+
+		if ( in_array( $locale, array( 'en', 'en_US' ), true ) ) {
+			/**
+			 * English (United States) is not included in translations array
+			 * We return fixed, non-localized string, as WordPress does
+			 *
+			 * @see {wp_dropdown_languages}
+			 */
+			return 'English';
+		}
+
+		if ( empty( $translations ) ) {
+			return $locale;
+		}
+
+		// perfect match.
+		$translation = isset( $translations[ $locale ] ) ? $translations[ $locale ] : false;
+
+		// check for no-dialect.
+		if ( 2 === strlen( $locale ) ) {
+
+			// first check for common occurrences.
+			if ( 'it' === $locale && isset( $translations['it_IT'] ) ) {
+				$translation = $translations['it_IT'];
+			} elseif ( 'es' === $locale && isset( $translations['es_ES'] ) ) {
+				$translation = $translations['es_ES'];
+			} elseif ( 'de' === $locale && isset( $translations['de_DE'] ) ) {
+				$translation = $translations['de_DE'];
+			} else {
+				foreach ( $translations as $translation_locale => $translation_details ) {
+					$no_dialect_locale = isset( $translation_details['iso'][1] ) ? $translation_details['iso'][1] : substr( $translation_locale, 0, 2 );
+
+					if ( $locale !== $no_dialect_locale ) {
+						continue;
+					}
+
+					$translation = $translation_details;
+
+					// remove dialect from names.
+					$translation['english_name'] = preg_replace( '/(.+) \(.*\)/', '$1', $translation['english_name'] );
+
+					// we found what we were looking for; break.
+					break;
+				}
+			}
+		}
+
+		if ( ! $translation ) {
+			return $locale;
+		}
+
+		$language_name = $show_native ? $translation['native_name'] : $translation['english_name'];
+
+		return $language_name;
+	}
+}
+
 if ( ! function_exists( 'yith_get_formatted_price' ) ) {
 	/**
 	 * Format the price with a currency symbol.
@@ -1822,7 +1892,7 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_post_actions' ) ) {
 				// translators: %s is the title of the post object.
 				'confirm-trash-message'  => sprintf( __( 'Are you sure you want to move "%s" to trash?', 'yith-plugin-fw' ), '<strong>' . $title . '</strong>' ),
 				// translators: %s is the title of the post object.
-				'confirm-delete-message' => sprintf( __( 'Are you sure you want to delete "%s"?', 'yith-plugin-fw' ), '<strong>' . $title . '</strong>' ) . '<br /><br />' . __( 'This action cannot be undone and you will be not able to recover this data.', 'yith-plugin-fw' ),
+				'confirm-delete-message' => sprintf( __( 'Are you sure you want to delete "%s"?', 'yith-plugin-fw' ), '<strong>' . $title . '</strong>' ) . '<br /><br />' . __( 'This action cannot be undone and you will not be able to recover this data.', 'yith-plugin-fw' ),
 			);
 
 			$args = wp_parse_args( $args, $defaults );
@@ -1890,7 +1960,7 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_post_actions' ) ) {
 						$actions['trash']['confirm_data'] = array(
 							'title'               => __( 'Confirm trash', 'yith-plugin-fw' ),
 							'message'             => $args['confirm-trash-message'],
-							'confirm-button'      => _x( 'Yes, trash', 'Trash confirmation action', 'yith-plugin-fw' ),
+							'confirm-button'      => _x( 'Yes, move to trash', 'Trash confirmation action', 'yith-plugin-fw' ),
 							'confirm-button-type' => 'delete',
 						);
 					}
@@ -1907,7 +1977,7 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_post_actions' ) ) {
 						$actions['delete']['confirm_data'] = array(
 							'title'               => __( 'Confirm delete', 'yith-plugin-fw' ),
 							'message'             => $args['confirm-delete-message'],
-							'confirm-button'      => _x( 'Yes, delete', 'Delete confirmation action', 'yith-plugin-fw' ),
+							'confirm-button'      => _x( 'Yes, delete permanently', 'Delete confirmation action', 'yith-plugin-fw' ),
 							'confirm-button-type' => 'delete',
 						);
 					}
@@ -1980,7 +2050,7 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_term_actions' ) ) {
 				'more-menu'              => array(),
 				'duplicate-url'          => false,
 				// translators: %s is the title of the post object.
-				'confirm-delete-message' => sprintf( __( 'Are you sure you want to delete "%s"?', 'yith-plugin-fw' ), '<strong>' . $title . '</strong>' ) . '<br /><br />' . __( 'This action cannot be undone and you will be not able to recover this data.', 'yith-plugin-fw' ),
+				'confirm-delete-message' => sprintf( __( 'Are you sure you want to delete "%s"?', 'yith-plugin-fw' ), '<strong>' . $title . '</strong>' ) . '<br /><br />' . __( 'This action cannot be undone and you will not be able to recover this data.', 'yith-plugin-fw' ),
 			);
 
 			$args = wp_parse_args( $args, $defaults );

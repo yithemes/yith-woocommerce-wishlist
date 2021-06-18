@@ -673,8 +673,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				return;
 			}
 
-			$regex_paged = '(([^/]+/)*' . $wishlist_page_slug . ')(/(.*))?/page/([0-9]{1,})/?$';
-			$regex_simple = '(([^/]+/)*' . $wishlist_page_slug . ')(/(.*))?/?$';
+			$regex_paged = '(([^/]+/)*' . urldecode( $wishlist_page_slug ) . ')(/(.*))?/page/([0-9]{1,})/?$';
+			$regex_simple = '(([^/]+/)*' . urldecode( $wishlist_page_slug ) . ')(/(.*))?/?$';
 
 			add_rewrite_rule( $regex_paged, 'index.php?pagename=$matches[1]&' . $this->wishlist_param . '=$matches[4]&paged=$matches[5]', 'top' );
 			add_rewrite_rule( $regex_simple, 'index.php?pagename=$matches[1]&' . $this->wishlist_param . '=$matches[4]', 'top' );

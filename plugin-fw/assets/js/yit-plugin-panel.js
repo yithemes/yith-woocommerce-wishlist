@@ -217,9 +217,9 @@ jQuery( function ( $ ) {
 
 		function checkButtonPosition() {
 			if ( isInViewport( saveButton ) ) {
-				floatSaveButton.fadeOut( 150 );
+				floatSaveButton.removeClass( 'visible' );
 			} else {
-				floatSaveButton.fadeIn( 300 );
+				floatSaveButton.addClass( 'visible' );
 			}
 		}
 
@@ -238,7 +238,6 @@ jQuery( function ( $ ) {
 		}
 
 		if ( floatSaveButton.length > 0 && mainForm.length > 0 ) {
-			floatSaveButton.hide();
 			checkButtonPosition();
 			document.addEventListener( 'scroll', checkButtonPosition, { passive: true } );
 
@@ -254,7 +253,7 @@ jQuery( function ( $ ) {
 					}
 				);
 				$.post( document.location.href, mainForm.serialize() )
-					.done( function ( result ) {
+					.done( function ( response ) {
 						floatSaveButton.unblock()
 							.addClass( 'green' )
 							.fadeOut( 300 )
@@ -272,6 +271,11 @@ jQuery( function ( $ ) {
 									);
 									next();
 								} );
+
+						// Prevent WooCommerce warning for changes without saving.
+						window.onbeforeunload = null;
+
+						$( document ).trigger( 'yith-plugin-fw-float-save-button-after-saving', [response] );
 					} );
 			} )
 		}

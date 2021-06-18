@@ -323,7 +323,7 @@
 
 
 								  slide: function ( event, ui ) {
-									  $( this ).find( 'input' ).val( ui.value );
+									  $( this ).find( 'input' ).val( ui.value ).trigger( 'change' );
 									  $( this ).find( '.ui-slider-handle' ).text( ui.value );
 									  $( this ).siblings( '.feedback' ).find( 'strong' ).text( ui.value + labels );
 								  }
@@ -794,7 +794,7 @@
 
 			units.removeClass( fw_dimensions.selectors.units.selectedClass );
 			unit.addClass( fw_dimensions.selectors.units.selectedClass );
-			valueField.val( value );
+			valueField.val( value ).trigger( 'change' );
 		},
 		linkedChange: function () {
 			var button      = $( this ).closest( fw_dimensions.selectors.linked.button ),

@@ -25,6 +25,7 @@ require_once 'includes/class-yit-plugin-common.php';
 require_once 'includes/class-yit-gradients.php';
 require_once 'includes/class-yit-plugin-licence.php';
 require_once 'includes/class-yit-theme-licence.php';
+require_once 'includes/class-yit-help-desk.php';
 require_once 'includes/class-yit-video.php';
 require_once 'includes/class-yit-upgrade.php';
 require_once 'includes/class-yit-pointers.php';

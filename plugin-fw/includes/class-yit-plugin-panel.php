@@ -475,37 +475,19 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			);
 			$args     = wp_parse_args( $args, $defaults );
 
-			list ( $current_tab, $premium_class, $page, $parent_page, $wrapper_class ) = yith_plugin_fw_extract( $args, 'current_tab', 'premium_class', 'page', 'parent_page', 'wrapper_class' );
+			list ( $wrapper_class ) = yith_plugin_fw_extract( $args, 'wrapper_class' );
 
 			$tabs = '<ul class="yith-plugin-fw-tabs">';
 
 			foreach ( $this->settings['admin-tabs'] as $tab => $tab_value ) {
-				$active_class = $current_tab === $tab ? ' nav-tab-active' : '';
-				if ( 'premium' === $tab ) {
-					$active_class .= ' ' . $premium_class;
-				}
-				$active_class = apply_filters( 'yith_plugin_fw_panel_active_tab_class', $active_class, $current_tab, $tab );
-
-				$first_sub_tab = $this->get_first_sub_tab_key( $tab );
-				$sub_tab       = ! ! $first_sub_tab ? $first_sub_tab : '';
-				$sub_tabs      = $this->get_sub_tabs( $tab );
-				$url           = $this->get_nav_url( $page, $tab, $sub_tab, $parent_page );
-				$icon          = ( $current_tab !== $tab && $sub_tabs ) ? '<i class="yith-icon yith-icon-arrow_down"></i>' : '';
-
-				$tabs .= '<li class="yith-plugin-fw-tab-element">';
-				$tabs .= '<a class="nav-tab' . esc_attr( $active_class ) . '" href="' . esc_url( $url ) . '">' . wp_kses_post( $tab_value ) . $icon . '</a>';
-
-				if ( $current_tab !== $tab && $sub_tabs ) {
-					$tabs .= '<div class="nav-subtab-wrap"><ul class="nav-subtab">';
-					foreach ( $sub_tabs as $_key => $_tab ) {
-						$url = $this->get_nav_url( $page, $tab, $_key );
-
-						$tabs .= '<li class="nav-subtab-item"><a href="' . esc_url( $url ) . '">' . wp_kses_post( $_tab['title'] ) . '</a></li>';
-					}
-					$tabs .= '</ul></div>';
-				}
-				$tabs .= '</li>';
+				$tabs .= $this->get_tab_nav( $tab, $tab_value, $args );
 			}
+
+			// help tab.
+			if ( $this->has_help_tab() ) {
+				$tabs .= $this->get_tab_nav( 'help', _x( 'Help', 'Help tab name', 'yith-plugin-fw' ), $args );
+			}
+
 			$tabs .= '</ul>';
 			?>
 			<h2 class="<?php echo esc_attr( $wrapper_class ); ?>">
@@ -513,6 +495,52 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			</h2>
 			<?php
 			$this->print_sub_tabs_nav( $args );
+		}
+
+		/**
+		 * Get HTML for single tab in tabs navigation
+		 *
+		 * @param string $tab_slug Tab slug.
+		 * @param string $tab_name Tab name.
+		 * @param array  $args     Nav Arguments.
+		 *
+		 * @return string Tab HTML
+		 *
+		 * @author   Antonio La Rocca <antonio.larocca@yithemes.com>
+		 * @since    3.4.0
+		 */
+		protected function get_tab_nav( $tab_slug, $tab_name, $args = array() ) {
+			list ( $current_tab, $premium_class, $page, $parent_page ) = yith_plugin_fw_extract( $args, 'current_tab', 'premium_class', 'page', 'parent_page' );
+
+			$active_class = $current_tab === $tab_slug ? ' nav-tab-active' : '';
+
+			if ( 'premium' === $tab_slug ) {
+				$active_class .= ' ' . $premium_class;
+			}
+			$active_class = apply_filters( 'yith_plugin_fw_panel_active_tab_class', $active_class, $current_tab, $tab_slug );
+
+			$first_sub_tab = $this->get_first_sub_tab_key( $tab_slug );
+			$sub_tab       = ! ! $first_sub_tab ? $first_sub_tab : '';
+			$sub_tabs      = $this->get_sub_tabs( $tab_slug );
+			$url           = $this->get_nav_url( $page, $tab_slug, $sub_tab, $parent_page );
+			$icon          = ( $current_tab !== $tab_slug && $sub_tabs ) ? '<i class="yith-icon yith-icon-arrow_down"></i>' : '';
+
+			$tab = '<li class="yith-plugin-fw-tab-element">';
+
+			$tab .= '<a class="nav-tab' . esc_attr( $active_class ) . '" href="' . esc_url( $url ) . '">' . wp_kses_post( $tab_name ) . $icon . '</a>';
+
+			if ( $current_tab !== $tab_slug && $sub_tabs ) {
+				$tab .= '<div class="nav-subtab-wrap"><ul class="nav-subtab">';
+				foreach ( $sub_tabs as $_key => $_tab ) {
+					$url = $this->get_nav_url( $page, $tab_slug, $_key );
+
+					$tab .= '<li class="nav-subtab-item"><a href="' . esc_url( $url ) . '">' . wp_kses_post( $_tab['title'] ) . '</a></li>';
+				}
+				$tab .= '</ul></div>';
+			}
+			$tab .= '</li>';
+
+			return $tab;
 		}
 
 		/**
@@ -599,6 +627,10 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 
 				if ( $custom_tab_options ) {
 					$this->print_custom_tab( $custom_tab_options );
+
+					return;
+				} elseif ( $this->is_help_tab() ) {
+					$this->print_help_tab();
 
 					return;
 				}
@@ -726,6 +758,64 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		}
 
 		/**
+		 * Check if panel has help tab
+		 *
+		 * @return bool Whether panel has help tab or no.
+		 */
+		public function has_help_tab() {
+			return ! empty( $this->settings['help_tab'] ) && ( ! $this->is_free() || ! empty( $this->settings['help_tab']['show_on_free'] ) );
+		}
+
+		/**
+		 * Checks whether current tab is special Help Tab
+		 *
+		 * @return bool Whether current tab is Help Tab
+		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
+		 */
+		public function is_help_tab() {
+			return 'help' === $this->get_current_tab();
+		}
+
+		/**
+		 * Prints special Help Tab
+		 *
+		 * @return void
+		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
+		 */
+		public function print_help_tab() {
+			$options      = isset( $this->settings['help_tab'] ) ? $this->settings['help_tab'] : array();
+			$plugin_title = isset( $this->settings['plugin_title'] ) ? $this->settings['plugin_title'] : $this->settings['page_title'];
+
+			if ( 0 !== strpos( $plugin_title, 'YITH' ) ) {
+				$plugin_title = "YITH {$plugin_title}";
+			}
+
+			// parse options.
+			$options = wp_parse_args(
+				$options,
+				array(
+					// translators: 1. Plugin name.
+					'title'              => sprintf( _x( 'Thank you for purchasing %s!', 'Help tab default title', 'yith-plugin-fw' ), $plugin_title ),
+					'description'        => _x( 'We want to help you to enjoy a wonderful experience with all our products.', 'Help tab default description', 'yith-plugin-fw' ),
+					'main_video'         => false,
+					'playlists'          => array(),
+					'hc_url'             => 'https://support.yithemes.com/hc/',
+					'doc_url'            => $this->settings['plugin_slug'] ? 'https://docs.yithemes.com/' . $this->settings['plugin_slug'] : '',
+					'submit_ticket_url'  => 'https://yithemes.com/my-account/support/submit-a-ticket/',
+					'show_hc_articles'   => true,
+					'show_submit_ticket' => true,
+				)
+			);
+
+			// set template variables.
+			$current_tab     = $this->get_current_tab();
+			$current_sub_tab = $this->get_current_sub_tab();
+			$latest_articles = $this->settings['plugin_slug'] ? YIT_Help_Desk::get_latest_articles( $this->settings['plugin_slug'] ) : array();
+
+			include YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/help-tab.php';
+		}
+
+		/**
 		 * Add sections and fields to setting panel.
 		 * Read all options and show sections and fields.
 		 *
@@ -735,9 +825,10 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			$yit_options = $this->get_main_array_options();
 			$option_key  = $this->get_current_option_key();
 
-			if ( ! $option_key ) {
+			if ( ! $option_key || ! isset( $yit_options[ $option_key ] ) ) {
 				return;
 			}
+
 			foreach ( $yit_options[ $option_key ] as $section => $data ) {
 				add_settings_section( "yit_settings_{$option_key}_{$section}", $this->get_section_title( $section ), $this->get_section_description( $section ), 'yit' );
 				foreach ( $data as $option ) {
