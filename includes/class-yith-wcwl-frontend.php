@@ -2,8 +2,8 @@
 /**
  * Init class
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.23';
+		public $version = '3.0.25';
 
 		/**
 		 * Plugin database version
@@ -50,7 +50,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @access private
 		 * @since 1.0.0
 		 */
-		protected $_yith_wcwl_install;
+		protected $yith_wcwl_install;
 
 		/**
 		 * Returns single instance of the class
@@ -75,7 +75,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			define( 'YITH_WCWL_VERSION', $this->version );
 			define( 'YITH_WCWL_DB_VERSION', $this->db_version );
 
-			$this->_yith_wcwl_install = YITH_WCWL_Install();
+			$this->yith_wcwl_install = YITH_WCWL_Install();
 
 			// add filter for font-awesome compatibility.
 			add_filter( 'option_yith_wcwl_add_to_wishlist_icon', array( $this, 'update_font_awesome_classes' ) );
@@ -118,9 +118,9 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function init() {
 			// update cookie from old version to new one.
-			$this->_update_cookies();
-			$this->_destroy_serialized_cookies();
-			$this->_convert_cookies_to_session();
+			$this->update_cookies();
+			$this->destroy_serialized_cookies();
+			$this->convert_cookies_to_session();
 
 			// register assets.
 			$this->register_styles();
@@ -140,19 +140,19 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				'yith_wcwl_positions',
 				array(
 					'after_add_to_cart' => array(
-						'hook' => 'woocommerce_single_product_summary',
+						'hook'     => 'woocommerce_single_product_summary',
 						'priority' => 31,
 					),
-					'add-to-cart' => array(
-						'hook' => 'woocommerce_single_product_summary',
+					'add-to-cart'       => array(
+						'hook'     => 'woocommerce_single_product_summary',
 						'priority' => 31,
 					),
-					'thumbnails'  => array(
-						'hook' => 'woocommerce_product_thumbnails',
+					'thumbnails'        => array(
+						'hook'     => 'woocommerce_product_thumbnails',
 						'priority' => 21,
 					),
-					'summary'     => array(
-						'hook' => 'woocommerce_after_single_product_summary',
+					'summary'           => array(
+						'hook'     => 'woocommerce_after_single_product_summary',
 						'priority' => 11,
 					),
 				)
@@ -166,7 +166,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			}
 
 			// check if Add to wishlist button is enabled for loop.
-			$enabled_on_loop = 'yes' == get_option( 'yith_wcwl_show_on_loop', 'no' );
+			$enabled_on_loop = 'yes' === get_option( 'yith_wcwl_show_on_loop', 'no' );
 
 			if ( ! $enabled_on_loop ) {
 				return;
@@ -175,16 +175,16 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$positions = apply_filters(
 				'yith_wcwl_loop_positions',
 				array(
-					'before_image' => array(
-						'hook' => 'woocommerce_before_shop_loop_item',
+					'before_image'       => array(
+						'hook'     => 'woocommerce_before_shop_loop_item',
 						'priority' => 5,
 					),
 					'before_add_to_cart' => array(
-						'hook' => 'woocommerce_after_shop_loop_item',
+						'hook'     => 'woocommerce_after_shop_loop_item',
 						'priority' => 7,
 					),
-					'after_add_to_cart' => array(
-						'hook' => 'woocommerce_after_shop_loop_item',
+					'after_add_to_cart'  => array(
+						'hook'     => 'woocommerce_after_shop_loop_item',
 						'priority' => 15,
 					),
 				)
@@ -272,7 +272,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 3.0.20
 		 */
 		public function add_noindex_header() {
-			if ( function_exists( 'wp_robots_no_robots' ) || ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) {
+			if ( function_exists( 'wp_robots_no_robots' ) || ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return;
 			}
 
@@ -288,7 +288,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return array Filtered robots directives.
 		 */
 		public function add_noindex_robots( $robots ) {
-			if ( ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) {
+			if ( ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return $robots;
 			}
 
@@ -304,7 +304,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function register_styles() {
 			$woocommerce_base = WC()->template_path();
-			$assets_path = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
+			$assets_path      = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
 
 			// register dependencies.
 			wp_register_style( 'jquery-selectBox', YITH_WCWL_URL . 'assets/css/jquery.selectBox.css', array(), '1.2.0' );
@@ -324,10 +324,10 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			if ( ! $located ) {
 				wp_register_style( 'yith-wcwl-main', YITH_WCWL_URL . 'assets/css/style.css', $deps, $this->version );
 			} else {
-				$stylesheet_directory = get_stylesheet_directory();
+				$stylesheet_directory     = get_stylesheet_directory();
 				$stylesheet_directory_uri = get_stylesheet_directory_uri();
-				$template_directory = get_template_directory();
-				$template_directory_uri = get_template_directory_uri();
+				$template_directory       = get_template_directory();
+				$template_directory_uri   = get_template_directory_uri();
 
 				$style_url = ( strpos( $located, $stylesheet_directory ) !== false ) ? str_replace( $stylesheet_directory, $stylesheet_directory_uri, $located ) : str_replace( $template_directory, $template_directory_uri, $located );
 
@@ -338,7 +338,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$current_theme = wp_get_theme();
 
 			if ( $current_theme->exists() ) {
-				$theme_slug = $current_theme->Template;
+				$theme_slug = $current_theme->Template; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 				if ( file_exists( YITH_WCWL_DIR . 'assets/css/themes/' . $theme_slug . '.css' ) ) {
 					wp_register_style( 'yith-wcwl-theme', YITH_WCWL_URL . 'assets/css/themes/' . $theme_slug . '.css', array( $located ? 'yith-wcwl-user-main' : 'yith-wcwl-main' ), $this->version );
@@ -353,9 +353,9 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function register_scripts() {
 			$woocommerce_base = WC()->template_path();
-			$assets_path = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'unminified/' : '';
+			$assets_path      = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
+			$suffix           = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$prefix           = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'unminified/' : '';
 
 			// register dependencies.
 			wp_register_script( 'prettyPhoto', $assets_path . 'js/prettyPhoto/jquery.prettyPhoto' . $suffix . '.js', array( 'jquery' ), '3.1.6', true );
@@ -412,7 +412,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return void
 		 */
 		public function enqueue_custom_style() {
-			$custom_css = $this->_build_custom_css();
+			$custom_css = $this->build_custom_css();
 
 			if ( $custom_css ) {
 				$handle = wp_script_is( 'yith-wcwl-user-main' ) ? 'yith-wcwl-user-main' : 'yith-wcwl-main';
@@ -445,31 +445,31 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			return apply_filters(
 				'yith_wcwl_localize_script',
 				array(
-					'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),
-					'redirect_to_cart' => get_option( 'yith_wcwl_redirect_cart' ),
-					'multi_wishlist' => false,
-					'hide_add_button' => apply_filters( 'yith_wcwl_hide_add_button', true ),
-					'enable_ajax_loading' => 'yes' == get_option( 'yith_wcwl_ajax_enable', 'no' ),
-					'ajax_loader_url' => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
-					'remove_from_wishlist_after_add_to_cart' => get_option( 'yith_wcwl_remove_after_add_to_cart' ) == 'yes',
-					'is_wishlist_responsive' => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
+					'ajax_url'                  => admin_url( 'admin-ajax.php', 'relative' ),
+					'redirect_to_cart'          => get_option( 'yith_wcwl_redirect_cart' ),
+					'multi_wishlist'            => false,
+					'hide_add_button'           => apply_filters( 'yith_wcwl_hide_add_button', true ),
+					'enable_ajax_loading'       => 'yes' === get_option( 'yith_wcwl_ajax_enable', 'no' ),
+					'ajax_loader_url'           => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
+					'remove_from_wishlist_after_add_to_cart' => 'yes' === get_option( 'yith_wcwl_remove_after_add_to_cart' ),
+					'is_wishlist_responsive'    => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
 					'time_to_close_prettyphoto' => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
-					'fragments_index_glue' => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
+					'fragments_index_glue'      => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
 					'reload_on_found_variation' => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
-					'mobile_media_query' => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
-					'labels' => array(
-						'cookie_disabled' => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
+					'mobile_media_query'        => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
+					'labels'                    => array(
+						'cookie_disabled'       => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
 						'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) ),
 					),
-					'actions' => array(
-						'add_to_wishlist_action' => 'add_to_wishlist',
+					'actions'                   => array(
+						'add_to_wishlist_action'      => 'add_to_wishlist',
 						'remove_from_wishlist_action' => 'remove_from_wishlist',
-						'reload_wishlist_and_adding_elem_action'  => 'reload_wishlist_and_adding_elem',
-						'load_mobile_action' => 'load_mobile',
-						'delete_item_action' => 'delete_item',
-						'save_title_action' => 'save_title',
-						'save_privacy_action' => 'save_privacy',
-						'load_fragments' => 'load_fragments',
+						'reload_wishlist_and_adding_elem_action' => 'reload_wishlist_and_adding_elem',
+						'load_mobile_action'          => 'load_mobile',
+						'delete_item_action'          => 'delete_item',
+						'save_title_action'           => 'save_title',
+						'save_privacy_action'         => 'save_privacy',
+						'load_fragments'              => 'load_fragments',
 					),
 				)
 			);
@@ -503,7 +503,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function main_wishlist_content( $var ) {
 			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
-			$layout = ! empty( $var['layout'] ) ? $var['layout'] : '';
+			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
 
 			yith_wcwl_get_template_part( $template, '', $layout, $var );
 		}
@@ -518,7 +518,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function wishlist_header( $var ) {
 			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
-			$layout = ! empty( $var['layout'] ) ? $var['layout'] : '';
+			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
 
 			yith_wcwl_get_template_part( $template, 'header', $layout, $var );
 		}
@@ -533,7 +533,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function wishlist_footer( $var ) {
 			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
-			$layout = ! empty( $var['layout'] ) ? $var['layout'] : '';
+			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
 
 			yith_wcwl_get_template_part( $template, 'footer', $layout, $var );
 		}
@@ -552,7 +552,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				return $classes;
 			}
 
-			$enabled_on_loop = 'yes' == get_option( 'yith_wcwl_show_on_loop', 'no' );
+			$enabled_on_loop = 'yes' === get_option( 'yith_wcwl_show_on_loop', 'no' );
 
 			if ( ! $enabled_on_loop ) {
 				return $classes;
@@ -560,7 +560,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			$position = get_option( 'yith_wcwl_loop_position', 'after_add_to_cart' );
 
-			if ( 'shortcode' == $position ) {
+			if ( 'shortcode' === $position ) {
 				return $classes;
 			}
 
@@ -586,7 +586,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					if ( is_object( $value ) || is_array( $value ) ) {
 						// remove item if type is not supported.
 						unset( $options[ $id ] );
-					} elseif ( 'ajax_loading' == $id ) {
+					} elseif ( 'ajax_loading' === $id ) {
 						$options['ajax_loading'] = false;
 					}
 				}
@@ -625,9 +625,9 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		public function decode_fragment_options( $options ) {
 			if ( ! empty( $options ) ) {
 				foreach ( $options as $id => $value ) {
-					if ( 'true' == $value ) {
+					if ( 'true' === $value ) {
 						$options[ $id ] = true;
-					} elseif ( 'false' == $value ) {
+					} elseif ( 'false' === $value ) {
 						$options[ $id ] = false;
 					} else {
 						$options[ $id ] = sanitize_text_field( wp_unslash( $value ) );
@@ -672,11 +672,11 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function alter_add_to_cart_args( $args ) {
 			$use_custom_button = get_option( 'yith_wcwl_add_to_cart_style' );
-			$button_class = in_array( $use_custom_button, array( 'button_custom', 'button_default' ) );
-			$icon = get_option( 'yith_wcwl_add_to_cart_icon' );
-			$custom_icon = get_option( 'yith_wcwl_add_to_cart_custom_icon' );
-			$classes = isset( $args['class'] ) ? explode( ' ', $args['class'] ) : array();
-			$pos = array_search( 'button', $classes );
+			$button_class      = in_array( $use_custom_button, array( 'button_custom', 'button_default' ), true );
+			$icon              = get_option( 'yith_wcwl_add_to_cart_icon' );
+			$custom_icon       = get_option( 'yith_wcwl_add_to_cart_custom_icon' );
+			$classes           = isset( $args['class'] ) ? explode( ' ', $args['class'] ) : array();
+			$pos               = array_search( 'button', $classes, true );
 
 			if ( ! $button_class && false !== $pos ) {
 				unset( $classes[ $pos ] );
@@ -713,7 +713,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function alter_add_to_cart_text( $text, $product ) {
 			$label_option = get_option( 'yith_wcwl_add_to_cart_text', __( 'Add to cart', 'yith-woocommerce-wishlist' ) );
-			$label = $product->is_type( 'variable' ) ? $text : apply_filters( 'yith_wcwl_add_to_cart_label', $label_option );
+			$label        = $product->is_type( 'variable' ) ? $text : apply_filters( 'yith_wcwl_add_to_cart_label', $label_option );
 
 			return $label;
 		}
@@ -736,28 +736,28 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				}
 
 				$wishlist_id = $wishlist->get_id();
-				$item = $wishlist->get_product( $product->get_id() );
+				$item        = $wishlist->get_product( $product->get_id() );
 
 				if ( wp_doing_ajax() ) {
 					$url = add_query_arg( 'add-to-cart', $product->get_id(), YITH_WCWL()->get_wishlist_url( 'view/' . $yith_wcwl_wishlist_token ) );
 				}
 
-				if ( $product->is_type( array( 'simple', 'variation' ) ) && get_option( 'yith_wcwl_redirect_cart' ) == 'yes' ) {
+				if ( $product->is_type( array( 'simple', 'variation' ) ) && 'yes' === get_option( 'yith_wcwl_redirect_cart' ) ) {
 					$url = add_query_arg( 'add-to-cart', $product->get_id(), wc_get_cart_url() );
 				}
 
-				if ( ! $product->is_type( 'external' ) && get_option( 'yith_wcwl_remove_after_add_to_cart' ) == 'yes' ) {
+				if ( ! $product->is_type( 'external' ) && 'yes' === get_option( 'yith_wcwl_remove_after_add_to_cart' ) ) {
 					$url = add_query_arg(
 						array(
 							'remove_from_wishlist_after_add_to_cart' => $product->get_id(),
-							'wishlist_id' => $wishlist_id,
+							'wishlist_id'    => $wishlist_id,
 							'wishlist_token' => $yith_wcwl_wishlist_token,
 						),
 						$url
 					);
 				}
 
-				if ( $item && 'yes' == get_option( 'yith_wcwl_quantity_show' ) ) {
+				if ( $item && 'yes' === get_option( 'yith_wcwl_quantity_show' ) ) {
 					$url = add_query_arg( 'quantity', $item->get_quantity(), $url );
 				}
 			}
@@ -774,82 +774,82 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function update_font_awesome_classes( $class ) {
 			$exceptions = array(
-				'icon-envelope' => 'fa-envelope-o',
-				'icon-star-empty' => 'fa-star-o',
-				'icon-ok' => 'fa-check',
-				'icon-zoom-in' => 'fa-search-plus',
-				'icon-zoom-out' => 'fa-search-minus',
-				'icon-off' => 'fa-power-off',
-				'icon-trash' => 'fa-trash-o',
-				'icon-share' => 'fa-share-square-o',
-				'icon-check' => 'fa-check-square-o',
-				'icon-move' => 'fa-arrows',
-				'icon-file' => 'fa-file-o',
-				'icon-time' => 'fa-clock-o',
-				'icon-download-alt' => 'fa-download',
-				'icon-download' => 'fa-arrow-circle-o-down',
-				'icon-upload' => 'fa-arrow-circle-o-up',
-				'icon-play-circle' => 'fa-play-circle-o',
-				'icon-indent-left' => 'fa-dedent',
-				'icon-indent-right' => 'fa-indent',
-				'icon-facetime-video' => 'fa-video-camera',
-				'icon-picture' => 'fa-picture-o',
-				'icon-plus-sign' => 'fa-plus-circle',
-				'icon-minus-sign' => 'fa-minus-circle',
-				'icon-remove-sign' => 'fa-times-circle',
-				'icon-ok-sign' => 'fa-check-circle',
-				'icon-question-sign' => 'fa-question-circle',
-				'icon-info-sign' => 'fa-info-circle',
-				'icon-screenshot' => 'fa-crosshairs',
-				'icon-remove-circle' => 'fa-times-circle-o',
-				'icon-ok-circle' => 'fa-check-circle-o',
-				'icon-ban-circle' => 'fa-ban',
-				'icon-share-alt' => 'fa-share',
-				'icon-resize-full' => 'fa-expand',
-				'icon-resize-small' => 'fa-compress',
-				'icon-exclamation-sign' => 'fa-exclamation-circle',
-				'icon-eye-open' => 'fa-eye',
-				'icon-eye-close' => 'fa-eye-slash',
-				'icon-warning-sign' => 'fa-warning',
-				'icon-folder-close' => 'fa-folder',
-				'icon-resize-vertical' => 'fa-arrows-v',
-				'icon-resize-horizontal' => 'fa-arrows-h',
-				'icon-twitter-sign' => 'fa-twitter-square',
-				'icon-facebook-sign' => 'fa-facebook-square',
-				'icon-thumbs-up' => 'fa-thumbs-o-up',
-				'icon-thumbs-down' => 'fa-thumbs-o-down',
-				'icon-heart-empty' => 'fa-heart-o',
-				'icon-signout' => 'fa-sign-out',
-				'icon-linkedin-sign' => 'fa-linkedin-square',
-				'icon-pushpin' => 'fa-thumb-tack',
-				'icon-signin' => 'fa-sign-in',
-				'icon-github-sign' => 'fa-github-square',
-				'icon-upload-alt' => 'fa-upload',
-				'icon-lemon' => 'fa-lemon-o',
-				'icon-check-empty' => 'fa-square-o',
-				'icon-bookmark-empty' => 'fa-bookmark-o',
-				'icon-phone-sign' => 'fa-phone-square',
-				'icon-hdd' => 'fa-hdd-o',
-				'icon-hand-right' => 'fa-hand-o-right',
-				'icon-hand-left' => 'fa-hand-o-left',
-				'icon-hand-up' => 'fa-hand-o-up',
-				'icon-hand-down' => 'fa-hand-o-down',
-				'icon-circle-arrow-left' => 'fa-arrow-circle-left',
+				'icon-envelope'           => 'fa-envelope-o',
+				'icon-star-empty'         => 'fa-star-o',
+				'icon-ok'                 => 'fa-check',
+				'icon-zoom-in'            => 'fa-search-plus',
+				'icon-zoom-out'           => 'fa-search-minus',
+				'icon-off'                => 'fa-power-off',
+				'icon-trash'              => 'fa-trash-o',
+				'icon-share'              => 'fa-share-square-o',
+				'icon-check'              => 'fa-check-square-o',
+				'icon-move'               => 'fa-arrows',
+				'icon-file'               => 'fa-file-o',
+				'icon-time'               => 'fa-clock-o',
+				'icon-download-alt'       => 'fa-download',
+				'icon-download'           => 'fa-arrow-circle-o-down',
+				'icon-upload'             => 'fa-arrow-circle-o-up',
+				'icon-play-circle'        => 'fa-play-circle-o',
+				'icon-indent-left'        => 'fa-dedent',
+				'icon-indent-right'       => 'fa-indent',
+				'icon-facetime-video'     => 'fa-video-camera',
+				'icon-picture'            => 'fa-picture-o',
+				'icon-plus-sign'          => 'fa-plus-circle',
+				'icon-minus-sign'         => 'fa-minus-circle',
+				'icon-remove-sign'        => 'fa-times-circle',
+				'icon-ok-sign'            => 'fa-check-circle',
+				'icon-question-sign'      => 'fa-question-circle',
+				'icon-info-sign'          => 'fa-info-circle',
+				'icon-screenshot'         => 'fa-crosshairs',
+				'icon-remove-circle'      => 'fa-times-circle-o',
+				'icon-ok-circle'          => 'fa-check-circle-o',
+				'icon-ban-circle'         => 'fa-ban',
+				'icon-share-alt'          => 'fa-share',
+				'icon-resize-full'        => 'fa-expand',
+				'icon-resize-small'       => 'fa-compress',
+				'icon-exclamation-sign'   => 'fa-exclamation-circle',
+				'icon-eye-open'           => 'fa-eye',
+				'icon-eye-close'          => 'fa-eye-slash',
+				'icon-warning-sign'       => 'fa-warning',
+				'icon-folder-close'       => 'fa-folder',
+				'icon-resize-vertical'    => 'fa-arrows-v',
+				'icon-resize-horizontal'  => 'fa-arrows-h',
+				'icon-twitter-sign'       => 'fa-twitter-square',
+				'icon-facebook-sign'      => 'fa-facebook-square',
+				'icon-thumbs-up'          => 'fa-thumbs-o-up',
+				'icon-thumbs-down'        => 'fa-thumbs-o-down',
+				'icon-heart-empty'        => 'fa-heart-o',
+				'icon-signout'            => 'fa-sign-out',
+				'icon-linkedin-sign'      => 'fa-linkedin-square',
+				'icon-pushpin'            => 'fa-thumb-tack',
+				'icon-signin'             => 'fa-sign-in',
+				'icon-github-sign'        => 'fa-github-square',
+				'icon-upload-alt'         => 'fa-upload',
+				'icon-lemon'              => 'fa-lemon-o',
+				'icon-check-empty'        => 'fa-square-o',
+				'icon-bookmark-empty'     => 'fa-bookmark-o',
+				'icon-phone-sign'         => 'fa-phone-square',
+				'icon-hdd'                => 'fa-hdd-o',
+				'icon-hand-right'         => 'fa-hand-o-right',
+				'icon-hand-left'          => 'fa-hand-o-left',
+				'icon-hand-up'            => 'fa-hand-o-up',
+				'icon-hand-down'          => 'fa-hand-o-down',
+				'icon-circle-arrow-left'  => 'fa-arrow-circle-left',
 				'icon-circle-arrow-right' => 'fa-arrow-circle-right',
-				'icon-circle-arrow-up' => 'fa-arrow-circle-up',
-				'icon-circle-arrow-down' => 'fa-arrow-circle-down',
-				'icon-fullscreen' => 'fa-arrows-alt',
-				'icon-beaker' => 'fa-flask',
-				'icon-paper-clip' => 'fa-paperclip',
-				'icon-sign-blank' => 'fa-square',
-				'icon-pinterest-sign' => 'fa-pinterest-square',
-				'icon-google-plus-sign' => 'fa-google-plus-square',
-				'icon-envelope-alt' => 'fa-envelope',
-				'icon-comment-alt' => 'fa-comment-o',
-				'icon-comments-alt' => 'fa-comments-o',
+				'icon-circle-arrow-up'    => 'fa-arrow-circle-up',
+				'icon-circle-arrow-down'  => 'fa-arrow-circle-down',
+				'icon-fullscreen'         => 'fa-arrows-alt',
+				'icon-beaker'             => 'fa-flask',
+				'icon-paper-clip'         => 'fa-paperclip',
+				'icon-sign-blank'         => 'fa-square',
+				'icon-pinterest-sign'     => 'fa-pinterest-square',
+				'icon-google-plus-sign'   => 'fa-google-plus-square',
+				'icon-envelope-alt'       => 'fa-envelope',
+				'icon-comment-alt'        => 'fa-comment-o',
+				'icon-comments-alt'       => 'fa-comments-o',
 			);
 
-			if ( in_array( $class, array_keys( $exceptions ) ) ) {
+			if ( in_array( $class, array_keys( $exceptions ), true ) ) {
 				$class = $exceptions[ $class ];
 			}
 
@@ -866,7 +866,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function yith_wcfbt_shortcode( $meta ) {
 
-			if ( ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) || get_option( 'yith_wfbt_enable_integration' ) == 'no' ) {
+			if ( ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) || 'no' === get_option( 'yith_wfbt_enable_integration' ) ) {
 				return;
 			}
 
@@ -876,7 +876,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				)
 			);
 
-			$ids   = array();
+			$ids = array();
 			// take id of products in wishlist.
 			foreach ( $products as $product ) {
 				$ids[] = $product['prod_id'];
@@ -897,11 +897,11 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 2.0.0
 		 */
 		public function yith_wfbt_redirect_after_add_to_cart( $url ) {
-			if ( ! isset( $_REQUEST['yith_wfbt_shortcode'] ) ) {
+			if ( ! isset( $_REQUEST['yith_wfbt_shortcode'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return $url;
 			}
 
-			return get_option( 'yith_wcwl_redirect_cart' ) == 'yes' ? wc_get_cart_url() : YITH_WCWL()->get_wishlist_url();
+			return 'yes' === get_option( 'yith_wcwl_redirect_cart' ) ? wc_get_cart_url() : YITH_WCWL()->get_wishlist_url();
 		}
 
 		/**
@@ -910,69 +910,69 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @param array $rules Array of additional rules to add to default ones.
 		 * @return string Generated CSS code
 		 */
-		protected function _build_custom_css( $rules = array() ) {
+		protected function build_custom_css( $rules = array() ) {
 			$generated_code = '';
-			$rules = apply_filters(
+			$rules          = apply_filters(
 				'yith_wcwl_custom_css_rules',
 				array_merge(
 					array(
-						'color_add_to_wishlist' => array(
+						'color_add_to_wishlist'    => array(
 							'selector' => '.woocommerce a.add_to_wishlist.button.alt',
 							'rules'    => array(
-								'background' => array(
+								'background'       => array(
 									'rule'    => 'background-color: %1$s; background: %1$s',
 									'default' => '#333333',
 								),
-								'text' => array(
+								'text'             => array(
 									'rule'    => 'color: %s',
 									'default' => '#ffffff',
 								),
-								'border' => array(
+								'border'           => array(
 									'rule'    => 'border-color: %s',
 									'default' => '#333333',
 								),
 								'background_hover' => array(
 									'rule'    => 'background-color: %1$s; background: %1$s',
 									'default' => '#4F4F4F',
-									'status' => ':hover',
+									'status'  => ':hover',
 								),
-								'text_hover' => array(
+								'text_hover'       => array(
 									'rule'    => 'color: %s',
 									'default' => '#ffffff',
-									'status' => ':hover',
+									'status'  => ':hover',
 								),
-								'border_hover' => array(
+								'border_hover'     => array(
 									'rule'    => 'border-color: %s',
 									'default' => '#4F4F4F',
-									'status' => ':hover',
+									'status'  => ':hover',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_add_to_wishlist_style' => 'button_custom',
 							),
 						),
-						'rounded_corners_radius' => array(
+						'rounded_corners_radius'   => array(
 							'selector' => '.woocommerce a.add_to_wishlist.button.alt',
-							'rules' => array(
-								'rule' => 'border-radius: %dpx',
+							'rules'    => array(
+								'rule'    => 'border-radius: %dpx',
 								'default' => 16,
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_add_to_wishlist_style' => 'button_custom',
 							),
 						),
-						'color_add_to_cart' => array(
+						'color_add_to_cart'        => array(
 							'selector' => '.woocommerce .wishlist_table a.add_to_cart.button.alt',
 							'rules'    => array(
-								'background' => array(
+								'background'       => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#333333',
 								),
-								'text' => array(
+								'text'             => array(
 									'rule'    => 'color: %s',
 									'default' => '#ffffff',
 								),
-								'border' => array(
+								'border'           => array(
 									'rule'    => 'border-color: %s',
 									'default' => '#333333',
 								),
@@ -981,46 +981,46 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 									'default' => '#4F4F4F',
 									'status'  => ':hover',
 								),
-								'text_hover' => array(
+								'text_hover'       => array(
 									'rule'    => 'color: %s',
 									'default' => '#ffffff',
 									'status'  => ':hover',
 								),
-								'border_hover' => array(
+								'border_hover'     => array(
 									'rule'    => 'border-color: %s',
 									'default' => '#4F4F4F',
 									'status'  => ':hover',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
 						'add_to_cart_rounded_corners_radius' => array(
 							'selector' => '.woocommerce .wishlist_table a.add_to_cart.button.alt',
-							'rules' => array(
-								'rule' => 'border-radius: %dpx',
+							'rules'    => array(
+								'rule'    => 'border-radius: %dpx',
 								'default' => 16,
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_button_style_1' => array(
+						'color_button_style_1'     => array(
 							'selector' => '.woocommerce .hidden-title-form button,
 								   .yith-wcwl-wishlist-new .create-wishlist-button,
 								   .wishlist_manage_table tfoot button.submit-wishlist-changes,
 								   .yith-wcwl-wishlist-search-form button.wishlist-search-button',
 							'rules'    => array(
-								'background' => array(
+								'background'       => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#333333',
 								),
-								'text' => array(
+								'text'             => array(
 									'rule'    => 'color: %s',
 									'default' => '#ffffff',
 								),
-								'border' => array(
+								'border'           => array(
 									'rule'    => 'border-color: %s',
 									'default' => '#333333',
 								),
@@ -1029,35 +1029,35 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 									'default' => '#333333',
 									'status'  => ':hover',
 								),
-								'text_hover' => array(
+								'text_hover'       => array(
 									'rule'    => 'color: %s',
 									'default' => '#ffffff',
 									'status'  => ':hover',
 								),
-								'border_hover' => array(
+								'border_hover'     => array(
 									'rule'    => 'border-color: %s',
 									'default' => '#333333',
 									'status'  => ':hover',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_button_style_2' => array(
+						'color_button_style_2'     => array(
 							'selector' => '.woocommerce .wishlist-title a.show-title-form,
 								   .woocommerce .hidden-title-form a.hide-title-form,
 								   .wishlist_manage_table tfoot a.create-new-wishlist',
 							'rules'    => array(
-								'background' => array(
+								'background'       => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#333333',
 								),
-								'text' => array(
+								'text'             => array(
 									'rule'    => 'color: %s',
 									'default' => '#ffffff',
 								),
-								'border' => array(
+								'border'           => array(
 									'rule'    => 'border-color: %s',
 									'default' => '#333333',
 								),
@@ -1066,38 +1066,38 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 									'default' => '#333333',
 									'status'  => ':hover',
 								),
-								'text_hover' => array(
+								'text_hover'       => array(
 									'rule'    => 'color: %s',
 									'default' => '#ffffff',
 									'status'  => ':hover',
 								),
-								'border_hover' => array(
+								'border_hover'     => array(
 									'rule'    => 'border-color: %s',
 									'default' => '#333333',
 									'status'  => ':hover',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_wishlist_table' => array(
+						'color_wishlist_table'     => array(
 							'selector' => '.woocommerce table.shop_table.wishlist_table tr td',
 							'rules'    => array(
-								'background'  => array(
+								'background' => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#FFFFFF',
 								),
-								'text'        => array(
+								'text'       => array(
 									'rule'    => 'color: %s',
 									'default' => '#6D6C6C',
 								),
-								'border'      => array(
+								'border'     => array(
 									'rule'    => 'border-color: %s;',
 									'default' => '#FFFFFF',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
@@ -1108,118 +1108,118 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 								   .widget_yith-wcwl-lists ul.dropdown li a:hover,
 								   .selectBox-dropdown-menu.selectBox-options li.selectBox-selected a,
 								   .selectBox-dropdown-menu.selectBox-options li.selectBox-hover a',
-							'rules' => array(
-								'rule' => 'background: %1$s; background-color: %1$s;',
+							'rules'    => array(
+								'rule'    => 'background: %1$s; background-color: %1$s;',
 								'default' => '#F4F4F4',
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_share_button' => array(
+						'color_share_button'       => array(
 							'selector' => '.yith-wcwl-share li a',
 							'rules'    => array(
-								'color'  => array(
+								'color'       => array(
 									'rule'    => 'color: %s;',
 									'default' => '#FFFFFF',
 								),
-								'color_hover'  => array(
+								'color_hover' => array(
 									'rule'    => 'color: %s;',
 									'status'  => ':hover',
 									'default' => '#FFFFFF',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_enable_share' => 'yes',
 							),
 						),
-						'color_fb_button' => array(
+						'color_fb_button'          => array(
 							'selector' => '.yith-wcwl-share a.facebook',
 							'rules'    => array(
-								'background'  => array(
+								'background'       => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#39599E',
 								),
-								'background_hover'  => array(
+								'background_hover' => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'status'  => ':hover',
 									'default' => '#39599E',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_enable_share' => 'yes',
-								'yith_wcwl_share_fb' => 'yes',
+								'yith_wcwl_share_fb'     => 'yes',
 							),
 						),
-						'color_tw_button' => array(
+						'color_tw_button'          => array(
 							'selector' => '.yith-wcwl-share a.twitter',
 							'rules'    => array(
-								'background'  => array(
+								'background'       => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#45AFE2',
 								),
-								'background_hover'  => array(
+								'background_hover' => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'status'  => ':hover',
 									'default' => '#39599E',
 								),
 							),
-							'deps' => array(
-								'yith_wcwl_enable_share' => 'yes',
+							'deps'     => array(
+								'yith_wcwl_enable_share'  => 'yes',
 								'yith_wcwl_share_twitter' => 'yes',
 							),
 						),
-						'color_pr_button' => array(
+						'color_pr_button'          => array(
 							'selector' => '.yith-wcwl-share a.pinterest',
 							'rules'    => array(
-								'background'  => array(
+								'background'       => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#AB2E31',
 								),
-								'background_hover'  => array(
+								'background_hover' => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'status'  => ':hover',
 									'default' => '#39599E',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_enable_share' => 'yes',
 								'yith_wcwl_share_pinterest' => 'yes',
 							),
 						),
-						'color_em_button' => array(
+						'color_em_button'          => array(
 							'selector' => '.yith-wcwl-share a.email',
 							'rules'    => array(
-								'background'  => array(
+								'background'       => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#FBB102',
 								),
-								'background_hover'  => array(
+								'background_hover' => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'status'  => ':hover',
 									'default' => '#39599E',
 								),
 							),
-							'deps' => array(
+							'deps'     => array(
 								'yith_wcwl_enable_share' => 'yes',
-								'yith_wcwl_share_email' => 'yes',
+								'yith_wcwl_share_email'  => 'yes',
 							),
 						),
-						'color_wa_button' => array(
+						'color_wa_button'          => array(
 							'selector' => '.yith-wcwl-share a.whatsapp',
 							'rules'    => array(
-								'background'  => array(
+								'background'       => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'default' => '#00A901',
 								),
-								'background_hover'  => array(
+								'background_hover' => array(
 									'rule'    => 'background: %1$s; background-color: %1$s;',
 									'status'  => ':hover',
 									'default' => '#39599E',
 								),
 							),
-							'deps' => array(
-								'yith_wcwl_enable_share' => 'yes',
+							'deps'     => array(
+								'yith_wcwl_enable_share'   => 'yes',
 								'yith_wcwl_share_whatsapp' => 'yes',
 							),
 						),
@@ -1233,7 +1233,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			}
 
 			// retrieve dependencies.
-			$deps_list = wp_list_pluck( $rules, 'deps' );
+			$deps_list    = wp_list_pluck( $rules, 'deps' );
 			$dependencies = array();
 
 			if ( ! empty( $deps_list ) ) {
@@ -1250,15 +1250,15 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				// check dependencies first.
 				if ( ! empty( $rule['deps'] ) ) {
 					foreach ( $rule['deps'] as $dep_rule => $dep_value ) {
-						if ( ! isset( $dependencies[ $dep_rule ] ) || $dependencies[ $dep_rule ] != $dep_value ) {
+						if ( ! isset( $dependencies[ $dep_rule ] ) || $dependencies[ $dep_rule ] !== $dep_value ) {
 							continue 2;
 						}
 					}
 				}
 
 				// retrieve values from db.
-				$values = get_option( "yith_wcwl_{$id}" );
-				$new_rules = array();
+				$values     = get_option( "yith_wcwl_{$id}" );
+				$new_rules  = array();
 				$rules_code = '';
 
 				if ( isset( $rule['rules']['rule'] ) ) {
@@ -1269,7 +1269,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						$new_rules[ $status ] = array();
 					}
 
-					$new_rules[ $status ][] = $this->_build_css_rule( $rule['rules']['rule'], $values, $rule['rules']['default'] );
+					$new_rules[ $status ][] = $this->build_css_rule( $rule['rules']['rule'], $values, $rule['rules']['default'] );
 				} else {
 					// otherwise cycle through rules, and generate CSS code.
 					foreach ( $rule['rules'] as $property => $css ) {
@@ -1279,7 +1279,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 							$new_rules[ $status ] = array();
 						}
 
-						$new_rules[ $status ][] = $this->_build_css_rule( $css['rule'], isset( $values[ $property ] ) ? $values[ $property ] : false, $css['default'] );
+						$new_rules[ $status ][] = $this->build_css_rule( $css['rule'], isset( $values[ $property ] ) ? $values[ $property ] : false, $css['default'] );
 					}
 				}
 
@@ -1290,7 +1290,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 						if ( ! empty( $status ) ) {
 							$updated_selector = array();
-							$split_selectors = explode( ',', $rule['selector'] );
+							$split_selectors  = explode( ',', $rule['selector'] );
 
 							foreach ( $split_selectors as $split_selector ) {
 								$updated_selector[] = $split_selector . $status;
@@ -1325,7 +1325,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 *
 		 * @return string Formatted CSS rule
 		 */
-		protected function _build_css_rule( $rule, $value, $default = '' ) {
+		protected function build_css_rule( $rule, $value, $default = '' ) {
 			$value = ( '0' === $value || ( ! empty( $value ) && ! is_array( $value ) ) ) ? $value : $default;
 
 			return sprintf( rtrim( $rule, ';' ) . ';', $value );
@@ -1337,11 +1337,11 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return void
 		 * @since 2.0.7
 		 */
-		protected function _destroy_serialized_cookies() {
+		protected function destroy_serialized_cookies() {
 			$name = 'yith_wcwl_products';
 
 			if ( isset( $_COOKIE[ $name ] ) && is_serialized( sanitize_text_field( wp_unslash( $_COOKIE[ $name ] ) ) ) ) {
-				$_COOKIE[ $name ] = json_encode( array() );
+				$_COOKIE[ $name ] = wp_json_encode( array() );
 				yith_destroycookie( $name );
 			}
 		}
@@ -1352,8 +1352,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		protected function _update_cookies() {
-			$cookie = yith_getcookie( 'yith_wcwl_products' );
+		protected function update_cookies() {
+			$cookie     = yith_getcookie( 'yith_wcwl_products' );
 			$new_cookie = array();
 
 			if ( ! empty( $cookie ) ) {
@@ -1376,7 +1376,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		/**
 		 * Convert wishlist stored into cookies into
 		 */
-		protected function _convert_cookies_to_session() {
+		protected function convert_cookies_to_session() {
 			$cookie = yith_getcookie( 'yith_wcwl_products' );
 
 			if ( ! empty( $cookie ) ) {
@@ -1418,6 +1418,6 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
  * @return \YITH_WCWL_Frontend|\YITH_WCWL_Frontend_Premium
  * @since 2.0.0
  */
-function YITH_WCWL_Frontend() {
+function YITH_WCWL_Frontend() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Frontend_Premium::get_instance() : YITH_WCWL_Frontend::get_instance();
 }

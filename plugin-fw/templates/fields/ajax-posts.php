@@ -36,13 +36,18 @@ if ( $no_value ) {
 	$value = array();
 }
 
-$default_data = array(
+$default_data  = array(
 	'action'      => 'yith_plugin_fw_json_search_posts',
 	'placeholder' => __( 'Search Posts', 'yith-plugin-fw' ),
 	'allow_clear' => false,
 );
-$data         = wp_parse_args( $data, $default_data );
-$show_id      = isset( $data['show_id'] ) && $data['show_id'];
+$data          = wp_parse_args( $data, $default_data );
+$show_id       = isset( $data['show_id'] ) && $data['show_id'];
+$the_post_type = isset( $data['post_type'] ) ? $data['post_type'] : 'post';
+
+if ( ! isset( $data['show_id'] ) && in_array( $data['action'], array( 'woocommerce_json_search_products', 'woocommerce_json_search_products_and_variations' ), true ) ) {
+	$show_id = true; // Set show_id to true by default if this is a WC product search, since it includes the product ID by default.
+}
 
 // Separate select2 needed data and other data.
 $select2_custom_attributes = array();
@@ -60,13 +65,22 @@ foreach ( $data as $d_key => $d_value ) {
 $data_selected = array();
 if ( ! empty( $value ) ) {
 	if ( $multiple ) {
-		$value = is_array( $value ) ? $value : explode( ',', $value );
-		foreach ( $value as $_post_id ) {
-			$data_selected[ $_post_id ] = get_the_title( $_post_id ) . ( $show_id ? " (#{$_post_id})" : '' );
-		}
+		$value        = is_array( $value ) ? $value : explode( ',', $value );
+		$selected_ids = array_filter( array_map( 'absint', $value ) );
 	} else {
-		$_post_id                   = absint( $value );
-		$data_selected[ $_post_id ] = get_the_title( $_post_id ) . ( $show_id ? " (#{$_post_id})" : '' );
+		$selected_ids = array( absint( $value ) );
+	}
+
+	foreach ( $selected_ids as $selected_id ) {
+		$the_title = yith_plugin_fw_get_post_formatted_name(
+			$selected_id,
+			array(
+				'post-type' => $the_post_type,
+				'show-id'   => $show_id,
+			)
+		);
+
+		$data_selected[ $selected_id ] = wp_strip_all_tags( $the_title );
 	}
 }
 

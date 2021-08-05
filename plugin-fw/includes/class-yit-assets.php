@@ -146,9 +146,11 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 						'bulk_trash_confirm_title'    => __( 'Confirm trash', 'yith-plugin-fw' ),
 						'bulk_trash_confirm_message'  => __( 'Are you sure you want to trash the selected items?', 'yith-plugin-fw' ),
 						'bulk_trash_confirm_button'   => _x( 'Yes, move to trash', 'Trash confirmation action', 'yith-plugin-fw' ),
+						'bulk_trash_cancel_button'    => __( 'No', 'yith-plugin-fw' ),
 						'bulk_delete_confirm_title'   => __( 'Confirm delete', 'yith-plugin-fw' ),
 						'bulk_delete_confirm_message' => __( 'Are you sure you want to delete the selected items?', 'yith-plugin-fw' ) . '<br /><br />' . __( 'This action cannot be undone and you will not be able to recover this data.', 'yith-plugin-fw' ),
-						'bulk_delete_confirm_button'  => _x( 'Yes, delete permanently', 'Delete confirmation action', 'yith-plugin-fw' ),
+						'bulk_delete_confirm_button'  => _x( 'Yes, delete', 'Delete confirmation action', 'yith-plugin-fw' ),
+						'bulk_delete_cancel_button'   => __( 'No', 'yith-plugin-fw' ),
 					),
 				)
 			);

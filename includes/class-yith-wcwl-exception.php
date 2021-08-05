@@ -2,8 +2,8 @@
 /**
  * Wishlist Exception class
  *
- * @author Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
@@ -23,7 +23,7 @@ if ( ! class_exists( 'YITH_WCWL_Exception' ) ) {
 		 *
 		 * @var array
 		 */
-		private $_error_codes = array(
+		private $error_codes = array(
 			0 => 'error',
 			1 => 'exists',
 		);
@@ -36,8 +36,8 @@ if ( ! class_exists( 'YITH_WCWL_Exception' ) ) {
 		public function getTextualCode() {
 			$code = $this->getCode();
 
-			if ( array_key_exists( $code, $this->_error_codes ) ) {
-				return $this->_error_codes[ $code ];
+			if ( array_key_exists( $code, $this->error_codes ) ) {
+				return $this->error_codes[ $code ];
 			}
 
 			return 'error';

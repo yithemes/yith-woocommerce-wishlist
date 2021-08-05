@@ -149,7 +149,7 @@ if ( ! class_exists( 'YIT_Help_Desk' ) ) {
 				$status    = isset( $response['response'] ) ? absint( $response['response']['code'] ) : false;
 
 				if ( ! in_array( $status, apply_filters( 'yit_plugin_fw_help_desk_valid_response_statuses', array( 200 ) ), true ) ) {
-					throw new Exception( __( 'There was an error with your request; please try again later.', 'yit-plugin-fw' ), $status );
+					throw new Exception( __( 'There was an error with your request; please try again later.', 'yith-plugin-fw' ), $status );
 				} else {
 					return $resp_body;
 				}

@@ -84,14 +84,14 @@ if ( $has_default_playlist ) {
 									<p>
 										<?php
 										// translators: 1. Url to EN playlist.
-										echo wp_kses_post( sprintf( _x( 'Check the full <a href="%s" target="_blank">Playlist on Youtube</a> to learn more >', 'Help tab view all video link', 'yit-plugin-fw' ), $default_playlist ) );
+										echo wp_kses_post( sprintf( _x( 'Check the full <a href="%s" target="_blank">Playlist on Youtube</a> to learn more >', 'Help tab view all video link', 'yith-plugin-fw' ), $default_playlist ) );
 										?>
 									</p>
 								<?php endif; ?>
 
 								<p>
 									<b>
-										<?php echo esc_html_x( 'Videos are also available in:', 'Help tab Watch Videotutorials link', 'yit-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'Videos are also available in:', 'Help tab Watch Videotutorials link', 'yith-plugin-fw' ); ?>
 									</b>
 									<?php $first = true; ?>
 									<?php foreach ( $options['playlists'] as $lang => $url ) : ?>
@@ -121,10 +121,10 @@ if ( $has_default_playlist ) {
 							<li class="read-documentation box-with-shadow">
 								<a target="_blank" href="<?php echo esc_url( $options['doc_url'] ); ?>">
 									<h4>
-										<?php echo esc_html_x( 'Read the documentation', 'Help tab Read Documentation link', 'yit-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'Read the documentation', 'Help tab Read Documentation link', 'yith-plugin-fw' ); ?>
 									</h4>
 									<p class="description">
-										<?php echo esc_html_x( 'to learn from basics how it works', 'Help tab Read Documentation link', 'yit-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'to learn from basics how it works', 'Help tab Read Documentation link', 'yith-plugin-fw' ); ?>
 									</p>
 								</a>
 							</li>
@@ -134,10 +134,10 @@ if ( $has_default_playlist ) {
 							<li class="watch-videotutorials box-with-shadow">
 								<a target="_blank" href="<?php echo esc_url( $default_playlist ); ?>">
 									<h4>
-										<?php echo esc_html_x( 'Watch our videotutorials', 'Help tab Watch Videotutorials link', 'yit-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'Watch our videotutorials', 'Help tab Watch Videotutorials link', 'yith-plugin-fw' ); ?>
 									</h4>
 									<p class="description">
-										<?php echo esc_html_x( 'We show you some use cases', 'Help tab Watch Videotutorials link', 'yit-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'We show you some use cases', 'Help tab Watch Videotutorials link', 'yith-plugin-fw' ); ?>
 									</p>
 								</a>
 							</li>
@@ -147,10 +147,10 @@ if ( $has_default_playlist ) {
 							<li class="check-faqs box-with-shadow">
 								<a target="_blank" href="<?php echo esc_url( $options['hc_url'] ); ?>">
 									<h4>
-										<?php echo esc_html_x( 'Check the FAQs', 'Help tab view FAQs link', 'yit-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'Check the FAQs', 'Help tab view FAQs link', 'yith-plugin-fw' ); ?>
 									</h4>
 									<p class="description">
-										<?php echo esc_html_x( 'to find answers to your doubts', 'Help tab view FAQs link', 'yit-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'to find answers to your doubts', 'Help tab view FAQs link', 'yith-plugin-fw' ); ?>
 									</p>
 								</a>
 							</li>
@@ -166,7 +166,7 @@ if ( $has_default_playlist ) {
 			<div class="row">
 				<?php if ( $show_articles ) : ?>
 					<div class="yith-plugin-fw-hc-articles <?php echo $show_submit_ticket ? 'column-left' : 'full-width'; ?>">
-						<h3 class="yith-plugin-fw-hc-articles-title"><?php echo esc_html_x( 'Last FAQs in our Help Center', 'Help tab FAQ title', 'yit-plugin-fw' ); ?></h3>
+						<h3 class="yith-plugin-fw-hc-articles-title"><?php echo esc_html_x( 'Last FAQs in our Help Center', 'Help tab FAQ title', 'yith-plugin-fw' ); ?></h3>
 
 						<ul class="yith-plugin-fw-hc-articles-list">
 							<?php foreach ( $latest_articles as $article ) : ?>
@@ -180,7 +180,7 @@ if ( $has_default_playlist ) {
 
 						<?php if ( $show_view_all_faq ) : ?>
 							<a target="_blank" class="button button-secondary" href="<?php echo esc_url( $options['hc_url'] ); ?>">
-								<?php echo esc_html_x( 'View all FAQs >', 'Help tab FAQ link', 'yit-plugin-fw' ); ?>
+								<?php echo esc_html_x( 'View all FAQs >', 'Help tab FAQ link', 'yith-plugin-fw' ); ?>
 							</a>
 						<?php endif; ?>
 					</div>
@@ -189,18 +189,18 @@ if ( $has_default_playlist ) {
 				<?php if ( $show_submit_ticket ) : ?>
 					<div class="yith-plugin-fw-submit-ticket <?php echo $show_articles ? 'column-right' : 'full-width'; ?>">
 						<div class="box-with-shadow">
-							<h3><?php echo esc_html_x( 'Need help?', 'Help tab submit ticket title', 'yit-plugin-fw' ); ?></h3>
+							<h3><?php echo esc_html_x( 'Need help?', 'Help tab submit ticket title', 'yith-plugin-fw' ); ?></h3>
 							<p>
 								<?php
 									echo esc_html_x(
 										'If you are experiencing some technical issue ask help to our developers. Submit a ticket in our support desk and we will help you as soon as possible.',
 										'Help tab submit ticket description',
-										'yit-plugin-fw'
+										'yith-plugin-fw'
 									);
 								?>
 							</p>
 							<a target="_blank" href="<?php echo esc_url( $options['submit_ticket_url'] ); ?>" class="yit-plugin-fw-submit-ticket-button button button-primary">
-								<?php echo esc_html_x( 'Submit a ticket', 'Help tab submit ticket button', 'yit-plugin-fw' ); ?>
+								<?php echo esc_html_x( 'Submit a ticket', 'Help tab submit ticket button', 'yith-plugin-fw' ); ?>
 							</a>
 						</div>
 					</div>

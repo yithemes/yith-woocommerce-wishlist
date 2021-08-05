@@ -2,8 +2,8 @@
 /**
  * Wishlist class
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes\Wishlists
  * @version 3.0.0
  */
 
@@ -72,15 +72,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		public function __construct( $wishlist = 0 ) {
 			// set default values.
 			$this->data = array(
-				'privacy'            => apply_filters( 'yith_wcwl_default_wishlist_privacy', 0 ),
-				'user_id'            => 0,
-				'session_id'         => '',
-				'name'               => apply_filters( 'yith_wcwl_default_wishlist_name', '' ),
-				'slug'               => apply_filters( 'yith_wcwl_default_wishlist_slug', '' ),
-				'token'              => '',
-				'is_default'         => 0,
-				'date_added'         => '',
-				'expiration'         => '',
+				'privacy'    => apply_filters( 'yith_wcwl_default_wishlist_privacy', 0 ),
+				'user_id'    => 0,
+				'session_id' => '',
+				'name'       => apply_filters( 'yith_wcwl_default_wishlist_name', '' ),
+				'slug'       => apply_filters( 'yith_wcwl_default_wishlist_slug', '' ),
+				'token'      => '',
+				'is_default' => 0,
+				'date_added' => '',
+				'expiration' => '',
 			);
 
 			parent::__construct();
@@ -97,7 +97,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 
 			$this->data_store = WC_Data_Store::load( 'wishlist' );
 
-			if ( $this->get_id() > 0 || $this->get_token() != '' ) {
+			if ( $this->get_id() > 0 || ! empty( $this->get_token() ) ) {
 				$this->data_store->read( $this );
 			}
 		}
@@ -147,18 +147,18 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return bool
 		 */
 		public function is_current_user_owner( $current_user = false ) {
-			$user_id = $this->get_user_id();
+			$user_id    = $this->get_user_id();
 			$session_id = $this->get_session_id();
 
-			if ( $current_user && ( $current_user == $user_id || $current_user == $session_id ) ) {
+			if ( $current_user && ( (int) $current_user === $user_id || $current_user === $session_id ) ) {
 				return true;
 			}
 
-			if ( $this->has_owner() && is_user_logged_in() && get_current_user_id() == $user_id ) {
+			if ( $this->has_owner() && is_user_logged_in() && get_current_user_id() === $user_id ) {
 				return true;
 			}
 
-			if ( $this->is_session_based() && YITH_WCWL_Session()->maybe_get_session_id() == $session_id ) {
+			if ( $this->is_session_based() && YITH_WCWL_Session()->maybe_get_session_id() === $session_id ) {
 				return true;
 			}
 
@@ -224,7 +224,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return int Wishlist visibility (0 => public, 1 => shared, 2 => private)
 		 */
 		public function get_privacy( $context = 'view' ) {
-			return $this->get_prop( 'privacy', $context );
+			return (int) $this->get_prop( 'privacy', $context );
 		}
 
 		/**
@@ -234,7 +234,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return string Formatted privacy value
 		 */
 		public function get_formatted_privacy( $context = 'view' ) {
-			$privacy = $this->get_privacy( $context );
+			$privacy           = $this->get_privacy( $context );
 			$formatted_privacy = yith_wcwl_get_privacy_label( $privacy );
 
 			return apply_filters( 'yith_wcwl_wishlist_formatted_privacy', $formatted_privacy, $privacy, $this, $context );
@@ -249,7 +249,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 */
 		public function has_privacy( $privacy ) {
 			$wishlist_privacy = $this->get_privacy( 'edit' );
-			$has_privacy = false;
+			$has_privacy      = false;
 
 			if ( is_array( $privacy ) && ! empty( $privacy ) ) {
 				foreach ( $privacy as $test_value ) {
@@ -259,9 +259,9 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 					}
 				}
 			} elseif ( is_string( $privacy ) ) {
-				$has_privacy = yith_wcwl_get_privacy_value( $privacy ) == $wishlist_privacy;
+				$has_privacy = yith_wcwl_get_privacy_value( $privacy ) === $wishlist_privacy;
 			} else {
-				$has_privacy = $privacy == $wishlist_privacy;
+				$has_privacy = $privacy === $wishlist_privacy;
 			}
 
 			return $has_privacy;
@@ -274,7 +274,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return int Wishlist owner id
 		 */
 		public function get_user_id( $context = 'view' ) {
-			return $this->get_prop( 'user_id', $context );
+			return (int) $this->get_prop( 'user_id', $context );
 		}
 
 		/**
@@ -342,7 +342,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		public function get_date_added( $context = 'view' ) {
 			$date_added = $this->get_prop( 'date_added', $context );
 
-			if ( $date_added && 'view' == $context ) {
+			if ( $date_added && 'view' === $context ) {
 				return $date_added->date_i18n( 'Y-m-d H:i:s' );
 			}
 
@@ -375,7 +375,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		public function get_expiration( $context = 'view' ) {
 			$expiration = $this->get_prop( 'expiration', $context );
 
-			if ( $expiration && 'view' == $context ) {
+			if ( $expiration && 'view' === $context ) {
 				return $expiration->date_i18n( 'Y-m-d H:i:s' );
 			}
 
@@ -459,10 +459,10 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 				return false;
 			}
 
-			$user = get_userdata( $user_id );
+			$user       = get_userdata( $user_id );
 			$first_name = $user->first_name;
-			$last_name = $user->last_name;
-			$email = $user->user_email;
+			$last_name  = $user->last_name;
+			$email      = $user->user_email;
 
 			$formatted_name = $email;
 
@@ -596,7 +596,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		protected function set_prop( $prop, $value ) {
 			parent::set_prop( $prop, $value );
 
-			if ( 'name' == $prop ) {
+			if ( 'name' === $prop ) {
 				$this->set_slug( sanitize_title_with_dashes( $this->get_name() ) );
 			}
 		}
@@ -672,7 +672,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 
 			// Add/save items.
 			foreach ( $this->items as $product_id => $item ) {
-				if ( $item->get_wishlist_id() != $this->get_id() ) {
+				if ( $item->get_wishlist_id() !== $this->get_id() ) {
 					$item->set_wishlist_id( $this->get_id() );
 				}
 
@@ -765,7 +765,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @return bool Whether item is already in list
 		 */
 		public function has_item( $item_id ) {
-			return in_array( $item_id, array_column( $this->get_items(), 'id' ) );
+			return in_array( (int) $item_id, array_column( $this->get_items(), 'id' ), true );
 		}
 
 		/**

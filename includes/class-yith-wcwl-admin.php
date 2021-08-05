@@ -2,8 +2,8 @@
 /**
  * Admin init class
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @var string Panel hookname
 		 * @since 2.0.0
 		 */
-		protected $_panel = null;
+		protected $panel = null;
 
 		/**
 		 * Link to landing page on yithemes.com
@@ -122,7 +122,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @param WP_Post $post        The current post object.
 		 */
 		public function add_display_post_states( $post_states, $post ) {
-			if ( get_option( 'yith_wcwl_wishlist_page_id' ) == $post->ID ) {
+			if ( (int) get_option( 'yith_wcwl_wishlist_page_id' ) === $post->ID ) {
 				$post_states['yith_wcwl_page_for_wishlist'] = __( 'Wishlist Page', 'yith-woocommerce-wishlist' );
 			}
 
@@ -155,7 +155,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.min.css', array(), '4.7.0' );
 			wp_register_style( 'yith-wcwl-material-icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), '3.0.1' );
 			wp_register_style( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/css/admin.css', array( 'yith-wcwl-font-awesome' ), YITH_WCWL_Frontend()->version );
-			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/' . $prefix . 'admin/yith-wcwl' . $suffix . '.js', array( 'jquery', 'wc-backbone-modal', 'jquery-blockui' ), YITH_WCWL_Frontend()->version );
+			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/' . $prefix . 'admin/yith-wcwl' . $suffix . '.js', array( 'jquery', 'wc-backbone-modal', 'jquery-blockui' ), YITH_WCWL_Frontend()->version, true );
 		}
 
 		/**
@@ -208,8 +208,8 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function add_plugin_meta( $new_row_meta_args, $plugin_meta, $plugin_file, $plugin_data, $status, $init_file = 'YITH_WCWL_INIT' ) {
-			if ( defined( $init_file ) && constant( $init_file ) == $plugin_file ) {
-				$new_row_meta_args['slug']      = 'yith-woocommerce-wishlist';
+			if ( defined( $init_file ) && constant( $init_file ) === $plugin_file ) {
+				$new_row_meta_args['slug'] = 'yith-woocommerce-wishlist';
 
 			}
 
@@ -232,27 +232,37 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		public function register_panel() {
 
 			$args = array(
-				'create_menu_page' => true,
-				'parent_slug'   => '',
-				'page_title'    => __( 'YITH WooCommerce Wishlist', 'yith-woocommerce-wishlist' ),
-				'menu_title'    => __( 'Wishlist', 'yith-woocommerce-wishlist' ),
-				'plugin_slug'   => YITH_WCWL_SLUG,
+				'create_menu_page'   => true,
+				'parent_slug'        => '',
+				'page_title'         => 'WooCommerce Wishlist',
+				'menu_title'         => __( 'Wishlist', 'yith-woocommerce-wishlist' ),
+				'plugin_slug'        => YITH_WCWL_SLUG,
 				'plugin_description' => __( 'Allows your customers to create and share lists of products that they want to purchase on your e-commerce.', 'yith-woocommerce-wishlist' ),
-				'capability'    => apply_filters( 'yith_wcwl_settings_panel_capability', 'manage_options' ),
-				'parent'        => '',
-				'class'         => function_exists( 'yith_set_wrapper_class' ) ? yith_set_wrapper_class() : '',
-				'parent_page'   => 'yith_plugin_panel',
-				'page'          => 'yith_wcwl_panel',
-				'admin-tabs'    => $this->available_tabs,
-				'options-path'  => YITH_WCWL_DIR . 'plugin-options',
+				'capability'         => apply_filters( 'yith_wcwl_settings_panel_capability', 'manage_options' ),
+				'parent'             => '',
+				'class'              => function_exists( 'yith_set_wrapper_class' ) ? yith_set_wrapper_class() : '',
+				'parent_page'        => 'yith_plugin_panel',
+				'page'               => 'yith_wcwl_panel',
+				'admin-tabs'         => $this->available_tabs,
+				'options-path'       => YITH_WCWL_DIR . 'plugin-options',
+				'help_tab'           => array(
+					'main_video' => array(
+						'desc' => _x( 'Check this video to learn how to <b>configure wishlist and customize options:</b>', '[HELP TAB] Video title', 'yith-woocommerce-ajax-navigation' ),
+						'url'  => array(
+							'it' => 'https://www.youtube.com/embed/9hM9PgBVNTg',
+							'es' => 'https://www.youtube.com/embed/GwQkNrrHFs4',
+						),
+					),
+					'hc_url'    => 'https://support.yithemes.com/hc/en-us/categories/360003468437-YITH-WOOCOMMERCE-WISHLIST',
+				),
 			);
 
 			/* === Fixed: not updated theme  === */
 			if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
-				require_once( YITH_WCWL_DIR . 'plugin-fw/lib/yit-plugin-panel-wc.php' );
+				require_once YITH_WCWL_DIR . 'plugin-fw/lib/yit-plugin-panel-wc.php';
 			}
 
-			$this->_panel = new YIT_Plugin_Panel_WooCommerce( $args );
+			$this->panel = new YIT_Plugin_Panel_WooCommerce( $args );
 		}
 
 		/**
@@ -265,7 +275,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @return array Filtered array of extra classes
 		 */
 		public function mark_options_disabled( $classes, $field ) {
-			if ( isset( $field['id'] ) && 'yith_wfbt_enable_integration' == $field['id'] && ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) ) {
+			if ( isset( $field['id'] ) && 'yith_wfbt_enable_integration' === $field['id'] && ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) ) {
 				$classes[] = 'yith-disabled';
 			}
 
@@ -281,11 +291,11 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		public function enqueue() {
 			global $woocommerce, $pagenow;
 
-			if ( 'admin.php' == $pagenow && isset( $_GET['page'] ) && 'yith_wcwl_panel' == $_GET['page'] ) {
+			if ( 'admin.php' === $pagenow && isset( $_GET['page'] ) && 'yith_wcwl_panel' === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				wp_enqueue_style( 'yith-wcwl-admin' );
 				wp_enqueue_script( 'yith-wcwl-admin' );
 
-				if ( isset( $_GET['tab'] ) && 'popular' == $_GET['tab'] ) {
+				if ( isset( $_GET['tab'] ) && 'popular' === $_GET['tab'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					wp_enqueue_style( 'yith-wcwl-material-icons' );
 					wp_enqueue_editor();
 				}
@@ -302,7 +312,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 			$premium_tab = YITH_WCWL_DIR . 'templates/admin/wishlist-panel-premium.php';
 
 			if ( file_exists( $premium_tab ) ) {
-				include( $premium_tab );
+				include $premium_tab;
 			}
 		}
 
@@ -325,6 +335,6 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
  * @return \YITH_WCWL_Admin
  * @since 2.0.0
  */
-function YITH_WCWL_Admin() {
+function YITH_WCWL_Admin() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Admin_Premium::get_instance() : YITH_WCWL_Admin::get_instance();
 }

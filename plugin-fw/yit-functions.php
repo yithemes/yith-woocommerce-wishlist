@@ -909,10 +909,11 @@ if ( ! function_exists( 'yit_get_language_from_locale' ) ) {
 	/**
 	 * Returns language name from locale code
 	 *
-	 * @param  string $locale      Locale to search for.
-	 * @param  bool   $show_native Whether to return native language instead of english one.
+	 * @param string $locale      Locale to search for.
+	 * @param bool   $show_native Whether to return native language instead of english one.
+	 *
 	 * @return string Language name for passed locale; if can't find any, local itself is returned.
-	 * @since 3.7.1
+	 * @since  3.7.1
 	 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 	 */
 	function yit_get_language_from_locale( $locale, $show_native = false ) {
@@ -1960,6 +1961,7 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_post_actions' ) ) {
 						$actions['trash']['confirm_data'] = array(
 							'title'               => __( 'Confirm trash', 'yith-plugin-fw' ),
 							'message'             => $args['confirm-trash-message'],
+							'cancel-button'       => __( 'No', 'yith-plugin-fw' ),
 							'confirm-button'      => _x( 'Yes, move to trash', 'Trash confirmation action', 'yith-plugin-fw' ),
 							'confirm-button-type' => 'delete',
 						);
@@ -1977,7 +1979,8 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_post_actions' ) ) {
 						$actions['delete']['confirm_data'] = array(
 							'title'               => __( 'Confirm delete', 'yith-plugin-fw' ),
 							'message'             => $args['confirm-delete-message'],
-							'confirm-button'      => _x( 'Yes, delete permanently', 'Delete confirmation action', 'yith-plugin-fw' ),
+							'cancel-button'       => __( 'No', 'yith-plugin-fw' ),
+							'confirm-button'      => _x( 'Yes, delete', 'Delete confirmation action', 'yith-plugin-fw' ),
 							'confirm-button-type' => 'delete',
 						);
 					}
@@ -2145,5 +2148,73 @@ if ( ! function_exists( 'yith_plugin_fw_get_action_buttons' ) ) {
 		}
 
 		return $actions_html;
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_get_post_formatted_name' ) ) {
+	/**
+	 * Get the formatted name for posts/products
+	 *
+	 * @param int|WP_Post|WC_Product $post The post ID, the post object, or the product object.
+	 * @param array                  $args Arguments.
+	 *
+	 * @return string
+	 * @since 3.7.2
+	 */
+	function yith_plugin_fw_get_post_formatted_name( $post, $args = array() ) {
+		$defaults  = array(
+			'show-id'   => false,
+			'post-type' => false,
+		);
+		$args      = wp_parse_args( $args, $defaults );
+		$post_type = $args['post-type'];
+		$show_id   = $args['show-id'];
+
+		if ( is_a( $post, 'WP_Post' ) ) {
+			$post_id = $post->ID;
+		} elseif ( class_exists( 'WC_Product' ) && is_a( $post, 'WC_Product' ) ) {
+			$post_id = $post->get_id();
+			if ( false === $post_type ) {
+				$post_type = is_a( $post, 'WC_Product_Variation' ) ? 'product_variation' : 'product';
+			}
+		} else {
+			$post_id = absint( $post );
+		}
+
+		if ( ! $post_type ) {
+			$post_type = get_post_type( $post_id );
+		}
+
+		$name = null;
+
+		switch ( $post_type ) {
+			case 'product':
+			case 'product_variation':
+				$product = wc_get_product( $post );
+				if ( $product ) {
+					$name = $product->get_formatted_name();
+
+					if ( ! $show_id ) {
+
+						if ( $product->get_sku() ) {
+							$identifier = $product->get_sku();
+						} else {
+							$identifier = '#' . $product->get_id();
+						}
+
+						// Use normal replacing instead of regex since the identifier could be also the product SKU.
+						$name = str_replace( "({$identifier})", '', $name );
+					}
+				}
+		}
+
+		if ( is_null( $name ) ) {
+			$name = get_the_title( $post_id );
+			if ( $show_id ) {
+				$name .= " (#{$post_id})";
+			}
+		}
+
+		return $name;
 	}
 }

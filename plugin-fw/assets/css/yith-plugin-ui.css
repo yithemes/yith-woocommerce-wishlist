@@ -1240,13 +1240,23 @@ table.yith-plugin-fw__boxed-table tbody tr {
 
 table.yith-plugin-fw__boxed-table tbody tr th, table.yith-plugin-fw__boxed-table tbody tr td {
   background: transparent;
-  border-radius: 5px;
   vertical-align: middle;
   padding: 25px 0 25px 25px;
 }
 
 table.yith-plugin-fw__boxed-table tbody tr td:last-child {
   padding-right: 25px;
+}
+
+table.yith-plugin-fw__boxed-table tbody tr th:first-child,
+table.yith-plugin-fw__boxed-table tbody tr td:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+table.yith-plugin-fw__boxed-table tbody tr th:last-child,
+table.yith-plugin-fw__boxed-table tbody tr td:last-child {
+  padding-right: 25px;
+  border-radius: 0 5px 5px 0;
 }
 
 table.yith-plugin-fw__boxed-table tbody tr:hover {
@@ -1454,13 +1464,25 @@ table.yith-plugin-fw__boxed-table.wp-list-table tbody tr:hover .yith-plugin-fw__
 
 .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr th, .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr td, .yith-plugin-ui #plugin-fw-wc .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr th, .yith-plugin-ui #plugin-fw-wc .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr td {
   background: transparent;
-  border-radius: 5px;
   vertical-align: middle;
   padding: 25px 0 25px 25px;
 }
 
 .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr td:last-child, .yith-plugin-ui #plugin-fw-wc .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr td:last-child {
   padding-right: 25px;
+}
+
+.yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr th:first-child,
+.yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr td:first-child, .yith-plugin-ui #plugin-fw-wc .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr th:first-child,
+.yith-plugin-ui #plugin-fw-wc .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr td:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+.yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr th:last-child,
+.yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr td:last-child, .yith-plugin-ui #plugin-fw-wc .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr th:last-child,
+.yith-plugin-ui #plugin-fw-wc .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr td:last-child {
+  padding-right: 25px;
+  border-radius: 0 5px 5px 0;
 }
 
 .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr:hover, .yith-plugin-ui #plugin-fw-wc .yith-plugin-ui--boxed-wp-list-style table.wp-list-table tbody tr:hover {

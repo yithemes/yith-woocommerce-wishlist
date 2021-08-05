@@ -32,6 +32,7 @@ window.yith = window.yith || {};
 		var defaults = {
 				title                     : false,
 				message                   : false,
+				onCreate                  : false,
 				onConfirm                 : false,
 				onCancel                  : false,
 				onClose                   : false,
@@ -111,6 +112,7 @@ window.yith = window.yith || {};
 						allowWpMenu               : options.allowWpMenu,
 						allowWpMenuInMobile       : options.allowWpMenuInMobile,
 						showClose                 : options.showClose,
+						onCreate                  : options.onCreate,
 						onClose                   : options.onClose,
 						closeWhenClickingOnOverlay: options.closeWhenClickingOnOverlay
 					}
@@ -170,6 +172,7 @@ window.yith = window.yith || {};
 				allowClosingWithEsc       : true,
 				closeWhenClickingOnOverlay: false,
 				scrollContent             : true,
+				onCreate                  : false,
 				onClose                   : false
 			},
 			self     = {};
@@ -273,7 +276,9 @@ window.yith = window.yith || {};
 					container.addClass( 'yith-plugin-fw__modal--allow-wp-menu-in-mobile' );
 				}
 
-
+				if ( typeof options.onCreate === 'function' ) {
+					options.onCreate();
+				}
 			},
 			initEvents     = function () {
 				dom.close.on( 'click', handleClose );
@@ -292,7 +297,7 @@ window.yith = window.yith || {};
 				if ( options.allowClosingWithEsc && event.keyCode === 27 ) {
 					handleClose();
 				}
-			}
+			};
 
 		initialize();
 
@@ -300,7 +305,6 @@ window.yith = window.yith || {};
 		self.close    = handleClose;
 
 		return self;
-
-	}
+	};
 
 } )( window.jQuery, window.yith );

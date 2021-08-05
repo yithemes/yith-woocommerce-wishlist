@@ -2,8 +2,8 @@
 /**
  * Wishlist widget for Elementor
  *
- * @author Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes\Elementor
  * @version 3.0.7
  */
 
@@ -12,6 +12,11 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 } // Exit if accessed directly
 
 if ( ! class_exists( 'YITH_WCWL_Elementor_Wishlist' ) ) {
+	/**
+	 * Wishlist Elementor block
+	 *
+	 * @since 3.0.0
+	 */
 	class YITH_WCWL_Elementor_Wishlist extends \Elementor\Widget_Base {
 
 		/**
@@ -74,7 +79,7 @@ if ( ! class_exists( 'YITH_WCWL_Elementor_Wishlist' ) ) {
 		 * @since  1.0.0
 		 * @access protected
 		 */
-		protected function _register_controls() {
+		protected function _register_controls() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 
 			$this->start_controls_section(
 				'product_section',

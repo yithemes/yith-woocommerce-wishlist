@@ -88,7 +88,7 @@
 }
 
 .yith-plugin-fw-panel-help-tab-content {
-    background-color : #F4F4F4;
+    background-color : #f4f4f4;
     border-radius    : 15px;
     max-width        : 1100px;
     margin           : 0 auto;
@@ -96,7 +96,7 @@
 }
 
 .yith-plugin-fw-panel-help-tab-content p,
-.yith-plugin-fw-panel-help-tab-content a{
+.yith-plugin-fw-panel-help-tab-content a {
     font-size : 16px;
 }
 
@@ -125,8 +125,8 @@
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-help-tab-actions,
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-hc-articles,
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-submit-ticket {
-    box-sizing    : border-box;
-    white-space   : normal;
+    box-sizing  : border-box;
+    white-space : normal;
 }
 
 .yith-plugin-fw-panel-help-tab-content h2.yith-plugin-fw-panel-help-tab-title {
@@ -139,7 +139,7 @@
 }
 
 .yith-plugin-fw-panel-help-tab-content h3 {
-    color     : #03689F;
+    color     : #03689f;
     font-size : 15px;
 }
 
@@ -150,7 +150,7 @@
 }
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-help-tab-video {
-    text-align: center;
+    text-align : center;
 }
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-help-tab-video p.video-description {
@@ -181,7 +181,7 @@
     display          : block;
     background-color : #fff;
     border-radius    : 5px;
-    box-shadow       : 0 0 15px 5px rgba(174,201,207,0.3);
+    box-shadow       : 0 0 15px 5px rgba(174, 201, 207, 0.3);
     transition       : all .2s ease;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .yith-plugin-fw-panel-help-tab-content ul.yith-plugin-fw-help-tab-actions:not( .full-width ) {
-    padding-top : 65px!important;
+    padding-top : 65px !important;
 }
 
 .yith-plugin-fw-panel-help-tab-content ul.yith-plugin-fw-help-tab-actions li {
@@ -201,17 +201,17 @@
 
 .yith-plugin-fw-panel-help-tab-content ul.yith-plugin-fw-help-tab-actions li > a {
     display         : block;
-    padding         : 15px 20px 15px 75px!important;
+    padding         : 15px 20px 15px 75px !important;
     text-decoration : none;
 }
 
 .yith-plugin-fw-panel-help-tab-content ul.yith-plugin-fw-help-tab-actions li:hover {
-    box-shadow : 0 0 15px 5px rgba(177,220,228,0.6);
+    box-shadow : 0 0 15px 5px rgba(177, 220, 228, 0.6);
     transform  : scale(1.04);
 }
 
 .yith-plugin-fw-panel-help-tab-content ul.yith-plugin-fw-help-tab-actions li a:before {
-    color                   : #03689F;
+    color                   : #03689f;
     float                   : left;
     font-family             : 'yith-icon';
     font-size               : 36px;
@@ -238,7 +238,7 @@
 }
 
 .yith-plugin-fw-panel-help-tab-content ul.yith-plugin-fw-help-tab-actions li h4 a {
-    color           : #03689F;
+    color           : #03689f;
     text-decoration : none;
 }
 
@@ -262,7 +262,7 @@
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-hc-articles h3:before {
     content    : '';
-    background : #03689F;
+    background : #03689f;
     display    : block;
     height     : 100%;
     left       : -40px;
@@ -273,7 +273,7 @@
 }
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-hc-articles a.button {
-    font-size: 16px;
+    font-size : 16px;
 }
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-hc-articles-list {
@@ -286,33 +286,33 @@
 }
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-hc-articles-list li:before {
-    content: '-';
+    content : '-';
 }
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-hc-articles-list a {
     text-decoration : none;
 }
 
-.yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-submit-ticket > .box-with-shadow{
-    padding: 30px!important;
+.yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-submit-ticket > .box-with-shadow {
+    padding : 30px !important;
 }
 
-.yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-submit-ticket h3{
-    color     : #B90A0A;
+.yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-submit-ticket h3 {
+    color     : #b90a0a;
     font-size : 18px;
     margin    : 0 0 15px;
 }
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-submit-ticket p {
-    margin-bottom: 35px;
+    margin-bottom : 35px;
 }
 
 .yith-plugin-fw-panel-help-tab-content .yith-plugin-fw-submit-ticket .button {
-    border-radius  : 7px;
-    display        : block;
-    font-size      : 15px;
-    padding        : 7px 15px;
-    text-align     : center;
+    border-radius : 7px;
+    display       : block;
+    font-size     : 15px;
+    padding       : 7px 15px;
+    text-align    : center;
 }
 
 /**
@@ -1010,7 +1010,7 @@ button#yith-plugin-fw-float-save-button {
 }
 
 .ywtenv-is-sandbox button#yith-plugin-fw-float-save-button {
-    bottom: 100px;
+    bottom : 100px;
 }
 
 button#yith-plugin-fw-float-save-button.visible {
@@ -1033,6 +1033,17 @@ button#yith-plugin-fw-float-save-button.green {
     transition       : all 0.8s linear;
 }
 
+.rtl button#yith-plugin-fw-float-save-button {
+    right : auto;
+    left  : 70px;
+}
+
+.rtl button#yith-plugin-fw-float-save-button i {
+    margin-left  : 8px;
+    margin-right : 0;
+}
+
+
 /* === Responsive === */
 
 @media (max-width : 767px) {
@@ -1043,20 +1054,20 @@ button#yith-plugin-fw-float-save-button.green {
 
 }
 
-@media (max-width: 992px) {
+@media (max-width : 992px) {
     .yith-plugin-fw-panel-help-tab-content .row {
-        white-space: normal;
-        margin-bottom: 0;
+        white-space   : normal;
+        margin-bottom : 0;
     }
 
     .yith-plugin-fw-panel-help-tab-content .row .column-left,
     .yith-plugin-fw-panel-help-tab-content .row .column-right {
-        width : 100%;
-        margin-bottom: 50px;
+        width         : 100%;
+        margin-bottom : 50px;
     }
 
     .yith-plugin-fw-panel-help-tab-content ul.yith-plugin-fw-help-tab-actions {
-        padding-top: 0!important;
+        padding-top : 0 !important;
     }
 }
 

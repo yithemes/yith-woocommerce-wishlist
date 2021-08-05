@@ -2,8 +2,8 @@
 /**
  * Wishlist page template - Standard Layout
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Templates\Wishlist\View
  * @version 3.0.11
  */
 
@@ -78,7 +78,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 					<div class="item-wrapper">
 						<div class="product-thumbnail">
 							<a href="<?php echo esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product', $item->get_product_id() ) ) ); ?>">
-								<?php echo $product->get_image(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo wp_kses_post( $product->get_image() ); ?>
 							</a>
 						</div>
 
@@ -149,11 +149,11 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 											<td class="value">
 												<?php
 												if ( $show_price ) {
-													echo $item->get_formatted_product_price(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+													echo wp_kses_post( $item->get_formatted_product_price() );
 												}
 
 												if ( $show_price_variations ) {
-													echo $item->get_price_variation(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+													echo wp_kses_post( $item->get_price_variation() );
 												}
 												?>
 											</td>
@@ -206,7 +206,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 						<!-- Change wishlist -->
 						<?php if ( $move_to_another_wishlist && $available_multi_wishlist && count( $users_wishlists ) > 1 ) : ?>
 							<div class="move-to-another-wishlist">
-								<?php if ( 'select' == $move_to_another_wishlist_type ) : ?>
+								<?php if ( 'select' === $move_to_another_wishlist_type ) : ?>
 									<select class="change-wishlist selectBox">
 										<option value=""><?php esc_html_e( 'Move', 'yith-woocommerce-wishlist' ); ?></option>
 										<?php
@@ -250,20 +250,12 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 		<p class="wishlist-empty">
 			<?php echo esc_html( apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ) ) ); ?>
 		</p>
-		<?php
-	endif;
-
-	if ( ! empty( $page_links ) ) :
-		?>
-		<p class="pagination-row">
-			<?php echo $page_links; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		</p>
 	<?php endif; ?>
 
 </ul>
 
 <?php if ( ! empty( $page_links ) ) : ?>
 	<nav class="wishlist-pagination">
-		<?php echo $page_links; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo wp_kses_post( $page_links ); ?>
 	</nav>
 <?php endif; ?>

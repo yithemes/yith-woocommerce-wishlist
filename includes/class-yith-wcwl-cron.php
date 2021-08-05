@@ -2,8 +2,8 @@
 /**
  * Wishlist Cron Handler
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
@@ -23,7 +23,7 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 		 *
 		 * @var array
 		 */
-		protected $_crons = array();
+		protected $crons = array();
 
 		/**
 		 * Single instance of the class
@@ -48,8 +48,8 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 		 * @return array Array of registered crons ans callbacks
 		 */
 		public function get_crons() {
-			if ( empty( $this->_crons ) ) {
-				$this->_crons = array(
+			if ( empty( $this->crons ) ) {
+				$this->crons = array(
 					'yith_wcwl_delete_expired_wishlists' => array(
 						'schedule' => 'daily',
 						'callback' => array( $this, 'delete_expired_wishlists' ),
@@ -57,7 +57,7 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 				);
 			}
 
-			return apply_filters( 'yith_wcwl_crons', $this->_crons );
+			return apply_filters( 'yith_wcwl_crons', $this->crons );
 		}
 
 		/**
@@ -115,6 +115,6 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
  * @return \YITH_WCWL_Cron
  * @since 3.0.0
  */
-function YITH_WCWL_Cron() {
+function YITH_WCWL_Cron() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Cron_Premium::get_instance() : YITH_WCWL_Cron::get_instance();
 }

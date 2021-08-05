@@ -2,8 +2,8 @@
 /**
  * Wishlist Session Handler
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
@@ -32,44 +32,44 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		/**
 		 * Session ID.
 		 *
-		 * @var int $_session_id Session ID.
+		 * @var int $session_id Session ID.
 		 */
-		protected $_session_id;
+		protected $session_id;
 
 		/**
 		 * Cookie name used for the session.
 		 *
 		 * @var string cookie name
 		 */
-		protected $_cookie_name;
+		protected $cookie_name;
 
 		/**
 		 * Cookie content.
 		 *
 		 * @var array cookie content.
 		 */
-		protected $_cookie;
+		protected $cookie;
 
 		/**
 		 * Stores session expiry.
 		 *
 		 * @var string session due to expire timestamp
 		 */
-		protected $_session_expiring;
+		protected $session_expiring;
 
 		/**
 		 * Stores session expiration.
 		 *
 		 * @var string session expiration timestamp
 		 */
-		protected $_session_expiration;
+		protected $session_expiration;
 
 		/**
 		 * True when the cookie exists.
 		 *
 		 * @var bool Based on whether a cookie exists.
 		 */
-		protected $_has_cookie = false;
+		protected $has_cookie = false;
 
 		/**
 		 * Construct session class
@@ -97,17 +97,17 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 					 * Once customer logs in, we can permanently register wishlists for his account
 					 */
 					$this->finalize_session();
-				} elseif ( time() > $this->_session_expiring ) {
+				} elseif ( time() > $this->session_expiring ) {
 					// Update session if its close to expiring.
 					$this->set_session_expiration();
-					$this->update_session_timestamp( $this->_session_id, $this->_session_expiration );
+					$this->update_session_timestamp( $this->session_id, $this->session_expiration );
 				}
 			} else {
 				$this->set_session_expiration();
-				$this->_session_id = $this->_session_id ? $this->_session_id : $this->generate_session_id();
+				$this->session_id = $this->session_id ? $this->session_id : $this->generate_session_id();
 			}
 
-			if ( ! $this->_has_cookie ) {
+			if ( ! $this->has_cookie ) {
 				$this->set_session_cookie();
 			}
 		}
@@ -122,20 +122,20 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 				return;
 			}
 
-			$to_hash = $this->_session_id . '|' . $this->_session_expiration;
+			$to_hash = $this->session_id . '|' . $this->session_expiration;
 			$hash    = hash_hmac( 'md5', $to_hash, wp_hash( $to_hash ) );
 
 			$cookie_value = array(
-				'session_id' => $this->_session_id,
-				'session_expiration' => $this->_session_expiration,
-				'session_expiring' => $this->_session_expiring,
-				'cookie_hash' => $hash,
+				'session_id'         => $this->session_id,
+				'session_expiration' => $this->session_expiration,
+				'session_expiring'   => $this->session_expiring,
+				'cookie_hash'        => $hash,
 			);
-			yith_setcookie( $this->get_session_cookie_name(), $cookie_value, $this->_session_expiration, $this->use_secure_cookie(), true );
+			yith_setcookie( $this->get_session_cookie_name(), $cookie_value, $this->session_expiration, $this->use_secure_cookie(), true );
 
 			// cookie has been set.
-			$this->_cookie = $cookie_value;
-			$this->_has_cookie = true;
+			$this->cookie     = $cookie_value;
+			$this->has_cookie = true;
 		}
 
 		/**
@@ -146,8 +146,8 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @return bool|array
 		 */
 		public function get_session_cookie() {
-			if ( ! empty( $this->_cookie ) ) {
-				return $this->_cookie;
+			if ( ! empty( $this->cookie ) ) {
+				return $this->cookie;
 			}
 
 			$cookie_value = yith_getcookie( $this->get_session_cookie_name() ); // @codingStandardsIgnoreLine.
@@ -168,12 +168,12 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 				return false;
 			}
 
-			$this->_cookie = $cookie_value;
-			$this->_has_cookie = true;
+			$this->cookie     = $cookie_value;
+			$this->has_cookie = true;
 
-			$this->_session_id         = $cookie_value['session_id'];
-			$this->_session_expiration = $cookie_value['session_expiration'];
-			$this->_session_expiring   = $cookie_value['session_expiring'];
+			$this->session_id         = $cookie_value['session_id'];
+			$this->session_expiration = $cookie_value['session_expiration'];
+			$this->session_expiring   = $cookie_value['session_expiring'];
 
 			return $cookie_value;
 		}
@@ -194,11 +194,11 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @since 3.0.3
 		 */
 		public function get_session_cookie_name() {
-			if ( empty( $this->_cookie_name ) ) {
-				$this->_cookie_name = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
+			if ( empty( $this->cookie_name ) ) {
+				$this->cookie_name = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
 			}
 
-			return $this->_cookie_name;
+			return $this->cookie_name;
 		}
 
 		/**
@@ -210,7 +210,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			$session_id = $this->get_session_id();
 
 			if ( $session_id ) {
-				return $this->_session_expiration;
+				return $this->session_expiration;
 			}
 
 			return false;
@@ -220,8 +220,8 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * Set session expiration.
 		 */
 		public function set_session_expiration() {
-			$this->_session_expiring   = time() + yith_wcwl_get_cookie_expiration() - HOUR_IN_SECONDS;
-			$this->_session_expiration = time() + yith_wcwl_get_cookie_expiration();
+			$this->session_expiring   = time() + yith_wcwl_get_cookie_expiration() - HOUR_IN_SECONDS;
+			$this->session_expiration = time() + yith_wcwl_get_cookie_expiration();
 		}
 
 		/**
@@ -230,7 +230,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @return bool
 		 */
 		public function has_session() {
-			return $this->_has_cookie; // @codingStandardsIgnoreLine.
+			return $this->has_cookie; // @codingStandardsIgnoreLine.
 		}
 
 		/**
@@ -240,11 +240,11 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 */
 		public function get_session_id() {
 			if ( $this->has_session() ) {
-				return $this->_session_id;
+				return $this->session_id;
 			} elseif ( ! is_user_logged_in() ) {
 				$this->init_session_cookie();
 
-				return $this->_session_id;
+				return $this->session_id;
 			}
 
 			return false;
@@ -257,7 +257,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 */
 		public function maybe_get_session_id() {
 			if ( $this->has_session() ) {
-				return $this->_session_id;
+				return $this->session_id;
 			}
 
 			return false;
@@ -278,7 +278,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			}
 
 			require_once ABSPATH . 'wp-includes/class-phpass.php';
-			$hasher      = new PasswordHash( 8, false );
+			$hasher     = new PasswordHash( 8, false );
 			$session_id = md5( $hasher->get_random_bytes( 32 ) );
 
 			return $session_id;
@@ -304,7 +304,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 				return;
 			}
 
-			$user_id = get_current_user_id();
+			$user_id    = get_current_user_id();
 			$session_id = $cookie['session_id'];
 
 			try {
@@ -343,8 +343,8 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		public function forget_session() {
 			yith_destroycookie( $this->get_session_cookie_name() );
 
-			$this->_session_id = $this->generate_session_id();
-			$this->_cookie = null;
+			$this->session_id = $this->generate_session_id();
+			$this->cookie     = null;
 		}
 
 		/**
@@ -369,6 +369,6 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
  * @return \YITH_WCWL_Session
  * @since 3.0.0
  */
-function YITH_WCWL_Session() {
+function YITH_WCWL_Session() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	return YITH_WCWL_Session::get_instance();
 }

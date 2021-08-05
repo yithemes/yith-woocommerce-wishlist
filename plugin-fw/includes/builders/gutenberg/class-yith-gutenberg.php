@@ -126,19 +126,21 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 			}
 
 			if ( ! empty( $this->registered_blocks ) ) {
-				add_filter( 'block_categories', array( $this, 'block_category' ), 10, 2 );
+				global $wp_version;
+
+				$categories_hook = version_compare( $wp_version, '5.8-beta', '>=' ) ? 'block_categories_all' : 'block_categories';
+				add_filter( $categories_hook, array( $this, 'block_category' ), 10, 1 );
 			}
 		}
 
 		/**
 		 * Add block category
 		 *
-		 * @param array   $categories The block categories.
-		 * @param WP_Post $post       The current post.
+		 * @param array $categories The block categories.
 		 *
 		 * @return array The block categories.
 		 */
-		public function block_category( $categories, $post ) {
+		public function block_category( $categories ) {
 			return array_merge(
 				$categories,
 				array(
@@ -322,9 +324,12 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 			do_action( 'yith_plugin_fw_gutenberg_after_do_shortcode', $shortcode, $current_action );
 
 			$html = ob_get_clean();
-			if ( is_ajax() ) {
-				wp_send_json( array( 'html' => $html ) );
-			}
+
+			wp_send_json(
+				array(
+					'html' => $html,
+				)
+			);
 
 			// phpcs:enable
 		}

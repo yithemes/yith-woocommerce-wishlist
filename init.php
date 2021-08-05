@@ -3,16 +3,16 @@
  * Plugin Name: YITH WooCommerce Wishlist
  * Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
  * Description: <code><strong>YITH WooCommerce Wishlist</strong></code> gives your users the possibility to create, fill, manage and share their wishlists allowing you to analyze their interests and needs to improve your marketing strategies. <a href="https://yithemes.com/" target="_blank">Get more plugins for your e-commerce on <strong>YITH</strong></a>
- * Version: 3.0.23
+ * Version: 3.0.25
  * Author: YITH
  * Author URI: https://yithemes.com/
  * Text Domain: yith-woocommerce-wishlist
  * Domain Path: /languages/
- * WC requires at least: 4.2.0
- * WC tested up to: 5.4
+ * WC requires at least: 5.3.0
+ * WC tested up to: 5.6
  *
- * @author YITHEMES
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist
  * @version 3.0.0
  */
 
@@ -72,7 +72,7 @@ if ( ! defined( 'YITH_WCWL_SLUG' ) ) {
 
 /* Plugin Framework Version Check */
 if ( ! function_exists( 'yit_maybe_plugin_fw_loader' ) && file_exists( YITH_WCWL_DIR . 'plugin-fw/init.php' ) ) {
-	require_once( YITH_WCWL_DIR . 'plugin-fw/init.php' );
+	require_once YITH_WCWL_DIR . 'plugin-fw/init.php';
 }
 yit_maybe_plugin_fw_loader( YITH_WCWL_DIR );
 
@@ -88,25 +88,25 @@ if ( ! function_exists( 'yith_wishlist_constructor' ) ) {
 		load_plugin_textdomain( 'yith-woocommerce-wishlist', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 		// Load required classes and functions.
-		require_once( YITH_WCWL_INC . 'data-stores/class.yith-wcwl-wishlist-data-store.php' );
-		require_once( YITH_WCWL_INC . 'data-stores/class.yith-wcwl-wishlist-item-data-store.php' );
-		require_once( YITH_WCWL_INC . 'functions.yith-wcwl.php' );
-		require_once( YITH_WCWL_INC . 'legacy/functions.yith-wcwl-legacy.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-exception.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-form-handler.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-ajax-handler.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-session.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-cron.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-wishlist.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-wishlist-item.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-wishlist-factory.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-frontend.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-install.php' );
-		require_once( YITH_WCWL_INC . 'class.yith-wcwl-shortcode.php' );
+		require_once YITH_WCWL_INC . 'data-stores/class-yith-wcwl-wishlist-data-store.php';
+		require_once YITH_WCWL_INC . 'data-stores/class-yith-wcwl-wishlist-item-data-store.php';
+		require_once YITH_WCWL_INC . 'functions-yith-wcwl.php';
+		require_once YITH_WCWL_INC . 'legacy/functions-yith-wcwl-legacy.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-exception.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-form-handler.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-ajax-handler.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-session.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-cron.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-wishlist.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-wishlist-item.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-wishlist-factory.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-frontend.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-install.php';
+		require_once YITH_WCWL_INC . 'class-yith-wcwl-shortcode.php';
 
 		if ( is_admin() ) {
-			require_once( YITH_WCWL_INC . 'class.yith-wcwl-admin.php' );
+			require_once YITH_WCWL_INC . 'class-yith-wcwl-admin.php';
 		}
 
 		// Let's start the game!
@@ -132,7 +132,7 @@ if ( ! function_exists( 'yith_wishlist_install' ) ) {
 	function yith_wishlist_install() {
 
 		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
 		if ( ! function_exists( 'WC' ) ) {

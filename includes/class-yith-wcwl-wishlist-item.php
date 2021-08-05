@@ -2,8 +2,8 @@
 /**
  * Wishlist Item class
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes\Wishlists
  * @version 3.0.0
  */
 
@@ -98,7 +98,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return int Wishlist ID
 		 */
 		public function get_wishlist_id( $context = 'view' ) {
-			return intval( $this->get_prop( 'wishlist_id', $context ) );
+			return (int) $this->get_prop( 'wishlist_id', $context );
 		}
 
 		/**
@@ -107,7 +107,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return int Wishlist ID
 		 */
 		public function get_origin_wishlist_id() {
-			return intval( $this->origin_wishlist_id );
+			return (int) $this->origin_wishlist_id;
 		}
 
 		/**
@@ -118,7 +118,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return int Wishlist ID
 		 */
 		public function get_original_product_id( $context = 'view' ) {
-			return intval( $this->get_prop( 'product_id', $context ) );
+			return (int) $this->get_prop( 'product_id', $context );
 		}
 
 		/**
@@ -185,7 +185,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_formatted_product_price( $context = 'view' ) {
 			$product = $this->get_product( $context );
 
-			$base_price = $product->is_type( 'variable' ) ? $product->get_variation_regular_price( 'max' ) : $product->get_price();
+			$base_price      = $product->is_type( 'variable' ) ? $product->get_variation_regular_price( 'max' ) : $product->get_price();
 			$formatted_price = $base_price ? $product->get_price_html() : apply_filters( 'yith_free_text', __( 'Free!', 'yith-woocommerce-wishlist' ), $product );
 
 			return apply_filters( 'yith_wcwl_item_formatted_price', $formatted_price, $base_price, $product );
@@ -214,7 +214,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return int Quantity
 		 */
 		public function get_quantity( $context = 'view' ) {
-			return max( 1, intval( $this->get_prop( 'quantity', $context ) ) );
+			return max( 1, (int) $this->get_prop( 'quantity', $context ) );
 		}
 
 		/**
@@ -224,7 +224,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return int User ID
 		 */
 		public function get_user_id( $context = 'view' ) {
-			return intval( $this->get_prop( 'user_id', $context ) );
+			return (int) $this->get_prop( 'user_id', $context );
 		}
 
 		/**
@@ -234,7 +234,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return \WP_User|bool User
 		 */
 		public function get_user( $context = 'view' ) {
-			$user_id = intval( $this->get_prop( 'user_id', $context ) );
+			$user_id = (int) $this->get_prop( 'user_id', $context );
 
 			if ( ! $user_id ) {
 				return false;
@@ -343,7 +343,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return int Position
 		 */
 		public function get_position( $context = 'view' ) {
-			return intval( $this->get_prop( 'position', $context ) );
+			return (int) $this->get_prop( 'position', $context );
 		}
 
 		/**
@@ -355,7 +355,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_original_price( $context = 'view' ) {
 			$price = $this->get_prop( 'original_price', 'edit' );
 
-			if ( 'view' == $context ) {
+			if ( 'view' === $context ) {
 				return wc_price(
 					$price,
 					array(
@@ -376,7 +376,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_original_currency( $context = 'view' ) {
 			$currency = $this->get_prop( 'original_currency', 'edit' );
 
-			if ( 'view' == $context && ! $currency ) {
+			if ( 'view' === $context && ! $currency ) {
 				$currency = get_woocommerce_currency();
 			}
 
@@ -392,7 +392,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			$original_currency = $this->get_original_currency( 'edit' );
 
 			// if currency changed, makes no sense to make comparisons.
-			if ( get_woocommerce_currency() != $original_currency ) {
+			if ( get_woocommerce_currency() !== $original_currency ) {
 				return '';
 			}
 
@@ -417,7 +417,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			}
 
 			$percentage_difference = -1 * round( $difference / $original_price * 100, 2 );
-			$class = $percentage_difference > 0 ? 'increase' : 'decrease';
+			$class                 = $percentage_difference > 0 ? 'increase' : 'decrease';
 
 			$template = apply_filters(
 				'yith_wcwl_price_variation_template',
@@ -464,7 +464,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 
 			$wishlist = yith_wcwl_get_wishlist( $wishlist_id );
 
-			if ( $wishlist && $this->get_user_id() != $wishlist->get_user_id() ) {
+			if ( $wishlist && $this->get_user_id() !== $wishlist->get_user_id() ) {
 				$this->set_user_id( $wishlist->get_user_id() );
 			}
 		}
@@ -517,7 +517,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @param int $position Position.
 		 */
 		public function set_position( $position ) {
-			$this->set_prop( 'position', intval( $position ) );
+			$this->set_prop( 'position', (int) $position );
 		}
 
 		/**
@@ -545,7 +545,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return void
 		 */
 		public function set_on_sale( $on_sale ) {
-			if ( $this->get_object_read() && $on_sale && $this->is_on_sale() != $on_sale ) {
+			if ( $this->get_object_read() && $on_sale && $this->is_on_sale() !== $on_sale ) {
 				do_action( 'yith_wcwl_item_is_on_sale', $this );
 			}
 

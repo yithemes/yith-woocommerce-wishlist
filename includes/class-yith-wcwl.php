@@ -2,8 +2,8 @@
 /**
  * Main class
  *
- * @author Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
@@ -105,7 +105,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				global $plugin_fw_data;
 				if ( ! empty( $plugin_fw_data ) ) {
 					$plugin_fw_file = array_shift( $plugin_fw_data );
-					require_once( $plugin_fw_file );
+					require_once $plugin_fw_file;
 				}
 			}
 		}
@@ -120,7 +120,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 */
 		public function privacy_loader() {
 			if ( class_exists( 'YITH_Privacy_Plugin_Abstract' ) ) {
-				require_once( YITH_WCWL_INC . 'class.yith-wcwl-privacy.php' );
+				require_once YITH_WCWL_INC . 'class-yith-wcwl-privacy.php';
 				new YITH_WCWL_Privacy();
 			}
 		}
@@ -148,7 +148,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			);
 
 			$atts = empty( $atts ) && ! empty( $this->details ) ? $this->details : $atts;
-			$atts = ! empty( $atts ) ? $atts : $_REQUEST;
+			$atts = ! empty( $atts ) ? $atts : $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$atts = wp_parse_args( $atts, $defaults );
 
 			// filtering params.
@@ -217,17 +217,17 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		public function remove( $atts = array() ) {
 			$defaults = array(
 				'remove_from_wishlist' => 0,
-				'wishlist_id' => 0,
-				'user_id' => false,
+				'wishlist_id'          => 0,
+				'user_id'              => false,
 			);
 
 			$atts = empty( $atts ) && ! empty( $this->details ) ? $this->details : $atts;
-			$atts = ! empty( $atts ) ? $atts : $_REQUEST;
+			$atts = ! empty( $atts ) ? $atts : $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$atts = wp_parse_args( $atts, $defaults );
 
-			$prod_id = intval( $atts['remove_from_wishlist'] );
+			$prod_id     = intval( $atts['remove_from_wishlist'] );
 			$wishlist_id = intval( $atts['wishlist_id'] );
-			$user_id = intval( $atts['user_id'] );
+			$user_id     = intval( $atts['user_id'] );
 
 			do_action( 'yith_wcwl_removing_from_wishlist', $prod_id, $wishlist_id, $user_id );
 
@@ -333,10 +333,10 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			);
 
 			if ( is_user_logged_in() ) {
-				$id = get_current_user_id();
+				$id              = get_current_user_id();
 				$args['user_id'] = $id;
 			} elseif ( YITH_WCWL_Session()->has_session() ) {
-				$id = YITH_WCWL_Session()->get_session_id();
+				$id                 = YITH_WCWL_Session()->get_session_id();
 				$args['session_id'] = $id;
 			}
 
@@ -395,9 +395,9 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			$count = YITH_WCWL_Wishlist_Factory::get_wishlist_items_count(
 				array(
-					'product_id' => $product_id,
-					'user_id' => false,
-					'session_id' => false,
+					'product_id'  => $product_id,
+					'user_id'     => false,
+					'session_id'  => false,
 					'wishlist_id' => 'all',
 				)
 			);
@@ -416,7 +416,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		public function get_product_details( $product_id, $wishlist_id = false ) {
 			$product = $this->get_products(
 				array(
-					'prod_id' => $product_id,
+					'prod_id'     => $product_id,
 					'wishlist_id' => $wishlist_id,
 				)
 			);
@@ -443,7 +443,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			);
 
 			$atts = empty( $atts ) && ! empty( $this->details ) ? $this->details : $atts;
-			$atts = ! empty( $atts ) ? $atts : $_REQUEST;
+			$atts = ! empty( $atts ) ? $atts : $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$atts = wp_parse_args( $atts, $defaults );
 
 			$user_id = ( ! empty( $atts['user_id'] ) ) ? $atts['user_id'] : false;
@@ -459,9 +459,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function update_wishlist( $wishlist_id, $args = array() ) {
-			return;
-		}
+		public function update_wishlist( $wishlist_id, $args = array() ) {}
 
 		/**
 		 * Delete indicated wishlist
@@ -470,9 +468,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @return void
 		 * @since 2.0.0
 		 */
-		public function remove_wishlist( $wishlist_id ) {
-			return;
-		}
+		public function remove_wishlist( $wishlist_id ) {}
 
 		/**
 		 * Retrieve all the wishlist matching specified arguments
@@ -520,7 +516,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				$lists = YITH_WCWL_Wishlist_Factory::get_wishlists(
 					array(
 						'orderby' => 'dateadded',
-						'order' => 'ASC',
+						'order'   => 'ASC',
 					)
 				);
 
@@ -619,11 +615,11 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @since 3.0.0
 		 */
 		public function can_user_add_to_wishlist( $user_id = false ) {
-			$user_id = $user_id ? $user_id : get_current_user_id();
+			$user_id                                    = $user_id ? $user_id : get_current_user_id();
 			$disable_wishlist_for_unauthenticated_users = get_option( 'yith_wcwl_disable_wishlist_for_unauthenticated_users' );
-			$return = true;
+			$return                                     = true;
 
-			if ( 'yes' == $disable_wishlist_for_unauthenticated_users && ! $user_id ) {
+			if ( 'yes' === $disable_wishlist_for_unauthenticated_users && ! $user_id ) {
 				$return = false;
 			}
 
@@ -637,7 +633,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @return array Array of filtered data store
 		 */
 		public function register_data_stores( $data_stores ) {
-			$data_stores['wishlist'] = 'YITH_WCWL_Wishlist_Data_Store';
+			$data_stores['wishlist']      = 'YITH_WCWL_Wishlist_Data_Store';
 			$data_stores['wishlist-item'] = 'YITH_WCWL_Wishlist_Item_Data_Store';
 
 			return $data_stores;
@@ -662,7 +658,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				return;
 			}
 
-			$wishlist_page = get_post( $wishlist_page_id );
+			$wishlist_page      = get_post( $wishlist_page_id );
 			$wishlist_page_slug = $wishlist_page ? $wishlist_page->post_name : false;
 
 			if ( empty( $wishlist_page_slug ) ) {
@@ -673,7 +669,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				return;
 			}
 
-			$regex_paged = '(([^/]+/)*' . urldecode( $wishlist_page_slug ) . ')(/(.*))?/page/([0-9]{1,})/?$';
+			$regex_paged  = '(([^/]+/)*' . urldecode( $wishlist_page_slug ) . ')(/(.*))?/page/([0-9]{1,})/?$';
 			$regex_simple = '(([^/]+/)*' . urldecode( $wishlist_page_slug ) . ')(/(.*))?/?$';
 
 			add_rewrite_rule( $regex_paged, 'index.php?pagename=$matches[1]&' . $this->wishlist_param . '=$matches[4]&paged=$matches[5]', 'top' );
@@ -709,7 +705,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			$wishlist_page_id = get_option( 'yith_wcwl_wishlist_page_id' );
 			$wishlist_page_id = yith_wcwl_object_id( $wishlist_page_id );
 
-			return apply_filters( 'yith_wcwl_wishlist_page_id', $wishlist_page_id );
+			return (int) apply_filters( 'yith_wcwl_wishlist_page_id', $wishlist_page_id );
 		}
 
 		/**
@@ -722,12 +718,12 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 */
 		public function get_wishlist_url( $action = '' ) {
 			global $sitepress;
-			$wishlist_page_id = $this->get_wishlist_page_id();
+			$wishlist_page_id   = $this->get_wishlist_page_id();
 			$wishlist_permalink = get_the_permalink( $wishlist_page_id );
 
 			$action_params = explode( '/', $action );
-			$view = $action_params[0];
-			$data = isset( $action_params[1] ) ? $action_params[1] : '';
+			$view          = $action_params[0];
+			$data          = isset( $action_params[1] ) ? $action_params[1] : '';
 
 			if ( 'view' === $action && empty( $data ) ) {
 				return $wishlist_permalink;
@@ -735,10 +731,10 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 			if ( get_option( 'permalink_structure' ) && ! defined( 'ICL_PLUGIN_PATH' ) && ! defined( 'POLYLANG_VERSION' ) ) {
 				$wishlist_permalink = trailingslashit( $wishlist_permalink );
-				$base_url = trailingslashit( $wishlist_permalink . $action );
+				$base_url           = trailingslashit( $wishlist_permalink . $action );
 			} else {
 				$base_url = $wishlist_permalink;
-				$params = array();
+				$params   = array();
 
 				if ( ! empty( $data ) ) {
 					$params[ $this->wishlist_param ] = $view;
@@ -755,7 +751,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				$base_url = add_query_arg( $params, $base_url );
 			}
 
-			if ( defined( 'ICL_PLUGIN_PATH' ) && $sitepress->get_current_language() != $sitepress->get_default_language() ) {
+			if ( defined( 'ICL_PLUGIN_PATH' ) && $sitepress->get_current_language() !== $sitepress->get_default_language() ) {
 				$base_url = add_query_arg( 'lang', $sitepress->get_current_language(), $base_url );
 			}
 
@@ -853,10 +849,11 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @return string Filtered translation url for current page/post.
 		 */
 		public function get_pll_wishlist_url( $url ) {
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended
 			if ( yith_wcwl_is_wishlist_page() && isset( $_GET[ $this->wishlist_param ] ) ) {
 				$wishlist_action = sanitize_text_field( wp_unslash( $_GET[ $this->wishlist_param ] ) );
-				$user_id = isset( $_GET['user_id'] ) ? sanitize_text_field( wp_unslash( $_GET['user_id'] ) ) : '';
-				$wishlist_id = isset( $_GET['wishlist_id'] ) ? sanitize_text_field( wp_unslash( $_GET['wishlist_id'] ) ) : '';
+				$user_id         = isset( $_GET['user_id'] ) ? sanitize_text_field( wp_unslash( $_GET['user_id'] ) ) : '';
+				$wishlist_id     = isset( $_GET['wishlist_id'] ) ? sanitize_text_field( wp_unslash( $_GET['wishlist_id'] ) ) : '';
 
 				$params = array_filter(
 					array(
@@ -868,6 +865,8 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 
 				$url = add_query_arg( $params, $url );
 			}
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
 			return $url;
 		}
 	}
@@ -879,6 +878,6 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
  * @return \YITH_WCWL|\YITH_WCWL_Premium
  * @since 2.0.0
  */
-function YITH_WCWL() {
+function YITH_WCWL() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Premium::get_instance() : YITH_WCWL::get_instance();
 }

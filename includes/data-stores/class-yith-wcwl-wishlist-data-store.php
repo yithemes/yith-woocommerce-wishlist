@@ -2,14 +2,16 @@
 /**
  * Wishlist data store
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes\DataStores
  * @version 3.0.0
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
 if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 	/**
@@ -66,12 +68,12 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			$columns = array(
 				'wishlist_privacy' => '%d',
-				'wishlist_name' => '%s',
-				'wishlist_slug' => '%s',
-				'wishlist_token' => '%s',
-				'is_default' => '%d',
+				'wishlist_name'    => '%s',
+				'wishlist_slug'    => '%s',
+				'wishlist_token'   => '%s',
+				'is_default'       => '%d',
 			);
-			$values = array(
+			$values  = array(
 				apply_filters( 'yith_wcwl_add_wishlist_privacy', $wishlist->get_privacy() ),
 				apply_filters( 'yith_wcwl_add_wishlist_name', $wishlist->get_name() ),
 				apply_filters( 'yith_wcwl_add_wishlist_slug', $wishlist->get_slug() ),
@@ -83,28 +85,28 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			if ( $session_id ) {
 				$columns['session_id'] = '%s';
-				$values[] = apply_filters( 'yith_wcwl_add_wishlist_session_id', $session_id );
+				$values[]              = apply_filters( 'yith_wcwl_add_wishlist_session_id', $session_id );
 			}
 
 			$user_id = $wishlist->get_user_id();
 
 			if ( $user_id ) {
 				$columns['user_id'] = '%d';
-				$values[] = apply_filters( 'yith_wcwl_add_wishlist_user_id', $user_id );
+				$values[]           = apply_filters( 'yith_wcwl_add_wishlist_user_id', $user_id );
 			}
 
 			$date_added = $wishlist->get_date_added( 'edit' );
 
 			if ( $date_added ) {
 				$columns['dateadded'] = 'FROM_UNIXTIME( %d )';
-				$values[] = apply_filters( 'yith_wcwl_add_wishlist_date_added', $date_added->getTimestamp() );
+				$values[]             = apply_filters( 'yith_wcwl_add_wishlist_date_added', $date_added->getTimestamp() );
 			}
 
 			$expiration = $wishlist->get_expiration( 'edit' );
 
 			if ( $expiration ) {
 				$columns['expiration'] = 'FROM_UNIXTIME( %d )';
-				$values[] = apply_filters( 'yith_wcwl_add_wishlist_expiration', $expiration->getTimestamp() );
+				$values[]              = apply_filters( 'yith_wcwl_add_wishlist_expiration', $expiration->getTimestamp() );
 			}
 
 			// if session wishlist, set always an expiration.
@@ -112,12 +114,12 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			if ( isset( $columns['session_id'] ) && ! $expiration && $session_expiration ) {
 				$columns['expiration'] = 'FROM_UNIXTIME( %d )';
-				$values[] = apply_filters( 'yith_wcwl_add_wishlist_expiration', $session_expiration );
+				$values[]              = apply_filters( 'yith_wcwl_add_wishlist_expiration', $session_expiration );
 			}
 
 			$query_columns = implode( ', ', array_map( 'esc_sql', array_keys( $columns ) ) );
-			$query_values = implode( ', ', array_values( $columns ) );
-			$query = "INSERT INTO {$wpdb->yith_wcwl_wishlists} ( {$query_columns} ) VALUES ( {$query_values} ) ";
+			$query_values  = implode( ', ', array_values( $columns ) );
+			$query         = "INSERT INTO {$wpdb->yith_wcwl_wishlists} ( {$query_columns} ) VALUES ( {$query_values} ) ";
 
 			$res = $wpdb->query( $wpdb->prepare( $query, $values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
@@ -143,7 +145,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			$wishlist->set_defaults();
 
-			$id = $wishlist->get_id();
+			$id    = $wishlist->get_id();
 			$token = $wishlist->get_token();
 
 			if ( ! $id && ! $token ) {
@@ -202,18 +204,18 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				return;
 			}
 
-			$data = $wishlist->get_data();
+			$data    = $wishlist->get_data();
 			$changes = $wishlist->get_changes();
 
 			if ( array_intersect( array( 'user_id', 'session_id', 'slug', 'name', 'token', 'privacy', 'expiration', 'date_added', 'is_default' ), array_keys( $changes ) ) ) {
 				$columns = array(
 					'wishlist_privacy' => '%d',
-					'wishlist_name' => '%s',
-					'wishlist_token' => '%s',
-					'is_default' => '%d',
-					'dateadded' => 'FROM_UNIXTIME( %d )',
+					'wishlist_name'    => '%s',
+					'wishlist_token'   => '%s',
+					'is_default'       => '%d',
+					'dateadded'        => 'FROM_UNIXTIME( %d )',
 				);
-				$values = array(
+				$values  = array(
 					$wishlist->get_privacy(),
 					$wishlist->get_name(),
 					$wishlist->get_token(),
@@ -225,7 +227,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 				if ( $session_id ) {
 					$columns['session_id'] = '%s';
-					$values[] = apply_filters( 'yith_wcwl_update_wishlist_session_id', $session_id );
+					$values[]              = apply_filters( 'yith_wcwl_update_wishlist_session_id', $session_id );
 				} else {
 					$columns['session_id'] = 'NULL';
 				}
@@ -234,7 +236,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 				if ( $user_id ) {
 					$columns['user_id'] = '%d';
-					$values[] = apply_filters( 'yith_wcwl_update_wishlist_user_id', $user_id );
+					$values[]           = apply_filters( 'yith_wcwl_update_wishlist_user_id', $user_id );
 				} else {
 					$columns['user_id'] = 'NULL';
 				}
@@ -243,16 +245,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 				if ( $expiration ) {
 					$columns['expiration'] = 'FROM_UNIXTIME( %d )';
-					$values[] = apply_filters( 'yith_wcwl_update_wishlist_expiration', $expiration->getTimestamp() );
+					$values[]              = apply_filters( 'yith_wcwl_update_wishlist_expiration', $expiration->getTimestamp() );
 				} else {
 					$columns['expiration'] = 'NULL';
 				}
 
 				$wishlist_slug = $wishlist->get_slug();
 
-				if ( isset( $changes['slug'] ) && $wishlist_slug != $data['slug'] ) {
+				if ( isset( $changes['slug'] ) && $wishlist_slug !== $data['slug'] ) {
 					$columns['wishlist_slug'] = '%s';
-					$values[] = $this->generate_slug( $wishlist_slug );
+					$values[]                 = $this->generate_slug( $wishlist_slug );
 				}
 
 				$this->update_raw( $columns, $values, array( 'ID' => '%d' ), array( $wishlist->get_id() ) );
@@ -357,21 +359,21 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			global $wpdb;
 
 			$default = array(
-				'id' => false,
-				'user_id' => ( is_user_logged_in() ) ? get_current_user_id() : false,
-				'session_id' => ( ! is_user_logged_in() ) ? YITH_WCWL_Session()->maybe_get_session_id() : false,
-				'wishlist_slug' => false,
-				'wishlist_name' => false,
-				'wishlist_token' => false,
-				'wishlist_visibility' => apply_filters( 'yith_wcwl_wishlist_visibility_string_value', 'all' ), // all, visible, public, shared, private.
-				'user_search' => false,
-				's' => false,
-				'is_default' => false,
-				'orderby' => '',
-				'order' => 'DESC',
-				'limit' => false,
-				'offset' => 0,
-				'show_empty' => true,
+				'id'                  => false,
+				'user_id'             => ( is_user_logged_in() ) ? get_current_user_id() : false,
+				'session_id'          => ( ! is_user_logged_in() ) ? YITH_WCWL_Session()->maybe_get_session_id() : false,
+				'wishlist_slug'       => false,
+				'wishlist_name'       => false,
+				'wishlist_token'      => false,
+				'wishlist_visibility' => apply_filters( 'yith_wcwl_wishlist_visibility_string_value', 'all' ), // all | visible | public | shared | private.
+				'user_search'         => false,
+				's'                   => false,
+				'is_default'          => false,
+				'orderby'             => '',
+				'order'               => 'DESC',
+				'limit'               => false,
+				'offset'              => 0,
+				'show_empty'          => true,
 			);
 
 			// if there is no current wishlist, and user was asking for current one, short-circuit query, as pointless.
@@ -394,7 +396,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				$sql .= " LEFT JOIN `{$wpdb->usermeta}` AS ums ON ums.`user_id` = u.`ID`";
 			}
 
-			$sql .= ' WHERE 1';
+			$sql     .= ' WHERE 1';
 			$sql_args = array();
 
 			if ( ! empty( $user_id ) ) {
@@ -460,27 +462,27 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			}
 
 			if ( ! empty( $is_default ) ) {
-				$sql .= ' AND l.`is_default` = %d';
+				$sql       .= ' AND l.`is_default` = %d';
 				$sql_args[] = $is_default;
 			}
 
 			if ( ! empty( $id ) ) {
-				$sql .= ' AND l.`ID` = %d';
+				$sql       .= ' AND l.`ID` = %d';
 				$sql_args[] = $id;
 			}
 
 			if ( isset( $wishlist_slug ) && false !== $wishlist_slug ) {
-				$sql .= ' AND l.`wishlist_slug` = %s';
+				$sql       .= ' AND l.`wishlist_slug` = %s';
 				$sql_args[] = sanitize_title_with_dashes( $wishlist_slug );
 			}
 
 			if ( ! empty( $wishlist_token ) ) {
-				$sql .= ' AND l.`wishlist_token` = %s';
+				$sql       .= ' AND l.`wishlist_token` = %s';
 				$sql_args[] = $wishlist_token;
 			}
 
 			if ( ! empty( $wishlist_name ) ) {
-				$sql .= ' AND l.`wishlist_name` LIKE %s';
+				$sql       .= ' AND l.`wishlist_name` LIKE %s';
 				$sql_args[] = '%' . esc_sql( $wishlist_name ) . '%';
 			}
 
@@ -489,7 +491,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 					$wishlist_visibility = yith_wcwl_get_privacy_value( $wishlist_visibility );
 				}
 
-				$sql .= ' AND l.`wishlist_privacy` = %d';
+				$sql       .= ' AND l.`wishlist_privacy` = %d';
 				$sql_args[] = $wishlist_visibility;
 			}
 
@@ -507,7 +509,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			$sql .= ' is_default DESC';
 
 			if ( ! empty( $limit ) && isset( $offset ) ) {
-				$sql .= ' LIMIT %d, %d';
+				$sql       .= ' LIMIT %d, %d';
 				$sql_args[] = $offset;
 				$sql_args[] = $limit;
 			}
@@ -555,7 +557,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			$default = array(
 				'search' => false,
-				'limit' => false,
+				'limit'  => false,
 				'offset' => 0,
 			);
 
@@ -572,7 +574,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				$sql .= " LEFT JOIN `{$wpdb->usermeta}` AS ums ON ums.`user_id` = u.`ID`";
 			}
 
-			$sql .= ' WHERE l.wishlist_privacy = %d';
+			$sql     .= ' WHERE l.wishlist_privacy = %d';
 			$sql_args = array( 0 );
 
 			if ( ! empty( $search ) ) {
@@ -637,7 +639,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			if ( $clear_caches ) {
 				$query = "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} {$query_where}";
 				$query = $conditions ? $wpdb->prepare( $query, $conditions_values ) : $query; // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-				$ids = $wpdb->get_col( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				$ids   = $wpdb->get_col( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			}
 
 			// calculate set statement.
@@ -650,7 +652,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			$query_columns = implode( ', ', $query_columns );
 
 			// build query, and execute it.
-			$query = "UPDATE {$wpdb->yith_wcwl_wishlists} SET {$query_columns} {$query_where}";
+			$query  = "UPDATE {$wpdb->yith_wcwl_wishlists} SET {$query_columns} {$query_where}";
 			$values = $conditions ? array_merge( $column_values, $conditions_values ) : $column_values;
 
 			$wpdb->query( $wpdb->prepare( $query, $values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
@@ -712,7 +714,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				 */
 				if ( ! empty( $hidden_products ) && ! empty( $items ) && ! apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ) {
 					foreach ( $items as $item_id => $item ) {
-						if ( ! in_array( $item->prod_id, $hidden_products ) ) {
+						if ( ! in_array( $item->prod_id, $hidden_products, true ) ) {
 							continue;
 						}
 
@@ -764,11 +766,11 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			do {
 				$dictionary = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-				$nchars = 12;
-				$token = '';
+				$nchars     = 12;
+				$token      = '';
 
 				for ( $i = 0; $i <= $nchars - 1; $i++ ) {
-					$token .= $dictionary[ mt_rand( 0, strlen( $dictionary ) - 1 ) ];
+					$token .= $dictionary[ wp_rand( 0, strlen( $dictionary ) - 1 ) ];
 				}
 
 				$count = $wpdb->get_var( $wpdb->prepare( $sql, $token ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
@@ -802,7 +804,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				array(
 					'session_id' => 'NULL',
 					'expiration' => 'NULL',
-					'user_id' => '%d',
+					'user_id'    => '%d',
 				),
 				array( $user_id ),
 				array( 'session_id' => '%s' ),
@@ -817,7 +819,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 				// search for master default wishlist.
 				$master_default_wishlist = array_shift( $default_ids );
-				$where_statement = implode( ', ', array_map( 'esc_sql', $default_ids ) );
+				$where_statement         = implode( ', ', array_map( 'esc_sql', $default_ids ) );
 
 				try {
 					if ( apply_filters( 'yith_wcwl_merge_default_wishlists', true ) ) {
@@ -855,25 +857,25 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			global $wpdb;
 
 			$wishlist_id = false;
-			$cache_key = false;
+			$cache_key   = false;
 
-			$user_id = get_current_user_id();
+			$user_id    = get_current_user_id();
 			$session_id = YITH_WCWL_Session()->maybe_get_session_id();
 
 			if ( ! empty( $id ) && is_int( $id ) ) {
-				$cache_key = 'wishlist-default-' . $id;
+				$cache_key   = 'wishlist-default-' . $id;
 				$wishlist_id = wp_cache_get( $cache_key, 'wishlists' );
 				$wishlist_id = false !== $wishlist_id ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE user_id = %d AND is_default = 1", $id ) );
 			} elseif ( ! empty( $id ) && is_string( $id ) ) {
-				$cache_key = 'wishlist-default-' . $id;
+				$cache_key   = 'wishlist-default-' . $id;
 				$wishlist_id = wp_cache_get( $cache_key, 'wishlists' );
 				$wishlist_id = false !== $wishlist_id ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE session_id = %s AND expiration > NOW() AND is_default = 1", $id ) );
 			} elseif ( $user_id ) {
-				$cache_key = 'wishlist-default-' . $user_id;
+				$cache_key   = 'wishlist-default-' . $user_id;
 				$wishlist_id = wp_cache_get( $cache_key, 'wishlists' );
 				$wishlist_id = false !== $wishlist_id ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE user_id = %d AND is_default = 1", $user_id ) );
 			} elseif ( $session_id ) {
-				$cache_key = 'wishlist-default-' . $session_id;
+				$cache_key   = 'wishlist-default-' . $session_id;
 				$wishlist_id = wp_cache_get( $cache_key, 'wishlists' );
 				$wishlist_id = false !== $wishlist_id ? $wishlist_id : $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->yith_wcwl_wishlists} WHERE session_id = %s AND expiration > NOW() AND is_default = 1", $session_id ) );
 			}
@@ -884,7 +886,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				}
 
 				return YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_id );
-			} elseif ( 'edit' == $context ) {
+			} elseif ( 'edit' === $context ) {
 				$wishlist = $this->generate_default_wishlist( $id );
 
 				if ( $cache_key ) {
@@ -956,7 +958,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				if ( ! preg_match( '/([a-z-]+)-([0-9]+)/', $slug, $match ) ) {
 					$i = 2;
 				} else {
-					$i = intval( $match[2] ) + 1;
+					$i    = intval( $match[2] ) + 1;
 					$slug = $match[1];
 				}
 
@@ -990,7 +992,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 		protected function should_be_default() {
 			global $wpdb;
 
-			$user_id = get_current_user_id();
+			$user_id     = get_current_user_id();
 			$customer_id = YITH_WCWL_Session()->maybe_get_session_id();
 
 			if ( $user_id ) {
@@ -1016,19 +1018,19 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 		 */
 		protected function clear_caches( &$wishlist ) {
 			if ( $wishlist instanceof YITH_WCWL_Wishlist ) {
-				$id = $wishlist->get_id();
+				$id    = $wishlist->get_id();
 				$token = $wishlist->get_token();
 			} elseif ( intval( $wishlist ) ) {
-				$id = $wishlist;
+				$id       = $wishlist;
 				$wishlist = yith_wcwl_get_wishlist( $wishlist );
-				$token = $wishlist ? $wishlist->get_token() : false;
+				$token    = $wishlist ? $wishlist->get_token() : false;
 			} else {
-				$token = $wishlist;
+				$token    = $wishlist;
 				$wishlist = yith_wcwl_get_wishlist( $wishlist );
-				$id = $wishlist ? $wishlist->get_id() : false;
+				$id       = $wishlist ? $wishlist->get_id() : false;
 			}
 
-			$user_id = $wishlist ? $wishlist->get_user_id() : false;
+			$user_id    = $wishlist ? $wishlist->get_user_id() : false;
 			$session_id = $wishlist ? $wishlist->get_session_id() : false;
 
 			wp_cache_delete( 'wishlist-items-' . $id, 'wishlists' );
@@ -1045,3 +1047,5 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 		}
 	}
 }
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching

@@ -2,8 +2,8 @@
 /**
  * Wishlist Factory class
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes\Wishlists
  * @version 3.0.0
  */
 
@@ -128,8 +128,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		public static function get_current_wishlist( $args = array() ) {
 			$defaults = array(
 				'action_params' => get_query_var( YITH_WCWL()->wishlist_param, false ),
-				'user_id' => isset( $_GET['user_id'] ) ? intval( $_GET['user_id'] ) : false,
-				'wishlist_id' => false,
+				'user_id'       => isset( $_GET['user_id'] ) ? intval( $_GET['user_id'] ) : false, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				'wishlist_id'   => false,
 			);
 
 			/**
@@ -146,7 +146,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 			$action_params = explode( '/', apply_filters( 'yith_wcwl_current_wishlist_view_params', $action_params ) );
 
 			$action = ( isset( $action_params[0] ) ) ? $action_params[0] : 'view';
-			$value = ( isset( $action_params[1] ) ) ? $action_params[1] : '';
+			$value  = ( isset( $action_params[1] ) ) ? $action_params[1] : '';
 
 			if ( ! empty( $wishlist_id ) ) {
 				return self::get_wishlist( $wishlist_id );
@@ -158,9 +158,9 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 
 			if (
 				empty( $action ) ||
-				! in_array( $action, YITH_WCWL()->get_available_views() ) ||
-				in_array( $action, array( 'view', 'user' ) ) ||
-				( in_array( $action, array( 'manage', 'create' ) ) && ! YITH_WCWL()->is_multi_wishlist_enabled() )
+				! in_array( $action, YITH_WCWL()->get_available_views(), true ) ||
+				in_array( $action, array( 'view', 'user' ), true ) ||
+				( in_array( $action, array( 'manage', 'create' ), true ) && ! YITH_WCWL()->is_multi_wishlist_enabled() )
 			) {
 				switch ( $action ) {
 					case 'user':
@@ -321,7 +321,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		public static function get_times_added_count( $product_id ) {
 			try {
 				$result = WC_Data_Store::load( 'wishlist-item' )->count_times_added( $product_id );
-				return apply_filters( 'yith_wcwl_wishlist_times_added_count_query', $result, $product_id );
+				return (int) apply_filters( 'yith_wcwl_wishlist_times_added_count_query', $result, $product_id );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return 0;
@@ -337,7 +337,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		public static function get_times_current_user_added_count( $product_id ) {
 			try {
 				$result = WC_Data_Store::load( 'wishlist-item' )->count_times_added( $product_id, 'current' );
-				return apply_filters( 'yith_wcwl_wishlist_times_current_user_added_count_query', $result, $product_id );
+				return (int) apply_filters( 'yith_wcwl_wishlist_times_current_user_added_count_query', $result, $product_id );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
 				return 0;

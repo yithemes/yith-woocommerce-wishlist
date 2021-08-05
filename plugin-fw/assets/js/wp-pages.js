@@ -42,12 +42,14 @@ jQuery( function ( $ ) {
 							case 'trash':
 								confirmOptions.title             = yith_plugin_fw_wp_pages.i18n.bulk_trash_confirm_title;
 								confirmOptions.message           = yith_plugin_fw_wp_pages.i18n.bulk_trash_confirm_message;
+								confirmOptions.cancelButton      = yith_plugin_fw_wp_pages.i18n.bulk_trash_cancel_button;
 								confirmOptions.confirmButton     = yith_plugin_fw_wp_pages.i18n.bulk_trash_confirm_button;
 								confirmOptions.confirmButtonType = 'delete';
 								break;
 							case 'delete':
 								confirmOptions.title             = yith_plugin_fw_wp_pages.i18n.bulk_delete_confirm_title;
 								confirmOptions.message           = yith_plugin_fw_wp_pages.i18n.bulk_delete_confirm_message;
+								confirmOptions.cancelButton      = yith_plugin_fw_wp_pages.i18n.bulk_delete_cancel_button;
 								confirmOptions.confirmButton     = yith_plugin_fw_wp_pages.i18n.bulk_delete_confirm_button;
 								confirmOptions.confirmButtonType = 'delete';
 								break;

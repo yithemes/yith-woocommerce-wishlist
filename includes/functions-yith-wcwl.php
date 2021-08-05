@@ -2,8 +2,8 @@
 /**
  * Functions file
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Functions
  * @version 3.0.0
  */
 
@@ -54,7 +54,7 @@ if ( ! function_exists( 'yith_wcwl_is_single' ) ) {
 	 * @since 3.0.0
 	 */
 	function yith_wcwl_is_single() {
-		return apply_filters( 'yith_wcwl_is_single', is_product() && ! in_array( wc_get_loop_prop( 'name' ), array( 'related', 'up-sells' ) ) && ! wc_get_loop_prop( 'is_shortcode' ) );
+		return apply_filters( 'yith_wcwl_is_single', is_product() && ! in_array( wc_get_loop_prop( 'name' ), array( 'related', 'up-sells' ), true ) && ! wc_get_loop_prop( 'is_shortcode' ) );
 	}
 }
 
@@ -122,7 +122,7 @@ if ( ! function_exists( 'yith_wcwl_get_template' ) ) {
 
 		if ( $var && is_array( $var ) ) {
 			$atts = $var;
-			extract( $var );
+			extract( $var ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 		}
 
 		if ( $return ) {
@@ -130,7 +130,7 @@ if ( ! function_exists( 'yith_wcwl_get_template' ) ) {
 		}
 
 		// include file located.
-		include( $located );
+		include $located;
 
 		if ( $return ) {
 			return ob_get_clean();
@@ -248,13 +248,13 @@ if ( ! function_exists( 'yith_wcwl_get_count_text' ) ) {
 			// translators: 1. Number of users.
 			$count_text = sprintf( _n( '%d user', '%d users', $count, 'yith-woocommerce-wishlist' ), $count );
 			$text       = _n( 'has this item in wishlist', 'have this item in wishlist', $count, 'yith-woocommerce-wishlist' );
-		} elseif ( $count == $current_user_count ) {
+		} elseif ( $count === $current_user_count ) {
 			$count_text = __( 'You\'re the first', 'yith-woocommerce-wishlist' );
 			$text       = __( 'to add this item in wishlist', 'yith-woocommerce-wishlist' );
 		} else {
 			$other_count = $count - $current_user_count;
 			// translators: 1. Count of users when many, or "another" when only one.
-			$count_text = sprintf( _n( 'You and %s user', 'You and %d users', $other_count, 'yith-woocommerce-wishlist' ), 1 == $other_count ? __( 'another', 'yith-woocommerce-wishlist' ) : $other_count );
+			$count_text = sprintf( _n( 'You and %s user', 'You and %d users', $other_count, 'yith-woocommerce-wishlist' ), 1 === $other_count ? __( 'another', 'yith-woocommerce-wishlist' ) : $other_count ); // phpcs:ignore WordPress.WP.I18n.MismatchedPlaceholders
 			$text       = __( 'have this item in wishlist', 'yith-woocommerce-wishlist' );
 		}
 
@@ -295,9 +295,9 @@ if ( ! function_exists( 'yith_setcookie' ) ) {
 			return false;
 		}
 
-		$time = null != $time ? $time : time() + yith_wcwl_get_cookie_expiration();
+		$time = ! empty( $time ) ? $time : time() + yith_wcwl_get_cookie_expiration();
 
-		$value      = json_encode( stripslashes_deep( $value ) );
+		$value      = wp_json_encode( stripslashes_deep( $value ) );
 		$expiration = apply_filters( 'yith_wcwl_cookie_expiration_time', $time ); // Default 30 days.
 
 		$_COOKIE[ $name ] = $value;
@@ -356,6 +356,7 @@ if ( ! function_exists( 'yith_wcwl_get_hidden_products' ) ) {
 
 		if ( false === $hidden_products ) {
 			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
+				// phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				$hidden_products = get_posts(
 					array(
 						'post_type'      => 'product',
@@ -370,6 +371,7 @@ if ( ! function_exists( 'yith_wcwl_get_hidden_products' ) ) {
 						),
 					)
 				);
+				// phpcs:enable WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			} else {
 				$hidden_products = wc_get_products(
 					array(
@@ -418,7 +420,7 @@ if ( ! function_exists( 'yith_wcwl_get_plugin_icons' ) ) {
 	 * @return array Array of available icons, in class => name format
 	 */
 	function yith_wcwl_get_plugin_icons( $none_label = '', $custom_label = '' ) {
-		$icons = json_decode( file_get_contents( YITH_WCWL_DIR . 'assets/js/admin/yith-wcwl-icons.json' ), true );
+		$icons = json_decode( file_get_contents( YITH_WCWL_DIR . 'assets/js/admin/yith-wcwl-icons.json' ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 		$icons['none']   = $none_label ? $none_label : __( 'None', 'yith-woocommerce-wishlist' );
 		$icons['custom'] = $custom_label ? $custom_label : __( 'Custom', 'yith-woocommerce-wishlist' );
@@ -445,7 +447,7 @@ if ( ! function_exists( 'yith_wcwl_get_privacy_label' ) ) {
 				$privacy_text  = __( 'Shared', 'yith-woocommerce-wishlist' );
 
 				if ( $extended ) {
-					$privacy_text = '<b>' . $privacy_text . '</b> - ';
+					$privacy_text  = '<b>' . $privacy_text . '</b> - ';
 					$privacy_text .= __( 'Only people with a link to this list can see it', 'yith-woocommerce-wishlist' );
 				}
 
@@ -455,7 +457,7 @@ if ( ! function_exists( 'yith_wcwl_get_privacy_label' ) ) {
 				$privacy_text  = __( 'Private', 'yith-woocommerce-wishlist' );
 
 				if ( $extended ) {
-					$privacy_text = '<b>' . $privacy_text . '</b> - ';
+					$privacy_text  = '<b>' . $privacy_text . '</b> - ';
 					$privacy_text .= __( 'Only you can see this list', 'yith-woocommerce-wishlist' );
 				}
 
@@ -465,7 +467,7 @@ if ( ! function_exists( 'yith_wcwl_get_privacy_label' ) ) {
 				$privacy_text  = __( 'Public', 'yith-woocommerce-wishlist' );
 
 				if ( $extended ) {
-					$privacy_text = '<b>' . $privacy_text . '</b> - ';
+					$privacy_text  = '<b>' . $privacy_text . '</b> - ';
 					$privacy_text .= __( 'Anyone can search for and see this list', 'yith-woocommerce-wishlist' );
 				}
 
@@ -538,14 +540,14 @@ if ( ! function_exists( 'yith_wcwl_merge_in_array' ) ) {
 	 */
 	function yith_wcwl_merge_in_array( $array, $element, $pivot, $position = 'after' ) {
 		// search for the pivot inside array.
-		$pos = array_search( $pivot, array_keys( $array ) );
+		$pos = array_search( $pivot, array_keys( $array ), true );
 
 		if ( false === $pos ) {
 			return $array;
 		}
 
 		// separate array into chunks.
-		$i      = 'after' == $position ? 1 : 0;
+		$i      = 'after' === $position ? 1 : 0;
 		$part_1 = array_slice( $array, 0, $pos + $i );
 		$part_2 = array_slice( $array, $pos + $i );
 
@@ -569,7 +571,7 @@ if ( ! function_exists( 'yith_wcwl_maybe_format_field_array' ) ) {
 		}
 
 		foreach ( $field_structure as $field ) {
-			if ( isset( $field['active'] ) && 'yes' != $field['active'] ) {
+			if ( isset( $field['active'] ) && 'yes' !== $field['active'] ) {
 				continue;
 			}
 
@@ -592,7 +594,7 @@ if ( ! function_exists( 'yith_wcwl_maybe_format_field_array' ) ) {
 						}
 
 						list( $id, $value ) = explode( '::', $raw_option );
-						$options[ $id ] = $value;
+						$options[ $id ]     = $value;
 					}
 				}
 
@@ -603,7 +605,7 @@ if ( ! function_exists( 'yith_wcwl_maybe_format_field_array' ) ) {
 			$field['class'] = array( 'form-row-' . $field['position'] );
 
 			// format requires.
-			$field['required'] = isset( $field['required'] ) && 'yes' == $field['required'];
+			$field['required'] = isset( $field['required'] ) && 'yes' === $field['required'];
 
 			// set custom attributes when field is required.
 			if ( $field['required'] ) {
@@ -613,7 +615,7 @@ if ( ! function_exists( 'yith_wcwl_maybe_format_field_array' ) ) {
 			}
 
 			// if type requires options, but no options was defined, skip field printing.
-			if ( in_array( $field['type'], array( 'select', 'radio' ) ) && empty( $field['options'] ) ) {
+			if ( in_array( $field['type'], array( 'select', 'radio' ), true ) && empty( $field['options'] ) ) {
 				continue;
 			}
 
@@ -668,10 +670,37 @@ if ( ! function_exists( 'yith_wcwl_object_id' ) ) {
 		// Should work with WPML and PolyLang.
 		$id = apply_filters( 'wpml_object_id', $id, $type, $return_original, $lang );
 
-		// Space for additional translations
+		// Space for additional translations.
 		$id = apply_filters( 'yith_wcwl_object_id', $id, $type, $return_original, $lang );
 
 		return $id;
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_kses_icon' ) ) {
+	/**
+	 * Escape output of wishlist icon
+	 *
+	 * @param string $data Data to escape.
+	 * @return string Escaped data
+	 */
+	function yith_wcwl_kses_icon( $data ) {
+		$allowed_icon_html = apply_filters(
+			'yith_wcwl_allowed_icon_html',
+			array(
+				'i'   => array(
+					'class' => true,
+				),
+				'img' => array(
+					'src'    => true,
+					'alt'    => true,
+					'width'  => true,
+					'height' => true,
+				),
+			)
+		);
+
+		return wp_kses( $data, $allowed_icon_html );
 	}
 }
 

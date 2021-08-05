@@ -2,8 +2,8 @@
 /**
  * Wishlist pages template; load template parts basing on the url
  *
- * @author Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Templates\Wishlist
  * @version 3.0.0
  */
 

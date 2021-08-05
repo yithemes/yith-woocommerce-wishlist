@@ -2,8 +2,8 @@
 /**
  * Privacy class; added to let customer export personal data
  *
- * @author Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
@@ -38,6 +38,8 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 
 		/**
 		 * Retrieves privacy example text for wishlist plugin
+		 *
+		 * @param string $section Section of the message to retrieve.
 		 *
 		 * @return string Privacy message
 		 * @since 2.2.2
@@ -80,7 +82,7 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		public function register_exporter( $exporters ) {
 			$exporters['yith_wcwl_exporter'] = array(
 				'exporter_friendly_name' => __( 'Customer wishlists', 'yith-woocommerce-wishlist' ),
-				'callback' => array( $this, 'wishlist_data_exporter' ),
+				'callback'               => array( $this, 'wishlist_data_exporter' ),
 			);
 
 			return $exporters;
@@ -96,7 +98,7 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		public function register_eraser( $erasers ) {
 			$erasers['yith_wcwl_eraser'] = array(
 				'eraser_friendly_name' => __( 'Customer wishlists', 'yith-woocommerce-wishlist' ),
-				'callback' => array( $this, 'wishlist_data_eraser' ),
+				'callback'             => array( $this, 'wishlist_data_eraser' ),
 			);
 
 			return $erasers;
@@ -160,10 +162,10 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		public function wishlist_data_eraser( $email_address, $page ) {
 			global $wpdb;
 
-			$page            = (int) $page;
-			$offset          = 10 * ( $page - 1 );
-			$user            = get_user_by( 'email', $email_address ); // Check if user has an ID in the DB to load stored personal data.
-			$response        = array(
+			$page     = (int) $page;
+			$offset   = 10 * ( $page - 1 );
+			$user     = get_user_by( 'email', $email_address ); // Check if user has an ID in the DB to load stored personal data.
+			$response = array(
 				'items_removed'  => false,
 				'items_retained' => false,
 				'messages'       => array(),
@@ -238,7 +240,7 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 				switch ( $prop ) {
 					case 'items':
 						$item_names = array();
-						$items = $wishlist->get_items();
+						$items      = $wishlist->get_items();
 
 						foreach ( $items as $item ) {
 							$product = $item->get_product();

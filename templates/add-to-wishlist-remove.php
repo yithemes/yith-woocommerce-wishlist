@@ -2,8 +2,8 @@
 /**
  * Add to wishlist button template - Remove button
  *
- * @author Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Templates\AddToWishlist
  * @version 3.0.12
  */
 
@@ -41,8 +41,16 @@ global $product;
 ?>
 
 <div class="yith-wcwl-add-button">
-	<a href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist', $product_id, $base_url ) ); ?>" rel="nofollow" data-item-id="<?php echo esc_attr( $found_item->get_id() ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-original-product-id="<?php echo esc_attr( $parent_product_id ); ?>" class="delete_item <?php echo esc_attr( $link_classes ); ?>" data-title="<?php echo esc_attr( apply_filters( 'yith_wcwl_add_to_wishlist_title', $label ) ); ?>">
-		<?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<a
+		href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist', $product_id, $base_url ) ); ?>"
+		class="delete_item <?php echo esc_attr( $link_classes ); ?>"
+		data-item-id="<?php echo esc_attr( $found_item->get_id() ); ?>"
+		data-product-id="<?php echo esc_attr( $product_id ); ?>"
+		data-original-product-id="<?php echo esc_attr( $parent_product_id ); ?>"
+		data-title="<?php echo esc_attr( apply_filters( 'yith_wcwl_add_to_wishlist_title', $label ) ); ?>"
+		rel="nofollow"
+	>
+		<?php echo yith_wcwl_kses_icon( $icon ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php echo wp_kses_post( $label ); ?>
 	</a>
 
