@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: YITH WooCommerce Wishlist
+ * Plugin Name: YITH WooCommerce Wishlist (Modified)
  * Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
  * Description: Modified by Prionkor for REST API support.<code><strong>YITH WooCommerce Wishlist</strong></code> gives your users the possibility to create, fill, manage and share their wishlists allowing you to analyze their interests and needs to improve your marketing strategies. <a href="https://yithemes.com/" target="_blank">Get more plugins for your e-commerce on <strong>YITH</strong></a>
  * Version: 3.0.25
