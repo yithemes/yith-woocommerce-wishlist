@@ -1,30 +1,36 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the select-mailchimp field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
-$multiple_html = ( isset( $multiple ) && $multiple ) ? ' multiple' : '';
+list ( $field_id, $class, $name, $multiple, $std, $value, $options, $button_name, $custom_attributes, $data ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'multiple', 'std', 'value', 'options', 'button_name', 'custom_attributes', 'data' );
+
+$multiple = ! empty( $multiple );
 ?>
 
-<select<?php echo $multiple_html ?>
-    id="<?php echo $id ?>"
-    name="<?php echo $name ?>" <?php if ( isset( $std ) ) : ?>data-std="<?php echo $std ?>"<?php endif ?>
-    class="yith-plugin-fw-select"
-    <?php echo $custom_attributes ?>
-    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>>
-    <?php foreach ( $options as $key => $item ) : ?>
-        <option value="<?php echo $key ?>"<?php selected( $key, $value ) ?>><?php echo $item ?></option>
-    <?php endforeach; ?>
+<select id="<?php echo esc_attr( $field_id ); ?>"
+		name="<?php echo esc_attr( $name ); ?>"
+		class="yith-plugin-fw-select"
+
+	<?php if ( $multiple ) : ?>
+		multiple
+	<?php endif; ?>
+
+	<?php if ( isset( $std ) ) : ?>
+		data-std="<?php echo $multiple && is_array( $std ) ? esc_attr( implode( ',', $std ) ) : esc_attr( $std ); ?>"
+	<?php endif; ?>
+
+	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+>
+	<?php foreach ( $options as $key => $item ) : ?>
+		<option value="<?php echo esc_attr( $key ); ?>"<?php selected( $key, $value ); ?>><?php echo esc_html( $item ); ?></option>
+	<?php endforeach; ?>
 </select>
-<input type="button" class="button-secondary <?php echo isset( $class ) ? $class : ''; ?>" value="<?php echo $button_name ?>"/>
+<input type="button" class="button-secondary <?php echo isset( $class ) ? esc_attr( $class ) : ''; ?>" value="<?php echo esc_attr( $button_name ); ?>"/>
 <span class="spinner"></span>

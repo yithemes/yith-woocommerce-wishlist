@@ -1,34 +1,43 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
+ * Template for displaying the radio field
  *
- * @var array $field
+ * @var array $field The field.
+ * @since   3.0.13
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-/** @since 3.0.13 */
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
-
-extract( $field );
+list ( $field_id, $class, $name, $value, $options, $custom_attributes, $data ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'value', 'options', 'custom_attributes', 'data' );
 
 $class = isset( $class ) ? $class : '';
 $class = 'yith-plugin-fw-radio ' . $class;
 
 ?>
-<div class="<?php echo $class ?>" id="<?php echo $id ?>"
-    <?php echo $custom_attributes ?>
-    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?> data-value="<?php echo $value ?>" data-type="radio">
-    <?php foreach ( $options as $key => $label ) :
-        $radio_id = sanitize_key( $id . '-' . $key );
-        ?>
-        <div class="yith-plugin-fw-radio__row">
-            <input type="radio" id="<?php echo $radio_id ?>" name="<?php echo $name ?>" value="<?php echo esc_attr( $key ) ?>" <?php checked( $key, $value ); ?> />
-            <label for="<?php echo $radio_id ?>"><?php echo $label ?></label>
-        </div>
-    <?php endforeach; ?>
+<div id="<?php echo esc_attr( $field_id ); ?>"
+		class="<?php echo esc_attr( $class ); ?>"
+		data-value="<?php echo esc_attr( $value ); ?>"
+		data-type="radio"
+	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+>
+	<?php foreach ( $options as $key => $label ) : ?>
+		<?php
+		$radio_id = $field_id . '-' . sanitize_key( $key );
+		?>
+		<div class="yith-plugin-fw-radio__row">
+			<input type="radio" id="<?php echo esc_attr( $radio_id ); ?>"
+					name="<?php echo esc_attr( $name ); ?>"
+					value="<?php echo esc_attr( $key ); ?>"
+				<?php checked( $key, $value ); ?>
+			/>
+			<label for="<?php echo esc_attr( $radio_id ); ?>">
+				<?php
+				// HTML allowed!
+				echo $label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				?>
+			</label>
+		</div>
+	<?php endforeach; ?>
 </div>
-

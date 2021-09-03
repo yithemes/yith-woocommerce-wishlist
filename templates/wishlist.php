@@ -2,8 +2,8 @@
 /**
  * Wishlist pages template; load template parts basing on the url
  *
- * @author Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Templates\Wishlist
  * @version 3.0.0
  */
 
@@ -45,4 +45,4 @@ do_action( 'yith_wcwl_wishlist_main_wishlist_content', $var );
  * @hooked \YITH_WCWL_Frontend::wishlist_footer - 10
  */
 do_action( 'yith_wcwl_wishlist_after_wishlist_content', $var );
-?>
+

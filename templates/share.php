@@ -2,14 +2,15 @@
 /**
  * Share template
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Templates
  * @version 3.0.0
  */
 
 /**
  * Template variables:
  *
+ * @var $wishlist                YITH_WCWL_Wishlist Wishlist object
  * @var $share_title             string Title for share section
  * @var $share_facebook_enabled  bool Whether to enable FB sharing button
  * @var $share_twitter_enabled   bool Whether to enable Twitter sharing button
@@ -35,7 +36,12 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 } // Exit if accessed directly
 ?>
 
-<?php do_action( 'yith_wcwl_before_wishlist_share', $wishlist ); ?>
+<?php
+// we want spaces to be encoded as + instead of %20, so we use urlencode instead of rawurlencode.
+// phpcs:disable WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
+
+do_action( 'yith_wcwl_before_wishlist_share', $wishlist );
+?>
 
 <div class="yith-wcwl-share">
 	<h4 class="yith-wcwl-share-title"><?php echo esc_html( $share_title ); ?></h4>
@@ -43,7 +49,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 		<?php if ( $share_facebook_enabled ) : ?>
 			<li class="share-button">
 				<a target="_blank" rel="noopener" class="facebook" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode( $share_link_url ); ?>&p[title]=<?php echo esc_attr( $share_link_title ); ?>" title="<?php esc_html_e( 'Facebook', 'yith-woocommerce-wishlist' ); ?>">
-					<?php echo $share_facebook_icon ? $share_facebook_icon : esc_html__( 'Facebook', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo $share_facebook_icon ? yith_wcwl_kses_icon( $share_facebook_icon ) : esc_html__( 'Facebook', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -51,7 +57,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 		<?php if ( $share_twitter_enabled ) : ?>
 			<li class="share-button">
 				<a target="_blank" rel="noopener" class="twitter" href="https://twitter.com/share?url=<?php echo urlencode( $share_link_url ); ?>&amp;text=<?php echo esc_attr( $share_twitter_summary ); ?>" title="<?php esc_html_e( 'Twitter', 'yith-woocommerce-wishlist' ); ?>">
-					<?php echo $share_twitter_icon ? $share_twitter_icon : esc_html__( 'Twitter', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo $share_twitter_icon ? yith_wcwl_kses_icon( $share_twitter_icon ) : esc_html__( 'Twitter', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -59,7 +65,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 		<?php if ( $share_pinterest_enabled ) : ?>
 			<li class="share-button">
 				<a target="_blank" rel="noopener" class="pinterest" href="http://pinterest.com/pin/create/button/?url=<?php echo urlencode( $share_link_url ); ?>&amp;description=<?php echo esc_attr( $share_summary ); ?>&amp;media=<?php echo esc_attr( $share_image_url ); ?>" title="<?php esc_html_e( 'Pinterest', 'yith-woocommerce-wishlist' ); ?>" onclick="window.open(this.href); return false;">
-					<?php echo $share_pinterest_icon ? $share_pinterest_icon : esc_html__( 'Pinterest', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo $share_pinterest_icon ? yith_wcwl_kses_icon( $share_pinterest_icon ) : esc_html__( 'Pinterest', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -67,7 +73,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 		<?php if ( $share_email_enabled ) : ?>
 			<li class="share-button">
 				<a class="email" href="mailto:?subject=<?php echo esc_attr( apply_filters( 'yith_wcwl_email_share_subject', $share_link_title ) ); ?>&amp;body=<?php echo esc_attr( apply_filters( 'yith_wcwl_email_share_body', urlencode( $share_link_url ) ) ); ?>&amp;title=<?php echo esc_attr( $share_link_title ); ?>" title="<?php esc_html_e( 'Email', 'yith-woocommerce-wishlist' ); ?>">
-					<?php echo $share_email_icon ? $share_email_icon : __( 'Email', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo $share_email_icon ? yith_wcwl_kses_icon( $share_email_icon ) : __( 'Email', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -75,7 +81,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 		<?php if ( $share_whatsapp_enabled ) : ?>
 			<li class="share-button">
 				<a class="whatsapp" href="<?php echo esc_attr( $share_whatsapp_url ); ?>" data-action="share/whatsapp/share" target="_blank" rel="noopener" title="<?php esc_html_e( 'WhatsApp', 'yith-woocommerce-wishlist' ); ?>">
-					<?php echo $share_whatsapp_icon ? $share_whatsapp_icon : esc_html__( 'Whatsapp', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo $share_whatsapp_icon ? yith_wcwl_kses_icon( $share_whatsapp_icon ) : esc_html__( 'Whatsapp', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -91,4 +97,8 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	<?php do_action( 'yith_wcwl_after_share_buttons', $share_link_url, $share_title, $share_link_title ); ?>
 </div>
 
-<?php do_action( 'yith_wcwl_after_wishlist_share', $wishlist ); ?>
+<?php
+do_action( 'yith_wcwl_after_wishlist_share', $wishlist );
+
+// phpcs:enable WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
+?>

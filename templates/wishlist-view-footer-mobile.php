@@ -2,8 +2,8 @@
 /**
  * Wishlist footer
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Templates\Wishlist\View
  * @version 3.0.0
  */
 
@@ -29,6 +29,8 @@
  * @var $move_to_another_wishlist_type string Whether to show a select or a popup for wishlist change
  * @var $available_multi_wishlist      bool Whether multi wishlist is enabled and available
  * @var $users_wishlists               array Array of current user wishlists
+ * @var $count                         int Count of items in wishlist
+ * @var $var                           array Array of variable passed to the template
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -51,13 +53,20 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 						<?php
 						foreach ( $users_wishlists as $wl ) :
 							/**
+							 * Each of the wishlists owned by current user.
+							 *
 							 * @var $wl \YITH_WCWL_Wishlist
 							 */
 							if ( $wl->get_token() === $wishlist_token ) {
 								continue;
 							}
 							?>
-							<option value="<?php echo esc_attr( $wl->get_token() ); ?>"><?php echo esc_html( sprintf( __( 'Move to %s', 'yith-woocommerce-wishlist' ), $wl->get_formatted_name() ) ); ?></option>
+							<option value="<?php echo esc_attr( $wl->get_token() ); ?>">
+								<?php
+								// translators: 1. Wishlist formatted name.
+								echo esc_html( sprintf( __( 'Move to %s', 'yith-woocommerce-wishlist' ), $wl->get_formatted_name() ) );
+								?>
+							</option>
 						<?php endforeach; ?>
 					<?php endif; ?>
 				</select>
@@ -83,8 +92,12 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 			<div class="yith_wcwl_footer_additional_action">
 				<?php if ( $count && $show_ask_estimate_button ) : ?>
 					<!-- Ask an estimate button -->
-					<a href="<?php echo ( $additional_info || ! is_user_logged_in() ) ? '#ask_an_estimate_popup' : esc_url( $ask_estimate_url ); ?>" class="<?php echo esc_attr( $ask_an_estimate_classes ); ?> ask-an-estimate-button" <?php echo ( $additional_info || ! is_user_logged_in() ) ? 'data-rel="prettyPhoto[ask_an_estimate]"' : ''; ?> >
-						<?php echo apply_filters( 'yith_wcwl_ask_an_estimate_icon', $ask_an_estimate_icon ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<a
+						href="<?php echo esc_url( ( $additional_info || ! is_user_logged_in() ) ? '#ask_an_estimate_popup' : $ask_estimate_url ); ?>"
+						class="<?php echo esc_attr( $ask_an_estimate_classes ); ?> ask-an-estimate-button"
+						<?php echo ( $additional_info || ! is_user_logged_in() ) ? 'data-rel="prettyPhoto[ask_an_estimate]"' : ''; ?>
+					>
+						<?php echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_ask_an_estimate_icon', $ask_an_estimate_icon ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						<?php echo esc_html( apply_filters( 'yith_wcwl_ask_an_estimate_text', $ask_an_estimate_text ) ); ?>
 					</a>
 				<?php endif; ?>

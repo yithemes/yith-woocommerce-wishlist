@@ -1,15 +1,12 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
+ * Template for displaying the dimensions field
  *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-! defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 $default_options = array(
 	'dimensions'   => array(
@@ -29,16 +26,7 @@ $default_options = array(
 
 $field = wp_parse_args( $field, $default_options );
 
-/**
- * @var string   $id
- * @var string   $custom_attributes
- * @var array    $dimensions
- * @var array    $units
- * @var bool     $allow_linked
- * @var bool|int $min
- * @var bool|int $max
- */
-extract( $field );
+list ( $field_id, $class, $name, $dimensions, $units, $allow_linked, $min, $max, $value, $data, $custom_attributes ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'dimensions', 'units', 'allow_linked', 'min', 'max', 'value', 'data', 'custom_attributes' );
 
 $class = isset( $class ) ? $class : '';
 $class = 'yith-plugin-fw-dimensions ' . $class;
@@ -53,15 +41,16 @@ if ( $allow_linked && 'yes' === $linked ) {
 	$class .= ' yith-plugin-fw-dimensions--linked-active';
 }
 ?>
-<div id="<?php echo $id ?>" class="<?php echo $class; ?>"
-	<?php echo $custom_attributes ?>
+<div id="<?php echo esc_attr( $field_id ); ?>" class="<?php echo esc_attr( $class ); ?>"
+	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
 >
 	<div class="yith-plugin-fw-dimensions__dimensions">
 		<?php foreach ( $dimensions as $key => $dimension ) : ?>
 			<?php
-			$d_id         = "{$id}-dimension-" . sanitize_title( $key );
-			$d_name       = "{$name}[dimensions][" . sanitize_title( $key ) . "]";
+			$d_key        = sanitize_title( $key );
+			$d_id         = "{$field_id}-dimension-{$d_key}";
+			$d_name       = "{$name}[dimensions][{$d_key}]";
 			$d_value      = isset( $dimensions_values[ $key ] ) ? $dimensions_values[ $key ] : 0;
 			$d_attributes = '';
 			$d_label      = $dimension;
@@ -77,33 +66,39 @@ if ( $allow_linked && 'yes' === $linked ) {
 				$d_max = isset( $dimension['max'] ) ? $dimension['max'] : $d_max;
 			}
 
-			if ( $d_max !== false ) {
-				$d_attributes = " max='{$d_max}' . $d_attributes";
+			if ( false !== $d_max ) {
+				$d_attributes = " max={$d_max} " . $d_attributes;
 			}
 
-			if ( $d_min !== false ) {
-				$d_attributes = " min='{$d_min}' " . $d_attributes;
+			if ( false !== $d_min ) {
+				$d_attributes = " min={$d_min} " . $d_attributes;
 			}
 
 			?>
-			<div class="yith-plugin-fw-dimensions__dimension yith-plugin-fw-dimensions__dimension--<?php echo sanitize_title( $key ); ?>">
-				<label for="<?php echo $d_id; ?>" class="yith-plugin-fw-dimensions__dimension__label"><?php echo $d_label; ?></label>
-				<input id="<?php echo $d_id; ?>" class="yith-plugin-fw-dimensions__dimension__number"
-						type="number" name="<?php echo $d_name; ?>" value="<?php echo $d_value; ?>"
-					<?php echo $d_attributes; ?>
+			<div class="yith-plugin-fw-dimensions__dimension yith-plugin-fw-dimensions__dimension--<?php echo esc_attr( $d_key ); ?>">
+				<label for="<?php echo esc_attr( $d_id ); ?>" class="yith-plugin-fw-dimensions__dimension__label"><?php echo esc_html( $d_label ); ?></label>
+				<input id="<?php echo esc_attr( $d_id ); ?>" class="yith-plugin-fw-dimensions__dimension__number"
+						type="number" name="<?php echo esc_attr( $d_name ); ?>" value="<?php echo esc_attr( $d_value ); ?>"
+					<?php if ( false !== $d_max ) : ?>
+						max="<?php echo esc_attr( $d_max ); ?>"
+					<?php endif; ?>
+					<?php if ( false !== $d_min ) : ?>
+						min="<?php echo esc_attr( $d_min ); ?>"
+					<?php endif; ?>
+					<?php echo $d_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				>
 			</div>
 		<?php endforeach ?>
 
-		<?php if ( $allow_linked ): ?>
-			<div class="yith-plugin-fw-dimensions__linked" title="<?php _ex( 'Link values together', 'Tooltip in the "Dimensions" field', 'yith-plugin-fw' ); ?>">
-				<input class='yith-plugin-fw-dimensions__linked__value' type="hidden" name="<?php echo $name ?>[linked]" value="<?php echo $linked ?>">
+		<?php if ( $allow_linked ) : ?>
+			<div class="yith-plugin-fw-dimensions__linked" title="<?php echo esc_attr_x( 'Link values together', 'Tooltip in the "Dimensions" field', 'yith-plugin-fw' ); ?>">
+				<input class='yith-plugin-fw-dimensions__linked__value' type="hidden" name="<?php echo esc_attr( $name ); ?>[linked]" value="<?php echo esc_attr( $linked ); ?>">
 				<span class="dashicons dashicons-admin-links"></span>
 			</div>
 		<?php endif; ?>
 	</div>
 	<div class="yith-plugin-fw-dimensions__units">
-		<input class='yith-plugin-fw-dimensions__unit__value' type="hidden" name="<?php echo $name ?>[unit]" value="<?php echo isset( $value['unit'] ) ? $value['unit'] : current( array_keys( $units ) ) ?>">
+		<input class='yith-plugin-fw-dimensions__unit__value' type="hidden" name="<?php echo esc_attr( $name ); ?>[unit]" value="<?php echo esc_attr( $unit_value ); ?>">
 		<?php foreach ( $units as $key => $label ) : ?>
 			<?php
 			$key     = sanitize_title( $key );
@@ -114,9 +109,14 @@ if ( $allow_linked && 'yes' === $linked ) {
 			if ( $unit_value === $key ) {
 				$classes[] = 'yith-plugin-fw-dimensions__unit--selected';
 			}
+
+			if ( count( $units ) < 2 ) {
+				$classes[] = 'yith-plugin-fw-dimensions__unit--unique';
+			}
+
 			$classes = implode( ' ', $classes );
 			?>
-			<span class="<?php echo $classes; ?>" data-value="<?php echo $key; ?>"><?php echo $label; ?></span>
+			<span class="<?php echo esc_attr( $classes ); ?>" data-value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></span>
 		<?php endforeach ?>
 	</div>
 </div>

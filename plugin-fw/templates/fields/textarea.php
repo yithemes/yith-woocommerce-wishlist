@@ -1,26 +1,29 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the textarea field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
+list ( $field_id, $class, $name, $value, $std, $rows, $cols, $custom_attributes, $data ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'value', 'std', 'rows', 'cols', 'custom_attributes', 'data' );
 
 $class = isset( $class ) ? $class : 'yith-plugin-fw-textarea';
-$rows = isset( $rows ) ? $rows : 5;
-$cols = isset( $cols ) ? $cols : 50;
+$rows  = isset( $rows ) ? $rows : 5;
+$cols  = isset( $cols ) ? $cols : 50;
 ?>
-<textarea id="<?php echo $id ?>"
-          name="<?php echo $name ?>"
-          class="<?php echo $class ?>"
-          rows="<?php echo $rows ?>" cols="<?php echo $cols ?>" <?php if ( isset( $std ) ) : ?>data-std="<?php echo $std ?>"<?php endif ?>
-    <?php echo $custom_attributes ?>
-    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>><?php echo $value ?></textarea>
+<textarea id="<?php echo esc_attr( $field_id ); ?>"
+		name="<?php echo esc_attr( $name ); ?>"
+		class="<?php echo esc_attr( $class ); ?>"
+		rows="<?php echo esc_attr( $rows ); ?>"
+		cols="<?php echo esc_attr( $cols ); ?>"
+
+	<?php if ( isset( $std ) ) : ?>
+		data-std="<?php echo esc_attr( $std ); ?>"
+	<?php endif; ?>
+
+	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+><?php echo esc_textarea( $value ); ?></textarea>

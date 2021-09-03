@@ -126,6 +126,7 @@
     width       : auto !important;
     display     : inline-block;
     font-weight : normal;
+    float       : none;
 }
 
 .metaboxes-tab input[type="checkbox"] {
@@ -178,7 +179,6 @@
     display        : inline-block;
     line-height    : 23px;
     width          : auto;
-    vertical-align : middle;
     margin         : 0;
 }
 

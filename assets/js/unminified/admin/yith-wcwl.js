@@ -726,6 +726,15 @@ jQuery( function( $ ) {
         return ( 'multipart' === on_sale_item_mail_type.val() || 'plain' === on_sale_item_mail_type.val() ) && isChecked( on_sale_item_mail_enabled )
     } );
 
+    /* === DATEPICKER === */
+
+    // commissions filter
+    $( ".date-picker-field, .date-picker" ).datepicker ({
+        dateFormat: "yy-mm-dd",
+        numberOfMonths: 1,
+        showButtonPanel: true
+    } );
+
     /* === TOGGLE BOX HANDLING === */
 
     $(document).on( 'yith-add-box-button-toggle', function(){

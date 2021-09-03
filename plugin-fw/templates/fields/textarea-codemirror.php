@@ -1,26 +1,29 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the textarea-codemirror field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+list ( $field_id, $class, $name, $value, $custom_attributes, $data, $settings ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'value', 'custom_attributes', 'data', 'settings' );
 
-wp_enqueue_script( 'codemirror' );
-wp_enqueue_script( 'codemirror-javascript' );
-wp_enqueue_style( 'codemirror' );
-
-extract( $field );
+$default_settings = array(
+	'type' => 'text/javascript',
+);
+$settings         = isset( $settings ) ? $settings : array();
+$settings         = wp_parse_args( $settings, $default_settings );
+$settings         = wp_enqueue_code_editor( $settings );
 
 $class = isset( $class ) ? $class : 'codemirror';
 ?>
-<textarea id="<?php echo $id ?>"
-          name="<?php echo $name ?>"
-          class="<?php echo $class ?>"
-          rows="8" cols="50" <?php echo $custom_attributes ?>
-    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>><?php echo $value ?></textarea>
+<textarea id="<?php echo esc_attr( $field_id ); ?>"
+		name="<?php echo esc_attr( $name ); ?>"
+		class="<?php echo esc_attr( $class ); ?>"
+		rows="8" cols="50"
+		data-settings="<?php echo esc_attr( wp_json_encode( $settings ) ); ?>"
+	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+><?php echo esc_textarea( $value ); ?></textarea>
