@@ -2,8 +2,8 @@
 /**
  * Wishlist page template - Standard Layout
  *
- * @author  Your Inspiration Themes
- * @package YITH WooCommerce Wishlist
+ * @author YITH
+ * @package YITH\Wishlist\Templates\Wishlist\View
  * @version 3.0.0
  */
 
@@ -15,6 +15,8 @@
  * @var $wishlist_token                string Current wishlist token
  * @var $wishlist_id                   int Current wishlist id
  * @var $users_wishlists               array Array of current user wishlists
+ * @var $pagination                    string yes/no
+ * @var $per_page                      int Items per page
  * @var $current_page                  int Current page
  * @var $page_links                    array Array of page links
  * @var $is_user_owner                 bool Whether current user is wishlist owner
@@ -47,9 +49,8 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 <!-- WISHLIST TABLE -->
 <table
 	class="shop_table cart wishlist_table wishlist_view traditional responsive <?php echo $no_interactions ? 'no-interactions' : ''; ?> <?php echo $enable_drag_n_drop ? 'sortable' : ''; ?> "
-	data-pagination="<?php echo esc_attr( $pagination ); ?>" data-per-page="<?php echo esc_attr( $per_page ); ?>"
-	data-page="<?php echo esc_attr( $current_page ); ?>" data-id="<?php echo esc_attr( $wishlist_id ); ?>"
-	data-token="<?php echo esc_attr( $wishlist_token ); ?>">
+	data-pagination="<?php echo esc_attr( $pagination ); ?>" data-per-page="<?php echo esc_attr( $per_page ); ?>" data-page="<?php echo esc_attr( $current_page ); ?>"
+	data-id="<?php echo esc_attr( $wishlist_id ); ?>" data-token="<?php echo esc_attr( $wishlist_token ); ?>">
 
 	<?php $column_count = 2; ?>
 
@@ -130,8 +131,9 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	<?php
 	if ( $wishlist && $wishlist->has_items() ) :
 		foreach ( $wishlist_items as $item ) :
-			// phpcs:ignore Generic.Commenting.DocComment
 			/**
+			 * Each of the wishlist items
+			 *
 			 * @var $item \YITH_WCWL_Wishlist_Item
 			 */
 			global $product;
@@ -161,7 +163,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 						<?php do_action( 'yith_wcwl_table_before_product_thumbnail', $item, $wishlist ); ?>
 
 						<a href="<?php echo esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product', $item->get_product_id() ) ) ); ?>">
-							<?php echo $product->get_image(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php echo wp_kses_post( $product->get_image() ); ?>
 						</a>
 
 						<?php do_action( 'yith_wcwl_table_after_product_thumbnail', $item, $wishlist ); ?>
@@ -170,15 +172,18 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 					<td class="product-name">
 						<?php do_action( 'yith_wcwl_table_before_product_name', $item, $wishlist ); ?>
 
-						<a href="<?php echo esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product', $item->get_product_id() ) ) ); ?>"><?php echo esc_html( apply_filters( 'woocommerce_in_cartproduct_obj_title', $product->get_title(), $product ) ); ?></a>
+						<a href="<?php echo esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product', $item->get_product_id() ) ) ); ?>">
+							<?php echo wp_kses_post( apply_filters( 'woocommerce_in_cartproduct_obj_title', $product->get_title(), $product ) ); ?>
+						</a>
 
 						<?php
 						if ( $show_variation && $product->is_type( 'variation' ) ) {
-							// phpcs:ignore Generic.Commenting.DocComment
 							/**
+							 * Product is a Variation
+							 *
 							 * @var $product \WC_Product_Variation
 							 */
-							echo wc_get_formatted_variation( $product ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo wp_kses_post( wc_get_formatted_variation( $product ) );
 						}
 						?>
 
@@ -191,11 +196,11 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
 							<?php
 							if ( $show_price ) {
-								echo $item->get_formatted_product_price(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo wp_kses_post( $item->get_formatted_product_price() );
 							}
 
 							if ( $show_price_variations ) {
-								echo $item->get_price_variation(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								echo wp_kses_post( $item->get_price_variation() );
 							}
 							?>
 
@@ -257,8 +262,9 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 										<option value=""><?php esc_html_e( 'Move', 'yith-woocommerce-wishlist' ); ?></option>
 										<?php
 										foreach ( $users_wishlists as $wl ) :
-											// phpcs:ignore Generic.Commenting.DocComment
 											/**
+											 * Each of customer's wishlists
+											 *
 											 * @var $wl \YITH_WCWL_Wishlist
 											 */
 											if ( $wl->get_token() === $wishlist_token ) {
@@ -268,7 +274,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 											<option value="<?php echo esc_attr( $wl->get_token() ); ?>">
 												<?php echo sprintf( '%s - %s', esc_html( $wl->get_formatted_name() ), esc_html( $wl->get_formatted_privacy() ) ); ?>
 											</option>
-										<?php
+											<?php
 										endforeach;
 										?>
 									</select>
@@ -298,21 +304,23 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 						</td>
 					<?php endif; ?>
 				</tr>
-			<?php
+				<?php
 			endif;
 		endforeach;
 	else :
-	?>
+		?>
 		<tr>
 			<td colspan="<?php echo esc_attr( $column_count ); ?>" class="wishlist-empty"><?php echo esc_html( apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ), $wishlist ) ); ?></td>
 		</tr>
-	<?php
+		<?php
 	endif;
 
 	if ( ! empty( $page_links ) ) :
-	?>
+		?>
 		<tr class="pagination-row wishlist-pagination">
-			<td colspan="<?php echo esc_attr( $column_count ); ?>"><?php echo $page_links; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
+			<td colspan="<?php echo esc_attr( $column_count ); ?>">
+				<?php echo wp_kses_post( $page_links ); ?>
+			</td>
 		</tr>
 	<?php endif ?>
 	</tbody>

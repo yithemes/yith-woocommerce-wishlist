@@ -1,10 +1,12 @@
 {
   "name": "yith-woocommerce-wishlist",
-  "version": "3.0.0",
-  "description": "YITH WooCommerce Wishlist gives your users the possibility to create, fill, manage and share their wishlists allowing you to analyze their interests and needs to improve your marketing strategies.",
-  "main": "gulpfile.js",
+  "version": "3.0.19",
+  "description": "YITH WooCommerce Wishlist",
+  "main": "Gruntfile.js",
   "scripts": {
-    "test": "gulp"
+    "build": "npm run js && npm run i18n",
+    "js": "grunt js",
+    "i18n": "grunt makepot",
   },
   "keywords": [
     "wishlist",
@@ -16,16 +18,22 @@
     "yith"
   ],
   "author": "YITH <plugins@yithemes.com>",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0+",
   "homepage": "https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/",
   "devDependencies": {
-    "gulp": "^4.0.0",
-    "gulp-clean-css": "^4.0.0",
-    "gulp-jshint": "^2.1.0",
-    "gulp-po-sync": "^0.1.0",
-    "gulp-po2mo": "^1.0.3",
-    "gulp-uglify-es": "^2.0.0",
-    "gulp-wp-pot": "^2.3.5",
-    "jshint": "^2.11.0"
+    "archiver": "^5.2.0",
+    "axios": "^0.21.1",
+    "chalk": "^4.1.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^9.1.0",
+    "promptly": "^3.2.0",
+    "grunt": "^1.0.3",
+    "grunt-cli": "^1.3.2",
+    "grunt-contrib-cssmin": "^4.0.0",
+    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-eslint": "^23.0.0",
+    "grunt-wp-i18n": "^1.0.2",
+    "@wordpress/eslint-plugin": "^7.4.0"
   }
 }

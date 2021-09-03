@@ -1,60 +1,53 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the inline-fields field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
-$value = maybe_unserialize( $value );
-if ( ! empty( $fields ) && is_array( $fields ) ) { ?>
-	<div id="<?php echo esc_attr( $id ); ?>" class="<?php echo isset( $class ) ? $class : ''; ?> yith-inline-fields">
-		<?php
-		foreach ( $fields as $key => $field ) {
-			$allowed_types  = array( 'select', 'select-buttons', 'number', 'text', 'slider', 'hidden', 'html' );
-			$default_args   = array( 'type' => 'select' );
+list ( $field_id, $name, $class, $fields, $value ) = yith_plugin_fw_extract( $field, 'id', 'name', 'class', 'fields', 'value' );
 
-			// set default
-			if ( ! isset( $field[ 'default' ] ) && isset( $field[ 'std' ] ) ) {
-				$field['default'] = $field['std'];
-			}
-			$std = isset( $field['default'] ) ? $field['default'] : '';
-
-			$field['value'] = isset( $value[ $key ] ) ? maybe_unserialize( $value[ $key ] ) : $std;
-			$field['class'] = isset( $field['class'] ) ? $field['class'] : '';
-			$field['id']    = $id . '_' . $key;
-			$field['name']  = $name . '[' . $key . ']';
-
-			if ( ! in_array( $field['type'], $allowed_types, true ) ) {
+$class         = ! ! $class ? $class : '';
+$value         = maybe_unserialize( $value );
+$allowed_types = array( 'select', 'select-buttons', 'number', 'text', 'slider', 'hidden', 'html', 'datepicker' );
+$default_args  = array( 'type' => 'select' );
+?>
+<?php if ( ! empty( $fields ) && is_array( $fields ) ) : ?>
+	<div id="<?php echo esc_attr( $field_id ); ?>" class="<?php echo esc_attr( $class ); ?> yith-inline-fields">
+		<?php foreach ( $fields as $key => $inline_field ) : ?>
+			<?php
+			if ( ! in_array( $inline_field['type'], $allowed_types, true ) ) {
 				continue;
 			}
 
-			if ( in_array( $field['type'], array( 'select', 'select-buttons' ), true ) ) {
-				$field['class'] = 'wc-enhanced-select';
+			if ( ! isset( $inline_field['default'] ) && isset( $inline_field['std'] ) ) {
+				$inline_field['default'] = $inline_field['std'];
+			}
+			$default = isset( $inline_field['default'] ) ? $inline_field['default'] : '';
+
+			$inline_field['value'] = isset( $value[ $key ] ) ? maybe_unserialize( $value[ $key ] ) : $default;
+			$inline_field['class'] = isset( $inline_field['class'] ) ? $inline_field['class'] : '';
+			$inline_field['id']    = $field_id . '_' . $key;
+			$inline_field['name']  = $name . '[' . $key . ']';
+
+			if ( in_array( $inline_field['type'], array( 'select', 'select-buttons' ), true ) ) {
+				$inline_field['class'] .= ' wc-enhanced-select';
 			}
 			?>
-			<?php if ( isset( $field['inline-label'] ) && '' !== $field['inline-label'] ) : ?>
+			<?php if ( ! empty( $inline_field['inline-label'] ) ) : ?>
 				<div class="option-element">
-					<span><?php echo $field['inline-label']; ?></span>
+					<span><?php echo esc_html( $inline_field['inline-label'] ); ?></span>
 				</div>
 			<?php endif; ?>
-			<div class="option-element <?php echo $field['type']; ?> <?php echo $field['class']; ?>">
-				<?php if ( isset( $field['label'] ) && '' !== $field['label'] ) : ?>
-					<label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
+			<div class="option-element <?php echo esc_attr( $inline_field['type'] ); ?> <?php echo esc_attr( $inline_field['class'] ); ?>">
+				<?php if ( isset( $inline_field['label'] ) && '' !== $inline_field['label'] ) : ?>
+					<label for="<?php echo esc_attr( $inline_field['id'] ); ?>"><?php echo esc_html( $inline_field['label'] ); ?></label>
 				<?php endif; ?>
-				<?php yith_plugin_fw_get_field( $field, true ); ?>
+				<?php yith_plugin_fw_get_field( $inline_field, true ); ?>
 			</div>
-		<?php } ?>
+		<?php endforeach; ?>
 	</div>
-	<?php
-
-}
+<?php endif; ?>

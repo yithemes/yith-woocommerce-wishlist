@@ -1,53 +1,55 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the select-images field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
+list ( $field_id, $class, $name, $value, $options, $custom_attributes, $data ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'value', 'options', 'custom_attributes', 'data' );
 
-$class      = isset( $class ) ? $class : 'yith-plugin-fw-select-images';
-$wrapper_id = $id . '-wrapper';
+$class = isset( $class ) ? $class : 'yith-plugin-fw-select-images';
 ?>
-<div id="<?php echo $wrapper_id ?>" class="yith-plugin-fw-select-images__wrapper" data-type="select-images">
+<div id="<?php echo esc_attr( $field_id ); ?>-wrapper" class="yith-plugin-fw-select-images__wrapper" data-type="select-images">
+	<select id="<?php echo esc_attr( $field_id ); ?>"
+			name="<?php echo esc_attr( $name ); ?>"
+			class="<?php echo esc_attr( $class ); ?>"
+			style="display: none"
+		<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	>
+		<?php foreach ( $options as $key => $item ) : ?>
+			<?php
+			$label = ! empty( $item['label'] ) ? $item['label'] : $key;
+			?>
+			<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $value ); ?> ><?php echo esc_html( $label ); ?></option>
+		<?php endforeach; ?>
+	</select>
 
-    <select id="<?php echo $id ?>"
-            name="<?php echo $name ?>"
-            class="<?php echo $class ?>"
-            style="display: none"
-        <?php echo $custom_attributes ?>
-        <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>>
-        <?php foreach ( $options as $key => $item ) :
-            $label = !empty( $item[ 'label' ] ) ? $item[ 'label' ] : $key;
-            ?>
-            <option value="<?php echo esc_attr( $key ) ?>" <?php selected( $key, $value ); ?> ><?php echo $label ?></option>
-        <?php endforeach; ?>
-    </select>
-
-    <ul class="yith-plugin-fw-select-images__list">
-        <?php foreach ( $options as $key => $item ) :
-	        $label = ! empty( $item['label'] ) ? $item['label'] : $key;
-	        $image = ! empty( $item['image'] ) ? $item['image'] : '';
-	        $img_data = ! empty( $item['data'] ) ? yith_plugin_fw_html_data_to_string( $item['data'] ): '';
-            if ( $image ) :
-                $selected_class = 'yith-plugin-fw-select-images__item--selected';
-                $current_class = $key === $value ? $selected_class : '';
-                ?>
-                <li class="yith-plugin-fw-select-images__item <?php echo $current_class ?>" data-type="select-images-item" data-key="<?php echo $key ?>" <?php echo $img_data; ?>>
-                    <?php if ( $label ) : ?>
-                        <div class="yith-plugin-fw-select-images__item__label"><?php echo $label ?></div>
-                    <?php endif; ?>
-                    <img class="yith-plugin-fw-select-images_src" src="<?php echo $image ?>" />
-                </li>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </ul>
+	<ul class="yith-plugin-fw-select-images__list">
+		<?php foreach ( $options as $key => $item ) : ?>
+			<?php
+			$label = ! empty( $item['label'] ) ? $item['label'] : $key;
+			$image = ! empty( $item['image'] ) ? $item['image'] : '';
+			?>
+			<?php if ( $image ) : ?>
+				<?php
+				$selected_class = 'yith-plugin-fw-select-images__item--selected';
+				$current_class  = $key === $value ? $selected_class : '';
+				?>
+				<li class="yith-plugin-fw-select-images__item <?php echo esc_attr( $current_class ); ?>"
+						data-type="select-images-item"
+						data-key="<?php echo esc_attr( $key ); ?>"
+					<?php echo isset( $item['data'] ) ? yith_plugin_fw_html_data_to_string( $item['data'] ) : ''; ?>
+				>
+					<?php if ( $label ) : ?>
+						<div class="yith-plugin-fw-select-images__item__label"><?php echo esc_html( $label ); ?></div>
+					<?php endif; ?>
+					<img class="yith-plugin-fw-select-images_src" src="<?php echo esc_url( $image ); ?>"/>
+				</li>
+			<?php endif; ?>
+		<?php endforeach; ?>
+	</ul>
 </div>

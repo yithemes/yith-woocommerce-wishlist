@@ -1,17 +1,15 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the html field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
+list ( $html ) = yith_plugin_fw_extract( $field, 'html' );
 
-echo !empty( $html ) ? $html : '';
+$html = ! ! $html ? $html : '';
+
+echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

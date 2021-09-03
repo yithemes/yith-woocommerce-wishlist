@@ -1,16 +1,13 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
+ * Template for displaying the custom field
  *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-if ( isset( $field[ 'action' ] ) ) {
-    do_action( $field[ 'action' ], $field );
+if ( isset( $field['action'] ) ) {
+	do_action( $field['action'], $field );
 }

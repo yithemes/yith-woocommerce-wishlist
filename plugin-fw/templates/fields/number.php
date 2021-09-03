@@ -1,36 +1,32 @@
 <?php
 /**
- * This file belongs to the YIT Plugin Framework.
+ * Template for displaying the number field
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @var array $field
+ * @var array $field The field.
+ * @package YITH\PluginFramework\Templates\Fields
  */
 
-!defined( 'ABSPATH' ) && exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-extract( $field );
+list ( $field_id, $class, $name, $std, $value, $min, $max, $step, $custom_attributes, $data ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'std', 'value', 'min', 'max', 'step', 'custom_attributes', 'data' );
 
-$min_max_attr = $step_attr = '';
-
-if ( isset( $min ) ) {
-    $min_max_attr .= " min='{$min}'";
-}
-
-if ( isset( $max ) ) {
-    $min_max_attr .= " max='{$max}'";
-}
-
-if ( isset( $step ) ) {
-    $step_attr .= "step='{$step}'";
-}
 ?>
-<input type="number" id="<?php echo $id ?>"
-    <?php echo !empty( $class ) ? "class='$class'" : ''; ?>
-       name="<?php echo $name ?>" <?php echo $step_attr ?> <?php echo $min_max_attr ?>
-       value="<?php echo esc_attr( $value ) ?>" <?php if ( isset( $std ) ) : ?>data-std="<?php echo $std ?>"<?php endif ?>
-    <?php echo $custom_attributes ?>
-    <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>/>
+<input type="number" id="<?php echo esc_attr( $field_id ); ?>"
+		name="<?php echo esc_attr( $name ); ?>"
+		class="<?php echo ! empty( $class ) ? esc_attr( $class ) : ''; ?>"
+		value="<?php echo esc_attr( $value ); ?>"
+	<?php if ( isset( $min ) ) : ?>
+		min="<?php echo esc_attr( $min ); ?>"
+	<?php endif; ?>
+	<?php if ( isset( $max ) ) : ?>
+		max="<?php echo esc_attr( $max ); ?>"
+	<?php endif; ?>
+	<?php if ( isset( $step ) ) : ?>
+		step="<?php echo esc_attr( $step ); ?>"
+	<?php endif; ?>
+	<?php if ( isset( $std ) ) : ?>
+		data-std="<?php echo esc_attr( $std ); ?>"
+	<?php endif; ?>
+	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+/>

@@ -1,0 +1,21 @@
+# Hidden files and folders
+.*
+.*/
+*/.*
+
+# NPM, composer, grunt and other utilities
+*.lock
+node_modules
+vendor
+package.json
+package-lock.json
+composer.json
+Gruntfile.js
+docker-compose.yml
+docker-compose.yaml
+phpunit.xml
+phpunit.xml.dist
+phpcs.xml.dist
+
+# Excluded files and folders of the plugin
+bin

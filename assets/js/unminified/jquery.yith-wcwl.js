@@ -80,7 +80,7 @@ jQuery( function( $ ){
 
                     if( yith_wcwl_l10n.multi_wishlist ) {
                         // close PrettyPhoto popup
-                        close_pretty_photo( response_message );
+                        close_pretty_photo( response_message, response_result );
 
                         // update options for all wishlist selects
                         if( typeof( response.user_wishlists ) !== 'undefined' ) {
@@ -360,7 +360,7 @@ jQuery( function( $ ){
                 checkboxes.prop( 'checked','checked').change();
             }
             else{
-                checkboxes.removeProp( 'checked').change();
+				checkboxes.prop('checked', false).change();
             }
         } );
 
@@ -433,7 +433,11 @@ jQuery( function( $ ){
             var t = $( ev.target ),
                 product_id = t.data( 'product_id' ),
                 variation_id = variation.variation_id,
-                targets = $('[data-product-id="' + product_id + '"]').add('[data-original-product-id="' + product_id + '"]'),
+                target1 = $('.yith-wcwl-add-to-wishlist')
+                    .find('[data-product-id="' + product_id + '"]'),
+                target2 = $('.yith-wcwl-add-to-wishlist')
+                    .find('[data-original-product-id="' + product_id + '"]'),
+                targets = target1.add( target2 ),
                 fragments = targets.closest( '.wishlist-fragment' ).filter(':visible');
 
             if( ! product_id || ! variation_id || ! targets.length ){
@@ -521,6 +525,7 @@ jQuery( function( $ ){
                 fragments: fragments,
                 firstLoad: false
             } );
+
         } );
 
         t.on( 'yith_wcwl_reload_fragments', load_fragments );
@@ -657,7 +662,7 @@ jQuery( function( $ ){
         $('a[data-rel^="prettyPhoto[add_to_wishlist_"]')
             .add('a[data-rel="prettyPhoto[ask_an_estimate]"]')
             .add('a[data-rel="prettyPhoto[create_wishlist]"]')
-            .unbind( 'click' )
+            .off( 'click' )
             .prettyPhoto( ppParams );
 
         $('a[data-rel="prettyPhoto[move_to_another_wishlist]"]').on( 'click', function(){
@@ -692,9 +697,8 @@ jQuery( function( $ ){
                 for ( var i in mutationsList ) {
                     var mutation = mutationsList[ i ];
                     if ( mutation.type === 'childList' ) {
-                      typeof mutation.addedNodes !== 'undefined' && mutation.addedNodes.forEach( callbackAdd);
-
-                      typeof mutation.removedNodes !== 'undefined' && mutation.removedNodes.forEach( callbackRemove );
+                      typeof mutation.addedNodes !== 'undefined' && typeof mutation.addedNodes.forEach === 'function' && mutation.addedNodes.forEach( callbackAdd );
+                      typeof mutation.removedNodes !== 'undefined' && typeof mutation.addedNodes.forEach === 'function' && mutation.removedNodes.forEach( callbackRemove );
                     }
                 }
             } );
@@ -1028,18 +1032,21 @@ jQuery( function( $ ){
      * @since 3.0.0
      */
     function init_wishlist_details_popup() {
+
         $('.wishlist_table').filter('.images_grid').not('.enhanced')
             .on( 'click', '[data-row-id] .product-thumbnail a', function(ev){
-                var t = $(this),
-                    item = t.closest('[data-row-id]'),
-                    items = item.siblings( '[data-row-id]' ),
-                    popup = item.find('.item-details');
+                if ( ! yith_wcwl_l10n.disable_popup_grid_view ){
+                    var t = $(this),
+                        item = t.closest('[data-row-id]'),
+                        items = item.siblings( '[data-row-id]' ),
+                        popup = item.find('.item-details');
 
-                ev.preventDefault();
+                    ev.preventDefault();
 
-                if( popup.length ){
-                    items.removeClass('show');
-                    item.toggleClass( 'show' );
+                    if( popup.length ){
+                        items.removeClass('show');
+                        item.toggleClass( 'show' );
+                    }
                 }
             } )
             .on( 'click', '[data-row-id] a.close', function (ev){
@@ -1145,7 +1152,7 @@ jQuery( function( $ ){
         $( window ).on( 'resize', function(){
             var table = $('.wishlist_table.responsive'),
                 mobile = table.is('.mobile'),
-                media = window.matchMedia( '(max-width: 768px)' ),
+                media = window.matchMedia( '(max-width: ' + yith_wcwl_l10n.mobile_media_query + 'px)' ),
                 form = table.closest('form'),
                 id = form.attr('class'),
                 options = form.data('fragment-options'),
@@ -1482,7 +1489,7 @@ jQuery( function( $ ){
      * @return void
      * @since 3.0.0
      */
-    function close_pretty_photo( message ) {
+    function close_pretty_photo( message, status ) {
         if( typeof $.prettyPhoto !== 'undefined' && typeof $.prettyPhoto.close !== 'undefined' ) {
             if( typeof message !== 'undefined' ){
                 var container = $('.pp_content_container'),
@@ -1495,7 +1502,7 @@ jQuery( function( $ ){
                         'class': 'yith-wcwl-popup-feedback'
                     } );
 
-                    new_content.append( $( '<i/>', { 'class': 'fa fa-check heading-icon' } ) );
+                    new_content.append( $( '<i/>', { 'class': 'fa heading-icon ' + ( 'error' === status ? 'fa-exclamation-triangle' : 'fa-check' ) } ) );
                     new_content.append( $( '<p/>', { 'class': 'feedback', 'html': message } ) );
                     new_content.css( 'display', 'none' );
 
@@ -1747,6 +1754,7 @@ jQuery( function( $ ){
                     init_handling_after_ajax();
 
                     $(document).trigger( 'yith_wcwl_fragments_loaded', [ fragments, data.fragments, search.firstLoad ] );
+
                 }
             },
             url: yith_wcwl_l10n.ajax_url
@@ -1761,7 +1769,7 @@ jQuery( function( $ ){
      */
     function replace_fragments( fragments ) {
        $.each( fragments, function( i, v ){
-           var itemSelector = '.' + i.split( yith_wcwl_l10n.fragments_index_glue ).filter( ( val ) => { return val.length && val !== 'exists'; } ).join( '.' ),
+           var itemSelector = '.' + i.split( yith_wcwl_l10n.fragments_index_glue ).filter( ( val ) => { return val.length && val !== 'exists' && val !== 'with-count'; } ).join( '.' ),
                toReplace = $( itemSelector );
 
            // find replace tempalte

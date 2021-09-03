@@ -1,17 +1,14 @@
 <?php
 /**
- * This file belongs to the YIT Framework.
+ * The Template for displaying PHP Information.
  *
- * This source file is subject to the GNU GENERAL PUBLIC LICENSE (GPL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * @package YIT Plugin Framework
+ * @package YITH\PluginFramework\Templates\SysInfo
  */
 
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
+
 ob_start();
-phpinfo( 61 ); //phpcs:ignore
+phpinfo( 61 ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_phpinfo
 $php_info = ob_get_contents();
 ob_end_clean();
 
