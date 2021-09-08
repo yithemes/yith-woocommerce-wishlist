@@ -292,7 +292,7 @@ jQuery( function( $ ) {
             }
 
             updatePreviewXHR = $.ajax( {
-                url: ajaxurl + '?action=preview_promotion_email',
+                url: ajaxurl + '?action=preview_promotion_email&_wpnonce=' + yith_wcwl.nonce.preview_promotion_email,
                 data: modal.find('form').serialize(),
                 method: 'POST',
                 beforeSend: function(){
@@ -350,7 +350,7 @@ jQuery( function( $ ) {
                         }
 
                         $.ajax({
-                            url: ajaxurl + '?action=calculate_promotion_email_receivers',
+                            url: ajaxurl + '?action=calculate_promotion_email_receivers&_wpnonce=' + yith_wcwl.nonce.calculate_promotion_email_receivers,
                             data: modal.find('form').serialize(),
                             method: 'post',
                             beforeSend: function(){

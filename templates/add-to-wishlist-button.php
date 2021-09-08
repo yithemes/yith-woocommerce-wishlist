@@ -39,7 +39,7 @@ global $product;
 
 <div class="yith-wcwl-add-button">
 	<a
-		href="<?php echo esc_url( add_query_arg( 'add_to_wishlist', $product_id, $base_url ) ); ?>"
+		href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'add_to_wishlist', $product_id, $base_url ), 'add_to_wishlist' ) ); ?>"
 		class="<?php echo esc_attr( $link_classes ); ?>"
 		data-product-id="<?php echo esc_attr( $product_id ); ?>"
 		data-product-type="<?php echo esc_attr( $product_type ); ?>"

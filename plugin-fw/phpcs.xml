@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards">
+<ruleset name="YITH Plugin Framework Coding Standards">
     <description>YITH Plugin Framework - PHP_CodeSniffer ruleset.</description>
 
     <file>.</file>
@@ -27,7 +27,7 @@
     <!-- Configs -->
     <config name="minimum_supported_wp_version" value="5.2"/>
     <!-- Check for cross-version support for PHP 5.6 and higher. -->
-    <config name="testVersion" value="5.6-"/>
+    <config name="testVersion" value="7.0-"/>
 
     <!-- Rules -->
 

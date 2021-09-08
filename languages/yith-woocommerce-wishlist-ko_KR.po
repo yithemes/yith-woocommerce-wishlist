@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2021-08-05 09:17:26+00:00\n"
+"POT-Creation-Date: 2021-09-08 10:47:00+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:05+0200\n"
 "Last-Translator: Valentyn Zubenko <valentyn.zubenko@gmail.com>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -44,33 +44,33 @@ msgstr ""
 msgid "Premium Version"
 msgstr "프리미엄 버전 "
 
-#: includes/class-yith-wcwl-admin.php:238
+#: includes/class-yith-wcwl-admin.php:249
 #: includes/class-yith-wcwl-install.php:342
 msgid "Wishlist"
 msgstr "위시리스"
 
-#: includes/class-yith-wcwl-admin.php:240
+#: includes/class-yith-wcwl-admin.php:251
 msgid ""
 "Allows your customers to create and share lists of products that they want "
 "to purchase on your e-commerce."
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:71
+#: includes/class-yith-wcwl-ajax-handler.php:75
 #: templates/add-to-wishlist-remove.php:59
 msgid "View &rsaquo;"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:72
+#: includes/class-yith-wcwl-ajax-handler.php:76
 #: templates/add-to-wishlist-remove.php:58
 msgid "or"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:73
+#: includes/class-yith-wcwl-ajax-handler.php:77
 msgid "Close"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:145
-#: includes/class-yith-wcwl-ajax-handler.php:183
+#: includes/class-yith-wcwl-ajax-handler.php:155
+#: includes/class-yith-wcwl-ajax-handler.php:195
 msgid "Product successfully removed."
 msgstr "상품이 성공적으로 제거 되었습니다."
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Product added to cart successfully"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:715
+#: includes/class-yith-wcwl-frontend.php:725
 #: includes/class-yith-wcwl-shortcode.php:239
 #: plugin-options/wishlist_page-options.php:240
 #: templates/wishlist-view-footer-mobile.php:46
@@ -1469,7 +1469,7 @@ msgid ""
 "your e-commerce on <strong>YITH</strong></a>"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:250
+#: includes/class-yith-wcwl-admin.php:261
 msgctxt "[HELP TAB] Video title"
 msgid ""
 "Check this video to learn how to <b>configure wishlist and customize options:"

@@ -156,6 +156,17 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 			wp_register_style( 'yith-wcwl-material-icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), '3.0.1' );
 			wp_register_style( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/css/admin.css', array( 'yith-wcwl-font-awesome' ), YITH_WCWL_Frontend()->version );
 			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/' . $prefix . 'admin/yith-wcwl' . $suffix . '.js', array( 'jquery', 'wc-backbone-modal', 'jquery-blockui' ), YITH_WCWL_Frontend()->version, true );
+
+			wp_localize_script(
+				'yith-wcwl-admin',
+				'yith_wcwl',
+				array(
+					'nonce' => array(
+						'preview_promotion_email'             => wp_create_nonce( 'preview_promotion_email' ),
+						'calculate_promotion_email_receivers' => wp_create_nonce( 'calculate_promotion_email_receivers' ),
+					),
+				)
+			);
 		}
 
 		/**

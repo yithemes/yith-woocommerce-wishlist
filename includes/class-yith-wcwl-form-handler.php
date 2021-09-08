@@ -68,7 +68,7 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 		 */
 		public static function add_to_wishlist() {
 			// add item to wishlist when javascript is not enabled.
-			if ( isset( $_GET['add_to_wishlist'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( isset( $_GET['add_to_wishlist'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'add_to_wishlist' ) ) {
 				try {
 					YITH_WCWL()->add();
 
@@ -86,7 +86,7 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 		 */
 		public static function remove_from_wishlist() {
 			// remove item from wishlist when javascript is not enabled.
-			if ( isset( $_GET['remove_from_wishlist'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( isset( $_GET['remove_from_wishlist'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'remove_from_wishlist' ) ) {
 				try {
 					YITH_WCWL()->remove();
 				} catch ( Exception $e ) {

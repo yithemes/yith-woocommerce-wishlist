@@ -425,7 +425,7 @@ if ( ! function_exists( 'yith_wcwl_get_plugin_icons' ) ) {
 		$icons['none']   = $none_label ? $none_label : __( 'None', 'yith-woocommerce-wishlist' );
 		$icons['custom'] = $custom_label ? $custom_label : __( 'Custom', 'yith-woocommerce-wishlist' );
 
-		return $icons;
+		return apply_filters( 'yith_wcwl_plugin_icons', $icons, $none_label, $custom_label );
 	}
 }
 

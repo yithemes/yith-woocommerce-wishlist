@@ -483,7 +483,6 @@
 		} else {
 			$( this ).attr( 'value', 'no' ).removeClass( 'onoffchecked' );
 		}
-		$( this ).trigger( 'change' );
 	} );
 
 

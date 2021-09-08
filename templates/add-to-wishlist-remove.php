@@ -42,7 +42,7 @@ global $product;
 
 <div class="yith-wcwl-add-button">
 	<a
-		href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist', $product_id, $base_url ) ); ?>"
+		href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'remove_from_wishlist', $product_id, $base_url ), 'remove_from_wishlist' ) ); ?>"
 		class="delete_item <?php echo esc_attr( $link_classes ); ?>"
 		data-item-id="<?php echo esc_attr( $found_item->get_id() ); ?>"
 		data-product-id="<?php echo esc_attr( $product_id ); ?>"

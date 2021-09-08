@@ -59,6 +59,10 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 * @return void
 		 */
 		public static function add_to_wishlist() {
+			if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'add_to_wishlist' ) ) {
+				wp_send_json( array( 'result' => false ) );
+			}
+
 			try {
 				YITH_WCWL()->add();
 
@@ -81,11 +85,9 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				$message = apply_filters( 'yith_wcwl_error_adding_to_wishlist_message', $e->getMessage() );
 			}
 
-			// phpcs:disable WordPress.Security.NonceVerification.Recommended
 			$product_id   = isset( $_REQUEST['add_to_wishlist'] ) ? intval( $_REQUEST['add_to_wishlist'] ) : false;
 			$fragments    = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			$wishlist_url = YITH_WCWL()->get_last_operation_url();
-			// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 			$wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
 
@@ -96,11 +98,15 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 					'id'                       => $wishlist->get_id(),
 					'wishlist_name'            => $wishlist->get_formatted_name(),
 					'default'                  => $wishlist->is_default(),
-					'add_to_this_wishlist_url' => $product_id ? add_query_arg(
-						array(
-							'add_to_wishlist' => $product_id,
-							'wishlist_id'     => $wishlist->get_id(),
-						)
+					'add_to_this_wishlist_url' => $product_id ? wp_nonce_url(
+						add_query_arg(
+							array(
+								'add_to_wishlist' => $product_id,
+								'wishlist_id'     => $wishlist->get_id(),
+							),
+							$wishlist->get_url()
+						),
+						'add_to_wishlist'
 					) : '',
 				);
 			}
@@ -138,7 +144,11 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 * @return void
 		 */
 		public static function remove_from_wishlist() {
-			$fragments = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security
+			if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'remove_from_wishlist' ) ) {
+				wp_send_json( array( 'fragments' => array() ) );
+			}
+
+			$fragments = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
 			try {
 				YITH_WCWL()->remove();
@@ -164,13 +174,15 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 * @since 3.0.0
 		 */
 		public static function delete_item() {
-			// phpcs:disable WordPress.Security.NonceVerification
+			if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'delete_item' ) ) {
+				wp_send_json( array( 'result' => false ) );
+			}
+
 			$item_id   = isset( $_POST['item_id'] ) ? intval( $_POST['item_id'] ) : false;
 			$fragments = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			$return    = array(
 				'result' => false,
 			);
-			// phpcs:enable WordPress.Security.NonceVerification
 
 			if ( $item_id ) {
 				$item = YITH_WCWL_Wishlist_Factory::get_wishlist_item( $item_id );
@@ -196,12 +208,14 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 * @since 3.0.7
 		 */
 		public static function save_title() {
-			// phpcs:disable WordPress.Security.NonceVerification
+			if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'save_title' ) ) {
+				wp_send_json( array( 'result' => false ) );
+			}
+
 			$wishlist_id   = isset( $_POST['wishlist_id'] ) ? sanitize_text_field( wp_unslash( $_POST['wishlist_id'] ) ) : false;
 			$wishlist_name = isset( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : false;
 			$fragments     = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			$wishlist      = $wishlist_id ? yith_wcwl_get_wishlist( $wishlist_id ) : false;
-			// phpcs:enable WordPress.Security.NonceVerification
 
 			if ( ! $wishlist_id || ! $wishlist ) {
 				wp_send_json(
@@ -237,6 +251,10 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 * @since 3.0.0
 		 */
 		public static function load_fragments() {
+			if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'load_fragments' ) ) {
+				wp_send_json( array( 'result' => false ) );
+			}
+
 			$fragments = isset( $_POST['fragments'] ) ? wc_clean( $_POST['fragments'] ) : false; // phpcs:ignore WordPress.Security
 
 			wp_send_json(
@@ -253,6 +271,10 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function reload_wishlist_and_adding_elem() {
+			if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'reload_wishlist_and_adding_elem' ) ) {
+				wp_send_json( array( 'result' => false ) );
+			}
+
 			$type_msg = 'success';
 
 			try {
@@ -266,7 +288,6 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				$type_msg = 'error';
 			}
 
-			// phpcs:disable WordPress.Security.NonceVerification.Recommended
 			$wishlist_token = isset( $_REQUEST['wishlist_token'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wishlist_token'] ) ) : false;
 			$atts           = array( 'wishlist_id' => $wishlist_token );
 
@@ -277,7 +298,6 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			if ( isset( $_REQUEST['per_page'] ) ) {
 				$atts['per_page'] = intval( $_REQUEST['per_page'] );
 			}
-			// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 			yith_wcwl_add_notice( $message, $type_msg );
 
@@ -300,7 +320,11 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		public static function load_mobile() {
 			global $yith_wcwl_is_mobile;
 
-			$fragments = isset( $_POST['fragments'] ) ? wc_clean( $_POST['fragments'] ) : false; // phpcs:ignore WordPress.Security
+			if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ), 'load_mobile' ) ) {
+				wp_send_json( array( 'fragments' => array() ) );
+			}
+
+			$fragments = isset( $_POST['fragments'] ) ? wc_clean( $_POST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			$result    = array();
 
 			if ( ! empty( $fragments ) ) {

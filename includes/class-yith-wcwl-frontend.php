@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.0.25';
+		public $version = '3.1.0';
 
 		/**
 		 * Plugin database version
@@ -470,6 +470,16 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						'save_title_action'           => 'save_title',
 						'save_privacy_action'         => 'save_privacy',
 						'load_fragments'              => 'load_fragments',
+					),
+					'nonce'                     => array(
+						'add_to_wishlist_nonce'      => wp_create_nonce( 'add_to_wishlist' ),
+						'remove_from_wishlist_nonce' => wp_create_nonce( 'remove_from_wishlist' ),
+						'reload_wishlist_and_adding_elem_nonce' => wp_create_nonce( 'reload_wishlist_and_adding_elem' ),
+						'load_mobile_nonce'          => wp_create_nonce( 'load_mobile' ),
+						'delete_item_nonce'          => wp_create_nonce( 'delete_item' ),
+						'save_title_nonce'           => wp_create_nonce( 'save_title' ),
+						'save_privacy_nonce'         => wp_create_nonce( 'save_privacy' ),
+						'load_fragments_nonce'       => wp_create_nonce( 'load_fragments' ),
 					),
 				)
 			);

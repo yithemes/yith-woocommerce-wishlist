@@ -114,6 +114,8 @@ if ( ! function_exists( 'yit_plugin_fw_row_meta' ) ) {
 		$fields            = isset( $new_row_meta_args['to_show'] ) ? $new_row_meta_args['to_show'] : array();
 		$slug              = isset( $new_row_meta_args['slug'] ) ? $new_row_meta_args['slug'] : '';
 		$is_premium        = isset( $new_row_meta_args['is_premium'] ) ? $new_row_meta_args['is_premium'] : '';
+		$utm_campaign      = 'plugin-version-author-uri';
+		$utm_source        = $is_premium ? 'wp-premium-dashboard' : 'wp-free-dashboard';
 
 		if ( ! ! $is_premium ) {
 			$to_remove = array_search( 'premium_version', $fields, true );
@@ -162,18 +164,18 @@ if ( ! function_exists( 'yit_plugin_fw_row_meta' ) ) {
 			}
 
 			if ( ! empty( $url ) && ! empty( $label ) ) {
-				$url           = yith_plugin_fw_add_utm_data( $url, $slug, 'plugin-version-author-uri', 'wp-dashboard' );
+				$url           = yith_plugin_fw_add_utm_data( $url, $slug, $utm_campaign, $utm_source );
 				$plugin_meta[] = sprintf( '<a href="%s" target="_blank"><span class="%s"></span>%s</a>', $url, $icon, $label );
 			}
 		}
 
 		if ( isset( $plugin_meta[1] ) ) {
-			$utm_author_uri = yith_plugin_fw_add_utm_data( $plugin_data['AuthorURI'], $slug, 'plugin-version-author-uri', 'wp-dashboard' );
+			$utm_author_uri = yith_plugin_fw_add_utm_data( $plugin_data['AuthorURI'], $slug, $utm_campaign, $utm_source );
 			$plugin_meta[1] = str_replace( $plugin_data['AuthorURI'], $utm_author_uri, $plugin_meta[1] );
 		}
 
 		if ( isset( $plugin_meta[2] ) ) {
-			$utm_plugin_uri = yith_plugin_fw_add_utm_data( $plugin_data['PluginURI'], $slug, 'plugin-version-author-uri', 'wp-dashboard' );
+			$utm_plugin_uri = yith_plugin_fw_add_utm_data( $plugin_data['PluginURI'], $slug, $utm_campaign, $utm_source );
 			$plugin_meta[2] = str_replace( $plugin_data['PluginURI'], $utm_plugin_uri, $plugin_meta[2] );
 		}
 

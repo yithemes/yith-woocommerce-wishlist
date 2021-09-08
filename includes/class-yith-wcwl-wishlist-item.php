@@ -452,6 +452,17 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			return (bool) $this->get_prop( 'on_sale', $context );
 		}
 
+		/**
+		 * Returns url to remove item from wishlist
+		 *
+		 * @return string Remove url.
+		 */
+		public function get_remove_url() {
+			$base_url = $this->get_wishlist()->get_url();
+
+			return apply_filters( 'yith_wcwl_wishlist_item_remove_url', wp_nonce_url( add_query_arg( 'remove_from_wishlist', $this->get_product_id(), $base_url ), 'remove_from_wishlist' ), $this );
+		}
+
 		/* === SETTERS === */
 
 		/**

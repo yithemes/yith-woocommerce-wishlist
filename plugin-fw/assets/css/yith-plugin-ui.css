@@ -29,6 +29,12 @@
   --yith-outline-bg-hover: rgba(157, 198, 205, 0.2);
   --yith-outline-border-hover: #007ba3;
   --yith-outline-focus: #dfeef2;
+  --yith-delete-outline-text: #c41d04;
+  --yith-delete-outline-border: #c41d04;
+  --yith-delete-outline-bg: rgba(205, 157, 157, 0);
+  --yith-delete-outline-bg-hover: rgba(232, 184, 184, 0.15);
+  --yith-delete-outline-border-hover: #db2b11;
+  --yith-delete-outline-focus: #ffe9e7;
   --yith-accent: #98aa36;
   --yith-light-bg: #f0f6fb;
   --yith-light-border-color: #d7e3e7;
@@ -322,11 +328,13 @@
 .yith-plugin-ui #doaction,
 .yith-plugin-ui #doaction2,
 .yith-plugin-ui #post-query-submit,
+.yith-plugin-ui #posts-filter #delete_all,
 .yith-plugin-ui #search-submit,
 .yith-plugin-ui .button.filter-button, .wp-core-ui .yith-plugin-ui .button.action,
 .wp-core-ui .yith-plugin-ui #doaction,
 .wp-core-ui .yith-plugin-ui #doaction2,
 .wp-core-ui .yith-plugin-ui #post-query-submit,
+.wp-core-ui .yith-plugin-ui #posts-filter #delete_all,
 .wp-core-ui .yith-plugin-ui #search-submit,
 .wp-core-ui .yith-plugin-ui .button.filter-button {
   background: var(--yith-outline-bg);
@@ -343,11 +351,13 @@
 .yith-plugin-ui #doaction:focus,
 .yith-plugin-ui #doaction2:focus,
 .yith-plugin-ui #post-query-submit:focus,
+.yith-plugin-ui #posts-filter #delete_all:focus,
 .yith-plugin-ui #search-submit:focus,
 .yith-plugin-ui .button.filter-button:focus, .wp-core-ui .yith-plugin-ui .button.action:focus,
 .wp-core-ui .yith-plugin-ui #doaction:focus,
 .wp-core-ui .yith-plugin-ui #doaction2:focus,
 .wp-core-ui .yith-plugin-ui #post-query-submit:focus,
+.wp-core-ui .yith-plugin-ui #posts-filter #delete_all:focus,
 .wp-core-ui .yith-plugin-ui #search-submit:focus,
 .wp-core-ui .yith-plugin-ui .button.filter-button:focus {
   background: var(--yith-outline-bg);
@@ -363,6 +373,8 @@
 .yith-plugin-ui #doaction2:active,
 .yith-plugin-ui #post-query-submit:hover,
 .yith-plugin-ui #post-query-submit:active,
+.yith-plugin-ui #posts-filter #delete_all:hover,
+.yith-plugin-ui #posts-filter #delete_all:active,
 .yith-plugin-ui #search-submit:hover,
 .yith-plugin-ui #search-submit:active,
 .yith-plugin-ui .button.filter-button:hover,
@@ -373,6 +385,8 @@
 .wp-core-ui .yith-plugin-ui #doaction2:active,
 .wp-core-ui .yith-plugin-ui #post-query-submit:hover,
 .wp-core-ui .yith-plugin-ui #post-query-submit:active,
+.wp-core-ui .yith-plugin-ui #posts-filter #delete_all:hover,
+.wp-core-ui .yith-plugin-ui #posts-filter #delete_all:active,
 .wp-core-ui .yith-plugin-ui #search-submit:hover,
 .wp-core-ui .yith-plugin-ui #search-submit:active,
 .wp-core-ui .yith-plugin-ui .button.filter-button:hover,
@@ -380,6 +394,25 @@
   background: var(--yith-outline-bg-hover);
   border-color: var(--yith-outline-border-hover);
   color: var(--yith-outline-text);
+}
+
+.yith-plugin-ui #posts-filter #delete_all, .wp-core-ui .yith-plugin-ui #posts-filter #delete_all {
+  background: var(--yith-delete-outline-bg);
+  border: 1px solid var(--yith-delete-outline-border);
+  color: var(--yith-delete-outline-text);
+}
+
+.yith-plugin-ui #posts-filter #delete_all:focus, .wp-core-ui .yith-plugin-ui #posts-filter #delete_all:focus {
+  background: var(--yith-delete-outline-bg);
+  border: 1px solid var(--yith-delete-outline-border);
+  color: var(--yith-delete-outline-text);
+  box-shadow: 0 0 0 3px var(--yith-delete-outline-focus);
+}
+
+.yith-plugin-ui #posts-filter #delete_all:hover, .yith-plugin-ui #posts-filter #delete_all:active, .wp-core-ui .yith-plugin-ui #posts-filter #delete_all:hover, .wp-core-ui .yith-plugin-ui #posts-filter #delete_all:active {
+  background: var(--yith-delete-outline-bg-hover);
+  border-color: var(--yith-delete-outline-border-hover);
+  color: var(--yith-delete-outline-text);
 }
 
 .yith-plugin-ui .tablenav .tablenav-pages .button,

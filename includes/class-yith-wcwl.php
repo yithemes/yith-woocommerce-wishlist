@@ -651,7 +651,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			// filter wishlist param.
 			$this->wishlist_param = apply_filters( 'yith_wcwl_wishlist_param', $this->wishlist_param );
 
-			$wishlist_page_id = isset( $_POST['yith_wcwl_wishlist_page_id'] ) ? intval( $_POST['yith_wcwl_wishlist_page_id'] ) : get_option( 'yith_wcwl_wishlist_page_id' ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$wishlist_page_id = get_option( 'yith_wcwl_wishlist_page_id' );
 			$wishlist_page_id = yith_wcwl_object_id( $wishlist_page_id, 'page', true, 'default' );
 
 			if ( empty( $wishlist_page_id ) ) {
@@ -806,7 +806,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 				$url = add_query_arg( $args );
 			}
 
-			return apply_filters( 'yith_wcwl_add_to_wishlist_url', esc_url_raw( $url ), $product_id, $args );
+			return apply_filters( 'yith_wcwl_add_to_wishlist_url', esc_url_raw( wp_nonce_url( $url, 'add_to_wishlist' ) ), $product_id, $args );
 		}
 
 		/**
@@ -817,7 +817,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 		 * @since 1.0.0
 		 */
 		public function get_remove_url( $item_id ) {
-			return esc_url( add_query_arg( 'remove_from_wishlist', $item_id ) );
+			return esc_url( wp_nonce_url( add_query_arg( 'remove_from_wishlist', $item_id ), 'remove_from_wishlist' ) );
 		}
 
 		/**
