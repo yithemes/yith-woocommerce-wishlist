@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-07-13 10:11:30+00:00\n"
+"POT-Creation-Date: 2021-09-24 08:04:51+00:00\n"
 "PO-Revision-Date: 2021-02-11 18:07:46+0000\n"
 "Language: el_GR\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "Are you sure you want to trash the selected items?"
 msgstr ""
 
 #: includes/class-yit-assets.php:149 includes/class-yit-assets.php:153
-#: templates/sysinfo/tabs/main.php:40 templates/sysinfo/tabs/main.php:48
+#: templates/sysinfo/tabs/main.php:41 templates/sysinfo/tabs/main.php:49
 #: yit-functions.php:1964 yit-functions.php:1982
 msgid "No"
 msgstr "Όχι"
@@ -588,31 +588,40 @@ msgstr "Έγινε αντιγραφή!"
 msgid "Copy Code"
 msgstr "Αντιγραφή Κώδικα"
 
-#: templates/sysinfo/tabs/main.php:15
+#: templates/sysinfo/tabs/main.php:16
 msgid "Site Info"
 msgstr "Στοιχεία Ιστότοπου"
 
-#: templates/sysinfo/tabs/main.php:20
+#: templates/sysinfo/tabs/main.php:21
 msgid "Site URL"
 msgstr "URL Ιστοσελίδας"
 
-#: templates/sysinfo/tabs/main.php:29
+#: templates/sysinfo/tabs/main.php:30
 msgid "Output IP Address"
 msgstr "Διεύθυνση IP Παραγωγής"
 
-#: templates/sysinfo/tabs/main.php:37
+#: templates/sysinfo/tabs/main.php:38
 msgid "Defined WP_CACHE"
 msgstr "Καθορισμένο WP_CACHE"
 
-#: templates/sysinfo/tabs/main.php:40 templates/sysinfo/tabs/main.php:48
+#: templates/sysinfo/tabs/main.php:41 templates/sysinfo/tabs/main.php:49
 msgid "Yes"
 msgstr "Ναι"
 
-#: templates/sysinfo/tabs/main.php:45
+#: templates/sysinfo/tabs/main.php:46
 msgid "External object cache"
 msgstr "Cache εξωτερικού αντικειμένου"
 
 #: templates/sysinfo/tabs/main.php:54
+msgid "YITH Plugin Framework Version"
+msgstr ""
+
+#. translators: %s is the name of the plugin that is loading the framework.
+#: templates/sysinfo/tabs/main.php:63
+msgid "loaded by %s"
+msgstr ""
+
+#: templates/sysinfo/tabs/main.php:72
 msgid "Plugins Requirements"
 msgstr "Προϋποθέσεις Πρόσθετων"
 
@@ -630,7 +639,7 @@ msgstr ""
 msgid "Further actions"
 msgstr ""
 
-#: yit-plugin.php:204
+#: yit-plugin.php:206
 msgid "License"
 msgstr "Άδεια χρήσης προϊόντος"
 
@@ -787,10 +796,9 @@ msgid "Width"
 msgstr ""
 
 #: templates/fields/image-dimensions.php:23
-#, fuzzy
 msgctxt "Image height field label"
 msgid "Height"
-msgstr "Δεξιά"
+msgstr ""
 
 #: templates/fields/onoff.php:28
 msgctxt "YES/NO button: use MAX 4 characters!"
@@ -947,7 +955,7 @@ msgctxt "Plugin Row Meta"
 msgid "Premium version"
 msgstr "Premium έκδοση"
 
-#: yit-plugin.php:200
+#: yit-plugin.php:202
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Ρυθμίσεις"

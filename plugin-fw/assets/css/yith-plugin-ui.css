@@ -337,6 +337,16 @@
 .wp-core-ui .yith-plugin-ui #posts-filter #delete_all,
 .wp-core-ui .yith-plugin-ui #search-submit,
 .wp-core-ui .yith-plugin-ui .button.filter-button {
+  display: inline-block;
+  height: auto;
+  line-height: 30px;
+  border-radius: 4px;
+  padding: 0 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+  text-decoration: none;
+  white-space: nowrap;
   background: var(--yith-outline-bg);
   border: 1px solid var(--yith-outline-border);
   color: var(--yith-outline-text);
@@ -345,6 +355,23 @@
   border-radius: 8px;
   padding: 0 15px;
   font-weight: 600;
+}
+
+.yith-plugin-ui .button.action:focus,
+.yith-plugin-ui #doaction:focus,
+.yith-plugin-ui #doaction2:focus,
+.yith-plugin-ui #post-query-submit:focus,
+.yith-plugin-ui #posts-filter #delete_all:focus,
+.yith-plugin-ui #search-submit:focus,
+.yith-plugin-ui .button.filter-button:focus, .wp-core-ui .yith-plugin-ui .button.action:focus,
+.wp-core-ui .yith-plugin-ui #doaction:focus,
+.wp-core-ui .yith-plugin-ui #doaction2:focus,
+.wp-core-ui .yith-plugin-ui #post-query-submit:focus,
+.wp-core-ui .yith-plugin-ui #posts-filter #delete_all:focus,
+.wp-core-ui .yith-plugin-ui #search-submit:focus,
+.wp-core-ui .yith-plugin-ui .button.filter-button:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .yith-plugin-ui .button.action:focus,

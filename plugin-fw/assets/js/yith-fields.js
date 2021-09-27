@@ -148,8 +148,9 @@
 							attachment = attachment.toJSON();
 
 							if ( attachment.id ) {
-								attachmentIDs = attachmentIDs ? attachmentIDs + "," + attachment.id : attachment.id;
-								wrapper.append( '<li class="image" data-attachment_id="' + attachment.id + '"><img src="' + attachment.sizes.thumbnail.url + '"/><ul class="actions"><li><a href="#" class="delete" title="' + button.data( 'delete' ) + '">x</a></li></ul></li>' );
+								attachmentIDs           = attachmentIDs ? attachmentIDs + "," + attachment.id : attachment.id;
+								var attachmentImageData = attachment.sizes.thumbnail || attachment.sizes.medium || attachment.sizes.large || attachment.sizes.full;
+								wrapper.append( '<li class="image" data-attachment_id="' + attachment.id + '"><img src="' + attachmentImageData.url + '"/><ul class="actions"><li><a href="#" class="delete" title="' + button.data( 'delete' ) + '">x</a></li></ul></li>' );
 							}
 						} );
 

@@ -71,6 +71,12 @@
     line-height : 1;
 }
 
+.yith-plugin-fw input[type=number],
+.woocommerce .yith-plugin-fw table.form-table input[type=number] {
+    width     : 70px;
+    min-width : 70px;
+}
+
 .woocommerce .yith-plugin-fw table.form-table input[type=text].wp-color-picker,
 .woocommerce .yith-plugin-fw table.form-table input[type=text].yith-plugin-fw-colorpicker,
 .yith-plugin-fw input[type=text].wp-color-picker,
@@ -535,8 +541,8 @@ YITH UI
 .yith-plugin-ui .nav-tab {
     background-color : #336374;
     color            : #fff;
-    font-size        : 15px;
-    padding          : 7px 20px;
+    font-size        : 13px;
+    padding          : 7px 15px;
     border           : 0;
     margin           : 0 4px 0 0;
     transition       : background-color 0.3s linear;
@@ -728,6 +734,27 @@ YITH UI
     min-width     : 90px;
     box-shadow    : none;
     color         : #716269;
+}
+
+
+.yith-plugin-ui input::-webkit-input-placeholder {
+    color : #999999;
+}
+
+.yith-plugin-ui input:-ms-input-placeholder {
+    color : #999999;
+}
+
+.yith-plugin-ui input::-ms-input-placeholder {
+    color : #999999;
+}
+
+.yith-plugin-ui input::placeholder {
+    color : #999999;
+}
+
+.woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=number] {
+    min-width : 70px;
 }
 
 .yith-plugin-ui textarea:not(.wp-editor-area),
@@ -1962,11 +1989,11 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 }
 
 .yith-plugin-ui .yith-plugin-fw-image-dimensions label {
-    display         : block;
-    font-size       : 11px;
-    font-weight     : 600;
-    text-transform  : uppercase;
-    margin          : 0 0 10px 0;
+    display        : block;
+    font-size      : 11px;
+    font-weight    : 600;
+    text-transform : uppercase;
+    margin         : 0 0 10px 0;
 }
 
 /**

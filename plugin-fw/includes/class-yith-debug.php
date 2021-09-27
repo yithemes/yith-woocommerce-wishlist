@@ -12,7 +12,8 @@ if ( ! class_exists( 'YITH_Debug' ) ) {
 	/**
 	 * YITH_Debug class.
 	 *
-	 * @author  Leanza Francesco <leanzafrancesco@gmail.com>
+	 * @author     Leanza Francesco <leanzafrancesco@gmail.com>
+	 * @deprecated 3.7.7
 	 */
 	class YITH_Debug {
 
@@ -47,22 +48,14 @@ if ( ! class_exists( 'YITH_Debug' ) ) {
 		 * YITH_Debug constructor.
 		 */
 		private function __construct() {
-			add_action( 'init', array( $this, 'init' ) );
+
 		}
 
 		/**
 		 * Init
 		 */
 		public function init() {
-			if ( ! is_admin() || defined( 'DOING_AJAX' ) ) {
-				return;
-			}
 
-			$is_debug = apply_filters( 'yith_plugin_fw_is_debug', isset( $_GET['yith-debug'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-			if ( $is_debug ) {
-				add_action( 'admin_bar_menu', array( $this, 'add_debug_in_admin_bar' ), 99 );
-			}
 		}
 
 		/**
@@ -71,60 +64,7 @@ if ( ! class_exists( 'YITH_Debug' ) ) {
 		 * @param WP_Admin_Bar $wp_admin_bar WP_Admin_Bar instance.
 		 */
 		public function add_debug_in_admin_bar( $wp_admin_bar ) {
-			$args = array(
-				'id'    => 'yith-debug-admin-bar',
-				'title' => 'YITH Debug',
-				'href'  => '',
-				'meta'  => array(
-					'class' => 'yith-debug-admin-bar',
-				),
-			);
-			$wp_admin_bar->add_node( $args );
-
-			$subnodes = array();
-
-			foreach ( $this->get_debug_information() as $key => $information ) {
-				$label = $information['label'];
-				$value = $information['value'];
-				$url   = ! empty( $information['url'] ) ? $information['url'] : '';
-
-				if ( ! ! $value ) {
-					$title = "<strong>$label:</strong> $value";
-				} else {
-					$title = "<strong>$label</strong>";
-				}
-
-				$subnodes[] = array(
-					'id'     => 'yith-debug-admin-bar-' . $key,
-					'parent' => 'yith-debug-admin-bar',
-					'title'  => $title,
-					'href'   => $url,
-					'meta'   => array(
-						'class' => 'yith-debug-admin-bar-' . $key,
-					),
-				);
-
-				if ( isset( $information['subsub'] ) ) {
-					foreach ( $information['subsub'] as $sub_key => $sub_value ) {
-						$title      = isset( $sub_value['title'] ) ? $sub_value['title'] : '';
-						$html       = isset( $sub_value['html'] ) ? $sub_value['html'] : '';
-						$subnodes[] = array(
-							'id'     => 'yith-debug-admin-bar-' . $key . '-' . $sub_key,
-							'parent' => 'yith-debug-admin-bar-' . $key,
-							'title'  => $title,
-							'href'   => '',
-							'meta'   => array(
-								'class' => 'yith-debug-admin-bar-' . $key . '-' . $sub_key,
-								'html'  => $html,
-							),
-						);
-					}
-				}
-			}
-
-			foreach ( $subnodes as $subnode ) {
-				$wp_admin_bar->add_node( $subnode );
-			}
+			// Do nothing.
 		}
 
 
@@ -134,83 +74,8 @@ if ( ! class_exists( 'YITH_Debug' ) ) {
 		 * @return array
 		 */
 		public function get_debug_information() {
-			// phpcs:disable WordPress.Security.NonceVerification.Recommended
-			// phpcs:disable WordPress.PHP.DevelopmentFunctions.error_log_var_dump
-
-			$debug = array(
-				'plugin-fw-info'       => array(
-					'label' => 'Framework',
-					'value' => $this->get_plugin_framework_info(),
-				),
-				'yith-premium-plugins' => array(
-					'label'  => 'YITH Premium Plugins',
-					'value'  => '',
-					'subsub' => $this->get_premium_plugins_info(),
-				),
-				'wc-version'           => array(
-					'label' => 'WooCommerce',
-					'value' => $this->get_woocommerce_version_info(),
-				),
-				'theme'                => array(
-					'label' => 'Theme',
-					'value' => $this->get_theme_info(),
-				),
-				'screen-id'            => array(
-					'label' => 'Screen ID',
-					'value' => $this->get_current_screen_info(),
-				),
-				'post-meta'            => array(
-					'label' => 'Post Meta',
-					'value' => '',
-					'url'   => add_query_arg( array( 'yith-debug-post-meta' => 'all' ) ),
-				),
-				'option'               => array(
-					'label' => 'Option',
-					'value' => '',
-					'url'   => add_query_arg( array( 'yith-debug-option' => '' ) ),
-				),
-			);
-
-			// Post Meta debug.
-			global $post;
-			if ( ! empty( $_GET['yith-debug-post-meta'] ) && $post ) {
-				$meta_key   = sanitize_key( wp_unslash( $_GET['yith-debug-post-meta'] ) );
-				$meta_value = 'all' !== $meta_key ? get_post_meta( $post->ID, $meta_key, true ) : get_post_meta( $post->ID );
-
-				ob_start();
-				echo '<pre>';
-				var_dump( $meta_value );
-				echo '</pre>';
-				$meta_value_html = ob_get_clean();
-
-				$debug['post-meta']['value']  = $meta_key;
-				$debug['post-meta']['subsub'] = array( array( 'html' => $meta_value_html ) );
-			}
-
-			// Option debug.
-			if ( ! empty( $_GET['yith-debug-option'] ) ) {
-				$option_key   = sanitize_key( wp_unslash( $_GET['yith-debug-option'] ) );
-				$option_value = get_option( $option_key );
-
-				ob_start();
-				echo '<pre>';
-				var_dump( $option_value );
-				echo '</pre>';
-				$option_value_html = ob_get_clean();
-
-				$debug['option']['value']  = $option_key;
-				$debug['option']['subsub'] = array( array( 'html' => $option_value_html ) );
-			}
-
-			// phpcs:enable
-
-			return $debug;
+			return array();
 		}
-
-		/** -----------------------------------------------------------
-		 *                          GETTER INFO
-		 *  -----------------------------------------------------------
-		 */
 
 		/**
 		 * Return the current screen ID.
@@ -281,10 +146,9 @@ if ( ! function_exists( 'yith_debug' ) ) {
 	 * Single instance of YITH_Debug
 	 *
 	 * @return YITH_Debug
+	 * @deprecated 3.7.7
 	 */
 	function yith_debug() {
 		return YITH_Debug::instance();
 	}
-
-	yith_debug();
 }

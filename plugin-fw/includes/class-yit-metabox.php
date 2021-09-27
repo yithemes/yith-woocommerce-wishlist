@@ -301,8 +301,9 @@ if ( ! class_exists( 'YIT_Metabox' ) ) {
 			$this->reorder_tabs();
 
 			$args = array(
-				'tabs'  => $this->tabs,
-				'class' => isset( $this->options['class'] ) ? $this->options['class'] : '',
+				'tabs'        => $this->tabs,
+				'class'       => isset( $this->options['class'] ) ? $this->options['class'] : '',
+				'meta_box_id' => $this->id,
 			);
 
 			if ( isset( $meta_box, $meta_box['id'] ) ) {

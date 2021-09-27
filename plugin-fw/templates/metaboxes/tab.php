@@ -2,8 +2,10 @@
 /**
  * The Template for displaying meta-box tabs.
  *
- * @var array  $tabs  The tabs.
- * @var string $class The CSS Class.
+ * @var array  $tabs        The tabs.
+ * @var string $class       The CSS Class.
+ * @var string $meta_box_id The ID of the meta-box.
+ *
  * @package YITH\PluginFramework\Templates
  */
 
@@ -84,7 +86,23 @@ do_action( 'yit_before_metaboxes_tab' );
 					if ( $pos ) {
 						$field_name = substr_replace( $field_name, '', $pos, 1 );
 					}
-					$value                  = yit_get_post_meta( $post->ID, $field_name );
+
+					/**
+					 * APPLY_FILTER: yith_plugin_fw_metabox_{meta_box_id}_field_pre_get_value
+					 * Allow filtering values for meta-box fields instead of retrieving them by post_meta(s).
+					 *
+					 * @param mixed|null $value      The value to be filtered. Set 'null' to retrieve it by the related post_meta (Default: null).
+					 * @param int        $post_id    The post ID.
+					 * @param string     $field_name The field name.
+					 * @param array      $field      The field.
+					 *
+					 * @since 3.7.6
+					 */
+					$value = apply_filters( "yith_plugin_fw_metabox_{$meta_box_id}_field_pre_get_value", null, $post->ID, $field_name, $field );
+					if ( is_null( $value ) ) {
+						$value = yit_get_post_meta( $post->ID, $field_name );
+					}
+
 					$field['value']         = false === $value ? ( isset( $field['std'] ) ? $field['std'] : '' ) : $value;
 					$field['checkboxgroup'] = ( 'checkbox' === $field['type'] && isset( $field['checkboxgroup'] ) ) ? ' ' . $field['checkboxgroup'] : '';
 					$container_classes      = 'the-metabox ' . $field['type'] . $field['checkboxgroup'] . ' clearfix ';

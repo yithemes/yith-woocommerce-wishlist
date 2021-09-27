@@ -176,10 +176,10 @@
 }
 
 .metaboxes-tab span.description.inline {
-    display        : inline-block;
-    line-height    : 23px;
-    width          : auto;
-    margin         : 0;
+    display     : inline-block;
+    line-height : 23px;
+    width       : auto;
+    margin      : 0;
 }
 
 .metaboxes-tab .slider label {
@@ -254,8 +254,8 @@
 }
 
 .metaboxes-tab.yith-plugin-ui input[type=number] {
-    width     : auto;
-    min-width : 90px;
+    width     : 70px;
+    min-width : 70px;
 }
 
 .metaboxes-tab.yith-plugin-ui p {

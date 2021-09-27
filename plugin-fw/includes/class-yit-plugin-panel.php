@@ -491,7 +491,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			$tabs .= '</ul>';
 			?>
 			<h2 class="<?php echo esc_attr( $wrapper_class ); ?>">
-				<?php echo $tabs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php echo wp_kses_post( $tabs ); ?>
 			</h2>
 			<?php
 			$this->print_sub_tabs_nav( $args );

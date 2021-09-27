@@ -7,9 +7,10 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$system_info = get_option( 'yith_system_info' );
-$output_ip   = YITH_System_Status()->get_output_ip();
-$labels      = YITH_System_Status()->requirement_labels;
+$system_info    = get_option( 'yith_system_info' );
+$output_ip      = YITH_System_Status()->get_output_ip();
+$labels         = YITH_System_Status()->requirement_labels;
+$plugin_fw_info = YITH_System_Status()->get_plugin_fw_info();
 ?>
 <h2>
 	<?php esc_html_e( 'Site Info', 'yith-plugin-fw' ); ?>
@@ -46,6 +47,23 @@ $labels      = YITH_System_Status()->requirement_labels;
 		</th>
 		<td class="info-value">
 			<?php echo( wp_using_ext_object_cache() ? esc_html__( 'Yes', 'yith-plugin-fw' ) : esc_html__( 'No', 'yith-plugin-fw' ) ); ?>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">
+			<?php esc_html_e( 'YITH Plugin Framework Version', 'yith-plugin-fw' ); ?>
+		</th>
+		<td class="info-value">
+			<?php
+			echo esc_html(
+				sprintf(
+					'%s (%s)',
+					$plugin_fw_info['version'],
+					// translators: %s is the name of the plugin that is loading the framework.
+					sprintf( __( 'loaded by %s', 'yith-plugin-fw' ), $plugin_fw_info['loaded_by'] )
+				)
+			);
+			?>
 		</td>
 	</tr>
 </table>

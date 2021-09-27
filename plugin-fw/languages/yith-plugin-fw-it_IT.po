@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-07-13 10:11:30+00:00\n"
-"PO-Revision-Date: 2021-06-08 08:19:01+0000\n"
+"POT-Creation-Date: 2021-09-24 08:04:51+00:00\n"
+"PO-Revision-Date: 2021-09-09 16:03:50+0000\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgid "Are you sure you want to trash the selected items?"
 msgstr "Se sicuro di voler spostare nel cestino gli elementi selezionati?"
 
 #: includes/class-yit-assets.php:149 includes/class-yit-assets.php:153
-#: templates/sysinfo/tabs/main.php:40 templates/sysinfo/tabs/main.php:48
+#: templates/sysinfo/tabs/main.php:41 templates/sysinfo/tabs/main.php:49
 #: yit-functions.php:1964 yit-functions.php:1982
 msgid "No"
 msgstr "No"
@@ -596,31 +596,40 @@ msgstr "Copiato!"
 msgid "Copy Code"
 msgstr "Copia codice"
 
-#: templates/sysinfo/tabs/main.php:15
+#: templates/sysinfo/tabs/main.php:16
 msgid "Site Info"
 msgstr "Info sito"
 
-#: templates/sysinfo/tabs/main.php:20
+#: templates/sysinfo/tabs/main.php:21
 msgid "Site URL"
 msgstr "URL del sito"
 
-#: templates/sysinfo/tabs/main.php:29
+#: templates/sysinfo/tabs/main.php:30
 msgid "Output IP Address"
 msgstr "Indirizzo IP di output"
 
-#: templates/sysinfo/tabs/main.php:37
+#: templates/sysinfo/tabs/main.php:38
 msgid "Defined WP_CACHE"
 msgstr "Defined WP_CACHE"
 
-#: templates/sysinfo/tabs/main.php:40 templates/sysinfo/tabs/main.php:48
+#: templates/sysinfo/tabs/main.php:41 templates/sysinfo/tabs/main.php:49
 msgid "Yes"
 msgstr "Sì"
 
-#: templates/sysinfo/tabs/main.php:45
+#: templates/sysinfo/tabs/main.php:46
 msgid "External object cache"
 msgstr "External object cache"
 
 #: templates/sysinfo/tabs/main.php:54
+msgid "YITH Plugin Framework Version"
+msgstr ""
+
+#. translators: %s is the name of the plugin that is loading the framework.
+#: templates/sysinfo/tabs/main.php:63
+msgid "loaded by %s"
+msgstr ""
+
+#: templates/sysinfo/tabs/main.php:72
 msgid "Plugins Requirements"
 msgstr "Requisiti plugin"
 
@@ -638,7 +647,7 @@ msgstr "Sei sicuro di voler eliminare \"%s\"?"
 msgid "Further actions"
 msgstr "Altre azioni"
 
-#: yit-plugin.php:204
+#: yit-plugin.php:206
 msgid "License"
 msgstr "Chiave di licenza"
 
@@ -793,13 +802,12 @@ msgstr "Collega i valori"
 #: templates/fields/image-dimensions.php:18
 msgctxt "Image width field label"
 msgid "Width"
-msgstr ""
+msgstr "Larghezza"
 
 #: templates/fields/image-dimensions.php:23
-#, fuzzy
 msgctxt "Image height field label"
 msgid "Height"
-msgstr "A destra"
+msgstr "Altezza"
 
 #: templates/fields/onoff.php:28
 msgctxt "YES/NO button: use MAX 4 characters!"
@@ -961,11 +969,7 @@ msgctxt "Plugin Row Meta"
 msgid "Premium version"
 msgstr "Versione premium"
 
-#: yit-plugin.php:200
+#: yit-plugin.php:202
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Impostazioni"
-
-#~ msgctxt "Delete confirmation action"
-#~ msgid "Yes, delete permanently"
-#~ msgstr "Sì, elimina definitivamente"
