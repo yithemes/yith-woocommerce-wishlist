@@ -46,7 +46,7 @@
 
     <rule ref="WordPress.Security.EscapeOutput">
         <properties>
-            <property name="customEscapingFunctions" type="array" value="wc_help_tip,wc_sanitize_tooltip,wc_selected,wc_kses_notice,wc_esc_json,wc_query_string_form_fields,wc_make_phone_clickable,yith_plugin_fw_html_data_to_string,yith_field_deps_data,yith_panel_field_deps_data"/>
+            <property name="customEscapingFunctions" type="array" value="wc_help_tip,wc_sanitize_tooltip,wc_selected,wc_kses_notice,wc_esc_json,wc_query_string_form_fields,wc_make_phone_clickable,yith_plugin_fw_html_data_to_string,yith_field_deps_data,yith_panel_field_deps_data,yith_plugin_fw_html_attributes_to_string"/>
         </properties>
     </rule>
 </ruleset>

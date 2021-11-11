@@ -337,10 +337,10 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				?>
 				<div id="yith-system-alert" class="notice notice-error is-dismissible" style="position: relative;">
 					<p>
-						<span class="yith-logo"><img src="<?php echo esc_attr( yith_plugin_fw_get_default_logo() ); ?>"/></span>
+						<span class="yith-logo"><img src="<?php echo esc_attr( yith_plugin_fw_get_default_logo() ); ?>" /></span>
 						<b>
 							<?php esc_html_e( 'Warning!', 'yith-plugin-fw' ); ?>
-						</b><br/>
+						</b><br />
 						<?php
 						/* translators: %1$s open link tag, %2$s open link tag*/
 						echo sprintf( esc_html__( 'The system check has detected some compatibility issues on your installation.%1$sClick here%2$s to know more', 'yith-plugin-fw' ), '<a href="' . esc_url( add_query_arg( array( 'page' => $this->page ), admin_url( 'admin.php' ) ) ) . '">', '</a>' );
@@ -717,6 +717,81 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 			}
 
 			return compact( 'version', 'loaded_by' );
+		}
+
+		/**
+		 * Retrieve database info, such as MySQL version and database size.
+		 *
+		 * @return array
+		 */
+		public function get_database_info() {
+
+			global $wpdb;
+
+			$database_version = $wpdb->get_row( //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				'SELECT
+						@@GLOBAL.version_comment AS string,
+						@@GLOBAL.version AS number',
+				ARRAY_A
+			);
+
+			$tables        = array();
+			$database_size = array();
+
+			// It is not possible to get the database name from some classes that replace wpdb (e.g., HyperDB)
+			// and that is why this if condition is needed.
+			if ( defined( 'DB_NAME' ) ) {
+				$database_table_information = $wpdb->get_results( //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+					$wpdb->prepare(
+						"SELECT
+					    table_name AS 'name',
+						engine AS 'engine',
+					    round( ( data_length / 1024 / 1024 ), 2 ) 'data',
+					    round( ( index_length / 1024 / 1024 ), 2 ) 'index',
+       					round( ( data_free / 1024 / 1024 ), 2 ) 'free'
+					FROM information_schema.TABLES
+					WHERE table_schema = %s
+					ORDER BY name ASC;",
+						DB_NAME
+					)
+				);
+
+				$database_size = array(
+					'data'  => 0,
+					'index' => 0,
+					'free'  => 0,
+				);
+
+				$site_tables_prefix = $wpdb->get_blog_prefix( get_current_blog_id() );
+				$global_tables      = $wpdb->tables( 'global', true );
+				foreach ( $database_table_information as $table ) {
+					// Only include tables matching the prefix of the current site, this is to prevent displaying all tables on a MS install not relating to the current.
+					if ( is_multisite() && 0 !== strpos( $table->name, $site_tables_prefix ) && ! in_array( $table->name, $global_tables, true ) ) {
+						continue;
+					}
+
+					$tables[ $table->name ] = array(
+						'data'   => $table->data,
+						'index'  => $table->index,
+						'free'   => $table->free,
+						'engine' => $table->engine,
+					);
+
+					$database_size['data']  += $table->data;
+					$database_size['index'] += $table->index;
+					$database_size['free']  += $table->free;
+				}
+			}
+
+			return apply_filters(
+				'yith_database_info',
+				array(
+					'mysql_version'        => $database_version['number'],
+					'mysql_version_string' => $database_version['string'],
+					'database_tables'      => $tables,
+					'database_size'        => $database_size,
+				)
+			);
 		}
 
 	}

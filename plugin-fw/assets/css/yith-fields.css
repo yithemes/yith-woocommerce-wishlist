@@ -831,7 +831,7 @@ YITH UI
 .yith-plugin-ui .select2-container.select2-container--open .select2-selection--multiple {
     margin     : 0;
     border     : 0;
-    box-shadow : none;
+    box-shadow : none !important;
 }
 
 .yith-plugin-ui .select2-container .select2-selection--single .select2-selection__arrow {
@@ -839,6 +839,10 @@ YITH UI
 }
 
 /* old panel*/
+
+.yith-plugin-fw-select2-container {
+    z-index : 9999;
+}
 
 .yith-plugin-ui span.select2.select2-container.select2-container--default,
 span.select2.select2-container.select2-container--default.yith-plugin-fw-select2-container {
@@ -898,6 +902,7 @@ span.select2.select2-container.select2-container--default.yith-plugin-fw-select2
     margin-top    : 10px;
     border-radius : 8px;
     box-shadow    : 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+    border        : 0;
 }
 
 .yith-plugin-fw-select2-container.select2-container--open .select2-dropdown--above {

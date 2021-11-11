@@ -979,7 +979,19 @@ if ( ! class_exists( 'YIT_Icons' ) ) {
 		 * @return string
 		 */
 		public function get_icon_data( $icon_string, $filter_suffix = '' ) {
-			$icon_data = '';
+			return yith_plugin_fw_html_data_to_string( $this->get_icon_data_array( $icon_string, $filter_suffix ) );
+		}
+
+		/**
+		 * Get the icon data array
+		 *
+		 * @param string $icon_string   The icon string.
+		 * @param string $filter_suffix The filter suffix.
+		 *
+		 * @return array
+		 */
+		public function get_icon_data_array( $icon_string, $filter_suffix = '' ) {
+			$icon_data = array();
 			if ( $icon_string ) {
 				$icon_array = explode( ':', $icon_string );
 
@@ -994,8 +1006,12 @@ if ( ! class_exists( 'YIT_Icons' ) ) {
 				if ( array_key_exists( $font_name, $icons ) ) {
 					$icon_key  = array_search( $icon_name, $icons[ $font_name ], true );
 					$icon_code = '&#x' . str_replace( '\\', '', $icon_key );
-
-					$icon_data = 'data-font="' . esc_attr( $font_name ) . '" data-name="' . esc_attr( $icon_name ) . '" data-key="' . esc_attr( $icon_key ) . '" data-icon="' . $icon_code . '"';
+					$icon_data = array(
+						'font' => $font_name,
+						'name' => $icon_name,
+						'key'  => $icon_key,
+						'icon' => $icon_code,
+					);
 				}
 			}
 

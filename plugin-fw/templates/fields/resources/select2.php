@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 	<?php echo ! empty( $args['data-action'] ) ? 'data-action="' . esc_attr( $args['data-action'] ) . '"' : ''; ?>
 	<?php echo ! empty( $args['data-multiple'] ) ? 'multiple="multiple"' : ''; ?>
 		style="<?php echo esc_attr( $args['style'] ); ?>"
-	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
 >
 	<?php if ( ! empty( $args['value'] ) ) : ?>
 		<?php

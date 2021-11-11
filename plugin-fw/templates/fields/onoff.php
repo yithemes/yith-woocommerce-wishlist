@@ -12,7 +12,7 @@ list ( $field_id, $class, $name, $std, $value, $custom_attributes, $data, $desc_
 
 ?>
 <div class="yith-plugin-fw-onoff-container <?php echo ! empty( $class ) ? esc_attr( $class ) : ''; ?>"
-	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 >
 	<input type="checkbox" id="<?php echo esc_attr( $field_id ); ?>"
 			class="on_off"
@@ -22,7 +22,7 @@ list ( $field_id, $class, $name, $std, $value, $custom_attributes, $data, $desc_
 			data-std="<?php echo esc_attr( $std ); ?>"
 		<?php endif; ?>
 		<?php checked( true, yith_plugin_fw_is_true( $value ) ); ?>
-		<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
 	/>
 	<span class="yith-plugin-fw-onoff"
 			data-text-on="<?php echo esc_attr_x( 'YES', 'YES/NO button: use MAX 4 characters!', 'yith-plugin-fw' ); ?>"

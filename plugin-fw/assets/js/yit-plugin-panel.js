@@ -215,6 +215,21 @@ jQuery( function ( $ ) {
 			mainForm        = $( '#plugin-fw-wc' ),
 			saveButton      = document.querySelector( '#main-save-button' );
 
+		function updateValuesForSpecialEditors() {
+			if ( 'tinyMCE' in window && 'triggerSave' in window.tinyMCE ) {
+				// Trigger saving to serialize the correct value for WP Editors.
+				window.tinyMCE.triggerSave();
+			}
+
+			// Trigger saving to serialize the correct value for each Codemirror Editor.
+			$( '.codemirror.codemirror--initialized' ).each( function () {
+				var editor = $( this ).data( 'codemirrorInstance' ) || false;
+				if ( editor && 'codemirror' in editor ) {
+					editor.codemirror.save();
+				}
+			} );
+		}
+
 		function checkButtonPosition() {
 			if ( isInViewport( saveButton ) ) {
 				floatSaveButton.removeClass( 'visible' );
@@ -243,6 +258,9 @@ jQuery( function ( $ ) {
 
 			$( document ).on( 'click', '#yith-plugin-fw-float-save-button', function ( e ) {
 				e.preventDefault();
+
+				updateValuesForSpecialEditors();
+
 				floatSaveButton.block(
 					{
 						message   : null,

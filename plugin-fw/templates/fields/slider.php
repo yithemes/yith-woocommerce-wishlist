@@ -39,8 +39,8 @@ $step = isset( $step ) ? $step : 1;
 				data-max="<?php echo esc_attr( $max ); ?>"
 				data-val="<?php echo esc_attr( $value ); ?>"
 
-			<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+			<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+			<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 		>
 			<input id="<?php echo esc_attr( $field_id ); ?>"
 					type="hidden"

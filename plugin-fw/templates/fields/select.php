@@ -37,8 +37,8 @@ if ( $multiple && ! is_array( $value ) ) {
 		data-placeholder="<?php echo esc_attr( $placeholder ); ?>"
 	<?php endif; ?>
 
-	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+	<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 >
 	<?php foreach ( $options as $key => $item ) : ?>
 		<?php if ( is_array( $item ) ) : ?>

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2021-09-08 10:47:00+00:00\n"
+"POT-Creation-Date: 2021-11-11 13:53:53+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:05+0200\n"
 "Last-Translator: Nicola Mustone <mail@nicolamustone.it>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -1408,20 +1408,20 @@ msgstr ""
 msgid "In Stock"
 msgstr "קיים במלאי"
 
-#: templates/wishlist-view-mobile.php:211 templates/wishlist-view.php:262
+#: templates/wishlist-view-mobile.php:212 templates/wishlist-view.php:262
 msgid "Move"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:232 templates/wishlist-view.php:283
+#: templates/wishlist-view-mobile.php:233 templates/wishlist-view.php:283
 msgid "Move to another list &rsaquo;"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:240 templates/wishlist-view.php:157
+#: templates/wishlist-view-mobile.php:241 templates/wishlist-view.php:157
 #: templates/wishlist-view.php:293
 msgid "Remove this product"
 msgstr "הסרת מוצר מהרשימה"
 
-#: templates/wishlist-view-mobile.php:251 templates/wishlist-view.php:313
+#: templates/wishlist-view-mobile.php:252 templates/wishlist-view.php:313
 msgid "No products added to the wishlist"
 msgstr ""
 

@@ -197,6 +197,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 						<?php endif; ?>
 
 						<!-- Add to cart button -->
+						<?php $show_add_to_cart = apply_filters( 'yith_wcwl_table_product_show_add_to_cart', $show_add_to_cart, $item, $wishlist ); ?>
 						<?php if ( $show_add_to_cart && isset( $stock_status ) && 'out-of-stock' !== $stock_status ) : ?>
 							<div class="product-add-to-cart">
 								<?php woocommerce_template_loop_add_to_cart( array( 'quantity' => $show_quantity ? $item->get_quantity() : 1 ) ); ?>

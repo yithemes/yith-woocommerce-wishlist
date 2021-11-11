@@ -8,15 +8,18 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-list ( $field_id, $name, $class, $fields, $value, $custom_attributes ) = yith_plugin_fw_extract( $field, 'id', 'name', 'class', 'fields', 'value', 'custom_attributes' );
+list ( $field_id, $name, $class, $fields, $value, $data, $custom_attributes ) = yith_plugin_fw_extract( $field, 'id', 'name', 'class', 'fields', 'value', 'data', 'custom_attributes' );
 
 $class         = ! ! $class ? $class : '';
 $value         = maybe_unserialize( $value );
-$allowed_types = array( 'select', 'select-buttons', 'number', 'text', 'slider', 'hidden', 'html', 'datepicker' );
+$allowed_types = apply_filters( 'yith_plugin_fw_inline_fields_allowed_types', array( 'select', 'select-buttons', 'number', 'text', 'slider', 'hidden', 'html', 'datepicker' ), $name, $field );
 $default_args  = array( 'type' => 'select' );
 ?>
 <?php if ( ! empty( $fields ) && is_array( $fields ) ) : ?>
-	<div id="<?php echo esc_attr( $field_id ); ?>" class="<?php echo esc_attr( $class ); ?> yith-inline-fields" <?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+	<div id="<?php echo esc_attr( $field_id ); ?>" class="<?php echo esc_attr( $class ); ?> yith-inline-fields"
+		<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+		<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
+	>
 		<?php foreach ( $fields as $key => $inline_field ) : ?>
 			<?php
 			if ( ! in_array( $inline_field['type'], $allowed_types, true ) ) {

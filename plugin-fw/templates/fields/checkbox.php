@@ -17,8 +17,8 @@ list ( $field_id, $name, $class, $std, $value, $data, $custom_attributes, $desc_
 		data-std="<?php echo esc_attr( $std ); ?>"
 	<?php endif; ?>
 	<?php checked( true, yith_plugin_fw_is_true( $value ) ); ?>
-	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+	<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 />
 <?php if ( isset( $desc_inline ) ) : ?>
 	<span class='description inline'><?php echo wp_kses_post( $desc_inline ); ?></span>

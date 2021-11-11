@@ -1107,15 +1107,15 @@ if ( ! function_exists( 'yith_plugin_fw_get_field' ) ) {
 		}
 
 		if ( ! isset( $field['custom_attributes'] ) ) {
-			$field['custom_attributes'] = '';
-		} elseif ( is_array( $field['custom_attributes'] ) ) {
-			// Let's build custom attributes as string.
-			$custom_attributes = array();
-			foreach ( $field['custom_attributes'] as $attribute => $attribute_value ) {
-				$custom_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
-			}
+			$field['custom_attributes'] = array();
+		}
 
-			$field['custom_attributes'] = implode( ' ', $custom_attributes );
+		if ( is_array( $field['custom_attributes'] ) ) {
+			/**
+			 * Convert custom_attributes to string to prevent issues in plugins using them as string in their templates.
+			 * todo: remove after checking plugins using custom_attributes as "string" in custom fields templates and as "array" in custom fields options.
+			 */
+			$field['custom_attributes'] = yith_plugin_fw_html_attributes_to_string( $field['custom_attributes'] );
 		}
 
 		if ( ! isset( $field['default'] ) && isset( $field['std'] ) ) {
@@ -1194,21 +1194,23 @@ if ( ! function_exists( 'yith_plugin_fw_html_data_to_string' ) ) {
 	function yith_plugin_fw_html_data_to_string( $data = array(), $echo = false ) {
 		$html_data = '';
 
-		if ( is_array( $data ) ) {
-			foreach ( $data as $key => $value ) {
-				$data_attribute = "data-{$key}";
-				$data_value     = ! is_array( $value ) ? $value : implode( ',', $value );
+		if ( ! ! $data ) {
+			if ( is_array( $data ) ) {
+				foreach ( $data as $key => $value ) {
+					$data_attribute = "data-{$key}";
+					$data_value     = ! is_array( $value ) ? $value : implode( ',', $value );
 
-				$html_data .= ' ' . esc_attr( $data_attribute ) . '="' . esc_attr( $data_value ) . '"';
+					$html_data .= ' ' . esc_attr( $data_attribute ) . '="' . esc_attr( $data_value ) . '"';
+				}
+				$html_data .= ' ';
 			}
-			$html_data .= ' ';
 		}
 
 		if ( $echo ) {
 			echo $html_data; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		} else {
-			return $html_data;
 		}
+
+		return $html_data;
 	}
 }
 
@@ -1792,25 +1794,43 @@ if ( ! function_exists( 'yith_plugin_fw_include_fw_template' ) ) {
 if ( ! function_exists( 'yith_plugin_fw_html_attributes_to_string' ) ) {
 	/**
 	 * Transform attributes array to HTML attributes string.
+	 * If using a string, the attributes will be escaped.
+	 * Prefer using arrays.
 	 *
-	 * @param array $attributes The array of attributes.
-	 * @param bool  $echo       Set to true to print it directly; false otherwise.
+	 * @param array|string $attributes The attributes.
+	 * @param bool         $echo       Set to true to print it directly; false otherwise.
 	 *
 	 * @return string
 	 * @since 3.7.0
+	 * @since 3.8.0 Escaping attributes when using strings; allow value-less attributes by setting value to null.
 	 */
 	function yith_plugin_fw_html_attributes_to_string( $attributes = array(), $echo = false ) {
 		$html_attributes = '';
 
-		if ( is_array( $attributes ) ) {
-			$html_attributes = array();
-			foreach ( $attributes as $key => $value ) {
-				$html_attributes[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+		if ( ! ! $attributes ) {
+			if ( is_string( $attributes ) ) {
+				$parsed_attrs = wp_kses_hair( $attributes, wp_allowed_protocols() );
+				$attributes   = array();
+				foreach ( $parsed_attrs as $attr ) {
+					$attributes[ $attr['name'] ] = 'n' === $attr['vless'] ? $attr['value'] : null;
+				}
 			}
-			$html_attributes = implode( ' ', $html_attributes );
+
+			if ( is_array( $attributes ) ) {
+				$html_attributes = array();
+				foreach ( $attributes as $key => $value ) {
+					if ( ! is_null( $value ) ) {
+						$html_attributes[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+					} else {
+						$html_attributes[] = esc_attr( $key );
+					}
+				}
+				$html_attributes = implode( ' ', $html_attributes );
+			}
 		}
 
 		if ( $echo ) {
+			// Already escaped above.
 			echo $html_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
@@ -1839,9 +1859,6 @@ if ( ! function_exists( 'yith_plugin_fw_get_component' ) ) {
 			);
 
 			$component = wp_parse_args( $component, $defaults );
-
-			$component['html_attributes'] = yith_plugin_fw_html_attributes_to_string( $component['attributes'] );
-			$component['html_data']       = yith_plugin_fw_html_data_to_string( $component['data'] );
 
 			$component_template = '/components/' . $type . '.php';
 
@@ -2216,5 +2233,43 @@ if ( ! function_exists( 'yith_plugin_fw_get_post_formatted_name' ) ) {
 		}
 
 		return $name;
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_add_kses_global_attributes' ) ) {
+
+	/**
+	 * Add global attributes to a tag in the allowed HTML list.
+	 *
+	 * @param array $attributes An array of attributes.
+	 *
+	 * @return array The array of attributes with global attributes added.
+	 *
+	 * @since  3.8.0
+	 */
+	function yith_plugin_fw_add_kses_global_attributes( $attributes ) {
+		$global_attributes = array(
+			'aria-describedby' => true,
+			'aria-details'     => true,
+			'aria-label'       => true,
+			'aria-labelledby'  => true,
+			'aria-hidden'      => true,
+			'class'            => true,
+			'id'               => true,
+			'style'            => true,
+			'title'            => true,
+			'role'             => true,
+			'data-*'           => true,
+		);
+
+		if ( true === $attributes ) {
+			$attributes = array();
+		}
+
+		if ( is_array( $attributes ) ) {
+			return array_merge( $attributes, $global_attributes );
+		}
+
+		return $attributes;
 	}
 }

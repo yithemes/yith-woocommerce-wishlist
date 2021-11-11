@@ -129,6 +129,11 @@
 	padding: 30px 20px !important;
 }
 
+.yith-system-info-wrap table.form-table th {
+	min-width: 200px;
+	width: auto !important;
+}
+
 .yith-system-info-wrap table.form-table textarea.yith-system-info-debug {
 	width: 100%;
 	height: 400px !important;

@@ -17,8 +17,8 @@ $options = yit_registered_sidebars();
 		name="<?php echo esc_attr( $name ); ?>"
 		class="<?php echo esc_attr( $class ); ?>"
 
-	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+	<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 >
 	<?php foreach ( $options as $key => $item ) : ?>
 		<option value="<?php echo esc_attr( $key ); ?>"<?php selected( $key, $value ); ?>><?php echo esc_html( $item ); ?></option>

@@ -800,12 +800,32 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 					'main_video'         => false,
 					'playlists'          => array(),
 					'hc_url'             => 'https://support.yithemes.com/hc/',
-					'doc_url'            => $this->settings['plugin_slug'] ? 'https://docs.yithemes.com/' . $this->settings['plugin_slug'] : '',
+					'doc_url'            => $this->settings['plugin_slug'] ? 'https://docs.yithemes.com/' . $this->settings['plugin_slug'] . '/' : '',
 					'submit_ticket_url'  => 'https://yithemes.com/my-account/support/submit-a-ticket/',
 					'show_hc_articles'   => true,
 					'show_submit_ticket' => true,
 				)
 			);
+
+			// add campaign parameters to url.
+			if ( $this->settings['plugin_slug'] ) {
+				$utm_medium   = $this->settings['plugin_slug'];
+				$utm_source   = 'wp-premium-dashboard';
+				$utm_campaign = 'help-tab';
+
+				$campaign_urls = array(
+					'submit_ticket_url',
+					'doc_url',
+				);
+
+				foreach ( $campaign_urls as $campaign_url ) {
+					if ( empty( $options[ $campaign_url ] ) ) {
+						continue;
+					}
+
+					$options[ $campaign_url ] = yith_plugin_fw_add_utm_data( $options[ $campaign_url ], $utm_medium, $utm_campaign, $utm_source );
+				}
+			}
 
 			// set template variables.
 			$current_tab     = $this->get_current_tab();

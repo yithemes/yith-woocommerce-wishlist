@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-list ( $component_id, $class, $the_title, $html_attributes, $html_data, $button_action, $icon, $icon_class, $url, $action_button_menu, $confirm_data ) = yith_plugin_fw_extract( $component, 'id', 'class', 'title', 'html_attributes', 'html_data', 'action', 'icon', 'icon_class', 'url', 'menu', 'confirm_data' );
+list ( $component_id, $class, $the_title, $attributes, $data, $button_action, $icon, $icon_class, $url, $action_button_menu, $confirm_data ) = yith_plugin_fw_extract( $component, 'id', 'class', 'title', 'attributes', 'data', 'action', 'icon', 'icon_class', 'url', 'menu', 'confirm_data' );
 
 $button_action      = isset( $button_action ) ? $button_action : '';
 $icon               = isset( $icon ) ? $icon : $button_action;
@@ -42,8 +42,8 @@ $link_class = implode( ' ', array_filter( $link_classes ) );
 <span
 		id="<?php echo esc_attr( $component_id ); ?>"
 		class="<?php echo esc_attr( $class ); ?>"
-	<?php echo $html_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	<?php echo $html_data; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped	?>
+	<?php echo yith_plugin_fw_html_attributes_to_string( $attributes ); ?>
+	<?php echo yith_plugin_fw_html_data_to_string( $data ); ?>
 	>
 <a class="<?php echo esc_attr( $link_class ); ?>"
 

@@ -11,6 +11,7 @@ $system_info    = get_option( 'yith_system_info' );
 $output_ip      = YITH_System_Status()->get_output_ip();
 $labels         = YITH_System_Status()->requirement_labels;
 $plugin_fw_info = YITH_System_Status()->get_plugin_fw_info();
+$database_info  = YITH_System_Status()->get_database_info();
 ?>
 <h2>
 	<?php esc_html_e( 'Site Info', 'yith-plugin-fw' ); ?>
@@ -95,6 +96,76 @@ $plugin_fw_info = YITH_System_Status()->get_plugin_fw_info();
 				} elseif ( $has_warnings ) {
 					YITH_System_Status()->print_warning_messages( $key );
 				}
+				?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+</table>
+<?php
+$db_error = version_compare( $database_info['mysql_version'], '5.6', '<' ) && ! strstr( $database_info['mysql_version_string'], 'MariaDB' );
+?>
+<h2>
+	<?php esc_html_e( 'Database Info', 'yith-plugin-fw' ); ?>
+</h2>
+<table class="form-table" role="presentation">
+	<tr>
+		<th scope="row">
+			<?php esc_html_e( 'MySQL version', 'yith-plugin-fw' ); ?>
+		</th>
+		<td class="requirement-value <?php echo( $db_error ? 'has-errors' : '' ); ?>" style="width:auto!important">
+			<span class="dashicons dashicons-<?php echo( $db_error ? 'warning' : 'yes' ); ?>"></span>
+			<?php echo esc_attr( $database_info['mysql_version'] . ' - ' . $database_info['mysql_version_string'] ); ?>
+		</td>
+		<td class="requirement-messages">
+			<?php
+			if ( $db_error ) {
+				/* Translators: %s: Codex link. */
+				echo sprintf( esc_html__( 'WordPress recommends a minimum MySQL version of 5.6. See: %s', 'yith-plugin-fw' ), '<a href="https://wordpress.org/about/requirements/" target="_blank">' . esc_html__( 'WordPress requirements', 'yith-plugin-fw' ) . '</a>' );
+			}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">
+			<?php esc_html_e( 'Total Database Size', 'yith-plugin-fw' ); ?>
+		</th>
+		<td colspan="2">
+			<?php printf( '%.2fMB', esc_html( $database_info['database_size']['data'] + $database_info['database_size']['index'] + $database_info['database_size']['free'] ) ); ?>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">
+			<?php esc_html_e( 'Database Data Size', 'yith-plugin-fw' ); ?>
+		</th>
+		<td colspan="2">
+			<?php printf( '%.2fMB', esc_html( $database_info['database_size']['data'] ) ); ?>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">
+			<?php esc_html_e( 'Database Index Size', 'yith-plugin-fw' ); ?>
+		</th>
+		<td colspan="2">
+			<?php printf( '%.2fMB', esc_html( $database_info['database_size']['index'] ) ); ?>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">
+			<?php esc_html_e( 'Database Free Size', 'yith-plugin-fw' ); ?>
+		</th>
+		<td colspan="2">
+			<?php printf( '%.2fMB', esc_html( $database_info['database_size']['free'] ) ); ?>
+		</td>
+	</tr>
+	<?php foreach ( $database_info['database_tables'] as $table => $table_data ) : ?>
+		<tr>
+			<th scope="row">
+				<?php echo esc_html( $table ); ?>
+			</th>
+			<td colspan="2">
+				<?php
+				/* Translators: %1$f: Table size, %2$f: Index size, %3$f: Free size, %4$s Engine. */
+				printf( esc_html__( 'Data: %1$.2fMB | Index: %2$.2fMB | Free: %3$.2fMB | Engine: %4$s', 'yith-plugin-fw' ), esc_html( number_format( $table_data['data'], 2 ) ), esc_html( number_format( $table_data['index'], 2 ) ), esc_html( number_format( $table_data['free'], 2 ) ), esc_html( $table_data['engine'] ) );
 				?>
 			</td>
 		</tr>

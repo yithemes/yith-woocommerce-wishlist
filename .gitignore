@@ -1,3 +1,15 @@
+# Editors
 .idea/
+
+# Node
 node_modules/
+package-lock.json
+
+# Composer
+vendor/
+composer.lock
+
+.env
+
+# OS X metadata
 .DS_Store

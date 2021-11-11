@@ -35,8 +35,8 @@ if ( isset( $force_value ) ) {
 				readonly
 			<?php endif; ?>
 
-			<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+			<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+			<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 		>
 		<div class="yith-plugin-fw-copy-to-clipboard__tip"><?php echo esc_html_x( 'Copied!', 'Copy-to-clipboard message', 'yith-plugin-fw' ); ?></div>
 	</div>

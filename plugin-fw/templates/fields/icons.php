@@ -14,10 +14,22 @@ wp_enqueue_style( 'font-awesome' );
 
 $filter_icons      = ! ! $filter_icons ? $filter_icons : '';
 $default_icon_text = isset( $std ) ? $std : false;
-$default_icon_data = YIT_Icons()->get_icon_data( $default_icon_text, $filter_icons );
+$default_icon_data = YIT_Icons()->get_icon_data_array( $default_icon_text, $filter_icons );
+$default_icon      = '';
+if ( isset( $default_icon_data['icon'] ) ) {
+	$default_icon = $default_icon_data['icon'];
+	$default_icon = str_replace( '&#x', '', $default_icon );
+	unset( $default_icon_data['icon'] );
+}
 
-$current_icon_data = YIT_Icons()->get_icon_data( $value, $filter_icons );
+$current_icon_data = YIT_Icons()->get_icon_data_array( $value, $filter_icons );
 $current_icon_text = $value;
+$current_icon      = '';
+if ( isset( $current_icon_data['icon'] ) ) {
+	$current_icon = $current_icon_data['icon'];
+	$current_icon = str_replace( '&#x', '', $current_icon );
+	unset( $current_icon_data['icon'] );
+}
 
 $yit_icons = YIT_Icons()->get_icons( $filter_icons );
 ?>
@@ -26,7 +38,10 @@ $yit_icons = YIT_Icons()->get_icons( $filter_icons );
 
 	<div class="yit-icons-manager-text">
 		<div class="yit-icons-manager-icon-preview"
-			<?php echo $current_icon_data; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php echo yith_plugin_fw_html_data_to_string( $current_icon_data ); ?>
+			<?php if ( $current_icon ) : ?>
+				data-icon="&#x<?php echo esc_attr( $current_icon ); ?>"
+			<?php endif; ?>
 		></div>
 		<input class="yit-icons-manager-icon-text" type="text"
 				id="<?php echo esc_attr( $field_id ); ?>"
@@ -42,7 +57,7 @@ $yit_icons = YIT_Icons()->get_icons( $filter_icons );
 			<?php foreach ( $yit_icons as $font => $icons ) : ?>
 				<?php foreach ( $icons as $key => $icon_name ) : ?>
 					<?php
-					$data_icon  = str_replace( '\\', '&#x', $key );
+					$data_icon  = str_replace( '\\', '', $key );
 					$icon_text  = $font . ':' . $icon_name;
 					$icon_class = $icon_text === $current_icon_text ? 'active' : '';
 
@@ -50,7 +65,7 @@ $yit_icons = YIT_Icons()->get_icons( $filter_icons );
 					?>
 					<li class="<?php echo esc_attr( $icon_class ); ?>"
 							data-font="<?php echo esc_attr( $font ); ?>"
-							data-icon="<?php echo $data_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
+							data-icon="&#x<?php echo esc_attr( $data_icon ); ?>"
 							data-key="<?php echo esc_attr( $key ); ?>"
 							data-name="<?php echo esc_attr( $icon_name ); ?>"></li>
 				<?php endforeach; ?>
@@ -61,7 +76,12 @@ $yit_icons = YIT_Icons()->get_icons( $filter_icons );
 	<div class="yit-icons-manager-actions">
 		<?php if ( $default_icon_text ) : ?>
 			<div class="yit-icons-manager-action-set-default button"><?php esc_html_e( 'Set Default', 'yith-plugin-fw' ); ?>
-				<i class="yit-icons-manager-default-icon-preview" <?php echo esc_html( $default_icon_data ); ?>></i>
+				<i class="yit-icons-manager-default-icon-preview"
+					<?php echo yith_plugin_fw_html_data_to_string( $default_icon_data ); ?>
+					<?php if ( $default_icon ) : ?>
+						data-icon="&#x<?php echo esc_attr( $default_icon ); ?>"
+					<?php endif; ?>
+				></i>
 			</div>
 		<?php endif ?>
 	</div>

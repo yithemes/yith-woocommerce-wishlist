@@ -1,12 +1,21 @@
 {
   "name": "yith-woocommerce-wishlist",
-  "version": "3.0.19",
+  "version": "3.3.0",
   "description": "YITH WooCommerce Wishlist",
   "main": "Gruntfile.js",
   "scripts": {
+    "release": "cross-env ./bin/release.sh",
+    "release:package": "node ./bin/release-package.js",
     "build": "npm run js && npm run i18n",
+    "build-zip": "cross-env ./bin/build-zip.sh",
+    "build-zip:package": "node ./bin/build-zip-package.js",
     "js": "grunt js",
-    "i18n": "grunt makepot",
+    "i18n": "npm run -s i18n:build && npm run -s i18n:translations",
+    "i18n:build": "grunt makepot",
+    "i18n:translations": "npm run -s i18n:update-po && npm run -s i18n:clean",
+    "i18n:clean": "node ./bin/clean-language-files.js",
+    "i18n:update-po": "grunt update_po",
+    "changelog": "node ./bin/changelog.js"
   },
   "keywords": [
     "wishlist",
@@ -21,19 +30,24 @@
   "license": "GPL-3.0+",
   "homepage": "https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/",
   "devDependencies": {
+    "@wordpress/eslint-plugin": "^7.4.0",
     "archiver": "^5.2.0",
-    "axios": "^0.21.1",
-    "chalk": "^4.1.0",
+    "axios": "^0.21.4",
+    "chalk": "^4.1.2",
     "cross-env": "^7.0.3",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "fs-extra": "^9.1.0",
-    "promptly": "^3.2.0",
-    "grunt": "^1.0.3",
-    "grunt-cli": "^1.3.2",
+    "grunt": "^1.4.1",
+    "grunt-cli": "^1.4.3",
     "grunt-contrib-cssmin": "^4.0.0",
     "grunt-contrib-uglify": "^4.0.0",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-eslint": "^23.0.0",
+    "grunt-phpcbf": "^0.1.1",
+    "grunt-phpcs": "^0.4.0",
     "grunt-wp-i18n": "^1.0.2",
-    "@wordpress/eslint-plugin": "^7.4.0"
+    "prettier": "^2.2.1",
+    "promptly": "^3.2.0",
+    "typescript": "^4.2.3"
   }
 }

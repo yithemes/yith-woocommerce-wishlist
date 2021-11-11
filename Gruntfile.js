@@ -20,10 +20,13 @@ module.exports = function ( grunt ) {
 
     grunt.initConfig( {
         dirs: {
-            css     : 'assets/css',
-            css_raw : 'assets/css/unminified',
-            js      : 'assets/js',
-            js_raw  : 'assets/js/unminified',
+            css           : 'assets/css',
+            css_raw       : 'assets/css/unminified',
+            js            : 'assets/js',
+            js_raw        : 'assets/js/unminified',
+            php_includes  : 'includes',
+            php_templates : 'templates',
+            php_options   : 'plugin-options',
         },
 
         uglify: {
@@ -67,7 +70,7 @@ module.exports = function ( grunt ) {
         },
 
         cssmin: {
-            common : {
+            dist : {
                 files: [{
                     expand: true,
                     cwd   : '<%= dirs.css_raw %>/',
@@ -127,13 +130,89 @@ module.exports = function ( grunt ) {
             options: {
                 template: potInfo.languageFolderPath + potInfo.filename
             },
-            build  : {
+            dist  : {
                 src: potInfo.languageFolderPath + '*.po'
             }
-        }
+        },
+
+        phpcs: {
+            options: {
+                standard: 'WordPress',
+                report: 'summary',
+                showSniffCodes: true,
+            },
+            dist: {
+                src: [
+                    '<%= dirs.php_includes %>/*.php',
+                    '<%= dirs.php_includes %>/**/*.php',
+                    '<%= dirs.php_templates %>/*.php',
+                    '<%= dirs.php_templates %>/**/*.php',
+                    '<%= dirs.php_options %>/*.php',
+                    '<%= dirs.php_options %>/**/*.php',
+                ]
+            },
+            watch: {
+                options: {
+                    report: 'full',
+                    warningSeverity: 0,
+                }
+            },
+            blame: {
+                options: {
+                    report: 'full'
+                },
+                src: grunt.option('target')
+            }
+        },
+
+        phpcbf: {
+            options: {
+                noPatch: false,
+                standard: 'WordPress'
+            },
+            dist: {
+                src: [
+                    '<%= dirs.php_includes %>/*.php',
+                    '<%= dirs.php_includes %>/**/*.php',
+                    '<%= dirs.php_templates %>/*.php',
+                    '<%= dirs.php_templates %>/**/*.php',
+                    '<%= dirs.php_options %>/*.php',
+                    '<%= dirs.php_options %>/**/*.php',
+                ]
+            },
+            fix: {
+                src: grunt.option('target')
+            }
+        },
+
+        watch: {
+            options: {
+                spawn: false
+            },
+            js: {
+                files: ['<%= dirs.js_raw %>/*.js', '<%= dirs.js_raw %>/admin/*.js'],
+                tasks: ['eslint:watch', 'uglify']
+            },
+            css: {
+                files: ['<%= dirs.css_raw %>/*.css', '<%= dirs.css_raw %>/themes/*.css'],
+                tasks: ['cssmin']
+            },
+            php: {
+                files: ['<%= dirs.php_includes %>/*.php','<%= dirs.php_includes %>/**/*.php','<%= dirs.php_templates %>/*.php','<%= dirs.php_templates %>/**/*.php','<%= dirs.php_options %>/*.php','<%= dirs.php_options %>/**/*.php'],
+                tasks: ['phpcbf:watch', 'phpcs:watch']
+            }
+        },
 
     });
 
+    // On watch event, configure env variables for tasks
+    grunt.event.on( 'watch', function( action, filepath ) {
+        grunt.config( 'phpcs.watch.src', filepath );
+        grunt.config( 'phpcbf.watch.src', filepath );
+        grunt.config( 'eslint.watch.src', filepath );
+    });
+
+    // Register multitasks
     grunt.registerMultiTask( 'update_po', 'This task update .po strings by .pot', function () {
         grunt.log.writeln( 'Updating .po files.' );
 
@@ -186,7 +265,10 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks( 'grunt-wp-i18n' );
     grunt.loadNpmTasks( 'grunt-contrib-uglify' );
     grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
+    grunt.loadNpmTasks( 'grunt-contrib-watch' );
     grunt.loadNpmTasks( 'grunt-eslint' );
+    grunt.loadNpmTasks( 'grunt-phpcs' );
+    grunt.loadNpmTasks( 'grunt-phpcbf' );
 
     // Register tasks.
     grunt.registerTask( 'js:dev', [ 'eslint', 'uglify' ] );

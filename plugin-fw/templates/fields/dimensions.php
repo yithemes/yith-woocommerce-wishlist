@@ -42,8 +42,8 @@ if ( $allow_linked && 'yes' === $linked ) {
 }
 ?>
 <div id="<?php echo esc_attr( $field_id ); ?>" class="<?php echo esc_attr( $class ); ?>"
-	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+	<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 >
 	<div class="yith-plugin-fw-dimensions__dimensions">
 		<?php foreach ( $dimensions as $key => $dimension ) : ?>
@@ -52,26 +52,26 @@ if ( $allow_linked && 'yes' === $linked ) {
 			$d_id         = "{$field_id}-dimension-{$d_key}";
 			$d_name       = "{$name}[dimensions][{$d_key}]";
 			$d_value      = isset( $dimensions_values[ $key ] ) ? $dimensions_values[ $key ] : 0;
-			$d_attributes = '';
+			$d_attributes = array();
 			$d_label      = $dimension;
 			$d_min        = $min;
 			$d_max        = $max;
 
 			if ( is_array( $dimension ) ) {
 				$d_label = isset( $dimension['label'] ) ? $dimension['label'] : $key;
-				if ( isset( $dimension['custom_attributes'] ) ) {
-					$d_attributes .= $dimension['custom_attributes'];
+				if ( isset( $dimension['custom_attributes'] ) && is_array( $dimension['custom_attributes'] ) ) {
+					$d_attributes = array_merge( $d_attributes, $dimension['custom_attributes'] );
 				}
 				$d_min = isset( $dimension['min'] ) ? $dimension['min'] : $d_min;
 				$d_max = isset( $dimension['max'] ) ? $dimension['max'] : $d_max;
 			}
 
 			if ( false !== $d_max ) {
-				$d_attributes = " max={$d_max} " . $d_attributes;
+				$d_attributes['max'] = $d_max;
 			}
 
 			if ( false !== $d_min ) {
-				$d_attributes = " min={$d_min} " . $d_attributes;
+				$d_attributes['min'] = $d_min;
 			}
 
 			?>
@@ -85,7 +85,7 @@ if ( $allow_linked && 'yes' === $linked ) {
 					<?php if ( false !== $d_min ) : ?>
 						min="<?php echo esc_attr( $d_min ); ?>"
 					<?php endif; ?>
-					<?php echo $d_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo yith_plugin_fw_html_attributes_to_string( $d_attributes ); ?>
 				>
 			</div>
 		<?php endforeach ?>

@@ -27,6 +27,6 @@ list ( $field_id, $class, $name, $std, $value, $min, $max, $step, $custom_attrib
 	<?php if ( isset( $std ) ) : ?>
 		data-std="<?php echo esc_attr( $std ); ?>"
 	<?php endif; ?>
-	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+	<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 />

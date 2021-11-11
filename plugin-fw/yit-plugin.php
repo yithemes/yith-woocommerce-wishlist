@@ -35,7 +35,6 @@ require_once 'includes/class-yith-debug.php';
 require_once 'includes/class-yith-dashboard.php';
 require_once 'includes/privacy/class-yith-privacy.php';
 require_once 'includes/privacy/class-yith-privacy-plugin-abstract.php';
-require_once 'includes/promo/yith-promo.php';
 require_once 'includes/class-yith-system-status.php';
 require_once 'includes/class-yith-post-type-admin.php';
 

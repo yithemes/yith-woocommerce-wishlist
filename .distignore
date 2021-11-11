@@ -6,7 +6,6 @@
 # NPM, composer, grunt and other utilities
 *.lock
 node_modules
-vendor
 package.json
 package-lock.json
 composer.json
@@ -19,3 +18,7 @@ phpcs.xml.dist
 
 # Excluded files and folders of the plugin
 bin
+
+# Screenshots
+screenshot-*.png
+screenshot-*.jpg

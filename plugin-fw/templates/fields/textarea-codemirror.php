@@ -24,6 +24,6 @@ $class = isset( $class ) ? $class : 'codemirror';
 		class="<?php echo esc_attr( $class ); ?>"
 		rows="8" cols="50"
 		data-settings="<?php echo esc_attr( wp_json_encode( $settings ) ); ?>"
-	<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	<?php echo isset( $data ) ? yith_plugin_fw_html_data_to_string( $data ) : ''; ?>
+	<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
+	<?php yith_plugin_fw_html_data_to_string( $data, true ); ?>
 ><?php echo esc_textarea( $value ); ?></textarea>

@@ -15,21 +15,22 @@ $field['type'] = 'select';
 if ( empty( $field['class'] ) ) {
 	unset( $field['class'] );
 }
-
-$add_label    = isset( $field['add_all_button_label'] ) ? $field['add_all_button_label'] : __( 'Add All', 'yith-plugin-fw' );
-$default_args = array(
+// 'add_all_button_label' is deprecated, use 'add_all_label' instead.
+$add_all_label    = $field['add_all_label'] ?? $field['add_all_button_label'] ?? __( 'Add All', 'yith-plugin-fw' );
+$remove_all_label = $field['remove_all_label'] ?? __( 'Remove All', 'yith-plugin-fw' );
+$default_args     = array(
 	'multiple' => true,
 	'class'    => 'wc-enhanced-select',
 	'buttons'  => array(
 		array(
-			'name'  => $add_label,
+			'name'  => $add_all_label,
 			'class' => 'yith-plugin-fw-select-all',
 			'data'  => array(
 				'select-id' => $field['id'],
 			),
 		),
 		array(
-			'name'  => __( 'Remove All', 'yith-plugin-fw' ),
+			'name'  => $remove_all_label,
 			'class' => 'yith-plugin-fw-deselect-all',
 			'data'  => array(
 				'select-id' => $field['id'],

@@ -30,7 +30,7 @@ $value = get_option( $name, array() );
 	<div class="yith-toggle-elements">
 		<div id="<?php echo esc_attr( $field_id ); ?>"
 				class="yith-toggle-row fixed <?php echo ! empty( $subtitle ) ? 'with-subtitle' : ''; ?> <?php echo esc_attr( $class ); ?>"
-			<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
 		>
 			<div class="yith-toggle-title">
 				<h3>

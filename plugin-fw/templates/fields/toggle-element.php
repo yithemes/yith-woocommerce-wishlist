@@ -109,7 +109,7 @@ if ( empty( $values ) && ! $show_add_button && $elements ) {
 				<div id="<?php echo esc_attr( $field_id ); ?>_<?php echo esc_attr( $i ); ?>"
 						class="yith-toggle-row <?php echo ! empty( $subtitle ) ? 'with-subtitle' : ''; ?> <?php echo esc_attr( $class ); ?>"
 						data-item_key="<?php echo esc_attr( $i ); ?>"
-					<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
 				>
 					<div class="yith-toggle-title">
 						<h3>
@@ -204,7 +204,7 @@ if ( empty( $values ) && ! $show_add_button && $elements ) {
 		<div id="<?php echo esc_attr( $field_id ); ?>_{{{data.index}}}"
 				class="yith-toggle-row highlight <?php echo ! empty( $subtitle ) ? 'with-subtitle' : ''; ?> <?php echo esc_attr( $class ); ?>"
 				data-item_key="{{{data.index}}}"
-			<?php echo $custom_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php yith_plugin_fw_html_attributes_to_string( $custom_attributes, true ); ?>
 		>
 			<div class="yith-toggle-title">
 				<h3>
