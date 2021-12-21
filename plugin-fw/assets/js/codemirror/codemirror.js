@@ -1,5 +1,12 @@
-// CodeMirror version 3.15
-//
+/*
+* CodeMirror version 3.15
+* https://codemirror.net/
+* Copyright (C) 2017 by Marijn Haverbeke <marijnh@gmail.com> and others
+*
+* Released under the MIT license
+* https://codemirror.net/LICENSE
+*/
+
 // CodeMirror is the only global var we claim
 window.CodeMirror = (function() {
   "use strict";

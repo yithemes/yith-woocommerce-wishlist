@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-11-09 12:50:28+00:00\n"
-"PO-Revision-Date: 2021-09-29 11:02:22+0000\n"
+"POT-Creation-Date: 2021-12-13 14:46:02+00:00\n"
+"PO-Revision-Date: 2021-12-13 12:45:02+0000\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +75,7 @@ msgid "There was an error with your request; please try again later."
 msgstr ""
 "Er is een fout opgetreden met je verzoek, probeer het later opnieuw a.u.b."
 
-#: includes/class-yit-plugin-panel-woocommerce.php:423
+#: includes/class-yit-plugin-panel-woocommerce.php:430
 msgid "The changes you have made will be lost if you leave this page."
 msgstr "Als je deze pagina verlaat zullen alle wijzigingen verloren gaan."
 
@@ -87,17 +87,17 @@ msgstr "Plugin instellingen"
 msgid "Settings"
 msgstr "Instellingen"
 
-#: includes/class-yit-plugin-panel.php:451
-#: includes/class-yit-plugin-panel.php:454
+#: includes/class-yit-plugin-panel.php:455
+#: includes/class-yit-plugin-panel.php:458
 msgid "How to install premium version"
 msgstr "Hoe installeer ik de premium versie"
 
-#: includes/class-yit-plugin-panel.php:652
+#: includes/class-yit-plugin-panel.php:659
 #: includes/class-yit-plugin-subpanel.php:132
 msgid "Save Changes"
 msgstr "Wijzigingen opslaan"
 
-#: includes/class-yit-plugin-panel.php:657
+#: includes/class-yit-plugin-panel.php:664
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid ""
@@ -105,72 +105,72 @@ msgid ""
 msgstr ""
 "Als je doorgaat met deze actie, zal je alle opties op deze pagina resetten."
 
-#: includes/class-yit-plugin-panel.php:657
+#: includes/class-yit-plugin-panel.php:664
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid "Are you sure?"
 msgstr "Weet je het zeker?"
 
-#: includes/class-yit-plugin-panel.php:661
+#: includes/class-yit-plugin-panel.php:668
 #: includes/class-yit-plugin-subpanel.php:139
 msgid "Reset to default"
 msgstr "Resetten naar standaard"
 
-#: includes/class-yit-plugin-panel.php:979
+#: includes/class-yit-plugin-panel.php:1047
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr "Het element dat je hebt ingevoerd bestaat al. Voer een andere naam in."
 
-#: includes/class-yit-plugin-panel.php:980
+#: includes/class-yit-plugin-panel.php:1048
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
-#: includes/class-yit-plugin-panel.php:981
+#: includes/class-yit-plugin-panel.php:1049
 msgid "Settings reset"
 msgstr "Instellingen resetten"
 
-#: includes/class-yit-plugin-panel.php:982
+#: includes/class-yit-plugin-panel.php:1050
 msgid "Element deleted correctly."
 msgstr "Element juist verwijderd."
 
-#: includes/class-yit-plugin-panel.php:983
-#: includes/class-yit-plugin-panel.php:984
+#: includes/class-yit-plugin-panel.php:1051
+#: includes/class-yit-plugin-panel.php:1052
 msgid "Element updated correctly."
 msgstr "Element juist geüpdatet."
 
-#: includes/class-yit-plugin-panel.php:985
+#: includes/class-yit-plugin-panel.php:1053
 msgid "Database imported correctly."
 msgstr "Database juist geïmporteerd."
 
-#: includes/class-yit-plugin-panel.php:986
+#: includes/class-yit-plugin-panel.php:1054
 msgid "An error has occurred during import. Please try again."
 msgstr "Er is een fout opgetreden tijdens importeren. Probeer opnieuw."
 
-#: includes/class-yit-plugin-panel.php:987
+#: includes/class-yit-plugin-panel.php:1055
 msgid "The added file is not valid."
 msgstr "Het toegevoegde bestand is niet geldig."
 
-#: includes/class-yit-plugin-panel.php:988
+#: includes/class-yit-plugin-panel.php:1056
 msgid "Sorry, import is disabled."
 msgstr "Sorry, importeren is uitgeschakeld."
 
-#: includes/class-yit-plugin-panel.php:989
+#: includes/class-yit-plugin-panel.php:1057
 msgid "Sorting successful."
 msgstr "Succesvol gesorteerd."
 
-#: includes/class-yit-plugin-panel.php:1457
+#: includes/class-yit-plugin-panel.php:1525
 msgid "We need your support"
 msgstr "We hebben je hulp nodig"
 
-#: includes/class-yit-plugin-panel.php:1458
+#: includes/class-yit-plugin-panel.php:1526
 msgid "to keep updating and improving the plugin. Please,"
 msgstr "om de plugin te blijven bijwerken en verbeteren. A.u.b.,"
 
-#: includes/class-yit-plugin-panel.php:1460
+#: includes/class-yit-plugin-panel.php:1528
 msgid "help us by leaving a good review"
 msgstr "help ons door een goede beoordeling achter te laten"
 
-#: includes/class-yit-plugin-panel.php:1461
+#: includes/class-yit-plugin-panel.php:1529
 msgid ":) Thanks!"
 msgstr ":) Bedankt!"
 
@@ -726,24 +726,29 @@ msgctxt "Delete confirmation action"
 msgid "Yes, delete"
 msgstr "Ja, verwijderen"
 
-#: includes/class-yit-plugin-panel.php:488
+#: includes/class-yit-plugin-panel.php:492
 msgctxt "Help tab name"
 msgid "Help"
 msgstr "Help"
 
 #. translators: 1. Plugin name.
-#: includes/class-yit-plugin-panel.php:798
+#: includes/class-yit-plugin-panel.php:805
 msgctxt "Help tab default title"
 msgid "Thank you for purchasing %s!"
 msgstr "Bedankt voor het kopen van %s!"
 
-#: includes/class-yit-plugin-panel.php:799
+#: includes/class-yit-plugin-panel.php:806
 msgctxt "Help tab default description"
 msgid ""
 "We want to help you to enjoy a wonderful experience with all our products."
 msgstr ""
 "We willen je helpen om te genieten van de geweldige ervaringen met al onze "
 "producten."
+
+#: includes/class-yit-plugin-panel.php:853
+msgctxt "Premium tab name"
+msgid "Get premium"
+msgstr "Neem premium"
 
 #: includes/class-yith-dashboard.php:96
 msgctxt "Plugin FW"
@@ -931,6 +936,37 @@ msgstr ""
 msgctxt "Help tab submit ticket button"
 msgid "Submit a ticket"
 msgstr "Verstuur een ticket"
+
+#: templates/panel/premium-tab.php:30
+msgctxt "Premium Tab"
+msgid "Get the premium version to unlock advanced features"
+msgstr "Neem de premium versie om geavanceerde opties te deblokkeren"
+
+#: templates/panel/premium-tab.php:34
+msgctxt "Premium Tab"
+msgid "Get premium"
+msgstr "Neem premium"
+
+#: templates/panel/premium-tab.php:39
+msgctxt "Premium Tab"
+msgid "Plugin premium features images"
+msgstr "Plugin premium opties afbeeldingen"
+
+#. translators: alt attribute of main image tag.
+#: templates/panel/premium-tab.php:51
+msgctxt "Premium Tab"
+msgid "And so much more!"
+msgstr "En zo veel meer!"
+
+#: templates/panel/premium-tab.php:53
+msgctxt "Premium Tab"
+msgid "Check the free vs premium features >"
+msgstr "Bekijk de gratis vs premium opties >"
+
+#: templates/panel/premium-tab.php:58
+msgctxt "Premium Tab"
+msgid "Get the premium version"
+msgstr "Krijg de premium versie"
 
 #: yit-functions.php:1925
 msgctxt "Post action"

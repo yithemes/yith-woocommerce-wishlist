@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-11-09 12:50:28+00:00\n"
+"POT-Creation-Date: 2021-12-13 14:46:02+00:00\n"
 "PO-Revision-Date: 2021-02-11 18:07:46+0000\n"
 "Language: el_GR\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr "Αξία χρώματος"
 msgid "There was an error with your request; please try again later."
 msgstr ""
 
-#: includes/class-yit-plugin-panel-woocommerce.php:423
+#: includes/class-yit-plugin-panel-woocommerce.php:430
 msgid "The changes you have made will be lost if you leave this page."
 msgstr ""
 "Οι αλλαγές που έχετε δημιουργήσει θα χαθούν αν αφήσετε αυτήν την σελίδα."
@@ -83,17 +83,17 @@ msgstr "Ρυθμίσεις Προσθέτου"
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: includes/class-yit-plugin-panel.php:451
-#: includes/class-yit-plugin-panel.php:454
+#: includes/class-yit-plugin-panel.php:455
+#: includes/class-yit-plugin-panel.php:458
 msgid "How to install premium version"
 msgstr "Πώς να εγκαταστήσετε την προηγμένη έκδοση"
 
-#: includes/class-yit-plugin-panel.php:652
+#: includes/class-yit-plugin-panel.php:659
 #: includes/class-yit-plugin-subpanel.php:132
 msgid "Save Changes"
 msgstr "Αποθήκευση Αλλαγών"
 
-#: includes/class-yit-plugin-panel.php:657
+#: includes/class-yit-plugin-panel.php:664
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid ""
@@ -102,73 +102,73 @@ msgstr ""
 "Αν συνεχίσετε με αυτή την ενέργεια θα επαναφέρετε όλες τις επιλογές στη "
 "σελίδα."
 
-#: includes/class-yit-plugin-panel.php:657
+#: includes/class-yit-plugin-panel.php:664
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid "Are you sure?"
 msgstr "Είστε σίγουρος;"
 
-#: includes/class-yit-plugin-panel.php:661
+#: includes/class-yit-plugin-panel.php:668
 #: includes/class-yit-plugin-subpanel.php:139
 msgid "Reset to default"
 msgstr "Επαναφορά σε προεπιλεγμένο"
 
-#: includes/class-yit-plugin-panel.php:979
+#: includes/class-yit-plugin-panel.php:1047
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr "Το στοιχείο που εισάγατε υπάρχει ήδη. Παρακαλώ, εισάγετε άλλο όνομα."
 
-#: includes/class-yit-plugin-panel.php:980
+#: includes/class-yit-plugin-panel.php:1048
 msgid "Settings saved"
 msgstr "Ρυθμίσεις αποθηκεύτηκαν"
 
-#: includes/class-yit-plugin-panel.php:981
+#: includes/class-yit-plugin-panel.php:1049
 msgid "Settings reset"
 msgstr "Επαναφορά ρυθμίσεων"
 
-#: includes/class-yit-plugin-panel.php:982
+#: includes/class-yit-plugin-panel.php:1050
 msgid "Element deleted correctly."
 msgstr "Το στοιχείο διαγράφηκε επιτυχώς."
 
-#: includes/class-yit-plugin-panel.php:983
-#: includes/class-yit-plugin-panel.php:984
+#: includes/class-yit-plugin-panel.php:1051
+#: includes/class-yit-plugin-panel.php:1052
 msgid "Element updated correctly."
 msgstr "Το στοιχείο αναβαθμίστηκε επιτυχώς."
 
-#: includes/class-yit-plugin-panel.php:985
+#: includes/class-yit-plugin-panel.php:1053
 msgid "Database imported correctly."
 msgstr "Επιτυχής εισαγωγή βάσης δεδομένων."
 
-#: includes/class-yit-plugin-panel.php:986
+#: includes/class-yit-plugin-panel.php:1054
 msgid "An error has occurred during import. Please try again."
 msgstr "Παρουσιάστηκε σφάλμα κατά την εισαγωγή. Παρακαλώ προσπαθήστε ξανά."
 
-#: includes/class-yit-plugin-panel.php:987
+#: includes/class-yit-plugin-panel.php:1055
 msgid "The added file is not valid."
 msgstr "Το προστιθέμενο αρχείο δεν είναι έγκυρο."
 
-#: includes/class-yit-plugin-panel.php:988
+#: includes/class-yit-plugin-panel.php:1056
 msgid "Sorry, import is disabled."
 msgstr "Συγνώμη, η εισαγωγή είναι απενεργοποιημένη."
 
-#: includes/class-yit-plugin-panel.php:989
+#: includes/class-yit-plugin-panel.php:1057
 msgid "Sorting successful."
 msgstr "Διαλογή επιτυχής."
 
-#: includes/class-yit-plugin-panel.php:1457
+#: includes/class-yit-plugin-panel.php:1525
 msgid "We need your support"
 msgstr "Χρειαζόμαστε την υποστήριξή σας"
 
-#: includes/class-yit-plugin-panel.php:1458
+#: includes/class-yit-plugin-panel.php:1526
 msgid "to keep updating and improving the plugin. Please,"
 msgstr ""
 "για να διατηρήσετε την ενημέρωση και τη βελτίωση του πρόσθετου. Παρακαλώ,"
 
-#: includes/class-yit-plugin-panel.php:1460
+#: includes/class-yit-plugin-panel.php:1528
 msgid "help us by leaving a good review"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1461
+#: includes/class-yit-plugin-panel.php:1529
 msgid ":) Thanks!"
 msgstr ":) Ευχαριστώ!"
 
@@ -718,21 +718,26 @@ msgctxt "Delete confirmation action"
 msgid "Yes, delete"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:488
+#: includes/class-yit-plugin-panel.php:492
 msgctxt "Help tab name"
 msgid "Help"
 msgstr ""
 
 #. translators: 1. Plugin name.
-#: includes/class-yit-plugin-panel.php:798
+#: includes/class-yit-plugin-panel.php:805
 msgctxt "Help tab default title"
 msgid "Thank you for purchasing %s!"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:799
+#: includes/class-yit-plugin-panel.php:806
 msgctxt "Help tab default description"
 msgid ""
 "We want to help you to enjoy a wonderful experience with all our products."
+msgstr ""
+
+#: includes/class-yit-plugin-panel.php:853
+msgctxt "Premium tab name"
+msgid "Get premium"
 msgstr ""
 
 #: includes/class-yith-dashboard.php:96
@@ -917,6 +922,37 @@ msgstr ""
 #: templates/panel/help-tab.php:203
 msgctxt "Help tab submit ticket button"
 msgid "Submit a ticket"
+msgstr ""
+
+#: templates/panel/premium-tab.php:30
+msgctxt "Premium Tab"
+msgid "Get the premium version to unlock advanced features"
+msgstr ""
+
+#: templates/panel/premium-tab.php:34
+msgctxt "Premium Tab"
+msgid "Get premium"
+msgstr ""
+
+#: templates/panel/premium-tab.php:39
+msgctxt "Premium Tab"
+msgid "Plugin premium features images"
+msgstr ""
+
+#. translators: alt attribute of main image tag.
+#: templates/panel/premium-tab.php:51
+msgctxt "Premium Tab"
+msgid "And so much more!"
+msgstr ""
+
+#: templates/panel/premium-tab.php:53
+msgctxt "Premium Tab"
+msgid "Check the free vs premium features >"
+msgstr ""
+
+#: templates/panel/premium-tab.php:58
+msgctxt "Premium Tab"
+msgid "Get the premium version"
 msgstr ""
 
 #: yit-functions.php:1925
