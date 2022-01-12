@@ -107,7 +107,6 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 
 			// register wishlist panel.
 			add_action( 'admin_menu', array( $this, 'register_panel' ), 5 );
-			add_action( 'yith_wcwl_premium_tab', array( $this, 'print_premium_tab' ) );
 
 			// add a post display state for special WC pages.
 			add_filter( 'display_post_states', array( $this, 'add_display_post_states' ), 10, 2 );
@@ -148,7 +147,6 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 					'settings'        => __( 'General settings', 'yith-woocommerce-wishlist' ),
 					'add_to_wishlist' => __( 'Add to wishlist options', 'yith-woocommerce-wishlist' ),
 					'wishlist_page'   => __( 'Wishlist page options', 'yith-woocommerce-wishlist' ),
-					'premium'         => __( 'Premium Version', 'yith-woocommerce-wishlist' ),
 				)
 			);
 
@@ -245,8 +243,8 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 			$args = array(
 				'create_menu_page'   => true,
 				'parent_slug'        => '',
-				'page_title'         => 'WooCommerce Wishlist',
-				'menu_title'         => __( 'Wishlist', 'yith-woocommerce-wishlist' ),
+				'page_title'         => 'YITH WooCommerce Wishlist',
+				'menu_title'         => 'Wishlist',
 				'plugin_slug'        => YITH_WCWL_SLUG,
 				'plugin_description' => __( 'Allows your customers to create and share lists of products that they want to purchase on your e-commerce.', 'yith-woocommerce-wishlist' ),
 				'capability'         => apply_filters( 'yith_wcwl_settings_panel_capability', 'manage_options' ),
@@ -258,13 +256,30 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 				'options-path'       => YITH_WCWL_DIR . 'plugin-options',
 				'help_tab'           => array(
 					'main_video' => array(
-						'desc' => _x( 'Check this video to learn how to <b>configure wishlist and customize options:</b>', '[HELP TAB] Video title', 'yith-woocommerce-ajax-navigation' ),
+						'desc' => _x( 'Check this video to learn how to <b>configure wishlist and customize options:</b>', '[HELP TAB] Video title', 'yith-woocommerce-wishlist' ),
 						'url'  => array(
 							'it' => 'https://www.youtube.com/embed/9hM9PgBVNTg',
 							'es' => 'https://www.youtube.com/embed/GwQkNrrHFs4',
 						),
 					),
-					'hc_url'    => 'https://support.yithemes.com/hc/en-us/categories/360003468437-YITH-WOOCOMMERCE-WISHLIST',
+					'hc_url'     => 'https://support.yithemes.com/hc/en-us/categories/360003468437-YITH-WOOCOMMERCE-WISHLIST',
+				),
+				'premium_tab'        => array(
+					'landing_page_url'          => $this->get_premium_landing_uri(),
+					'premium_features'          => array(
+						__( 'Enable the wishlist feature for all users or <b>only for registered users</b>', 'yith-woocommerce-wishlist' ),
+						__( 'Allow users to create <b>multiple wishlists</b> (Ex: Christmas, Birthday, etc.) <br>Users can choose the wishlist from a dropdown menu when they click on "Add to wishlist"', 'yith-woocommerce-wishlist' ),
+						__( 'Allow users to set <b>visibility options for each wishlist</b>, by making them either public (visible to everyone), private or shared (visible only to people it has been shared with)', 'yith-woocommerce-wishlist' ),
+						__( 'Choose between <b>different layouts</b> for the wishlist page and for the wishlist content', 'yith-woocommerce-wishlist' ),
+						__( '<b>Allow users to manage their wishlists:</b> rename and delete wishlists, move a product from one wishlist to another, change order of items, quantity, etc.', 'yith-woocommerce-wishlist' ),
+						__( 'Enable an <b>"Ask for an estimate" button</b> to let customers send the content of their wishlist to the admin and get a custom quote', 'yith-woocommerce-wishlist' ),
+						__( '<b>Show a wishlist widget</b> that lists all the products in the wishlists (available also with "mini-cart" style for the header)', 'yith-woocommerce-wishlist' ),
+						__( 'View the most popular products added to the wishlist by your customers and <b>send promotional emails to users</b> who have added specific products to their wishlist', 'yith-woocommerce-wishlist' ),
+						__( '<b>Send an automatic email to the wishlist owner</b> whenever a product in the list is back in stock or on sale', 'yith-woocommerce-wishlist' ),
+						'<b>' . __( 'Regular updates, Translations and Premium Support', 'yith-woocommerce-wishlist' ) . '</b>',
+					),
+					'main_image_url'            => YITH_WCWL_URL . 'assets/images/get-premium-wishlist.jpg',
+					'show_free_vs_premium_link' => true,
 				),
 			);
 
@@ -314,20 +329,6 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		}
 
 		/**
-		 * Prints tab premium of the plugin
-		 *
-		 * @return void
-		 * @since 2.0.0
-		 */
-		public function print_premium_tab() {
-			$premium_tab = YITH_WCWL_DIR . 'templates/admin/wishlist-panel-premium.php';
-
-			if ( file_exists( $premium_tab ) ) {
-				include $premium_tab;
-			}
-		}
-
-		/**
 		 * Get the premium landing uri
 		 *
 		 * @since   1.0.0
@@ -335,7 +336,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @return  string The premium landing link
 		 */
 		public function get_premium_landing_uri() {
-			return apply_filters( 'yith_plugin_fw_premium_landing_uri', $this->premium_landing_url, YITH_WCWL_SLUG );
+			return $this->premium_landing_url;
 		}
 	}
 }

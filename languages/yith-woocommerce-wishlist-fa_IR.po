@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2021-11-11 13:53:53+00:00\n"
+"POT-Creation-Date: 2022-01-12 11:22:42+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:05+0200\n"
 "Last-Translator: Am!n <amin.pe94@gmail.com>\n"
 "Language-Team: YITH - translated to persian by dornaweb <info@dornaweb.com>\n"
@@ -23,36 +23,88 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPathExcluded-0: ../plugin-fw\n"
 
-#: includes/class-yith-wcwl-admin.php:126
+#: includes/class-yith-wcwl-admin.php:125
 #, fuzzy
 msgid "Wishlist Page"
 msgstr "لیست علاقه مندی ها"
 
-#: includes/class-yith-wcwl-admin.php:148
+#: includes/class-yith-wcwl-admin.php:147
 msgid "General settings"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:149
+#: includes/class-yith-wcwl-admin.php:148
 msgid "Add to wishlist options"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:150
+#: includes/class-yith-wcwl-admin.php:149
 msgid "Wishlist page options"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:151
-msgid "Premium Version"
-msgstr "نسخه پولی"
-
 #: includes/class-yith-wcwl-admin.php:249
-#: includes/class-yith-wcwl-install.php:342
-msgid "Wishlist"
-msgstr "لیست علاقه مندی ها"
-
-#: includes/class-yith-wcwl-admin.php:251
 msgid ""
 "Allows your customers to create and share lists of products that they want "
 "to purchase on your e-commerce."
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:270
+msgid ""
+"Enable the wishlist feature for all users or <b>only for registered users</b>"
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:271
+msgid ""
+"Allow users to create <b>multiple wishlists</b> (Ex: Christmas, Birthday, "
+"etc.) <br>Users can choose the wishlist from a dropdown menu when they click "
+"on \"Add to wishlist\""
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:272
+msgid ""
+"Allow users to set <b>visibility options for each wishlist</b>, by making "
+"them either public (visible to everyone), private or shared (visible only to "
+"people it has been shared with)"
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:273
+msgid ""
+"Choose between <b>different layouts</b> for the wishlist page and for the "
+"wishlist content"
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:274
+msgid ""
+"<b>Allow users to manage their wishlists:</b> rename and delete wishlists, "
+"move a product from one wishlist to another, change order of items, "
+"quantity, etc."
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:275
+msgid ""
+"Enable an <b>\"Ask for an estimate\" button</b> to let customers send the "
+"content of their wishlist to the admin and get a custom quote"
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:276
+msgid ""
+"<b>Show a wishlist widget</b> that lists all the products in the wishlists "
+"(available also with \"mini-cart\" style for the header)"
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:277
+msgid ""
+"View the most popular products added to the wishlist by your customers and "
+"<b>send promotional emails to users</b> who have added specific products to "
+"their wishlist"
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:278
+msgid ""
+"<b>Send an automatic email to the wishlist owner</b> whenever a product in "
+"the list is back in stock or on sale"
+msgstr ""
+
+#: includes/class-yith-wcwl-admin.php:279
+msgid "Regular updates, Translations and Premium Support"
 msgstr ""
 
 #: includes/class-yith-wcwl-ajax-handler.php:75
@@ -95,6 +147,10 @@ msgstr ""
 #: templates/wishlist-view-footer.php:46
 msgid "Add to cart"
 msgstr ""
+
+#: includes/class-yith-wcwl-install.php:342
+msgid "Wishlist"
+msgstr "لیست علاقه مندی ها"
 
 #: includes/class-yith-wcwl-privacy.php:52
 msgid "While you visit our site, we’ll track:"
@@ -1147,175 +1203,6 @@ msgstr ""
 msgid "Choose colors for WhatsApp share button"
 msgstr ""
 
-#: templates/admin/wishlist-panel-premium.php:168
-#: templates/admin/wishlist-panel-premium.php:309
-msgid ""
-"Upgrade to the %1$spremium version%2$s%3$sof %1$sYITH WooCommerce Wishlist"
-"%2$s to benefit from all features!"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:170
-#: templates/admin/wishlist-panel-premium.php:311
-msgid "Upgrade"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:176
-msgid "Premium Features"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:180
-msgid "Allow your customers to create multiple wishlists"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:182
-msgid ""
-"Christmas, Birthday... users will be able to create and manage multiple "
-"wishlists, in case they prefer to keep the products sorted by category or "
-"other parameters."
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:185
-msgid "Multiple Wishlist"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:192
-msgid "Wishlist Private"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:196
-msgid "A transparent privacy management"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:198
-msgid ""
-"Your customers can set a privacy option for each wishlist and choose whether "
-"sharing the wishlist or making it private."
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:206
-msgid ""
-"Allow your customers to ask for an estimate, directly from their wishlist "
-"page"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:208
-msgid ""
-"And give only registered users the privilege to use the wishlist "
-"functionalities."
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:211
-msgid "Estimate Cost"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:218
-msgid "Admin Panel"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:222
-msgid "An advanced and more versatile management of the wishlist"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:224
-msgid ""
-"Your customers can sort the products in the wishlist thanks to the drag&drop "
-"option, move products from one wishlist to another, manage product quantity, "
-"download the wishlist content to a .pdf file, share the wishlist on their "
-"social networks, and much more!"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:232
-msgid "Monitor your customers’ wishlists and the popular products"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:234
-msgid ""
-"You can see your customers’ wishlists, gain insight into the products they "
-"are more interested in and plan targeted marketing strategies."
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:237
-msgid "Search Wishlists"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:244
-msgid "'ADD TO CART'"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:248
-msgid ""
-"Send promotional emails for products in wishlists to push customers to buy"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:250
-msgid ""
-"Just three clicks to send promotional emails with discount coupons to "
-"customers who have added specific products to their wishlist and push them "
-"to buy."
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:258
-msgid "Let users buy the product right from the wishlist page"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:260
-msgid ""
-"Let them move products from one wishlist to the cart in one click, keeping "
-"also the information about the size, colour or quantity selected when added "
-"to the wishlist."
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:263
-msgid "DISABLE WISHLIST"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:271
-msgid "Choose a charming layout for your wishlist page"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:273
-msgid ""
-"The wishlist is one of the most used functionalities in an ecommerce store "
-"but often the page layout is not enhanced enough and looks unattractive to "
-"the user. With our plugin, you can choose among some alternative layouts and "
-"offer an even more interesting experience to users who creates a wishlist on "
-"your website."
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:276
-msgid "UNLOGGED USERS"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:284
-msgid "Wishlist widgets for the header and sidebars"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:286
-msgid ""
-"Increase the wishlist visibility through our modern widgets that you can use "
-"in the header, in the sidebars, wherever you want."
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:289
-msgid "POPULAR TABLE"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:296
-msgid "FUNCTIONALITIES"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:300
-msgid "Allow users to monitor the price of the products in their wishlist"
-msgstr ""
-
-#: templates/admin/wishlist-panel-premium.php:302
-msgid ""
-"We took inspiration from one of the most interesting features of Amazon "
-"product pages: from now on, users can realise what’s the best time to buy a "
-"product and how much they can save when there’s a promotion running or a "
-"discount on the product they’ve added to the wishlist."
-msgstr ""
-
 #: templates/share.php:51 templates/share.php:52
 msgid "Facebook"
 msgstr "فیسبوک"
@@ -1466,7 +1353,7 @@ msgid ""
 "your e-commerce on <strong>YITH</strong></a>"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:261
+#: includes/class-yith-wcwl-admin.php:259
 msgctxt "[HELP TAB] Video title"
 msgid ""
 "Check this video to learn how to <b>configure wishlist and customize options:"
@@ -1616,6 +1503,9 @@ msgstr ""
 msgctxt "yith-woocommerce-wishlist"
 msgid "Items per page"
 msgstr ""
+
+#~ msgid "Premium Version"
+#~ msgstr "نسخه پولی"
 
 #~ msgid "My wishlist on "
 #~ msgstr "لیست علاقه مندی های من در %s"
