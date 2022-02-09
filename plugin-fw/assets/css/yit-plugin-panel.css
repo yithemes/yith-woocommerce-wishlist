@@ -901,7 +901,6 @@
 #wpwrap h2.nav-tab-wrapper, #wpbody-content h2.nav-tab-wrapper {
     border-bottom  : 1px solid #ccc;
     margin-right   : 15px;
-    text-transform : uppercase;
 }
 
 /* === YIT FRAMEWORK === */
@@ -971,7 +970,6 @@
 }
 
 .yith-plugin-ui .yith-plugin-fw-sub-tabs-nav h3.nav-tab-wrapper {
-    text-transform   : uppercase;
     line-height      : inherit;
     font-weight      : 600;
     margin           : 20px 0 0 0;
@@ -1083,7 +1081,6 @@ li.nav-subtab-item {
 li.nav-subtab-item a {
     font-size       : 12px;
     text-decoration : none;
-    letter-spacing  : 0.05em;
     color           : #336374;
 }
 
@@ -1109,7 +1106,7 @@ li.yith-plugin-fw-tab-element:hover ul.nav-subtab {
 
 li.yith-plugin-fw-tab-element a.nav-tab i {
     margin-left : 10px;
-    font-size   : 12px;
+    font-size   : 9px;
     font-weight : 600;
 }
 

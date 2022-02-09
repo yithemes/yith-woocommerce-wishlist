@@ -1516,7 +1516,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				?>
 				<h1 class="notice-container"></h1>
 				<div class="yith-plugin-fw-banner">
-					<h1><?php echo esc_html( $this->settings['page_title'] ); ?></h1>
+					<h1 translate="no"><?php echo esc_html( $this->settings['page_title'] ); ?></h1>
 				</div>
 				<div class="yith-plugin-fw-rate">
 					<?php
@@ -1533,7 +1533,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			<?php else : ?>
 				<h1 class="notice-container"></h1>
 				<div class="yith-plugin-fw-banner">
-					<h1><?php echo esc_html( $this->settings['page_title'] ); ?></h1>
+					<h1 translate="no"><?php echo esc_html( $this->settings['page_title'] ); ?></h1>
 				</div>
 			<?php endif ?>
 			<?php
