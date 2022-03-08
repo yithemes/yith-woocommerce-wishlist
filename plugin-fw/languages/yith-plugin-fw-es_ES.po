@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-01-19 09:30:00+00:00\n"
+"POT-Creation-Date: 2022-03-02 14:53:34+00:00\n"
 "PO-Revision-Date: 2021-12-13 13:19:03+0000\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -13,57 +13,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 
-#: includes/class-yit-assets.php:146 yit-functions.php:1979
+#: includes/class-yit-assets.php:144 yit-functions.php:1979
 msgid "Confirm trash"
 msgstr "Confirmar el traslado a la papelera"
 
-#: includes/class-yit-assets.php:147
+#: includes/class-yit-assets.php:145
 msgid "Are you sure you want to trash the selected items?"
 msgstr ""
 "¿Estás seguro de que quieres mover a la papelera los elementos seleccionados?"
 
-#: includes/class-yit-assets.php:149 includes/class-yit-assets.php:153
+#: includes/class-yit-assets.php:147 includes/class-yit-assets.php:151
 #: templates/sysinfo/tabs/main.php:42 templates/sysinfo/tabs/main.php:50
 #: yit-functions.php:1981 yit-functions.php:1999
 msgid "No"
 msgstr "No"
 
-#: includes/class-yit-assets.php:150 yit-functions.php:1997
+#: includes/class-yit-assets.php:148 yit-functions.php:1997
 #: yit-functions.php:2125
 msgid "Confirm delete"
 msgstr "Confirmar el borrado"
 
-#: includes/class-yit-assets.php:151
+#: includes/class-yit-assets.php:149
 msgid "Are you sure you want to delete the selected items?"
 msgstr "¿Estás seguro de que quieres borrar los elementos seleccionados?"
 
-#: includes/class-yit-assets.php:151 yit-functions.php:1913
+#: includes/class-yit-assets.php:149 yit-functions.php:1913
 #: yit-functions.php:2073
 msgid ""
 "This action cannot be undone and you will not be able to recover this data."
 msgstr "Esta acción no se puede revertir y no podrá recuperar estos datos."
 
-#: includes/class-yit-assets.php:164
+#: includes/class-yit-assets.php:162
 msgid "Clear"
 msgstr "Borrar"
 
-#: includes/class-yit-assets.php:165
+#: includes/class-yit-assets.php:163
 msgid "Clear color"
 msgstr "Borrar color"
 
-#: includes/class-yit-assets.php:166
+#: includes/class-yit-assets.php:164
 msgid "Default"
 msgstr "Predeterminado"
 
-#: includes/class-yit-assets.php:167
+#: includes/class-yit-assets.php:165
 msgid "Select default color"
 msgstr "Seleccionar color predeterminado"
 
-#: includes/class-yit-assets.php:168
+#: includes/class-yit-assets.php:166
 msgid "Select Color"
 msgstr "Seleccionar color"
 
-#: includes/class-yit-assets.php:169
+#: includes/class-yit-assets.php:167
 msgid "Color value"
 msgstr "Valor del color"
 
@@ -72,7 +72,7 @@ msgid "There was an error with your request; please try again later."
 msgstr ""
 "Se ha producido un error en tu solicitud; inténtalo de nuevo más tarde."
 
-#: includes/class-yit-plugin-panel-woocommerce.php:430
+#: includes/class-yit-plugin-panel-woocommerce.php:429
 msgid "The changes you have made will be lost if you leave this page."
 msgstr "Los cambios que has hecho se perderán si abandonas esta página."
 
@@ -84,17 +84,17 @@ msgstr "Ajustes del plugin"
 msgid "Settings"
 msgstr "Ajustes"
 
-#: includes/class-yit-plugin-panel.php:455
-#: includes/class-yit-plugin-panel.php:458
+#: includes/class-yit-plugin-panel.php:454
+#: includes/class-yit-plugin-panel.php:457
 msgid "How to install premium version"
 msgstr "Cómo instalar la versión premium"
 
-#: includes/class-yit-plugin-panel.php:659
+#: includes/class-yit-plugin-panel.php:658
 #: includes/class-yit-plugin-subpanel.php:132
 msgid "Save Changes"
 msgstr "Guardar cambios"
 
-#: includes/class-yit-plugin-panel.php:664
+#: includes/class-yit-plugin-panel.php:663
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid ""
@@ -103,13 +103,13 @@ msgstr ""
 "Si continúas con esta acción, restablecerás todas las opciones en esta "
 "página."
 
-#: includes/class-yit-plugin-panel.php:664
+#: includes/class-yit-plugin-panel.php:663
 #: includes/class-yit-plugin-subpanel.php:136
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
-#: includes/class-yit-plugin-panel.php:668
+#: includes/class-yit-plugin-panel.php:667
 #: includes/class-yit-plugin-subpanel.php:139
 msgid "Reset to default"
 msgstr "Restablecer valores predeterminados"
@@ -705,28 +705,28 @@ msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr "YITH"
 
-#: includes/class-yit-assets.php:134
+#: includes/class-yit-assets.php:132
 msgctxt "Button text"
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: includes/class-yit-assets.php:135
+#: includes/class-yit-assets.php:133
 msgctxt "Button text"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: includes/class-yit-assets.php:148 yit-functions.php:1982
+#: includes/class-yit-assets.php:146 yit-functions.php:1982
 msgctxt "Trash confirmation action"
 msgid "Yes, move to trash"
 msgstr "Sí, mover a la papelera"
 
-#: includes/class-yit-assets.php:152 yit-functions.php:2000
+#: includes/class-yit-assets.php:150 yit-functions.php:2000
 #: yit-functions.php:2127
 msgctxt "Delete confirmation action"
 msgid "Yes, delete"
 msgstr "Si, borrar"
 
-#: includes/class-yit-plugin-panel.php:492
+#: includes/class-yit-plugin-panel.php:491
 msgctxt "Help tab name"
 msgid "Help"
 msgstr "Ayuda"
@@ -738,9 +738,10 @@ msgid "Thank you for purchasing %s!"
 msgstr "¡Gracias por comprar %s!"
 
 #: includes/class-yit-plugin-panel.php:806
+#, fuzzy
 msgctxt "Help tab default description"
 msgid ""
-"We want to help you to enjoy a wonderful experience with all our products."
+"We want to help you enjoy a wonderful experience with all of our products."
 msgstr ""
 "Queremos ayudarte a disfrutar de una experiencia maravillosa con todos "
 "nuestros productos."
@@ -877,16 +878,6 @@ msgctxt "Help tab Watch Videotutorials link"
 msgid "Videos are also available in:"
 msgstr "Los vídeos también están disponibles en:"
 
-#: templates/panel/help-tab.php:137
-msgctxt "Help tab Watch Videotutorials link"
-msgid "Watch our videotutorials"
-msgstr "Vea nuestros videotutoriales"
-
-#: templates/panel/help-tab.php:140
-msgctxt "Help tab Watch Videotutorials link"
-msgid "We show you some use cases"
-msgstr "Te mostramos algunos ejemplos de uso"
-
 #: templates/panel/help-tab.php:124
 msgctxt "Help tab Read Documentation link"
 msgid "Read the documentation"
@@ -894,8 +885,20 @@ msgstr "Lee la documentación"
 
 #: templates/panel/help-tab.php:127
 msgctxt "Help tab Read Documentation link"
-msgid "to learn from basics how it works"
-msgstr "para aprender desde lo más básico cómo funciona"
+msgid "to learn how the plugin works from the basics."
+msgstr ""
+
+#: templates/panel/help-tab.php:137
+#, fuzzy
+msgctxt "Help tab Watch video tutorials link"
+msgid "Watch our video tutorials"
+msgstr "Vea nuestros videotutoriales"
+
+#: templates/panel/help-tab.php:140
+#, fuzzy
+msgctxt "Help tab Watch video tutorials link"
+msgid "to see some helpful use cases."
+msgstr "Te mostramos algunos ejemplos de uso"
 
 #: templates/panel/help-tab.php:150
 msgctxt "Help tab view FAQs link"
@@ -903,8 +906,9 @@ msgid "Check the FAQs"
 msgstr "Comprueba los FAQ"
 
 #: templates/panel/help-tab.php:153
+#, fuzzy
 msgctxt "Help tab view FAQs link"
-msgid "to find answers to your doubts"
+msgid "to find answers to your doubts."
 msgstr "para encontrar respuestas a tus dudas"
 
 #: templates/panel/help-tab.php:169
@@ -923,10 +927,12 @@ msgid "Need help?"
 msgstr "¿Necesitas ayuda?"
 
 #: templates/panel/help-tab.php:195
+#, fuzzy
 msgctxt "Help tab submit ticket description"
 msgid ""
-"If you are experiencing some technical issue ask help to our developers. "
-"Submit a ticket in our support desk and we will help you as soon as possible."
+"If you are experiencing any technical issues, ask for help from our "
+"developers. Submit a ticket through our support desk and we will help you as "
+"soon as possible."
 msgstr ""
 "Si tienes algún problema técnico, pide ayuda a nuestros desarrolladores. "
 "Envía un ticket en nuestro panel de soporte y te ayudaremos lo antes posible."
@@ -1046,3 +1052,7 @@ msgstr "Versión premium"
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Ajustes"
+
+#~ msgctxt "Help tab Read Documentation link"
+#~ msgid "to learn from basics how it works"
+#~ msgstr "para aprender desde lo más básico cómo funciona"

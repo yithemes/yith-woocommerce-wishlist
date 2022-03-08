@@ -124,7 +124,7 @@ if ( $has_default_playlist ) {
 										<?php echo esc_html_x( 'Read the documentation', 'Help tab Read Documentation link', 'yith-plugin-fw' ); ?>
 									</h4>
 									<p class="description">
-										<?php echo esc_html_x( 'to learn from basics how it works', 'Help tab Read Documentation link', 'yith-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'to learn how the plugin works from the basics.', 'Help tab Read Documentation link', 'yith-plugin-fw' ); ?>
 									</p>
 								</a>
 							</li>
@@ -134,10 +134,10 @@ if ( $has_default_playlist ) {
 							<li class="watch-videotutorials box-with-shadow">
 								<a target="_blank" href="<?php echo esc_url( $default_playlist ); ?>">
 									<h4>
-										<?php echo esc_html_x( 'Watch our videotutorials', 'Help tab Watch Videotutorials link', 'yith-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'Watch our video tutorials', 'Help tab Watch video tutorials link', 'yith-plugin-fw' ); ?>
 									</h4>
 									<p class="description">
-										<?php echo esc_html_x( 'We show you some use cases', 'Help tab Watch Videotutorials link', 'yith-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'to see some helpful use cases.', 'Help tab Watch video tutorials link', 'yith-plugin-fw' ); ?>
 									</p>
 								</a>
 							</li>
@@ -150,7 +150,7 @@ if ( $has_default_playlist ) {
 										<?php echo esc_html_x( 'Check the FAQs', 'Help tab view FAQs link', 'yith-plugin-fw' ); ?>
 									</h4>
 									<p class="description">
-										<?php echo esc_html_x( 'to find answers to your doubts', 'Help tab view FAQs link', 'yith-plugin-fw' ); ?>
+										<?php echo esc_html_x( 'to find answers to your doubts.', 'Help tab view FAQs link', 'yith-plugin-fw' ); ?>
 									</p>
 								</a>
 							</li>
@@ -193,7 +193,7 @@ if ( $has_default_playlist ) {
 							<p>
 								<?php
 									echo esc_html_x(
-										'If you are experiencing some technical issue ask help to our developers. Submit a ticket in our support desk and we will help you as soon as possible.',
+										'If you are experiencing any technical issues, ask for help from our developers. Submit a ticket through our support desk and we will help you as soon as possible.',
 										'Help tab submit ticket description',
 										'yith-plugin-fw'
 									);

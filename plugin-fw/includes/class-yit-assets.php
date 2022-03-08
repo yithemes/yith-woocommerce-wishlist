@@ -90,8 +90,6 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 			wp_register_style( 'yit-plugin-metaboxes', YIT_CORE_PLUGIN_URL . '/assets/css/metaboxes.css', array( 'yith-plugin-ui' ), $this->version );
 			wp_register_style( 'yith-plugin-fw-fields', YIT_CORE_PLUGIN_URL . '/assets/css/yith-fields.css', array( 'yith-plugin-ui' ), $this->version );
 
-			wp_register_style( 'raleway-font', '//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900', array(), $this->version );
-
 			$wc_version_suffix = '';
 			if ( function_exists( 'WC' ) || ! empty( $woocommerce ) ) {
 				$woocommerce_version = function_exists( 'WC' ) ? WC()->version : $woocommerce->version;

@@ -332,7 +332,6 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 
 				wp_enqueue_style( 'yith-plugin-fw-fields' );
 				wp_enqueue_style( 'jquery-ui-style' );
-				wp_enqueue_style( 'raleway-font' );
 
 				wp_enqueue_script( 'jquery-ui' );
 				wp_enqueue_script( 'jquery-ui-core' );
@@ -770,8 +769,9 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * @return bool Whether panel has help tab or no.
 		 */
 		public function has_help_tab() {
-			return ! empty( $this->settings['help_tab'] ) && ( ! $this->is_free() || ! empty( $this->settings['help_tab']['show_on_free'] ) );
+			return ! empty( $this->settings['help_tab'] ) && apply_filters( 'yith_plugin_fw_panel_has_help_tab', true, $this ) && ( ! $this->is_free() || ! empty( $this->settings['help_tab']['show_on_free'] ) );
 		}
+
 
 		/**
 		 * Checks whether current tab is special Help Tab
@@ -803,7 +803,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				array(
 					// translators: 1. Plugin name.
 					'title'              => sprintf( _x( 'Thank you for purchasing %s!', 'Help tab default title', 'yith-plugin-fw' ), $plugin_title ),
-					'description'        => _x( 'We want to help you to enjoy a wonderful experience with all our products.', 'Help tab default description', 'yith-plugin-fw' ),
+					'description'        => _x( 'We want to help you enjoy a wonderful experience with all of our products.', 'Help tab default description', 'yith-plugin-fw' ),
 					'main_video'         => false,
 					'playlists'          => array(),
 					'hc_url'             => 'https://support.yithemes.com/hc/',
@@ -1667,7 +1667,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * @author   Leanza Francesco <leanzafrancesco@gmail.com>
 		 */
 		public function print_panel_tabs_in_wp_pages() {
-			if ( self::$panel_tabs_in_wp_pages ) {
+			if ( self::$panel_tabs_in_wp_pages && 'all_admin_notices' === current_action() ) {
 				global $pagenow;
 
 				wp_enqueue_style( 'yit-plugin-style' );

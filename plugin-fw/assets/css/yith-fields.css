@@ -837,6 +837,10 @@ YITH UI
 	border-color       : #d8d8d8;
 }
 
+.yith-plugin-ui option:disabled {
+	color : #aaa;
+}
+
 .yith-plugin-ui .form-table th {
 	width         : 200px;
 	padding-right : 50px;
