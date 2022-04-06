@@ -27,7 +27,7 @@ foreach ( $fields as $field_name => $single_field ) {
 
 if ( empty( $inline ) ) : ?>
 
-	<table class="yith-plugin-fw-text-array-table">
+	<table id="<?php echo esc_attr( $field_id ); ?>" class="yith-plugin-fw-text-array-table">
 		<?php foreach ( $text_array as $key => $single ) : ?>
 			<tr>
 				<td><?php echo esc_html( $single['label'] ); ?></td>
@@ -46,7 +46,7 @@ if ( empty( $inline ) ) : ?>
 
 <?php else : ?>
 
-	<div class="yith-plugin-fw-text-array-inline">
+	<div id="<?php echo esc_attr( $field_id ); ?>" class="yith-plugin-fw-text-array-inline">
 		<?php foreach ( $text_array as $key => $single ) : ?>
 			<div class="yith-single-text"
 				<?php if ( isset( $size ) ) : ?>

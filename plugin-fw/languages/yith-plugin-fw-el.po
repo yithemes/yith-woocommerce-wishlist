@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-03-02 14:53:34+00:00\n"
+"POT-Creation-Date: 2022-04-02 10:27:44+00:00\n"
 "PO-Revision-Date: 2021-02-11 18:07:46+0000\n"
 "Language: el_GR\n"
 "MIME-Version: 1.0\n"
@@ -402,8 +402,8 @@ msgstr ""
 "διακομιστή μας."
 
 #: templates/fields/ajax-customers.php:41
-msgid "Search Customers"
-msgstr "Αναζήτηση Πελατών"
+msgid "Search for a customer..."
+msgstr ""
 
 #. translators: 1. user display name; 2. user ID; 3. user email.
 #: templates/fields/ajax-customers.php:68
@@ -412,16 +412,16 @@ msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr "%1$s (#%2$s &ndash; %3$s)"
 
 #: templates/fields/ajax-posts.php:41
-msgid "Search Posts"
-msgstr "Αναζήτηση Άρθρου"
+msgid "Search for a post..."
+msgstr ""
 
-#: templates/fields/ajax-products.php:14
-msgid "Search Product"
-msgstr "Αναζήτηση Προϊόντος"
+#: templates/fields/ajax-products.php:16
+msgid "Search for a product..."
+msgstr ""
 
 #: templates/fields/ajax-terms.php:41
-msgid "Search Categories"
-msgstr "Αναζήτηση Κατηγοριών"
+msgid "Search for a category..."
+msgstr ""
 
 #: templates/fields/customtabs.php:17
 msgid "Close all"

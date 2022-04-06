@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-03-02 14:53:34+00:00\n"
+"POT-Creation-Date: 2022-04-02 10:27:44+00:00\n"
 "PO-Revision-Date: 2021-12-13 12:45:02+0000\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -410,8 +410,8 @@ msgstr ""
 "vanwege een verbindingsprobleem tussen je site en onze server."
 
 #: templates/fields/ajax-customers.php:41
-msgid "Search Customers"
-msgstr "Klanten zoeken"
+msgid "Search for a customer..."
+msgstr ""
 
 #. translators: 1. user display name; 2. user ID; 3. user email.
 #: templates/fields/ajax-customers.php:68
@@ -420,16 +420,16 @@ msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr "%1$s (#%2$s &ndash; %3$s)"
 
 #: templates/fields/ajax-posts.php:41
-msgid "Search Posts"
-msgstr "Posts zoeken"
+msgid "Search for a post..."
+msgstr ""
 
-#: templates/fields/ajax-products.php:14
-msgid "Search Product"
-msgstr "Zoek Product"
+#: templates/fields/ajax-products.php:16
+msgid "Search for a product..."
+msgstr ""
 
 #: templates/fields/ajax-terms.php:41
-msgid "Search Categories"
-msgstr "Zoek categorieën"
+msgid "Search for a category..."
+msgstr ""
 
 #: templates/fields/customtabs.php:17
 msgid "Close all"
@@ -738,13 +738,10 @@ msgid "Thank you for purchasing %s!"
 msgstr "Bedankt voor het kopen van %s!"
 
 #: includes/class-yit-plugin-panel.php:806
-#, fuzzy
 msgctxt "Help tab default description"
 msgid ""
 "We want to help you enjoy a wonderful experience with all of our products."
 msgstr ""
-"We willen je helpen om te genieten van de geweldige ervaringen met al onze "
-"producten."
 
 #: includes/class-yit-plugin-panel.php:853
 msgctxt "Premium tab name"
@@ -889,16 +886,14 @@ msgid "to learn how the plugin works from the basics."
 msgstr ""
 
 #: templates/panel/help-tab.php:137
-#, fuzzy
 msgctxt "Help tab Watch video tutorials link"
 msgid "Watch our video tutorials"
-msgstr "Bekijk onze video uitleg"
+msgstr ""
 
 #: templates/panel/help-tab.php:140
-#, fuzzy
 msgctxt "Help tab Watch video tutorials link"
 msgid "to see some helpful use cases."
-msgstr "We tonen je enkele gebruikscasussen"
+msgstr ""
 
 #: templates/panel/help-tab.php:150
 msgctxt "Help tab view FAQs link"
@@ -906,10 +901,9 @@ msgid "Check the FAQs"
 msgstr "Check de FAQs"
 
 #: templates/panel/help-tab.php:153
-#, fuzzy
 msgctxt "Help tab view FAQs link"
 msgid "to find answers to your doubts."
-msgstr "om je twijfels te beantwoorden"
+msgstr ""
 
 #: templates/panel/help-tab.php:169
 msgctxt "Help tab FAQ title"
@@ -927,16 +921,12 @@ msgid "Need help?"
 msgstr "Hulp nodig?"
 
 #: templates/panel/help-tab.php:195
-#, fuzzy
 msgctxt "Help tab submit ticket description"
 msgid ""
 "If you are experiencing any technical issues, ask for help from our "
 "developers. Submit a ticket through our support desk and we will help you as "
 "soon as possible."
 msgstr ""
-"Als je een technisch probleem ondervindt, vraag dan hulp aan onze "
-"developers. Je kunt een ticket indienen bij onze supportdesk en we helpen je "
-"zo snel mogelijk verder."
 
 #: templates/panel/help-tab.php:203
 msgctxt "Help tab submit ticket button"
@@ -1053,7 +1043,3 @@ msgstr "Premium versie"
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Instellingen"
-
-#~ msgctxt "Help tab Read Documentation link"
-#~ msgid "to learn from basics how it works"
-#~ msgstr "om vanaf de basis te leren hoe het werkt"

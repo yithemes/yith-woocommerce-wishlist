@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 5.7
 Tested up to: 5.9
-Stable tag: 3.7.0
+Stable tag: 3.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,7 +113,12 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 == Changelog ==
 
-= 3.7.0 - Released on 08 March 2022 =
+= 3.8.0 - Released on 6 April 2022 =
+
+* New: support for WooCommerce 6.4
+* Update: YITH plugin framework
+
+= 3.7.0 - Released on 8 March 2022 =
 
 * New: support for WooCommerce 6.3
 * Update: YITH plugin framework
@@ -150,7 +155,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Update: YITH Plugin Framework
 * Fix: debug info feature removed for all logged in users
 
-= 3.1.0 - Released on 08 September 2021 =
+= 3.1.0 - Released on 8 September 2021 =
 
 * New: support for WooCommerce 5.7
 * Update: YITH Plugin Framework
@@ -158,7 +163,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Fix: use absolute URL in 'Remove from Wishlist' anchors, to avoid problems when template is loaded via AJAX
 * Dev: added yith_wcwl_plugin_icons filter, to allow third party add custom icons (thanks to swallow2603)
 
-= 3.0.25 - Released on 05 August 2021 =
+= 3.0.25 - Released on 5 August 2021 =
 
 * New: support for WooCommerce 5.6
 * New: support for WordPress 5.8
@@ -274,7 +279,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Fix: notice when using custom icons for ATW buttons
 * Dev: added new filter yith_wcwl_fragments_index_glue
 
-= 3.0.11 - Released on 08 Jun 2020 =
+= 3.0.11 - Released on 8 Jun 2020 =
 
 * New: support for WooCommerce 4.2
 * Update: plugin framework
@@ -289,7 +294,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Dev: added yith_wcwl_add_to_wishlist_heading_icon_html filter
 * Dev: added yith_wcwl_add_to_wishlist_data trigger, to allow third party code change data submitted with ATW ajax call
 
-= 3.0.10 - Released on 07 May 2020 =
+= 3.0.10 - Released on 7 May 2020 =
 
 * New: support for WooCommerce 4.1
 * New: prevent some UserAgents from triggering wishlist handling (avoid spam)
@@ -308,18 +313,18 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Dev: added yith_wcwl_default_wishlist filter
 * Dev: added yith_wcwl_add_notice wrapper function, to avoid possible fatal errors when calling wc_add_notice
 
-= 3.0.9 - Released on 09 March 2020 =
+= 3.0.9 - Released on 9 March 2020 =
 
 * Tweak: use wp_kses_post instead of esc_html for browse wishlist text
 * Update: plugin framework
 
-= 3.0.8 - Released on 04 March 2020 =
+= 3.0.8 - Released on 4 March 2020 =
 
 * Tweak: use wp_kses_post sanitization instead of esc_html for button labels to allow developers to add HTML to them
 * Tweak: minor improvements for OceanWP theme style
 * Fix: notice on empty wishlist page (thanks to ashimhastech)
 
-= 3.0.7 - Released on 03 March 2020 =
+= 3.0.7 - Released on 3 March 2020 =
 
 * New: support for WordPress 5.4
 * New: support for WooCommerce 4.0
@@ -338,7 +343,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Dev: new actions on wishlist-view.php template (thanks to Jory)
 * Dev: added .editorconfig (thanks to Jory)
 
-= 3.0.6 – Released on 04 February 2020 =
+= 3.0.6 – Released on 4 February 2020 =
 
 * Tweak: avoid redirect for guest users if wishlist page is set to my-account
 * Tweak: minor improvements to localization
@@ -395,7 +400,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Update: language files
 * Tweak: restored global $yith_wcwl
 
-= 3.0.0 - Released on 09 December 2019 =
+= 3.0.0 - Released on 9 December 2019 =
 
 * New: option to show Add to Wishlist button on loops
 * New: Add to Wishlist button style when placed over product image
@@ -437,7 +442,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Dev: added new yith_wcwl_product_already_in_wishlist_text_button and yith_wcwl_product_added_to_wishlist_message_button filters
 * Dev: added new yith_wcwl_out_of_stock_label and yith_wcwl_in_stock_label filters
 
-= 2.2.15 - Released on 05 November 2019  =
+= 2.2.15 - Released on 5 November 2019  =
 
 * Update: Plugin framework
 
@@ -507,7 +512,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 * New: updated plugin framework
 
-= 2.2.4 - Released on 04 October 2018 =
+= 2.2.4 - Released on 4 October 2018 =
 
 * New: added support to WooCoommerce 3.5
 * New: added support to WordPress 4.9.8
@@ -571,7 +576,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Fix: problem with duplicated meta
 * Fix: product created wince WC 3.0.x not being shown on wishlist
 
-= 2.1.0 - Released on 03 April 2017 =
+= 2.1.0 - Released on 3 April 2017 =
 
 * New: WooCommerce 3.0-RC2 compatibility
 * New: WordPress 4.7.3 compatibility
@@ -603,7 +608,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Tweak: removed description and image from facebook share link (fb doesn't allow anymore)
 * Fixed: product query (GROUP By and LIMIT statement conflicting)
 
-= 2.0.15 - Released on 04 April 2016 =
+= 2.0.15 - Released on 4 April 2016 =
 
 * Added: filter yith_wcwl_is_product_in_wishlist to choose whether a product is in wishlist or not
 * Added: filter yith_wcwl_cookie_expiration to set default wishlist cookie expiration time in seconds
@@ -702,7 +707,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Fixed: Escaped add_query_arg() and remove_query_arg()
 * Removed: use of pretty permalinks if WPML enabled
 
-= 2.0.6 - Released on 08 April 2015 =
+= 2.0.6 - Released on 8 April 2015 =
 
 * Added: system to overwrite wishlist js
 * Added: trailingslashit() to wishlist permalink
@@ -721,7 +726,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Tweak: added wishlist table id to .load(), to update only that part of template
 * Fixed: yith_wcwl_locate_template causing 500 Internal Server Error
 
-= 2.0.4 - Released on 04 March 2015 =
+= 2.0.4 - Released on 4 March 2015 =
 
 * Added: Options for browse wishlist/already in wishlist/product added strings
 * Added: rel nofollow to add to wishlist button
@@ -759,7 +764,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Updated: Plugin core framework
 
 
-= 1.1.7 - Released on 03 December 2014 =
+= 1.1.7 - Released on 3 December 2014 =
 
 * Added: Support to WooCommerce Endpoints (@use yit_wcwl_add_to_cart_redirect_url filter)
 * Added: Filter to shortcode html
@@ -780,7 +785,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Fixed: wrong string for inline js on remove link
 * Fixed: wrong string for inline js on add to cart link
 
-= 1.1.3 - Released on 05 June 2014 =
+= 1.1.3 - Released on 5 June 2014 =
 
 * Added: Options Tabs Filter
 * Fixed: Various Bugs
@@ -819,7 +824,7 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 * Updated: German translation by Stephanie Schlieske
 * Fixed: Add to cart button does not appear if the product is out of stock
 
-= 1.0.4 - Released on 04 September 2013 =
+= 1.0.4 - Released on 4 September 2013 =
 
 * Added: partial Ukrainian translation
 * Added: complete German translation. Thanks to Stephanie Schliesk

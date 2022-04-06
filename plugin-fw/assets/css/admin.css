@@ -56,9 +56,16 @@
 /*-----------------------
     YITH FEEDS
  ------------------------*/
+.yith-feeds-wrapper{
+	display: none;
+}
+
+.yith-feeds-changelog-plugin-name{
+	display: table;
+}
 
 .yith-feeds-logo {
-	display: table-cell;
+	display: table-cell !important;
 	background: #005b7c;
 	padding: 5px;
 	border-radius: 50%;

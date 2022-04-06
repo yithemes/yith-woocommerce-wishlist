@@ -199,16 +199,19 @@ window.yith = window.yith || {};
 				footer : false
 			},
 			initialize     = function () {
-				handleClose();
+				close();
 
 				create();
 				initEvents();
 			},
-			handleClose    = function () {
+			close          = function () {
 				$( '.yith-plugin-fw__modal__wrap' ).remove();
 				container.removeClass( 'yith-plugin-fw__modal--opened' );
 				container.removeClass( 'yith-plugin-fw__modal--allow-wp-menu' );
 				container.removeClass( 'yith-plugin-fw__modal--allow-wp-menu-in-mobile' );
+			},
+			handleClose    = function () {
+				close();
 
 				if ( typeof options.onClose === 'function' ) {
 					options.onClose();

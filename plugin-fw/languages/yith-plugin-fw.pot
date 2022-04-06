@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-03-02 14:53:34+00:00\n"
+"POT-Creation-Date: 2022-04-02 10:27:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -390,7 +390,7 @@ msgid ""
 msgstr ""
 
 #: templates/fields/ajax-customers.php:41
-msgid "Search Customers"
+msgid "Search for a customer..."
 msgstr ""
 
 #: templates/fields/ajax-customers.php:68
@@ -400,15 +400,15 @@ msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr ""
 
 #: templates/fields/ajax-posts.php:41
-msgid "Search Posts"
+msgid "Search for a post..."
 msgstr ""
 
-#: templates/fields/ajax-products.php:14
-msgid "Search Product"
+#: templates/fields/ajax-products.php:16
+msgid "Search for a product..."
 msgstr ""
 
 #: templates/fields/ajax-terms.php:41
-msgid "Search Categories"
+msgid "Search for a category..."
 msgstr ""
 
 #: templates/fields/customtabs.php:17
