@@ -37,7 +37,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^8.6.0",
     "fs-extra": "^9.1.0",
-    "grunt": "^1.4.1",
+    "grunt": "^1.5.2",
     "grunt-cli": "^1.4.3",
     "grunt-contrib-cssmin": "^4.0.0",
     "grunt-contrib-uglify": "^4.0.0",
