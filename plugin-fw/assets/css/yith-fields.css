@@ -631,12 +631,14 @@ YITH UI
 }
 
 .yith-plugin-ui span.description {
+	display     : block;
 	color       : #716269;
 	font-size   : 13px;
 	font-style  : normal;
 	font-weight : 400;
-	margin-top  : 15px;
+	margin-top  : 10px;
 	margin-left : 0;
+	line-height : 20px;
 }
 
 #wpwrap .yith-plugin-ui h2.nav-tab-wrapper, #wpbody-content .yith-plugin-ui h2.nav-tab-wrapper {
@@ -750,7 +752,8 @@ YITH UI
 .woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table textarea:not(.wp-editor-area),
 .woocommerce .yith-plugin-fw table.form-table input[type=password],
 .woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=number],
-.woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=text] {
+.woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=text],
+.woocommerce.yith-plugin-fw-panel .yith-plugin-ui table.form-table input[type=email] {
 	border        : 1px solid #d8d8d8;
 	border-radius : 8px;
 	padding       : 8px 10px;
@@ -1871,13 +1874,6 @@ div#ui-datepicker-div.yith-plugin-fw-datepicker-div {
 	display        : inline-block;
 	vertical-align : middle;
 	margin         : 0;
-}
-
-.yith-plugin-ui span.description {
-	margin-top  : 10px;
-	line-height : 20px;
-	max-width   : 40%;
-	min-width   : min(100%, 360px);
 }
 
 .yith-plugin-fw-option-with-description {

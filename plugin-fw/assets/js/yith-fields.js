@@ -997,4 +997,50 @@
 		);
 	} ).trigger( 'yith-plugin-fw-tips-init' );
 
+	/**
+	 * Tabs
+	 */
+	$( document ).on( 'yith-plugin-fw-tabs-init', function () {
+		$( '.yith-plugin-fw__tabs:not(.yith-plugin-fw__tabs--initialized)' ).each( function () {
+			var tabsContainer         = $( this ),
+				additionalActiveClass = tabsContainer.data( 'tab-additional-active-class' ) || false,
+				allHandlers           = tabsContainer.find( '.yith-plugin-fw__tab__handler' ),
+				firstTabHandler       = tabsContainer.find( '.yith-plugin-fw__tab__handler' ).first(),
+				allPanelIds           = allHandlers.get().map( function ( _current ) {
+					return _current.getAttribute( 'href' );
+				} ).filter( function ( _current ) {
+					return !!_current;
+				} ).join( ', ' ),
+				allPanels             = $( allPanelIds ),
+				showTab               = function ( tabHandler ) {
+					var tab       = tabHandler.parent( '.yith-plugin-fw__tab' ),
+						otherTabs = tab.siblings( '.yith-plugin-fw__tab' ),
+						panelId   = tabHandler.attr( 'href' );
+
+					tab.addClass( 'yith-plugin-fw__tab--active' );
+					!!additionalActiveClass && tab.addClass( additionalActiveClass );
+					otherTabs.removeClass( 'yith-plugin-fw__tab--active' );
+					!!additionalActiveClass && otherTabs.removeClass( additionalActiveClass );
+
+					allPanels.hide();
+					$( panelId ).show();
+				},
+				handleTabClick        = function ( e ) {
+					e.preventDefault();
+					var currentTabHandler = $( this ),
+						tab               = currentTabHandler.parent( '.yith-plugin-fw__tab' ),
+						isActive          = tab.hasClass( 'yith-plugin-fw__tab--active' );
+
+					if ( !isActive ) {
+						showTab( currentTabHandler );
+					}
+				};
+
+			tabsContainer.addClass( 'yith-plugin-fw__tabs--initialized' );
+			tabsContainer.on( 'click', '.yith-plugin-fw__tab__handler', handleTabClick );
+
+			!!firstTabHandler.length && showTab( firstTabHandler );
+		} );
+	} ).trigger( 'yith-plugin-fw-tabs-init' );
+
 } )( jQuery );

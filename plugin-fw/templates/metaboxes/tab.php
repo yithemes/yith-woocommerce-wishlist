@@ -81,7 +81,7 @@ $label_allowed_tags = apply_filters( 'yith_plugin_fw_metabox_label_allowed_tags'
 ?>
 	<div class="yith-plugin-fw metaboxes-tab <?php echo esc_attr( $classes ); ?>">
 		<?php do_action( 'yit_before_metaboxes_labels' ); ?>
-		<ul class="metaboxes-tabs clearfix" style="<?php echo esc_attr( $ul_style ); ?>">
+		<ul class="metaboxes-tabs clearfix yith-plugin-fw__tabs" style="<?php echo esc_attr( $ul_style ); ?>" data-tab-additional-active-class="tabs">
 			<?php foreach ( $tabs as $key => $_tab ) : ?>
 
 				<?php
@@ -103,11 +103,14 @@ $label_allowed_tags = apply_filters( 'yith_plugin_fw_metabox_label_allowed_tags'
 					$_tab['deps']['type'] = 'hideme';
 				}
 
-				$class = ! $i ? 'tabs' : '';
+				$class = 'yith-plugin-fw__tab';
+				if ( ! $i ) {
+					$class .= ' tabs yith-plugin-fw__tab--active';
+				}
 				$i ++;
 				?>
 				<li id="<?php echo esc_attr( $anchor_id ); ?>" class="<?php echo esc_attr( $class ); ?>" <?php echo yith_field_deps_data( $_tab ); ?>>
-					<a href="#<?php echo esc_attr( urldecode( $key ) ); ?>">
+					<a href="#<?php echo esc_attr( urldecode( $key ) ); ?>" class="yith-plugin-fw__tab__handler">
 						<?php echo wp_kses( $_tab['label'], $label_allowed_tags ); ?>
 					</a>
 				</li>
@@ -125,7 +128,7 @@ $label_allowed_tags = apply_filters( 'yith_plugin_fw_metabox_label_allowed_tags'
 		<?php wp_nonce_field( 'metaboxes-fields-nonce', 'yit_metaboxes_nonce' ); ?>
 
 		<?php foreach ( $tabs as $key => $_tab ) : ?>
-			<div class="tabs-panel" id="<?php echo esc_attr( urldecode( $key ) ); ?>">
+			<div class="tabs-panel yith-plugin-fw__tab-panel" id="<?php echo esc_attr( urldecode( $key ) ); ?>">
 				<?php
 				if ( empty( $_tab['fields'] ) ) {
 					continue;

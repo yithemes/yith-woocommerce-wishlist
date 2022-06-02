@@ -112,9 +112,17 @@ if ( ! function_exists( 'yit_plugin_fw_row_meta' ) ) {
 		);
 		$fields            = isset( $new_row_meta_args['to_show'] ) ? $new_row_meta_args['to_show'] : array();
 		$slug              = isset( $new_row_meta_args['slug'] ) ? $new_row_meta_args['slug'] : '';
-		$is_premium        = isset( $new_row_meta_args['is_premium'] ) ? $new_row_meta_args['is_premium'] : '';
+		$is_extended       = ! empty( $new_row_meta_args['is_extended'] ) || false !== strpos( $plugin_file, '-extended' );
+		$is_premium        = ! empty( $new_row_meta_args['is_premium'] ) || false !== strpos( $plugin_file, '-premium' );
 		$utm_campaign      = 'plugin-version-author-uri';
-		$utm_source        = $is_premium ? 'wp-premium-dashboard' : 'wp-free-dashboard';
+
+		if ( $is_premium ) {
+			$utm_source = 'wp-premium-dashboard';
+		} elseif ( $is_extended ) {
+			$utm_source = 'wp-extended-dashboard';
+		} else {
+			$utm_source = 'wp-free-dashboard';
+		}
 
 		if ( ! ! $is_premium ) {
 			$to_remove = array_search( 'premium_version', $fields, true );

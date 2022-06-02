@@ -19,10 +19,6 @@ window.yith = window.yith || {};
 			}
 			return filteredClasses.join( ' ' );
 		}
-	}
-
-	var stopEventPropagation = function ( e ) {
-		e.stopPropagation();
 	};
 
 	/**
@@ -181,8 +177,8 @@ window.yith = window.yith || {};
 		options         = $.extend( {}, defaults, options );
 		options.classes = $.extend( {}, defaults.classes, options.classes );
 
-		var container      = $( '#wpwrap' ),
-			classes        = {
+		var container            = $( '#wpwrap' ),
+			classes              = {
 				wrap   : ['yith-plugin-ui', 'yith-plugin-fw__modal__wrap', options.classes.wrap],
 				main   : ['yith-plugin-fw__modal__main', options.classes.main],
 				close  : ['yith-plugin-fw__modal__close', 'yith-icon', 'yith-icon-close', options.classes.close],
@@ -190,7 +186,7 @@ window.yith = window.yith || {};
 				content: ['yith-plugin-fw__modal__content', options.classes.content],
 				footer : ['yith-plugin-fw__modal__footer', options.classes.footer]
 			},
-			dom            = {
+			dom                  = {
 				wrap   : false,
 				main   : false,
 				close  : false,
@@ -198,26 +194,27 @@ window.yith = window.yith || {};
 				content: false,
 				footer : false
 			},
-			initialize     = function () {
+			initialize           = function () {
 				close();
 
 				create();
 				initEvents();
 			},
-			close          = function () {
+			close                = function () {
 				$( '.yith-plugin-fw__modal__wrap' ).remove();
 				container.removeClass( 'yith-plugin-fw__modal--opened' );
 				container.removeClass( 'yith-plugin-fw__modal--allow-wp-menu' );
 				container.removeClass( 'yith-plugin-fw__modal--allow-wp-menu-in-mobile' );
+				removeEvents();
 			},
-			handleClose    = function () {
+			handleClose          = function () {
 				close();
 
 				if ( typeof options.onClose === 'function' ) {
 					options.onClose();
 				}
 			},
-			create         = function () {
+			create               = function () {
 				dom.wrap    = $( '<div class="' + cssClasses( classes.wrap ) + '">' );
 				dom.main    = $( '<div class="' + cssClasses( classes.main ) + '">' );
 				dom.close   = $( '<span class="' + cssClasses( classes.close ) + '">' );
@@ -226,7 +223,6 @@ window.yith = window.yith || {};
 				dom.footer  = $( '<div class="' + cssClasses( classes.footer ) + '">' );
 
 				dom.main.css( { width: options.width } );
-
 
 				if ( options.title ) {
 					if ( typeof options.title === 'string' ) {
@@ -283,20 +279,26 @@ window.yith = window.yith || {};
 					options.onCreate();
 				}
 			},
-			initEvents     = function () {
+			handleClickOnOverlay = function ( event ) {
+				var target = $( event.target );
+				if ( target.is( dom.wrap ) && options.closeWhenClickingOnOverlay ) {
+					handleClose();
+				}
+			},
+			initEvents           = function () {
 				dom.close.on( 'click', handleClose );
 				if ( options.closeSelector ) {
 					container.on( 'click', options.closeSelector, handleClose );
 				}
 
-				if ( options.closeWhenClickingOnOverlay ) {
-					dom.wrap.on( 'click', handleClose );
-					dom.main.on( 'click', stopEventPropagation );
-				}
+				dom.wrap.on( 'click', handleClickOnOverlay );
 
 				$( document ).on( 'keydown', handleKeyboard );
 			},
-			handleKeyboard = function ( event ) {
+			removeEvents         = function () {
+				$( document ).off( 'keydown', handleKeyboard );
+			},
+			handleKeyboard       = function ( event ) {
 				if ( options.allowClosingWithEsc && event.keyCode === 27 ) {
 					handleClose();
 				}

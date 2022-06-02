@@ -15,10 +15,10 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 list( $premium_features, $main_image_url, $show_free_vs_premium ) = yith_plugin_fw_extract( $options, 'premium_features', 'main_image_url', 'show_free_vs_premium_link' );
 
-$get_premium_url = yith_plugin_fw_add_utm_data( $premium_url, $plugin_slug, 'button-upgrade', 'wp-free-dashboard' );
+$get_premium_url = yith_plugin_fw_add_utm_data( $premium_url, $plugin_slug, 'button-upgrade', yith_plugin_fw_panel_utm_source( $this ) );
 
 if ( $show_free_vs_premium ) {
-	$free_vs_premium_url = yith_plugin_fw_add_utm_data( $premium_url, $plugin_slug, 'button-compare', 'wp-free-dashboard' );
+	$free_vs_premium_url = yith_plugin_fw_add_utm_data( $premium_url, $plugin_slug, 'button-compare', yith_plugin_fw_panel_utm_source( $this ) );
 }
 
 ?>

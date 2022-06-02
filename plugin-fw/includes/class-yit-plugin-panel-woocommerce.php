@@ -82,6 +82,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 					$this->links = $this->settings['links'];
 				}
 
+				$this->maybe_init_help_tab();
 				$this->maybe_init_premium_tab();
 
 				add_action( 'admin_init', array( $this, 'set_default_options' ) );

@@ -36,10 +36,10 @@
   --yith-delete-outline-border-hover: #db2b11;
   --yith-delete-outline-focus: #ffe9e7;
   --yith-accent: #98aa36;
-  --yith-light-bg: #f0f6fb;
+  --yith-light-bg: #f5fafc;
   --yith-light-border-color: #d7e3e7;
   --yith-light-shadow: rgba(145, 191, 227, 0.11);
-  --yith-light-accent: #0079b0;
+  --yith-light-accent: #0073aa;
   --yith-success: #98aa36;
   --yith-success-light: #d4df9a;
   --yith-success-lighter: #eaefcc;
@@ -1101,6 +1101,8 @@
 
 #tiptip_holder {
   display: none;
+  pointer-events: none;
+  /* Fix tip flashing when hover the edge */
   z-index: 8675309;
   position: absolute;
   top: 0;
@@ -1172,6 +1174,58 @@
   border-width: 6px;
   height: 0;
   width: 0;
+}
+
+.yith-plugin-ui .yith-plugin-fw__tabs {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--yith-light-border-color);
+  flex-wrap: wrap;
+}
+
+.yith-plugin-ui .yith-plugin-fw__tabs .yith-plugin-fw__tab {
+  border: 0;
+  margin: 0;
+  display: block;
+}
+
+.yith-plugin-ui .yith-plugin-fw__tabs .yith-plugin-fw__tab__handler, .yith-plugin-ui .yith-plugin-fw__tabs a.yith-plugin-fw__tab__handler {
+  background: var(--yith-content-bg);
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 17px 20px 15px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  transition: all .2s ease-in-out;
+  opacity: .55;
+}
+
+.yith-plugin-ui .yith-plugin-fw__tabs .yith-plugin-fw__tab__handler:hover, .yith-plugin-ui .yith-plugin-fw__tabs a.yith-plugin-fw__tab__handler:hover {
+  opacity: 1;
+  background: var(--yith-light-bg);
+  color: var(--yith-light-accent);
+}
+
+.yith-plugin-ui .yith-plugin-fw__tabs .yith-plugin-fw__tab.yith-plugin-fw__tab--active .yith-plugin-fw__tab__handler,
+.yith-plugin-ui .yith-plugin-fw__tabs .yith-plugin-fw__tab__handler.yith-plugin-fw__tab__handler--enabled {
+  opacity: 1;
+  color: var(--yith-light-accent);
+  border-color: var(--yith-light-accent);
+}
+
+.yith-plugin-ui .yith-plugin-fw__tab-panel {
+  padding: 20px;
+}
+
+.yith-plugin-ui .yith-plugin-fw__tab-panel.yith-plugin-fw__tab-panel--outlined {
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: var(--yith-light-border-color);
 }
 
 /**

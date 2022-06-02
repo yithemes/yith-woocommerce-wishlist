@@ -103,7 +103,7 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 			wp_localize_script( 'yith-gutenberg', 'yithGutenbergBlocks', $this->blocks_args );
 
 			wp_enqueue_script( 'yith-gutenberg' );
-			wp_enqueue_style( 'yith-gutenberg', $gutenberg_assets_url . '/style-index.css', array(), yith_plugin_fw_get_version() );
+			wp_enqueue_style( 'yith-gutenberg', $gutenberg_assets_url . '/style-index.css', array( 'yith-plugin-fw-icon-font' ), yith_plugin_fw_get_version() );
 		}
 
 		/**

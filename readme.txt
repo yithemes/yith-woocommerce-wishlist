@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: wishlist, woocommerce, products, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, shop wishlist
 Requires at least: 5.7
-Tested up to: 5.9
-Stable tag: 3.8.0
+Tested up to: 6.0
+Stable tag: 3.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,6 +112,12 @@ Yes, of course you can. To avoid Wishlist page to show product prices, you can h
 
 
 == Changelog ==
+
+= 3.9.0 - Released on 16 May 2022 =
+
+* New: support for WordPress 6.0
+* New: support for WooCommerce 6.5
+* Update: YITH plugin framework
 
 = 3.8.0 - Released on 6 April 2022 =
 

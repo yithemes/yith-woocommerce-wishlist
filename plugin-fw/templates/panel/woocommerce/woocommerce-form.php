@@ -9,7 +9,8 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-$content_class = apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap' );
+$form_method   = apply_filters( 'yit_admin_panel_form_method', 'POST', $option_key );
+$content_class = apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap', $option_key );
 $container_id  = $this->settings['page'] . '_' . $option_key;
 $reset_warning = __( 'If you continue with this action, you will reset all options in this page.', 'yith-plugin-fw' ) . '\n' . __( 'Are you sure?', 'yith-plugin-fw' );
 ?>
@@ -19,7 +20,7 @@ $reset_warning = __( 'If you continue with this action, you will reset all optio
 	<?php do_action( 'yit_framework_before_print_wc_panel_content', $option_key ); ?>
 
 	<div class="<?php echo esc_attr( $content_class ); ?>">
-		<form id="plugin-fw-wc" method="post">
+		<form id="plugin-fw-wc" method="<?php echo esc_attr( $form_method ); ?>">
 
 			<?php $this->add_fields(); ?>
 
@@ -31,6 +32,10 @@ $reset_warning = __( 'If you continue with this action, you will reset all optio
 			<?php if ( apply_filters( 'yit_framework_show_float_save_button', true ) ) : ?>
 				<button id="yith-plugin-fw-float-save-button" class="button button-primary yith-plugin-fw-animate__appear-from-bottom" data-default-label="<?php esc_attr_e( 'Save Options', 'yith-plugin-fw' ); ?>" data-saved-label="<?php esc_attr_e( 'Options Saved', 'yith-plugin-fw' ); ?>"><i class="yith-icon yith-icon-save"></i> <?php esc_html_e( 'Save Options', 'yith-plugin-fw' ); ?></button>
 			<?php endif; ?>
+
+			<input type="hidden" name="page" value="<?php echo esc_attr( $this->settings['page'] ); ?>"/>
+			<input type="hidden" name="tab" value="<?php echo esc_attr( $this->get_current_tab() ); ?>"/>
+			<input type="hidden" name="sub_tab" value="<?php echo esc_attr( $this->get_current_sub_tab() ); ?>"/>
 		</form>
 		<form id="plugin-fw-wc-reset" method="post">
 			<input type="hidden" name="yit-action" value="wc-options-reset"/>
