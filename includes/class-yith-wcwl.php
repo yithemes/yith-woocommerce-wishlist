@@ -154,7 +154,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			// filtering params.
 			$prod_id     = apply_filters( 'yith_wcwl_adding_to_wishlist_prod_id', intval( $atts['add_to_wishlist'] ) );
 			$wishlist_id = apply_filters( 'yith_wcwl_adding_to_wishlist_wishlist_id', $atts['wishlist_id'] );
-			$quantity    = apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', intval( $atts['quantity'] ) );
+			$quantity    = apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', intval( $atts['quantity'] ), $prod_id );
 			$user_id     = apply_filters( 'yith_wcwl_adding_to_wishlist_user_id', intval( $atts['user_id'] ) );
 			$dateadded   = apply_filters( 'yith_wcwl_adding_to_wishlist_dateadded', $atts['dateadded'] );
 

@@ -374,7 +374,7 @@ jQuery( function( $ ){
                 data = form.serializeArray().reduce( ( data, field ) => { data[ field.name ] = field.value; return data; }, {} );
 
             data.action  = yith_wcwl_l10n.actions.ask_an_estimate;
-            data.nonce   = yith_wcwl_l10n.noce.ask_an_estimate_nonce;
+            data.nonce   = yith_wcwl_l10n.nonce.ask_an_estimate_nonce;
             data.context = 'frontend';
 
             $.ajax({
@@ -587,6 +587,14 @@ jQuery( function( $ ){
 
     } ).trigger('yith_wcwl_init');
 
+    // Avoid pressing the enter key in the qty input.
+    $( 'form#yith-wcwl-form .wishlist_table .product-quantity input' ).on( 'keypress', function( e ) {
+        if ( e.keyCode == '13' ) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
     /* === INIT FUNCTIONS === */
 
     /**
@@ -620,6 +628,7 @@ jQuery( function( $ ){
             opacity               : 0.8,
             deeplinking           : false,
             overlay_gallery       : false,
+            keyboard_shortcuts    : false,
             default_width         : 500,
             changepicturecallback : function(){
                 init_select_box();
@@ -1118,6 +1127,8 @@ jQuery( function( $ ){
             else{
                 container.find( '#new_wishlist_selector' ).remove();
             }
+
+            $(document).trigger( 'yith_wcwl_tab_selected', [ tab, target ] );
         } );
 
         $(document).on( 'change', '.wishlist-select', function(){
@@ -1454,6 +1465,8 @@ jQuery( function( $ ){
                 if( typeof fragments !== 'undefined' ){
                     replace_fragments( fragments );
                 }
+
+                init_handling_after_ajax();
             }
         });
     }

@@ -496,6 +496,10 @@ p.wishlist-empty{
     max-width: 2em;
 }
 
+.wishlist_table .product-add-to-cart .variations_form {
+    margin: 15px 0;
+}
+
 .wishlist_table .price-variation{
     display: block;
 }
@@ -1387,7 +1391,7 @@ table.wishlist_manage_table tfoot td{
 
 .elementor-widget-wp-widget-yith-wcwl-items .mini .heading .items-counter i,
 .widget_yith-wcwl-items .mini .heading .items-counter i{
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .elementor-widget-wp-widget-yith-wcwl-items .extended .heading .items-counter .items-count,
@@ -1399,7 +1403,7 @@ table.wishlist_manage_table tfoot td{
     text-align: center;
     top: calc(50% - 20px);
 
-    font-size: 1rem;
+    font-size: 14px;
 }
 
 .elementor-widget-wp-widget-yith-wcwl-items .mini .heading .items-counter .items-count,
@@ -1424,6 +1428,7 @@ table.wishlist_manage_table tfoot td{
     left: 0;
     background: #fff;
     padding: 25px 40px;
+    min-width: 280px;
     display: none;
 
     -webkit-box-shadow: 0 0 15px rgba(0,0,0,.3);

@@ -85,7 +85,6 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		/**
 		 * Constructor of the class
 		 *
-		 * @return \YITH_WCWL_Admin
 		 * @since 2.0.0
 		 */
 		public function __construct() {
@@ -159,8 +158,9 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 				'yith-wcwl-admin',
 				'yith_wcwl',
 				array(
-					'nonce' => array(
-						'preview_promotion_email'             => wp_create_nonce( 'preview_promotion_email' ),
+					'promotion' => get_option( 'woocommerce_yith_wcwl_promotion_mail_settings', array() ),
+					'nonce'     => array(
+						'preview_promotion_email' => wp_create_nonce( 'preview_promotion_email' ),
 						'calculate_promotion_email_receivers' => wp_create_nonce( 'calculate_promotion_email_receivers' ),
 					),
 				)
@@ -258,13 +258,23 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 					'main_video' => array(
 						'desc' => _x( 'Check this video to learn how to <b>configure wishlist and customize options:</b>', '[HELP TAB] Video title', 'yith-woocommerce-wishlist' ),
 						'url'  => array(
+							'en' => 'https://www.youtube.com/embed/oMnfyHo819M',
 							'it' => 'https://www.youtube.com/embed/9hM9PgBVNTg',
 							'es' => 'https://www.youtube.com/embed/GwQkNrrHFs4',
 						),
 					),
+					'playlists'  => array(
+						'en' => 'https://www.youtube.com/watch?v=oMnfyHo819M&list=PLDriKG-6905lyNLO9kQ7GCsldGt7u-4Pa',
+						'it' => 'https://www.youtube.com/watch?v=zpwlE60H6YM&list=PL9c19edGMs09kk40S7FEiXjKKppjS-CAK',
+						'es' => 'https://www.youtube.com/watch?v=5Ftr4_v0s5I&list=PL9Ka3j92PYJMMYXecDH8FB5cxTfTbF4jJ',
+					),
 					'hc_url'     => 'https://support.yithemes.com/hc/en-us/categories/360003468437-YITH-WOOCOMMERCE-WISHLIST',
 				),
-				'premium_tab'        => array(
+			);
+
+			// registers premium tab.
+			if ( ! defined( 'YITH_WCWL_PREMIUM' ) ) {
+				$args['premium_tab'] = array(
 					'landing_page_url'          => $this->get_premium_landing_uri(),
 					'premium_features'          => array(
 						__( 'Enable the wishlist feature for all users or <b>only for registered users</b>', 'yith-woocommerce-wishlist' ),
@@ -278,10 +288,10 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 						__( '<b>Send an automatic email to the wishlist owner</b> whenever a product in the list is back in stock or on sale', 'yith-woocommerce-wishlist' ),
 						'<b>' . __( 'Regular updates, Translations and Premium Support', 'yith-woocommerce-wishlist' ) . '</b>',
 					),
-					'main_image_url'            => YITH_WCWL_URL . 'assets/images/get-premium-wishlist.jpg',
+					'main_image_url'            => YITH_WCWL_URL . 'assets/images/premium/get-premium-wishlist.jpg',
 					'show_free_vs_premium_link' => true,
-				),
-			);
+				);
+			}
 
 			/* === Fixed: not updated theme  === */
 			if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {

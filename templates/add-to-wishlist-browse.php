@@ -44,6 +44,10 @@ global $product;
 	</span>
 	<a href="<?php echo esc_url( $wishlist_url ); ?>" rel="nofollow" data-title="<?php echo esc_attr( $browse_wishlist_text ); ?>">
 		<?php echo ( ! $is_single && 'before_image' === $loop_position ) ? yith_wcwl_kses_icon( $icon ) : false; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<?php echo wp_kses_post( apply_filters( 'yith_wcwl_browse_wishlist_label', $browse_wishlist_text, $product_id, $icon ) ); ?>
+		<?php
+		if ( apply_filters( 'yith_wcwl_show_text_on_the_image', true ) ) {
+			echo wp_kses_post( apply_filters( 'yith_wcwl_browse_wishlist_label', $browse_wishlist_text, $product_id, $icon ) );
+		}
+		?>
 	</a>
 </div>

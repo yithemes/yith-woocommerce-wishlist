@@ -413,7 +413,7 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				if ( ! $no_interactions && $enable_share && ( $share_facebook_enabled || $share_twitter_enabled || $share_pinterest_enabled || $share_email_enabled || $share_whatsapp_enabled || $share_url_enabled ) ) {
 					$share_title      = apply_filters( 'yith_wcwl_socials_share_title', __( 'Share on:', 'yith-woocommerce-wishlist' ) );
 					$share_link_url   = apply_filters( 'yith_wcwl_shortcode_share_link_url', $wishlist->get_url(), $wishlist );
-					$share_link_title = apply_filters( 'plugin_text', urlencode( get_option( 'yith_wcwl_socials_title' ) ) );
+					$share_link_title = apply_filters( 'yith_wcwl_share_title', urlencode( get_option( 'yith_wcwl_socials_title' ) ), $wishlist );
 					$share_summary    = urlencode( str_replace( '%wishlist_url%', $share_link_url, get_option( 'yith_wcwl_socials_text' ) ) );
 
 					$share_atts = array(

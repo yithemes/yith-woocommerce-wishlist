@@ -57,7 +57,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			);
 			$values  = array(
 				apply_filters( 'yith_wcwl_adding_to_wishlist_product_id', $product_id ),
-				apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', $item->get_quantity() ),
+				apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', $item->get_quantity(), $product_id ),
 				apply_filters( 'yith_wcwl_adding_to_wishlist_wishlist_id', $wishlist_id ),
 				apply_filters( 'yith_wcwl_adding_to_wishlist_position', $item->get_position() ),
 				apply_filters( 'yith_wcwl_adding_to_wishlist_original_price', $item->get_product_price() ),

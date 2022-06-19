@@ -185,8 +185,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_formatted_product_price( $context = 'view' ) {
 			$product = $this->get_product( $context );
 
-			$base_price      = $product->is_type( 'variable' ) ? $product->get_variation_regular_price( 'max' ) : $product->get_price();
-			$formatted_price = $base_price ? $product->get_price_html() : apply_filters( 'yith_free_text', __( 'Free!', 'yith-woocommerce-wishlist' ), $product );
+			$base_price = $product->is_type( 'variable' ) ? $product->get_variation_regular_price( 'max' ) : $product->get_price();
+
+			if ( '' === $base_price ) {
+				$formatted_price = '';
+			} elseif ( ! $base_price ) {
+				$formatted_price = apply_filters( 'yith_free_text', __( 'Free!', 'yith-woocommerce-wishlist' ), $product );
+			} else {
+				$formatted_price = $product->get_price_html();
+			}
 
 			return apply_filters( 'yith_wcwl_item_formatted_price', $formatted_price, $base_price, $product );
 		}
@@ -406,13 +413,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			$product       = $this->get_product();
 			$current_price = $this->get_product_price();
 
-			if ( ! is_numeric( $current_price ) ) {
+			if ( ! $current_price || ! is_numeric( $current_price ) ) {
 				return '';
 			}
 
 			$difference = $original_price - $current_price;
 
-			if ( $difference <= 0 && apply_filters( 'yith_wcwl_hide_price_increase', true, $product, $original_price, $original_currency ) ) {
+			if ( $difference <= 0 && apply_filters( 'yith_wcwl_hide_price_increase', true, $product, $original_price, $original_currency, $difference ) ) {
 				return '';
 			}
 
@@ -432,7 +439,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 				$class,
 				$percentage_difference,
 				$original_price,
-				$original_currency
+				$original_currency,
+				$this
 			);
 			$template = sprintf( $template, $percentage_difference, wc_price( $original_price, array( 'currency' => $original_currency ) ) );
 
@@ -461,6 +469,41 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			$base_url = $this->get_wishlist()->get_url();
 
 			return apply_filters( 'yith_wcwl_wishlist_item_remove_url', wp_nonce_url( add_query_arg( 'remove_from_wishlist', $this->get_product_id(), $base_url ), 'remove_from_wishlist' ), $this );
+		}
+
+		/**
+		 * Get product availability class
+		 *
+		 * @param string $context Context of the operation.
+		 * @return string Availability class.
+		 */
+		public function get_stock_status( $context = 'view' ) {
+			$product = $this->get_product( $context );
+
+			if ( ! $product ) {
+				return false;
+			}
+
+			$availability = $product->get_availability();
+			$stock_status = isset( $availability['class'] ) ? $availability['class'] : false;
+
+			return $stock_status;
+		}
+
+		/**
+		 * Checks whether product is purchasable or not
+		 *
+		 * @param string $context Context of the operation.
+		 * @return bool Whether product is purchasable or not
+		 */
+		public function is_purchasable( $context = 'view' ) {
+			$product = $this->get_product( $context );
+
+			if ( ! $product ) {
+				return false;
+			}
+
+			return $product->is_purchasable();
 		}
 
 		/* === SETTERS === */

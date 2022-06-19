@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2022-01-12 11:22:42+00:00\n"
+"POT-Creation-Date: 2022-06-19 14:16:05+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:05+0200\n"
 "Last-Translator: Am!n <amin.pe94@gmail.com>\n"
 "Language-Team: YITH - translated to persian by dornaweb <info@dornaweb.com>\n"
@@ -23,20 +23,20 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPathExcluded-0: ../plugin-fw\n"
 
-#: includes/class-yith-wcwl-admin.php:125
+#: includes/class-yith-wcwl-admin.php:124
 #, fuzzy
 msgid "Wishlist Page"
 msgstr "لیست علاقه مندی ها"
 
-#: includes/class-yith-wcwl-admin.php:147
+#: includes/class-yith-wcwl-admin.php:146
 msgid "General settings"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:148
+#: includes/class-yith-wcwl-admin.php:147
 msgid "Add to wishlist options"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:149
+#: includes/class-yith-wcwl-admin.php:148
 msgid "Wishlist page options"
 msgstr ""
 
@@ -46,64 +46,64 @@ msgid ""
 "to purchase on your e-commerce."
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:270
+#: includes/class-yith-wcwl-admin.php:280
 msgid ""
 "Enable the wishlist feature for all users or <b>only for registered users</b>"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:271
+#: includes/class-yith-wcwl-admin.php:281
 msgid ""
 "Allow users to create <b>multiple wishlists</b> (Ex: Christmas, Birthday, "
 "etc.) <br>Users can choose the wishlist from a dropdown menu when they click "
 "on \"Add to wishlist\""
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:272
+#: includes/class-yith-wcwl-admin.php:282
 msgid ""
 "Allow users to set <b>visibility options for each wishlist</b>, by making "
 "them either public (visible to everyone), private or shared (visible only to "
 "people it has been shared with)"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:273
+#: includes/class-yith-wcwl-admin.php:283
 msgid ""
 "Choose between <b>different layouts</b> for the wishlist page and for the "
 "wishlist content"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:274
+#: includes/class-yith-wcwl-admin.php:284
 msgid ""
 "<b>Allow users to manage their wishlists:</b> rename and delete wishlists, "
 "move a product from one wishlist to another, change order of items, "
 "quantity, etc."
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:275
+#: includes/class-yith-wcwl-admin.php:285
 msgid ""
 "Enable an <b>\"Ask for an estimate\" button</b> to let customers send the "
 "content of their wishlist to the admin and get a custom quote"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:276
+#: includes/class-yith-wcwl-admin.php:286
 msgid ""
 "<b>Show a wishlist widget</b> that lists all the products in the wishlists "
 "(available also with \"mini-cart\" style for the header)"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:277
+#: includes/class-yith-wcwl-admin.php:287
 msgid ""
 "View the most popular products added to the wishlist by your customers and "
 "<b>send promotional emails to users</b> who have added specific products to "
 "their wishlist"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:278
+#: includes/class-yith-wcwl-admin.php:288
 msgid ""
 "<b>Send an automatic email to the wishlist owner</b> whenever a product in "
 "the list is back in stock or on sale"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:279
+#: includes/class-yith-wcwl-admin.php:289
 msgid "Regular updates, Translations and Premium Support"
 msgstr ""
 
@@ -130,17 +130,17 @@ msgstr "محصول با موفقیت حذف شد."
 msgid "Please, make sure to enter a valid title"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:461
+#: includes/class-yith-wcwl-frontend.php:552
 msgid ""
 "We are sorry, but this feature is available only if cookies on your browser "
 "are enabled."
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:462
+#: includes/class-yith-wcwl-frontend.php:553
 msgid "Product added to cart successfully"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:725
+#: includes/class-yith-wcwl-frontend.php:816
 #: includes/class-yith-wcwl-shortcode.php:239
 #: plugin-options/wishlist_page-options.php:240
 #: templates/wishlist-view-footer-mobile.php:46
@@ -327,7 +327,7 @@ msgstr ""
 msgid "Remove from list"
 msgstr ""
 
-#: includes/class-yith-wcwl-wishlist-item.php:189
+#: includes/class-yith-wcwl-wishlist-item.php:193
 msgid "Free!"
 msgstr "رایگان!"
 
@@ -1274,44 +1274,44 @@ msgstr ""
 msgid "Edit title"
 msgstr "ویرایش عنوان"
 
-#: templates/wishlist-view-mobile.php:136
+#: templates/wishlist-view-mobile.php:134
 msgid "Added on:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:147
+#: templates/wishlist-view-mobile.php:145
 msgid "Price:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:174
+#: templates/wishlist-view-mobile.php:172
 msgid "Quantity:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:189
+#: templates/wishlist-view-mobile.php:187
 msgid "Stock:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:192 templates/wishlist-view.php:229
+#: templates/wishlist-view-mobile.php:190 templates/wishlist-view.php:227
 msgid "Out of stock"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:192 templates/wishlist-view.php:229
+#: templates/wishlist-view-mobile.php:190 templates/wishlist-view.php:227
 msgid "In Stock"
 msgstr "موجود"
 
-#: templates/wishlist-view-mobile.php:212 templates/wishlist-view.php:262
+#: templates/wishlist-view-mobile.php:210 templates/wishlist-view.php:260
 msgid "Move"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:233 templates/wishlist-view.php:283
+#: templates/wishlist-view-mobile.php:231 templates/wishlist-view.php:281
 msgid "Move to another list &rsaquo;"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:241 templates/wishlist-view.php:157
-#: templates/wishlist-view.php:293
+#: templates/wishlist-view-mobile.php:239 templates/wishlist-view.php:155
+#: templates/wishlist-view.php:291
 msgid "Remove this product"
 msgstr "حذف این محصول"
 
-#: templates/wishlist-view-mobile.php:252 templates/wishlist-view.php:313
+#: templates/wishlist-view-mobile.php:250 templates/wishlist-view.php:311
 msgid "No products added to the wishlist"
 msgstr ""
 
@@ -1336,11 +1336,11 @@ msgid "Arrange"
 msgstr ""
 
 #. translators: date added label: 1 date added.
-#: templates/wishlist-view.php:243
+#: templates/wishlist-view.php:241
 msgid "Added on: %s"
 msgstr ""
 
-#: templates/wishlist-view.php:293
+#: templates/wishlist-view.php:291
 msgid "Remove"
 msgstr "حذف"
 
@@ -1391,7 +1391,7 @@ msgid "Shows a list of products in wishlist"
 msgstr ""
 
 #. translators: 1. % of reduction/increase in price.
-#: includes/class-yith-wcwl-wishlist-item.php:428
+#: includes/class-yith-wcwl-wishlist-item.php:435
 msgctxt ""
 "Part of the template that shows price variation since addition to list; "
 "placeholder will be replaced with a percentage"
@@ -1399,7 +1399,7 @@ msgid "Price is %1$s%%"
 msgstr ""
 
 #. translators: 2: original product price.
-#: includes/class-yith-wcwl-wishlist-item.php:430
+#: includes/class-yith-wcwl-wishlist-item.php:437
 msgctxt ""
 "Part of the template that shows price variation since addition to list; "
 "placeholder will be replaced with a price"

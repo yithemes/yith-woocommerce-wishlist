@@ -688,7 +688,25 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				}
 
 				// order by statement.
-				$query .= ' ORDER BY position ASC, ID DESC;';
+				$orders  = apply_filters(
+					'yith_wcwl_wishlist_items_sorting',
+					array(
+						'position' => 'ASC',
+						'ID'       => 'DESC',
+					)
+				);
+				$orderby = implode(
+					', ',
+					array_map(
+						function ( $column, $sorting ) {
+							return "$column $sorting";
+						},
+						array_keys( $orders ),
+						$orders
+					)
+				);
+
+				$query .= ' ORDER BY ' . esc_sql( $orderby );
 
 				$items = $wpdb->get_results(
 					$wpdb->prepare(

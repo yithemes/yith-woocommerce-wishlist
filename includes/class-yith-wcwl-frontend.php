@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.9.0';
+		public $version = '3.10.0';
 
 		/**
 		 * Plugin database version
@@ -190,12 +190,103 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				)
 			);
 
-			// Add the link "Add to wishlist".
+			// Add the link "Add to wishlist" in the loop.
 			$position = get_option( 'yith_wcwl_loop_position', 'after_add_to_cart' );
 
 			if ( 'shortcode' !== $position && isset( $positions[ $position ] ) ) {
 				add_action( $positions[ $position ]['hook'], array( $this, 'print_button' ), $positions[ $position ]['priority'] );
 			}
+
+			// Add the link "Add to wishlist" for Gutenberg blocks.
+			add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'add_button_for_block' ), 10, 3 );
+		}
+
+		/**
+		 * Add ATW button to Products block item
+		 *
+		 * @param string     $item_html HTML of the single block item.
+		 * @param array      $data      Data used to render the item.
+		 * @param WC_Product $product   Current product.
+		 *
+		 * @return string Filtered HTML.
+		 */
+		public function add_button_for_block( $item_html, $data, $product ) {
+			// Add the link "Add to wishlist" in the loop.
+			$position = get_option( 'yith_wcwl_loop_position', 'after_add_to_cart' );
+			$button   = $this->get_button( $product->get_id() );
+			$parts    = array();
+
+			preg_match( '/(<li class=".*?">)[\S|\s]*?(<a .*?>[\S|\s]*?<\/a>)([\S|\s]*?)(<\/li>)/', $item_html, $parts );
+
+			if ( ! $parts || count( $parts ) < 5 ) {
+				return $item_html;
+			}
+
+			// removes first match (entire match).
+			array_shift( $parts );
+
+			// removes empty parts.
+			$parts = array_filter( $parts );
+
+			// searches for index to cut parts array.
+			switch ( $position ) {
+				case 'before_image':
+					$index = 1;
+					break;
+				case 'before_add_to_cart':
+					$index = 2;
+					break;
+				case 'after_add_to_cart':
+					$index = 3;
+					break;
+			}
+
+			// if index is found, stitch button in correct position.
+			if ( $index ) {
+				$first_set  = array_slice( $parts, 0, $index );
+				$second_set = array_slice( $parts, $index );
+
+				$parts = array_merge(
+					$first_set,
+					(array) $button,
+					$second_set
+				);
+
+				// replace li classes.
+				$parts[0] = preg_replace( '/class="(.*)"/', 'class="$1 add-to-wishlist-' . $position . '"', $parts[0] );
+			}
+
+			// join all parts together.
+			$item_html = implode( '', $parts );
+
+			// return item.
+			return $item_html;
+		}
+
+		/**
+		 * Returns HTML for ATW button
+		 *
+		 * @param int $product_id Optional product id (if empty global product will be used instead by the shortcode).
+		 * @return string HTML for ATW button.
+		 */
+		public function get_button( $product_id = false ) {
+			$shortcode_tag = 'yith_wcwl_add_to_wishlist';
+			$options       = array();
+			$text_options  = '';
+
+			if ( $product_id ) {
+				$options['product_id'] = $product_id;
+			}
+
+			if ( ! empty( $options ) ) {
+				foreach ( $options as $option_key => $option_value ) {
+					$text_options .= " $option_key=\"$option_value\"";
+				}
+			}
+
+			$shortcode = "[$shortcode_tag $text_options]";
+
+			return do_shortcode( $shortcode );
 		}
 
 		/**
