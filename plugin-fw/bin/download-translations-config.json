@@ -27,6 +27,11 @@
       "id": "ru",
       "name": "Russian",
       "slug": "ru_RU"
+    },
+    {
+      "id": "zh",
+      "name": "Chinese (China)",
+      "slug": "zh_CN"
     }
   ]
 }

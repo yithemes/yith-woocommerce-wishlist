@@ -171,7 +171,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 										<td class="label">
 											<?php esc_html_e( 'Quantity:', 'yith-woocommerce-wishlist' ); ?>
 										</td>
-										<td class="value">
+										<td class="product-quantity">
 											<?php if ( ! $no_interactions && $wishlist->current_user_can( 'update_quantity' ) ) : ?>
 												<input type="number" min="1" step="1" name="items[<?php echo esc_attr( $item->get_product_id() ); ?>][quantity]" value="<?php echo esc_attr( $item->get_quantity() ); ?>"/>
 											<?php else : ?>
