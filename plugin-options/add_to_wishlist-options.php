@@ -11,6 +11,15 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
 
+/**
+ * APPLY_FILTERS: yith_wcwl_add_to_wishlist_options
+ *
+ * Filter the options available in the 'Add to wishlist options' tab.
+ *
+ * @param array $options Array of options
+ *
+ * @return array
+ */
 return apply_filters(
 	'yith_wcwl_add_to_wishlist_options',
 	array(
@@ -246,6 +255,15 @@ return apply_filters(
 				'name'      => __( '"Add to wishlist" icon', 'yith-woocommerce-wishlist' ),
 				'desc'      => __( 'Select an icon for the "Add to wishlist" button (optional)', 'yith-woocommerce-wishlist' ),
 				'id'        => 'yith_wcwl_add_to_wishlist_icon',
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_to_wishlist_std_icon
+				 *
+				 * Filter the default 'Add to wishlist' icon.
+				 *
+				 * @param string $icon Default icon
+				 *
+				 * @return array
+				 */
 				'default'   => apply_filters( 'yith_wcwl_add_to_wishlist_std_icon', 'fa-heart-o', 'yith_wcwl_add_to_wishlist_icon' ),
 				'type'      => 'yith-field',
 				'class'     => 'icon-select',
@@ -270,6 +288,15 @@ return apply_filters(
 				'name'      => __( '"Added to wishlist" icon', 'yith-woocommerce-wishlist' ),
 				'desc'      => __( 'Select an icon for the "Added to wishlist" button (optional)', 'yith-woocommerce-wishlist' ),
 				'id'        => 'yith_wcwl_added_to_wishlist_icon',
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_to_wishlist_std_icon
+				 *
+				 * Filter the default 'Added to wishlist' icon.
+				 *
+				 * @param string $icon Default icon
+				 *
+				 * @return array
+				 */
 				'default'   => apply_filters( 'yith_wcwl_add_to_wishlist_std_icon', 'fa-heart', 'yith_wcwl_added_to_wishlist_icon' ),
 				'type'      => 'yith-field',
 				'class'     => 'icon-select',

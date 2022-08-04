@@ -75,11 +75,11 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function get_instance() {
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new self();
+			if ( is_null( static::$instance ) ) {
+				static::$instance = new static();
 			}
 
-			return self::$instance;
+			return static::$instance;
 		}
 
 		/**
@@ -140,6 +140,15 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 			$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'unminified/' : '';
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_available_admin_tabs
+			 *
+			 * Filter the available tabs in the plugin panel.
+			 *
+			 * @param array $tabs Admin tabs
+			 *
+			 * @return array
+			 */
 			$this->available_tabs = apply_filters(
 				'yith_wcwl_available_admin_tabs',
 				array(
@@ -186,10 +195,20 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 			} elseif ( version_compare( $stored_db_version, YITH_WCWL_DB_VERSION, '<' ) ) {
 				// update database.
 				YITH_WCWL_Install()->update( $stored_db_version );
+				/**
+				 * DO_ACTION: yith_wcwl_updated
+				 *
+				 * Allows to fire some action when the plugin database is updated.
+				 */
 				do_action( 'yith_wcwl_updated' );
 			}
 
 			// Plugin installed.
+			/**
+			 * DO_ACTION: yith_wcwl_installed
+			 *
+			 * Allows to fire some action when the plugin database is installed.
+			 */
 			do_action( 'yith_wcwl_installed' );
 		}
 
@@ -217,15 +236,13 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function add_plugin_meta( $new_row_meta_args, $plugin_meta, $plugin_file, $plugin_data, $status, $init_file = 'YITH_WCWL_INIT' ) {
-			if ( defined( $init_file ) && constant( $init_file ) === $plugin_file ) {
-				$new_row_meta_args['slug'] = 'yith-woocommerce-wishlist';
-
+			if ( ! defined( $init_file ) || constant( $init_file ) !== $plugin_file ) {
+				return $new_row_meta_args;
 			}
 
-			if ( defined( 'YITH_WCWL_PREMIUM' ) ) {
-				$new_row_meta_args['is_premium'] = true;
-
-			}
+			$new_row_meta_args['slug']        = 'yith-woocommerce-wishlist';
+			$new_row_meta_args['is_premium']  = defined( 'YITH_WCWL_PREMIUM' );
+			$new_row_meta_args['is_extended'] = defined( 'YITH_WCWL_EXTENDED' );
 
 			return $new_row_meta_args;
 		}
@@ -246,7 +263,18 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 				'page_title'         => 'YITH WooCommerce Wishlist',
 				'menu_title'         => 'Wishlist',
 				'plugin_slug'        => YITH_WCWL_SLUG,
+				'is_extended'        => defined( 'YITH_WCWL_EXTENDED' ),
+				'is_premium'         => defined( 'YITH_WCWL_PREMIUM' ),
 				'plugin_description' => __( 'Allows your customers to create and share lists of products that they want to purchase on your e-commerce.', 'yith-woocommerce-wishlist' ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_settings_panel_capability
+				 *
+				 * Filter the capability used to access the plugin panel.
+				 *
+				 * @param string $capability Capability
+				 *
+				 * @return string
+				 */
 				'capability'         => apply_filters( 'yith_wcwl_settings_panel_capability', 'manage_options' ),
 				'parent'             => '',
 				'class'              => function_exists( 'yith_set_wrapper_class' ) ? yith_set_wrapper_class() : '',
@@ -275,8 +303,8 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 			// registers premium tab.
 			if ( ! defined( 'YITH_WCWL_PREMIUM' ) ) {
 				$args['premium_tab'] = array(
-					'landing_page_url'          => $this->get_premium_landing_uri(),
-					'premium_features'          => array(
+					'landing_page_url' => $this->get_premium_landing_uri(),
+					'premium_features' => array(
 						__( 'Enable the wishlist feature for all users or <b>only for registered users</b>', 'yith-woocommerce-wishlist' ),
 						__( 'Allow users to create <b>multiple wishlists</b> (Ex: Christmas, Birthday, etc.) <br>Users can choose the wishlist from a dropdown menu when they click on "Add to wishlist"', 'yith-woocommerce-wishlist' ),
 						__( 'Allow users to set <b>visibility options for each wishlist</b>, by making them either public (visible to everyone), private or shared (visible only to people it has been shared with)', 'yith-woocommerce-wishlist' ),
@@ -284,12 +312,11 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 						__( '<b>Allow users to manage their wishlists:</b> rename and delete wishlists, move a product from one wishlist to another, change order of items, quantity, etc.', 'yith-woocommerce-wishlist' ),
 						__( 'Enable an <b>"Ask for an estimate" button</b> to let customers send the content of their wishlist to the admin and get a custom quote', 'yith-woocommerce-wishlist' ),
 						__( '<b>Show a wishlist widget</b> that lists all the products in the wishlists (available also with "mini-cart" style for the header)', 'yith-woocommerce-wishlist' ),
-						__( 'View the most popular products added to the wishlist by your customers and <b>send promotional emails to users</b> who have added specific products to their wishlist', 'yith-woocommerce-wishlist' ),
+						__( '<b>Send promotional emails to users</b> who have added specific products to their wishlist', 'yith-woocommerce-wishlist' ),
 						__( '<b>Send an automatic email to the wishlist owner</b> whenever a product in the list is back in stock or on sale', 'yith-woocommerce-wishlist' ),
 						'<b>' . __( 'Regular updates, Translations and Premium Support', 'yith-woocommerce-wishlist' ) . '</b>',
 					),
-					'main_image_url'            => YITH_WCWL_URL . 'assets/images/premium/get-premium-wishlist.jpg',
-					'show_free_vs_premium_link' => true,
+					'main_image_url'   => YITH_WCWL_URL . 'assets/images/premium/get-premium-wishlist.jpg',
 				);
 			}
 
@@ -358,5 +385,13 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
  * @since 2.0.0
  */
 function YITH_WCWL_Admin() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Admin_Premium::get_instance() : YITH_WCWL_Admin::get_instance();
+	if ( defined( 'YITH_WCWL_PREMIUM' ) ) {
+		$instance = YITH_WCWL_Admin_Premium::get_instance();
+	} elseif ( defined( 'YITH_WCWL_EXTENDED' ) ) {
+		$instance = YITH_WCWL_Admin_Extended::get_instance();
+	} else {
+		$instance = YITH_WCWL_Admin::get_instance();
+	}
+
+	return $instance;
 }

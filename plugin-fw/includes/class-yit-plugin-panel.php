@@ -769,7 +769,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * @return bool Whether panel has help tab or no.
 		 */
 		public function has_help_tab() {
-			return ! empty( $this->settings['help_tab'] ) && apply_filters( 'yith_plugin_fw_panel_has_help_tab', true, $this ) && ( ! $this->is_free() || ! empty( $this->settings['help_tab']['show_on_free'] ) );
+			return apply_filters( 'yith_plugin_fw_panel_has_help_tab', ! empty( $this->settings['help_tab'] ) && ( ! $this->is_free() || ! empty( $this->settings['help_tab']['show_on_free'] ) ), $this );
 		}
 
 
@@ -792,22 +792,31 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		public function print_help_tab() {
 			$options      = isset( $this->settings['help_tab'] ) ? $this->settings['help_tab'] : array();
 			$plugin_title = isset( $this->settings['plugin_title'] ) ? $this->settings['plugin_title'] : $this->settings['page_title'];
+			$is_extended  = $this->is_extended();
+			$is_premium   = $this->is_premium() || ! $is_extended;
 
 			if ( 0 !== strpos( $plugin_title, 'YITH' ) ) {
 				$plugin_title = "YITH {$plugin_title}";
+			}
+
+			// translators: 1. Plugin name.
+			$default_title   = $is_premium ? _x( 'Thank you for purchasing %s!', 'Help tab default title', 'yith-plugin-fw' ) : _x( 'Thank you for using %s!', 'Help tab default title', 'yith-plugin-fw' );
+			$default_doc_url = '';
+
+			if ( isset( $this->settings['plugin_slug'] ) ) {
+				$default_doc_url = $is_extended ? "https://www.bluehost.com/help/article/{$this->settings['plugin_slug']}/" : "https://docs.yithemes.com/{$this->settings['plugin_slug']}/";
 			}
 
 			// parse options.
 			$options = wp_parse_args(
 				$options,
 				array(
-					// translators: 1. Plugin name.
-					'title'              => sprintf( _x( 'Thank you for purchasing %s!', 'Help tab default title', 'yith-plugin-fw' ), $plugin_title ),
+					'title'              => sprintf( $default_title, $plugin_title ),
 					'description'        => _x( 'We want to help you enjoy a wonderful experience with all of our products.', 'Help tab default description', 'yith-plugin-fw' ),
 					'main_video'         => false,
 					'playlists'          => array(),
 					'hc_url'             => 'https://support.yithemes.com/hc/',
-					'doc_url'            => isset( $this->settings['plugin_slug'] ) ? 'https://docs.yithemes.com/' . $this->settings['plugin_slug'] . '/' : '',
+					'doc_url'            => $default_doc_url,
 					'submit_ticket_url'  => 'https://yithemes.com/my-account/support/submit-a-ticket/',
 					'show_hc_articles'   => true,
 					'show_submit_ticket' => true,
@@ -815,7 +824,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			);
 
 			// add campaign parameters to url.
-			if ( isset( $this->settings['plugin_slug'] ) ) {
+			if ( isset( $this->settings['plugin_slug'] ) && ! $is_extended ) {
 				$utm_medium   = $this->settings['plugin_slug'];
 				$utm_source   = yith_plugin_fw_panel_utm_source( $this );
 				$utm_campaign = 'help-tab';
@@ -832,6 +841,10 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 
 					$options[ $campaign_url ] = yith_plugin_fw_add_utm_data( $options[ $campaign_url ], $utm_medium, $utm_campaign, $utm_source );
 				}
+			}
+
+			if ( $is_extended && $options['show_submit_ticket'] ) {
+				$options['submit_ticket_url'] = add_query_arg( array( 'page' => 'bluehost' ), admin_url( 'admin.php' ) ) . '#/help';
 			}
 
 			// set template variables.
@@ -897,12 +910,14 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * @since  3.9.0
 		 */
 		protected function print_premium_tab() {
-			$options = $this->settings['premium_tab'] ?? array();
+			$options     = $this->settings['premium_tab'] ?? array();
+			$is_extended = $this->is_extended();
 
 			$defaults = array(
 				'premium_features'          => array(),
 				'main_image_url'            => '',
 				'show_free_vs_premium_link' => true,
+				'show_premium_landing_link' => $is_extended,
 			);
 			$options  = wp_parse_args( $options, $defaults );
 

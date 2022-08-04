@@ -45,7 +45,27 @@ global $product;
 	<a href="<?php echo esc_url( $wishlist_url ); ?>" rel="nofollow" data-title="<?php echo esc_attr( $browse_wishlist_text ); ?>">
 		<?php echo ( ! $is_single && 'before_image' === $loop_position ) ? yith_wcwl_kses_icon( $icon ) : false; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php
+		/**
+		 * APPLY_FILTERS: yith_wcwl_show_text_on_the_image
+		 *
+		 * Filter whether to show the 'Add to wishlist' text on the product image.
+		 *
+		 * @param bool $condition Whether show or not the text in the image
+		 *
+		 * @return bool
+		 */
 		if ( apply_filters( 'yith_wcwl_show_text_on_the_image', true ) ) {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_browse_wishlist_label
+			 *
+			 * Filter the label to browse the wishlist.
+			 *
+			 * @param string $text       Browse wishlist text
+			 * @param int    $product_id Product ID
+			 * @param string $icon       Icon
+			 *
+			 * @return string
+			 */
 			echo wp_kses_post( apply_filters( 'yith_wcwl_browse_wishlist_label', $browse_wishlist_text, $product_id, $icon ) );
 		}
 		?>

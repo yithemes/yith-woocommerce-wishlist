@@ -56,9 +56,27 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			if ( ! $wishlist->get_session_id() && ! $wishlist->get_user_id() ) {
 				if ( is_user_logged_in() ) {
 					$user_id = get_current_user_id();
+					/**
+					 * APPLY_FILTERS: yith_wcwl_add_wishlist_user_id
+					 *
+					 * Filter the user ID saved in the wishlist.
+					 *
+					 * @param int $user_id User ID
+					 *
+					 * @return int
+					 */
 					$wishlist->set_user_id( apply_filters( 'yith_wcwl_add_wishlist_user_id', $user_id ) );
 				} else {
 					$session_id = YITH_WCWL_Session()->get_session_id();
+					/**
+					 * APPLY_FILTERS: yith_wcwl_add_wishlist_session_id
+					 *
+					 * Filter the session ID saved in the wishlist.
+					 *
+					 * @param string $session_id Session ID
+					 *
+					 * @return string
+					 */
 					$wishlist->set_session_id( apply_filters( 'yith_wcwl_add_wishlist_session_id', $session_id ) );
 				}
 			}
@@ -74,10 +92,55 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				'is_default'       => '%d',
 			);
 			$values  = array(
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_wishlist_privacy
+				 *
+				 * Filter the wishlist privacy.
+				 *
+				 * @param int $privacy Wishlist privacy
+				 *
+				 * @return int
+				 */
 				apply_filters( 'yith_wcwl_add_wishlist_privacy', $wishlist->get_privacy() ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_wishlist_name
+				 *
+				 * Filter the wishlist name.
+				 *
+				 * @param string $name Wishlist name
+				 *
+				 * @return string
+				 */
 				apply_filters( 'yith_wcwl_add_wishlist_name', $wishlist->get_name() ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_wishlist_slug
+				 *
+				 * Filter the wishlist slug.
+				 *
+				 * @param string $slug Wishlist slug
+				 *
+				 * @return string
+				 */
 				apply_filters( 'yith_wcwl_add_wishlist_slug', $wishlist->get_slug() ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_wishlist_token
+				 *
+				 * Filter the wishlist token.
+				 *
+				 * @param string $token Wishlist token
+				 *
+				 * @return string
+				 */
 				apply_filters( 'yith_wcwl_add_wishlist_token', $wishlist->get_token() ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_wishlist_is_default
+				 *
+				 * Filter whether is the default wishlist.
+				 *
+				 * @param bool $bool Is default wishlist?
+				 *
+				 * @return bool
+				 */
 				apply_filters( 'yith_wcwl_add_wishlist_is_default', $wishlist->get_is_default() ),
 			);
 
@@ -99,14 +162,32 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 			if ( $date_added ) {
 				$columns['dateadded'] = 'FROM_UNIXTIME( %d )';
-				$values[]             = apply_filters( 'yith_wcwl_add_wishlist_date_added', $date_added->getTimestamp() );
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_wishlist_date_added
+				 *
+				 * Filter the date when the wishlist was created.
+				 *
+				 * @param int $date_added Date when the wishlist was created (timestamp)
+				 *
+				 * @return int
+				 */
+				$values[] = apply_filters( 'yith_wcwl_add_wishlist_date_added', $date_added->getTimestamp() );
 			}
 
 			$expiration = $wishlist->get_expiration( 'edit' );
 
 			if ( $expiration ) {
 				$columns['expiration'] = 'FROM_UNIXTIME( %d )';
-				$values[]              = apply_filters( 'yith_wcwl_add_wishlist_expiration', $expiration->getTimestamp() );
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_wishlist_expiration
+				 *
+				 * Filter the date when the wishlist will expire.
+				 *
+				 * @param int $expiration_date Date when the wishlist will expire (timestamp)
+				 *
+				 * @return int
+				 */
+				$values[] = apply_filters( 'yith_wcwl_add_wishlist_expiration', $expiration->getTimestamp() );
 			}
 
 			// if session wishlist, set always an expiration.
@@ -124,12 +205,29 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			$res = $wpdb->query( $wpdb->prepare( $query, $values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 			if ( $res ) {
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_correctly_created
+				 *
+				 * Filter the ID of the Wishlist created.
+				 *
+				 * @param int $id Wishlist ID
+				 *
+				 * @return int
+				 */
 				$id = apply_filters( 'yith_wcwl_wishlist_correctly_created', intval( $wpdb->insert_id ) );
 
 				$wishlist->set_id( $id );
 				$wishlist->apply_changes();
 				$this->clear_caches( $wishlist );
 
+				/**
+				 * DO_ACTION: yith_wcwl_new_wishlist
+				 *
+				 * Allows to fire some action when a new wishlist is created.
+				 *
+				 * @param int                $wishlist_id   Wishlist ID
+				 * @param YITH_WCWL_Wishlist $wishlist_data Wishlist object
+				 */
 				do_action( 'yith_wcwl_new_wishlist', $wishlist->get_id(), $wishlist );
 			}
 		}
@@ -227,7 +325,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 				if ( $session_id ) {
 					$columns['session_id'] = '%s';
-					$values[]              = apply_filters( 'yith_wcwl_update_wishlist_session_id', $session_id );
+					/**
+					 * APPLY_FILTERS: yith_wcwl_update_wishlist_session_id
+					 *
+					 * Filter the session ID of the updated wishlist.
+					 *
+					 * @param string $session_id Session ID
+					 *
+					 * @return string
+					 */
+					$values[] = apply_filters( 'yith_wcwl_update_wishlist_session_id', $session_id );
 				} else {
 					$columns['session_id'] = 'NULL';
 				}
@@ -236,7 +343,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 				if ( $user_id ) {
 					$columns['user_id'] = '%d';
-					$values[]           = apply_filters( 'yith_wcwl_update_wishlist_user_id', $user_id );
+					/**
+					 * APPLY_FILTERS: yith_wcwl_update_wishlist_user_id
+					 *
+					 * Filter the user ID of the updated wishlist.
+					 *
+					 * @param int $user_id User ID
+					 *
+					 * @return int
+					 */
+					$values[] = apply_filters( 'yith_wcwl_update_wishlist_user_id', $user_id );
 				} else {
 					$columns['user_id'] = 'NULL';
 				}
@@ -245,7 +361,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 
 				if ( $expiration ) {
 					$columns['expiration'] = 'FROM_UNIXTIME( %d )';
-					$values[]              = apply_filters( 'yith_wcwl_update_wishlist_expiration', $expiration->getTimestamp() );
+					/**
+					 * APPLY_FILTERS: yith_wcwl_update_wishlist_expiration
+					 *
+					 * Filter the expiration date of the updated wishlist.
+					 *
+					 * @param int $expiration_date Date when the wishlist will expire (timestamp)
+					 *
+					 * @return int
+					 */
+					$values[] = apply_filters( 'yith_wcwl_update_wishlist_expiration', $expiration->getTimestamp() );
 				} else {
 					$columns['expiration'] = 'NULL';
 				}
@@ -263,6 +388,14 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			$wishlist->apply_changes();
 			$this->clear_caches( $wishlist );
 
+			/**
+			 * DO_ACTION: yith_wcwl_update_wishlist
+			 *
+			 * Allows to fire some action when a wishlist is updated.
+			 *
+			 * @param int                $wishlist_id   Wishlist ID
+			 * @param YITH_WCWL_Wishlist $wishlist_data Wishlist object
+			 */
 			do_action( 'yith_wcwl_update_wishlist', $wishlist->get_id(), $wishlist );
 		}
 
@@ -283,6 +416,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				return;
 			}
 
+			/**
+			 * DO_ACTION: yith_wcwl_before_delete_wishlist
+			 *
+			 * Allows to fire some action before a wishlist is deleted.
+			 *
+			 * @param int $wishlist_id Wishlist ID
+			 */
 			do_action( 'yith_wcwl_before_delete_wishlist', $wishlist->get_id() );
 
 			$this->clear_caches( $wishlist );
@@ -291,10 +431,24 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			$wpdb->delete( $wpdb->yith_wcwl_items, array( 'wishlist_id' => $id ) );
 			$wpdb->delete( $wpdb->yith_wcwl_wishlists, array( 'ID' => $id ) );
 
+			/**
+			 * DO_ACTION: yith_wcwl_delete_wishlist
+			 *
+			 * Allows to fire some action when a wishlist is deleted.
+			 *
+			 * @param int $wishlist_id Wishlist ID
+			 */
 			do_action( 'yith_wcwl_delete_wishlist', $wishlist->get_id() );
 
 			$wishlist->set_id( 0 );
 
+			/**
+			 * DO_ACTION: yith_wcwl_deleted_wishlist
+			 *
+			 * Allows to fire some action after a wishlist is deleted.
+			 *
+			 * @param int $id Wishlist ID
+			 */
 			do_action( 'yith_wcwl_deleted_wishlist', $id );
 
 			if ( $is_default && ( $user_id || $session_id ) ) {
@@ -365,6 +519,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				'wishlist_slug'       => false,
 				'wishlist_name'       => false,
 				'wishlist_token'      => false,
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_visibility_string_value
+				 *
+				 * Filter the wishlist visibility value.
+				 *
+				 * @param string $wishlist_visibility Wishlist visibility. Possible values are: all | visible | public | shared | private
+				 *
+				 * @return string
+				 */
 				'wishlist_visibility' => apply_filters( 'yith_wcwl_wishlist_visibility_string_value', 'all' ), // all | visible | public | shared | private.
 				'user_search'         => false,
 				's'                   => false,
@@ -526,6 +689,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				$lists = array();
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_get_wishlists
+			 *
+			 * Filter the wishlists retrieved in the query.
+			 *
+			 * @param array $lists Array of wishlists
+			 * @param array $args  Array of arguments
+			 *
+			 * @return array
+			 */
 			return apply_filters( 'yith_wcwl_get_wishlists', $lists, $args );
 		}
 
@@ -683,11 +856,29 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				// remove hidden products from result.
 				$hidden_products = yith_wcwl_get_hidden_products();
 
+				/**
+				 * APPLY_FILTERS: yith_wcwl_remove_hidden_products_via_query
+				 *
+				 * Filter whether to remove hidden products via query.
+				 *
+				 * @param bool $bool Remove hidden products or not?
+				 *
+				 * @return bool
+				 */
 				if ( ! empty( $hidden_products ) && apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ) {
 					$query .= ' AND prod_id NOT IN ( ' . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . ' )';
 				}
 
 				// order by statement.
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_items_sorting
+				 *
+				 * Filter the order arguments for the query.
+				 *
+				 * @param array $args Array of order arguments
+				 *
+				 * @return array
+				 */
 				$orders  = apply_filters(
 					'yith_wcwl_wishlist_items_sorting',
 					array(
@@ -755,6 +946,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				$items = array();
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_get_products
+			 *
+			 * Filter the products retrieved from the wishlist.
+			 *
+			 * @param array $items Array of products
+			 * @param array $args  Array of arguments
+			 *
+			 * @return array
+			 */
 			return apply_filters( 'yith_wcwl_get_products', $items, array( 'wishlist_id' => $wishlist->get_id() ) );
 		}
 
@@ -840,6 +1041,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				$where_statement         = implode( ', ', array_map( 'esc_sql', $default_ids ) );
 
 				try {
+					/**
+					 * APPLY_FILTERS: yith_wcwl_merge_default_wishlists
+					 *
+					 * Filter whether merge all default wishlists into the oldest one.
+					 *
+					 * @param bool $bool Merge all default wishlists or not?
+					 *
+					 * @return bool
+					 */
 					if ( apply_filters( 'yith_wcwl_merge_default_wishlists', true ) ) {
 						// by default we merge all default wishlists into oldest one (master default wishlist).
 
@@ -855,6 +1065,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 						$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->yith_wcwl_wishlists} SET is_default = %d WHERE ID IN ({$where_statement})", 0 ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 						// set name where it is missing.
+						/**
+						 * APPLY_FILTERS: yith_wcwl_default_wishlist_formatted_title
+						 *
+						 * Filter the default wishlist title.
+						 *
+						 * @param string $title Default wishlist title
+						 *
+						 * @return string
+						 */
 						$default_title = apply_filters( 'yith_wcwl_default_wishlist_formatted_title', get_option( 'yith_wcwl_wishlist_title' ) );
 						$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->yith_wcwl_wishlists} SET wishlist_name = %s WHERE ID IN ({$where_statement}) AND wishlist_name = ''", $default_title ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 					}
@@ -950,6 +1169,14 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 				 * Let developers perform processing when default wishlist is created
 				 *
 				 * @since 3.0.10
+				 */
+				/**
+				 * DO_ACTION: yith_wcwl_generated_default_wishlist
+				 *
+				 * Allows to fire some action when default wishlist is created.
+				 *
+				 * @param YITH_WCWL_Wishlist $default_wishlist Default wishlist object
+				 * @param int                $id               Wishlist ID
 				 */
 				do_action( 'yith_wcwl_generated_default_wishlist', $default_wishlist, $id );
 			} catch ( Exception $e ) {

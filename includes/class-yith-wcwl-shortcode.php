@@ -224,6 +224,15 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			extract( $atts ); // phpcs:ignore
 
 			// retrieve options from query string.
+			/**
+			 * APPLY_FILTERS: yith_wcwl_current_wishlist_view_params
+			 *
+			 * Filter the array of parameters to see the current wishlist.
+			 *
+			 * @param array $params Array of parameters
+			 *
+			 * @return array
+			 */
 			$action_params = explode( '/', apply_filters( 'yith_wcwl_current_wishlist_view_params', $action_params ) );
 			$action        = ( isset( $action_params[0] ) ) ? $action_params[0] : 'view';
 
@@ -244,8 +253,28 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			$icon = get_option( 'yith_wcwl_add_to_wishlist_icon' );
 
 			if ( 'custom' === $icon ) {
-				$custom_icon       = get_option( 'yith_wcwl_add_to_wishlist_custom_icon' );
-				$custom_icon_alt   = apply_filters( 'yith_wcwl_custom_icon_alt', '' );
+				$custom_icon = get_option( 'yith_wcwl_add_to_wishlist_custom_icon' );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_custom_icon_alt
+				 *
+				 * Filter the alternative text for the heading icon in the widget.
+				 *
+				 * @param string $text Alternative text
+				 *
+				 * @return string
+				 */
+				$custom_icon_alt = apply_filters( 'yith_wcwl_custom_icon_alt', '' );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_custom_width
+				 *
+				 * Filter the width for the heading icon in the widget.
+				 *
+				 * @param string $width Icon width
+				 *
+				 * @return string
+				 */
 				$custom_icon_width = apply_filters( 'yith_wcwl_custom_width', '32' );
 
 				$heading_icon = '<img src="' . esc_url( $custom_icon ) . '" alt="' . esc_attr( $custom_icon_alt ) . '" width="' . esc_attr( $custom_icon_width ) . '" />';
@@ -411,8 +440,39 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				// we want spaces to be encoded as + instead of %20, so we use urlencode instead of rawurlencode.
 				// phpcs:disable WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
 				if ( ! $no_interactions && $enable_share && ( $share_facebook_enabled || $share_twitter_enabled || $share_pinterest_enabled || $share_email_enabled || $share_whatsapp_enabled || $share_url_enabled ) ) {
-					$share_title      = apply_filters( 'yith_wcwl_socials_share_title', __( 'Share on:', 'yith-woocommerce-wishlist' ) );
-					$share_link_url   = apply_filters( 'yith_wcwl_shortcode_share_link_url', $wishlist->get_url(), $wishlist );
+					/**
+					 * APPLY_FILTERS: yith_wcwl_socials_share_title
+					 *
+					 * Filter the title to share the wishlist on the different socials.
+					 *
+					 * @param string $share_title Share title
+					 *
+					 * @return string
+					 */
+					$share_title = apply_filters( 'yith_wcwl_socials_share_title', __( 'Share on:', 'yith-woocommerce-wishlist' ) );
+
+					/**
+					 * APPLY_FILTERS: yith_wcwl_shortcode_share_link_url
+					 *
+					 * Filter the wishlist URL to share.
+					 *
+					 * @param string             $share_link_url Share link URL
+					 * @param YITH_WCWL_Wishlist $wishlist       Wishlist object
+					 *
+					 * @return string
+					 */
+					$share_link_url = apply_filters( 'yith_wcwl_shortcode_share_link_url', $wishlist->get_url(), $wishlist );
+
+					/**
+					 * APPLY_FILTERS: yith_wcwl_share_title
+					 *
+					 * Filter the title to share the wishlist.
+					 *
+					 * @param string             $share_title Share title
+					 * @param YITH_WCWL_Wishlist $wishlist    Wishlist object
+					 *
+					 * @return string
+					 */
 					$share_link_title = apply_filters( 'yith_wcwl_share_title', urlencode( get_option( 'yith_wcwl_socials_title' ) ), $wishlist );
 					$share_summary    = urlencode( str_replace( '%wishlist_url%', $share_link_url, get_option( 'yith_wcwl_socials_text' ) ) );
 
@@ -521,6 +581,21 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			}
 
 			// filter params.
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_wishlist_params
+			 *
+			 * Filter the array with the paramters in the wishlist page.
+			 *
+			 * @param array  $additional_params Wishlist parameters
+			 * @param string $action            Action
+			 * @param array  $action_params     Action parameters
+			 * @param string $pagination        Use pagination or not
+			 * @param int    $per_page          Number of items per page
+			 * @param array  $atts              Array of attributes
+			 *
+			 * @return array
+			 */
 			$additional_params = apply_filters( 'yith_wcwl_wishlist_params', $additional_params, $action, $action_params, $pagination, $per_page, $atts );
 
 			$atts = array_merge(
@@ -591,16 +666,54 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			$loop_position       = get_option( 'yith_wcwl_loop_position' );
 
 			// button label.
+			/**
+			 * APPLY_FILTERS: yith_wcwl_button_label
+			 *
+			 * Filter the label of the 'Add to wishlist' button.
+			 *
+			 * @param string $label_option Button label
+			 *
+			 * @return string
+			 */
 			$label = apply_filters( 'yith_wcwl_button_label', $label_option );
 
 			// button icon.
-			$icon       = apply_filters( 'yith_wcwl_button_icon', 'none' !== $icon_option ? $icon_option : '' );
+			/**
+			 * APPLY_FILTERS: yith_wcwl_button_icon
+			 *
+			 * Filter the icon of the 'Add to wishlist' button.
+			 *
+			 * @param string $icon Button icon
+			 *
+			 * @return string
+			 */
+			$icon = apply_filters( 'yith_wcwl_button_icon', 'none' !== $icon_option ? $icon_option : '' );
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_button_added_icon
+			 *
+			 * Filter the added icon of the 'Add to wishlist' button.
+			 *
+			 * @param string $icon Button added icon
+			 *
+			 * @return string
+			 */
 			$added_icon = apply_filters( 'yith_wcwl_button_added_icon', 'none' !== $added_icon_option ? $added_icon_option : '' );
 
 			// button class.
 			$is_single         = isset( $atts['is_single'] ) ? $atts['is_single'] : yith_wcwl_is_single();
 			$use_custom_button = get_option( 'yith_wcwl_add_to_wishlist_style' );
-			$classes           = apply_filters( 'yith_wcwl_add_to_wishlist_button_classes', in_array( $use_custom_button, array( 'button_custom', 'button_default' ), true ) ? 'add_to_wishlist single_add_to_wishlist button alt' : 'add_to_wishlist single_add_to_wishlist' );
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_add_to_wishlist_button_classes
+			 *
+			 * Filter the CSS classes of the 'Add to wishlist' button.
+			 *
+			 * @param string $classes Button classes
+			 *
+			 * @return string
+			 */
+			$classes = apply_filters( 'yith_wcwl_add_to_wishlist_button_classes', in_array( $use_custom_button, array( 'button_custom', 'button_default' ), true ) ? 'add_to_wishlist single_add_to_wishlist button alt' : 'add_to_wishlist single_add_to_wishlist' );
 
 			// check if product is already in wishlist.
 			$exists                      = YITH_WCWL()->is_product_in_wishlist( $current_product_id );
@@ -618,10 +731,20 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			if ( 'remove' === $template_part ) {
 				$classes = str_replace( array( 'single_add_to_wishlist', 'add_to_wishlist' ), '', $classes );
-				$label   = apply_filters( 'yith_wcwl_remove_from_wishlist_label', __( 'Remove from list', 'yith-woocommerce-wishlist' ) );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_remove_from_wishlist_label
+				 *
+				 * Filter the label to remove from the wishlist.
+				 *
+				 * @param string $label Label
+				 *
+				 * @return string
+				 */
+				$label = apply_filters( 'yith_wcwl_remove_from_wishlist_label', __( 'Remove from list', 'yith-woocommerce-wishlist' ) );
 			}
 
-			// forcefully add icon when showing button over image, if no one is set.
+			// prevent button appearance when we're in loop, over image.
 			if ( ! $is_single && 'before_image' === get_option( 'yith_wcwl_loop_position' ) ) {
 				$classes = str_replace( 'button', '', $classes );
 			}
@@ -649,8 +772,35 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'product_type'              => $product_type,
 				'label'                     => $label,
 				'show_view'                 => yith_wcwl_is_single(),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_browse_wishlist_label
+				 *
+				 * Filter the label to browse the wishlist.
+				 *
+				 * @param string $browse_wishlist Browse wishlist text
+				 *
+				 * @return string
+				 */
 				'browse_wishlist_text'      => apply_filters( 'yith_wcwl_browse_wishlist_label', $browse_wishlist ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_product_already_in_wishlist_text_button
+				 *
+				 * Filter the text when the product is already in the wishlist.
+				 *
+				 * @param string $already_in_wishlist 'Already in wishlist' text
+				 *
+				 * @return string
+				 */
 				'already_in_wishslist_text' => apply_filters( 'yith_wcwl_product_already_in_wishlist_text_button', $already_in_wishlist ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_product_added_to_wishlist_message_button
+				 *
+				 * Filter the text when the product has been added to the wishlist.
+				 *
+				 * @param string $product_added 'Product added to the wishlist' text
+				 *
+				 * @return string
+				 */
 				'product_added_text'        => apply_filters( 'yith_wcwl_product_added_to_wishlist_message_button', $product_added ),
 				'icon'                      => $icon,
 				'heading_icon'              => $icon,
@@ -663,12 +813,33 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				'template_part'             => $template_part,
 			);
 			// let third party developer filter options.
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_add_to_wishlist_params
+			 *
+			 * Filter the array with the paramters for the 'Add to wishlist' action.
+			 *
+			 * @param array  $additional_params Wishlist parameters
+			 * @param array  $atts              Array of attributes
+			 *
+			 * @return array
+			 */
 			$additional_params = apply_filters( 'yith_wcwl_add_to_wishlist_params', $additional_params, $atts );
 
 			$atts = shortcode_atts(
 				$additional_params,
 				$atts
 			);
+
+			// add no-icon class when item is shown without icon.
+			if ( $is_single && empty( $atts['icon'] ) ) {
+				$atts['container_classes'] .= ' no-icon';
+			}
+
+			// add no-icon class when item is shown without icon.
+			if ( $exists && $atts['show_count'] ) {
+				$atts['container_classes'] .= ' with-count';
+			}
 
 			// set icon when missing, when on top of image (icon only, icon required).
 			if ( ! $is_single && 'before_image' === get_option( 'yith_wcwl_loop_position' ) && ( ! $atts['icon'] || 'custom' === $atts['icon'] ) ) {
@@ -704,14 +875,49 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 			// set fragment options.
 			$atts['fragment_options'] = YITH_WCWL_Frontend()->format_fragment_options( $atts, 'add_to_wishlist' );
-			$atts['icon']             = apply_filters( 'yith_wcwl_add_to_wishlist_icon_html', $icon_html, $atts );
-			$atts['heading_icon']     = apply_filters( 'yith_wcwl_add_to_wishlist_heading_icon_html', $heading_icon_html, $atts );
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_add_to_wishlist_icon_html
+			 *
+			 * Filter the HTML of the icon for the 'Add to wishlist'.
+			 *
+			 * @param string $icon_html HTML icon
+			 * @param array  $atts      Array of attributes
+			 *
+			 * @return string
+			 */
+			$atts['icon'] = apply_filters( 'yith_wcwl_add_to_wishlist_icon_html', $icon_html, $atts );
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_add_to_wishlist_heading_icon_html
+			 *
+			 * Filter the HTML of the heading icon for the 'Add to wishlist'.
+			 *
+			 * @param string $icon_html HTML icon
+			 * @param array  $atts      Array of attributes
+			 *
+			 * @return string
+			 */
+			$atts['heading_icon'] = apply_filters( 'yith_wcwl_add_to_wishlist_heading_icon_html', $heading_icon_html, $atts );
 
 			$template = yith_wcwl_get_template( 'add-to-wishlist.php', $atts, true );
 
 			// enqueue scripts.
 			YITH_WCWL_Frontend()->enqueue_scripts();
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_add_to_wishlisth_button_html
+			 *
+			 * Filter the HTML of the 'Add to wishlist' button.
+			 *
+			 * @param string $template     Button HTML
+			 * @param string $wishlist_url Wishlist URL
+			 * @param string $product_type Product type
+			 * @param bool   $exists       Whether the product is already in the wishlist
+			 * @param array  $atts         Array of attributes
+			 *
+			 * @return string
+			 */
 			return apply_filters( 'yith_wcwl_add_to_wishlisth_button_html', $template, $wishlist_url, $product_type, $exists, $atts );
 		}
 

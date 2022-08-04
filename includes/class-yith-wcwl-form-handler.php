@@ -54,6 +54,16 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 		public static function process_form_handling() {
 			$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : false;
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_block_user_agent
+			 *
+			 * Filter the conditions to block some user agents.
+			 *
+			 * @param bool   $condition  Conditions
+			 * @param string $user_agent User agent
+			 *
+			 * @return bool
+			 */
 			if ( $user_agent && apply_filters( 'yith_wcwl_block_user_agent', preg_match( '/bot|crawl|slurp|spider|wordpress/i', $user_agent ), $user_agent ) ) {
 				return false;
 			}
@@ -72,8 +82,26 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 				try {
 					YITH_WCWL()->add();
 
+					/**
+					 * APPLY_FILTERS: yith_wcwl_product_added_to_wishlist_message
+					 *
+					 * Filter the message shown when an item has been added to the wishlist.
+					 *
+					 * @param string $message Message
+					 *
+					 * @return string
+					 */
 					yith_wcwl_add_notice( apply_filters( 'yith_wcwl_product_added_to_wishlist_message', get_option( 'yith_wcwl_product_added_text' ) ), 'success' );
 				} catch ( Exception $e ) {
+					/**
+					 * APPLY_FILTERS: yith_wcwl_error_adding_to_wishlist_message
+					 *
+					 * Filter the error message shown when adding an item to the wishlist.
+					 *
+					 * @param string $message Message
+					 *
+					 * @return string
+					 */
 					yith_wcwl_add_notice( apply_filters( 'yith_wcwl_error_adding_to_wishlist_message', $e->getMessage() ), 'error' );
 				}
 			}
@@ -127,6 +155,15 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 			if ( ! empty( $args['wishlist_id'] ) ) {
 				$wishlist = yith_wcwl_get_wishlist( $args['wishlist_id'] );
 
+				/**
+				 * APPLY_FILTERS: yith_wcwl_remove_after_add_to_cart
+				 *
+				 * Filter the conditions to allow removing the product from the wishlist after it has been adding to the cart.
+				 *
+				 * @param bool $condition Conditions
+				 *
+				 * @return bool
+				 */
 				if ( apply_filters( 'yith_wcwl_remove_after_add_to_cart', $wishlist && $wishlist->is_current_user_owner(), $wishlist ) ) {
 					try {
 						YITH_WCWL()->remove( $args );

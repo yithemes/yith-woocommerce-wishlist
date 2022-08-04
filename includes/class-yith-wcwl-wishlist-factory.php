@@ -61,10 +61,30 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		 * @return \YITH_WCWL_Wishlist[]|bool A list of matching wishlists or false on failure
 		 */
 		public static function get_wishlists( $args = array() ) {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_wishlist_query_args
+			 *
+			 * Filter the array of parameters to get wishlists.
+			 *
+			 * @param array $args Array of parameters
+			 *
+			 * @return array
+			 */
 			$args = apply_filters( 'yith_wcwl_wishlist_query_args', $args );
 
 			try {
 				$results = WC_Data_Store::load( 'wishlist' )->query( $args );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_query
+				 *
+				 * Filter the result of the query to get wishlists.
+				 *
+				 * @param array $results Query results
+				 * @param array $args    Array of parameters
+				 *
+				 * @return array
+				 */
 				return apply_filters( 'yith_wcwl_wishlist_query', $results, $args );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
@@ -79,10 +99,30 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		 * @return int Count
 		 */
 		public static function get_wishlists_count( $args = array() ) {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_wishlists_count_query_args
+			 *
+			 * Filter the array of parameters to get wishlists count.
+			 *
+			 * @param array $args Array of parameters
+			 *
+			 * @return array
+			 */
 			$args = apply_filters( 'yith_wcwl_wishlists_count_query_args', $args );
 
 			try {
 				$result = WC_Data_Store::load( 'wishlist' )->count( $args );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_count_query
+				 *
+				 * Filter the result of the query to get wishlists count.
+				 *
+				 * @param int   $result Query results
+				 * @param array $args   Array of parameters
+				 *
+				 * @return int
+				 */
 				return apply_filters( 'yith_wcwl_wishlist_count_query', $result, $args );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
@@ -103,10 +143,30 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		 * @return int[]|bool Array of user ids, or false on failure
 		 */
 		public static function get_wishlist_users( $args = array() ) {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_wishlist_users_query_args
+			 *
+			 * Filter the array of parameters to get wishlists users.
+			 *
+			 * @param array $args Array of parameters
+			 *
+			 * @return array
+			 */
 			$args = apply_filters( 'yith_wcwl_wishlist_users_query_args', $args );
 
 			try {
 				$results = WC_Data_Store::load( 'wishlist' )->search_users( $args );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_user_query
+				 *
+				 * Filter the result of the query to get wishlists users.
+				 *
+				 * @param array $results Query results
+				 * @param array $args   Array of parameters
+				 *
+				 * @return array
+				 */
 				return apply_filters( 'yith_wcwl_wishlist_user_query', $results, $args );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
@@ -143,6 +203,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract
 
 			// retrieve options from query string.
+			/**
+			 * APPLY_FILTERS: yith_wcwl_current_wishlist_view_params
+			 *
+			 * Filter the array of parameters to see the current wishlist.
+			 *
+			 * @param array $params Array of parameters
+			 *
+			 * @return array
+			 */
 			$action_params = explode( '/', apply_filters( 'yith_wcwl_current_wishlist_view_params', $action_params ) );
 
 			$action = ( isset( $action_params[0] ) ) ? $action_params[0] : 'view';
@@ -188,6 +257,18 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		public static function get_default_wishlist( $id = false, $context = 'read' ) {
 			try {
 				$default_wishlist = WC_Data_Store::load( 'wishlist' )->get_default_wishlist( $id, $context );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_default_wishlist
+				 *
+				 * Filter the default wishlist created.
+				 *
+				 * @param YITH_WCWL_Wishlist $default_wishlist Default wishlist
+				 * @param int                $id               Customer or session ID
+				 * @param string             $context          Context
+				 *
+				 * @return YITH_WCWL_Wishlist
+				 */
 				return apply_filters( 'yith_wcwl_default_wishlist', $default_wishlist, $id, $context );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
@@ -283,10 +364,30 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		 * @return \YITH_WCWL_Wishlist_Item[]|bool A list of matching items or false on failure
 		 */
 		public static function get_wishlist_items( $args = array() ) {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_wishlist_items_query_args
+			 *
+			 * Filter the array of parameters to get wishlist items.
+			 *
+			 * @param array $args Array of parameters
+			 *
+			 * @return array
+			 */
 			$args = apply_filters( 'yith_wcwl_wishlist_items_query_args', $args );
 
 			try {
 				$results = WC_Data_Store::load( 'wishlist-item' )->query( $args );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_item_query
+				 *
+				 * Filter the result of the query to get wishlist items.
+				 *
+				 * @param array $results Query results
+				 * @param array $args    Array of parameters
+				 *
+				 * @return array
+				 */
 				return apply_filters( 'yith_wcwl_wishlist_item_query', $results, $args );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
@@ -301,10 +402,30 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		 * @return int Count
 		 */
 		public static function get_wishlist_items_count( $args = array() ) {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_wishlist_items_count_query_args
+			 *
+			 * Filter the array of parameters to get wishlist items count.
+			 *
+			 * @param array $args Array of parameters
+			 *
+			 * @return array
+			 */
 			$args = apply_filters( 'yith_wcwl_wishlist_items_count_query_args', $args );
 
 			try {
 				$result = WC_Data_Store::load( 'wishlist-item' )->count( $args );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_item_count_query
+				 *
+				 * Filter the result of the query to get wishlist items count.
+				 *
+				 * @param int   $result Query results
+				 * @param array $args   Array of parameters
+				 *
+				 * @return int
+				 */
 				return apply_filters( 'yith_wcwl_wishlist_item_count_query', $result, $args );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
@@ -321,6 +442,17 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		public static function get_times_added_count( $product_id ) {
 			try {
 				$result = WC_Data_Store::load( 'wishlist-item' )->count_times_added( $product_id );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_times_added_count_query
+				 *
+				 * Filter the result of the query to get how many times a product has been added to a wishlist.
+				 *
+				 * @param int $result     Query results
+				 * @param int $product_id Product ID
+				 *
+				 * @return int
+				 */
 				return (int) apply_filters( 'yith_wcwl_wishlist_times_added_count_query', $result, $product_id );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );
@@ -337,6 +469,17 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Factory' ) ) {
 		public static function get_times_current_user_added_count( $product_id ) {
 			try {
 				$result = WC_Data_Store::load( 'wishlist-item' )->count_times_added( $product_id, 'current' );
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_times_current_user_added_count_query
+				 *
+				 * Filter the result of the query to get how many times a product has been added to a wishlist by the current user.
+				 *
+				 * @param int $result     Query results
+				 * @param int $product_id Product ID
+				 *
+				 * @return int
+				 */
 				return (int) apply_filters( 'yith_wcwl_wishlist_times_current_user_added_count_query', $result, $product_id );
 			} catch ( Exception $e ) {
 				wc_caught_exception( $e, __FUNCTION__, func_get_args() );

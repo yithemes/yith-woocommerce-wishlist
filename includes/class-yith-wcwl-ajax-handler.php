@@ -66,10 +66,29 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			try {
 				YITH_WCWL()->add();
 
-				$return  = 'true';
+				$return = 'true';
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_product_added_to_wishlist_message
+				 *
+				 * Filter the message shown when an item has been added to the wishlist.
+				 *
+				 * @param string $message Message
+				 *
+				 * @return string
+				 */
 				$message = apply_filters( 'yith_wcwl_product_added_to_wishlist_message', get_option( 'yith_wcwl_product_added_text' ) );
 
 				// append view and close links.
+				/**
+				 * APPLY_FILTERS: yith_wcwl_show_popup_links
+				 *
+				 * Filter whether to show the links in the popup after an item has been added to the wishlist.
+				 *
+				 * @param bool $show_links Whether to show links or not in the popup
+				 *
+				 * @return bool
+				 */
 				if ( apply_filters( 'yith_wcwl_show_popup_links', YITH_WCWL()->is_multi_wishlist_enabled() ) ) {
 					$message .= '<p class="after-links">
 					<a href="' . YITH_WCWL()->get_last_operation_url() . '">' . __( 'View &rsaquo;', 'yith-woocommerce-wishlist' ) . '</a>
@@ -78,7 +97,17 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 					</p>';
 				}
 			} catch ( YITH_WCWL_Exception $e ) {
-				$return  = $e->getTextualCode();
+				$return = $e->getTextualCode();
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_error_adding_to_wishlist_message
+				 *
+				 * Filter the error message shown when adding an item to the wishlist.
+				 *
+				 * @param string $message Message
+				 *
+				 * @return string
+				 */
 				$message = apply_filters( 'yith_wcwl_error_adding_to_wishlist_message', $e->getMessage() );
 			} catch ( Exception $e ) {
 				$return  = 'error';
@@ -123,6 +152,15 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				}
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_ajax_add_return_params
+			 *
+			 * Filter the parameters sent in the Ajax response.
+			 *
+			 * @param array $params Array of parameters sent in the response
+			 *
+			 * @return array
+			 */
 			wp_send_json(
 				apply_filters(
 					'yith_wcwl_ajax_add_return_params',
@@ -152,6 +190,16 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 
 			try {
 				YITH_WCWL()->remove();
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_product_removed_text
+				 *
+				 * Filter the message when an item has been removed from the wishlist.
+				 *
+				 * @param string $message Message
+				 *
+				 * @return string
+				 */
 				$message = apply_filters( 'yith_wcwl_product_removed_text', __( 'Product successfully removed.', 'yith-woocommerce-wishlist' ) );
 			} catch ( Exception $e ) {
 				$message = $e->getMessage();
@@ -190,6 +238,15 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				if ( $item ) {
 					$item->delete();
 
+					/**
+					 * APPLY_FILTERS: yith_wcwl_product_removed_text
+					 *
+					 * Filter the message when an item has been removed from the wishlist.
+					 *
+					 * @param string $message Message
+					 *
+					 * @return string
+					 */
 					$return = array(
 						'result'    => true,
 						'message'   => apply_filters( 'yith_wcwl_product_removed_text', __( 'Product successfully removed.', 'yith-woocommerce-wishlist' ) ),
@@ -279,6 +336,16 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 
 			try {
 				YITH_WCWL()->add();
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_product_added_to_wishlist_message
+				 *
+				 * Filter the message shown when an item has been added to the wishlist.
+				 *
+				 * @param string $message Message
+				 *
+				 * @return string
+				 */
 				$message = apply_filters( 'yith_wcwl_product_added_to_wishlist_message', get_option( 'yith_wcwl_product_added_text' ) );
 			} catch ( YITH_WCWL_Exception $e ) {
 				$message  = $e->getMessage();
@@ -373,6 +440,17 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 							$result[ $id ] = ob_get_clean();
 							break;
 						default:
+							/**
+							 * APPLY_FILTERS: yith_wcwl_fragment_output
+							 *
+							 * Filter the output when reloading fragments.
+							 *
+							 * @param string $output  Fragment output
+							 * @param int    $id      Fragment ID
+							 * @param array  $options Fragment options
+							 *
+							 * @return string
+							 */
 							$result[ $id ] = apply_filters( 'yith_wcwl_fragment_output', '', $id, $options );
 							break;
 					}

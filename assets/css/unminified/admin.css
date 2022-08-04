@@ -27,27 +27,29 @@
     padding-left: 60px;
 }
 
-#popular-filter .wp-list-table th.column-actions,
-#popular-filter .wp-list-table td.column-actions {
+#popular-filter .wp-list-table th.column-name,
+#popular-filter .wp-list-table td.column-name {
     width: 25%!important;
 }
 
-#popular-filter .wp-list-table td.column-actions a{
-    margin-bottom: 5px;
-    padding: 0;
+#popular-filter .wp-list-table th.column-thumb,
+#popular-filter .wp-list-table td.column-thumb {
+    width: 5%!important;
 }
 
-#popular-filter .wp-list-table td.column-actions a i{
-    margin: 5px;
+#popular-filter .wp-list-table th.column-actions,
+#popular-filter .wp-list-table td.column-actions {
+    width: 10%!important;
+    text-align: right;
 }
 
-#popular-filter .wp-list-table td.column-actions a.button-primary{
-    padding-right: 5px;
+#popular-filter .wp-list-table tr td.column-actions .yith-plugin-fw__action-button {
+    opacity: 0;
+    transition: .3s;
 }
 
-#popular-filter .wp-list-table td.column-actions a,
-#popular-filter .wp-list-table td.column-actions a i{
-    vertical-align: middle;
+#popular-filter .wp-list-table tr:hover td.column-actions .yith-plugin-fw__action-button {
+    opacity: 1;
 }
 
 /* === 2. ALL WISHLISTS TAB === */
@@ -238,11 +240,19 @@
     width: 100%;
 }
 
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 #content_html_tab .wp-switch-editor {
+    box-sizing: initial;
+}
+
 .yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview{
-    height: 500px;
+    height: 600px;
     overflow-x: hidden;
     overflow-y: scroll;
     margin: 30px 0;
+}
+
+.yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview.html td > table {
+    width: 100%!important;
 }
 
 .yith-wcwl-wizard-modal .wc-backbone-modal-main article .step-1 .email-preview.plain{

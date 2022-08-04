@@ -118,6 +118,15 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @return void
 		 */
 		public function set_session_cookie() {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_set_session_cookie
+			 *
+			 * Filter whether to set the session cookie.
+			 *
+			 * @param bool $set_session_cookie Whether to set session cookie or not
+			 *
+			 * @return bool
+			 */
 			if ( headers_sent() || ! apply_filters( 'yith_wcwl_set_session_cookie', true ) ) {
 				return;
 			}
@@ -184,6 +193,15 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * @return bool
 		 */
 		public function use_secure_cookie() {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_session_use_secure_cookie
+			 *
+			 * Filter whether to use secure cookies.
+			 *
+			 * @param bool $use_secure_cookie Wether to use secure cookies or not
+			 *
+			 * @return bool
+			 */
 			return apply_filters( 'yith_wcwl_session_use_secure_cookie', wc_site_is_https() && is_ssl() );
 		}
 
@@ -195,6 +213,15 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 */
 		public function get_session_cookie_name() {
 			if ( empty( $this->cookie_name ) ) {
+				/**
+				 * APPLY_FILTERS: yith_wcwl_session_cookie
+				 *
+				 * Filter the session cookie name.
+				 *
+				 * @param string $cookie_name Cookie name
+				 *
+				 * @return string
+				 */
 				$this->cookie_name = apply_filters( 'yith_wcwl_session_cookie', 'yith_wcwl_session_' . COOKIEHASH );
 			}
 

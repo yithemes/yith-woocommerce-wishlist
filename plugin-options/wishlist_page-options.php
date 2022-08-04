@@ -11,12 +11,21 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
 
+/**
+ * APPLY_FILTERS: yith_wcwl_wishlist_page_options
+ *
+ * Filter the options available in the 'Wishlist page options' tab.
+ *
+ * @param array $options Array of options
+ *
+ * @return array
+ */
 return apply_filters(
 	'yith_wcwl_wishlist_page_options',
 	array(
 		'wishlist_page' => array(
 			'manage_section_start'     => array(
-				'name' => __( 'All your wishlists', 'yith-woocommerce-wishlist' ),
+				'name' => __( 'Wishlist page', 'yith-woocommerce-wishlist' ),
 				'type' => 'title',
 				'desc' => '',
 				'id'   => 'yith_wcwl_manage_settings',
@@ -335,6 +344,15 @@ return apply_filters(
 				'name'      => __( '"Add to cart" icon', 'yith-woocommerce-wishlist' ),
 				'desc'      => __( 'Select an icon for the "Add to cart" button (optional)', 'yith-woocommerce-wishlist' ),
 				'id'        => 'yith_wcwl_add_to_cart_icon',
+				/**
+				 * APPLY_FILTERS: yith_wcwl_add_to_cart_std_icon
+				 *
+				 * Filter the default 'Add to cart' icon in the Wishlist page.
+				 *
+				 * @param string $icon Default icon
+				 *
+				 * @return string
+				 */
 				'default'   => apply_filters( 'yith_wcwl_add_to_cart_std_icon', 'fa-shopping-cart' ),
 				'type'      => 'yith-field',
 				'yith-type' => 'select',

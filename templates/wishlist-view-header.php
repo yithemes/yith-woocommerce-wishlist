@@ -23,7 +23,16 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 } // Exit if accessed directly
 ?>
 
-<?php do_action( 'yith_wcwl_before_wishlist_form', $wishlist ); ?>
+<?php
+/**
+ * DO_ACTION: yith_wcwl_before_wishlist_form
+ *
+ * Allows to render some content or fire some action before the wishlist form.
+ *
+ * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+ */
+do_action( 'yith_wcwl_before_wishlist_form', $wishlist );
+?>
 
 <form
 	id="yith-wcwl-form"
@@ -35,16 +44,45 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
 	<!-- TITLE -->
 	<?php
+	/**
+	 * DO_ACTION: yith_wcwl_before_wishlist_title
+	 *
+	 * Allows to render some content or fire some action before the wishlist title.
+	 *
+	 * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+	 */
 	do_action( 'yith_wcwl_before_wishlist_title', $wishlist );
 
 	if ( ! empty( $page_title ) ) :
 		?>
 		<div class="wishlist-title-container">
 			<div class="wishlist-title <?php echo ( $can_user_edit_title ) ? 'wishlist-title-with-form' : ''; ?>">
-				<?php echo wp_kses_post( apply_filters( 'yith_wcwl_wishlist_title', '<h2>' . $page_title . '</h2>' ) ); ?>
+				<?php
+				/**
+				 * APPLY_FILTER: yith_wcwl_wishlist_title
+				 *
+				 * Filter the title of the Wishlist page.
+				 *
+				 * @param string $title Wishlist page title
+				 *
+				 * @return string
+				 */
+				echo wp_kses_post( apply_filters( 'yith_wcwl_wishlist_title', '<h2>' . $page_title . '</h2>' ) );
+				?>
 				<?php if ( $can_user_edit_title ) : ?>
 					<a class="btn button show-title-form">
-						<?php echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_edit_title_icon', '<i class="fa fa-pencil"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php
+						/**
+						 * APPLY_FILTER: yith_wcwl_edit_title_icon
+						 *
+						 * Filter the icon of the edit Wishlist title button.
+						 *
+						 * @param string $icon Edit title icon
+						 *
+						 * @return string
+						 */
+						echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_edit_title_icon', '<i class="fa fa-pencil"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						?>
 						<?php esc_html_e( 'Edit title', 'yith-woocommerce-wishlist' ); ?>
 					</a>
 				<?php endif; ?>
@@ -54,10 +92,32 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 					<input type="text" value="<?php echo esc_attr( $page_title ); ?>" name="wishlist_name"/>
 					<div class="edit-title-buttons">
 						<a role="button" href="#" class="hide-title-form">
-							<?php echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_cancel_wishlist_title_icon', '<i class="fa fa-remove"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php
+							/**
+							 * APPLY_FILTER: yith_wcwl_cancel_wishlist_title_icon
+							 *
+							 * Filter the icon of the Cancel button when editing the Wishlist title.
+							 *
+							 * @param string $icon Cancel icon
+							 *
+							 * @return string
+							 */
+							echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_cancel_wishlist_title_icon', '<i class="fa fa-remove"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							?>
 						</a>
 						<a role="button" href="#" class="save-title-form">
-							<?php echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_save_wishlist_title_icon', '<i class="fa fa-check"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php
+							/**
+							 * APPLY_FILTER: yith_wcwl_save_wishlist_title_icon
+							 *
+							 * Filter the icon of the Save button when editing the Wishlist title.
+							 *
+							 * @param string $icon Save icon
+							 *
+							 * @return string
+							 */
+							echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_save_wishlist_title_icon', '<i class="fa fa-check"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							?>
 						</a>
 					</div>
 				</div>
@@ -66,5 +126,12 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 		<?php
 	endif;
 
+	/**
+	 * DO_ACTION: yith_wcwl_before_wishlist
+	 *
+	 * Allows to render some content or fire some action before the wishlist.
+	 *
+	 * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+	 */
 	do_action( 'yith_wcwl_before_wishlist', $wishlist );
 	?>

@@ -11,6 +11,15 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
 
+/**
+ * APPLY_FILTERS: yith_wcwl_list_options
+ *
+ * Filter the options available in the 'All wishlists' tab.
+ *
+ * @param array $options Array of options
+ *
+ * @return array
+ */
 return apply_filters(
 	'yith_wcwl_list_options',
 	array(

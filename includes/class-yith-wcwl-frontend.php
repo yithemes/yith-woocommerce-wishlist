@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.11.0';
+		public $version = '3.12.0';
 
 		/**
 		 * Plugin database version
@@ -59,11 +59,11 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function get_instance() {
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new self();
+			if ( is_null( static::$instance ) ) {
+				static::$instance = new static();
 			}
 
-			return self::$instance;
+			return static::$instance;
 		}
 
 		/**
@@ -107,6 +107,11 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			add_filter( 'woocommerce_add_to_cart_redirect', array( $this, 'yith_wfbt_redirect_after_add_to_cart' ), 10, 1 );
 
 			// YITH WCWL Loaded.
+			/**
+			 * DO_ACTION: yith_wcwl_loaded
+			 *
+			 * Allows to fire some action when the frontend class has loaded all the requirements.
+			 */
 			do_action( 'yith_wcwl_loaded' );
 		}
 
@@ -136,6 +141,15 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 1.0.0
 		 */
 		public function add_button() {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_positions
+			 *
+			 * Filter the array of positions where to display the 'Add to wishlist' button in the product page.
+			 *
+			 * @param array $positions Array of positions
+			 *
+			 * @return array
+			 */
 			$positions = apply_filters(
 				'yith_wcwl_positions',
 				array(
@@ -172,6 +186,15 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				return;
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_loop_positions
+			 *
+			 * Filter the array of positions where to display the 'Add to wishlist' button in the loop page.
+			 *
+			 * @param array $positions Array of positions
+			 *
+			 * @return array
+			 */
 			$positions = apply_filters(
 				'yith_wcwl_loop_positions',
 				array(
@@ -302,6 +325,15 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			 *
 			 * @since 3.0.7
 			 */
+			/**
+			 * APPLY_FILTERS: yith_wcwl_show_add_to_wishlist
+			 *
+			 * Filter whether to show the 'Add to wishlist' button.
+			 *
+			 * @param bool $show_button Whether to show the ATW button or not
+			 *
+			 * @return bool
+			 */
 			if ( ! apply_filters( 'yith_wcwl_show_add_to_wishlist', true ) ) {
 				return;
 			}
@@ -363,6 +395,15 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 3.0.20
 		 */
 		public function add_noindex_header() {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_skip_noindex_headers
+			 *
+			 * Filter whether to disable the 'Add to wishlist' action from robots.
+			 *
+			 * @param bool $show_button Whether to disable the ATW action from robots or not
+			 *
+			 * @return bool
+			 */
 			if ( function_exists( 'wp_robots_no_robots' ) || ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return;
 			}
@@ -402,6 +443,15 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.css', array(), '4.7.0' );
 			wp_register_style( 'woocommerce_prettyPhoto_css', $assets_path . 'css/prettyPhoto.css', array(), '3.1.6' );
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_main_style_deps
+			 *
+			 * Filter the style dependencies to be used in the plugin.
+			 *
+			 * @param array $deps Array of style dependencies
+			 *
+			 * @return array
+			 */
 			$deps = apply_filters( 'yith_wcwl_main_style_deps', array( 'jquery-selectBox', 'yith-wcwl-font-awesome', 'woocommerce_prettyPhoto_css' ) );
 
 			// register main style.
@@ -452,6 +502,15 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			wp_register_script( 'prettyPhoto', $assets_path . 'js/prettyPhoto/jquery.prettyPhoto' . $suffix . '.js', array( 'jquery' ), '3.1.6', true );
 			wp_register_script( 'jquery-selectBox', YITH_WCWL_URL . 'assets/js/jquery.selectBox.min.js', array( 'jquery' ), '1.2.0', true );
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_main_script_deps
+			 *
+			 * Filter the script dependencies to be used in the plugin.
+			 *
+			 * @param array $deps Array of script dependencies
+			 *
+			 * @return array
+			 */
 			$deps = apply_filters( 'yith_wcwl_main_script_deps', array( 'jquery', 'jquery-selectBox', 'prettyPhoto' ) );
 
 			// get localized variables.
@@ -533,23 +592,95 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 2.2.3
 		 */
 		public function get_localize() {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_localize_script
+			 *
+			 * Filter the array with the parameters sent to the plugin scripts trought the localize.
+			 *
+			 * @param array $localize Array of parameters
+			 *
+			 * @return array
+			 */
 			return apply_filters(
 				'yith_wcwl_localize_script',
 				array(
 					'ajax_url'                  => admin_url( 'admin-ajax.php', 'relative' ),
 					'redirect_to_cart'          => get_option( 'yith_wcwl_redirect_cart' ),
 					'multi_wishlist'            => false,
+					/**
+					 * APPLY_FILTERS: yith_wcwl_hide_add_button
+					 *
+					 * Filter whether to hide the 'Add to wishlist' button.
+					 *
+					 * @param bool $hide_button Whether to hide the ATW button or not
+					 *
+					 * @return bool
+					 */
 					'hide_add_button'           => apply_filters( 'yith_wcwl_hide_add_button', true ),
 					'enable_ajax_loading'       => 'yes' === get_option( 'yith_wcwl_ajax_enable', 'no' ),
 					'ajax_loader_url'           => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
 					'remove_from_wishlist_after_add_to_cart' => 'yes' === get_option( 'yith_wcwl_remove_after_add_to_cart' ),
+					/**
+					 * APPLY_FILTERS: yith_wcwl_is_wishlist_responsive
+					 *
+					 * Filter whether to use the responsive layout for the wishlist.
+					 *
+					 * @param bool $is_responsive Whether to use responsive layout or not
+					 *
+					 * @return bool
+					 */
 					'is_wishlist_responsive'    => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
+					/**
+					 * APPLY_FILTERS: yith_wcwl_time_to_close_prettyphoto
+					 *
+					 * Filter the time (in miliseconds) to close the popup after the 'Ask for an estimate' request has been sent.
+					 *
+					 * @param int $time Time to close the popup
+					 *
+					 * @return int
+					 */
 					'time_to_close_prettyphoto' => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
+					/**
+					 * APPLY_FILTERS: yith_wcwl_fragments_index_glue
+					 *
+					 * Filter the character used for the fragments index.
+					 *
+					 * @param string $char Character
+					 *
+					 * @return string
+					 */
 					'fragments_index_glue'      => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
+					/**
+					 * APPLY_FILTERS: yith_wcwl_reload_on_found_variation
+					 *
+					 * Filter whether to reload fragments on new variations found.
+					 *
+					 * @param bool $reload_variations Whether to reload fragments
+					 *
+					 * @return bool
+					 */
 					'reload_on_found_variation' => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
+					/**
+					 * APPLY_FILTERS: yith_wcwl_mobile_media_query
+					 *
+					 * Filter the breakpoint size for the mobile media queries.
+					 *
+					 * @param int $breakpoint Breakpoint size
+					 *
+					 * @return int
+					 */
 					'mobile_media_query'        => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
 					'labels'                    => array(
 						'cookie_disabled'       => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
+						/**
+						 * APPLY_FILTERS: yith_wcwl_added_to_cart_message
+						 *
+						 * Filter the message when a product has been added succesfully to the cart from the wishlist.
+						 *
+						 * @param string $message Message
+						 *
+						 * @return string
+						 */
 						'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) ),
 					),
 					'actions'                   => array(
@@ -814,7 +945,17 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function alter_add_to_cart_text( $text, $product ) {
 			$label_option = get_option( 'yith_wcwl_add_to_cart_text', __( 'Add to cart', 'yith-woocommerce-wishlist' ) );
-			$label        = $product->is_type( 'variable' ) ? $text : apply_filters( 'yith_wcwl_add_to_cart_label', $label_option );
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_add_to_cart_label
+			 *
+			 * Filter the label of the 'Add to cart' button in the wishlist page.
+			 *
+			 * @param string $label Label
+			 *
+			 * @return string
+			 */
+			$label = $product->is_type( 'variable' ) ? $text : apply_filters( 'yith_wcwl_add_to_cart_label', $label_option );
 
 			return $label;
 		}
@@ -863,6 +1004,17 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				}
 			}
 
+			/**
+			 * APPLY_FILTERS: yit_wcwl_add_to_cart_redirect_url
+			 *
+			 * Filter the URL to redirect after adding to the cart from the wishlist.
+			 *
+			 * @param string     $redirect_url Redirect URL
+			 * @param string     $original_url Original URL
+			 * @param WC_Product $product      Product object
+			 *
+			 * @return string
+			 */
 			return apply_filters( 'yit_wcwl_add_to_cart_redirect_url', esc_url_raw( $url ), $url, $product );
 		}
 
@@ -1013,7 +1165,17 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		protected function build_custom_css( $rules = array() ) {
 			$generated_code = '';
-			$rules          = apply_filters(
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_custom_css_rules
+			 *
+			 * Filter the array with the custom CSS rules to be used.
+			 *
+			 * @param array $css_rules CSS rules
+			 *
+			 * @return array
+			 */
+			$rules = apply_filters(
 				'yith_wcwl_custom_css_rules',
 				array_merge(
 					array(
@@ -1520,5 +1682,13 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
  * @since 2.0.0
  */
 function YITH_WCWL_Frontend() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Frontend_Premium::get_instance() : YITH_WCWL_Frontend::get_instance();
+	if ( defined( 'YITH_WCWL_PREMIUM' ) ) {
+		$instance = YITH_WCWL_Frontend_Premium::get_instance();
+	} elseif ( defined( 'YITH_WCWL_EXTENDED' ) ) {
+		$instance = YITH_WCWL_Frontend_Extended::get_instance();
+	} else {
+		$instance = YITH_WCWL_Frontend::get_instance();
+	}
+
+	return $instance;
 }

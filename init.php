@@ -3,13 +3,13 @@
  * Plugin Name: YITH WooCommerce Wishlist
  * Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
  * Description: <code><strong>YITH WooCommerce Wishlist</strong></code> gives your users the possibility to create, fill, manage and share their wishlists allowing you to analyze their interests and needs to improve your marketing strategies. <a href="https://yithemes.com/" target="_blank">Get more plugins for your e-commerce on <strong>YITH</strong></a>
- * Version: 3.11.0
+ * Version: 3.12.0
  * Author: YITH
  * Author URI: https://yithemes.com/
  * Text Domain: yith-woocommerce-wishlist
  * Domain Path: /languages/
- * WC requires at least: 6.5
- * WC tested up to: 6.7
+ * WC requires at least: 6.6
+ * WC tested up to: 6.8
  *
  * @author YITH
  * @package YITH\Wishlist
@@ -36,11 +36,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
-
-if ( ! function_exists( 'yith_plugin_registration_hook' ) ) {
-	require_once 'plugin-fw/yit-plugin-registration-hook.php';
-}
-register_activation_hook( __FILE__, 'yith_plugin_registration_hook' );
 
 if ( ! defined( 'YITH_WCWL' ) ) {
 	define( 'YITH_WCWL', true );
@@ -70,11 +65,33 @@ if ( ! defined( 'YITH_WCWL_SLUG' ) ) {
 	define( 'YITH_WCWL_SLUG', 'yith-woocommerce-wishlist' );
 }
 
-/* Plugin Framework Version Check */
-if ( ! function_exists( 'yit_maybe_plugin_fw_loader' ) && file_exists( YITH_WCWL_DIR . 'plugin-fw/init.php' ) ) {
-	require_once YITH_WCWL_DIR . 'plugin-fw/init.php';
+if ( ! function_exists( 'yith_wcwl_install_plugin_fw' ) ) {
+	/**
+	 * Install plugin-fw when needed
+	 *
+	 * @since 3.9.0
+	 */
+	function yith_wcwl_install_plugin_fw() {
+		if ( ! function_exists( 'yit_maybe_plugin_fw_loader' ) && file_exists( YITH_WCWL_DIR . 'plugin-fw/init.php' ) ) {
+			require_once YITH_WCWL_DIR . 'plugin-fw/init.php';
+		}
+		yit_maybe_plugin_fw_loader( YITH_WCWL_DIR );
+	}
 }
-yit_maybe_plugin_fw_loader( YITH_WCWL_DIR );
+
+if ( ! function_exists( 'yith_wcwl_register_activation' ) ) {
+	/**
+	 * Performs required action on activation hook
+	 *
+	 * @since 3.9.0
+	 */
+	function yith_wcwl_register_activation() {
+		if ( ! function_exists( 'yith_plugin_registration_hook' ) ) {
+			require_once 'plugin-fw/yit-plugin-registration-hook.php';
+		}
+		register_activation_hook( __FILE__, 'yith_plugin_registration_hook' );
+	}
+}
 
 if ( ! function_exists( 'yith_wishlist_constructor' ) ) {
 	/**
@@ -120,7 +137,6 @@ if ( ! function_exists( 'yith_wishlist_constructor' ) ) {
 		$yith_wcwl = YITH_WCWL();
 	}
 }
-add_action( 'yith_wcwl_init', 'yith_wishlist_constructor' );
 
 if ( ! function_exists( 'yith_wishlist_install' ) ) {
 	/**
@@ -130,22 +146,19 @@ if ( ! function_exists( 'yith_wishlist_install' ) ) {
 	 * @since 2.0.0
 	 */
 	function yith_wishlist_install() {
-
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		if ( ! function_exists( 'yith_deactivate_plugins' ) ) {
+			require_once 'plugin-fw/yit-deactive-plugin.php';
 		}
 
 		if ( ! function_exists( 'WC' ) ) {
 			add_action( 'admin_notices', 'yith_wcwl_install_woocommerce_admin_notice' );
-		} elseif ( defined( 'YITH_WCWL_PREMIUM' ) ) {
-			add_action( 'admin_notices', 'yith_wcwl_install_free_admin_notice' );
-			deactivate_plugins( plugin_basename( __FILE__ ) );
+		} elseif ( defined( 'YITH_WCWL_PREMIUM' ) || defined( 'YITH_WCWL_EXTENDED' ) ) {
+			yith_deactivate_plugins( 'YITH_WCWL_FREE_INIT' );
 		} else {
 			do_action( 'yith_wcwl_init' );
 		}
 	}
 }
-add_action( 'plugins_loaded', 'yith_wishlist_install', 11 );
 
 if ( ! function_exists( 'yith_wcwl_install_woocommerce_admin_notice' ) ) {
 	/**
@@ -163,18 +176,26 @@ if ( ! function_exists( 'yith_wcwl_install_woocommerce_admin_notice' ) ) {
 	}
 }
 
-if ( ! function_exists( 'yith_wcwl_install_free_admin_notice' ) ) {
+if ( ! function_exists( 'yith_wcwl_deactivate_lower_tier_notice' ) ) {
 	/**
-	 * Shows admin notice when plugin is activated together with premium version
+	 * Print an admin notice if trying to activate this version when an higher tier is already enabled
 	 *
 	 * @return void
-	 * @since 2.0.0
+	 * @use    admin_notices hooks
+	 * @since  1.0
+	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	 */
-	function yith_wcwl_install_free_admin_notice() {
+	function yith_wcwl_deactivate_lower_tier_notice() {
 		?>
-		<div class="error">
-			<p><?php echo esc_html( __( 'You can\'t activate the free version of', 'yith-woocommerce-wishlist' ) . 'YITH WooCommerce Wishlist' . __( 'while you are using the premium one.', 'yith-woocommerce-wishlist' ) ); ?></p>
+		<div class="notice">
+			<p><?php esc_html_e( 'YITH WooCommerce Wishlist was deactivated as you\'re running an higher tier version of the same plugin.', 'yith-woocommerce-wishlist' ); ?></p>
 		</div>
 		<?php
 	}
 }
+
+yith_wcwl_register_activation();
+yith_wcwl_install_plugin_fw();
+
+add_action( 'yith_wcwl_init', 'yith_wishlist_constructor' );
+add_action( 'plugins_loaded', 'yith_wishlist_install', 11 );

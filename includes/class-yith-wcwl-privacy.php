@@ -69,6 +69,16 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 					break;
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_privacy_policy_content
+			 *
+			 * Filter the content of the privacy policy.
+			 *
+			 * @param string $content Privacy policy content
+			 * @param string $section Privacy policy section
+			 *
+			 * @return string
+			 */
 			return apply_filters( 'yith_wcwl_privacy_policy_content', $content, $section );
 		}
 
@@ -188,11 +198,35 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 
 			if ( 0 < count( $wishlists ) ) {
 				foreach ( $wishlists as $wishlist ) {
+					/**
+					 * APPLY_FILTERS: yith_wcwl_privacy_erase_wishlist_personal_data
+					 *
+					 * Filter whether to delete the personal data from the wishlist.
+					 *
+					 * @param bool               $condition Whether to delete personal data or not
+					 * @param YITH_WCWL_Wishlist $wishlist  Wishlist object
+					 *
+					 * @return bool
+					 */
 					if ( apply_filters( 'yith_wcwl_privacy_erase_wishlist_personal_data', true, $wishlist ) ) {
+						/**
+						 * DO_ACTION: yith_wcwl_privacy_before_remove_wishlist_personal_data
+						 *
+						 * Allows to fire some action before deleting the personal data from the wishlist.
+						 *
+						 * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+						 */
 						do_action( 'yith_wcwl_privacy_before_remove_wishlist_personal_data', $wishlist );
 
 						$wishlist->delete();
 
+						/**
+						 * DO_ACTION: yith_wcwl_privacy_remove_wishlist_personal_data
+						 *
+						 * Allows to fire some action when deleting the personal data from the wishlist.
+						 *
+						 * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+						 */
 						do_action( 'yith_wcwl_privacy_remove_wishlist_personal_data', $wishlist );
 
 						/* Translators: %s Order number. */
@@ -220,7 +254,18 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 		 * @since 2.2.2
 		 */
 		protected function get_wishlist_personal_data( $wishlist ) {
-			$personal_data   = array();
+			$personal_data = array();
+
+			/**
+			 * APPLY_FILTERS: yith_wcwl_privacy_export_wishlist_personal_data_props
+			 *
+			 * Filter the personal data props to export from the wishlist.
+			 *
+			 * @param array              $data_to_export Personal data to export
+			 * @param YITH_WCWL_Wishlist $wishlist       Wishlist object
+			 *
+			 * @return array
+			 */
 			$props_to_export = apply_filters(
 				'yith_wcwl_privacy_export_wishlist_personal_data_props',
 				array(
@@ -283,6 +328,17 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 						break;
 				}
 
+				/**
+				 * APPLY_FILTERS: yith_wcwl_privacy_export_wishlist_personal_data_prop
+				 *
+				 * Filter the personal data value to export from the wishlist.
+				 *
+				 * @param string             $value    Value to export
+				 * @param string             $prop     Prop data to export
+				 * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+				 *
+				 * @return string
+				 */
 				$value = apply_filters( 'yith_wcwl_privacy_export_wishlist_personal_data_prop', $value, $prop, $wishlist );
 
 				if ( $value ) {
@@ -293,6 +349,16 @@ if ( ! class_exists( 'YITH_WCWL_Privacy' ) ) {
 				}
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_privacy_export_wishlist_personal_data
+			 *
+			 * Filter the personal data to export from the wishlist.
+			 *
+			 * @param array              $personal_data Personal data to export
+			 * @param YITH_WCWL_Wishlist $wishlist      Wishlist object
+			 *
+			 * @return array
+			 */
 			$personal_data = apply_filters( 'yith_wcwl_privacy_export_wishlist_personal_data', $personal_data, $wishlist );
 
 			return $personal_data;

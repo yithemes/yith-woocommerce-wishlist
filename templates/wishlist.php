@@ -22,27 +22,32 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
 <?php
 /**
- * Hook: yith_wcwl_wishlist_before_wishlist_content.
+ * DO_ACTION: yith_wcwl_wishlist_before_wishlist_content
  *
- * @hooked \YITH_WCWL_Frontend::wishlist_header - 10
+ * Allows to render some content or fire some action before the wishlist content.
+ *
+ * @param array $var Array of attributes that needs to be sent to sub-template
  */
 do_action( 'yith_wcwl_wishlist_before_wishlist_content', $var );
 ?>
 
 <?php
 /**
- * Hook: yith_wcwl_wishlist_main_wishlist_content.
+ * DO_ACTION: yith_wcwl_wishlist_before_wishlist_content
  *
- * @hooked \YITH_WCWL_Frontend::main_wishlist_content - 10
+ * Allows to render some content or fire some action in the wishlist content.
+ *
+ * @param array $var Array of attributes that needs to be sent to sub-template
  */
 do_action( 'yith_wcwl_wishlist_main_wishlist_content', $var );
 ?>
 
 <?php
 /**
- * Hook: yith_wcwl_wishlist_after_wishlist_content.
+ * DO_ACTION: yith_wcwl_wishlist_after_wishlist_content
  *
- * @hooked \YITH_WCWL_Frontend::wishlist_footer - 10
+ * Allows to render some content or fire some action after the wishlist content.
+ *
+ * @param array $var Array of attributes that needs to be sent to sub-template
  */
 do_action( 'yith_wcwl_wishlist_after_wishlist_content', $var );
-

@@ -40,6 +40,11 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 // we want spaces to be encoded as + instead of %20, so we use urlencode instead of rawurlencode.
 // phpcs:disable WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
 
+/**
+ * DO_ACTION: yith_wcwl_before_wishlist_share
+ *
+ * Allows to render some content or fire some action before the share wishlist section.
+ */
 do_action( 'yith_wcwl_before_wishlist_share', $wishlist );
 ?>
 
@@ -72,6 +77,28 @@ do_action( 'yith_wcwl_before_wishlist_share', $wishlist );
 
 		<?php if ( $share_email_enabled ) : ?>
 			<li class="share-button">
+				<?php
+				/**
+				 * APPLY_FILTERS: yith_wcwl_email_share_subject
+				 *
+				 * Filter the subject for the share email.
+				 *
+				 * @param string $subject Email subject
+				 *
+				 * @return string
+				 */
+
+				/**
+				 * APPLY_FILTERS: yith_wcwl_email_share_body
+				 *
+				 * Filter the body for the share email.
+				 *
+				 * @param string $body Email body
+				 *
+				 * @return string
+				 */
+
+				?>
 				<a class="email" href="mailto:?subject=<?php echo esc_attr( apply_filters( 'yith_wcwl_email_share_subject', $share_link_title ) ); ?>&amp;body=<?php echo esc_attr( apply_filters( 'yith_wcwl_email_share_body', urlencode( $share_link_url ) ) ); ?>&amp;title=<?php echo esc_attr( $share_link_title ); ?>" title="<?php esc_html_e( 'Email', 'yith-woocommerce-wishlist' ); ?>">
 					<?php echo $share_email_icon ? yith_wcwl_kses_icon( $share_email_icon ) : __( 'Email', 'yith-woocommerce-wishlist' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</a>
@@ -94,10 +121,26 @@ do_action( 'yith_wcwl_before_wishlist_share', $wishlist );
 		</div>
 	<?php endif; ?>
 
-	<?php do_action( 'yith_wcwl_after_share_buttons', $share_link_url, $share_title, $share_link_title ); ?>
+	<?php
+	/**
+	 * DO_ACTION: yith_wcwl_after_share_buttons
+	 *
+	 * Allows to render some content or fire some action after the share buttons in the Wishlist page.
+	 *
+	 * @param string $share_link_url   Share link URL
+	 * @param string $share_title      Share title
+	 * @param string $share_link_title Share link title
+	 */
+	do_action( 'yith_wcwl_after_share_buttons', $share_link_url, $share_title, $share_link_title );
+	?>
 </div>
 
 <?php
+/**
+ * DO_ACTION: yith_wcwl_after_wishlist_share
+ *
+ * Allows to render some content or fire some action after the share wishlist section.
+ */
 do_action( 'yith_wcwl_after_wishlist_share', $wishlist );
 
 // phpcs:enable WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode

@@ -374,6 +374,12 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 								$default[ $colorpicker['id'] ] = isset( $colorpicker['default'] ) ? $colorpicker['default'] : '';
 							}
 							update_option( $option['id'], $default );
+						} elseif ( isset( $option['yith-type'] ) && 'inline-fields' === $option['yith-type'] && ! empty( $option['fields'] ) ) {
+							$default = array();
+							foreach ( $option['fields'] as $field_id => $field ) {
+								$default[ $field_id ] = isset( $field['default'] ) ? $field['default'] : '';
+							}
+							update_option( $option['id'], $default );
 						} elseif ( isset( $option['default'] ) ) {
 							update_option( $option['id'], $option['default'] );
 						}
@@ -494,8 +500,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 		 * @param string $admin_body_classes The body classes.
 		 *
 		 * @return string Filtered body classes
-		 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 		 * @since  2.0
+		 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 		 */
 		public static function admin_body_class( $admin_body_classes ) {
 			global $pagenow;
@@ -518,8 +524,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 		 * @param string $raw_value Raw option value.
 		 *
 		 * @return mixed Filtered return value
-		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 * @since  2.0
+		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function maybe_unserialize_panel_data( $value, $option, $raw_value ) {
 			if ( ! version_compare( WC()->version, '2.4.0', '>=' ) || ! isset( $option['type'] ) || in_array( $option['type'], self::$wc_type, true ) || 'yith-field' === $option['type'] ) {
@@ -548,8 +554,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 		 * @param mixed $raw_value Raw option value.
 		 *
 		 * @return mixed Filtered return value
-		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since  3.0.0
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 */
 		public static function sanitize_option( $value, $option, $raw_value ) {
 			if ( isset( $option['type'] ) && 'yith-field' === $option['type'] ) {
@@ -731,8 +737,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 		 * @param string $raw_value Raw option value.
 		 *
 		 * @return mixed Filtered return value
-		 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 		 * @since  3.0.0
+		 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 		 */
 		public static function sanitize_onoff_value( $value, $option, $raw_value ) {
 			if ( isset( $option['type'] ) && in_array( $option['type'], array( 'checkbox', 'onoff' ), true ) ) {
@@ -752,8 +758,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 		 * @param array $yit_options Original options array.
 		 *
 		 * @return mixed|array New options array
-		 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 		 * @since  3.0.0
+		 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 		 */
 		public function check_for_save_single_option( $yit_options ) {
 			foreach ( $yit_options as $key => $options_list ) {

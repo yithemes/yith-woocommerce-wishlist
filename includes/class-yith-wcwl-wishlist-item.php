@@ -190,11 +190,32 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			if ( '' === $base_price ) {
 				$formatted_price = '';
 			} elseif ( ! $base_price ) {
+				/**
+				 * APPLY_FILTERS: yith_free_text
+				 *
+				 * Filter the text shown when a product in the wishlist has no price.
+				 *
+				 * @param string     $text    Text
+				 * @param WC_Product $product Product object
+				 *
+				 * @return string
+				 */
 				$formatted_price = apply_filters( 'yith_free_text', __( 'Free!', 'yith-woocommerce-wishlist' ), $product );
 			} else {
 				$formatted_price = $product->get_price_html();
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_item_formatted_price
+			 *
+			 * Filter the formatted price for a wishlist item.
+			 *
+			 * @param string     $formatted_price Formatted price
+			 * @param string     $base_price      Base price
+			 * @param WC_Product $product         Product object
+			 *
+			 * @return string
+			 */
 			return apply_filters( 'yith_wcwl_item_formatted_price', $formatted_price, $base_price, $product );
 		}
 
@@ -419,6 +440,19 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 
 			$difference = $original_price - $current_price;
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_hide_price_increase
+			 *
+			 * Filter whether to show the price difference in the wishlist.
+			 *
+			 * @param bool       $show_difference   Whether to show price difference or not
+			 * @param WC_Product $product           Product object
+			 * @param string     $original_price    Original price
+			 * @param string     $original_currency Original currency
+			 * @param float      $difference        Price difference
+			 *
+			 * @return bool
+			 */
 			if ( $difference <= 0 && apply_filters( 'yith_wcwl_hide_price_increase', true, $product, $original_price, $original_currency, $difference ) ) {
 				return '';
 			}
@@ -426,6 +460,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 			$percentage_difference = -1 * round( $difference / $original_price * 100, 2 );
 			$class                 = $percentage_difference > 0 ? 'increase' : 'decrease';
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_price_variation_template
+			 *
+			 * Filter the HTML string to show the price difference in the wishlist.
+			 *
+			 * @param string $html HTML string
+			 *
+			 * @return string
+			 */
 			$template = apply_filters(
 				'yith_wcwl_price_variation_template',
 				sprintf(
@@ -468,6 +511,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		public function get_remove_url() {
 			$base_url = $this->get_wishlist()->get_url();
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_wishlist_item_remove_url
+			 *
+			 * Filter the URL to remove an item from the wishlist.
+			 *
+			 * @param string $url URL to remove item from the wishlist
+			 *
+			 * @return string
+			 */
 			return apply_filters( 'yith_wcwl_wishlist_item_remove_url', wp_nonce_url( add_query_arg( 'remove_from_wishlist', $this->get_product_id(), $base_url ), 'remove_from_wishlist' ), $this );
 		}
 
@@ -600,6 +652,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 */
 		public function set_on_sale( $on_sale ) {
 			if ( $this->get_object_read() && $on_sale && $this->is_on_sale() !== $on_sale ) {
+				/**
+				 * DO_ACTION: yith_wcwl_item_is_on_sale
+				 *
+				 * Allows to fire some action when a wishlist item is set on sale.
+				 *
+				 * @param YITH_WCWL_Wishlist_Item $wishlist_item Wishlist item object
+				 */
 				do_action( 'yith_wcwl_item_is_on_sale', $this );
 			}
 
@@ -691,6 +750,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 				$offset = 'date_added';
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_wishlist_item_map_legacy_offsets
+			 *
+			 * Filter the wishlist item legacy offsets to index to new properties.
+			 *
+			 * @param string $offset        Offset to search
+			 * @param string $legacy_offset Legacy offset
+			 *
+			 * @return string
+			 */
 			return apply_filters( 'yith_wcwl_wishlist_item_map_legacy_offsets', $offset, $legacy_offset );
 		}
 	}

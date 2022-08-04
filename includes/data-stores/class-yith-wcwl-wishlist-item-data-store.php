@@ -56,12 +56,76 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				'on_sale'           => '%d',
 			);
 			$values  = array(
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_product_id
+				 *
+				 * Filter the ID of the product added to the wishlist.
+				 *
+				 * @param int $product_id Product ID
+				 *
+				 * @return int
+				 */
 				apply_filters( 'yith_wcwl_adding_to_wishlist_product_id', $product_id ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_quantity
+				 *
+				 * Filter the quantity of the product added to the wishlist.
+				 *
+				 * @param int $quantity   Product quantity
+				 * @param int $product_id Product ID
+				 *
+				 * @return int
+				 */
 				apply_filters( 'yith_wcwl_adding_to_wishlist_quantity', $item->get_quantity(), $product_id ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_wishlist_id
+				 *
+				 * Filter the wishlist ID where the products are added to.
+				 *
+				 * @param int $wishlist_id Wishlist ID
+				 *
+				 * @return int
+				 */
 				apply_filters( 'yith_wcwl_adding_to_wishlist_wishlist_id', $wishlist_id ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_position
+				 *
+				 * Filter the position where the product will be added to the wishlist.
+				 *
+				 * @param int $item_position Item position in the wishlist
+				 *
+				 * @return int
+				 */
 				apply_filters( 'yith_wcwl_adding_to_wishlist_position', $item->get_position() ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_original_price
+				 *
+				 * Filter the price of the product added to the wishlist.
+				 *
+				 * @param int $product_price Product price
+				 *
+				 * @return int
+				 */
 				apply_filters( 'yith_wcwl_adding_to_wishlist_original_price', $item->get_product_price() ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_original_currency
+				 *
+				 * Filter the currency of the product added to the wishlist.
+				 *
+				 * @param string $currency Currency
+				 *
+				 * @return string
+				 */
 				apply_filters( 'yith_wcwl_adding_to_wishlist_original_currency', $item->get_original_currency() ),
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_on_sale
+				 *
+				 * Filter whether the product added to the wishlist is on sale.
+				 *
+				 * @param bool $bool Is the product on sale or not?
+				 *
+				 * @return bool
+				 */
 				apply_filters( 'yith_wcwl_adding_to_wishlist_on_sale', $item->is_on_sale() ),
 			);
 
@@ -69,14 +133,32 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 
 			if ( $user_id ) {
 				$columns['user_id'] = '%d';
-				$values[]           = apply_filters( 'yith_wcwl_adding_to_wishlist_user_id', $user_id );
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_user_id
+				 *
+				 * Filter the user ID saved in the wishlist.
+				 *
+				 * @param int $user_id User ID
+				 *
+				 * @return int
+				 */
+				$values[] = apply_filters( 'yith_wcwl_adding_to_wishlist_user_id', $user_id );
 			}
 
 			$date_added = $item->get_date_added( 'edit' );
 
 			if ( $date_added ) {
 				$columns['dateadded'] = 'FROM_UNIXTIME( %d )';
-				$values[]             = apply_filters( 'yith_wcwl_adding_to_wishlist_date_added', $date_added->getTimestamp() );
+				/**
+				 * APPLY_FILTERS: yith_wcwl_adding_to_wishlist_date_added
+				 *
+				 * Filter the date when the wishlist was created.
+				 *
+				 * @param int $date_added Date when the wishlist was created (timestamp)
+				 *
+				 * @return int
+				 */
+				$values[] = apply_filters( 'yith_wcwl_adding_to_wishlist_date_added', $date_added->getTimestamp() );
 			}
 
 			$query_columns = implode( ', ', array_map( 'esc_sql', array_keys( $columns ) ) );
@@ -90,6 +172,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				$item->apply_changes();
 				$this->clear_cache( $item );
 
+				/**
+				 * DO_ACTION: yith_wcwl_new_wishlist_item
+				 *
+				 * Allows to fire some action when a new item is added to the wishlist.
+				 *
+				 * @param int                     $item_id     Wishlist item ID
+				 * @param YITH_WCWL_Wishlist_Item $item        Wishlist item object
+				 * @param int                     $wishlist_id Wishlist ID
+				 */
 				do_action( 'yith_wcwl_new_wishlist_item', $item->get_id(), $item, $item->get_wishlist_id() );
 			}
 		}
@@ -179,6 +270,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			$item->apply_changes();
 			$this->clear_cache( $item );
 
+			/**
+			 * DO_ACTION: yith_wcwl_update_wishlist_item
+			 *
+			 * Allows to fire some action when an item is updated in the wishlist.
+			 *
+			 * @param int                     $item_id     Wishlist item ID
+			 * @param YITH_WCWL_Wishlist_Item $item        Wishlist item object
+			 * @param int                     $wishlist_id Wishlist ID
+			 */
 			do_action( 'yith_wcwl_update_wishlist_item', $item->get_id(), $item, $item->get_wishlist_id() );
 		}
 
@@ -197,10 +297,24 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				return;
 			}
 
+			/**
+			 * DO_ACTION: yith_wcwl_before_delete_wishlist_item
+			 *
+			 * Allows to fire some action before an item is deleted from the wishlist.
+			 *
+			 * @param int $item_id Wishlist item ID
+			 */
 			do_action( 'yith_wcwl_before_delete_wishlist_item', $item->get_id() );
 
 			$wpdb->delete( $wpdb->yith_wcwl_items, array( 'ID' => $item->get_id() ) );
 
+			/**
+			 * DO_ACTION: yith_wcwl_delete_wishlist_item
+			 *
+			 * Allows to fire some action when an item is deleted from the wishlist.
+			 *
+			 * @param int $item_id Wishlist item ID
+			 */
 			do_action( 'yith_wcwl_delete_wishlist_item', $item->get_id() );
 
 			$item->set_id( 0 );
@@ -234,6 +348,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				'product_id'          => false,
 				'wishlist_id'         => false, // wishlist_id for a specific wishlist, false for default, or all for any wishlist.
 				'wishlist_token'      => false,
+				/**
+				 * APPLY_FILTERS: yith_wcwl_wishlist_visibility_string_value
+				 *
+				 * Filter the wishlist visibility value.
+				 *
+				 * @param string $wishlist_visibility Wishlist visibility. Possible values are: all | visible | public | shared | private
+				 *
+				 * @return string
+				 */
 				'wishlist_visibility' => apply_filters( 'yith_wcwl_wishlist_visibility_string_value', 'all' ), // all | visible | public | shared | private.
 				'is_default'          => false,
 				'on_sale'             => false,
@@ -261,6 +384,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			// remove hidden products from result.
 			$hidden_products = yith_wcwl_get_hidden_products();
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_remove_hidden_products_via_query
+			 *
+			 * Filter whether to remove hidden products via query.
+			 *
+			 * @param bool $bool Remove hidden products or not?
+			 *
+			 * @return bool
+			 */
 			if ( ! empty( $hidden_products ) && apply_filters( 'yith_wcwl_remove_hidden_products_via_query', true ) ) {
 				$sql .= ' AND p.ID NOT IN ( ' . implode( ', ', array_filter( $hidden_products, 'esc_sql' ) ) . ' )';
 			}
@@ -383,6 +515,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 				$items = array();
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_get_products
+			 *
+			 * Filter the products retrieved from the wishlist.
+			 *
+			 * @param array $items Array of products
+			 * @param array $args  Array of arguments
+			 *
+			 * @return array
+			 */
 			return apply_filters( 'yith_wcwl_get_products', $items, $args );
 		}
 

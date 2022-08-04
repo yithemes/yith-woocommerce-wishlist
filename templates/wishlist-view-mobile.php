@@ -87,7 +87,16 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 										<?php echo wp_kses_post( apply_filters( 'woocommerce_in_cartproduct_obj_title', $product->get_title(), $product ) ); ?>
 									</a>
 								</h3>
-								<?php do_action( 'yith_wcwl_table_after_product_name', $item ); ?>
+								<?php
+								/**
+								 * DO_ACTION: yith_wcwl_table_after_product_name
+								 *
+								 * Allows to render some content or fire some action after the product name in the wishlist table.
+								 *
+								 * @param YITH_WCWL_Wishlist_Item $item Wishlist item object
+								 */
+								do_action( 'yith_wcwl_table_after_product_name', $item );
+								?>
 							</div>
 
 							<?php if ( $show_variation || $show_dateadded || $show_price ) : ?>
@@ -228,7 +237,18 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 									</select>
 								<?php else : ?>
 									<a href="#move_to_another_wishlist" class="move-to-another-wishlist-button" data-rel="prettyPhoto[move_to_another_wishlist]">
-										<?php echo esc_html( apply_filters( 'yith_wcwl_move_to_another_list_label', __( 'Move to another list &rsaquo;', 'yith-woocommerce-wishlist' ) ) ); ?>
+										<?php
+										/**
+										 * APPLY_FILTERS: yith_wcwl_move_to_another_list_label
+										 *
+										 * Filter the label to move the product to another wishlist.
+										 *
+										 * @param string $label Label
+										 *
+										 * @return string
+										 */
+										echo esc_html( apply_filters( 'yith_wcwl_move_to_another_list_label', __( 'Move to another list &rsaquo;', 'yith-woocommerce-wishlist' ) ) );
+										?>
 									</a>
 								<?php endif; ?>
 							</div>
@@ -236,6 +256,17 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 
 						<?php if ( $show_remove_product || $repeat_remove_button ) : ?>
 							<div class="product-remove">
+								<?php
+								/**
+								 * APPLY_FILTERS: yith_wcwl_remove_product_wishlist_message_title
+								 *
+								 * Filter the title of the button to remove the product from the wishlist.
+								 *
+								 * @param string $title Button title
+								 *
+								 * @return string
+								 */
+								?>
 								<a href="<?php echo esc_url( $item->get_remove_url() ); ?>" class="remove_from_wishlist" title="<?php echo esc_html( apply_filters( 'yith_wcwl_remove_product_wishlist_message_title', __( 'Remove this product', 'yith-woocommerce-wishlist' ) ) ); ?>"><i class="fa fa-trash"></i></a>
 							</div>
 						<?php endif; ?>
@@ -247,7 +278,18 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	else :
 		?>
 		<p class="wishlist-empty">
-			<?php echo esc_html( apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ) ) ); ?>
+			<?php
+			/**
+			 * APPLY_FILTERS: yith_wcwl_no_product_to_remove_message
+			 *
+			 * Filter the message shown when there are no products in the wishlist.
+			 *
+			 * @param string $message Message
+			 *
+			 * @return string
+			 */
+			echo esc_html( apply_filters( 'yith_wcwl_no_product_to_remove_message', __( 'No products added to the wishlist', 'yith-woocommerce-wishlist' ) ) );
+			?>
 		</p>
 	<?php endif; ?>
 

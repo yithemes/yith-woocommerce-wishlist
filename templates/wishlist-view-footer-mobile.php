@@ -41,7 +41,20 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 		<?php if ( $count && $show_cb ) : ?>
 			<!-- Bulk actions form -->
 			<div class="yith_wcwl_wishlist_bulk_action">
-				<label for="bulk_actions"><?php echo esc_html( apply_filters( 'yith_wcwl_wishlist_bulk_actions_label', __( 'Apply this action to all the selected items:', 'yith-woocommerce-wishlist' ) ) ); ?></label>
+				<label for="bulk_actions">
+					<?php
+					/**
+					 * APPLY_FILTERS: yith_wcwl_wishlist_bulk_actions_label
+					 *
+					 * Filter the label of the bulk action selector in the Wishlist page.
+					 *
+					 * @param string $label Label
+					 *
+					 * @return string
+					 */
+					echo esc_html( apply_filters( 'yith_wcwl_wishlist_bulk_actions_label', __( 'Apply this action to all the selected items:', 'yith-woocommerce-wishlist' ) ) );
+					?>
+				</label>
 				<select name="bulk_actions" id="bulk_actions">
 					<option value="add_to_cart"><?php esc_html_e( 'Add to cart', 'yith-woocommerce-wishlist' ); ?></option>
 
@@ -97,8 +110,30 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 						class="<?php echo esc_attr( $ask_an_estimate_classes ); ?> ask-an-estimate-button"
 						<?php echo ( $additional_info || ! is_user_logged_in() ) ? 'data-rel="prettyPhoto[ask_an_estimate]"' : ''; ?>
 					>
-						<?php echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_ask_an_estimate_icon', $ask_an_estimate_icon ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<?php echo esc_html( apply_filters( 'yith_wcwl_ask_an_estimate_text', $ask_an_estimate_text ) ); ?>
+						<?php
+						/**
+						 * APPLY_FILTERS: yith_wcwl_ask_an_estimate_icon
+						 *
+						 * Filter the icon for the 'Ask for an estimate'.
+						 *
+						 * @param string $icon Icon
+						 *
+						 * @return string
+						 */
+						echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_ask_an_estimate_icon', $ask_an_estimate_icon ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						?>
+						<?php
+						/**
+						 * APPLY_FILTERS: yith_wcwl_ask_an_estimate_text
+						 *
+						 * Filter the text for the 'Ask for an estimate'.
+						 *
+						 * @param string $text Text
+						 *
+						 * @return string
+						 */
+						echo esc_html( apply_filters( 'yith_wcwl_ask_an_estimate_text', $ask_an_estimate_text ) );
+						?>
 					</a>
 				<?php endif; ?>
 
@@ -115,19 +150,55 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	<?php wp_nonce_field( 'yith_wcwl_edit_wishlist_action', 'yith_wcwl_edit_wishlist' ); ?>
 	<input type="hidden" value="<?php echo esc_attr( $wishlist_token ); ?>" name="wishlist_id" id="wishlist_id">
 
-	<?php do_action( 'yith_wcwl_after_wishlist', $wishlist ); ?>
+	<?php
+	/**
+	 * DO_ACTION: yith_wcwl_after_wishlist
+	 *
+	 * Allows to render some content or fire some action after the wishlist.
+	 *
+	 * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+	 */
+	do_action( 'yith_wcwl_after_wishlist', $wishlist );
+	?>
 
 </form>
 
-<?php do_action( 'yith_wcwl_after_wishlist_form', $wishlist ); ?>
+<?php
+/**
+ * DO_ACTION: yith_wcwl_after_wishlist_form
+ *
+ * Allows to render some content or fire some action after the wishlist form.
+ *
+ * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+ */
+do_action( 'yith_wcwl_after_wishlist_form', $wishlist );
+?>
 
 <?php
+/**
+ * APPLY_FILTERS: yith_wcwl_ask_an_estimate_conditions
+ *
+ * Filter the condition to load the 'Ask for an estimate' template.
+ *
+ * @param bool $condition Condition to load the template
+ *
+ * @return bool
+ */
 if ( apply_filters( 'yith_wcwl_ask_an_estimate_conditions', $wishlist && $show_ask_estimate_button && ( ! is_user_logged_in() || $additional_info ) ) ) {
 	yith_wcwl_get_template( 'wishlist-popup-ask-an-estimate.php', $var );
 }
 ?>
 
 <?php
+/**
+ * APPLY_FILTERS: yith_wcwl_move_to_another_wishlist_popup_conditions
+ *
+ * Filter the condition to load the template to move products to another wishlist.
+ *
+ * @param bool $condition Condition to load the template
+ *
+ * @return bool
+ */
 if ( apply_filters( 'yith_wcwl_move_to_another_wishlist_popup_conditions', $wishlist && $move_to_another_wishlist && 'popup' === $move_to_another_wishlist_type && $available_multi_wishlist && count( $users_wishlists ) > 1, $wishlist ) ) {
 	yith_wcwl_get_template( 'wishlist-popup-move.php', $var );
 }

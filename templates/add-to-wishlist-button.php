@@ -38,6 +38,17 @@ global $product;
 ?>
 
 <div class="yith-wcwl-add-button">
+	<?php
+	/**
+	 * APPLY_FILTERS: yith_wcwl_add_to_wishlist_title
+	 *
+	 * Filter the 'Add to wishlist' label.
+	 *
+	 * @param string $label Label
+	 *
+	 * @return string
+	 */
+	?>
 	<a
 		href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'add_to_wishlist', $product_id, $base_url ), 'add_to_wishlist' ) ); ?>"
 		class="<?php echo esc_attr( $link_classes ); ?>"

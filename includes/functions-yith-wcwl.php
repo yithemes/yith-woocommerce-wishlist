@@ -41,6 +41,15 @@ if ( ! function_exists( 'yith_wcwl_is_wishlist_page' ) ) {
 			return false;
 		}
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_is_wishlist_page
+		 *
+		 * Filter whether the current page is the wishlist page.
+		 *
+		 * @param bool $is_wishlist_page Whether current page is wishlist page or not
+		 *
+		 * @return bool
+		 */
 		return apply_filters( 'yith_wcwl_is_wishlist_page', is_page( $wishlist_page_id ) );
 	}
 }
@@ -54,6 +63,15 @@ if ( ! function_exists( 'yith_wcwl_is_single' ) ) {
 	 * @since 3.0.0
 	 */
 	function yith_wcwl_is_single() {
+		/**
+		 * APPLY_FILTERS: yith_wcwl_is_single
+		 *
+		 * Filter whether the ATW button is being printed in a single product page.
+		 *
+		 * @param bool $is_product Whether current page is a product page or not
+		 *
+		 * @return bool
+		 */
 		return apply_filters( 'yith_wcwl_is_single', is_product() && ! in_array( wc_get_loop_prop( 'name' ), array( 'related', 'up-sells' ), true ) && ! wc_get_loop_prop( 'is_shortcode' ) );
 	}
 }
@@ -68,6 +86,15 @@ if ( ! function_exists( 'yith_wcwl_is_mobile' ) ) {
 	function yith_wcwl_is_mobile() {
 		global $yith_wcwl_is_mobile;
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_is_wishlist_responsive
+		 *
+		 * Filter if is enabled the responsive layout.
+		 *
+		 * @param bool $is_wishlist_responsive Whether responsive layout is enabled or not
+		 *
+		 * @return bool
+		 */
 		return apply_filters( 'yith_wcwl_is_wishlist_responsive', true ) && ( wp_is_mobile() || $yith_wcwl_is_mobile );
 	}
 }
@@ -102,6 +129,16 @@ if ( ! function_exists( 'yith_wcwl_locate_template' ) ) {
 			return apply_filters( 'yith_wcwl_locate_template', $plugin_path, $path );
 		}
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_locate_template
+		 *
+		 * Filter the location of the templates.
+		 *
+		 * @param string $located Template found
+		 * @param string $path    Template path
+		 *
+		 * @return string
+		 */
 		return apply_filters( 'yith_wcwl_locate_template', $located, $path );
 	}
 }
@@ -159,6 +196,19 @@ if ( ! function_exists( 'yith_wcwl_get_template_part' ) ) {
 			$template_layout = '-' . $template_layout;
 		}
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_template_part_hierarchy
+		 *
+		 * Filter the hierarchy structure of the plugin templates and templates parts.
+		 *
+		 * @param array  $template_hierarchy Template hierarchy
+		 * @param string $template           Template
+		 * @param string $template_part      Template part
+		 * @param string $template_layout    Template layout
+		 * @param array  $var                Array of data
+		 *
+		 * @return array
+		 */
 		$template_hierarchy = apply_filters(
 			'yith_wcwl_template_part_hierarchy',
 			array_merge(
@@ -243,6 +293,16 @@ if ( ! function_exists( 'yith_wcwl_get_count_text' ) ) {
 
 		// if no user added to wishlist, return empty string.
 		if ( ! $count ) {
+			/**
+			 * APPLY_FILTERS: yith_wcwl_count_text_empty
+			 *
+			 * Filter the text shown when a product has not been added to any wishlist.
+			 *
+			 * @param string $text       Text
+			 * @param int    $product_id Product ID
+			 *
+			 * @return string
+			 */
 			return apply_filters( 'yith_wcwl_count_text_empty', '', $product_id );
 		} elseif ( ! $current_user_count ) {
 			// translators: 1. Number of users.
@@ -260,6 +320,18 @@ if ( ! function_exists( 'yith_wcwl_get_count_text' ) ) {
 
 		$label = sprintf( '<div class="count-add-to-wishlist"><span class="count">%s</span> %s</div>', $count_text, $text );
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_count_text
+		 *
+		 * Filter the text that states how many users added a specific product to wishlist.
+		 *
+		 * @param string $label              Text
+		 * @param int    $product_id         Product ID
+		 * @param int    $current_user_count Current user count
+		 * @param int    $count              Total count
+		 *
+		 * @return string
+		 */
 		return apply_filters( 'yith_wcwl_count_text', $label, $product_id, $current_user_count, $count );
 	}
 }
@@ -273,6 +345,15 @@ if ( ! function_exists( 'yith_wcwl_get_cookie_expiration' ) ) {
 	 * @return int Number of seconds the cookie should last.
 	 */
 	function yith_wcwl_get_cookie_expiration() {
+		/**
+		 * APPLY_FILTERS: yith_wcwl_cookie_expiration
+		 *
+		 * Filter the cookie expiration.
+		 *
+		 * @param int $cookie_expiration Cookie expiration
+		 *
+		 * @return int
+		 */
 		return intval( apply_filters( 'yith_wcwl_cookie_expiration', 60 * 60 * 24 * 30 ) );
 	}
 }
@@ -291,13 +372,32 @@ if ( ! function_exists( 'yith_setcookie' ) ) {
 	 * @since 1.0.0
 	 */
 	function yith_setcookie( $name, $value = array(), $time = null, $secure = false, $httponly = false ) {
+		/**
+		 * APPLY_FILTERS: yith_wcwl_set_cookie
+		 *
+		 * Filter whether to set the cookie.
+		 *
+		 * @param bool $set_cookie Whether to set cookie or not
+		 *
+		 * @return bool
+		 */
 		if ( ! apply_filters( 'yith_wcwl_set_cookie', true ) || empty( $name ) ) {
 			return false;
 		}
 
 		$time = ! empty( $time ) ? $time : time() + yith_wcwl_get_cookie_expiration();
 
-		$value      = wp_json_encode( stripslashes_deep( $value ) );
+		$value = wp_json_encode( stripslashes_deep( $value ) );
+
+		/**
+		 * APPLY_FILTERS: yith_wcwl_cookie_expiration_time
+		 *
+		 * Filter the cookie expiration time.
+		 *
+		 * @param int $time Cookie expiration time
+		 *
+		 * @return int
+		 */
 		$expiration = apply_filters( 'yith_wcwl_cookie_expiration_time', $time ); // Default 30 days.
 
 		$_COOKIE[ $name ] = $value;
@@ -393,6 +493,15 @@ if ( ! function_exists( 'yith_wcwl_get_hidden_products' ) ) {
 			set_transient( 'yith_wcwl_hidden_products', $hidden_products, 30 * DAY_IN_SECONDS );
 		}
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_hidden_products
+		 *
+		 * Filter the array of hidden products.
+		 *
+		 * @param array $hidden_products Hidden products
+		 *
+		 * @return array
+		 */
 		return apply_filters( 'yith_wcwl_hidden_products', $hidden_products );
 	}
 }
@@ -425,6 +534,17 @@ if ( ! function_exists( 'yith_wcwl_get_plugin_icons' ) ) {
 		$icons['none']   = $none_label ? $none_label : __( 'None', 'yith-woocommerce-wishlist' );
 		$icons['custom'] = $custom_label ? $custom_label : __( 'Custom', 'yith-woocommerce-wishlist' );
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_plugin_icons
+		 *
+		 * Filter the icons used in the plugin.
+		 *
+		 * @param array  $icons        Icons
+		 * @param string $none_label   Label to use for none option
+		 * @param string $custom_label Label to use for custom option
+		 *
+		 * @return array
+		 */
 		return apply_filters( 'yith_wcwl_plugin_icons', $icons, $none_label, $custom_label );
 	}
 }
@@ -474,6 +594,17 @@ if ( ! function_exists( 'yith_wcwl_get_privacy_label' ) ) {
 				break;
 		}
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_{$privacy_label}_wishlist_visibility
+		 *
+		 * Filter the privacy label for the wishlist privacy status.
+		 *
+		 * @param string $privacy_text Privacy text
+		 * @param bool   $extended     Whether to show extended or simplified label
+		 * @param int    $privacy      Privacy value
+		 *
+		 * @return string
+		 */
 		return apply_filters( "yith_wcwl_{$privacy_label}_wishlist_visibility", $privacy_text, $extended, $privacy );
 	}
 }
@@ -501,6 +632,16 @@ if ( ! function_exists( 'yith_wcwl_get_privacy_value' ) ) {
 				break;
 		}
 
+		/**
+		 * APPLY_FILTERS: yith_wcwl_privacy_value
+		 *
+		 * Filter the privacy value.
+		 *
+		 * @param int    $privacy_value Privacy value
+		 * @param string $privacy_label Privacy label
+		 *
+		 * @return string
+		 */
 		return apply_filters( 'yith_wcwl_privacy_value', $privacy_value, $privacy_label );
 	}
 }
@@ -520,6 +661,17 @@ if ( ! function_exists( 'yith_wcwl_get_current_url' ) ) {
 		 * Added filter to change default behaviour, passing what we think is current page url
 		 *
 		 * @since 3.0.12
+		 */
+
+		/**
+		 * APPLY_FILTERS: yith_wcwl_current_url
+		 *
+		 * Filter the current URL.
+		 *
+		 * @param string $current_url Current URL
+		 * @param string $url         URL
+		 *
+		 * @return string
 		 */
 		return apply_filters( 'yith_wcwl_current_url', '', add_query_arg( $wp->query_vars, home_url( $wp->request ) ) );
 	}
@@ -671,6 +823,18 @@ if ( ! function_exists( 'yith_wcwl_object_id' ) ) {
 		$id = apply_filters( 'wpml_object_id', $id, $type, $return_original, $lang );
 
 		// Space for additional translations.
+		/**
+		 * APPLY_FILTERS: yith_wcwl_object_id
+		 *
+		 * Filter the Wishlist object ID.
+		 *
+		 * @param int    $id              Object ID
+		 * @param string $type            Object type
+		 * @param bool   $return_original Whether to return original object if no translation is found
+		 * @param string $lang            Language to use for translation
+		 *
+		 * @return int
+		 */
 		$id = apply_filters( 'yith_wcwl_object_id', $id, $type, $return_original, $lang );
 
 		return $id;
@@ -685,6 +849,15 @@ if ( ! function_exists( 'yith_wcwl_kses_icon' ) ) {
 	 * @return string Escaped data
 	 */
 	function yith_wcwl_kses_icon( $data ) {
+		/**
+		 * APPLY_FILTERS: yith_wcwl_allowed_icon_html
+		 *
+		 * Filter the allowed HTML for the icons.
+		 *
+		 * @param array $allowed_icon_html Allowed HTML
+		 *
+		 * @return array
+		 */
 		$allowed_icon_html = apply_filters(
 			'yith_wcwl_allowed_icon_html',
 			array(

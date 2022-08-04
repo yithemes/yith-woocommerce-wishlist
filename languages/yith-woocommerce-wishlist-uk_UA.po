@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2022-06-19 14:16:05+00:00\n"
+"POT-Creation-Date: 2022-08-04 12:20:46+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:07+0200\n"
 "Last-Translator: Valentyn Zubenko <valentyn.zubenko@gmail.com>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -28,123 +28,122 @@ msgstr ""
 msgid "Wishlist Page"
 msgstr "Мій обраний список в %s"
 
-#: includes/class-yith-wcwl-admin.php:146
+#: includes/class-yith-wcwl-admin.php:155
 msgid "General settings"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:147
+#: includes/class-yith-wcwl-admin.php:156
 msgid "Add to wishlist options"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:148
+#: includes/class-yith-wcwl-admin.php:157
 msgid "Wishlist page options"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:249
+#: includes/class-yith-wcwl-admin.php:268
 msgid ""
 "Allows your customers to create and share lists of products that they want "
 "to purchase on your e-commerce."
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:280
+#: includes/class-yith-wcwl-admin.php:308
 msgid ""
 "Enable the wishlist feature for all users or <b>only for registered users</b>"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:281
+#: includes/class-yith-wcwl-admin.php:309
 msgid ""
 "Allow users to create <b>multiple wishlists</b> (Ex: Christmas, Birthday, "
 "etc.) <br>Users can choose the wishlist from a dropdown menu when they click "
 "on \"Add to wishlist\""
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:282
+#: includes/class-yith-wcwl-admin.php:310
 msgid ""
 "Allow users to set <b>visibility options for each wishlist</b>, by making "
 "them either public (visible to everyone), private or shared (visible only to "
 "people it has been shared with)"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:283
+#: includes/class-yith-wcwl-admin.php:311
 msgid ""
 "Choose between <b>different layouts</b> for the wishlist page and for the "
 "wishlist content"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:284
+#: includes/class-yith-wcwl-admin.php:312
 msgid ""
 "<b>Allow users to manage their wishlists:</b> rename and delete wishlists, "
 "move a product from one wishlist to another, change order of items, "
 "quantity, etc."
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:285
+#: includes/class-yith-wcwl-admin.php:313
 msgid ""
 "Enable an <b>\"Ask for an estimate\" button</b> to let customers send the "
 "content of their wishlist to the admin and get a custom quote"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:286
+#: includes/class-yith-wcwl-admin.php:314
 msgid ""
 "<b>Show a wishlist widget</b> that lists all the products in the wishlists "
 "(available also with \"mini-cart\" style for the header)"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:287
+#: includes/class-yith-wcwl-admin.php:315
 msgid ""
-"View the most popular products added to the wishlist by your customers and "
-"<b>send promotional emails to users</b> who have added specific products to "
+"<b>Send promotional emails to users</b> who have added specific products to "
 "their wishlist"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:288
+#: includes/class-yith-wcwl-admin.php:316
 msgid ""
 "<b>Send an automatic email to the wishlist owner</b> whenever a product in "
 "the list is back in stock or on sale"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:289
+#: includes/class-yith-wcwl-admin.php:317
 msgid "Regular updates, Translations and Premium Support"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:75
-#: templates/add-to-wishlist-remove.php:59
+#: includes/class-yith-wcwl-ajax-handler.php:94
+#: templates/add-to-wishlist-remove.php:81
 msgid "View &rsaquo;"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:76
-#: templates/add-to-wishlist-remove.php:58
+#: includes/class-yith-wcwl-ajax-handler.php:95
+#: templates/add-to-wishlist-remove.php:69
 msgid "or"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:77
+#: includes/class-yith-wcwl-ajax-handler.php:96
 msgid "Close"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:155
-#: includes/class-yith-wcwl-ajax-handler.php:195
+#: includes/class-yith-wcwl-ajax-handler.php:203
+#: includes/class-yith-wcwl-ajax-handler.php:252
 msgid "Product successfully removed."
 msgstr ""
 
-#: includes/class-yith-wcwl-form-handler.php:156
+#: includes/class-yith-wcwl-form-handler.php:193
 msgid "Please, make sure to enter a valid title"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:552
+#: includes/class-yith-wcwl-frontend.php:674
 msgid ""
 "We are sorry, but this feature is available only if cookies on your browser "
 "are enabled."
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:553
+#: includes/class-yith-wcwl-frontend.php:684
 msgid "Product added to cart successfully"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:816
-#: includes/class-yith-wcwl-shortcode.php:239
-#: plugin-options/wishlist_page-options.php:240
-#: templates/wishlist-view-footer-mobile.php:46
-#: templates/wishlist-view-footer.php:46
+#: includes/class-yith-wcwl-frontend.php:947
+#: includes/class-yith-wcwl-shortcode.php:248
+#: plugin-options/wishlist_page-options.php:249
+#: templates/wishlist-view-footer-mobile.php:59
+#: templates/wishlist-view-footer.php:59
 msgid "Add to cart"
 msgstr ""
 
@@ -192,43 +191,43 @@ msgid ""
 "for the products you love."
 msgstr ""
 
-#: includes/class-yith-wcwl-privacy.php:84
-#: includes/class-yith-wcwl-privacy.php:100
+#: includes/class-yith-wcwl-privacy.php:94
+#: includes/class-yith-wcwl-privacy.php:110
 msgid "Customer wishlists"
 msgstr ""
 
-#: includes/class-yith-wcwl-privacy.php:137 plugin-options/lists-options.php:25
-#: plugin-options/lists-options.php:32
+#: includes/class-yith-wcwl-privacy.php:147 plugin-options/lists-options.php:34
+#: plugin-options/lists-options.php:41
 msgid "Wishlists"
 msgstr "Мій обраний список в %s"
 
 #. Translators: %s Order number.
-#: includes/class-yith-wcwl-privacy.php:199
+#: includes/class-yith-wcwl-privacy.php:233
 msgid "Removed wishlist %s."
 msgstr "Мій обраний список в %s"
 
 #. Translators: %s Order number.
-#: includes/class-yith-wcwl-privacy.php:203
+#: includes/class-yith-wcwl-privacy.php:237
 msgid "Wishlist %s has been retained."
 msgstr ""
 
-#: includes/class-yith-wcwl-privacy.php:227
+#: includes/class-yith-wcwl-privacy.php:272
 msgid "Token"
 msgstr ""
 
-#: includes/class-yith-wcwl-privacy.php:228
+#: includes/class-yith-wcwl-privacy.php:273
 msgid "Wishlist URL"
 msgstr ""
 
-#: includes/class-yith-wcwl-privacy.php:229
+#: includes/class-yith-wcwl-privacy.php:274
 msgid "Title"
 msgstr ""
 
-#: includes/class-yith-wcwl-privacy.php:231
+#: includes/class-yith-wcwl-privacy.php:276
 msgid "Visibility"
 msgstr ""
 
-#: includes/class-yith-wcwl-privacy.php:232
+#: includes/class-yith-wcwl-privacy.php:277
 msgid "Items added"
 msgstr ""
 
@@ -295,138 +294,138 @@ msgstr ""
 msgid "ID of the wishlist to show (e.g. K6EOWXB888ZD)"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:414
+#: includes/class-yith-wcwl-shortcode.php:452
 msgid "Share on:"
 msgstr "Поширити в:"
 
-#: includes/class-yith-wcwl-shortcode.php:438
-#: plugin-options/wishlist_page-options.php:138
+#: includes/class-yith-wcwl-shortcode.php:498
+#: plugin-options/wishlist_page-options.php:147
 msgid "Share on Facebook"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:455
-#: plugin-options/wishlist_page-options.php:147
+#: includes/class-yith-wcwl-shortcode.php:515
+#: plugin-options/wishlist_page-options.php:156
 msgid "Tweet on Twitter"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:473
-#: plugin-options/wishlist_page-options.php:156
+#: includes/class-yith-wcwl-shortcode.php:533
+#: plugin-options/wishlist_page-options.php:165
 msgid "Pin on Pinterest"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:487
+#: includes/class-yith-wcwl-shortcode.php:547
 msgid "Share via email"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:510
-#: plugin-options/wishlist_page-options.php:174
+#: includes/class-yith-wcwl-shortcode.php:570
+#: plugin-options/wishlist_page-options.php:183
 msgid "Share on WhatsApp"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:621
+#: includes/class-yith-wcwl-shortcode.php:744
 msgid "Remove from list"
 msgstr ""
 
-#: includes/class-yith-wcwl-wishlist-item.php:193
+#: includes/class-yith-wcwl-wishlist-item.php:203
 msgid "Free!"
 msgstr ""
 
-#: includes/class-yith-wcwl.php:164
+#: includes/class-yith-wcwl.php:232
 msgid "The item cannot be added to this wishlist"
 msgstr ""
 
-#: includes/class-yith-wcwl.php:168 includes/class-yith-wcwl.php:174
+#: includes/class-yith-wcwl.php:236 includes/class-yith-wcwl.php:242
 msgid "An error occurred while adding the products to the wishlist."
 msgstr ""
 
-#: includes/class-yith-wcwl.php:235 includes/class-yith-wcwl.php:241
+#: includes/class-yith-wcwl.php:339 includes/class-yith-wcwl.php:365
 msgid "Error. Unable to remove the product from the wishlist."
 msgstr ""
 
-#: includes/data-stores/class-yith-wcwl-wishlist-data-store.php:152
-#: includes/data-stores/class-yith-wcwl-wishlist-data-store.php:174
+#: includes/data-stores/class-yith-wcwl-wishlist-data-store.php:250
+#: includes/data-stores/class-yith-wcwl-wishlist-data-store.php:272
 msgid "Invalid wishlist."
 msgstr ""
 
-#: includes/data-stores/class-yith-wcwl-wishlist-item-data-store.php:119
+#: includes/data-stores/class-yith-wcwl-wishlist-item-data-store.php:210
 msgid "Invalid wishlist item."
 msgstr ""
 
 #. translators: 1. Number of users.
-#: includes/functions-yith-wcwl.php:249
+#: includes/functions-yith-wcwl.php:309
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/functions-yith-wcwl.php:250
+#: includes/functions-yith-wcwl.php:310
 msgid "has this item in wishlist"
 msgid_plural "have this item in wishlist"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/functions-yith-wcwl.php:252
+#: includes/functions-yith-wcwl.php:312
 msgid "You're the first"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:253
+#: includes/functions-yith-wcwl.php:313
 msgid "to add this item in wishlist"
 msgstr ""
 
 #. translators: 1. Count of users when many, or "another" when only one.
-#: includes/functions-yith-wcwl.php:257
+#: includes/functions-yith-wcwl.php:317
 msgid "You and %s user"
 msgid_plural "You and %d users"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/functions-yith-wcwl.php:257
+#: includes/functions-yith-wcwl.php:317
 msgid "another"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:258
+#: includes/functions-yith-wcwl.php:318
 msgid "have this item in wishlist"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:425
+#: includes/functions-yith-wcwl.php:534
 msgid "None"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:426
+#: includes/functions-yith-wcwl.php:535
 msgid "Custom"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:447
+#: includes/functions-yith-wcwl.php:567
 msgid "Shared"
 msgstr "Поширити в:"
 
-#: includes/functions-yith-wcwl.php:451
+#: includes/functions-yith-wcwl.php:571
 msgid "Only people with a link to this list can see it"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:457
+#: includes/functions-yith-wcwl.php:577
 msgid "Private"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:461
+#: includes/functions-yith-wcwl.php:581
 msgid "Only you can see this list"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:467
+#: includes/functions-yith-wcwl.php:587
 msgid "Public"
 msgstr ""
 
-#: includes/functions-yith-wcwl.php:471
+#: includes/functions-yith-wcwl.php:591
 msgid "Anyone can search for and see this list"
 msgstr ""
 
 #: includes/widgets/elementor/class-yith-wcwl-elementor-add-to-wishlist.php:118
-#: plugin-options/add_to_wishlist-options.php:127
+#: plugin-options/add_to_wishlist-options.php:136
 msgid "Add to wishlist"
 msgstr ""
 
 #: includes/widgets/elementor/class-yith-wcwl-elementor-add-to-wishlist.php:128
-#: plugin-options/add_to_wishlist-options.php:143
+#: plugin-options/add_to_wishlist-options.php:152
 msgid "Browse wishlist"
 msgstr ""
 
@@ -439,70 +438,68 @@ msgstr ""
 msgid "Product added to wishlist"
 msgstr "Назва продукту"
 
-#: init.php:160
+#: init.php:173
 msgid "is enabled but not effective. It requires WooCommerce to work."
 msgstr ""
 
-#: init.php:176
-msgid "You can't activate the free version of"
+#: init.php:191
+msgid ""
+"YITH WooCommerce Wishlist was deactivated as you're running an higher tier "
+"version of the same plugin."
 msgstr ""
 
-#: init.php:176
-msgid "while you are using the premium one."
-msgstr ""
-
-#: plugin-options/add_to_wishlist-options.php:20
-#: plugin-options/settings-options.php:27
+#: plugin-options/add_to_wishlist-options.php:29
+#: plugin-options/settings-options.php:32
 msgid "General Settings"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:27
+#: plugin-options/add_to_wishlist-options.php:36
 msgid "After product is added to wishlist"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:28
+#: plugin-options/add_to_wishlist-options.php:37
 msgid ""
 "Choose the look of the Wishlist button when the product has already been "
 "added to a wishlist"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:32
+#: plugin-options/add_to_wishlist-options.php:41
 #, fuzzy
 msgid "Show \"Add to wishlist\" button"
 msgstr "Назва продукту"
 
-#: plugin-options/add_to_wishlist-options.php:33
+#: plugin-options/add_to_wishlist-options.php:42
 msgid "Show \"View wishlist\" link"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:34
+#: plugin-options/add_to_wishlist-options.php:43
 msgid "Show \"Remove from list\" link"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:48
+#: plugin-options/add_to_wishlist-options.php:57
 msgid "Loop settings"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:50
+#: plugin-options/add_to_wishlist-options.php:59
 msgid ""
 "Loop options will be visible on Shop page, category pages, product "
 "shortcodes, products sliders, and all the other places where the WooCommerce "
 "products' loop is used"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:55
+#: plugin-options/add_to_wishlist-options.php:64
 msgid "Show \"Add to wishlist\" in loop"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:56
+#: plugin-options/add_to_wishlist-options.php:65
 msgid "Enable the \"Add to wishlist\" feature in WooCommerce products' loop"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:64
+#: plugin-options/add_to_wishlist-options.php:73
 msgid "Position of \"Add to wishlist\" in loop"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:65
+#: plugin-options/add_to_wishlist-options.php:74
 msgid ""
 "Choose where to show \"Add to wishlist\" button or link in WooCommerce "
 "products' loop. <span class=\"addon\">Copy this shortcode <span class=\"code"
@@ -510,32 +507,32 @@ msgid ""
 "want to show the \"Add to wishlist\" link or button</span>"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:72
+#: plugin-options/add_to_wishlist-options.php:81
 msgid "On top of the image"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:73
+#: plugin-options/add_to_wishlist-options.php:82
 msgid "Before \"Add to cart\" button"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:74
+#: plugin-options/add_to_wishlist-options.php:83
 msgid "After \"Add to cart\" button"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:75
-#: plugin-options/add_to_wishlist-options.php:107
+#: plugin-options/add_to_wishlist-options.php:84
+#: plugin-options/add_to_wishlist-options.php:116
 msgid "Use shortcode"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:89
+#: plugin-options/add_to_wishlist-options.php:98
 msgid "Product page settings"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:96
+#: plugin-options/add_to_wishlist-options.php:105
 msgid "Position of \"Add to wishlist\" on product page"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:97
+#: plugin-options/add_to_wishlist-options.php:106
 msgid ""
 "Choose where to show \"Add to wishlist\" button or link on the product page. "
 "<span class=\"addon\">Copy this shortcode <span class=\"code"
@@ -543,472 +540,452 @@ msgid ""
 "want to show the \"Add to wishlist\" link or button</span>"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:104
+#: plugin-options/add_to_wishlist-options.php:113
 msgid "After \"Add to cart\""
 msgstr "After \"Додати в кошик\""
 
-#: plugin-options/add_to_wishlist-options.php:105
+#: plugin-options/add_to_wishlist-options.php:114
 msgid "After thumbnails"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:106
+#: plugin-options/add_to_wishlist-options.php:115
 msgid "After summary"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:117
-#: plugin-options/wishlist_page-options.php:222
+#: plugin-options/add_to_wishlist-options.php:126
+#: plugin-options/wishlist_page-options.php:231
 msgid "Text customization"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:124
+#: plugin-options/add_to_wishlist-options.php:133
 msgid "\"Add to wishlist\" text"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:125
+#: plugin-options/add_to_wishlist-options.php:134
 msgid "Enter a text for \"Add to wishlist\" button"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:132
+#: plugin-options/add_to_wishlist-options.php:141
 msgid "\"Product added\" text"
 msgstr "Назва продукту"
 
-#: plugin-options/add_to_wishlist-options.php:133
+#: plugin-options/add_to_wishlist-options.php:142
 msgid ""
 "Enter the text of the message displayed when the user adds a product to the "
 "wishlist"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:135
+#: plugin-options/add_to_wishlist-options.php:144
 msgid "Product added!"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:140
+#: plugin-options/add_to_wishlist-options.php:149
 msgid "\"Browse wishlist\" text"
 msgstr "\"Додати в кошик\" button text"
 
-#: plugin-options/add_to_wishlist-options.php:141
+#: plugin-options/add_to_wishlist-options.php:150
 msgid "Enter a text for the \"Browse wishlist\" link on the product page"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:148
+#: plugin-options/add_to_wishlist-options.php:157
 msgid "\"Product already in wishlist\" text"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:149
+#: plugin-options/add_to_wishlist-options.php:158
 msgid ""
 "Enter the text for the message displayed when the user views a product that "
 "is already in the wishlist"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:151
+#: plugin-options/add_to_wishlist-options.php:160
 msgid "The product is already in your wishlist!"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:161
+#: plugin-options/add_to_wishlist-options.php:170
 msgid "Style & Color customization"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:168
+#: plugin-options/add_to_wishlist-options.php:177
 msgid "Style of \"Add to wishlist\""
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:169
+#: plugin-options/add_to_wishlist-options.php:178
 msgid ""
 "Choose if you want to show a textual \"Add to wishlist\" link or a button"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:172
-#: plugin-options/wishlist_page-options.php:261
+#: plugin-options/add_to_wishlist-options.php:181
+#: plugin-options/wishlist_page-options.php:270
 msgid "Textual (anchor)"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:173
-#: plugin-options/wishlist_page-options.php:262
+#: plugin-options/add_to_wishlist-options.php:182
+#: plugin-options/wishlist_page-options.php:271
 msgid "Button with theme style"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:174
-#: plugin-options/wishlist_page-options.php:263
+#: plugin-options/add_to_wishlist-options.php:183
+#: plugin-options/wishlist_page-options.php:272
 msgid "Button with custom style"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:182
+#: plugin-options/add_to_wishlist-options.php:191
 msgid "\"Add to wishlist\" button style"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:188
+#: plugin-options/add_to_wishlist-options.php:197
 msgid "Choose colors for the \"Add to wishlist\" button"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:190
-#: plugin-options/wishlist_page-options.php:279
-#: plugin-options/wishlist_page-options.php:368
-#: plugin-options/wishlist_page-options.php:417
-#: plugin-options/wishlist_page-options.php:465
-#: plugin-options/wishlist_page-options.php:552
-#: plugin-options/wishlist_page-options.php:592
-#: plugin-options/wishlist_page-options.php:632
-#: plugin-options/wishlist_page-options.php:672
-#: plugin-options/wishlist_page-options.php:712
+#: plugin-options/add_to_wishlist-options.php:199
+#: plugin-options/wishlist_page-options.php:288
+#: plugin-options/wishlist_page-options.php:386
+#: plugin-options/wishlist_page-options.php:435
+#: plugin-options/wishlist_page-options.php:483
+#: plugin-options/wishlist_page-options.php:570
+#: plugin-options/wishlist_page-options.php:610
+#: plugin-options/wishlist_page-options.php:650
+#: plugin-options/wishlist_page-options.php:690
+#: plugin-options/wishlist_page-options.php:730
 msgid "Background"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:195
-#: plugin-options/wishlist_page-options.php:284
-#: plugin-options/wishlist_page-options.php:373
-#: plugin-options/wishlist_page-options.php:422
-#: plugin-options/wishlist_page-options.php:470
-#: plugin-options/wishlist_page-options.php:507
+#: plugin-options/add_to_wishlist-options.php:204
+#: plugin-options/wishlist_page-options.php:293
+#: plugin-options/wishlist_page-options.php:391
+#: plugin-options/wishlist_page-options.php:440
+#: plugin-options/wishlist_page-options.php:488
+#: plugin-options/wishlist_page-options.php:525
 msgid "Text"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:200
-#: plugin-options/wishlist_page-options.php:289
-#: plugin-options/wishlist_page-options.php:378
-#: plugin-options/wishlist_page-options.php:427
-#: plugin-options/wishlist_page-options.php:475
+#: plugin-options/add_to_wishlist-options.php:209
+#: plugin-options/wishlist_page-options.php:298
+#: plugin-options/wishlist_page-options.php:396
+#: plugin-options/wishlist_page-options.php:445
+#: plugin-options/wishlist_page-options.php:493
 msgid "Border"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:206
+#: plugin-options/add_to_wishlist-options.php:215
 msgid "Choose colors for the \"Add to wishlist\" button on hover state"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:208
-#: plugin-options/wishlist_page-options.php:297
-#: plugin-options/wishlist_page-options.php:386
-#: plugin-options/wishlist_page-options.php:435
+#: plugin-options/add_to_wishlist-options.php:217
+#: plugin-options/wishlist_page-options.php:306
+#: plugin-options/wishlist_page-options.php:404
+#: plugin-options/wishlist_page-options.php:453
 msgid "Background Hover"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:213
-#: plugin-options/wishlist_page-options.php:302
-#: plugin-options/wishlist_page-options.php:391
-#: plugin-options/wishlist_page-options.php:440
+#: plugin-options/add_to_wishlist-options.php:222
+#: plugin-options/wishlist_page-options.php:311
+#: plugin-options/wishlist_page-options.php:409
+#: plugin-options/wishlist_page-options.php:458
 msgid "Text Hover"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:218
-#: plugin-options/wishlist_page-options.php:307
-#: plugin-options/wishlist_page-options.php:396
-#: plugin-options/wishlist_page-options.php:445
+#: plugin-options/add_to_wishlist-options.php:227
+#: plugin-options/wishlist_page-options.php:316
+#: plugin-options/wishlist_page-options.php:414
+#: plugin-options/wishlist_page-options.php:463
 msgid "Border Hover"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:231
-#: plugin-options/wishlist_page-options.php:320
+#: plugin-options/add_to_wishlist-options.php:240
+#: plugin-options/wishlist_page-options.php:329
 msgid "Border radius"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:232
+#: plugin-options/add_to_wishlist-options.php:241
 msgid "Choose radius for the \"Add to wishlist\" button"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:246
+#: plugin-options/add_to_wishlist-options.php:255
 msgid "\"Add to wishlist\" icon"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:247
+#: plugin-options/add_to_wishlist-options.php:256
 msgid "Select an icon for the \"Add to wishlist\" button (optional)"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:257
+#: plugin-options/add_to_wishlist-options.php:275
 msgid "\"Add to wishlist\" custom icon"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:258
-#: plugin-options/add_to_wishlist-options.php:282
+#: plugin-options/add_to_wishlist-options.php:276
+#: plugin-options/add_to_wishlist-options.php:309
 msgid ""
 "Upload an icon you'd like to use for \"Add to wishlist\" button (suggested "
 "32px x 32px)"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:270
+#: plugin-options/add_to_wishlist-options.php:288
 msgid "\"Added to wishlist\" icon"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:271
+#: plugin-options/add_to_wishlist-options.php:289
 msgid "Select an icon for the \"Added to wishlist\" button (optional)"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:277
+#: plugin-options/add_to_wishlist-options.php:304
 msgid "Same used for Add to wishlist"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:281
+#: plugin-options/add_to_wishlist-options.php:308
 msgid "\"Added to wishlist\" custom icon"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:294
+#: plugin-options/add_to_wishlist-options.php:321
 msgid "Custom CSS"
 msgstr ""
 
-#: plugin-options/add_to_wishlist-options.php:295
+#: plugin-options/add_to_wishlist-options.php:322
 msgid "Enter custom CSS to be applied to Wishlist elements (optional)"
 msgstr ""
 
-#: plugin-options/lists-options.php:34
+#: plugin-options/lists-options.php:43
 msgid "Search list"
 msgstr ""
 
-#. translators: 1. Anchor to Frequently Bought Together landing page on
-#. yithemes.com.
-#: plugin-options/settings-options.php:19
-msgid ""
-"If you want to take advantage of this feature, you could consider purchasing "
-"the %s."
-msgstr ""
-
-#: plugin-options/settings-options.php:34
+#: plugin-options/settings-options.php:39
 msgid "Enable AJAX loading"
 msgstr ""
 
-#: plugin-options/settings-options.php:35
+#: plugin-options/settings-options.php:40
 msgid "Load any cacheable wishlist item via AJAX"
 msgstr ""
 
-#: plugin-options/settings-options.php:48
+#: plugin-options/settings-options.php:54
 msgid "YITH WooCommerce Frequently Bought Together Integration"
 msgstr ""
 
-#. translators: 1. Url to Frequently Bought Together landing page on
-#. yithemes.com.
-#: plugin-options/settings-options.php:51
-msgid ""
-"In order to use this integration you have to install and activate YITH "
-"WooCommerce Frequently Bought Together. <a href=\"%s\">Learn more</a>"
-msgstr ""
-
-#: plugin-options/settings-options.php:56
+#: plugin-options/settings-options.php:60
 msgid "Enable slider in wishlist"
 msgstr ""
 
-#. translators: 1. Example image of the integration. 2. CTA to buy Frequently
-#. Bought Together.
-#: plugin-options/settings-options.php:58
+#. translators: 1. Example image of the integration.
+#: plugin-options/settings-options.php:62
 msgid ""
 "Enable the slider with linked products on the Wishlist page (<a href=\"%1$s"
-"\" class=\"thickbox\">Example</a>). %2$s"
+"\" class=\"thickbox\">Example</a>)."
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:19
-msgid "All your wishlists"
-msgstr ""
-
-#: plugin-options/wishlist_page-options.php:26
+#: plugin-options/wishlist_page-options.php:28
+#: plugin-options/wishlist_page-options.php:35
 msgid "Wishlist page"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:27
+#: plugin-options/wishlist_page-options.php:36
 msgid ""
 "Pick a page as the main Wishlist page; make sure you add the <span class="
 "\"code\"><code>[yith_wcwl_wishlist]</code></span> shortcode into the page "
 "content"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:40
+#: plugin-options/wishlist_page-options.php:49
 msgid "Wishlist Detail Page"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:47
 #: plugin-options/wishlist_page-options.php:56
 #: plugin-options/wishlist_page-options.php:65
 #: plugin-options/wishlist_page-options.php:74
 #: plugin-options/wishlist_page-options.php:83
 #: plugin-options/wishlist_page-options.php:92
 #: plugin-options/wishlist_page-options.php:101
+#: plugin-options/wishlist_page-options.php:110
 msgid "In wishlist table show"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:48
+#: plugin-options/wishlist_page-options.php:57
 msgid "Product variations selected by the user (example: size or color)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:57
+#: plugin-options/wishlist_page-options.php:66
 msgid "Product price"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:66
+#: plugin-options/wishlist_page-options.php:75
 msgid "Product stock (show if the product is available or not)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:75
+#: plugin-options/wishlist_page-options.php:84
 msgid "Date on which the product was added to the wishlist"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:84
-msgid "Add to cart option for each product"
-msgstr ""
-
 #: plugin-options/wishlist_page-options.php:93
-msgid ""
-"Icon to remove the product from the wishlist - to the left of the product"
+msgid "Add to cart option for each product"
 msgstr ""
 
 #: plugin-options/wishlist_page-options.php:102
 msgid ""
-"Button to remove the product from the wishlist - to the right of the product"
-msgstr ""
-
-#: plugin-options/wishlist_page-options.php:110
-msgid "Redirect to cart"
+"Icon to remove the product from the wishlist - to the left of the product"
 msgstr ""
 
 #: plugin-options/wishlist_page-options.php:111
+msgid ""
+"Button to remove the product from the wishlist - to the right of the product"
+msgstr ""
+
+#: plugin-options/wishlist_page-options.php:119
+msgid "Redirect to cart"
+msgstr ""
+
+#: plugin-options/wishlist_page-options.php:120
 msgid ""
 "Redirect users to the cart page when they add a product to the cart from the "
 "wishlist page"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:119
+#: plugin-options/wishlist_page-options.php:128
 msgid "Remove if added to the cart"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:120
+#: plugin-options/wishlist_page-options.php:129
 msgid ""
 "Remove the product from the wishlist after it has been added to the cart"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:128
+#: plugin-options/wishlist_page-options.php:137
 msgid "Share wishlist"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:129
+#: plugin-options/wishlist_page-options.php:138
 msgid "Enable this option to let users share their wishlist on social media"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:137
 #: plugin-options/wishlist_page-options.php:146
 #: plugin-options/wishlist_page-options.php:155
 #: plugin-options/wishlist_page-options.php:164
 #: plugin-options/wishlist_page-options.php:173
+#: plugin-options/wishlist_page-options.php:182
 msgid "Share on social media"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:165
+#: plugin-options/wishlist_page-options.php:174
 msgid "Share by email"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:182
+#: plugin-options/wishlist_page-options.php:191
 msgid "Share by URL"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:183
+#: plugin-options/wishlist_page-options.php:192
 msgid "Show \"Share URL\" field on wishlist page"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:191
+#: plugin-options/wishlist_page-options.php:200
 msgid "Sharing title"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:192
+#: plugin-options/wishlist_page-options.php:201
 msgid "Wishlist title used for sharing (only used on Twitter and Pinterest)"
 msgstr ""
 
 #. translators: 1. Blog name.
-#: plugin-options/wishlist_page-options.php:195
+#: plugin-options/wishlist_page-options.php:204
 msgid "My wishlist on %s"
 msgstr "Мій обраний список в %s"
 
-#: plugin-options/wishlist_page-options.php:200
+#: plugin-options/wishlist_page-options.php:209
 msgid "Social text"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:201
+#: plugin-options/wishlist_page-options.php:210
 msgid ""
 "Type the message you want to publish when you share your wishlist on Twitter "
 "and Pinterest"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:209
+#: plugin-options/wishlist_page-options.php:218
 msgid "Social image URL"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:210
+#: plugin-options/wishlist_page-options.php:219
 msgid "It will be used to pin the wishlist on Pinterest."
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:229
+#: plugin-options/wishlist_page-options.php:238
 msgid "Default wishlist name"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:230
+#: plugin-options/wishlist_page-options.php:239
 msgid ""
 "Enter a name for the default wishlist. This is the wishlist that will be "
 "automatically generated for all users if they do not create any custom one"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:232
+#: plugin-options/wishlist_page-options.php:241
 #, fuzzy
 msgid "My wishlist"
 msgstr "Мій обраний список в %s"
 
-#: plugin-options/wishlist_page-options.php:237
+#: plugin-options/wishlist_page-options.php:246
 msgid "\"Add to cart\" text"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:238
+#: plugin-options/wishlist_page-options.php:247
 msgid "Enter a text for the \"Add to cart\" button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:250
+#: plugin-options/wishlist_page-options.php:259
 msgid "Style & color customization"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:257
+#: plugin-options/wishlist_page-options.php:266
 msgid "Style of \"Add to cart\""
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:258
+#: plugin-options/wishlist_page-options.php:267
 msgid "Choose whether to show a textual \"Add to cart\" link or a button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:271
+#: plugin-options/wishlist_page-options.php:280
 msgid "\"Add to cart\" button style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:277
+#: plugin-options/wishlist_page-options.php:286
 msgid "Choose the colors for the \"Add to cart\" button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:295
+#: plugin-options/wishlist_page-options.php:304
 msgid "Choose colors for the \"Add to cart\" button on hover state"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:321
+#: plugin-options/wishlist_page-options.php:330
 msgid "Set the radius for the \"Add to cart\" button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:335
+#: plugin-options/wishlist_page-options.php:344
 msgid "\"Add to cart\" icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:336
+#: plugin-options/wishlist_page-options.php:345
 msgid "Select an icon for the \"Add to cart\" button (optional)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:351
+#: plugin-options/wishlist_page-options.php:369
 msgid "\"Add to cart\" custom icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:352
+#: plugin-options/wishlist_page-options.php:370
 msgid ""
 "Upload an icon you'd like to use for the \"Add to cart\" button (suggested "
 "32px x 32px)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:360
+#: plugin-options/wishlist_page-options.php:378
 msgid "Primary button style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:366
+#: plugin-options/wishlist_page-options.php:384
 msgid ""
 "Choose colors for the primary button<br/><small>This style will be applied "
 "to \"Edit title\" button on Wishlist view, \"Submit Changes\" button on "
 "Manage view and \"Search wishlist\" button on Search view</small>"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:384
+#: plugin-options/wishlist_page-options.php:402
 msgid ""
 "Choose colors for the primary button on hover state<br/><small>This style "
 "will be applied to \"Edit title\" button on Wishlist view, \"Submit Changes"
@@ -1016,326 +993,326 @@ msgid ""
 "small>"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:409
+#: plugin-options/wishlist_page-options.php:427
 msgid "Secondary button style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:415
 #: plugin-options/wishlist_page-options.php:433
+#: plugin-options/wishlist_page-options.php:451
 msgid ""
 "Choose colors of the secondary button<br/><small>This style will be applied "
 "to the buttons that allow showing and hiding the Edit title form on Wishlist "
 "view and \"Create new Wishlist\" button on Manage view</small>"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:458
+#: plugin-options/wishlist_page-options.php:476
 msgid "Wishlist table style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:459
+#: plugin-options/wishlist_page-options.php:477
 msgid ""
 "Choose the colors for the wishlist table (when set to \"Traditional\" layout)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:487
+#: plugin-options/wishlist_page-options.php:505
 msgid "Highlight color"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:488
+#: plugin-options/wishlist_page-options.php:506
 msgid ""
 "Choose the color for all sections with background<br/><small>This color will "
 "be used as background for the wishlist table heading and footer (when set to "
 "\"Traditional\" layout), and for various form across wishlist views</small>"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:500
+#: plugin-options/wishlist_page-options.php:518
 msgid "Share button text color"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:501
+#: plugin-options/wishlist_page-options.php:519
 msgid "Choose colors for share buttons text"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:512
+#: plugin-options/wishlist_page-options.php:530
 msgid "Text hover"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:525
+#: plugin-options/wishlist_page-options.php:543
 msgid "Facebook share button icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:526
+#: plugin-options/wishlist_page-options.php:544
 msgid "Select an icon for the Facebook share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:536
+#: plugin-options/wishlist_page-options.php:554
 msgid "Facebook share button custom icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:537
+#: plugin-options/wishlist_page-options.php:555
 msgid ""
 "Upload an icon you'd like to use for Facebook share button (suggested 32px x "
 "32px)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:545
+#: plugin-options/wishlist_page-options.php:563
 msgid "Facebook share button style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:546
+#: plugin-options/wishlist_page-options.php:564
 msgid "Choose colors for Facebook share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:557
-#: plugin-options/wishlist_page-options.php:597
-#: plugin-options/wishlist_page-options.php:637
-#: plugin-options/wishlist_page-options.php:677
-#: plugin-options/wishlist_page-options.php:717
+#: plugin-options/wishlist_page-options.php:575
+#: plugin-options/wishlist_page-options.php:615
+#: plugin-options/wishlist_page-options.php:655
+#: plugin-options/wishlist_page-options.php:695
+#: plugin-options/wishlist_page-options.php:735
 msgid "Background hover"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:565
+#: plugin-options/wishlist_page-options.php:583
 msgid "Twitter share button icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:566
+#: plugin-options/wishlist_page-options.php:584
 msgid "Select an icon for the Twitter share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:576
+#: plugin-options/wishlist_page-options.php:594
 msgid "Twitter share button custom icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:577
+#: plugin-options/wishlist_page-options.php:595
 msgid ""
 "Upload an icon you'd like to use for Twitter share button (suggested 32px x "
 "32px)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:585
+#: plugin-options/wishlist_page-options.php:603
 msgid "Twitter share button style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:586
+#: plugin-options/wishlist_page-options.php:604
 msgid "Choose colors for Twitter share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:605
+#: plugin-options/wishlist_page-options.php:623
 msgid "Pinterest share button icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:606
+#: plugin-options/wishlist_page-options.php:624
 msgid "Select an icon for the Pinterest share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:616
+#: plugin-options/wishlist_page-options.php:634
 msgid "Pinterest share button custom icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:617
+#: plugin-options/wishlist_page-options.php:635
 msgid ""
 "Upload an icon you'd like to use for Pinterest share button (suggested 32px "
 "x 32px)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:625
+#: plugin-options/wishlist_page-options.php:643
 msgid "Pinterest share button style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:626
+#: plugin-options/wishlist_page-options.php:644
 msgid "Choose colors for Pinterest share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:645
+#: plugin-options/wishlist_page-options.php:663
 msgid "Email share button icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:646
+#: plugin-options/wishlist_page-options.php:664
 msgid "Select an icon for the Email share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:656
+#: plugin-options/wishlist_page-options.php:674
 msgid "Email share button custom icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:657
+#: plugin-options/wishlist_page-options.php:675
 msgid ""
 "Upload an icon you'd like to use for the Email share button (suggested 32px "
 "x 32px)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:665
+#: plugin-options/wishlist_page-options.php:683
 msgid "Email share button style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:666
+#: plugin-options/wishlist_page-options.php:684
 msgid "Choose colors for the Email share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:685
+#: plugin-options/wishlist_page-options.php:703
 msgid "WhatsApp share button icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:686
+#: plugin-options/wishlist_page-options.php:704
 msgid "Select an icon for the WhatsApp share button"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:696
+#: plugin-options/wishlist_page-options.php:714
 msgid "WhatsApp share button custom icon"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:697
+#: plugin-options/wishlist_page-options.php:715
 msgid ""
 "Upload an icon you'd like to use for WhatsApp share button (suggested 32px x "
 "32px)"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:705
+#: plugin-options/wishlist_page-options.php:723
 msgid "WhatsApp share button style"
 msgstr ""
 
-#: plugin-options/wishlist_page-options.php:706
+#: plugin-options/wishlist_page-options.php:724
 msgid "Choose colors for WhatsApp share button"
 msgstr ""
 
-#: templates/share.php:51 templates/share.php:52
+#: templates/share.php:56 templates/share.php:57
 msgid "Facebook"
 msgstr ""
 
-#: templates/share.php:59 templates/share.php:60
+#: templates/share.php:64 templates/share.php:65
 msgid "Twitter"
 msgstr ""
 
-#: templates/share.php:67 templates/share.php:68
+#: templates/share.php:72 templates/share.php:73
 msgid "Pinterest"
 msgstr ""
 
-#: templates/share.php:75 templates/share.php:76
+#: templates/share.php:102 templates/share.php:103
 msgid "Email"
 msgstr ""
 
-#: templates/share.php:83
+#: templates/share.php:110
 msgid "WhatsApp"
 msgstr ""
 
-#: templates/share.php:84
+#: templates/share.php:111
 msgid "Whatsapp"
 msgstr ""
 
-#: templates/share.php:93
+#: templates/share.php:120
 msgid "(Now"
 msgstr ""
 
-#: templates/share.php:93
+#: templates/share.php:120
 msgid "copy"
 msgstr ""
 
-#: templates/share.php:93
+#: templates/share.php:120
 msgid "this wishlist link and share it anywhere)"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:44
-#: templates/wishlist-view-footer.php:44
+#: templates/wishlist-view-footer-mobile.php:55
+#: templates/wishlist-view-footer.php:55
 msgid "Apply this action to all the selected items:"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:49
-#: templates/wishlist-view-footer.php:49
+#: templates/wishlist-view-footer-mobile.php:62
+#: templates/wishlist-view-footer.php:62
 msgid "Remove from wishlist"
 msgstr ""
 
 #. translators: 1. Wishlist formatted name.
-#: templates/wishlist-view-footer-mobile.php:67
-#: templates/wishlist-view-footer.php:67
+#: templates/wishlist-view-footer-mobile.php:80
+#: templates/wishlist-view-footer.php:80
 msgid "Move to %s"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:73
-#: templates/wishlist-view-footer.php:73
+#: templates/wishlist-view-footer-mobile.php:86
+#: templates/wishlist-view-footer.php:86
 msgid "Apply"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:81
-#: templates/wishlist-view-footer.php:81
+#: templates/wishlist-view-footer-mobile.php:94
+#: templates/wishlist-view-footer.php:94
 msgid "Update"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:87
-#: templates/wishlist-view-footer.php:103
+#: templates/wishlist-view-footer-mobile.php:100
+#: templates/wishlist-view-footer.php:138
 msgid "Add all to cart"
 msgstr ""
 
-#: templates/wishlist-view-header.php:48
+#: templates/wishlist-view-header.php:86
 msgid "Edit title"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:134
+#: templates/wishlist-view-mobile.php:143
 msgid "Added on:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:145
+#: templates/wishlist-view-mobile.php:154
 msgid "Price:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:172
+#: templates/wishlist-view-mobile.php:181
 msgid "Quantity:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:187
+#: templates/wishlist-view-mobile.php:196
 msgid "Stock:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:190 templates/wishlist-view.php:227
+#: templates/wishlist-view-mobile.php:199 templates/wishlist-view.php:431
 msgid "Out of stock"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:190 templates/wishlist-view.php:227
+#: templates/wishlist-view-mobile.php:199 templates/wishlist-view.php:431
 msgid "In Stock"
 msgstr "в наявності"
 
-#: templates/wishlist-view-mobile.php:210 templates/wishlist-view.php:260
+#: templates/wishlist-view-mobile.php:219 templates/wishlist-view.php:531
 msgid "Move"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:231 templates/wishlist-view.php:281
+#: templates/wishlist-view-mobile.php:250 templates/wishlist-view.php:562
 msgid "Move to another list &rsaquo;"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:239 templates/wishlist-view.php:155
-#: templates/wishlist-view.php:291
+#: templates/wishlist-view-mobile.php:270 templates/wishlist-view.php:250
+#: templates/wishlist-view.php:594
 msgid "Remove this product"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:250 templates/wishlist-view.php:311
+#: templates/wishlist-view-mobile.php:291 templates/wishlist-view.php:636
 msgid "No products added to the wishlist"
 msgstr ""
 
-#: templates/wishlist-view.php:79
+#: templates/wishlist-view.php:102
 msgid "Product name"
 msgstr ""
 
-#: templates/wishlist-view.php:87
+#: templates/wishlist-view.php:122
 msgid "Unit price"
 msgstr ""
 
-#: templates/wishlist-view.php:96
+#: templates/wishlist-view.php:143
 msgid "Quantity"
 msgstr ""
 
-#: templates/wishlist-view.php:105
+#: templates/wishlist-view.php:164
 msgid "Stock status"
 msgstr ""
 
-#: templates/wishlist-view.php:123
+#: templates/wishlist-view.php:206
 msgid "Arrange"
 msgstr ""
 
 #. translators: date added label: 1 date added.
-#: templates/wishlist-view.php:241
+#: templates/wishlist-view.php:466
 msgid "Added on: %s"
 msgstr ""
 
-#: templates/wishlist-view.php:291
+#: templates/wishlist-view.php:594
 msgid "Remove"
 msgstr ""
 
@@ -1348,7 +1325,7 @@ msgid ""
 "your e-commerce on <strong>YITH</strong></a>"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:259
+#: includes/class-yith-wcwl-admin.php:287
 msgctxt "[HELP TAB] Video title"
 msgid ""
 "Check this video to learn how to <b>configure wishlist and customize options:"
@@ -1360,7 +1337,7 @@ msgctxt "page_slug"
 msgid "wishlist"
 msgstr ""
 
-#: includes/class-yith-wcwl-privacy.php:230
+#: includes/class-yith-wcwl-privacy.php:275
 msgctxt "date when wishlist was created"
 msgid "Created on"
 msgstr ""
@@ -1386,7 +1363,7 @@ msgid "Shows a list of products in wishlist"
 msgstr ""
 
 #. translators: 1. % of reduction/increase in price.
-#: includes/class-yith-wcwl-wishlist-item.php:435
+#: includes/class-yith-wcwl-wishlist-item.php:478
 msgctxt ""
 "Part of the template that shows price variation since addition to list; "
 "placeholder will be replaced with a percentage"
@@ -1394,7 +1371,7 @@ msgid "Price is %1$s%%"
 msgstr ""
 
 #. translators: 2: original product price.
-#: includes/class-yith-wcwl-wishlist-item.php:437
+#: includes/class-yith-wcwl-wishlist-item.php:480
 msgctxt ""
 "Part of the template that shows price variation since addition to list; "
 "placeholder will be replaced with a price"

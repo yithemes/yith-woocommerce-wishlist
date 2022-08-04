@@ -57,6 +57,15 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 				);
 			}
 
+			/**
+			 * APPLY_FILTERS: yith_wcwl_crons
+			 *
+			 * Filter the cron tasks created in the plugin.
+			 *
+			 * @param array $crons Plugin crons
+			 *
+			 * @return array
+			 */
 			return apply_filters( 'yith_wcwl_crons', $this->crons );
 		}
 
@@ -100,11 +109,11 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 		 * @since 3.0.0
 		 */
 		public static function get_instance() {
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new self();
+			if ( is_null( static::$instance ) ) {
+				static::$instance = new static();
 			}
 
-			return self::$instance;
+			return static::$instance;
 		}
 	}
 }
@@ -116,5 +125,13 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
  * @since 3.0.0
  */
 function YITH_WCWL_Cron() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-	return defined( 'YITH_WCWL_PREMIUM' ) ? YITH_WCWL_Cron_Premium::get_instance() : YITH_WCWL_Cron::get_instance();
+	if ( defined( 'YITH_WCWL_PREMIUM' ) ) {
+		$instance = YITH_WCWL_Cron_Premium::get_instance();
+	} elseif ( defined( 'YITH_WCWL_EXTENDED' ) ) {
+		$instance = YITH_WCWL_Cron_Extended::get_instance();
+	} else {
+		$instance = YITH_WCWL_Cron::get_instance();
+	}
+
+	return $instance;
 }
