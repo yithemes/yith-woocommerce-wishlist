@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-08-02 12:02:23+00:00\n"
+"POT-Creation-Date: 2022-08-10 12:46:35+00:00\n"
 "PO-Revision-Date: 2021-12-13 12:45:02+0000\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -13,32 +13,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 
-#: includes/class-yit-assets.php:146 yit-functions.php:2006
+#: includes/class-yit-assets.php:148 yit-functions.php:2006
 msgid "Confirm trash"
 msgstr "Verplaatsen naar prullenbak bevestigen"
 
-#: includes/class-yit-assets.php:147
+#: includes/class-yit-assets.php:149
 msgid "Are you sure you want to trash the selected items?"
 msgstr ""
 "Weet je zeker dat je het geselecteerde item naar de prullenbak wilt "
 "verplaatsen?"
 
-#: includes/class-yit-assets.php:149 includes/class-yit-assets.php:153
+#: includes/class-yit-assets.php:151 includes/class-yit-assets.php:155
 #: templates/sysinfo/tabs/main.php:42 templates/sysinfo/tabs/main.php:50
 #: yit-functions.php:2008 yit-functions.php:2026
 msgid "No"
 msgstr "Nee"
 
-#: includes/class-yit-assets.php:150 yit-functions.php:2024
+#: includes/class-yit-assets.php:152 yit-functions.php:2024
 #: yit-functions.php:2152
 msgid "Confirm delete"
 msgstr "Verwijderen bevestigen"
 
-#: includes/class-yit-assets.php:151
+#: includes/class-yit-assets.php:153
 msgid "Are you sure you want to delete the selected items?"
 msgstr "Weet je zeker dat je de geselecteerde items wilt verwijderen?"
 
-#: includes/class-yit-assets.php:151 yit-functions.php:1940
+#: includes/class-yit-assets.php:153 yit-functions.php:1940
 #: yit-functions.php:2100
 msgid ""
 "This action cannot be undone and you will not be able to recover this data."
@@ -46,27 +46,27 @@ msgstr ""
 "Deze actie kan niet ongedaan gemaakt worden en je zult deze gegevens niet "
 "kunnen herstellen."
 
-#: includes/class-yit-assets.php:172
+#: includes/class-yit-assets.php:174
 msgid "Clear"
 msgstr "Wissen"
 
-#: includes/class-yit-assets.php:173
+#: includes/class-yit-assets.php:175
 msgid "Clear color"
 msgstr "Kleur wissen"
 
-#: includes/class-yit-assets.php:174
+#: includes/class-yit-assets.php:176
 msgid "Default"
 msgstr "Standaard"
 
-#: includes/class-yit-assets.php:175
+#: includes/class-yit-assets.php:177
 msgid "Select default color"
 msgstr "Standaardkleur selecteren"
 
-#: includes/class-yit-assets.php:176
+#: includes/class-yit-assets.php:178
 msgid "Select Color"
 msgstr "Kleur selecteren"
 
-#: includes/class-yit-assets.php:177
+#: includes/class-yit-assets.php:179
 msgid "Color value"
 msgstr "Kleurwaarde"
 
@@ -75,7 +75,7 @@ msgid "There was an error with your request; please try again later."
 msgstr ""
 "Er is een fout opgetreden met je verzoek, probeer het later opnieuw a.u.b."
 
-#: includes/class-yit-plugin-panel-woocommerce.php:430
+#: includes/class-yit-plugin-panel-woocommerce.php:437
 msgid "The changes you have made will be lost if you leave this page."
 msgstr "Als je deze pagina verlaat zullen alle wijzigingen verloren gaan."
 
@@ -87,17 +87,17 @@ msgstr "Plugin instellingen"
 msgid "Settings"
 msgstr "Instellingen"
 
-#: includes/class-yit-plugin-panel.php:455
-#: includes/class-yit-plugin-panel.php:458
+#: includes/class-yit-plugin-panel.php:456
+#: includes/class-yit-plugin-panel.php:459
 msgid "How to install premium version"
 msgstr "Hoe installeer ik de premium versie"
 
-#: includes/class-yit-plugin-panel.php:655
+#: includes/class-yit-plugin-panel.php:656
 #: includes/class-yit-plugin-subpanel.php:133
 msgid "Save Changes"
 msgstr "Wijzigingen opslaan"
 
-#: includes/class-yit-plugin-panel.php:663
+#: includes/class-yit-plugin-panel.php:664
 #: includes/class-yit-plugin-subpanel.php:140
 #: templates/panel/woocommerce/woocommerce-form.php:15
 msgid ""
@@ -105,72 +105,88 @@ msgid ""
 msgstr ""
 "Als je doorgaat met deze actie, zal je alle opties op deze pagina resetten."
 
-#: includes/class-yit-plugin-panel.php:663
+#: includes/class-yit-plugin-panel.php:664
 #: includes/class-yit-plugin-subpanel.php:140
 #: templates/panel/woocommerce/woocommerce-form.php:15
 msgid "Are you sure?"
 msgstr "Weet je het zeker?"
 
-#: includes/class-yit-plugin-panel.php:667
+#: includes/class-yit-plugin-panel.php:668
 #: includes/class-yit-plugin-subpanel.php:143
 msgid "Reset to default"
 msgstr "Resetten naar standaard"
 
-#: includes/class-yit-plugin-panel.php:1074
+#: includes/class-yit-plugin-panel.php:1039
+msgid "Read the <mark>plugin documentation</mark>"
+msgstr ""
+
+#: includes/class-yit-plugin-panel.php:1040
+msgid "Learn what you can really do with this powerful tool"
+msgstr ""
+
+#: includes/class-yit-plugin-panel.php:1050
+msgid "Watch our <mark>\"First Steps\" video</mark>"
+msgstr ""
+
+#: includes/class-yit-plugin-panel.php:1051
+msgid "See how it works before you start using it"
+msgstr ""
+
+#: includes/class-yit-plugin-panel.php:1307
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr "Het element dat je hebt ingevoerd bestaat al. Voer een andere naam in."
 
-#: includes/class-yit-plugin-panel.php:1075
+#: includes/class-yit-plugin-panel.php:1308
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
-#: includes/class-yit-plugin-panel.php:1076
+#: includes/class-yit-plugin-panel.php:1309
 msgid "Settings reset"
 msgstr "Instellingen resetten"
 
-#: includes/class-yit-plugin-panel.php:1077
+#: includes/class-yit-plugin-panel.php:1310
 msgid "Element deleted correctly."
 msgstr "Element juist verwijderd."
 
-#: includes/class-yit-plugin-panel.php:1078
-#: includes/class-yit-plugin-panel.php:1079
+#: includes/class-yit-plugin-panel.php:1311
+#: includes/class-yit-plugin-panel.php:1312
 msgid "Element updated correctly."
 msgstr "Element juist geüpdatet."
 
-#: includes/class-yit-plugin-panel.php:1080
+#: includes/class-yit-plugin-panel.php:1313
 msgid "Database imported correctly."
 msgstr "Database juist geïmporteerd."
 
-#: includes/class-yit-plugin-panel.php:1081
+#: includes/class-yit-plugin-panel.php:1314
 msgid "An error has occurred during import. Please try again."
 msgstr "Er is een fout opgetreden tijdens importeren. Probeer opnieuw."
 
-#: includes/class-yit-plugin-panel.php:1082
+#: includes/class-yit-plugin-panel.php:1315
 msgid "The added file is not valid."
 msgstr "Het toegevoegde bestand is niet geldig."
 
-#: includes/class-yit-plugin-panel.php:1083
+#: includes/class-yit-plugin-panel.php:1316
 msgid "Sorry, import is disabled."
 msgstr "Sorry, importeren is uitgeschakeld."
 
-#: includes/class-yit-plugin-panel.php:1084
+#: includes/class-yit-plugin-panel.php:1317
 msgid "Sorting successful."
 msgstr "Succesvol gesorteerd."
 
-#: includes/class-yit-plugin-panel.php:1573
+#: includes/class-yit-plugin-panel.php:1806
 msgid "We need your support"
 msgstr "We hebben je hulp nodig"
 
-#: includes/class-yit-plugin-panel.php:1574
+#: includes/class-yit-plugin-panel.php:1807
 msgid "to keep updating and improving the plugin. Please,"
 msgstr "om de plugin te blijven bijwerken en verbeteren. A.u.b.,"
 
-#: includes/class-yit-plugin-panel.php:1576
+#: includes/class-yit-plugin-panel.php:1809
 msgid "help us by leaving a good review"
 msgstr "help ons door een goede beoordeling achter te laten"
 
-#: includes/class-yit-plugin-panel.php:1577
+#: includes/class-yit-plugin-panel.php:1810
 msgid ":) Thanks!"
 msgstr ":) Bedankt!"
 
@@ -544,6 +560,34 @@ msgstr "Upload"
 msgid "Reset"
 msgstr "Resetten"
 
+#. translators: %s is the plugin version.
+#: templates/panel/welcome-modals/update.php:34
+msgid "is successfully updated to version %s."
+msgstr ""
+
+#. translators: %s is the plugin version.
+#: templates/panel/welcome-modals/update.php:44
+msgid "What's new in version %s"
+msgstr ""
+
+#: templates/panel/welcome-modals/update.php:49
+msgid "Check the changelog >"
+msgstr ""
+
+#: templates/panel/welcome-modals/update.php:64
+#: templates/panel/welcome-modals/welcome.php:60
+msgid "Got it, close this window"
+msgstr ""
+
+#: templates/panel/welcome-modals/welcome.php:30
+msgid "Thank you for using our plugin"
+msgstr ""
+
+#. translators: %s is the number of steps.
+#: templates/panel/welcome-modals/welcome.php:45
+msgid "Start with these %s steps:"
+msgstr ""
+
 #: templates/panel/woocommerce/woocommerce-form.php:29
 #: templates/panel/woocommerce/woocommerce-form.php:33
 msgid "Save Options"
@@ -724,51 +768,50 @@ msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr "YITH"
 
-#: includes/class-yit-assets.php:134
+#: includes/class-yit-assets.php:136
 msgctxt "Button text"
 msgid "Confirm"
 msgstr "Bevestigen"
 
-#: includes/class-yit-assets.php:135
+#: includes/class-yit-assets.php:137
 msgctxt "Button text"
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: includes/class-yit-assets.php:148 yit-functions.php:2009
+#: includes/class-yit-assets.php:150 yit-functions.php:2009
 msgctxt "Trash confirmation action"
 msgid "Yes, move to trash"
 msgstr "Ja, verplaatsen naar prullenbak"
 
-#: includes/class-yit-assets.php:152 yit-functions.php:2027
+#: includes/class-yit-assets.php:154 yit-functions.php:2027
 #: yit-functions.php:2154
 msgctxt "Delete confirmation action"
 msgid "Yes, delete"
 msgstr "Ja, verwijderen"
 
 #. translators: 1. Plugin name.
-#: includes/class-yit-plugin-panel.php:803
+#: includes/class-yit-plugin-panel.php:804
 msgctxt "Help tab default title"
 msgid "Thank you for purchasing %s!"
 msgstr "Bedankt voor het kopen van %s!"
 
-#: includes/class-yit-plugin-panel.php:803
-#, fuzzy
+#: includes/class-yit-plugin-panel.php:804
 msgctxt "Help tab default title"
 msgid "Thank you for using %s!"
-msgstr "Bedankt voor het kopen van %s!"
+msgstr ""
 
-#: includes/class-yit-plugin-panel.php:815
+#: includes/class-yit-plugin-panel.php:812
 msgctxt "Help tab default description"
 msgid ""
 "We want to help you enjoy a wonderful experience with all of our products."
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:866
+#: includes/class-yit-plugin-panel.php:863
 msgctxt "Premium tab name"
 msgid "Get premium"
 msgstr "Neem premium"
 
-#: includes/class-yit-plugin-panel.php:878
+#: includes/class-yit-plugin-panel.php:875
 msgctxt "Help tab name"
 msgid "Help"
 msgstr "Help"
@@ -960,10 +1003,9 @@ msgstr "Verstuur een ticket"
 
 #: templates/panel/help-tab.php:216 templates/panel/help-tab.php:218
 #: templates/panel/help-tab.php:223
-#, fuzzy
 msgctxt "Help tab documentation"
 msgid "Read the plugin documentation"
-msgstr "Lees de documentatie"
+msgstr ""
 
 #: templates/panel/help-tab.php:220
 msgctxt "Help tab documentation"
@@ -971,10 +1013,9 @@ msgid "to learn how it works from the basics."
 msgstr ""
 
 #: templates/panel/help-tab.php:231 templates/panel/help-tab.php:233
-#, fuzzy
 msgctxt "Help tab support"
 msgid "Need some help?"
-msgstr "Hulp nodig?"
+msgstr ""
 
 #: templates/panel/help-tab.php:235
 msgctxt "Help tab support"
@@ -989,10 +1030,9 @@ msgid ""
 msgstr ""
 
 #: templates/panel/help-tab.php:241
-#, fuzzy
 msgctxt "Help tab support"
 msgid "Yes, I need help"
-msgstr "Hulp nodig?"
+msgstr ""
 
 #: templates/panel/premium-tab.php:30
 msgctxt "Premium Tab"
@@ -1016,10 +1056,9 @@ msgid "And so much more!"
 msgstr "En zo veel meer!"
 
 #: templates/panel/premium-tab.php:53
-#, fuzzy
 msgctxt "Premium Tab"
 msgid "Check the premium features >"
-msgstr "Bekijk de gratis vs premium opties >"
+msgstr ""
 
 #: templates/panel/premium-tab.php:60
 msgctxt "Premium Tab"

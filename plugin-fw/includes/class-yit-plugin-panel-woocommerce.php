@@ -84,6 +84,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 
 				$this->maybe_init_help_tab();
 				$this->maybe_init_premium_tab();
+				$this->maybe_init_welcome_modals();
 
 				add_action( 'admin_init', array( $this, 'set_default_options' ) );
 				add_action( 'admin_menu', array( $this, 'add_setting_page' ) );
