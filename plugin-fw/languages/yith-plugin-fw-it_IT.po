@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-08-10 12:46:35+00:00\n"
-"PO-Revision-Date: 2022-08-10 12:35:50+0000\n"
+"POT-Creation-Date: 2022-10-04 10:25:50+00:00\n"
+"PO-Revision-Date: 2022-08-12 07:42:56+0000\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,7 +124,7 @@ msgstr "Scopri cosa puoi fare con questo potente strumento"
 
 #: includes/class-yit-plugin-panel.php:1050
 msgid "Watch our <mark>\"First Steps\" video</mark>"
-msgstr "Guarda il nostro <mark>video \"Primi Step\" video</mark>"
+msgstr "Guarda il nostro <mark>video \"Primi Step\"</mark>"
 
 #: includes/class-yit-plugin-panel.php:1051
 msgid "See how it works before you start using it"

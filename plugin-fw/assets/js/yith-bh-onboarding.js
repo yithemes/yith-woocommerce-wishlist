@@ -1,6 +1,7 @@
 (function($) {
 
   var init = function() {
+    $('#yith-bh-onboarding').fadeIn();
      var currentTab = $('.yith-bh-onboarding-tabs__nav li.selected').data('tab');
     $('#' + currentTab).fadeIn();
   };
@@ -60,6 +61,7 @@
     );
 
   });
+
   init();
 
 })(jQuery);

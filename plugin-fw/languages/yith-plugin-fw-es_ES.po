@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-08-10 12:46:35+00:00\n"
-"PO-Revision-Date: 2022-08-10 11:52:30+0000\n"
+"POT-Creation-Date: 2022-10-04 10:25:50+00:00\n"
+"PO-Revision-Date: 2022-09-22 14:14:01+0000\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -972,7 +972,7 @@ msgstr "para ver algunos casos de uso útiles."
 #: templates/panel/help-tab.php:152
 msgctxt "Help tab view FAQs link"
 msgid "Check the FAQs"
-msgstr "Comprueba los FAQ"
+msgstr "Comprueba las FAQ"
 
 #: templates/panel/help-tab.php:155
 msgctxt "Help tab view FAQs link"
@@ -982,12 +982,12 @@ msgstr "para encontrar respuestas a tus dudas."
 #: templates/panel/help-tab.php:170
 msgctxt "Help tab FAQ title"
 msgid "Last FAQs in our Help Center"
-msgstr "Últimos FAQs en nuestro Centro de Ayuda"
+msgstr "Últimas FAQ en nuestro Centro de ayuda"
 
 #: templates/panel/help-tab.php:184
 msgctxt "Help tab FAQ link"
 msgid "View all FAQs >"
-msgstr "Ver todos los FAQs >"
+msgstr "Ver todas las FAQs >"
 
 #: templates/panel/help-tab.php:193
 msgctxt "Help tab submit ticket title"

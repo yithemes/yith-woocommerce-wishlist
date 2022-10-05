@@ -12,7 +12,7 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 $tabs = $options['tabs'];
 ?>
-<div class="woocommerce yith-plugin-fw-panel" id="yith-bh-onboarding">
+<div class="woocommerce yith-plugin-fw-panel" id="yith-bh-onboarding" style="display: none">
 	<header>
 		<div class="yith-bh-onboarding-logo">
 			<?php if ( isset( $options['logo'] ) ) : ?>
