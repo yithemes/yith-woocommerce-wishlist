@@ -241,7 +241,7 @@ if ( ! class_exists( 'YIT_Ajax' ) ) {
 				die();
 			}
 
-			$terms = yith_get_terms( $args );
+			$terms = get_terms( $args );
 
 			if ( 'id' !== $args['term_field'] ) {
 				$temp_terms = $terms;
@@ -252,6 +252,7 @@ if ( ! class_exists( 'YIT_Ajax' ) ) {
 				}
 			}
 
+			$terms = apply_filters( 'yith_plugin_fw_json_search_found_terms', $terms, $args );
 			wp_send_json( $terms );
 		}
 	}

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-10-04 10:25:50+00:00\n"
+"POT-Creation-Date: 2022-11-11 07:31:10+00:00\n"
 "PO-Revision-Date: 2021-02-11 18:07:46+0000\n"
 "Language: el_GR\n"
 "MIME-Version: 1.0\n"
@@ -329,34 +329,34 @@ msgstr ""
 "Ο έλεγχος συστήματος έχει εντοπίσει κάποια προβλήματα συμβατότητας στην "
 "εγκατάστασή σας.%1$sΚάντε κλικ εδώ%2$s για να μάθετε περισσότερα"
 
-#: includes/class-yith-system-status.php:488
+#: includes/class-yith-system-status.php:496
 msgid "Enabled"
 msgstr "Ενεργοποιημένο"
 
-#: includes/class-yith-system-status.php:488
+#: includes/class-yith-system-status.php:496
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
-#: includes/class-yith-system-status.php:493
+#: includes/class-yith-system-status.php:501
 msgid "N/A"
 msgstr "N/A"
 
 #. translators: %1$s plugin name, %2$s requirement name
-#: includes/class-yith-system-status.php:520
+#: includes/class-yith-system-status.php:528
 msgid "%1$s needs %2$s enabled"
 msgstr "%1$s χρειάζεται %2$s ενεργοποιημένο"
 
 #. translators: %1$s plugin name, %2$s required memory amount
-#: includes/class-yith-system-status.php:523
+#: includes/class-yith-system-status.php:531
 msgid "%1$s needs at least %2$s of available memory"
 msgstr "%1$s χρειάζεται τουλάχιστον %2$s διαθέσιμης μνήμης"
 
 #. translators: %1$s plugin name, %2$s version number
-#: includes/class-yith-system-status.php:526
+#: includes/class-yith-system-status.php:534
 msgid "%1$s needs at least %2$s version"
 msgstr "%1$s χρειάζεται τουλάχιστον %2$s έκδοση"
 
-#: includes/class-yith-system-status.php:550
+#: includes/class-yith-system-status.php:558
 msgid ""
 "Update it to the latest version in order to benefit of all new features and "
 "security updates."
@@ -364,27 +364,27 @@ msgstr ""
 "Κάντε αναβάθμιση της τελευταίας έκδοσης για να επωφεληθείτε από τα νέα "
 "χαρακτηριστικά και τις αναβαθμίσεις προστασίας."
 
-#: includes/class-yith-system-status.php:554
-#: includes/class-yith-system-status.php:560
+#: includes/class-yith-system-status.php:562
+#: includes/class-yith-system-status.php:568
 msgid "Contact your hosting company in order to update it."
 msgstr "Επικοινωνήστε με την εταιρεία hosting σας για να αναβαθμίσετε."
 
-#: includes/class-yith-system-status.php:558
+#: includes/class-yith-system-status.php:566
 msgid "Contact your hosting company in order to install it."
 msgstr "Επικοινωνήστε με την εταιρεία hosting σας για να το ενεργοποιήσετε."
 
 #. translators: %1$s code, %2$s file name
-#: includes/class-yith-system-status.php:565
+#: includes/class-yith-system-status.php:573
 msgid "Remove %1$s from %2$s file"
 msgstr "Αφαίρεση %1$s από αρχείο %2$s"
 
-#: includes/class-yith-system-status.php:573
+#: includes/class-yith-system-status.php:581
 msgid "Contact your hosting company in order to enable it."
 msgstr "Επικοινωνήστε με την εταιρεία hosting σας για να ενεργοποιήσετε."
 
 #. translators: %1$s opening link tag, %2$s closing link tag
-#: includes/class-yith-system-status.php:577
-#: includes/class-yith-system-status.php:600
+#: includes/class-yith-system-status.php:585
+#: includes/class-yith-system-status.php:608
 msgid ""
 "Read more %1$shere%2$s or contact your hosting company in order to increase "
 "it."
@@ -393,7 +393,7 @@ msgstr ""
 "για να το βελτιώσετε."
 
 #. translators: %s recommended memory amount
-#: includes/class-yith-system-status.php:597
+#: includes/class-yith-system-status.php:605
 msgid ""
 "For optimal functioning of our plugins, we suggest setting at least %s of "
 "available memory"
@@ -402,7 +402,7 @@ msgstr ""
 "τουλάχιστον %s διαθέσιμης μνήμης"
 
 #. translators: %1$s TLS label, %2$s cURL label
-#: includes/class-yith-system-status.php:605
+#: includes/class-yith-system-status.php:613
 msgid ""
 "The system check cannot determine which %1$s version is installed because "
 "%2$s module is disabled. Ask your hosting company to enable it."
@@ -412,7 +412,7 @@ msgstr ""
 "να το ενεργοποιήσει."
 
 #. translators: %1$s TLS label
-#: includes/class-yith-system-status.php:608
+#: includes/class-yith-system-status.php:616
 msgid ""
 "The system check cannot determine which %1$s version is installed due to a "
 "connection issue between your site and our server."
@@ -618,13 +618,13 @@ msgstr "Αρχείο PHP error_log"
 msgid "Download"
 msgstr "Κατέβασμα"
 
-#: templates/sysinfo/tabs/error-log.php:72
+#: templates/sysinfo/tabs/error-log.php:73
 msgid "The file size exceeds 8 megabytes so it must be downloaded"
 msgstr ""
 "Το μέγεθος αρχείου υπερβαίνει τα 8 megabytes οπότε θα πρέπει να το κατεβάσετε"
 
 #. translators: %s file name.
-#: templates/sysinfo/tabs/error-log.php:96
+#: templates/sysinfo/tabs/error-log.php:97
 msgid ""
 "No Log file available. Enable the WordPress debug by adding this in the %s "
 "file of your installation"
@@ -632,11 +632,11 @@ msgstr ""
 "Δεν υπάρχει διαθέσιμο αρχείο Καταγραφής. Ενεργοποιήστε την αποσφαλμάτωση "
 "WordPress προσθέτοντάς το στο αρχείο %s της εγκατάστασής σας"
 
-#: templates/sysinfo/tabs/error-log.php:105
+#: templates/sysinfo/tabs/error-log.php:106
 msgid "Copied!"
 msgstr "Έγινε αντιγραφή!"
 
-#: templates/sysinfo/tabs/error-log.php:105
+#: templates/sysinfo/tabs/error-log.php:106
 msgid "Copy Code"
 msgstr "Αντιγραφή Κώδικα"
 
@@ -755,7 +755,7 @@ msgctxt "Elementor Widget - section title"
 msgid "%s - Options"
 msgstr ""
 
-#: includes/builders/gutenberg/class-yith-gutenberg.php:149
+#: includes/builders/gutenberg/class-yith-gutenberg.php:152
 msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr "YITH"

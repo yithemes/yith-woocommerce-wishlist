@@ -83,7 +83,10 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 		 */
 		public function enqueue_block_editor_assets() {
 			$ajax_url   = function_exists( 'WC' ) ? add_query_arg( 'wc-ajax', 'yith_plugin_fw_gutenberg_do_shortcode', trailingslashit( site_url() ) ) : admin_url( 'admin-ajax.php' );
-			$gutenberg  = array( 'ajaxurl' => $ajax_url );
+			$gutenberg  = array(
+				'ajaxurl'   => $ajax_url,
+				'ajaxNonce' => wp_create_nonce( 'gutenberg-ajax-action' ),
+			);
 			$asset_file = include YIT_CORE_PLUGIN_PATH . '/dist/gutenberg/index.asset.php';
 
 			$gutenberg_assets_url = YIT_CORE_PLUGIN_URL . '/dist/gutenberg';
@@ -309,29 +312,36 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 		 * Get a do_shortcode in ajax call to show block preview
 		 **/
 		public function do_shortcode() {
-			// phpcs:disable WordPress.Security.NonceVerification
-			$current_action = current_action();
-			$shortcode      = ! empty( $_REQUEST['shortcode'] ) ? wp_unslash( $_REQUEST['shortcode'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			check_ajax_referer( 'gutenberg-ajax-action', 'security' );
 
-			if ( ! apply_filters( 'yith_plugin_fw_gutenberg_skip_shortcode_sanitize', false ) ) {
-				$shortcode = sanitize_text_field( stripslashes( $shortcode ) );
+			$post_id    = absint( $_REQUEST['context']['postId'] ?? 0 );
+			$admin_page = sanitize_text_field( wp_unslash( $_REQUEST['context']['adminPage'] ?? '' ) );
+			$has_access = ( in_array( $admin_page, array( 'widgets-php', 'site-editor-php' ), true ) && current_user_can( 'edit_theme_options' ) );
+			$has_access = $has_access || $post_id && current_user_can( 'edit_post', $post_id );
+
+			if ( $has_access ) {
+				$current_action = current_action();
+				$shortcode      = ! empty( $_REQUEST['shortcode'] ) ? wp_unslash( $_REQUEST['shortcode'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+				if ( ! apply_filters( 'yith_plugin_fw_gutenberg_skip_shortcode_sanitize', false ) ) {
+					$shortcode = sanitize_text_field( stripslashes( $shortcode ) );
+				}
+
+				ob_start();
+
+				do_action( 'yith_plugin_fw_gutenberg_before_do_shortcode', $shortcode, $current_action );
+				echo do_shortcode( apply_filters( 'yith_plugin_fw_gutenberg_shortcode', $shortcode, $current_action ) );
+				do_action( 'yith_plugin_fw_gutenberg_after_do_shortcode', $shortcode, $current_action );
+
+				$html = ob_get_clean();
+
+				wp_send_json(
+					array(
+						'html' => $html,
+					)
+				);
+
 			}
-
-			ob_start();
-
-			do_action( 'yith_plugin_fw_gutenberg_before_do_shortcode', $shortcode, $current_action );
-			echo do_shortcode( apply_filters( 'yith_plugin_fw_gutenberg_shortcode', $shortcode, $current_action ) );
-			do_action( 'yith_plugin_fw_gutenberg_after_do_shortcode', $shortcode, $current_action );
-
-			$html = ob_get_clean();
-
-			wp_send_json(
-				array(
-					'html' => $html,
-				)
-			);
-
-			// phpcs:enable
 		}
 	}
 }

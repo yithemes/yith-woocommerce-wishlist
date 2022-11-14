@@ -40,7 +40,7 @@ $debug_files = array(
 	<?php foreach ( $debug_files as $key => $debug_file ) : ?>
 		<?php
 		if ( ! file_exists( $debug_file['path'] ) ) {
-			$missing_files ++;
+			$missing_files++;
 			continue;
 		}
 
@@ -62,6 +62,7 @@ $debug_files = array(
 									'data'  => array(
 										'action' => 'yith_create_log_file',
 										'file'   => $key,
+										'nonce'  => wp_create_nonce( 'yith-export-log' ),
 									),
 								),
 							),
@@ -95,12 +96,12 @@ $debug_files = array(
 				// translators: %s file name.
 				echo sprintf( esc_html__( 'No Log file available. Enable the WordPress debug by adding this in the %s file of your installation', 'yith-plugin-fw' ), '<code>wp-config.php</code>' );
 				?>
-				<br/>
-				<br/>
+				<br />
+				<br />
 				<span class="debug-code">
-					define( 'WP_DEBUG', true );<br/>
-					define( 'WP_DEBUG_LOG', true );<br/>
-					define( 'WP_DEBUG_DISPLAY', false );<br/>
+					define( 'WP_DEBUG', true );<br />
+					define( 'WP_DEBUG_LOG', true );<br />
+					define( 'WP_DEBUG_DISPLAY', false );<br />
 				</span>
 				<a href="#" data-tooltip="<?php esc_attr_e( 'Copied!', 'yith-plugin-fw' ); ?>" class="copy-link"><?php esc_html_e( 'Copy Code', 'yith-plugin-fw' ); ?></a>
 			</td>

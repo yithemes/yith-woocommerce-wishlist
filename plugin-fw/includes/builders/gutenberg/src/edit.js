@@ -193,7 +193,7 @@ const ComponentControl = ( { attributeName, attributeArgs, attributes, onChange,
  * @returns {function({attributes?: *, className: *, setAttributes: *})}
  */
 export const createEditFunction = ( blockName, blockArgs ) => {
-	return function ( { attributes, className, setAttributes } ) {
+	return function ( { context, attributes, className, setAttributes } ) {
 
 		const onChangeHandler = ( updatedValue, attributeName, controlType ) => {
 			if ( ['colorpicker', 'color'].includes( controlType ) ) {
@@ -227,7 +227,7 @@ export const createEditFunction = ( blockName, blockArgs ) => {
 					 </PanelBody>
 				 </InspectorControls>
 				}
-				<Shortcode attributes={attributes} blockArgs={blockArgs}/>
+				<Shortcode attributes={attributes} blockArgs={blockArgs} context={context}/>
 			</>
 		);
 	}
