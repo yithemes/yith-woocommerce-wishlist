@@ -176,20 +176,30 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		public function is_current_user_owner( $current_user = false ) {
 			$user_id    = $this->get_user_id();
 			$session_id = $this->get_session_id();
+			$is_owner   = false;
 
 			if ( $current_user && ( (int) $current_user === $user_id || $current_user === $session_id ) ) {
-				return true;
+				$is_owner = true;
 			}
 
 			if ( $this->has_owner() && is_user_logged_in() && get_current_user_id() === $user_id ) {
-				return true;
+				$is_owner = true;
 			}
 
 			if ( $this->is_session_based() && YITH_WCWL_Session()->maybe_get_session_id() === $session_id ) {
-				return true;
+				$is_owner = true;
 			}
 
-			return false;
+			/**
+			 * APPLY_FILTERS: yith_wcwl_is_current_user_owner
+			 *
+			 * Filters whether the current user is the wishlist owner.
+			 *
+			 * @param bool $is_owner Whether the current user is the wishlist owner
+			 *
+			 * @return bool
+			 */
+			return apply_filters( 'yith_wcwl_is_current_user_owner', $is_owner );
 		}
 
 		/**
@@ -939,6 +949,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @param string $offset Offset.
 		 * @param mixed  $value  Value.
 		 */
+		#[\ReturnTypeWillChange]
 		public function offsetSet( $offset, $value ) {
 			$offset = $this->map_legacy_offsets( $offset );
 
@@ -955,6 +966,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 *
 		 * @param string $offset Offset.
 		 */
+		#[\ReturnTypeWillChange]
 		public function offsetUnset( $offset ) {
 			$offset = $this->map_legacy_offsets( $offset );
 
@@ -973,6 +985,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @param string $offset Offset.
 		 * @return bool
 		 */
+		#[\ReturnTypeWillChange]
 		public function offsetExists( $offset ) {
 			$offset = $this->map_legacy_offsets( $offset );
 
@@ -990,6 +1003,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @param string $offset Offset.
 		 * @return mixed
 		 */
+		#[\ReturnTypeWillChange]
 		public function offsetGet( $offset ) {
 			$offset = $this->map_legacy_offsets( $offset );
 

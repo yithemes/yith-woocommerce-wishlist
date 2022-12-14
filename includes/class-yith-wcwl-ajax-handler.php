@@ -293,6 +293,15 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			$wishlist->set_name( $wishlist_name );
 			$wishlist->save();
 
+			/**
+			 * DO_ACTION: yith_wcwl_after_rename_wishlist
+			 *
+			 * Allows to fire some action when the wishlist has been renamed.
+			 *
+			 * @param YITH_WCWL_Wishlist $wishlist Wishlist object
+			 */
+			do_action( 'yith_wcwl_after_rename_wishlist', $wishlist );
+
 			$return = array(
 				'result'    => true,
 				'fragments' => self::refresh_fragments( $fragments ),

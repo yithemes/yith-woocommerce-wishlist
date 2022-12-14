@@ -20,5 +20,10 @@
     "phpcbf": [
       "phpcbf -p --standard=WordPress"
     ]
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

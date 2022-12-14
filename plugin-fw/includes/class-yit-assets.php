@@ -116,6 +116,13 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 					'search_terms_nonce'     => wp_create_nonce( 'search-terms' ),
 					'search_customers_nonce' => wp_create_nonce( 'search-customers' ),
 					'search_pages_nonce'     => wp_create_nonce( 'search-pages' ),
+					'i18n'                   => array(
+						'no_matches'        => _x( 'No matches found', 'Enhanced select', 'yith-plugin-fw' ),
+						'input_too_short_1' => _x( 'Please enter 1 or more characters', 'Enhanced select', 'yith-plugin-fw' ),
+						// translators: %s is the number of characters.
+						'input_too_short_n' => _x( 'Please enter %s or more characters', 'Enhanced select', 'yith-plugin-fw' ),
+						'searching'         => _x( 'Searching&hellip;', 'Enhanced select', 'yith-plugin-fw' ),
+					),
 				)
 			);
 
