@@ -33,7 +33,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.17.0';
+		public $version = '3.18.0';
 
 		/**
 		 * Plugin database version
@@ -162,7 +162,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						'priority' => 31,
 					),
 					'thumbnails'        => array(
-						'hook'     => 'woocommerce_product_thumbnails',
+						'hook'     => 'woocommerce_before_single_product_summary',
 						'priority' => 21,
 					),
 					'summary'           => array(
@@ -604,9 +604,10 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			return apply_filters(
 				'yith_wcwl_localize_script',
 				array(
-					'ajax_url'                  => admin_url( 'admin-ajax.php', 'relative' ),
-					'redirect_to_cart'          => get_option( 'yith_wcwl_redirect_cart' ),
-					'multi_wishlist'            => false,
+					'ajax_url'                    => admin_url( 'admin-ajax.php', 'relative' ),
+					'redirect_to_cart'            => get_option( 'yith_wcwl_redirect_cart' ),
+					'yith_wcwl_button_position'   => get_option( 'yith_wcwl_button_position' ),
+					'multi_wishlist'              => false,
 					/**
 					 * APPLY_FILTERS: yith_wcwl_hide_add_button
 					 *
@@ -616,9 +617,9 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'hide_add_button'           => apply_filters( 'yith_wcwl_hide_add_button', true ),
-					'enable_ajax_loading'       => 'yes' === get_option( 'yith_wcwl_ajax_enable', 'no' ),
-					'ajax_loader_url'           => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
+					'hide_add_button'             => apply_filters( 'yith_wcwl_hide_add_button', true ),
+					'enable_ajax_loading'         => 'yes' === get_option( 'yith_wcwl_ajax_enable', 'no' ),
+					'ajax_loader_url'             => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
 					'remove_from_wishlist_after_add_to_cart' => 'yes' === get_option( 'yith_wcwl_remove_after_add_to_cart' ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_is_wishlist_responsive
@@ -629,7 +630,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'is_wishlist_responsive'    => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
+					'is_wishlist_responsive'      => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_time_to_close_prettyphoto
 					 *
@@ -639,7 +640,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return int
 					 */
-					'time_to_close_prettyphoto' => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
+					'time_to_close_prettyphoto'   => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_fragments_index_glue
 					 *
@@ -649,7 +650,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return string
 					 */
-					'fragments_index_glue'      => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
+					'fragments_index_glue'        => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_reload_on_found_variation
 					 *
@@ -659,7 +660,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'reload_on_found_variation' => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
+					'reload_on_found_variation'   => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_mobile_media_query
 					 *
@@ -669,8 +670,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return int
 					 */
-					'mobile_media_query'        => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
-					'labels'                    => array(
+					'mobile_media_query'          => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
+					'labels'                      => array(
 						'cookie_disabled'       => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
 						/**
 						 * APPLY_FILTERS: yith_wcwl_added_to_cart_message
@@ -683,7 +684,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						 */
 						'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) ),
 					),
-					'actions'                   => array(
+					'actions'                     => array(
 						'add_to_wishlist_action'      => 'add_to_wishlist',
 						'remove_from_wishlist_action' => 'remove_from_wishlist',
 						'reload_wishlist_and_adding_elem_action' => 'reload_wishlist_and_adding_elem',
@@ -693,7 +694,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						'save_privacy_action'         => 'save_privacy',
 						'load_fragments'              => 'load_fragments',
 					),
-					'nonce'                     => array(
+					'nonce'                       => array(
 						'add_to_wishlist_nonce'      => wp_create_nonce( 'add_to_wishlist' ),
 						'remove_from_wishlist_nonce' => wp_create_nonce( 'remove_from_wishlist' ),
 						'reload_wishlist_and_adding_elem_nonce' => wp_create_nonce( 'reload_wishlist_and_adding_elem' ),
@@ -703,6 +704,26 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						'save_privacy_nonce'         => wp_create_nonce( 'save_privacy' ),
 						'load_fragments_nonce'       => wp_create_nonce( 'load_fragments' ),
 					),
+					/**
+					 * APPLY_FILTERS: yith_wcwl_redirect_after_ask_an_estimate
+					 *
+					 * Filter whether to redirect after the 'Ask for an estimate' form has been submitted.
+					 *
+					 * @param bool $redirect Whether to redirect or not
+					 *
+					 * @return bool
+					 */
+					'redirect_after_ask_estimate' => apply_filters( 'yith_wcwl_redirect_after_ask_an_estimate', false ),
+					/**
+					 * APPLY_FILTERS: yith_wcwl_redirect_url_after_ask_an_estimate
+					 *
+					 * Filter the URL to redirect after the 'Ask for an estimate' form has been submitted.
+					 *
+					 * @param string $redirect_url Redirect URL
+					 *
+					 * @return string
+					 */
+					'ask_estimate_redirect_url'   => apply_filters( 'yith_wcwl_redirect_url_after_ask_an_estimate', get_home_url() ),
 				)
 			);
 		}
@@ -1119,7 +1140,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 */
 		public function yith_wcfbt_shortcode( $meta ) {
 
-			if ( ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) || 'no' === get_option( 'yith_wfbt_enable_integration' ) ) {
+			if ( ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) || 'no' === get_option( 'yith_wfbt_enable_integration' ) || empty( $meta ) ) {
 				return;
 			}
 

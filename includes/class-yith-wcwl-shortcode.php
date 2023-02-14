@@ -169,8 +169,10 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			include_once YITH_WCWL_INC . 'widgets/elementor/class-yith-wcwl-elementor-add-to-wishlist.php';
 			include_once YITH_WCWL_INC . 'widgets/elementor/class-yith-wcwl-elementor-wishlist.php';
 
+			$register_widget_hook = version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ? 'elementor/widgets/register' : 'elementor/widgets/widgets_registered';
+
 			// register widgets.
-			add_action( 'elementor/widgets/widgets_registered', array( 'YITH_WCWL_Shortcode', 'register_elementor_widgets' ) );
+			add_action( $register_widget_hook, array( 'YITH_WCWL_Shortcode', 'register_elementor_widgets' ) );
 		}
 
 		/**
@@ -179,8 +181,15 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 		 * @return void
 		 */
 		public static function register_elementor_widgets() {
-			\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new YITH_WCWL_Elementor_Add_To_Wishlist() );
-			\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new YITH_WCWL_Elementor_Wishlist() );
+			$widgets_manager = \Elementor\Plugin::instance()->widgets_manager;
+
+			if ( is_callable( array( $widgets_manager, 'register' ) ) ) {
+				$widgets_manager->register( new YITH_WCWL_Elementor_Add_To_Wishlist() );
+				$widgets_manager->register( new YITH_WCWL_Elementor_Wishlist() );
+			} else {
+				$widgets_manager->register_widget_type( new YITH_WCWL_Elementor_Add_To_Wishlist() );
+				$widgets_manager->register_widget_type( new YITH_WCWL_Elementor_Wishlist() );
+			}
 		}
 
 		/* === SHORTCODES == */

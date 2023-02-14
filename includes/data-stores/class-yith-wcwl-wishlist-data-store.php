@@ -202,6 +202,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			$query_values  = implode( ', ', array_values( $columns ) );
 			$query         = "INSERT INTO {$wpdb->yith_wcwl_wishlists} ( {$query_columns} ) VALUES ( {$query_values} ) ";
 
+			do_action( 'yith_wcwl_before_create_wishlist_res_query', $query, $values );
+
 			$res = $wpdb->query( $wpdb->prepare( $query, $values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 			if ( $res ) {

@@ -182,9 +182,9 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 				$this->add_requirements(
 					esc_html__( 'YITH Plugins', 'yith-plugin-fw' ),
 					array(
-						'min_wp_version'  => '5.6',
-						'min_wc_version'  => '5.3',
-						'min_php_version' => '7.0',
+						'min_wp_version'  => '5.9',
+						'min_wc_version'  => '7.2',
+						'min_php_version' => '7.2',
 					)
 				);
 				$this->add_requirements(

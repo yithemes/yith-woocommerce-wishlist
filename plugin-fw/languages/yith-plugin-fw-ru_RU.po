@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2022-11-11 07:31:10+00:00\n"
+"POT-Creation-Date: 2023-02-14 10:45:27+00:00\n"
 "PO-Revision-Date: 2022-04-05 17:22:32+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -14,56 +14,56 @@ msgstr ""
 "10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 
-#: includes/class-yit-assets.php:148 yit-functions.php:2006
+#: includes/class-yit-assets.php:155 yit-functions.php:2006
 msgid "Confirm trash"
 msgstr "Подтвердить корзину"
 
-#: includes/class-yit-assets.php:149
+#: includes/class-yit-assets.php:156
 msgid "Are you sure you want to trash the selected items?"
 msgstr "Вы уверены, что хотите переместить в корзину выбранные элементы?"
 
-#: includes/class-yit-assets.php:151 includes/class-yit-assets.php:155
+#: includes/class-yit-assets.php:158 includes/class-yit-assets.php:162
 #: templates/sysinfo/tabs/main.php:42 templates/sysinfo/tabs/main.php:50
 #: yit-functions.php:2008 yit-functions.php:2026
 msgid "No"
 msgstr "Нет"
 
-#: includes/class-yit-assets.php:152 yit-functions.php:2024
+#: includes/class-yit-assets.php:159 yit-functions.php:2024
 #: yit-functions.php:2152
 msgid "Confirm delete"
 msgstr "Подтвердите удаление"
 
-#: includes/class-yit-assets.php:153
+#: includes/class-yit-assets.php:160
 msgid "Are you sure you want to delete the selected items?"
 msgstr "Вы уверены, что хотите удалить выбранные элементы?"
 
-#: includes/class-yit-assets.php:153 yit-functions.php:1940
+#: includes/class-yit-assets.php:160 yit-functions.php:1940
 #: yit-functions.php:2100
 msgid ""
 "This action cannot be undone and you will not be able to recover this data."
 msgstr "Это действие нельзя отменить, и вы не сможете восстановить эти данные."
 
-#: includes/class-yit-assets.php:174
+#: includes/class-yit-assets.php:181
 msgid "Clear"
 msgstr "Очистить"
 
-#: includes/class-yit-assets.php:175
+#: includes/class-yit-assets.php:182
 msgid "Clear color"
 msgstr "Очистить цвет"
 
-#: includes/class-yit-assets.php:176
+#: includes/class-yit-assets.php:183
 msgid "Default"
 msgstr "По умолчанию"
 
-#: includes/class-yit-assets.php:177
+#: includes/class-yit-assets.php:184
 msgid "Select default color"
 msgstr "Выберите цвет по умолчанию"
 
-#: includes/class-yit-assets.php:178
+#: includes/class-yit-assets.php:185
 msgid "Select Color"
 msgstr "Выберите цвет"
 
-#: includes/class-yit-assets.php:179
+#: includes/class-yit-assets.php:186
 msgid "Color value"
 msgstr "Цвет значения"
 
@@ -768,22 +768,43 @@ msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr "YITH"
 
-#: includes/class-yit-assets.php:136
+#: includes/class-yit-assets.php:120
+msgctxt "Enhanced select"
+msgid "No matches found"
+msgstr ""
+
+#: includes/class-yit-assets.php:121
+msgctxt "Enhanced select"
+msgid "Please enter 1 or more characters"
+msgstr ""
+
+#. translators: %s is the number of characters.
+#: includes/class-yit-assets.php:123
+msgctxt "Enhanced select"
+msgid "Please enter %s or more characters"
+msgstr ""
+
+#: includes/class-yit-assets.php:124
+msgctxt "Enhanced select"
+msgid "Searching&hellip;"
+msgstr ""
+
+#: includes/class-yit-assets.php:143
 msgctxt "Button text"
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: includes/class-yit-assets.php:137
+#: includes/class-yit-assets.php:144
 msgctxt "Button text"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: includes/class-yit-assets.php:150 yit-functions.php:2009
+#: includes/class-yit-assets.php:157 yit-functions.php:2009
 msgctxt "Trash confirmation action"
 msgid "Yes, move to trash"
 msgstr "Да, удалить в корзину"
 
-#: includes/class-yit-assets.php:154 yit-functions.php:2027
+#: includes/class-yit-assets.php:161 yit-functions.php:2027
 #: yit-functions.php:2154
 msgctxt "Delete confirmation action"
 msgid "Yes, delete"

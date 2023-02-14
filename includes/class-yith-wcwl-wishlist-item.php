@@ -673,6 +673,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @param string $offset Offset.
 		 * @param mixed  $value  Value.
 		 */
+		#[\ReturnTypeWillChange]
 		public function offsetSet( $offset, $value ) {
 			$offset = $this->map_legacy_offsets( $offset );
 
@@ -689,6 +690,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 *
 		 * @param string $offset Offset.
 		 */
+		#[\ReturnTypeWillChange]
 		public function offsetUnset( $offset ) {
 			$offset = $this->map_legacy_offsets( $offset );
 
@@ -707,6 +709,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @param string $offset Offset.
 		 * @return bool
 		 */
+		#[\ReturnTypeWillChange]
 		public function offsetExists( $offset ) {
 			$offset = $this->map_legacy_offsets( $offset );
 
@@ -724,6 +727,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @param string $offset Offset.
 		 * @return mixed
 		 */
+		#[\ReturnTypeWillChange]
 		public function offsetGet( $offset ) {
 			$offset = $this->map_legacy_offsets( $offset );
 

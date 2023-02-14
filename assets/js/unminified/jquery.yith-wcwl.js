@@ -595,6 +595,14 @@ jQuery( function( $ ){
         }
     });
 
+	// Move the Add to Wishlist button under the gallery
+	$( document ).ready(function() {
+		if( yith_wcwl_l10n.yith_wcwl_button_position === 'thumbnails' ) {
+			$( '.woocommerce-product-gallery + div.yith-wcwl-add-to-wishlist' ).appendTo( '.woocommerce-product-gallery' );
+		}
+	});
+
+
     /* === INIT FUNCTIONS === */
 
     /**
@@ -1549,6 +1557,10 @@ jQuery( function( $ ){
             else{
                 try {
                     $.prettyPhoto.close();
+
+                    if ( yith_wcwl_l10n.redirect_after_ask_estimate ) {
+                        window.location.replace( yith_wcwl_l10n.ask_estimate_redirect_url );
+                    }
                 }
                 catch( e ){ /* do nothing, no popup to close */ }
             }

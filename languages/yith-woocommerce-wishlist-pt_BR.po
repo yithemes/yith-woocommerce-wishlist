@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2022-08-04 12:20:46+00:00\n"
+"POT-Creation-Date: 2023-02-14 11:22:40+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:06+0200\n"
 "Last-Translator: YIThemes <support@yithemes.com>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -40,69 +40,69 @@ msgstr ""
 msgid "Wishlist page options"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:268
+#: includes/class-yith-wcwl-admin.php:256
 msgid ""
 "Allows your customers to create and share lists of products that they want "
 "to purchase on your e-commerce."
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:308
+#: includes/class-yith-wcwl-admin.php:296
 msgid ""
 "Enable the wishlist feature for all users or <b>only for registered users</b>"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:309
+#: includes/class-yith-wcwl-admin.php:297
 msgid ""
 "Allow users to create <b>multiple wishlists</b> (Ex: Christmas, Birthday, "
 "etc.) <br>Users can choose the wishlist from a dropdown menu when they click "
 "on \"Add to wishlist\""
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:310
+#: includes/class-yith-wcwl-admin.php:298
 msgid ""
 "Allow users to set <b>visibility options for each wishlist</b>, by making "
 "them either public (visible to everyone), private or shared (visible only to "
 "people it has been shared with)"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:311
+#: includes/class-yith-wcwl-admin.php:299
 msgid ""
 "Choose between <b>different layouts</b> for the wishlist page and for the "
 "wishlist content"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:312
+#: includes/class-yith-wcwl-admin.php:300
 msgid ""
 "<b>Allow users to manage their wishlists:</b> rename and delete wishlists, "
 "move a product from one wishlist to another, change order of items, "
 "quantity, etc."
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:313
+#: includes/class-yith-wcwl-admin.php:301
 msgid ""
 "Enable an <b>\"Ask for an estimate\" button</b> to let customers send the "
 "content of their wishlist to the admin and get a custom quote"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:314
+#: includes/class-yith-wcwl-admin.php:302
 msgid ""
 "<b>Show a wishlist widget</b> that lists all the products in the wishlists "
 "(available also with \"mini-cart\" style for the header)"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:315
+#: includes/class-yith-wcwl-admin.php:303
 msgid ""
 "<b>Send promotional emails to users</b> who have added specific products to "
 "their wishlist"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:316
+#: includes/class-yith-wcwl-admin.php:304
 msgid ""
 "<b>Send an automatic email to the wishlist owner</b> whenever a product in "
 "the list is back in stock or on sale"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:317
+#: includes/class-yith-wcwl-admin.php:305
 msgid "Regular updates, Translations and Premium Support"
 msgstr ""
 
@@ -129,18 +129,18 @@ msgstr "Produto removida com sucesso."
 msgid "Please, make sure to enter a valid title"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:674
+#: includes/class-yith-wcwl-frontend.php:675
 msgid ""
 "We are sorry, but this feature is available only if cookies on your browser "
 "are enabled."
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:684
+#: includes/class-yith-wcwl-frontend.php:685
 msgid "Product added to cart successfully"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:947
-#: includes/class-yith-wcwl-shortcode.php:248
+#: includes/class-yith-wcwl-frontend.php:968
+#: includes/class-yith-wcwl-shortcode.php:257
 #: plugin-options/wishlist_page-options.php:249
 #: templates/wishlist-view-footer-mobile.php:59
 #: templates/wishlist-view-footer.php:59
@@ -294,35 +294,35 @@ msgstr ""
 msgid "ID of the wishlist to show (e.g. K6EOWXB888ZD)"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:452
+#: includes/class-yith-wcwl-shortcode.php:461
 msgid "Share on:"
 msgstr "Compartilhar em:"
 
-#: includes/class-yith-wcwl-shortcode.php:498
+#: includes/class-yith-wcwl-shortcode.php:507
 #: plugin-options/wishlist_page-options.php:147
 msgid "Share on Facebook"
 msgstr "Compartilhar no Facebook"
 
-#: includes/class-yith-wcwl-shortcode.php:515
+#: includes/class-yith-wcwl-shortcode.php:524
 #: plugin-options/wishlist_page-options.php:156
 msgid "Tweet on Twitter"
 msgstr "Tweetar no Twitter"
 
-#: includes/class-yith-wcwl-shortcode.php:533
+#: includes/class-yith-wcwl-shortcode.php:542
 #: plugin-options/wishlist_page-options.php:165
 msgid "Pin on Pinterest"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:547
+#: includes/class-yith-wcwl-shortcode.php:556
 msgid "Share via email"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:570
+#: includes/class-yith-wcwl-shortcode.php:579
 #: plugin-options/wishlist_page-options.php:183
 msgid "Share on WhatsApp"
 msgstr ""
 
-#: includes/class-yith-wcwl-shortcode.php:744
+#: includes/class-yith-wcwl-shortcode.php:753
 msgid "Remove from list"
 msgstr ""
 
@@ -342,8 +342,8 @@ msgstr ""
 msgid "Error. Unable to remove the product from the wishlist."
 msgstr "Erro. Não foi possível remover o produto da lista de desejos."
 
-#: includes/data-stores/class-yith-wcwl-wishlist-data-store.php:250
-#: includes/data-stores/class-yith-wcwl-wishlist-data-store.php:272
+#: includes/data-stores/class-yith-wcwl-wishlist-data-store.php:252
+#: includes/data-stores/class-yith-wcwl-wishlist-data-store.php:274
 msgid "Invalid wishlist."
 msgstr ""
 
@@ -1327,7 +1327,7 @@ msgid ""
 "your e-commerce on <strong>YITH</strong></a>"
 msgstr ""
 
-#: includes/class-yith-wcwl-admin.php:287
+#: includes/class-yith-wcwl-admin.php:275
 msgctxt "[HELP TAB] Video title"
 msgid ""
 "Check this video to learn how to <b>configure wishlist and customize options:"
