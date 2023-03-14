@@ -1,4 +1,4 @@
-/* globals yith_framework_fw_fields, wp */
+/* globals yith_framework_fw_fields, wp, yith */
 ( function ( $ ) {
 
 	/* Upload */
@@ -601,11 +601,12 @@
 	};
 
 	$( document ).on( 'click', '.yith-toggle-title', function ( event ) {
-		var _toggle  = $( event.target ),
-			_section = _toggle.closest( '.yith-toggle-row' ),
-			_content = _section.find( '.yith-toggle-content' );
+		var _toggle       = $( event.target ),
+			_section      = _toggle.closest( '.yith-toggle-row' ),
+			_content      = _section.find( '.yith-toggle-content' ),
+			_isOnOffClick = !!_toggle.closest( '.yith-toggle-onoff' ).length;
 
-		if ( _toggle.hasClass( 'yith-plugin-fw-onoff' ) || _toggle.hasClass( 'yith-icon-drag' ) ) {
+		if ( _isOnOffClick || _toggle.hasClass( 'yith-icon-drag' ) ) {
 			return false;
 		}
 
@@ -800,10 +801,11 @@
 		if ( !e.target.multiple ) {
 			setTimeout(
 				function () {
-					document.querySelector( '.yith-plugin-fw-select2-container .select2-search__field' ).focus();
+					var select2SearchField = document.querySelector( '.yith-plugin-fw-select2-container .select2-search__field' );
+					select2SearchField && select2SearchField.focus();
 				},
 				50
-			)
+			);
 		}
 	} );
 
@@ -1042,5 +1044,321 @@
 			!!firstTabHandler.length && showTab( firstTabHandler );
 		} );
 	} ).trigger( 'yith-plugin-fw-tabs-init' );
+
+	/**
+	 * Dismissible Notices
+	 */
+	$( document ).on( 'click', '.yith-plugin-fw__notice__dismiss', function () {
+		$( this ).closest( '.yith-plugin-fw__notice' ).fadeOut( 300 );
+	} );
+
+	/**
+	 * Media field
+	 */
+	( function () {
+		var mediaUploader,
+			isDragging = false;
+
+		/**
+		 * Get the wrapper of the media field.
+		 * @param element JQuery element or dom element.
+		 * @returns {*}
+		 */
+		function getWrapper( element ) {
+			return $( element ).closest( '.yith-plugin-fw-media' );
+		}
+
+		/**
+		 * Trigger the Media file change.
+		 * @param wrapper
+		 * @param media
+		 */
+		function triggerMediaChange( wrapper, media ) {
+			var preview         = wrapper.find( '.yith-plugin-fw-media__preview' ),
+				previewImage    = preview.find( '.yith-plugin-fw-media__preview__image' ),
+				previewFileName = preview.find( '.yith-plugin-fw-media__preview__file__name' ),
+				urlField        = wrapper.find( '.yith-plugin-fw-media__url-value' ),
+				idField         = wrapper.find( '.yith-plugin-fw-media__id-value' );
+
+			if ( !media ) {
+				urlField.length && urlField.val( '' );
+				idField.length && idField.val( '' );
+				previewImage.attr( 'src', '' );
+				preview.attr( 'data-type', 'upload' );
+			} else {
+				if ( typeof media.url !== 'undefined' && urlField.length ) {
+					urlField.val( media.url );
+				}
+
+				if ( typeof media.id !== 'undefined' && idField.length ) {
+					idField.val( media.id );
+				}
+
+				if ( typeof media.url !== 'undefined' ) {
+					var isImage   = new RegExp( '(jpg|jpeg|png|gif|ico|svg|jpe|webp)$' ).test( media.url ),
+						mediaType = isImage ? 'image' : 'file';
+
+					preview.attr( 'data-type', mediaType );
+					if ( 'image' === mediaType ) {
+						previewImage.attr( 'src', media.url );
+					} else {
+						var filename = media.url.substring( media.url.lastIndexOf( '/' ) + 1 );
+						previewFileName.html( filename );
+					}
+				}
+			}
+		}
+
+		/**
+		 * Handle click on tab handler to switch between tabs.
+		 * @param event
+		 */
+		function onTabHandlerClick( event ) {
+			var handler         = $( event.target ).closest( '.yith-plugin-fw-media__tab' ),
+				wrapper         = getWrapper( handler ),
+				tabs            = wrapper.find( '.yith-plugin-fw-media__tab' ),
+				contentElements = wrapper.find( '.yith-plugin-fw-media__content > *' ),
+				tabSelector     = handler.data( 'tab-selector' ),
+				activeElement   = wrapper.find( tabSelector );
+
+			tabs.removeClass( 'yith-plugin-fw-media__tab--active' );
+			handler.addClass( 'yith-plugin-fw-media__tab--active' );
+
+			contentElements.hide();
+			activeElement.show();
+		}
+
+		/**
+		 * Handler fired when clicking on the delete media icon.
+		 * @param event
+		 */
+		function onDeleteMedia( event ) {
+			var wrapper = getWrapper( event.target );
+			triggerMediaChange( wrapper, false );
+		}
+
+		/**
+		 * Handler fired when manually changing the file URL in the URL field.
+		 * @param event
+		 */
+		function onImageChange( event ) {
+			var field   = $( event.target ),
+				wrapper = getWrapper( field );
+			triggerMediaChange( wrapper, { url: field.val(), id: '' } );
+		}
+
+		function onDragEnter( event ) {
+			event.preventDefault();
+
+			if ( !event.dataTransfer ) {
+				event.dataTransfer = event.originalEvent.dataTransfer;
+			}
+
+			event.dataTransfer.dropEffect = "copy";
+			$( this ).closest( '.yith-plugin-fw-media__preview' ).addClass( 'yith-plugin-fw--is-dragging' );
+		}
+
+		function onDragOver( event ) {
+			event.preventDefault();
+		}
+
+		function onDragLeave() {
+			$( this ).closest( '.yith-plugin-fw-media__preview' ).removeClass( 'yith-plugin-fw--is-dragging' );
+		}
+
+		/**
+		 * Add error notice.
+		 * @param wrapper
+		 * @param message
+		 */
+		function addErrorNotice( wrapper, message ) {
+			var errorNotice = $( '<div>' );
+			errorNotice.addClass( ['yith-plugin-fw__notice', 'yith-plugin-fw__notice--error', 'yith-plugin-fw-animate__appear-from-top', 'yith-plugin-fw--inline'] );
+			errorNotice.html( message );
+			errorNotice.append( $( '<span class="yith-plugin-fw__notice__dismiss"></span>' ) );
+
+			wrapper.append( errorNotice );
+		}
+
+		function onDrop( event ) {
+			event.preventDefault();
+
+			var preview = $( this ).closest( '.yith-plugin-fw-media__preview' );
+
+			preview.removeClass( 'yith-plugin-fw--is-dragging' );
+			preview.addClass( 'yith-plugin-fw--is-loading' );
+
+			if ( !event.dataTransfer ) {
+				event.dataTransfer = event.originalEvent.dataTransfer;
+			}
+
+			var files        = event.dataTransfer.files,
+				wrapper      = getWrapper( event.target ),
+				errorNotices = wrapper.find( '.yith-plugin-fw__notice' ),
+				onFinish     = function () {
+					preview.removeClass( 'yith-plugin-fw--is-loading' );
+				};
+
+			errorNotices.remove();
+
+			if ( files.length > 1 ) {
+				files = files[ 0 ];
+			}
+
+			if ( !files.length ) {
+				addErrorNotice( wrapper, yith_framework_fw_fields.i18n.noFileError );
+				onFinish();
+			} else if ( 'mediaUtils' in wp && 'uploadMedia' in wp.mediaUtils ) {
+				wp.mediaUtils.uploadMedia(
+					{
+						filesList   : files,
+						onFileChange: function ( data ) {
+							// Check for the ID, since uploadMedia triggers onFileChange at the start with a temporary blob URL to allow previewing it before uploading.
+							if ( data && data.length && data[ 0 ] && 'id' in data[ 0 ] ) {
+								triggerMediaChange( wrapper, data[ 0 ] );
+								onFinish();
+
+								// To allow re-loading media files on the next opening of the mediaUploader.
+								mediaUploader = null;
+							}
+						},
+						onError     : function ( data ) {
+							console.error( data );
+							onFinish();
+							addErrorNotice( wrapper, data.message );
+						}
+					}
+				);
+			} else {
+				addErrorNotice( wrapper, yith_framework_fw_fields.i18n.cannotDropError );
+				onFinish();
+			}
+
+			maybeDragEnd();
+		}
+
+		function onUploadClick( e ) {
+			e.preventDefault();
+
+			var button  = $( this ),
+				wrapper = getWrapper( button );
+
+			// If the uploader object has already been created, reopen the dialog
+			if ( mediaUploader ) {
+				mediaUploader.open();
+				return;
+			}
+
+			var mediaUploaderStates = [
+				new wp.media.controller.Library(
+					{
+						library   : wp.media.query(),
+						multiple  : false,
+						priority  : 20,
+						filterable: 'uploaded'
+					}
+				)
+			];
+
+			mediaUploader = wp.media.frames.downloadable_file = wp.media(
+				{
+					library : { type: '' },
+					multiple: false,
+					states  : mediaUploaderStates
+				}
+			);
+
+			// When a file is selected, grab the URL and set it as the text field's value
+			mediaUploader.on( 'select', function () {
+				var attachment = mediaUploader.state().get( 'selection' ).first().toJSON();
+
+				triggerMediaChange( wrapper, attachment );
+			} );
+
+			mediaUploader.open();
+		}
+
+		$( document )
+			.on( 'change', '.yith-plugin-fw-media__url-value', onImageChange )
+			.on( 'click', '.yith-plugin-fw-media__preview__upload__link, .yith-plugin-fw-media__preview__action--edit', onUploadClick )
+			.on( 'click', '.yith-plugin-fw-media__preview__action--delete', onDeleteMedia )
+			.on( 'click', '.yith-plugin-fw-media__tab', onTabHandlerClick )
+			.on( 'dragenter', '.yith-plugin-fw-media__preview__dropzone', onDragEnter )
+			.on( 'dragover', '.yith-plugin-fw-media__preview__dropzone', onDragOver )
+			.on( 'dragleave', '.yith-plugin-fw-media__preview__dropzone', onDragLeave )
+			.on( 'drop', '.yith-plugin-fw-media__preview__dropzone', onDrop );
+
+		function maybeDragStart() {
+			if ( isDragging ) {
+				return;
+			}
+
+			isDragging = true;
+
+			document.addEventListener( 'dragend', maybeDragEnd );
+			document.addEventListener( 'mousemove', maybeDragEnd );
+
+			document.body.classList.add( 'yith-plugin-fw--dropzone-active' );
+		}
+
+		function maybeDragEnd() {
+			if ( !isDragging ) {
+				return;
+			}
+
+			isDragging = false;
+
+			document.removeEventListener( 'dragend', maybeDragEnd );
+			document.removeEventListener( 'mousemove', maybeDragEnd );
+
+			document.body.classList.remove( 'yith-plugin-fw--dropzone-active' );
+		}
+
+		document.addEventListener( 'dragenter', maybeDragStart );
+
+	} )();
+
+	/**
+	 * File field.
+	 */
+	( function () {
+		/**
+		 * Get the wrapper of the file field.
+		 * @param element JQuery element or dom element.
+		 * @returns {*}
+		 */
+		function getWrapper( element ) {
+			return $( element ).closest( '.yith-plugin-fw-file' );
+		}
+
+		function onDragOver() {
+			getWrapper( this ).addClass( 'yith-plugin-fw--is-dragging' );
+		}
+
+		function onDragLeave() {
+			getWrapper( this ).addClass( 'yith-plugin-fw--is-dragging' );
+		}
+
+		function onChange() {
+			var wrapper = getWrapper( this ),
+				name    = wrapper.find( '.yith-plugin-fw-file__preview__name' ),
+				file    = this.files.length ? this.files[ 0 ] : false;
+
+			wrapper.removeClass( 'yith-plugin-fw--is-dragging' );
+			if ( file ) {
+				name.html( file.name );
+				wrapper.addClass( 'yith-plugin-fw--filled' );
+			} else {
+				wrapper.removeClass( 'yith-plugin-fw--filled' );
+			}
+		}
+
+		$( document )
+			.on( 'dragover', '.yith-plugin-fw-file', onDragOver )
+			.on( 'dragleave', '.yith-plugin-fw-file', onDragLeave )
+			.on( 'change', '.yith-plugin-fw-file__field', onChange );
+
+
+	} )();
 
 } )( jQuery );

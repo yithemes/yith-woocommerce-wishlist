@@ -1664,7 +1664,6 @@ if ( ! function_exists( 'yith_plugin_fw_get_dimensions_by_option' ) ) {
 if ( ! function_exists( 'yith_plugin_fw_extract' ) ) {
 	/**
 	 * Extract array variables
-	 *
 	 * Usage example:
 	 * ```
 	 * list ( $type, $class, $value ) = yith_plugin_fw_extract( $field, 'type', 'class', 'value' );
@@ -1916,8 +1915,7 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_post_actions' ) ) {
 	 * @type string|false $duplicate-url          The Duplicate URL. Default: false (the duplicate action will be not shown).
 	 * @type string|false $confirm-trash-message  The 'confirm trash' message. Set to false to not ask for trash confirmation.
 	 * @type string|false $confirm-delete-message The 'confirm delete' message. Set to false to not ask for delete confirmation.
-	 * }
-	 *
+	 *                                            }
 	 * @return array
 	 * @since 3.7.0
 	 */
@@ -2069,8 +2067,7 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_term_actions' ) ) {
 	 * @type array        $more-menu              Array of more-menu items.
 	 * @type string|false $duplicate-url          The Duplicate URL. Default: false (the duplicate action will be not shown).
 	 * @type string|false $confirm-delete-message The 'confirm delete' message. Set to false to not ask for delete confirmation.
-	 * }
-	 *
+	 *                                            }
 	 * @return array
 	 * @since 3.7.0
 	 */
@@ -2271,7 +2268,6 @@ if ( ! function_exists( 'yith_plugin_fw_add_kses_global_attributes' ) ) {
 	 * @param array $attributes An array of attributes.
 	 *
 	 * @return array The array of attributes with global attributes added.
-	 *
 	 * @since  3.8.0
 	 */
 	function yith_plugin_fw_add_kses_global_attributes( $attributes ) {
@@ -2298,5 +2294,74 @@ if ( ! function_exists( 'yith_plugin_fw_add_kses_global_attributes' ) ) {
 		}
 
 		return $attributes;
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_kses_allowed_svg_tags' ) ) {
+
+	/**
+	 * Return the list of allowed HTML tag for SVGs.
+	 *
+	 * @return array
+	 * @since  4.0.0
+	 */
+	function yith_plugin_fw_kses_allowed_svg_tags() {
+		return array(
+			'svg'      => array(
+				'class'        => true,
+				'data-*'       => true,
+				'aria-*'       => true,
+				'role'         => true,
+				'xmlns'        => true,
+				'width'        => true,
+				'height'       => true,
+				'viewbox'      => true,
+				'version'      => true,
+				'x'            => true,
+				'y'            => true,
+				'style'        => true,
+				'fill'         => true,
+				'stroke'       => true,
+				'stroke-width' => true,
+			),
+			'circle'   => array(
+				'class' => true,
+				'cx'    => true,
+				'cy'    => true,
+				'r'     => true,
+			),
+			'g'        => array( 'fill' => true ),
+			'polyline' => array(
+				'class'  => true,
+				'points' => true,
+			),
+			'polygon'  => array(
+				'class'  => true,
+				'points' => true,
+			),
+			'line'     => array(
+				'class' => true,
+				'x1'    => true,
+				'x2'    => true,
+				'y1'    => true,
+				'y2'    => true,
+			),
+			'title'    => array( 'title' => true ),
+			'path'     => array(
+				'class'           => true,
+				'd'               => true,
+				'fill'            => true,
+				'stroke-linecap'  => true,
+				'stroke-linejoin' => true,
+			),
+			'rect'     => array(
+				'class'  => true,
+				'x'      => true,
+				'y'      => true,
+				'fill'   => true,
+				'width'  => true,
+				'height' => true,
+			),
+		);
 	}
 }

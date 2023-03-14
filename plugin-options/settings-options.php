@@ -12,7 +12,6 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 } // Exit if accessed directly
 
 $yith_wfbt_installed = ( defined( 'YITH_WFBT' ) && YITH_WFBT );
-$yith_wfbt_thickbox  = YITH_WCWL_URL . 'assets/images/landing/yith-wfbt-slider.jpg';
 
 /**
  * APPLY_FILTERS: yith_wcwl_settings_options
@@ -58,8 +57,7 @@ return apply_filters(
 
 				'yith_wfbt_enable_integration' => array(
 					'name'      => __( 'Enable slider in wishlist', 'yith-woocommerce-wishlist' ),
-					// translators: 1. Example image of the integration.
-					'desc'      => sprintf( __( 'Enable the slider with linked products on the Wishlist page (<a href="%1$s" class="thickbox">Example</a>).', 'yith-woocommerce-wishlist' ), $yith_wfbt_thickbox ),
+					'desc'      => __( 'Enable the slider with linked products on the Wishlist page.', 'yith-woocommerce-wishlist' ),
 					'id'        => 'yith_wfbt_enable_integration',
 					'default'   => 'yes',
 					'type'      => 'yith-field',

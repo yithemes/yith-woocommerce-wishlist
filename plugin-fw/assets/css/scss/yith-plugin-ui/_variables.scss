@@ -3,7 +3,7 @@
  */
 
 $content_bg: #ffffff; // Content Background.
-$content_text: #3c434a; // Content Text.
+$content_text: #475569; // Content Text.
 
 $primary: #00799f; // Primary color, for buttons
 $primary_hover: #0094c4; // Primary hover color, for buttons
@@ -47,14 +47,17 @@ $success_light: lighten($success, 30%);
 $success_lighter: lighten($success, 43%);
 $success_lightest: lighten($success, 50%);
 
-
 $table_row_highlight: #f0f6fb;
 $table_row_striped: #f6f7f7;
 $table_border_light: #eff0f0;
 
-$field_border_color: #d8d8d8;
+$field_border_color: #cbd5e1;
 $field_border_weight: 1px;
 $field_border: $field_border_weight solid $field_border_color;
+$field_shadow_color: rgba(0, 0, 0, 0.05);
+$field_shadow: 0 1px 2px 0 $field_shadow_color;
+$field_border_radius: 6px;
+$field_placeholder_color: #8f9eb0;
 
 $link: #0079b0; // Link Color.
 
@@ -117,5 +120,10 @@ $wp_top_bar_mobile_size: 46px;
   --yith-field-border-color: #{$field_border_color};
   --yith-field-border-weight: #{$field_border_color};
   --yith-field-border: #{$field_border};
+  --yith-field-shadow: #{$field_shadow};
+  --yith-field-shadow-color: #{$field_shadow_color};
+  --yith-field-border-radius: #{$field_border_radius};
+  --yith-field-placeholder-color: #{$field_placeholder_color};
+
   --yith-link: #{$link};
 }

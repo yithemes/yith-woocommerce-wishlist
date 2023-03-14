@@ -428,7 +428,20 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 							 *
 							 * @return string
 							 */
-							echo 'out-of-stock' === $item->get_stock_status() ? '<span class="wishlist-out-of-stock">' . esc_html( apply_filters( 'yith_wcwl_out_of_stock_label', __( 'Out of stock', 'yith-woocommerce-wishlist' ) ) ) . '</span>' : '<span class="wishlist-in-stock">' . esc_html( apply_filters( 'yith_wcwl_in_stock_label', __( 'In Stock', 'yith-woocommerce-wishlist' ) ) ) . '</span>';
+							$stock_status_html = 'out-of-stock' === $item->get_stock_status() ? '<span class="wishlist-out-of-stock">' . esc_html( apply_filters( 'yith_wcwl_out_of_stock_label', __( 'Out of stock', 'yith-woocommerce-wishlist' ) ) ) . '</span>' : '<span class="wishlist-in-stock">' . esc_html( apply_filters( 'yith_wcwl_in_stock_label', __( 'In Stock', 'yith-woocommerce-wishlist' ) ) ) . '</span>';
+
+							/**
+							 * APPLY_FILTERS: yith_wcwl_stock_status
+							 *
+							 * Filters the HTML for the stock status label.
+							 *
+							 * @param string                  $stock_status_html Stock status HTML.
+							 * @param YITH_WCWL_Wishlist_Item $item              Wishlist item object.
+							 * @param YITH_WCWL_Wishlist      $wishlist          Wishlist object.
+							 *
+							 * @return string
+							 */
+							echo apply_filters( 'yith_wcwl_stock_status', $stock_status_html, $item, $wishlist );
 							?>
 
 							<?php

@@ -59,7 +59,20 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 					<option value="add_to_cart"><?php esc_html_e( 'Add to cart', 'yith-woocommerce-wishlist' ); ?></option>
 
 					<?php if ( $wishlist->current_user_can( 'remove_from_wishlist' ) ) : ?>
-						<option value="delete"><?php esc_html_e( 'Remove from wishlist', 'yith-woocommerce-wishlist' ); ?></option>
+						<option value="delete">
+							<?php
+							/**
+							 * APPLY_FILTERS: yith_wcwl_wishlist_bulk_remove_label
+							 *
+							 * Filters the label for the buk action to remove the items from the wishlist.
+							 *
+							 * @param string $label Label.
+							 *
+							 * @return string
+							 */
+							echo esc_html( apply_filters( 'yith_wcwl_wishlist_bulk_remove_label', __( 'Remove from wishlist', 'yith-woocommerce-wishlist' ) ) );
+							?>
+						</option>
 					<?php endif; ?>
 
 					<?php if ( $available_multi_wishlist && count( $users_wishlists ) > 1 && $is_user_owner ) : ?>

@@ -2,8 +2,7 @@
 /**
  * The Template for displaying the WooCommerce option row.
  *
- * @var array  $field       The field.
- * @var string $description The description.
+ * @var array $field The field.
  * @package    YITH\PluginFramework\Templates
  */
 

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2023-02-14 11:22:40+00:00\n"
+"POT-Creation-Date: 2023-03-14 12:20:55+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -486,7 +486,7 @@ msgid ""
 msgstr ""
 
 #: plugin-options/add_to_wishlist-options.php:29
-#: plugin-options/settings-options.php:32
+#: plugin-options/settings-options.php:31
 msgid "General Settings"
 msgstr "Algemene Instellingen"
 
@@ -819,28 +819,25 @@ msgstr ""
 msgid "Search list"
 msgstr "Verlanglijst delen"
 
-#: plugin-options/settings-options.php:39
+#: plugin-options/settings-options.php:38
 msgid "Enable AJAX loading"
 msgstr "AJAX loading inschakelen"
 
-#: plugin-options/settings-options.php:40
+#: plugin-options/settings-options.php:39
 msgid "Load any cacheable wishlist item via AJAX"
 msgstr ""
 
-#: plugin-options/settings-options.php:54
+#: plugin-options/settings-options.php:53
 msgid "YITH WooCommerce Frequently Bought Together Integration"
 msgstr "YITH WooCommerce Frequently Bought Together Integratie"
 
-#: plugin-options/settings-options.php:60
+#: plugin-options/settings-options.php:59
 msgid "Enable slider in wishlist"
 msgstr "Slider in verlanglijst  inschakelen"
 
-#. translators: 1. Example image of the integration.
-#: plugin-options/settings-options.php:62
+#: plugin-options/settings-options.php:60
 #, fuzzy
-msgid ""
-"Enable the slider with linked products on the Wishlist page (<a href=\"%1$s"
-"\" class=\"thickbox\">Example</a>)."
+msgid "Enable the slider with linked products on the Wishlist page."
 msgstr ""
 "Slider inschakelen met gelinkte producten op de verlanglijst pagina (<a href="
 "\"%s\" class=\"thickbox\">Voorbeeld</a>). %s"
@@ -1342,29 +1339,29 @@ msgstr "en overal delen)"
 msgid "Apply this action to all the selected items:"
 msgstr "Deze actie toepassen op alle geselecteerde items:"
 
-#: templates/wishlist-view-footer-mobile.php:62
-#: templates/wishlist-view-footer.php:62
+#: templates/wishlist-view-footer-mobile.php:73
+#: templates/wishlist-view-footer.php:73
 msgid "Remove from wishlist"
 msgstr "Verwijderen van verlanglijst"
 
 #. translators: 1. Wishlist formatted name.
-#: templates/wishlist-view-footer-mobile.php:80
-#: templates/wishlist-view-footer.php:80
+#: templates/wishlist-view-footer-mobile.php:93
+#: templates/wishlist-view-footer.php:93
 msgid "Move to %s"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:86
-#: templates/wishlist-view-footer.php:86
+#: templates/wishlist-view-footer-mobile.php:99
+#: templates/wishlist-view-footer.php:99
 msgid "Apply"
 msgstr "Toepassen"
 
-#: templates/wishlist-view-footer-mobile.php:94
-#: templates/wishlist-view-footer.php:94
+#: templates/wishlist-view-footer-mobile.php:107
+#: templates/wishlist-view-footer.php:107
 msgid "Update"
 msgstr "Bijwerken"
 
-#: templates/wishlist-view-footer-mobile.php:100
-#: templates/wishlist-view-footer.php:138
+#: templates/wishlist-view-footer-mobile.php:113
+#: templates/wishlist-view-footer.php:151
 msgid "Add all to cart"
 msgstr "Allen toevoegen aan winkelwagen"
 
@@ -1396,20 +1393,20 @@ msgstr "Niet op voorraad"
 msgid "In Stock"
 msgstr "Op voorraad"
 
-#: templates/wishlist-view-mobile.php:219 templates/wishlist-view.php:531
+#: templates/wishlist-view-mobile.php:219 templates/wishlist-view.php:544
 msgid "Move"
 msgstr "Verplaatsen"
 
-#: templates/wishlist-view-mobile.php:250 templates/wishlist-view.php:562
+#: templates/wishlist-view-mobile.php:250 templates/wishlist-view.php:575
 msgid "Move to another list &rsaquo;"
 msgstr "Verplaatsen naar een andere lijst &rsaquo;"
 
 #: templates/wishlist-view-mobile.php:270 templates/wishlist-view.php:250
-#: templates/wishlist-view.php:594
+#: templates/wishlist-view.php:607
 msgid "Remove this product"
 msgstr "Verwijder dit product"
 
-#: templates/wishlist-view-mobile.php:291 templates/wishlist-view.php:636
+#: templates/wishlist-view-mobile.php:291 templates/wishlist-view.php:649
 msgid "No products added to the wishlist"
 msgstr "Geen producten toegevoegd aan de verlanglijst"
 
@@ -1434,11 +1431,11 @@ msgid "Arrange"
 msgstr "Schikken"
 
 #. translators: date added label: 1 date added.
-#: templates/wishlist-view.php:466
+#: templates/wishlist-view.php:479
 msgid "Added on: %s"
 msgstr "Toegevoegd op: %s"
 
-#: templates/wishlist-view.php:594
+#: templates/wishlist-view.php:607
 msgid "Remove"
 msgstr "Verwijderen"
 

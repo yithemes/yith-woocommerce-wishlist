@@ -70,6 +70,13 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		protected static $actions_initialized = false;
 
 		/**
+		 * Notices to be shown in the panel.
+		 *
+		 * @var array
+		 */
+		protected $notices = array();
+
+		/**
 		 * YIT_Plugin_Panel constructor.
 		 *
 		 * @param array $args The panel arguments.
@@ -95,6 +102,10 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				$this->settings        = $args;
 				$this->tabs_path_files = $this->get_tabs_path_files();
 
+				$this->settings['ui_version'] = $this->settings['ui_version'] ?? 1;
+
+				$this->init_admin_tabs();
+
 				if ( isset( $this->settings['create_menu_page'] ) && $this->settings['create_menu_page'] ) {
 					$this->add_menu_page();
 				}
@@ -107,6 +118,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				$this->maybe_init_premium_tab();
 				$this->maybe_init_welcome_modals();
 
+				add_filter( 'admin_body_class', array( $this, 'add_body_class' ) );
 				add_action( 'admin_init', array( $this, 'register_settings' ) );
 				add_action( 'admin_menu', array( $this, 'add_setting_page' ), 20 );
 				add_action( 'admin_menu', array( $this, 'add_premium_version_upgrade_to_menu' ), 100 );
@@ -123,9 +135,34 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			}
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-
-			add_action( 'yith_plugin_fw_before_yith_panel', array( $this, 'add_plugin_banner' ), 10, 1 );
 			add_action( 'wp_ajax_yith_plugin_fw_save_toggle_element', array( $this, 'save_toggle_element_options' ) );
+		}
+
+		/**
+		 * Init the admin tabs.
+		 *
+		 * @since 4.0.0
+		 */
+		protected function init_admin_tabs() {
+			foreach ( $this->settings['admin-tabs'] as $key => $tab ) {
+				if ( ! is_array( $tab ) ) {
+					$this->settings['admin-tabs'][ $key ] = array(
+						'title'       => $tab,
+						'description' => '',
+						'icon'        => '',
+					);
+				}
+			}
+		}
+
+		/**
+		 * Retrieve the UI version of the panel.
+		 *
+		 * @return int
+		 * @since 4.0.0
+		 */
+		protected function get_ui_version() {
+			return absint( $this->settings['ui_version'] );
 		}
 
 		/**
@@ -188,7 +225,14 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				);
 
 				if ( ! $is_block_editor ) {
-					wp_enqueue_style( 'yit-plugin-style' );
+					if ( 1 === $this->get_ui_version() ) {
+						wp_enqueue_style( 'yit-plugin-style' );
+					} else {
+						// Set the old plugin framework style to be empty, to prevent issues if any plugin is enqueueing it directly.
+						wp_deregister_style( 'yit-plugin-style' );
+						wp_register_style( 'yit-plugin-style', false, array(), yith_plugin_fw_get_version() );
+					}
+					wp_enqueue_style( 'yith-plugin-panel' );
 					wp_enqueue_style( 'yith-plugin-fw-fields' );
 					wp_enqueue_script( 'yith-plugin-fw-wp-pages' );
 				}
@@ -213,8 +257,6 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 */
 		protected static function init_actions() {
 			if ( ! static::$actions_initialized ) {
-				add_filter( 'admin_body_class', array( __CLASS__, 'add_body_class' ) );
-
 				// Sort plugins by name in YITH Plugins menu.
 				add_action( 'admin_menu', array( __CLASS__, 'sort_plugins' ), 90 );
 				add_filter( 'add_menu_classes', array( __CLASS__, 'add_menu_class_in_yith_plugin' ) );
@@ -232,11 +274,11 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				$this->main_array_options = array();
 				$this->tabs_hierarchy     = array();
 
-				foreach ( $this->settings['admin-tabs'] as $item => $v ) {
+				foreach ( $this->settings['admin-tabs'] as $item => $tab ) {
 					$path = trailingslashit( $options_path ) . $item . '-options.php';
 					$path = apply_filters( 'yith_plugin_panel_item_options_path', $path, $options_path, $item, $this );
 					if ( file_exists( $path ) ) {
-						$_tab                     = include $path;
+						$_tab                     = $this->get_options_from_path( $path );
 						$this->main_array_options = array_merge( $this->main_array_options, $_tab );
 						$sub_tabs                 = $this->get_sub_tabs( $_tab );
 						$current_tab_key          = array_keys( $_tab )[0];
@@ -246,7 +288,11 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 								'parent'       => '',
 								'has_sub_tabs' => ! ! $sub_tabs,
 							),
-							$this->get_tab_info_by_options( $_tab[ $current_tab_key ] )
+							$this->get_tab_info_by_options( $_tab[ $current_tab_key ] ),
+							array(
+								'title'       => $tab['title'],
+								'description' => $tab['description'] ?? '',
+							)
 						);
 
 						foreach ( $sub_tabs as $sub_item => $sub_options ) {
@@ -257,11 +303,18 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 							$sub_tab_path = apply_filters( 'yith_plugin_panel_sub_tab_item_options_path', $sub_tab_path, $sub_tabs, $sub_item, $this );
 
 							if ( file_exists( $sub_tab_path ) ) {
-								$_sub_tab                 = include $sub_tab_path;
+								$_sub_tab                 = $this->get_options_from_path( $sub_tab_path );
 								$this->main_array_options = array_merge( $this->main_array_options, $_sub_tab );
 
 								$current_sub_tab_key                          = array_keys( $_sub_tab )[0];
-								$this->tabs_hierarchy[ $current_sub_tab_key ] = array_merge( array( 'parent' => $current_tab_key ), $this->get_tab_info_by_options( $_sub_tab[ $current_sub_tab_key ] ) );
+								$this->tabs_hierarchy[ $current_sub_tab_key ] = array_merge(
+									array( 'parent' => $current_tab_key ),
+									$this->get_tab_info_by_options( $_sub_tab[ $current_sub_tab_key ] ),
+									array(
+										'title'       => $sub_options['title'],
+										'description' => $sub_options['description'] ?? '',
+									)
+								);
 							}
 						}
 					}
@@ -270,21 +323,51 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		}
 
 		/**
-		 * Add yith-plugin-fw-panel in body classes in Panel pages
+		 * Add a notice to be shown in the panel.
 		 *
-		 * @param string $admin_body_classes Body classes.
+		 * @param string $message The message.
+		 * @param string $type    The type of the notice. Use the same types of the "notice" component.
 		 *
-		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
+		 * @return void
+		 * @since 4.0.0
+		 */
+		protected function add_notice( string $message, string $type = 'info' ) {
+			$this->notices[] = array(
+				'message' => $message,
+				'type'    => $type,
+			);
+		}
+
+		/**
+		 * Retrieve the notices to be shown.
+		 *
+		 * @return array
+		 * @since 4.0.0
+		 */
+		public function get_notices(): array {
+			return $this->notices;
+		}
+
+		/**
+		 * Add body classes in Panel pages
+		 *
+		 * @param string $classes Body classes.
+		 *
 		 * @return string
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since  3.0.0
 		 */
-		public static function add_body_class( $admin_body_classes ) {
+		public function add_body_class( $classes ) {
 			global $pagenow;
-			if ( ( 'admin.php' === $pagenow && strpos( get_current_screen()->id, 'yith-plugins_page' ) !== false ) ) {
-				$admin_body_classes = ! substr_count( $admin_body_classes, ' yith-plugin-fw-panel ' ) ? $admin_body_classes . ' yith-plugin-fw-panel ' : $admin_body_classes;
+
+			if ( ( 'admin.php' === $pagenow && strpos( get_current_screen()->id, $this->settings['page'] ) !== false ) || $this->get_current_tab() ) {
+				$to_add = array( 'yith-plugin-fw-panel', 'yith-plugin-fw-panel--version-' . $this->get_ui_version() );
+				foreach ( $to_add as $class_to_add ) {
+					$classes = ! substr_count( $classes, " $class_to_add " ) ? $classes . " $class_to_add " : $classes;
+				}
 			}
 
-			return $admin_body_classes;
+			return $classes;
 		}
 
 		/**
@@ -329,22 +412,32 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		public function admin_enqueue_scripts() {
 			global $pagenow;
 
-			if ( 'admin.php' === $pagenow && strpos( get_current_screen()->id, $this->settings['page'] ) !== false || apply_filters( 'yit_plugin_panel_asset_loading', false ) ) {
+			$is_current_panel = $this->is_current_panel( false );
+
+			if ( $is_current_panel || apply_filters( 'yit_plugin_panel_asset_loading', false ) ) {
 				wp_enqueue_media();
+
+				if ( $is_current_panel ) {
+					if ( 1 === $this->get_ui_version() ) {
+						wp_enqueue_style( 'yit-plugin-style' );
+					} else {
+						// Set the old plugin framework style to be empty, to prevent issues if any plugin is enqueueing it directly.
+						wp_deregister_style( 'yit-plugin-style' );
+						wp_register_style( 'yit-plugin-style', false, array(), yith_plugin_fw_get_version() );
+					}
+				}
 
 				wp_enqueue_style( 'yith-plugin-fw-fields' );
 				wp_enqueue_style( 'jquery-ui-style' );
+				wp_enqueue_style( 'yith-plugin-panel' );
 
 				wp_enqueue_script( 'jquery-ui' );
 				wp_enqueue_script( 'jquery-ui-core' );
 				wp_enqueue_script( 'jquery-ui-dialog' );
 				wp_enqueue_script( 'yith_how_to' );
 				wp_enqueue_script( 'yith-plugin-fw-fields' );
-			}
 
-			if ( ( 'admin.php' === $pagenow && yith_plugin_fw_is_panel() ) || apply_filters( 'yit_plugin_panel_asset_loading', false ) ) {
 				wp_enqueue_media();
-				wp_enqueue_style( 'yit-plugin-style' );
 				wp_enqueue_script( 'yit-plugin-panel' );
 			}
 
@@ -392,8 +485,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 *
 		 * @param array $field The field to validate.
 		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return array validated fields
+		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function options_validate( $field ) {
 			$option_key       = ! empty( $field['option_key'] ) ? $field['option_key'] : 'general';
@@ -401,7 +494,12 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			$validated_fields = $this->get_options();
 
 			foreach ( $yit_options[ $option_key ] as $section => $data ) {
-				foreach ( $data as $option ) {
+				foreach ( $data as $key => $option ) {
+					if ( ! empty( $option['is_option_disabled'] ) ) {
+						unset( $yit_options[ $option_key ][ $section ][ $key ] );
+						continue;
+					}
+
 					if ( isset( $option['sanitize_call'] ) && isset( $option['id'] ) ) {
 						if ( is_array( $option['sanitize_call'] ) ) {
 							foreach ( $option['sanitize_call'] as $callback ) {
@@ -465,82 +563,29 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		/**
 		 * Print the tabs navigation
 		 *
-		 * @param array $args Nav Arguments.
+		 * @param array $nav_args Nav Arguments.
 		 *
 		 * @author   Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since    3.4.0
 		 */
-		public function print_tabs_nav( $args = array() ) {
+		public function print_tabs_nav( $nav_args = array() ) {
 			$defaults = array(
-				'current_tab'   => $this->get_current_tab(),
-				'premium_class' => isset( $this->settings['class'] ) ? 'yith-premium' : 'premium',
-				'page'          => $this->settings['page'],
-				'parent_page'   => $this->settings['parent_page'],
-				'wrapper_class' => 'nav-tab-wrapper',
+				'current_tab'     => $this->get_current_tab(),
+				'current_sub_tab' => $this->get_current_sub_tab(),
+				'premium_class'   => isset( $this->settings['class'] ) ? 'yith-premium' : 'premium',
+				'page'            => $this->settings['page'],
+				'parent_page'     => $this->settings['parent_page'],
+				'wrapper_class'   => $this->get_ui_version() > 1 ? '' : 'nav-tab-wrapper',
 			);
-			$args     = wp_parse_args( $args, $defaults );
+			$nav_args = wp_parse_args( $nav_args, $defaults );
 
-			list ( $wrapper_class ) = yith_plugin_fw_extract( $args, 'wrapper_class' );
-
-			$tabs = '<ul class="yith-plugin-fw-tabs">';
-
-			foreach ( $this->settings['admin-tabs'] as $tab => $tab_value ) {
-				$tabs .= $this->get_tab_nav( $tab, $tab_value, $args );
-			}
-
-			$tabs .= '</ul>';
-			?>
-			<h2 class="<?php echo esc_attr( $wrapper_class ); ?>">
-				<?php echo wp_kses_post( $tabs ); ?>
-			</h2>
-			<?php
-			$this->print_sub_tabs_nav( $args );
-		}
-
-		/**
-		 * Get HTML for single tab in tabs navigation
-		 *
-		 * @param string $tab_slug Tab slug.
-		 * @param string $tab_name Tab name.
-		 * @param array  $args     Nav Arguments.
-		 *
-		 * @author   Antonio La Rocca <antonio.larocca@yithemes.com>
-		 * @return string Tab HTML
-		 *
-		 * @since    3.4.0
-		 */
-		protected function get_tab_nav( $tab_slug, $tab_name, $args = array() ) {
-			list ( $current_tab, $premium_class, $page, $parent_page ) = yith_plugin_fw_extract( $args, 'current_tab', 'premium_class', 'page', 'parent_page' );
-
-			$active_class = $current_tab === $tab_slug ? ' nav-tab-active' : '';
-
-			if ( 'premium' === $tab_slug ) {
-				$active_class .= ' ' . $premium_class;
-			}
-			$active_class = apply_filters( 'yith_plugin_fw_panel_active_tab_class', $active_class, $current_tab, $tab_slug );
-
-			$first_sub_tab = $this->get_first_sub_tab_key( $tab_slug );
-			$sub_tab       = ! ! $first_sub_tab ? $first_sub_tab : '';
-			$sub_tabs      = $this->get_sub_tabs( $tab_slug );
-			$url           = $this->get_nav_url( $page, $tab_slug, $sub_tab, $parent_page );
-			$icon          = ( $current_tab !== $tab_slug && $sub_tabs ) ? '<i class="yith-icon yith-icon-arrow_down"></i>' : '';
-
-			$tab = '<li class="yith-plugin-fw-tab-element">';
-
-			$tab .= '<a class="nav-tab' . esc_attr( $active_class ) . '" href="' . esc_url( $url ) . '">' . wp_kses_post( $tab_name ) . $icon . '</a>';
-
-			if ( $current_tab !== $tab_slug && $sub_tabs ) {
-				$tab .= '<div class="nav-subtab-wrap"><ul class="nav-subtab">';
-				foreach ( $sub_tabs as $_key => $_tab ) {
-					$url = $this->get_nav_url( $page, $tab_slug, $_key );
-
-					$tab .= '<li class="nav-subtab-item"><a href="' . esc_url( $url ) . '">' . wp_kses_post( $_tab['title'] ) . '</a></li>';
-				}
-				$tab .= '</ul></div>';
-			}
-			$tab .= '</li>';
-
-			return $tab;
+			$this->get_template(
+				'panel-nav.php',
+				array(
+					'panel'    => $this,
+					'nav_args' => $nav_args,
+				)
+			);
 		}
 
 		/**
@@ -606,72 +651,76 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		}
 
 		/**
+		 * Print the panel content page.
+		 *
+		 * @since 4.0.0
+		 */
+		public function render_panel_content_page() {
+			$yit_options        = $this->get_main_array_options();
+			$option_key         = $this->get_current_option_key();
+			$custom_tab_options = $this->get_custom_tab_options( $yit_options, $option_key );
+
+			if ( $this->is_premium_tab() && $this->has_premium_tab() ) {
+				$this->print_premium_tab();
+			} elseif ( $custom_tab_options ) {
+				$this->print_custom_tab( $custom_tab_options );
+			} elseif ( $this->is_help_tab() ) {
+				$this->print_help_tab();
+			} else {
+				$this->get_template(
+					'panel-content-page.php',
+					array(
+						'panel'               => $this,
+						'form_method'         => apply_filters( 'yit_admin_panel_form_method', 'POST', $option_key ),
+						'panel_content_class' => apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap', $option_key ),
+						'option_key'          => $option_key,
+					)
+				);
+			}
+		}
+
+		/**
+		 * Print the mobile header.
+		 *
+		 * @since 4.0.0
+		 */
+		protected function render_mobile_header() {
+			if ( $this->get_ui_version() > 1 ) {
+				$this->get_template(
+					'panel-mobile-header.php',
+					array(
+						'header_title' => $this->get_header_title(),
+					)
+				);
+			}
+		}
+
+		/**
 		 * Show a tabbed panel to setting page
 		 * a callback function called by add_setting_page => add_submenu_page
 		 *
 		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function yit_panel() {
-			$yit_options = $this->get_main_array_options();
-			$wrap_class  = isset( $this->settings['class'] ) ? $this->settings['class'] : '';
+			$wrap_class = $this->settings['class'] ?? '';
+			$option_key = $this->get_current_option_key();
+			$content_id = $this->settings['page'] . '_' . $option_key;
 
-			$option_key         = $this->get_current_option_key();
-			$custom_tab_options = $this->get_custom_tab_options( $yit_options, $option_key );
+			$this->render_panel_header();
 			?>
-			<div class="wrap <?php echo esc_attr( $wrap_class ); ?>">
+			<div class="yith-plugin-fw__wrap wrap <?php echo esc_attr( $wrap_class ); ?>">
 				<div id="icon-themes" class="icon32"><br/></div>
 				<?php
 				do_action( 'yith_plugin_fw_before_yith_panel', $this->settings['page'] );
 
-				$this->print_tabs_nav();
-				if ( $this->is_premium_tab() && $this->has_premium_tab() ) {
-					$this->print_premium_tab();
-
-					return;
-				} elseif ( $custom_tab_options ) {
-					$this->print_custom_tab( $custom_tab_options );
-
-					return;
-				} elseif ( $this->is_help_tab() ) {
-					$this->print_help_tab();
-
-					return;
-				}
-
-				$form_method         = apply_filters( 'yit_admin_panel_form_method', 'POST', $option_key );
-				$panel_content_class = apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap', $option_key );
+				$this->get_template(
+					'panel-content.php',
+					array(
+						'panel'      => $this,
+						'content_id' => $content_id,
+					)
+				);
 				?>
-				<div id="wrap" class="yith-plugin-fw plugin-option yit-admin-panel-container">
-					<?php $this->message(); ?>
-					<div class="<?php echo esc_attr( $panel_content_class ); ?>">
-						<h2><?php echo wp_kses_post( $this->get_tab_title() ); ?></h2>
-						<?php if ( $this->is_show_form() ) : ?>
-							<form id="yith-plugin-fw-panel" method="<?php echo esc_attr( $form_method ); ?>" action="options.php">
-								<?php do_settings_sections( 'yit' ); ?>
-								<p>&nbsp;</p>
-								<?php settings_fields( 'yit_' . $this->settings['parent'] . '_options' ); ?>
-								<input type="hidden" name="<?php echo esc_attr( $this->get_name_field( 'option_key' ) ); ?>"
-										value="<?php echo esc_attr( $option_key ); ?>"/>
-								<input type="submit" class="button-primary"
-										value="<?php esc_attr_e( 'Save Changes', 'yith-plugin-fw' ); ?>"
-										style="float:left;margin-right:10px;"/>
-								<input type="hidden" name="page" value="<?php echo esc_attr( $this->settings['page'] ); ?>"/>
-								<input type="hidden" name="tab" value="<?php echo esc_attr( $this->get_current_tab() ); ?>"/>
-								<input type="hidden" name="sub_tab" value="<?php echo esc_attr( $this->get_current_sub_tab() ); ?>"/>
-							</form>
-							<form method="post">
-								<?php
-								$reset_warning = __( 'If you continue with this action, you will reset all options in this page.', 'yith-plugin-fw' ) . '\n' . __( 'Are you sure?', 'yith-plugin-fw' );
-								?>
-								<input type="hidden" name="yit-action" value="reset"/>
-								<input type="submit" name="yit-reset" class="button-secondary"
-										value="<?php esc_attr_e( 'Reset to default', 'yith-plugin-fw' ); ?>"
-										onclick="return confirm('<?php echo esc_attr( $reset_warning ); ?>');"/>
-							</form>
-							<p>&nbsp;</p>
-						<?php endif ?>
-					</div>
-				</div>
 			</div>
 			<?php
 		}
@@ -702,6 +751,23 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			$option = ! empty( $options[ $option_key ] ) ? current( $options[ $option_key ] ) : false;
 
 			if ( $option && isset( $option['type'], $option['action'] ) && 'custom_tab' === $option['type'] && ! empty( $option['action'] ) ) {
+				// Inherit values for title and description, if it's a sub-tab/sub-page with show_container set to true.
+				if ( $this->get_ui_version() > 1 ) {
+					$hierarchy             = $this->get_tabs_hierarchy();
+					$hierarchy_page_info   = $hierarchy[ $option_key ] ?? array();
+					$parent                = $hierarchy_page_info['parent'] ?? '';
+					$hierarchy_parent_info = $hierarchy[ $parent ] ?? array();
+					$inherited_values      = array( 'title', 'description' );
+
+					if ( $hierarchy_page_info ) {
+						foreach ( $inherited_values as $inherited_value ) {
+							if ( ! isset( $option[ $inherited_value ] ) && isset( $hierarchy_page_info[ $inherited_value ] ) ) {
+								$option[ $inherited_value ] = $hierarchy_page_info[ $inherited_value ];
+							}
+						}
+					}
+				}
+
 				return $option;
 			} else {
 				return false;
@@ -737,9 +803,9 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 
 			$info['type'] = $type;
 			if ( 'post_type' === $type ) {
-				$info['post_type'] = isset( $first['post_type'] ) ? $first['post_type'] : '';
+				$info['post_type'] = $first['post_type'] ?? '';
 			} elseif ( 'taxonomy' === $type ) {
-				$info['taxonomy'] = isset( $first['taxonomy'] ) ? $first['taxonomy'] : '';
+				$info['taxonomy'] = $first['taxonomy'] ?? '';
 			}
 
 			return $info;
@@ -761,7 +827,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			$current_tab     = $this->get_current_tab();
 			$current_sub_tab = $this->get_current_sub_tab();
 
-			include YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/custom-tab.php';
+			$this->get_template( 'custom-tab.php', compact( 'options', 'current_tab', 'current_sub_tab' ) );
 		}
 
 		/**
@@ -777,8 +843,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		/**
 		 * Checks whether current tab is special Help Tab
 		 *
-		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 * @return bool Whether current tab is Help Tab
+		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function is_help_tab() {
 			return 'help' === $this->get_current_tab();
@@ -787,8 +853,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		/**
 		 * Prints special Help Tab
 		 *
-		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 * @return void
+		 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 		 */
 		public function print_help_tab() {
 			$options      = isset( $this->settings['help_tab'] ) ? $this->settings['help_tab'] : array();
@@ -801,8 +867,9 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			}
 
 			// translators: 1. Plugin name.
-			$default_title   = $is_premium ? _x( 'Thank you for purchasing %s!', 'Help tab default title', 'yith-plugin-fw' ) : _x( 'Thank you for using %s!', 'Help tab default title', 'yith-plugin-fw' );
-			$default_doc_url = $this->get_doc_url();
+			$default_title       = $is_premium ? _x( 'Thank you for purchasing %s!', 'Help tab default title', 'yith-plugin-fw' ) : _x( 'Thank you for using %s!', 'Help tab default title', 'yith-plugin-fw' );
+			$default_doc_url     = $this->get_doc_url();
+			$default_support_url = $is_extended ? add_query_arg( array( 'page' => 'bluehost' ), admin_url( 'admin.php' ) ) . '#/help' : 'https://yithemes.com/my-account/support/submit-a-ticket/';
 
 			// parse options.
 			$options = wp_parse_args(
@@ -814,7 +881,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 					'playlists'          => array(),
 					'hc_url'             => 'https://support.yithemes.com/hc/',
 					'doc_url'            => $default_doc_url,
-					'submit_ticket_url'  => 'https://yithemes.com/my-account/support/submit-a-ticket/',
+					'submit_ticket_url'  => $default_support_url,
 					'show_hc_articles'   => true,
 					'show_submit_ticket' => true,
 				)
@@ -840,14 +907,12 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				}
 			}
 
-			if ( $is_extended && $options['show_submit_ticket'] ) {
-				$options['submit_ticket_url'] = add_query_arg( array( 'page' => 'bluehost' ), admin_url( 'admin.php' ) ) . '#/help';
-			}
-
 			// set template variables.
 			$current_tab     = $this->get_current_tab();
 			$current_sub_tab = $this->get_current_sub_tab();
 			$latest_articles = isset( $this->settings['plugin_slug'] ) ? YIT_Help_Desk::get_latest_articles( $this->settings['plugin_slug'] ) : array();
+
+			$options = apply_filters( 'yith_plugin_fw_panel_help_tab_options', $options, $this->settings );
 
 			include YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/help-tab.php';
 		}
@@ -860,7 +925,11 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 */
 		protected function maybe_init_premium_tab() {
 			if ( isset( $this->settings['premium_tab'] ) ) {
-				$this->settings['admin-tabs']['premium'] = _x( 'Get premium', 'Premium tab name', 'yith-plugin-fw' );
+				$this->settings['admin-tabs']['premium'] = array(
+					'title'       => _x( 'Get premium', 'Premium tab name', 'yith-plugin-fw' ),
+					'icon'        => 'premium',
+					'description' => '',
+				);
 			}
 		}
 
@@ -872,15 +941,19 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 */
 		protected function maybe_init_help_tab() {
 			if ( $this->has_help_tab() ) {
-				$this->settings['admin-tabs']['help'] = _x( 'Help', 'Help tab name', 'yith-plugin-fw' );
+				$this->settings['admin-tabs']['help'] = array(
+					'title'       => _x( 'Help', 'Help tab name', 'yith-plugin-fw' ),
+					'icon'        => 'help',
+					'description' => '',
+				);
 			}
 		}
 
 		/**
 		 * Get the plugin doc URL.
 		 *
-		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @return string
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since  3.9.14
 		 */
 		protected function get_doc_url() {
@@ -895,8 +968,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		/**
 		 * Is in panel?
 		 *
-		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @return bool
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since  3.9.14
 		 */
 		protected function is_panel(): bool {
@@ -909,8 +982,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		/**
 		 * Is this the first panel page?
 		 *
-		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @return bool
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since  3.9.14
 		 */
 		protected function is_first_page(): bool {
@@ -1023,7 +1096,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 							'welcome-modal-close'
 						);
 						$plugin    = array(
-							'name'    => $this->settings['plugin_name'] ?? $this->settings['page_title'] ?? '',
+							'name'    => $this->get_plugin_name(),
 							'version' => $this->settings['plugin_version'] ?? '',
 							'slug'    => $this->settings['plugin_slug'] ?? '',
 							'icon'    => $this->settings['plugin_icon'] ?? '',
@@ -1088,8 +1161,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		/**
 		 * Checks whether current tab is Premium Tab
 		 *
-		 * @author Giuseppe Arcifa <giuseppe.arcifa@yithemes.com>
 		 * @return bool
+		 * @author Giuseppe Arcifa <giuseppe.arcifa@yithemes.com>
 		 * @since  3.9.0
 		 */
 		protected function is_premium_tab() {
@@ -1100,8 +1173,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * Check if panel has premium tab
 		 * (Check for premium Tab through the premium_tab param fully handled by plugin-fw)
 		 *
-		 * @author Giuseppe Arcifa <giuseppe.arcifa@yithemes.com>
 		 * @return bool
+		 * @author Giuseppe Arcifa <giuseppe.arcifa@yithemes.com>
 		 * @since  3.9.0
 		 */
 		protected function has_premium_tab() {
@@ -1111,8 +1184,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		/**
 		 * Prints Premium Tab
 		 *
-		 * @author Giuseppe Arcifa <giuseppe.arcifa@yithemes.com>
 		 * @return void
+		 * @author Giuseppe Arcifa <giuseppe.arcifa@yithemes.com>
 		 * @since  3.9.0
 		 */
 		protected function print_premium_tab() {
@@ -1151,7 +1224,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			}
 
 			foreach ( $yit_options[ $option_key ] as $section => $data ) {
-				add_settings_section( "yit_settings_{$option_key}_{$section}", $this->get_section_title( $section ), $this->get_section_description( $section ), 'yit' );
+				add_settings_section( "yit_settings_{$option_key}_{$section}", $this->get_section_title( $section ), '__return_empty_string', 'yit', array( 'description' => $this->get_section_description( $section ) ) );
 				foreach ( $data as $option ) {
 					if ( isset( $option['id'] ) && isset( $option['type'] ) && isset( $option['name'] ) ) {
 						add_settings_field(
@@ -1184,13 +1257,13 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			}
 
 			if ( ! empty( $this->settings['admin_tabs'] ) ) {
-				foreach ( $this->settings['admin-tabs'] as $item => $title ) {
+				foreach ( $this->settings['admin-tabs'] as $key => $tab ) {
 					$wp_admin_bar->add_menu(
 						array(
 							'parent' => $this->settings['parent'],
-							'title'  => $title,
-							'id'     => $this->settings['parent'] . '-' . $item,
-							'href'   => admin_url( 'themes.php' ) . '?page=' . $this->settings['parent_page'] . '&tab=' . $item,
+							'title'  => $tab['title'],
+							'id'     => $this->settings['parent'] . '-' . $key,
+							'href'   => admin_url( 'themes.php' ) . '?page=' . $this->settings['parent_page'] . '&tab=' . $key,
 						)
 					);
 				}
@@ -1201,14 +1274,13 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * Get current tab.
 		 * Retrieve the id of tab shown, return general is the current tab is not defined.
 		 *
-		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return string|false
+		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @since  3.9.14 Check for WP pages.
 		 */
 		public function get_current_tab() {
 			// phpcs:disable WordPress.Security.NonceVerification.Recommended
 			$admin_tabs = array_keys( $this->settings['admin-tabs'] );
-
 			global $post_type, $taxonomy;
 			$wp_tabs = array();
 			if ( $this->is_custom_post_type_page() ) {
@@ -1239,8 +1311,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		/**
 		 * Get the current sub-tab.
 		 *
-		 * @author   Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @return string The key of the sub-tab if exists, empty string otherwise.
+		 * @author   Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since    3.4.0
 		 * @since    3.9.14 Check for WP pages.
 		 */
@@ -1279,8 +1351,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * for sub-tabbed tabs, it will return the current sub-tab.
 		 * fot normal tabs, it will return the current tab.
 		 *
-		 * @author   Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @return string the current sub-tab, if exists; the current tab otherwise.
+		 * @author   Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since    3.4.0
 		 */
 		public function get_current_option_key() {
@@ -1304,17 +1376,17 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		public function message() {
 			// phpcs:disable WordPress.Security.NonceVerification.Recommended
 			$message = array(
-				'element_exists'   => $this->get_message( '<strong>' . __( 'The element you have entered already exists. Please, enter another name.', 'yith-plugin-fw' ) . '</strong>', 'error', false ),
-				'saved'            => $this->get_message( '<strong>' . __( 'Settings saved', 'yith-plugin-fw' ) . '.</strong>', 'updated', false ),
-				'reset'            => $this->get_message( '<strong>' . __( 'Settings reset', 'yith-plugin-fw' ) . '.</strong>', 'updated', false ),
-				'delete'           => $this->get_message( '<strong>' . __( 'Element deleted correctly.', 'yith-plugin-fw' ) . '</strong>', 'updated', false ),
-				'updated'          => $this->get_message( '<strong>' . __( 'Element updated correctly.', 'yith-plugin-fw' ) . '</strong>', 'updated', false ),
-				'settings-updated' => $this->get_message( '<strong>' . __( 'Element updated correctly.', 'yith-plugin-fw' ) . '</strong>', 'updated', false ),
-				'imported'         => $this->get_message( '<strong>' . __( 'Database imported correctly.', 'yith-plugin-fw' ) . '</strong>', 'updated', false ),
-				'no-imported'      => $this->get_message( '<strong>' . __( 'An error has occurred during import. Please try again.', 'yith-plugin-fw' ) . '</strong>', 'error', false ),
-				'file-not-valid'   => $this->get_message( '<strong>' . __( 'The added file is not valid.', 'yith-plugin-fw' ) . '</strong>', 'error', false ),
-				'cant-import'      => $this->get_message( '<strong>' . __( 'Sorry, import is disabled.', 'yith-plugin-fw' ) . '</strong>', 'error', false ),
-				'ord'              => $this->get_message( '<strong>' . __( 'Sorting successful.', 'yith-plugin-fw' ) . '</strong>', 'updated', false ),
+				'element_exists'   => $this->get_message( __( 'The element you have entered already exists. Please, enter another name.', 'yith-plugin-fw' ), 'error', false ),
+				'saved'            => $this->get_message( __( 'Settings saved', 'yith-plugin-fw' ) . '.', 'success', false ),
+				'reset'            => $this->get_message( __( 'Settings reset', 'yith-plugin-fw' ) . '.', 'success', false ),
+				'delete'           => $this->get_message( __( 'Element deleted correctly.', 'yith-plugin-fw' ), 'success', false ),
+				'updated'          => $this->get_message( __( 'Element updated correctly.', 'yith-plugin-fw' ), 'success', false ),
+				'settings-updated' => $this->get_message( __( 'Element updated correctly.', 'yith-plugin-fw' ), 'success', false ),
+				'imported'         => $this->get_message( __( 'Database imported correctly.', 'yith-plugin-fw' ), 'success', false ),
+				'no-imported'      => $this->get_message( __( 'An error has occurred during import. Please try again.', 'yith-plugin-fw' ), 'error', false ),
+				'file-not-valid'   => $this->get_message( __( 'The added file is not valid.', 'yith-plugin-fw' ), 'error', false ),
+				'cant-import'      => $this->get_message( __( 'Sorry, import is disabled.', 'yith-plugin-fw' ), 'error', false ),
+				'ord'              => $this->get_message( __( 'Sorting successful.', 'yith-plugin-fw' ), 'success', false ),
 			);
 
 			foreach ( $message as $key => $value ) {
@@ -1333,24 +1405,27 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * @param string $type    The type of message (can be 'error' or 'updated').
 		 * @param bool   $echo    Set to true if you want to print the message.
 		 *
-		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return string
+		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_message( $message, $type = 'error', $echo = true ) {
-			$message = '<div id="message" class="' . esc_attr( $type ) . ' fade"><p>' . wp_kses_post( $message ) . '</p></div>';
-			if ( $echo ) {
-				echo wp_kses_post( $message );
-			}
-
-			return $message;
+			return yith_plugin_fw_get_component(
+				array(
+					'type'        => 'notice',
+					'notice_type' => $type,
+					'message'     => $message,
+					'inline'      => $this->get_ui_version() > 1,
+				),
+				$echo
+			);
 		}
 
 		/**
 		 * Get Tab Path Files
 		 * return an array with file names of tabs
 		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return array
+		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_tabs_path_files() {
 			$option_files_path = $this->settings['options-path'] . '/';
@@ -1374,8 +1449,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * Get main array options
 		 * return an array with all options defined on options-files
 		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return array
+		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_main_array_options() {
 			$this->maybe_init_vars();
@@ -1454,8 +1529,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * Set an array with all default options
 		 * put default options in an array
 		 *
-		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return array
+		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_default_options() {
 			$yit_options     = $this->get_main_array_options();
@@ -1481,8 +1556,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * Get the title of the tab
 		 * return the title of tab
 		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return string
+		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_tab_title() {
 			$yit_options = $this->get_main_array_options();
@@ -1505,15 +1580,16 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 *
 		 * @param string $section The section.
 		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return string
+		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_section_title( $section ) {
 			$yit_options = $this->get_main_array_options();
 			$option_key  = $this->get_current_option_key();
+			$title_types = $this->get_ui_version() > 1 ? array( 'title', 'section' ) : array( 'section' );
 
 			foreach ( $yit_options[ $option_key ][ $section ] as $option ) {
-				if ( isset( $option['type'] ) && 'section' === $option['type'] ) {
+				if ( isset( $option['type'] ) && in_array( $option['type'], $title_types, true ) ) {
 					return $option['name'];
 				}
 			}
@@ -1527,16 +1603,17 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 *
 		 * @param string $section The section.
 		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return string
+		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_section_description( $section ) {
 			$yit_options = $this->get_main_array_options();
 			$option_key  = $this->get_current_option_key();
+			$title_types = $this->get_ui_version() > 1 ? array( 'title', 'section' ) : array( 'section' );
 
 			foreach ( $yit_options[ $option_key ][ $section ] as $option ) {
-				if ( isset( $option['type'] ) && 'section' === $option['type'] && isset( $option['desc'] ) ) {
-					return '<p>' . $option['desc'] . '</p>';
+				if ( isset( $option['type'] ) && in_array( $option['type'], $title_types, true ) && isset( $option['desc'] ) ) {
+					return $option['desc'];
 				}
 			}
 
@@ -1548,8 +1625,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * Show form when necessary
 		 * return true if 'showform' is not defined
 		 *
-		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return bool
+		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function is_show_form() {
 			$yit_options = $this->get_main_array_options();
@@ -1575,8 +1652,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 *
 		 * @param string $name The name.
 		 *
-		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return string
+		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_name_field( $name = '' ) {
 			return 'yit_' . $this->settings['parent'] . '_options[' . $name . ']';
@@ -1588,8 +1665,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 *
 		 * @param string $id The ID.
 		 *
-		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return string
+		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_id_field( $id ) {
 			return 'yit_' . $this->settings['parent'] . '_options_' . $id;
@@ -1603,11 +1680,36 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 *
 		 * @param array $param The parameters.
 		 *
-		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return void
+		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function render_field( $param ) {
 			if ( ! empty( $param ) && isset( $param ['option'] ) ) {
+
+				if ( $this->get_ui_version() > 1 ) {
+					$field      = $param['option'];
+					$field_id   = $field['id'];
+					$db_options = $this->get_options();
+
+					if ( 'on-off' === $field['type'] ) {
+						$field['type'] = 'onoff';
+					}
+					$std                 = $field['std'] ?? '';
+					$db_value            = $db_options[ $field_id ] ?? $std;
+					$field_template_path = yith_plugin_fw_get_field_template_path( $field );
+					if ( $field_template_path ) {
+						$field['id']    = $this->get_id_field( $field_id );
+						$field['name']  = $this->get_name_field( $field_id );
+						$field['value'] = $db_value;
+
+						yith_plugin_fw_get_field( $field, true, true );
+					} else {
+						do_action( "yit_panel_{$field['type']}", $field, $db_value );
+					}
+
+					return;
+				}
+
 				$option     = $param['option'];
 				$db_options = $this->get_options();
 
@@ -1646,8 +1748,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * return the options from db, if the options aren't defined in the db,
 		 * get the default options ad add the options in the db
 		 *
-		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 * @return array
+		 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function get_options() {
 			$options = get_option( 'yit_' . $this->settings['parent'] . '_options' );
@@ -1721,8 +1823,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 *
 		 * @param array $menu The menu.
 		 *
-		 * @author   Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @return array
+		 * @author   Leanza Francesco <leanzafrancesco@gmail.com>
 		 * @since    3.0.0
 		 */
 		public static function add_menu_class_in_yith_plugin( $menu ) {
@@ -1781,43 +1883,40 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		}
 
 		/**
+		 * Render the panel header.
+		 *
+		 * @return void
+		 * @since 4.0.0
+		 */
+		public function render_panel_header() {
+			$this->render_mobile_header();
+			$this->get_template(
+				'panel-header.php',
+				array(
+					'title'    => $this->settings['page_title'],
+					'is_free'  => $this->is_free(),
+					'rate_url' => isset( $this->settings['plugin_slug'] ) ? apply_filters( 'yith_plugin_fw_rate_url', 'https://wordpress.org/support/plugin/' . $this->settings['plugin_slug'] . '/reviews/#new-post' ) : '',
+				)
+			);
+		}
+
+		/**
 		 * Add plugin banner.
 		 *
 		 * @param string $page The page.
+		 *
+		 * @deprecated 4.0.0
 		 */
 		public function add_plugin_banner( $page ) {
+			if ( $this->get_ui_version() < 1 ) {
+				return;
+			}
+
 			if ( $page !== $this->settings['page'] || ! isset( $this->settings['class'] ) ) {
 				return;
 			}
 
-			?>
-			<?php if ( $this->is_free() && isset( $this->settings['plugin_slug'] ) ) : ?>
-				<?php
-				$rate_link = apply_filters( 'yith_plugin_fw_rate_url', 'https://wordpress.org/support/plugin/' . $this->settings['plugin_slug'] . '/reviews/#new-post' );
-				?>
-				<h1 class="notice-container"></h1>
-				<div class="yith-plugin-fw-banner">
-					<h1 translate="no"><?php echo esc_html( $this->settings['page_title'] ); ?></h1>
-				</div>
-				<div class="yith-plugin-fw-rate">
-					<?php
-					printf(
-						'<strong>%s</strong> %s <a href="%s" target="_blank"><u>%s</u> <span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a>  %s',
-						esc_html__( 'We need your support', 'yith-plugin-fw' ),
-						esc_html__( 'to keep updating and improving the plugin. Please,', 'yith-plugin-fw' ),
-						esc_url( $rate_link ),
-						esc_html__( 'help us by leaving a good review', 'yith-plugin-fw' ),
-						esc_html__( ':) Thanks!', 'yith-plugin-fw' )
-					);
-					?>
-				</div>
-			<?php else : ?>
-				<h1 class="notice-container"></h1>
-				<div class="yith-plugin-fw-banner">
-					<h1 translate="no"><?php echo esc_html( $this->settings['page_title'] ); ?></h1>
-				</div>
-			<?php endif ?>
-			<?php
+			$this->render_panel_header();
 		}
 
 		/**
@@ -1951,16 +2050,15 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			if ( self::$panel_tabs_in_wp_pages && 'all_admin_notices' === current_action() ) {
 				global $pagenow;
 
-				wp_enqueue_style( 'yit-plugin-style' );
 				wp_enqueue_script( 'yit-plugin-panel' );
 
-				$wrap_class = isset( $this->settings['class'] ) ? $this->settings['class'] : '';
-				$options    = isset( self::$panel_tabs_in_wp_pages['options'] ) ? self::$panel_tabs_in_wp_pages['options'] : array();
+				$wrap_class = $this->settings['class'] ?? '';
+				$options    = self::$panel_tabs_in_wp_pages['options'] ?? array();
 
 				$options_to_classes   = array( 'type', 'post_type', 'taxonomy' );
 				$page_wrapper_classes = array(
 					'yith-plugin-fw-wp-page-wrapper',
-					isset( $options['wrapper-class'] ) ? $options['wrapper-class'] : '',
+					$options['wrapper-class'] ?? '',
 				);
 
 				if ( in_array( $pagenow, array( 'edit.php', 'edit-tags.php' ), true ) ) {
@@ -1974,20 +2072,20 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 						$page_wrapper_classes[] = "yith-plugin-ui--{$option}-{$key}";
 					}
 				}
-
 				$page_wrapper_classes = implode( ' ', array_filter( $page_wrapper_classes ) );
 
-				echo '<div class="' . esc_attr( $page_wrapper_classes ) . '">';
+				$this->render_panel_header();
 
-				echo '<div class="' . esc_attr( $wrap_class ) . '">';
-
-				$this->add_plugin_banner( $this->settings['page'] );
-				$this->print_tabs_nav( self::$panel_tabs_in_wp_pages );
-				echo '</div>';
-
-				if ( self::$panel_tabs_in_wp_pages['current_sub_tab'] ) {
-					echo '<div class="yith-plugin-fw-wp-page__sub-tab-wrap">';
-				}
+				$this->get_template(
+					'panel-wp-page-header.php',
+					array(
+						'panel'                => $this,
+						'page_wrapper_classes' => $page_wrapper_classes,
+						'wrap_class'           => $wrap_class,
+						'tabs_nav_args'        => self::$panel_tabs_in_wp_pages,
+						'has_sub_tabs'         => self::$panel_tabs_in_wp_pages['current_sub_tab'],
+					)
+				);
 			}
 		}
 
@@ -1999,12 +2097,14 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 */
 		public function print_panel_tabs_in_wp_pages_end() {
 			if ( self::$panel_tabs_in_wp_pages ) {
-
-				if ( self::$panel_tabs_in_wp_pages['current_sub_tab'] ) {
-					echo '</div><!-- /yith-plugin-fw-wp-page__sub-tab-wrap -->';
-				}
-
-				echo '</div><!-- /yith-plugin-fw-wp-page-wrapper -->';
+				$this->get_template(
+					'panel-wp-page-footer.php',
+					array(
+						'panel'        => $this,
+						'has_sub_tabs' => self::$panel_tabs_in_wp_pages['current_sub_tab'],
+						'page_args'    => self::$panel_tabs_in_wp_pages['options'] ?? array(),
+					)
+				);
 			}
 		}
 
@@ -2058,6 +2158,150 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 */
 		public function add_utm_data_on_premium_tab( $url, $slug ) {
 			return ! empty( $this->settings['plugin_slug'] ) && $slug === $this->settings['plugin_slug'] && 'premium' === $this->get_current_tab() ? yith_plugin_fw_add_utm_data( $url, $slug, 'button-upgrade', yith_plugin_fw_panel_utm_source( $this ) ) : $url;
+		}
+
+		/**
+		 * Get the data of the current page.
+		 *
+		 * @return array
+		 * @since 4.0.0
+		 */
+		protected function get_page_data() {
+			$tab     = $this->get_current_tab();
+			$sub_tab = $this->get_current_sub_tab();
+
+			$hierarchy = $this->get_tabs_hierarchy();
+
+			return $hierarchy[ $sub_tab ] ?? $hierarchy[ $tab ] ?? array();
+		}
+
+		/**
+		 * Get the title of the current page.
+		 *
+		 * @return string
+		 * @since 4.0.0
+		 */
+		public function get_page_title() {
+			$data = $this->get_page_data();
+
+			return $data['title'] ?? '';
+		}
+
+		/**
+		 * Get the title of the current page.
+		 *
+		 * @return string
+		 * @since 4.0.0
+		 */
+		public function get_page_description() {
+			$data = $this->get_page_data();
+
+			return $data['description'] ?? '';
+		}
+
+		/**
+		 * Get options from path.
+		 * Useful to prevent issues with defined variables where including the file.
+		 *
+		 * @param string $path The options' file path.
+		 *
+		 * @return mixed
+		 * @since 4.0.0
+		 */
+		public function get_options_from_path( $path ) {
+			return include $path;
+		}
+
+		/**
+		 * Get the plugin name.
+		 *
+		 * @return string
+		 */
+		protected function get_plugin_name() {
+			return $this->settings['plugin_name'] ?? $this->settings['page_title'] ?? '';
+		}
+
+		/**
+		 * Get the title shown in the header of the panel.
+		 *
+		 * @return string
+		 */
+		protected function get_header_title() {
+			$stop_words = array( 'YITH', 'for WordPress & WooCommerce', 'for WordPress and WooCommerce', 'for WordPress', 'for WooCommerce', 'WooCommerce' );
+
+			return $this->settings['menu_title'] ?? trim( str_replace( $stop_words, '', $this->get_plugin_name() ) );
+		}
+
+		/**
+		 * Print the YITH logo and the plugin name.
+		 *
+		 * @since 4.0.0
+		 */
+		public function print_sidebar_header() {
+			if ( $this->get_ui_version() > 1 ) {
+				$this->get_template(
+					'panel-sidebar-header.php',
+					array(
+						'header_title' => $this->get_header_title(),
+					)
+				);
+			}
+		}
+
+		/**
+		 * Get a template based on the ui_version.
+		 *
+		 * @param string $template The template.
+		 * @param array  $args     Arguments.
+		 *
+		 * @since 4.0.0
+		 */
+		public function get_template( $template, $args = array() ) {
+			$_template_args = array(
+				'template'      => $template,
+				'base_path'     => YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/',
+				'ui_version'    => $this->get_ui_version(),
+				'template_path' => '',
+			);
+			if ( isset( $args['_template_args'] ) ) {
+				unset( $args['_template_args'] );
+			}
+
+			if ( $_template_args['ui_version'] > 1 ) {
+				$versioned_base_path = $_template_args['base_path'] . 'v' . $_template_args['ui_version'] . '/';
+				$versioned_path      = $versioned_base_path . $_template_args['template'];
+				if ( file_exists( $versioned_path ) ) {
+					$_template_args['template_path'] = $versioned_path;
+				}
+			}
+
+			if ( ! $_template_args['template_path'] ) {
+				$_template_args['template_path'] = $_template_args['base_path'] . $_template_args['template'];
+			}
+
+			if ( file_exists( $_template_args['template_path'] ) ) {
+				extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+				include $_template_args['template_path'];
+			}
+		}
+
+		/**
+		 * Return true if the current page is rendered by this panel.
+		 *
+		 * @param bool $include_wp_pages Set true to consider WP Pages as part of the current panel.
+		 *
+		 * @return bool
+		 * @since 4.0.0
+		 */
+		protected function is_current_panel( $include_wp_pages = true ) {
+			global $plugin_page;
+
+			$is_panel = $plugin_page === $this->settings['page'];
+			if ( ! $is_panel && $include_wp_pages ) {
+				$is_panel = ! ! $this->get_current_tab();
+			}
+
+			return $is_panel;
 		}
 	}
 }

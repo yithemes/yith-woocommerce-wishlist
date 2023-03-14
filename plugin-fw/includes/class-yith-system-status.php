@@ -301,7 +301,6 @@ if ( ! class_exists( 'YITH_System_Status' ) ) {
 			wp_register_script( 'yith-system-info', yit_load_js_file( $script_path . '/assets/js/yith-system-info.js' ), array( 'jquery' ), '1.0.0', true );
 
 			if ( isset( $_GET['page'] ) && 'yith_system_info' === $_GET['page'] ) { //phpcs:ignore
-				wp_enqueue_style( 'yit-plugin-style' );
 				wp_enqueue_style( 'yith-plugin-fw-fields' );
 				wp_enqueue_script( 'yith-system-info' );
 
