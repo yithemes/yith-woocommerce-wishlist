@@ -37,7 +37,7 @@
 
 #plugin-fw-wc table.form-table, #yith-plugin-fw-panel table.form-table, .yith-plugin-fw-panel-custom-tab-container {
     background-color : #fff;
-    margin    : 0 0 20px;
+    margin           : 0 0 20px;
 }
 
 .yith-plugin-fw-panel-custom-tab-container {
@@ -83,7 +83,7 @@
  */
 
 .yith-plugin-fw-wp-page-wrapper {
-    margin  : 23px 20px 0 2px;
+    margin : 23px 20px 0 2px;
 }
 
 .yith-plugin-fw-wp-page-wrapper .notice,
@@ -890,6 +890,11 @@ button#yith-plugin-fw-float-save-button.green {
     border        : 1px solid #d8d8d8;
     border-top    : 0;
     margin-bottom : 40px;
+}
+
+.yith-plugin-ui table.form-table tr.yith-plugin-fw-panel-wc-row.dimensions .yith-plugin-fw-dimensions-field-wrapper,
+.yith-plugin-ui table.form-table .yit_options.yith-plugin-fw-dimensions-field-wrapper{
+    margin-top : -28px;
 }
 
 .yith-plugin-ui #wpwrap h2.nav-tab-wrapper, .yith-plugin-ui #wpbody-content h2.nav-tab-wrapper {

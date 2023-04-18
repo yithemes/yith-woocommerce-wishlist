@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2023-03-10 11:17:07+00:00\n"
+"POT-Creation-Date: 2023-04-12 13:08:17+00:00\n"
 "PO-Revision-Date: 2022-06-29 13:12:18+0000\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "You cannot drop files here."
 msgstr ""
 
-#: includes/class-yit-assets.php:161 yit-functions.php:2004
+#: includes/class-yit-assets.php:161 yit-functions.php:2007
 msgid "Confirm trash"
 msgstr "確認丟棄"
 
@@ -30,13 +30,13 @@ msgid "Are you sure you want to trash the selected items?"
 msgstr "你確定要將所選的項目移至垃圾桶嗎?"
 
 #: includes/class-yit-assets.php:164 includes/class-yit-assets.php:168
-#: templates/sysinfo/tabs/main.php:42 templates/sysinfo/tabs/main.php:50
-#: yit-functions.php:2006 yit-functions.php:2024
+#: templates/sysinfo/tabs/main.php:46 templates/sysinfo/tabs/main.php:54
+#: yit-functions.php:2009 yit-functions.php:2027
 msgid "No"
 msgstr "不"
 
-#: includes/class-yit-assets.php:165 yit-functions.php:2022
-#: yit-functions.php:2149
+#: includes/class-yit-assets.php:165 yit-functions.php:2025
+#: yit-functions.php:2152
 msgid "Confirm delete"
 msgstr "確認刪除"
 
@@ -44,8 +44,8 @@ msgstr "確認刪除"
 msgid "Are you sure you want to delete the selected items?"
 msgstr "你確定要刪除所選的項目嗎?"
 
-#: includes/class-yit-assets.php:166 yit-functions.php:1938
-#: yit-functions.php:2097
+#: includes/class-yit-assets.php:166 yit-functions.php:1941
+#: yit-functions.php:2100
 msgid ""
 "This action cannot be undone and you will not be able to recover this data."
 msgstr "此操作無法撤消，您將無法恢復此數據。"
@@ -89,15 +89,15 @@ msgstr "顏色數值"
 msgid "There was an error with your request; please try again later."
 msgstr "您的請求有誤； 請稍後再試。"
 
-#: includes/class-yit-plugin-panel-woocommerce.php:514
+#: includes/class-yit-plugin-panel-woocommerce.php:517
 msgid "Options saved correctly!"
 msgstr ""
 
-#: includes/class-yit-plugin-panel-woocommerce.php:568
+#: includes/class-yit-plugin-panel-woocommerce.php:571
 msgid "Options reset correctly!"
 msgstr ""
 
-#: includes/class-yit-plugin-panel-woocommerce.php:622
+#: includes/class-yit-plugin-panel-woocommerce.php:625
 msgid "The changes you have made will be lost if you leave this page."
 msgstr "如果你離開這個頁面，這些改變將會遺失"
 
@@ -109,66 +109,66 @@ msgstr "外掛設定"
 msgid "Settings"
 msgstr "設定"
 
-#: includes/class-yit-plugin-panel.php:554
 #: includes/class-yit-plugin-panel.php:557
+#: includes/class-yit-plugin-panel.php:560
 msgid "How to install premium version"
 msgstr "如何安裝高級版"
 
-#: includes/class-yit-plugin-panel.php:1112
+#: includes/class-yit-plugin-panel.php:1132
 msgid "Read the <mark>plugin documentation</mark>"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1113
+#: includes/class-yit-plugin-panel.php:1133
 msgid "Learn what you can really do with this powerful tool"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1123
+#: includes/class-yit-plugin-panel.php:1143
 msgid "Watch our <mark>\"First Steps\" video</mark>"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1124
+#: includes/class-yit-plugin-panel.php:1144
 msgid "See how it works before you start using it"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1379
+#: includes/class-yit-plugin-panel.php:1459
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr "你輸入的這個元素已經存在，請輸入另一個名稱"
 
-#: includes/class-yit-plugin-panel.php:1380
+#: includes/class-yit-plugin-panel.php:1460
 msgid "Settings saved"
 msgstr "設定已經儲存"
 
-#: includes/class-yit-plugin-panel.php:1381
+#: includes/class-yit-plugin-panel.php:1461
 msgid "Settings reset"
 msgstr "重置設定"
 
-#: includes/class-yit-plugin-panel.php:1382
+#: includes/class-yit-plugin-panel.php:1462
 msgid "Element deleted correctly."
 msgstr "元素已被確實刪除"
 
-#: includes/class-yit-plugin-panel.php:1383
-#: includes/class-yit-plugin-panel.php:1384
+#: includes/class-yit-plugin-panel.php:1463
+#: includes/class-yit-plugin-panel.php:1464
 msgid "Element updated correctly."
 msgstr "元素已正確更新。"
 
-#: includes/class-yit-plugin-panel.php:1385
+#: includes/class-yit-plugin-panel.php:1465
 msgid "Database imported correctly."
 msgstr "資料庫已被正確匯入"
 
-#: includes/class-yit-plugin-panel.php:1386
+#: includes/class-yit-plugin-panel.php:1466
 msgid "An error has occurred during import. Please try again."
 msgstr "匯入過程中發生一個錯誤，請再試一次"
 
-#: includes/class-yit-plugin-panel.php:1387
+#: includes/class-yit-plugin-panel.php:1467
 msgid "The added file is not valid."
 msgstr "添加的檔案無效"
 
-#: includes/class-yit-plugin-panel.php:1388
+#: includes/class-yit-plugin-panel.php:1468
 msgid "Sorry, import is disabled."
 msgstr "抱歉，匯入功能被關閉"
 
-#: includes/class-yit-plugin-panel.php:1389
+#: includes/class-yit-plugin-panel.php:1469
 msgid "Sorting successful."
 msgstr "已順利排序"
 
@@ -424,6 +424,10 @@ msgstr "搜尋顧客..."
 msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr "%1$s (#%2$s &ndash; %3$s)"
 
+#: templates/fields/ajax-orders.php:16
+msgid "Search for an order..."
+msgstr ""
+
 #: templates/fields/ajax-posts.php:41
 msgid "Search for a post..."
 msgstr "搜尋文章..."
@@ -504,20 +508,20 @@ msgstr "增加圖片"
 msgid "Delete"
 msgstr "刪除"
 
-#: templates/fields/media.php:46
+#: templates/fields/media.php:47
 msgid "Upload file"
 msgstr ""
 
-#: templates/fields/media.php:52
+#: templates/fields/media.php:53
 msgid "Enter URL"
 msgstr ""
 
 #. translators: %s is the alternative action "Upload a file".
-#: templates/fields/media.php:70
+#: templates/fields/media.php:71
 msgid "Drag or %s"
 msgstr ""
 
-#: templates/fields/media.php:71
+#: templates/fields/media.php:72
 msgid "Upload a file"
 msgstr ""
 
@@ -595,6 +599,15 @@ msgstr "重置為預設值"
 msgid "Collapse"
 msgstr ""
 
+#: templates/panel/v2/your-store-tools-tab.php:17
+msgid "#1 Independent Seller of <mark>WooCommerce plugins</mark>"
+msgstr ""
+
+#: templates/panel/v2/your-store-tools-tab.php:21
+msgid ""
+"Additional tools to improve UX, increase conversions, and loyalize customers."
+msgstr ""
+
 #. translators: %s is the plugin version.
 #: templates/panel/welcome-modals/update.php:34
 msgid "is successfully updated to version %s."
@@ -632,7 +645,7 @@ msgid "PHPInfo"
 msgstr "PHP 信息"
 
 #: templates/sysinfo/system-information-panel.php:13
-#: templates/sysinfo/tabs/error-log.php:25
+#: templates/sysinfo/tabs/error-log.php:26
 msgid "Log Files"
 msgstr "紀錄檔"
 
@@ -648,117 +661,117 @@ msgstr "WP 除錯日誌檔"
 msgid "PHP error_log file"
 msgstr "PHP 錯誤日誌檔"
 
-#: templates/sysinfo/tabs/error-log.php:60
+#: templates/sysinfo/tabs/error-log.php:61
 msgid "Download"
 msgstr "下載"
 
-#: templates/sysinfo/tabs/error-log.php:73
+#: templates/sysinfo/tabs/error-log.php:74
 msgid "The file size exceeds 8 megabytes so it must be downloaded"
 msgstr "檔案大小超過 8 兆位元，因此必須下載"
 
 #. translators: %s file name.
-#: templates/sysinfo/tabs/error-log.php:97
+#: templates/sysinfo/tabs/error-log.php:98
 msgid ""
 "No Log file available. Enable the WordPress debug by adding this in the %s "
 "file of your installation"
 msgstr ""
 "沒有可用的日誌文件。 通過將其添加到安裝的 %s 文件中來啟用 WordPress 除錯"
 
-#: templates/sysinfo/tabs/error-log.php:106
+#: templates/sysinfo/tabs/error-log.php:107
 msgid "Copied!"
 msgstr "已複製!"
 
-#: templates/sysinfo/tabs/error-log.php:106
+#: templates/sysinfo/tabs/error-log.php:107
 msgid "Copy Code"
 msgstr "複製程式碼"
 
-#: templates/sysinfo/tabs/main.php:17
+#: templates/sysinfo/tabs/main.php:21
 msgid "Site Info"
 msgstr "網站信息"
 
-#: templates/sysinfo/tabs/main.php:22
+#: templates/sysinfo/tabs/main.php:26
 msgid "Site URL"
 msgstr "網站網址"
 
-#: templates/sysinfo/tabs/main.php:31
+#: templates/sysinfo/tabs/main.php:35
 msgid "Output IP Address"
 msgstr "輸出 IP 位置"
 
-#: templates/sysinfo/tabs/main.php:39
+#: templates/sysinfo/tabs/main.php:43
 msgid "Defined WP_CACHE"
 msgstr "已定義 WP_CACHE"
 
-#: templates/sysinfo/tabs/main.php:42 templates/sysinfo/tabs/main.php:50
+#: templates/sysinfo/tabs/main.php:46 templates/sysinfo/tabs/main.php:54
 msgid "Yes"
 msgstr "是"
 
-#: templates/sysinfo/tabs/main.php:47
+#: templates/sysinfo/tabs/main.php:51
 msgid "External object cache"
 msgstr "外部物件快取"
 
-#: templates/sysinfo/tabs/main.php:55
+#: templates/sysinfo/tabs/main.php:59
 msgid "YITH Plugin Framework Version"
 msgstr "YITH 外掛 Framework 版本"
 
 #. translators: %s is the name of the plugin that is loading the framework.
-#: templates/sysinfo/tabs/main.php:64
+#: templates/sysinfo/tabs/main.php:68
 msgid "loaded by %s"
 msgstr "讀取了 %s"
 
-#: templates/sysinfo/tabs/main.php:73
+#: templates/sysinfo/tabs/main.php:79
 msgid "Plugins Requirements"
 msgstr "外掛需求"
 
-#: templates/sysinfo/tabs/main.php:108
+#: templates/sysinfo/tabs/main.php:114
 msgid "Database Info"
 msgstr "資料庫信息"
 
-#: templates/sysinfo/tabs/main.php:113
+#: templates/sysinfo/tabs/main.php:119
 msgid "MySQL version"
 msgstr "MySQL 版本"
 
 #. Translators: %s: Codex link.
-#: templates/sysinfo/tabs/main.php:123
+#: templates/sysinfo/tabs/main.php:129
 msgid "WordPress recommends a minimum MySQL version of 5.6. See: %s"
 msgstr "WordPress 建議至少要有 MySQL 5.6. 以上版本，請查看: %s"
 
-#: templates/sysinfo/tabs/main.php:123
+#: templates/sysinfo/tabs/main.php:129
 msgid "WordPress requirements"
 msgstr "WordPress 要求"
 
-#: templates/sysinfo/tabs/main.php:130
+#: templates/sysinfo/tabs/main.php:136
 msgid "Total Database Size"
 msgstr "總資料庫大小"
 
-#: templates/sysinfo/tabs/main.php:138
+#: templates/sysinfo/tabs/main.php:144
 msgid "Database Data Size"
 msgstr "資料庫數據大小"
 
-#: templates/sysinfo/tabs/main.php:146
+#: templates/sysinfo/tabs/main.php:152
 msgid "Database Index Size"
 msgstr "資料庫索引大小"
 
-#: templates/sysinfo/tabs/main.php:154
+#: templates/sysinfo/tabs/main.php:160
 msgid "Database Free Size"
 msgstr "資料庫可用大小"
 
 #. Translators: %1$f: Table size, %2$f: Index size, %3$f: Free size, %4$s
 #. Engine.
-#: templates/sysinfo/tabs/main.php:168
+#: templates/sysinfo/tabs/main.php:174
 msgid "Data: %1$.2fMB | Index: %2$.2fMB | Free: %3$.2fMB | Engine: %4$s"
 msgstr "資料數據: %1$.2fMB | 索引: %2$.2fMB | 可用: %3$.2fMB | 引擎: %4$s"
 
 #. translators: %s is the title of the post object.
-#: yit-functions.php:1936
+#: yit-functions.php:1939
 msgid "Are you sure you want to move \"%s\" to trash?"
 msgstr "您確定要將 \"%s\" 丟進垃圾桶嗎?"
 
 #. translators: %s is the title of the post object.
-#: yit-functions.php:1938 yit-functions.php:2097
+#: yit-functions.php:1941 yit-functions.php:2100
 msgid "Are you sure you want to delete \"%s\"?"
 msgstr "您確定要刪除 \"%s\" 嗎?"
 
-#: yit-functions.php:2036 yit-functions.php:2044 yit-functions.php:2160
+#: yit-functions.php:2039 yit-functions.php:2047 yit-functions.php:2163
 msgid "Further actions"
 msgstr "進一步動作"
 
@@ -827,40 +840,45 @@ msgctxt "Button text"
 msgid "Cancel"
 msgstr "取消"
 
-#: includes/class-yit-assets.php:163 yit-functions.php:2007
+#: includes/class-yit-assets.php:163 yit-functions.php:2010
 msgctxt "Trash confirmation action"
 msgid "Yes, move to trash"
 msgstr "是的，將它移至垃圾桶"
 
-#: includes/class-yit-assets.php:167 yit-functions.php:2025
-#: yit-functions.php:2151
+#: includes/class-yit-assets.php:167 yit-functions.php:2028
+#: yit-functions.php:2154
 msgctxt "Delete confirmation action"
 msgid "Yes, delete"
 msgstr "是的，刪除"
 
 #. translators: 1. Plugin name.
-#: includes/class-yit-plugin-panel.php:870
+#: includes/class-yit-plugin-panel.php:875
 msgctxt "Help tab default title"
 msgid "Thank you for purchasing %s!"
 msgstr "感謝您購買 %s !"
 
-#: includes/class-yit-plugin-panel.php:870
+#: includes/class-yit-plugin-panel.php:875
 msgctxt "Help tab default title"
 msgid "Thank you for using %s!"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:879
+#: includes/class-yit-plugin-panel.php:884
 msgctxt "Help tab default description"
 msgid ""
 "We want to help you enjoy a wonderful experience with all of our products."
 msgstr "我們希望幫助您享受我們所有產品的美妙體驗。"
 
-#: includes/class-yit-plugin-panel.php:929
+#: includes/class-yit-plugin-panel.php:933
 msgctxt "Premium tab name"
 msgid "Get premium"
 msgstr "取得高級版"
 
-#: includes/class-yit-plugin-panel.php:945
+#: includes/class-yit-plugin-panel.php:949
+msgctxt "Panel tab name"
+msgid "Your Store Tools"
+msgstr ""
+
+#: includes/class-yit-plugin-panel.php:965
 msgctxt "Help tab name"
 msgid "Help"
 msgstr "幫助"
@@ -1112,57 +1130,72 @@ msgctxt "Panel option tag"
 msgid "PREMIUM"
 msgstr ""
 
-#: yit-functions.php:1950
+#: templates/panel/v2/your-store-tools-tab.php:35
+msgctxt "Plugin in \"Your Store Tools\" tab"
+msgid "Best choice"
+msgstr ""
+
+#: templates/panel/v2/your-store-tools-tab.php:46
+msgctxt "Plugin in \"Your Store Tools\" tab"
+msgid "Active"
+msgstr ""
+
+#: templates/panel/v2/your-store-tools-tab.php:51
+msgctxt "Plugin in \"Your Store Tools\" tab"
+msgid "Get it"
+msgstr ""
+
+#: yit-functions.php:1953
 msgctxt "Post action"
 msgid "Preview"
 msgstr "預覽"
 
-#: yit-functions.php:1959
+#: yit-functions.php:1962
 msgctxt "Post action"
 msgid "View"
 msgstr "查看"
 
-#: yit-functions.php:1970
+#: yit-functions.php:1973
 msgctxt "Post action"
 msgid "Edit"
 msgstr "編輯"
 
-#: yit-functions.php:1978
+#: yit-functions.php:1981
 msgctxt "Post action"
 msgid "Duplicate"
 msgstr "複製"
 
-#: yit-functions.php:1990
+#: yit-functions.php:1993
 msgctxt "Post action"
 msgid "Restore"
 msgstr "還原"
 
-#: yit-functions.php:1998
+#: yit-functions.php:2001
 msgctxt "Post action"
 msgid "Trash"
 msgstr "垃圾桶"
 
-#: yit-functions.php:2015
+#: yit-functions.php:2018
 msgctxt "Post action"
 msgid "Delete Permanently"
 msgstr "永久刪除"
 
-#: yit-functions.php:2111
+#: yit-functions.php:2114
 msgctxt "Term action"
 msgid "View"
 msgstr "查看"
 
-#: yit-functions.php:2121
+#: yit-functions.php:2124
 msgctxt "Term action"
 msgid "Edit"
 msgstr "編輯"
 
-#: yit-functions.php:2129
+#: yit-functions.php:2132
 msgctxt "Term action"
 msgid "Duplicate"
 msgstr "複製"
 
-#: yit-functions.php:2142
+#: yit-functions.php:2145
 msgctxt "Term action"
 msgid "Delete"
 msgstr "刪除"

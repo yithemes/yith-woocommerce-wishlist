@@ -2,10 +2,10 @@
 /**
  * The Template for displaying the Premium tab.
  *
- * @var array  $options     The premium tab  options array.
- * @var string $premium_url The premium landing page URL.
- * @var string $plugin_slug The plugin slug.
- *
+ * @var YIT_Plugin_Panel|YIT_Plugin_Panel_WooCommerce $this        The Panel.
+ * @var array                                         $options     The premium tab  options array.
+ * @var string                                        $premium_url The premium landing page URL.
+ * @var string                                        $plugin_slug The plugin slug.
  * @package YITH\PluginFramework\Templates
  * @author  Giuseppe Arcifa <giuseppe.arcifa@yithemes.com>
  * @since   3.9.0
@@ -15,10 +15,10 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 list( $premium_features, $main_image_url, $show_free_vs_premium, $show_premium_landing_link ) = yith_plugin_fw_extract( $options, 'premium_features', 'main_image_url', 'show_free_vs_premium_link', 'show_premium_landing_link' );
 
-$get_premium_url = yith_plugin_fw_add_utm_data( $premium_url, $plugin_slug, 'button-upgrade', yith_plugin_fw_panel_utm_source( $this ) );
+$get_premium_url = $this->add_utm_data( $premium_url, 'premium-tab-button-upgrade' );
 
 if ( $show_free_vs_premium ) {
-	$free_vs_premium_url = yith_plugin_fw_add_utm_data( $premium_url, $plugin_slug, 'button-compare', yith_plugin_fw_panel_utm_source( $this ) );
+	$free_vs_premium_url = $this->add_utm_data( $premium_url . '#tab-free_vs_premium_tab', 'premium-tab-button-compare' );
 }
 
 ?>
@@ -56,7 +56,7 @@ if ( $show_free_vs_premium ) {
 				<?php elseif ( $show_free_vs_premium ) : ?>
 					<span class="yith-plugin-fw-panel-premium-tab__free-vs-premium">
 						<?php echo esc_html_x( 'And so much more!', 'Premium Tab', 'yith-plugin-fw' ); ?>
-						<a href="<?php echo esc_url( $free_vs_premium_url . '#tab-free_vs_premium_tab' ); ?>" target="_blank">
+						<a href="<?php echo esc_url( $free_vs_premium_url ); ?>" target="_blank">
 							<?php echo esc_html_x( 'Check the free vs premium features >', 'Premium Tab', 'yith-plugin-fw' ); ?>
 						</a>
 					</span>

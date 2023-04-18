@@ -316,7 +316,9 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 
 			$post_id    = absint( $_REQUEST['context']['postId'] ?? 0 );
 			$admin_page = sanitize_text_field( wp_unslash( $_REQUEST['context']['adminPage'] ?? '' ) );
+			$page_now   = sanitize_text_field( wp_unslash( $_REQUEST['context']['pageNow'] ?? '' ) );
 			$has_access = ( in_array( $admin_page, array( 'widgets-php', 'site-editor-php' ), true ) && current_user_can( 'edit_theme_options' ) );
+			$has_access = $has_access || ( in_array( $page_now, array( 'customize', 'widgets', 'site-editor' ), true ) && current_user_can( 'edit_theme_options' ) );
 			$has_access = $has_access || $post_id && current_user_can( 'edit_post', $post_id );
 
 			if ( $has_access ) {
@@ -340,7 +342,6 @@ if ( ! class_exists( 'YITH_Gutenberg' ) ) {
 						'html' => $html,
 					)
 				);
-
 			}
 		}
 	}

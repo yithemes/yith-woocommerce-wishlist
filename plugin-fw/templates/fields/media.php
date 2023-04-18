@@ -34,6 +34,7 @@ $classes = implode( ' ', array_filter( $classes ) );
 
 $preview_type = $is_image ? 'image' : ( $file_name ? 'file' : 'upload' );
 
+wp_enqueue_media(); // Late enqueue media scripts.
 wp_enqueue_script( 'wp-media-utils' );
 ?>
 <div class="<?php echo esc_attr( $classes ); ?>">

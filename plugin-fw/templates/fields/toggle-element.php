@@ -10,6 +10,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 $defaults = array(
 	'id'                => '',
+	'label'             => '',
 	'class'             => '',
 	'name'              => '',
 	'add_button'        => '',
@@ -21,19 +22,27 @@ $defaults = array(
 	'save_button'       => array(),
 	'delete_button'     => array(),
 	'custom_attributes' => '',
+	'wrapper_class'     => '',
 );
 $field    = wp_parse_args( $field, $defaults );
 
-list ( $field_id, $class, $name, $value, $add_button, $elements, $the_title, $subtitle, $onoff_field, $sortable, $save_button, $delete_button, $custom_attributes ) = yith_plugin_fw_extract( $field, 'id', 'class', 'name', 'value', 'add_button', 'elements', 'title', 'subtitle', 'onoff_field', 'sortable', 'save_button', 'delete_button', 'custom_attributes' );
-
+list ( $field_id, $class, $wrapper_class, $label, $name, $value, $add_button, $elements, $the_title, $subtitle, $onoff_field, $sortable, $save_button, $delete_button, $custom_attributes ) = yith_plugin_fw_extract( $field, 'id', 'class', 'wrapper_class', 'label', 'name', 'value', 'add_button', 'elements', 'title', 'subtitle', 'onoff_field', 'sortable', 'save_button', 'delete_button', 'custom_attributes' );
 $show_add_button   = isset( $add_button ) && $add_button;
-$add_button_closed = isset( $add_button_closed ) ? $add_button_closed : '';
-$values            = isset( $value ) ? $value : get_option( $name, array() );
+$add_button_closed = $add_button_closed ?? '';
+$values            = $value ?? get_option( $name, array() );
 $values            = maybe_unserialize( $values );
-$sortable          = isset( $sortable ) ? $sortable : false;
-$class_wrapper     = $sortable ? 'ui-sortable' : '';
-$onoff_id          = isset( $onoff_field['id'] ) ? $onoff_field['id'] : '';
+$sortable          = $sortable ?? false;
+$onoff_id          = $onoff_field['id'] ?? '';
 $ajax_nonce        = wp_create_nonce( 'save-toggle-element' );
+$wrapper_class     = implode(
+	' ',
+	array_filter(
+		array(
+			$wrapper_class ?? '',
+			$sortable ? 'ui-sortable' : '',
+		)
+	)
+);
 
 if ( empty( $values ) && ! $show_add_button && $elements ) {
 	$values = array();
@@ -44,7 +53,7 @@ if ( empty( $values ) && ! $show_add_button && $elements ) {
 }
 
 ?>
-<div class="yith-toggle_wrapper <?php echo esc_attr( $class_wrapper ); ?>" id="<?php echo esc_attr( $field_id ); ?>" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>">
+<div class="yith-toggle_wrapper <?php echo esc_attr( $wrapper_class ); ?>" id="<?php echo esc_attr( $field_id ); ?>" data-nonce="<?php echo esc_attr( $ajax_nonce ); ?>">
 	<?php if ( ! empty( $label ) ) : ?>
 		<label for="<?php esc_attr( $field_id ); ?>"><?php echo esc_html( $label ); ?></label>
 	<?php endif; ?>

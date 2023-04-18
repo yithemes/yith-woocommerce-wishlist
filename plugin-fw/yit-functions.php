@@ -1750,17 +1750,19 @@ if ( ! function_exists( 'yith_plugin_fw_add_utm_data' ) ) {
 	 *
 	 * @param string $url      The url that want to track.
 	 * @param string $slug     Plugin slug.
-	 * @param string $campaign Campaign to track. Default: plugin-version-author-uri.
-	 * @param string $source   Where the link came from. Default: wp-dashboard.
+	 * @param string $campaign Campaign to track. Default: default.
+	 * @param string $source   Where the link came from. You can simply set it to the plugin version type(free, extended, premium) to get the correct source. Default: wp-dashboard.
 	 *
 	 * @since 3.6.10
 	 */
-	function yith_plugin_fw_add_utm_data( $url, $slug, $campaign = 'plugin-version-author-uri', $source = false ) {
-		$url = trailingslashit( $url );
-
-		if ( ! $source ) {
-			$source = yith_plugin_fw_panel_utm_source();
-		}
+	function yith_plugin_fw_add_utm_data( $url, $slug, $campaign = 'default', $source = 'wp-dashboard' ) {
+		$sources = array(
+			'free'     => 'wp-free-dashboard',
+			'extended' => 'wp-extended-dashboard',
+			'premium'  => 'wp-premium-dashboard',
+		);
+		$source  = $sources[ $source ] ?? $source;
+		$source  = ! ! $source ? $source : 'wp-dashboard';
 
 		if ( ! empty( $slug ) ) {
 			$utm_track_data = array(
@@ -1782,14 +1784,15 @@ if ( ! function_exists( 'yith_plugin_fw_panel_utm_source' ) ) {
 	 *
 	 * @param YIT_Plugin_Panel $panel Panel object.
 	 *
-	 * @since 3.6.10
+	 * @since      3.6.10
+	 * @deprecated 4.1.0
 	 */
 	function yith_plugin_fw_panel_utm_source( $panel = false ) {
-		if ( $panel->is_free() ) {
+		if ( $panel && $panel->is_free() ) {
 			return 'wp-free-dashboard';
 		}
 
-		if ( $panel->is_extended() ) {
+		if ( $panel && $panel->is_extended() ) {
 			return 'wp-extended-dashboard';
 		}
 
@@ -2196,8 +2199,8 @@ if ( ! function_exists( 'yith_plugin_fw_get_post_formatted_name' ) ) {
 	/**
 	 * Get the formatted name for posts/products
 	 *
-	 * @param int|WP_Post|WC_Product $post The post ID, the post object, or the product object.
-	 * @param array                  $args Arguments.
+	 * @param int|WP_Post|WC_Product|WC_Product_Variation|WC_Order $post The post ID, the post, the product, or the order.
+	 * @param array                                                $args Arguments.
 	 *
 	 * @return string
 	 * @since 3.7.2
@@ -2218,6 +2221,8 @@ if ( ! function_exists( 'yith_plugin_fw_get_post_formatted_name' ) ) {
 			if ( false === $post_type ) {
 				$post_type = is_a( $post, 'WC_Product_Variation' ) ? 'product_variation' : 'product';
 			}
+		} elseif ( class_exists( 'WC_Order' ) && is_a( $post, 'WC_Order' ) ) {
+			$post_id = $post->get_id();
 		} else {
 			$post_id = absint( $post );
 		}
@@ -2231,7 +2236,10 @@ if ( ! function_exists( 'yith_plugin_fw_get_post_formatted_name' ) ) {
 		switch ( $post_type ) {
 			case 'product':
 			case 'product_variation':
-				$product = wc_get_product( $post );
+				$product = class_exists( 'WC_Product' ) && is_a( $post, 'WC_Product' ) ? $post : false;
+				if ( ! $product && function_exists( 'wc_get_product' ) ) {
+					$product = wc_get_product( $post );
+				}
 				if ( $product ) {
 					$name = $product->get_formatted_name();
 
@@ -2247,6 +2255,33 @@ if ( ! function_exists( 'yith_plugin_fw_get_post_formatted_name' ) ) {
 						$name = str_replace( "({$identifier})", '', $name );
 					}
 				}
+				break;
+			case 'shop_order':
+				$date_format = sprintf( '%s %s', wc_date_format(), wc_time_format() );
+				$order       = class_exists( 'WC_Order' ) && is_a( $post, 'WC_Order' ) ? $post : false;
+				if ( ! $order && function_exists( 'wc_get_order' ) ) {
+					$order = wc_get_order( $post );
+				}
+				if ( $order ) {
+					$buyer = '';
+					if ( $order->get_billing_first_name() || $order->get_billing_last_name() ) {
+						$buyer = trim( sprintf( '%s %s', $order->get_billing_first_name(), $order->get_billing_last_name() ) );
+					} elseif ( $order->get_billing_company() ) {
+						$buyer = trim( $order->get_billing_company() );
+					} elseif ( $order->get_customer_id() ) {
+						$user  = get_user_by( 'id', $order->get_customer_id() );
+						$buyer = ucwords( $user->display_name );
+					}
+
+					$order_number = apply_filters( 'yith_plugin_fw_order_number', '#' . $order->get_id(), $order->get_id() );
+					$name         = sprintf(
+						'%s %s - %s',
+						$order_number,
+						esc_html( $buyer ),
+						esc_html( $order->get_date_created()->format( $date_format ) )
+					);
+				}
+				break;
 		}
 
 		if ( is_null( $name ) ) {

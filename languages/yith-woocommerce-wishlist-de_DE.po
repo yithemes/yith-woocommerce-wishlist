@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2023-03-14 12:20:55+00:00\n"
+"POT-Creation-Date: 2023-04-18 11:57:24+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -440,12 +440,12 @@ msgstr "Artikel ist bereits auf der Wunschliste Text"
 msgid "Product added to wishlist"
 msgstr "Artikel ist bereits auf der Wunschliste Text"
 
-#: init.php:173
+#: init.php:156
 #, fuzzy
 msgid "is enabled but not effective. It requires WooCommerce to work."
 msgstr "YITH Wishlist erfordert WooCommerce"
 
-#: init.php:191
+#: init.php:174
 msgid ""
 "YITH WooCommerce Wishlist was deactivated as you're running an higher tier "
 "version of the same plugin."
@@ -505,9 +505,9 @@ msgstr ""
 #: plugin-options/add_to_wishlist-options.php:74
 msgid ""
 "Choose where to show \"Add to wishlist\" button or link in WooCommerce "
-"products' loop. <span class=\"addon\">Copy this shortcode <span class=\"code"
-"\"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it where you "
-"want to show the \"Add to wishlist\" link or button</span>"
+"products' loop. <span class=\"addon\">Copy this shortcode <span "
+"class=\"code\"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it "
+"where you want to show the \"Add to wishlist\" link or button</span>"
 msgstr ""
 
 #: plugin-options/add_to_wishlist-options.php:81
@@ -538,9 +538,9 @@ msgstr ""
 #: plugin-options/add_to_wishlist-options.php:106
 msgid ""
 "Choose where to show \"Add to wishlist\" button or link on the product page. "
-"<span class=\"addon\">Copy this shortcode <span class=\"code"
-"\"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it where you "
-"want to show the \"Add to wishlist\" link or button</span>"
+"<span class=\"addon\">Copy this shortcode <span "
+"class=\"code\"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it "
+"where you want to show the \"Add to wishlist\" link or button</span>"
 msgstr ""
 
 #: plugin-options/add_to_wishlist-options.php:113
@@ -779,9 +779,9 @@ msgstr ""
 
 #: plugin-options/wishlist_page-options.php:36
 msgid ""
-"Pick a page as the main Wishlist page; make sure you add the <span class="
-"\"code\"><code>[yith_wcwl_wishlist]</code></span> shortcode into the page "
-"content"
+"Pick a page as the main Wishlist page; make sure you add the <span "
+"class=\"code\"><code>[yith_wcwl_wishlist]</code></span> shortcode into the "
+"page content"
 msgstr ""
 
 #: plugin-options/wishlist_page-options.php:49
@@ -989,9 +989,9 @@ msgstr ""
 #: plugin-options/wishlist_page-options.php:402
 msgid ""
 "Choose colors for the primary button on hover state<br/><small>This style "
-"will be applied to \"Edit title\" button on Wishlist view, \"Submit Changes"
-"\" button on Manage view and \"Search wishlist\" button on Search view</"
-"small>"
+"will be applied to \"Edit title\" button on Wishlist view, \"Submit "
+"Changes\" button on Manage view and \"Search wishlist\" button on Search "
+"view</small>"
 msgstr ""
 
 #: plugin-options/wishlist_page-options.php:427

@@ -623,14 +623,17 @@ YITH UI
 /*** Icon ***/
 .yith-plugin-ui .yith-icon--right-overlay {
     position    : relative;
-    left        : -33px;
+    left        : auto;
+    top         : auto;
+    right       : auto;
+    bottom      : auto;
+    transform   : translateX(-33px);
     line-height : 36px;
     width       : 0;
 }
 
 .rtl .yith-plugin-ui .yith-icon--right-overlay {
-    left  : auto;
-    right : -33px;
+    transform : translateX(33px);
 }
 
 /*** General Input Style ***/
@@ -789,7 +792,7 @@ YITH UI
 /* old panel*/
 
 .yith-plugin-fw-select2-container {
-    z-index : 9999;
+    z-index : 9999999;
 }
 
 .yith-plugin-ui span.select2.select2-container.select2-container--default,
@@ -1180,20 +1183,7 @@ DATEPICKER
 }
 
 .yith-plugin-fw-datepicker-field-wrapper .yith-plugin-fw-datepicker + .yith-icon-calendar {
-    position    : relative;
-    left        : auto;
-    line-height : 0;
-    width       : 0;
-    top         : 3px;
-    bottom      : auto;
-    right       : auto;
-    margin-left : -35px;
-    display     : inline;
-}
-
-.rtl .yith-plugin-fw-datepicker-field-wrapper .yith-plugin-fw-datepicker + .yith-icon-calendar {
-    margin-left  : 0;
-    margin-right : -33px;
+    position : absolute;
 }
 
 div#ui-datepicker-div.yith-plugin-fw-datepicker-div {

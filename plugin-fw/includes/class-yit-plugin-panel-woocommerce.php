@@ -86,6 +86,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 					$this->links = $this->settings['links'];
 				}
 
+				$this->maybe_init_your_store_tools_tab();
 				$this->maybe_init_help_tab();
 				$this->maybe_init_premium_tab();
 				$this->maybe_init_welcome_modals();
@@ -423,6 +424,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 				$this->print_custom_tab( $custom_tab_options );
 			} elseif ( $this->is_help_tab() ) {
 				$this->print_help_tab();
+			} elseif ( $this->has_your_store_tools_tab() && $this->is_your_store_tools_tab() ) {
+				$this->print_your_store_tools_tab();
 			} else {
 				$this->get_template(
 					'woocommerce/woocommerce-form.php',

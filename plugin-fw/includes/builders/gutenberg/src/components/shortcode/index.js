@@ -88,7 +88,7 @@ export class Shortcode extends Component {
 				const ajaxData = {
 					action   : 'yith_plugin_fw_gutenberg_do_shortcode',
 					shortcode: shortcode,
-					context  : { ...( this.props.context ?? {} ), adminPage: window?.adminpage ?? '' }
+					context  : { ...( this.props.context ?? {} ), adminPage: window?.adminpage ?? '', pageNow: window?.pagenow ?? '' }
 				};
 
 				ajaxFetch( ajaxData ).then( response => {

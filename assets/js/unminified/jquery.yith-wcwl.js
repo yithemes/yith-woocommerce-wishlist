@@ -534,6 +534,8 @@ jQuery( function( $ ){
 
         t.on( 'yith_wcwl_reload_fragments', load_fragments );
 
+        t.on( 'yith_wcwl_reload_after_ajax', init_handling_after_ajax );
+
         t.on( 'yith_infs_added_elem', function( ev, elem ){
             load_fragments( {
                 container: elem,

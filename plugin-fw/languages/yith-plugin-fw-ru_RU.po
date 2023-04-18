@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2023-03-10 11:17:07+00:00\n"
+"POT-Creation-Date: 2023-04-12 13:08:17+00:00\n"
 "PO-Revision-Date: 2022-04-05 17:22:32+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "You cannot drop files here."
 msgstr ""
 
-#: includes/class-yit-assets.php:161 yit-functions.php:2004
+#: includes/class-yit-assets.php:161 yit-functions.php:2007
 msgid "Confirm trash"
 msgstr "Подтвердить корзину"
 
@@ -31,13 +31,13 @@ msgid "Are you sure you want to trash the selected items?"
 msgstr "Вы уверены, что хотите переместить в корзину выбранные элементы?"
 
 #: includes/class-yit-assets.php:164 includes/class-yit-assets.php:168
-#: templates/sysinfo/tabs/main.php:42 templates/sysinfo/tabs/main.php:50
-#: yit-functions.php:2006 yit-functions.php:2024
+#: templates/sysinfo/tabs/main.php:46 templates/sysinfo/tabs/main.php:54
+#: yit-functions.php:2009 yit-functions.php:2027
 msgid "No"
 msgstr "Нет"
 
-#: includes/class-yit-assets.php:165 yit-functions.php:2022
-#: yit-functions.php:2149
+#: includes/class-yit-assets.php:165 yit-functions.php:2025
+#: yit-functions.php:2152
 msgid "Confirm delete"
 msgstr "Подтвердите удаление"
 
@@ -45,8 +45,8 @@ msgstr "Подтвердите удаление"
 msgid "Are you sure you want to delete the selected items?"
 msgstr "Вы уверены, что хотите удалить выбранные элементы?"
 
-#: includes/class-yit-assets.php:166 yit-functions.php:1938
-#: yit-functions.php:2097
+#: includes/class-yit-assets.php:166 yit-functions.php:1941
+#: yit-functions.php:2100
 msgid ""
 "This action cannot be undone and you will not be able to recover this data."
 msgstr "Это действие нельзя отменить, и вы не сможете восстановить эти данные."
@@ -93,15 +93,15 @@ msgstr ""
 "При выполнении вашего запроса произошла ошибка; пожалуйста, повторите "
 "попытку позже."
 
-#: includes/class-yit-plugin-panel-woocommerce.php:514
+#: includes/class-yit-plugin-panel-woocommerce.php:517
 msgid "Options saved correctly!"
 msgstr ""
 
-#: includes/class-yit-plugin-panel-woocommerce.php:568
+#: includes/class-yit-plugin-panel-woocommerce.php:571
 msgid "Options reset correctly!"
 msgstr ""
 
-#: includes/class-yit-plugin-panel-woocommerce.php:622
+#: includes/class-yit-plugin-panel-woocommerce.php:625
 msgid "The changes you have made will be lost if you leave this page."
 msgstr ""
 "Внесенные вами изменения будут потеряны, если вы покинете эту страницу."
@@ -114,66 +114,66 @@ msgstr "Настройки Плагина"
 msgid "Settings"
 msgstr "Настройки"
 
-#: includes/class-yit-plugin-panel.php:554
 #: includes/class-yit-plugin-panel.php:557
+#: includes/class-yit-plugin-panel.php:560
 msgid "How to install premium version"
 msgstr "Как установить премиум версию"
 
-#: includes/class-yit-plugin-panel.php:1112
+#: includes/class-yit-plugin-panel.php:1132
 msgid "Read the <mark>plugin documentation</mark>"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1113
+#: includes/class-yit-plugin-panel.php:1133
 msgid "Learn what you can really do with this powerful tool"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1123
+#: includes/class-yit-plugin-panel.php:1143
 msgid "Watch our <mark>\"First Steps\" video</mark>"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1124
+#: includes/class-yit-plugin-panel.php:1144
 msgid "See how it works before you start using it"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1379
+#: includes/class-yit-plugin-panel.php:1459
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr "Введенный вами элемент уже существует. Пожалуйста, введите другое имя."
 
-#: includes/class-yit-plugin-panel.php:1380
+#: includes/class-yit-plugin-panel.php:1460
 msgid "Settings saved"
 msgstr "Настройки сохранены"
 
-#: includes/class-yit-plugin-panel.php:1381
+#: includes/class-yit-plugin-panel.php:1461
 msgid "Settings reset"
 msgstr "Сбросить настройки"
 
-#: includes/class-yit-plugin-panel.php:1382
+#: includes/class-yit-plugin-panel.php:1462
 msgid "Element deleted correctly."
 msgstr "Элемент удален правильно."
 
-#: includes/class-yit-plugin-panel.php:1383
-#: includes/class-yit-plugin-panel.php:1384
+#: includes/class-yit-plugin-panel.php:1463
+#: includes/class-yit-plugin-panel.php:1464
 msgid "Element updated correctly."
 msgstr "Элемент обновлен правильно."
 
-#: includes/class-yit-plugin-panel.php:1385
+#: includes/class-yit-plugin-panel.php:1465
 msgid "Database imported correctly."
 msgstr "База данных импортирована правильно."
 
-#: includes/class-yit-plugin-panel.php:1386
+#: includes/class-yit-plugin-panel.php:1466
 msgid "An error has occurred during import. Please try again."
 msgstr "Во время импорта произошла ошибка. Пожалуйста, попробуйте еще раз."
 
-#: includes/class-yit-plugin-panel.php:1387
+#: includes/class-yit-plugin-panel.php:1467
 msgid "The added file is not valid."
 msgstr "Добавленный файл недействителен."
 
-#: includes/class-yit-plugin-panel.php:1388
+#: includes/class-yit-plugin-panel.php:1468
 msgid "Sorry, import is disabled."
 msgstr "Извините, импорт отключен."
 
-#: includes/class-yit-plugin-panel.php:1389
+#: includes/class-yit-plugin-panel.php:1469
 msgid "Sorting successful."
 msgstr "Сортировка выполнена успешно."
 
@@ -440,6 +440,10 @@ msgstr ""
 msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr "%1$s (#%2$s &ndash; %3$s)"
 
+#: templates/fields/ajax-orders.php:16
+msgid "Search for an order..."
+msgstr ""
+
 #: templates/fields/ajax-posts.php:41
 msgid "Search for a post..."
 msgstr ""
@@ -520,20 +524,20 @@ msgstr "Добавить Изображения"
 msgid "Delete"
 msgstr "Удалить"
 
-#: templates/fields/media.php:46
+#: templates/fields/media.php:47
 msgid "Upload file"
 msgstr ""
 
-#: templates/fields/media.php:52
+#: templates/fields/media.php:53
 msgid "Enter URL"
 msgstr ""
 
 #. translators: %s is the alternative action "Upload a file".
-#: templates/fields/media.php:70
+#: templates/fields/media.php:71
 msgid "Drag or %s"
 msgstr ""
 
-#: templates/fields/media.php:71
+#: templates/fields/media.php:72
 msgid "Upload a file"
 msgstr ""
 
@@ -611,6 +615,15 @@ msgstr "Сброс до настроек по умолчанию"
 msgid "Collapse"
 msgstr ""
 
+#: templates/panel/v2/your-store-tools-tab.php:17
+msgid "#1 Independent Seller of <mark>WooCommerce plugins</mark>"
+msgstr ""
+
+#: templates/panel/v2/your-store-tools-tab.php:21
+msgid ""
+"Additional tools to improve UX, increase conversions, and loyalize customers."
+msgstr ""
+
 #. translators: %s is the plugin version.
 #: templates/panel/welcome-modals/update.php:34
 msgid "is successfully updated to version %s."
@@ -648,7 +661,7 @@ msgid "PHPInfo"
 msgstr "PHPInfo"
 
 #: templates/sysinfo/system-information-panel.php:13
-#: templates/sysinfo/tabs/error-log.php:25
+#: templates/sysinfo/tabs/error-log.php:26
 msgid "Log Files"
 msgstr "Файлы журнала"
 
@@ -664,16 +677,16 @@ msgstr "WP debug.log file"
 msgid "PHP error_log file"
 msgstr "PHP error_log file"
 
-#: templates/sysinfo/tabs/error-log.php:60
+#: templates/sysinfo/tabs/error-log.php:61
 msgid "Download"
 msgstr "Загрузка"
 
-#: templates/sysinfo/tabs/error-log.php:73
+#: templates/sysinfo/tabs/error-log.php:74
 msgid "The file size exceeds 8 megabytes so it must be downloaded"
 msgstr "Размер файла превышает 8 мегабайт, поэтому его необходимо загрузить"
 
 #. translators: %s file name.
-#: templates/sysinfo/tabs/error-log.php:97
+#: templates/sysinfo/tabs/error-log.php:98
 msgid ""
 "No Log file available. Enable the WordPress debug by adding this in the %s "
 "file of your installation"
@@ -681,102 +694,102 @@ msgstr ""
 "Файл журнала недоступен. Включите отладку WordPress, добавив следующее в "
 "файл %s вашей установки"
 
-#: templates/sysinfo/tabs/error-log.php:106
+#: templates/sysinfo/tabs/error-log.php:107
 msgid "Copied!"
 msgstr "Скопирован!"
 
-#: templates/sysinfo/tabs/error-log.php:106
+#: templates/sysinfo/tabs/error-log.php:107
 msgid "Copy Code"
 msgstr "Копировать Код"
 
-#: templates/sysinfo/tabs/main.php:17
+#: templates/sysinfo/tabs/main.php:21
 msgid "Site Info"
 msgstr "Информация о сайте"
 
-#: templates/sysinfo/tabs/main.php:22
+#: templates/sysinfo/tabs/main.php:26
 msgid "Site URL"
 msgstr "Адрес сайта"
 
-#: templates/sysinfo/tabs/main.php:31
+#: templates/sysinfo/tabs/main.php:35
 msgid "Output IP Address"
 msgstr "Выходной IP-адрес"
 
-#: templates/sysinfo/tabs/main.php:39
+#: templates/sysinfo/tabs/main.php:43
 msgid "Defined WP_CACHE"
 msgstr "Определён WP_CACHE"
 
-#: templates/sysinfo/tabs/main.php:42 templates/sysinfo/tabs/main.php:50
+#: templates/sysinfo/tabs/main.php:46 templates/sysinfo/tabs/main.php:54
 msgid "Yes"
 msgstr "Да"
 
-#: templates/sysinfo/tabs/main.php:47
+#: templates/sysinfo/tabs/main.php:51
 msgid "External object cache"
 msgstr "Кэш внешних объектов"
 
-#: templates/sysinfo/tabs/main.php:55
+#: templates/sysinfo/tabs/main.php:59
 msgid "YITH Plugin Framework Version"
 msgstr "Версия YITH Plugin Framework"
 
 #. translators: %s is the name of the plugin that is loading the framework.
-#: templates/sysinfo/tabs/main.php:64
+#: templates/sysinfo/tabs/main.php:68
 msgid "loaded by %s"
 msgstr "загружен %s"
 
-#: templates/sysinfo/tabs/main.php:73
+#: templates/sysinfo/tabs/main.php:79
 msgid "Plugins Requirements"
 msgstr "Требования к Плагинам"
 
-#: templates/sysinfo/tabs/main.php:108
+#: templates/sysinfo/tabs/main.php:114
 msgid "Database Info"
 msgstr "Информация о БД"
 
-#: templates/sysinfo/tabs/main.php:113
+#: templates/sysinfo/tabs/main.php:119
 msgid "MySQL version"
 msgstr "Версия MySQL"
 
 #. Translators: %s: Codex link.
-#: templates/sysinfo/tabs/main.php:123
+#: templates/sysinfo/tabs/main.php:129
 msgid "WordPress recommends a minimum MySQL version of 5.6. See: %s"
 msgstr "WordPress рекомендует минимальную версию MySQL 5.6. См: %s"
 
-#: templates/sysinfo/tabs/main.php:123
+#: templates/sysinfo/tabs/main.php:129
 msgid "WordPress requirements"
 msgstr "Требования WordPress"
 
-#: templates/sysinfo/tabs/main.php:130
+#: templates/sysinfo/tabs/main.php:136
 msgid "Total Database Size"
 msgstr "Общий размер базы данных"
 
-#: templates/sysinfo/tabs/main.php:138
+#: templates/sysinfo/tabs/main.php:144
 msgid "Database Data Size"
 msgstr "Размер данных базы данных"
 
-#: templates/sysinfo/tabs/main.php:146
+#: templates/sysinfo/tabs/main.php:152
 msgid "Database Index Size"
 msgstr "Размер индекса базы данных "
 
-#: templates/sysinfo/tabs/main.php:154
+#: templates/sysinfo/tabs/main.php:160
 msgid "Database Free Size"
 msgstr "Свободный размер базы данных"
 
 #. Translators: %1$f: Table size, %2$f: Index size, %3$f: Free size, %4$s
 #. Engine.
-#: templates/sysinfo/tabs/main.php:168
+#: templates/sysinfo/tabs/main.php:174
 msgid "Data: %1$.2fMB | Index: %2$.2fMB | Free: %3$.2fMB | Engine: %4$s"
 msgstr ""
 "Данные: %1$.2fMB | Индекс: %2$.2fMB | Свободно: %3$.2fMB | Движок: %4$s"
 
 #. translators: %s is the title of the post object.
-#: yit-functions.php:1936
+#: yit-functions.php:1939
 msgid "Are you sure you want to move \"%s\" to trash?"
 msgstr "Вы уверены, что хотите переместить в корзину \"%s\"?"
 
 #. translators: %s is the title of the post object.
-#: yit-functions.php:1938 yit-functions.php:2097
+#: yit-functions.php:1941 yit-functions.php:2100
 msgid "Are you sure you want to delete \"%s\"?"
 msgstr "Вы уверены, что хотите удалить \"%s\"?"
 
-#: yit-functions.php:2036 yit-functions.php:2044 yit-functions.php:2160
+#: yit-functions.php:2039 yit-functions.php:2047 yit-functions.php:2163
 msgid "Further actions"
 msgstr "Дальнейшие действия"
 
@@ -847,29 +860,29 @@ msgctxt "Button text"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: includes/class-yit-assets.php:163 yit-functions.php:2007
+#: includes/class-yit-assets.php:163 yit-functions.php:2010
 msgctxt "Trash confirmation action"
 msgid "Yes, move to trash"
 msgstr "Да, удалить в корзину"
 
-#: includes/class-yit-assets.php:167 yit-functions.php:2025
-#: yit-functions.php:2151
+#: includes/class-yit-assets.php:167 yit-functions.php:2028
+#: yit-functions.php:2154
 msgctxt "Delete confirmation action"
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
 #. translators: 1. Plugin name.
-#: includes/class-yit-plugin-panel.php:870
+#: includes/class-yit-plugin-panel.php:875
 msgctxt "Help tab default title"
 msgid "Thank you for purchasing %s!"
 msgstr "Благодарим вас за покупку %s!"
 
-#: includes/class-yit-plugin-panel.php:870
+#: includes/class-yit-plugin-panel.php:875
 msgctxt "Help tab default title"
 msgid "Thank you for using %s!"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:879
+#: includes/class-yit-plugin-panel.php:884
 msgctxt "Help tab default description"
 msgid ""
 "We want to help you enjoy a wonderful experience with all of our products."
@@ -877,12 +890,17 @@ msgstr ""
 "Мы хотим помочь вам получить удовольствие от использования всех наших "
 "продуктов."
 
-#: includes/class-yit-plugin-panel.php:929
+#: includes/class-yit-plugin-panel.php:933
 msgctxt "Premium tab name"
 msgid "Get premium"
 msgstr "Получите премиум"
 
-#: includes/class-yit-plugin-panel.php:945
+#: includes/class-yit-plugin-panel.php:949
+msgctxt "Panel tab name"
+msgid "Your Store Tools"
+msgstr ""
+
+#: includes/class-yit-plugin-panel.php:965
 msgctxt "Help tab name"
 msgid "Help"
 msgstr "Помощь"
@@ -1140,57 +1158,72 @@ msgctxt "Panel option tag"
 msgid "PREMIUM"
 msgstr ""
 
-#: yit-functions.php:1950
+#: templates/panel/v2/your-store-tools-tab.php:35
+msgctxt "Plugin in \"Your Store Tools\" tab"
+msgid "Best choice"
+msgstr ""
+
+#: templates/panel/v2/your-store-tools-tab.php:46
+msgctxt "Plugin in \"Your Store Tools\" tab"
+msgid "Active"
+msgstr ""
+
+#: templates/panel/v2/your-store-tools-tab.php:51
+msgctxt "Plugin in \"Your Store Tools\" tab"
+msgid "Get it"
+msgstr ""
+
+#: yit-functions.php:1953
 msgctxt "Post action"
 msgid "Preview"
 msgstr "Предварительный просмотр"
 
-#: yit-functions.php:1959
+#: yit-functions.php:1962
 msgctxt "Post action"
 msgid "View"
 msgstr "Просмотреть"
 
-#: yit-functions.php:1970
+#: yit-functions.php:1973
 msgctxt "Post action"
 msgid "Edit"
 msgstr "Изменить"
 
-#: yit-functions.php:1978
+#: yit-functions.php:1981
 msgctxt "Post action"
 msgid "Duplicate"
 msgstr "Дублировать"
 
-#: yit-functions.php:1990
+#: yit-functions.php:1993
 msgctxt "Post action"
 msgid "Restore"
 msgstr "Восстановить"
 
-#: yit-functions.php:1998
+#: yit-functions.php:2001
 msgctxt "Post action"
 msgid "Trash"
 msgstr "Корзина"
 
-#: yit-functions.php:2015
+#: yit-functions.php:2018
 msgctxt "Post action"
 msgid "Delete Permanently"
 msgstr "Удалить навсегда"
 
-#: yit-functions.php:2111
+#: yit-functions.php:2114
 msgctxt "Term action"
 msgid "View"
 msgstr "Просмотреть"
 
-#: yit-functions.php:2121
+#: yit-functions.php:2124
 msgctxt "Term action"
 msgid "Edit"
 msgstr "Изменить"
 
-#: yit-functions.php:2129
+#: yit-functions.php:2132
 msgctxt "Term action"
 msgid "Duplicate"
 msgstr "Дублировать"
 
-#: yit-functions.php:2142
+#: yit-functions.php:2145
 msgctxt "Term action"
 msgid "Delete"
 msgstr "Удалить"

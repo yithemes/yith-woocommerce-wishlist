@@ -114,6 +114,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 					$this->links = $this->settings['links'];
 				}
 
+				$this->maybe_init_your_store_tools_tab();
 				$this->maybe_init_help_tab();
 				$this->maybe_init_premium_tab();
 				$this->maybe_init_welcome_modals();
@@ -493,41 +494,43 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			$yit_options      = $this->get_main_array_options();
 			$validated_fields = $this->get_options();
 
-			foreach ( $yit_options[ $option_key ] as $section => $data ) {
-				foreach ( $data as $key => $option ) {
-					if ( ! empty( $option['is_option_disabled'] ) ) {
-						unset( $yit_options[ $option_key ][ $section ][ $key ] );
-						continue;
-					}
+			if ( isset( $yit_options[ $option_key ] ) ) {
+				foreach ( $yit_options[ $option_key ] as $section => $data ) {
+					foreach ( $data as $key => $option ) {
+						if ( ! empty( $option['is_option_disabled'] ) ) {
+							unset( $yit_options[ $option_key ][ $section ][ $key ] );
+							continue;
+						}
 
-					if ( isset( $option['sanitize_call'] ) && isset( $option['id'] ) ) {
-						if ( is_array( $option['sanitize_call'] ) ) {
-							foreach ( $option['sanitize_call'] as $callback ) {
+						if ( isset( $option['sanitize_call'] ) && isset( $option['id'] ) ) {
+							if ( is_array( $option['sanitize_call'] ) ) {
+								foreach ( $option['sanitize_call'] as $callback ) {
+									if ( is_array( $field[ $option['id'] ] ) ) {
+										$validated_fields[ $option['id'] ] = array_map( $callback, $field[ $option['id'] ] );
+									} else {
+										$validated_fields[ $option['id'] ] = call_user_func( $callback, $field[ $option['id'] ] );
+									}
+								}
+							} else {
 								if ( is_array( $field[ $option['id'] ] ) ) {
-									$validated_fields[ $option['id'] ] = array_map( $callback, $field[ $option['id'] ] );
+									$validated_fields[ $option['id'] ] = array_map( $option['sanitize_call'], $field[ $option['id'] ] );
 								} else {
-									$validated_fields[ $option['id'] ] = call_user_func( $callback, $field[ $option['id'] ] );
+									$validated_fields[ $option['id'] ] = call_user_func( $option['sanitize_call'], $field[ $option['id'] ] );
 								}
 							}
 						} else {
-							if ( is_array( $field[ $option['id'] ] ) ) {
-								$validated_fields[ $option['id'] ] = array_map( $option['sanitize_call'], $field[ $option['id'] ] );
-							} else {
-								$validated_fields[ $option['id'] ] = call_user_func( $option['sanitize_call'], $field[ $option['id'] ] );
-							}
-						}
-					} else {
-						if ( isset( $option['id'] ) ) {
-							$value = isset( $field[ $option['id'] ] ) ? $field[ $option['id'] ] : false;
-							if ( isset( $option['type'] ) && in_array( $option['type'], array( 'checkbox', 'onoff' ), true ) ) {
-								$value = yith_plugin_fw_is_true( $value ) ? 'yes' : 'no';
-							}
+							if ( isset( $option['id'] ) ) {
+								$value = $field[ $option['id'] ] ?? false;
+								if ( isset( $option['type'] ) && in_array( $option['type'], array( 'checkbox', 'onoff' ), true ) ) {
+									$value = yith_plugin_fw_is_true( $value ) ? 'yes' : 'no';
+								}
 
-							if ( ! empty( $option['yith-sanitize-callback'] ) && is_callable( $option['yith-sanitize-callback'] ) ) {
-								$value = call_user_func( $option['yith-sanitize-callback'], $value );
-							}
+								if ( ! empty( $option['yith-sanitize-callback'] ) && is_callable( $option['yith-sanitize-callback'] ) ) {
+									$value = call_user_func( $option['yith-sanitize-callback'], $value );
+								}
 
-							$validated_fields[ $option['id'] ] = $value;
+								$validated_fields[ $option['id'] ] = $value;
+							}
 						}
 					}
 				}
@@ -666,6 +669,8 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				$this->print_custom_tab( $custom_tab_options );
 			} elseif ( $this->is_help_tab() ) {
 				$this->print_help_tab();
+			} elseif ( $this->has_your_store_tools_tab() && $this->is_your_store_tools_tab() ) {
+				$this->print_your_store_tools_tab();
 			} else {
 				$this->get_template(
 					'panel-content-page.php',
@@ -890,7 +895,6 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			// add campaign parameters to url.
 			if ( isset( $this->settings['plugin_slug'] ) && ! $is_extended ) {
 				$utm_medium   = $this->settings['plugin_slug'];
-				$utm_source   = yith_plugin_fw_panel_utm_source( $this );
 				$utm_campaign = 'help-tab';
 
 				$campaign_urls = array(
@@ -903,7 +907,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 						continue;
 					}
 
-					$options[ $campaign_url ] = yith_plugin_fw_add_utm_data( $options[ $campaign_url ], $utm_medium, $utm_campaign, $utm_source );
+					$options[ $campaign_url ] = $this->add_utm_data( $options[ $campaign_url ], $utm_campaign );
 				}
 			}
 
@@ -928,6 +932,22 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 				$this->settings['admin-tabs']['premium'] = array(
 					'title'       => _x( 'Get premium', 'Premium tab name', 'yith-plugin-fw' ),
 					'icon'        => 'premium',
+					'description' => '',
+				);
+			}
+		}
+
+		/**
+		 * Initialize the "Your Store Tools" tab
+		 *
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
+		 * @since  4.1.0
+		 */
+		protected function maybe_init_your_store_tools_tab() {
+			if ( isset( $this->settings['your_store_tools'] ) ) {
+				$this->settings['admin-tabs']['your-store-tools'] = array(
+					'title'       => _x( 'Your Store Tools', 'Panel tab name', 'yith-plugin-fw' ),
+					'icon'        => 'boost',
 					'description' => '',
 				);
 			}
@@ -1207,6 +1227,66 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			}
 
 			include YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/premium-tab.php';
+		}
+
+		/**
+		 * Checks whether current tab is Premium Tab
+		 *
+		 * @return bool
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
+		 * @since  4.1.0
+		 */
+		protected function is_your_store_tools_tab() {
+			return 'your-store-tools' === $this->get_current_tab();
+		}
+
+		/**
+		 * Check if panel has premium tab
+		 * (Check for premium Tab through the premium_tab param fully handled by plugin-fw)
+		 *
+		 * @return bool
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
+		 * @since  4.1.0
+		 */
+		protected function has_your_store_tools_tab() {
+			return ! empty( $this->settings['your_store_tools'] );
+		}
+
+		/**
+		 * Prints Premium Tab
+		 *
+		 * @return void
+		 * @author Leanza Francesco <leanzafrancesco@gmail.com>
+		 * @since  4.1.0
+		 */
+		protected function print_your_store_tools_tab() {
+			$options = $this->settings['your_store_tools'] ?? array();
+
+			$defaults = array(
+				'items' => array(),
+			);
+			$options  = wp_parse_args( $options, $defaults );
+
+			$item_defaults = array(
+				'name'           => '',
+				'description'    => '',
+				'url'            => '',
+				'icon_url'       => '',
+				'is_active'      => false,
+				'is_recommended' => false,
+			);
+
+			foreach ( $options['items'] as $key => $item ) {
+				$item = wp_parse_args( $item, $item_defaults );
+
+				if ( $item['url'] ) {
+					$item['url'] = $this->add_utm_data( $item['url'], 'your-store-tools' );
+				}
+
+				$options['items'][ $key ] = $item;
+			}
+
+			$this->get_template( 'your-store-tools-tab.php', $options );
 		}
 
 		/**
@@ -1859,7 +1939,10 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * @author Emanuela Castorina
 		 */
 		public function is_free() {
-			return ! empty( $this->settings['premium_tab'] ) && ! $this->is_extended() && ! $this->is_premium();
+			$has_fw_premium_tab  = ! empty( $this->settings['premium_tab'] );
+			$has_old_premium_tab = ! ! ( $this->settings['admin-tabs']['premium'] ?? false );
+
+			return ( $has_fw_premium_tab || $has_old_premium_tab ) && ! $this->is_extended() && ! $this->is_premium();
 		}
 
 		/**
@@ -2157,7 +2240,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		 * @since 3.8.4
 		 */
 		public function add_utm_data_on_premium_tab( $url, $slug ) {
-			return ! empty( $this->settings['plugin_slug'] ) && $slug === $this->settings['plugin_slug'] && 'premium' === $this->get_current_tab() ? yith_plugin_fw_add_utm_data( $url, $slug, 'button-upgrade', yith_plugin_fw_panel_utm_source( $this ) ) : $url;
+			return ! empty( $this->settings['plugin_slug'] ) && $slug === $this->settings['plugin_slug'] && 'premium' === $this->get_current_tab() ? $this->add_utm_data( $url, 'premium-tab-button-upgrade' ) : $url;
 		}
 
 		/**
@@ -2302,6 +2385,46 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 			}
 
 			return $is_panel;
+		}
+
+		/**
+		 * Return the UTM source.
+		 *
+		 * @return string
+		 * @since 4.1.0
+		 */
+		protected function get_plugin_version_type() {
+			if ( $this->is_free() ) {
+				return 'free';
+			}
+
+			if ( $this->is_extended() ) {
+				return 'extended';
+			}
+
+			if ( $this->is_premium() ) {
+				return 'premium';
+			}
+
+			return '';
+		}
+
+		/**
+		 * Add UTM data to an URL.
+		 *
+		 * @param string $url      The url.
+		 * @param string $campaign The campaign.
+		 *
+		 * @return string
+		 * @since 4.1.0
+		 */
+		public function add_utm_data( $url, $campaign ) {
+			$plugin_slug = $this->settings['plugin_slug'] ?? '';
+			if ( $plugin_slug ) {
+				$url = yith_plugin_fw_add_utm_data( $url, $plugin_slug, $campaign, $this->get_plugin_version_type() );
+			}
+
+			return $url;
 		}
 	}
 }

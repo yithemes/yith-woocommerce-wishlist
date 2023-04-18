@@ -211,7 +211,7 @@ if ( ! class_exists( 'YITH_WCWL' ) ) {
 			/**
 			 * DO_ACTION: yith_wcwl_adding_to_wishlist
 			 *
-			 * Allows to fire some action when a product to a wishlist.
+			 * Allows to fire some action when a product is added to a wishlist.
 			 *
 			 * @param int $prod_id     Product ID
 			 * @param int $wishlist_id Wishlist ID

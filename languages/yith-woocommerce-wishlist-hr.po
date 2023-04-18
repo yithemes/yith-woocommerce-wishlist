@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2023-03-14 12:20:55+00:00\n"
+"POT-Creation-Date: 2023-04-18 11:57:24+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
 "_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPathExcluded-0: ../plugin-fw\n"
@@ -444,14 +444,14 @@ msgstr "Tekst za \"Proizvod je već dodan u listu želja\""
 msgid "Product added to wishlist"
 msgstr "Tekst za \"Proizvod je već dodan u listu želja\""
 
-#: init.php:173
+#: init.php:156
 #, fuzzy
 msgid "is enabled but not effective. It requires WooCommerce to work."
 msgstr ""
 "YITH WooCommerce Lista želja je uključena ali nije omogućena. Zahtjeva "
 "WooCommerce dodatak da bi mogla raditi."
 
-#: init.php:191
+#: init.php:174
 msgid ""
 "YITH WooCommerce Wishlist was deactivated as you're running an higher tier "
 "version of the same plugin."
@@ -511,9 +511,9 @@ msgstr ""
 #: plugin-options/add_to_wishlist-options.php:74
 msgid ""
 "Choose where to show \"Add to wishlist\" button or link in WooCommerce "
-"products' loop. <span class=\"addon\">Copy this shortcode <span class=\"code"
-"\"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it where you "
-"want to show the \"Add to wishlist\" link or button</span>"
+"products' loop. <span class=\"addon\">Copy this shortcode <span "
+"class=\"code\"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it "
+"where you want to show the \"Add to wishlist\" link or button</span>"
 msgstr ""
 
 #: plugin-options/add_to_wishlist-options.php:81
@@ -544,9 +544,9 @@ msgstr ""
 #: plugin-options/add_to_wishlist-options.php:106
 msgid ""
 "Choose where to show \"Add to wishlist\" button or link on the product page. "
-"<span class=\"addon\">Copy this shortcode <span class=\"code"
-"\"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it where you "
-"want to show the \"Add to wishlist\" link or button</span>"
+"<span class=\"addon\">Copy this shortcode <span "
+"class=\"code\"><code>[yith_wcwl_add_to_wishlist]</code></span> and paste it "
+"where you want to show the \"Add to wishlist\" link or button</span>"
 msgstr ""
 
 #: plugin-options/add_to_wishlist-options.php:113
@@ -786,9 +786,9 @@ msgstr ""
 
 #: plugin-options/wishlist_page-options.php:36
 msgid ""
-"Pick a page as the main Wishlist page; make sure you add the <span class="
-"\"code\"><code>[yith_wcwl_wishlist]</code></span> shortcode into the page "
-"content"
+"Pick a page as the main Wishlist page; make sure you add the <span "
+"class=\"code\"><code>[yith_wcwl_wishlist]</code></span> shortcode into the "
+"page content"
 msgstr ""
 
 #: plugin-options/wishlist_page-options.php:49
@@ -996,9 +996,9 @@ msgstr ""
 #: plugin-options/wishlist_page-options.php:402
 msgid ""
 "Choose colors for the primary button on hover state<br/><small>This style "
-"will be applied to \"Edit title\" button on Wishlist view, \"Submit Changes"
-"\" button on Manage view and \"Search wishlist\" button on Search view</"
-"small>"
+"will be applied to \"Edit title\" button on Wishlist view, \"Submit "
+"Changes\" button on Manage view and \"Search wishlist\" button on Search "
+"view</small>"
 msgstr ""
 
 #: plugin-options/wishlist_page-options.php:427
@@ -1488,8 +1488,8 @@ msgstr ""
 #~ msgstr "Premium verzija"
 
 #~ msgid ""
-#~ "Upgrade to the %1$spremium version%2$s%3$sof %1$sYITH WooCommerce Wishlist"
-#~ "%2$s to benefit from all features!"
+#~ "Upgrade to the %1$spremium version%2$s%3$sof %1$sYITH WooCommerce "
+#~ "Wishlist%2$s to benefit from all features!"
 #~ msgstr ""
 #~ "Nadogradite na %1$spremium verziju%2$s%3$s %1$sYITH WooCommerce Listu "
 #~ "želja%2$s "

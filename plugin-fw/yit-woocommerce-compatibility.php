@@ -763,3 +763,15 @@ if ( ! function_exists( 'yit_datetime_to_timestamp' ) ) {
 
 yit_fix_wc_deprecated_filters();
 add_action( 'shutdown', 'yit_send_changes_to_db' );
+
+if ( ! function_exists( 'yith_plugin_fw_is_wc_custom_orders_table_usage_enabled' ) ) {
+	/**
+	 * Return true if the WooCommerce custom orders table usage is enabled (HPOS).
+	 *
+	 * @return bool
+	 * @since 4.1.0
+	 */
+	function yith_plugin_fw_is_wc_custom_orders_table_usage_enabled(): bool {
+		return class_exists( '\Automattic\WooCommerce\Utilities\OrderUtil' ) && is_callable( '\Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled' ) && \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled();
+	}
+}

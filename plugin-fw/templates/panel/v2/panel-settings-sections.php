@@ -55,7 +55,7 @@ $sections = $wp_settings_sections['yit'] ?? array();
 							call_user_func( $field['callback'], $field['args'] );
 							?>
 						</div>
-						<?php if ( ! ! $option['desc'] ) : ?>
+						<?php if ( ! empty( $option['desc'] ) ) : ?>
 							<div class="yith-plugin-fw__panel__option__description">
 								<?php echo wp_kses_post( $option['desc'] ); ?>
 							</div>
