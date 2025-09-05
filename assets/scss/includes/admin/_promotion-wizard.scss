@@ -1,0 +1,267 @@
+/* === PROMOTION WIZARD === */
+
+.yith-wcwl-wizard-modal {
+	.wc-backbone-modal-content {
+		width : 1200px;
+	}
+
+	.wc-backbone-modal-main {
+		padding-bottom : 0;
+
+		.wc-backbone-modal-header {
+			border-bottom : none;
+			padding       : 0;
+
+			.modal-close-link {
+				border-left : none;
+				z-index     : 1;
+			}
+		}
+
+		article {
+			padding    : 0;
+			max-height : calc(100vh - 40px) !important;
+
+			h2 {
+				font-size : 1.5em;
+				margin    : 0.8em 0 2em;
+
+				color     : #007694;
+			}
+
+			h4 {
+				color       : #007694;
+				margin      : 1.33em 0;
+				font-size   : 1em;
+				font-weight : 600;
+			}
+
+			p {
+				&.description {
+					font-weight : 600;
+					font-style  : normal;
+				}
+
+				&.placeholders {
+					font-size  : .9em;
+					margin-top : 1.33em;
+				}
+			}
+
+			code {
+				background : none;
+				padding    : 0;
+			}
+
+			small {
+				font-size : .9em;
+			}
+
+			b.alert {
+				color : #a20000;
+			}
+
+			.form-row {
+				margin-top : 1.5em;
+			}
+
+			label {
+				color         : #00a79c;
+				font-weight   : 600;
+				font-size     : 1.1em;
+				margin-bottom : 20px;
+			}
+
+			.tabs {
+				display : inline-block;
+				margin  : 0;
+
+				li {
+					display       : inline-block;
+					margin-bottom : 0;
+
+					a {
+						display         : block;
+						padding         : 10px 15px;
+						text-decoration : none;
+						font-size       : 1.1em;
+						color           : #404040;
+						font-weight     : 600;
+
+						&.active {
+							position   : relative;
+							background : #fff;
+							box-shadow : 0 0 25px -4px rgba(68, 138, 133, .4);
+							z-index    : 1;
+							color      : #00a79c;
+						}
+
+						&:hover {
+							color : #00a79c;
+						}
+					}
+				}
+			}
+
+			.tab,
+			.form-row {
+				padding            : 20px;
+
+				position           : relative;
+
+				-webkit-box-shadow : 0px 0px 25px -4px rgba(68, 138, 133, 0.4);
+				-moz-box-shadow    : 0px 0px 25px -4px rgba(68, 138, 133, 0.4);
+				box-shadow         : 0px 0px 25px -4px rgba(68, 138, 133, 0.4);
+			}
+
+			.tab:before {
+				content    : "";
+				display    : block;
+				background : #ffffff;
+				left       : 0;
+				right      : 0;
+				height     : 20px;
+				position   : absolute;
+				top        : -1px;
+				z-index    : 1;
+			}
+
+			.tab:not(.active) {
+				display : none;
+			}
+
+			.tab > textarea {
+				width      : 100%;
+				margin-top : 30px;
+			}
+
+			.col {
+				padding : 20px 30px;
+			}
+
+			.step-1 {
+				display : flex;
+				width   : 100%;
+
+				> .col {
+					flex  : 1;
+					width : 600px;
+				}
+
+				> .col-dx {
+					background-color : #f2f2f2;
+					position         : relative;
+					padding-bottom   : 80px;
+				}
+
+				#content_html {
+					width : 100%;
+				}
+
+				#content_html_tab .wp-switch-editor {
+					box-sizing : initial;
+				}
+
+				.email-preview {
+					height     : 600px;
+					overflow-x : hidden;
+					overflow-y : scroll;
+					margin     : 30px 0;
+
+					&.html td > table {
+						width : 100% !important;
+					}
+
+					&.plain {
+						padding    : 0 20px;
+						background : #fff;
+					}
+
+					.no-interactions {
+						pointer-events : none;
+					}
+
+					#wrapper {
+						padding : 0 !important;
+					}
+
+					#wrapper > table {
+						width : 100% !important;
+					}
+				}
+
+				.promotion-actions {
+					position    : absolute;
+					left        : 30px;
+					right       : 30px;
+					bottom      : 30px;
+					line-height : 40px;
+
+					.save-promotion-draft,
+					a.back-button {
+						color       : #007694;
+						font-weight : 700;
+					}
+
+					.save-promotion-draft {
+						background : none;
+						border     : none;
+						padding    : 0;
+						cursor     : pointer
+					}
+
+					a.continue-button {
+						float            : right;
+						background-color : #007694;
+						text-transform   : uppercase;
+						font-weight      : 600;
+						font-size        : 11px;
+						line-height      : 26px;
+						height           : auto;
+						padding          : 5px 20px;
+					}
+
+					a.continue-button:hover {
+						background-color : #375f6b;
+					}
+				}
+			}
+
+
+			.step-2 {
+				max-width  : 500px;
+				min-height : 400px;
+				position   : relative;
+
+				h2 {
+					margin-top : 2em;
+				}
+
+				p {
+					font-weight : 600;
+				}
+
+				#main_submit_button {
+					position       : absolute;
+					bottom         : 30px;
+					left           : 30px;
+					right          : 30px;
+					width          : calc(100% - 60px);
+					padding        : 5px 20px;
+					text-transform : uppercase;
+					font-weight    : 600;
+					vertical-align : middle;
+					line-height    : 30px;
+					height         : auto;
+				}
+
+				#main_submit_button i {
+					vertical-align : middle;
+					margin-right   : 5px;
+					font-size      : 22px;
+				}
+			}
+		}
+	}
+}
+

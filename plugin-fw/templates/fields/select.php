@@ -20,6 +20,10 @@ if ( $multiple && ! is_array( $value ) ) {
 	$value = array();
 }
 
+if ( strpos( $class, 'yith-enhanced-select' ) >= 0 ) {
+	yith_plugin_fw_enqueue_enhanced_select();
+}
+
 ?>
 <select id="<?php echo esc_attr( $field_id ); ?>"
 		name="<?php echo esc_attr( $name ); ?>"

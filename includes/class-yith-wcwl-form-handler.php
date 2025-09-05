@@ -2,7 +2,7 @@
 /**
  * Static class that will handle all form submission from customer
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
@@ -80,7 +80,7 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 			// add item to wishlist when javascript is not enabled.
 			if ( isset( $_GET['add_to_wishlist'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'add_to_wishlist' ) ) {
 				try {
-					YITH_WCWL()->add();
+					yith_wcwl_wishlists()->add_item(yith_wcwl()->get_details());
 
 					/**
 					 * APPLY_FILTERS: yith_wcwl_product_added_to_wishlist_message
@@ -116,7 +116,7 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 			// remove item from wishlist when javascript is not enabled.
 			if ( isset( $_GET['remove_from_wishlist'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'remove_from_wishlist' ) ) {
 				try {
-					YITH_WCWL()->remove();
+					yith_wcwl_wishlists()->remove_item( yith_wcwl()->get_details() );
 				} catch ( Exception $e ) {
 					yith_wcwl_add_notice( $e->getMessage(), 'error' );
 				}
@@ -166,7 +166,7 @@ if ( ! class_exists( 'YITH_WCWL_Form_Handler' ) ) {
 				 */
 				if ( apply_filters( 'yith_wcwl_remove_after_add_to_cart', $wishlist && $wishlist->is_current_user_owner(), $wishlist ) ) {
 					try {
-						YITH_WCWL()->remove( $args );
+						yith_wcwl_wishlists()->remove_item( yith_wcwl()->get_details( $args ) );
 					} catch ( Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 						// we were unable to remove item from the wishlist; no follow up is provided.
 					}

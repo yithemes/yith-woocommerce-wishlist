@@ -40,8 +40,9 @@
     margin-bottom: 20px !important;
 }
 
+
 #yith-bh-onboarding .submit-area {
-    padding: 0 30px 30px;
+    padding: 0 0 20px;
     text-align: right;
 }
 
@@ -89,7 +90,9 @@
     background-color: #fff;
     color: #2C5DB4;
 }
-
+#yith-bh-onboarding .yith-bh-onboarding-tabs__form{
+    padding:0 20px;
+}
 #yith-bh-onboarding .yith-bh-onboarding-tabs__content .yith-bh-onboarding-tabs__tab {
     display: none;
 }

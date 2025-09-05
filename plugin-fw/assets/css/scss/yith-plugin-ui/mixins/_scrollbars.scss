@@ -1,0 +1,18 @@
+@mixin with-visible-scrollbars {
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+
+    ::-webkit-scrollbar:horizontal {
+        height: 7px;
+    }
+
+    ::-webkit-scrollbar:vertical {
+        width: 7px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}

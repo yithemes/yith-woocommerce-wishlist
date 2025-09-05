@@ -16,7 +16,7 @@ $description = $page_args['description'] ?? '';
 $is_list     = in_array( $pagenow, array( 'edit.php', 'edit-tags.php' ), true )
 ?>
 
-<?php if ( $is_list && ! ! $description ): ?>
+<?php if ( $is_list && ! ! $description ) : ?>
 	<div class="yith-plugin-fw-wp-page__description">
 		<?php echo wp_kses_post( $description ); ?>
 	</div>

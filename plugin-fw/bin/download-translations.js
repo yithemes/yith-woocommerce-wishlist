@@ -4,7 +4,7 @@
  * This script download translations from https://translate.yithemes.com/
  *
  * @version 1.1.0
- * @author Leanza Francesco <leanzafrancesco@gmail.com>
+ * @author YITH <plugins@yithemes.com>
  */
 
 const fs      = require( 'fs' );

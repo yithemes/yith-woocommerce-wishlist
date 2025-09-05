@@ -12,7 +12,7 @@ if ( ! class_exists( 'YIT_Icons' ) ) {
 	/**
 	 * YIT_Icons class.
 	 *
-	 * @author      Leanza Francesco <leanzafrancesco@gmail.com>
+	 * @author      YITH <plugins@yithemes.com>
 	 */
 	class YIT_Icons {
 

@@ -35,7 +35,16 @@ $update_hover: darken($update, 5%); // Update button - hover
 $update_text: #ffffff; // Text on update button background
 $update_focus: #e7eccc; // Text on update button background
 
+$tertiary_text: #333333;
+$tertiary_border: #b5b5b5;
+$tertiary_border_hover: #979797;
+$tertiary_bg: #e6e7e9;
+$tertiary_bg_hover: #eeefef;
+$tertiary_focus: #eef1f1;
+
 $accent: #98aa36;
+
+$shadow: rgba(145, 191, 227, 0.3);
 
 $light_bg: #f5fafc;
 $light_border_color: #d7e3e7;
@@ -51,6 +60,7 @@ $table_row_highlight: #f0f6fb;
 $table_row_striped: #f6f7f7;
 $table_border_light: #eff0f0;
 
+$field_background: #ffffff;
 $field_border_color: #cbd5e1;
 $field_border_weight: 1px;
 $field_border: $field_border_weight solid $field_border_color;
@@ -61,6 +71,12 @@ $field_placeholder_color: #8f9eb0;
 
 $link: #0079b0; // Link Color.
 
+// Z-indexes
+$dialog_z_index: 999995;
+$modal_z_index: 999999;
+$modal_allow_wp_z_index: 1500;
+$tip_tip_z_index: 1500;
+
 // Extra variables: these will be not converted to CSS Variables
 $wp_menu_size: 160px;
 $wp_menu_folded_size: 36px;
@@ -70,60 +86,75 @@ $wp_top_bar_mobile_size: 46px;
 
 // export vars as CSS vars
 :root {
-  --yith-content-bg: #{$content_bg};
-  --yith-content-text: #{$content_text};
-  --yith-primary: #{$primary};
-  --yith-primary-hover: #{$primary_hover};
-  --yith-primary-focus: #{$primary_focus};
-  --yith-primary-text: #{$primary_text};
+    --yith-content-bg: #{$content_bg};
+    --yith-content-text: #{$content_text};
+    --yith-primary: #{$primary};
+    --yith-primary-hover: #{$primary_hover};
+    --yith-primary-focus: #{$primary_focus};
+    --yith-primary-text: #{$primary_text};
 
-  --yith-delete: #{$delete};
-  --yith-delete-hover: #{$delete_hover};
-  --yith-delete-text: #{$delete_text};
-  --yith-delete-focus: #{$delete_focus};
+    --yith-delete: #{$delete};
+    --yith-delete-hover: #{$delete_hover};
+    --yith-delete-text: #{$delete_text};
+    --yith-delete-focus: #{$delete_focus};
 
-  --yith-update: #{$update};
-  --yith-update-hover: #{$update_hover};
-  --yith-update-text: #{$update_text};
-  --yith-update-focus: #{$update_focus};
+    --yith-update: #{$update};
+    --yith-update-hover: #{$update_hover};
+    --yith-update-text: #{$update_text};
+    --yith-update-focus: #{$update_focus};
 
-  --yith-outline-text: #{$outline_text};
-  --yith-outline-border: #{$outline_border};
-  --yith-outline-bg: #{$outline_bg};
-  --yith-outline-bg-hover: #{$outline_bg_hover};
-  --yith-outline-border-hover: #{$outline_border_hover};
-  --yith-outline-focus: #{$outline_focus};
+    --yith-outline-text: #{$outline_text};
+    --yith-outline-border: #{$outline_border};
+    --yith-outline-bg: #{$outline_bg};
+    --yith-outline-bg-hover: #{$outline_bg_hover};
+    --yith-outline-border-hover: #{$outline_border_hover};
+    --yith-outline-focus: #{$outline_focus};
 
-  --yith-delete-outline-text: #{$delete_outline_text};
-  --yith-delete-outline-border: #{$delete_outline_border};
-  --yith-delete-outline-bg: #{$delete_outline_bg};
-  --yith-delete-outline-bg-hover: #{$delete_outline_bg_hover};
-  --yith-delete-outline-border-hover: #{$delete_outline_border_hover};
-  --yith-delete-outline-focus: #{$delete_outline_focus};
+    --yith-delete-outline-text: #{$delete_outline_text};
+    --yith-delete-outline-border: #{$delete_outline_border};
+    --yith-delete-outline-bg: #{$delete_outline_bg};
+    --yith-delete-outline-bg-hover: #{$delete_outline_bg_hover};
+    --yith-delete-outline-border-hover: #{$delete_outline_border_hover};
+    --yith-delete-outline-focus: #{$delete_outline_focus};
 
-  --yith-accent: #{$accent};
+    --yith-tertiary-text: #{$tertiary_text};
+    --yith-tertiary-border: #{$tertiary_border};
+    --yith-tertiary-bg: #{$tertiary_bg};
+    --yith-tertiary-bg-hover: #{$tertiary_bg_hover};
+    --yith-tertiary-border-hover: #{$tertiary_border_hover};
+    --yith-tertiary-focus: #{$tertiary_focus};
 
-  --yith-light-bg: #{$light_bg};
-  --yith-light-border-color: #{$light_border_color};
-  --yith-light-shadow: #{$light_shadow};
-  --yith-light-accent: #{$light_accent};
+    --yith-accent: #{$accent};
 
-  --yith-success: #{$success};
-  --yith-success-light: #{$success_light};
-  --yith-success-lighter: #{$success_lighter};
-  --yith-success-lightest: #{$success_lightest};
+    --yith-shadow: #{$shadow};
 
-  --yith-table-row-highlight: #{$table_row_highlight};
-  --yith-table-row-striped: #{$table_row_striped};
-  --yith-table-border-light: #{$table_border_light};
+    --yith-light-bg: #{$light_bg};
+    --yith-light-border-color: #{$light_border_color};
+    --yith-light-shadow: #{$light_shadow};
+    --yith-light-accent: #{$light_accent};
 
-  --yith-field-border-color: #{$field_border_color};
-  --yith-field-border-weight: #{$field_border_color};
-  --yith-field-border: #{$field_border};
-  --yith-field-shadow: #{$field_shadow};
-  --yith-field-shadow-color: #{$field_shadow_color};
-  --yith-field-border-radius: #{$field_border_radius};
-  --yith-field-placeholder-color: #{$field_placeholder_color};
+    --yith-success: #{$success};
+    --yith-success-light: #{$success_light};
+    --yith-success-lighter: #{$success_lighter};
+    --yith-success-lightest: #{$success_lightest};
 
-  --yith-link: #{$link};
+    --yith-table-row-highlight: #{$table_row_highlight};
+    --yith-table-row-striped: #{$table_row_striped};
+    --yith-table-border-light: #{$table_border_light};
+
+    --yith-field-background: #{$field_background};
+    --yith-field-border-color: #{$field_border_color};
+    --yith-field-border-weight: #{$field_border_color};
+    --yith-field-border: #{$field_border};
+    --yith-field-shadow: #{$field_shadow};
+    --yith-field-shadow-color: #{$field_shadow_color};
+    --yith-field-border-radius: #{$field_border_radius};
+    --yith-field-placeholder-color: #{$field_placeholder_color};
+
+    --yith-link: #{$link};
+
+    --yith-dialog-z-index: #{$dialog_z_index};
+    --yith-modal-z-index: #{$modal_z_index};
+    --yith-modal-allow-wp-z-index: #{$modal_allow_wp_z_index};
+    --yith-tip-tip-z-index: #{$tip_tip_z_index};
 }

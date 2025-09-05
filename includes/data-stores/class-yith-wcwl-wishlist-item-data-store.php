@@ -2,8 +2,8 @@
 /**
  * Wishlist data store
  *
- * @author YITH
  * @package YITH\Wishlist\Classes\DataStores
+ * @author  YITH <plugins@yithemes.com>
  * @version 3.0.0
  */
 
@@ -19,13 +19,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 	 *
 	 * @since 3.0.0
 	 */
-	class YITH_WCWL_Wishlist_Item_Data_Store {
+	class YITH_WCWL_Wishlist_Item_Data_Store extends WC_Data_Store_WP {
+
+		protected $meta_type = 'yith_wcwl_item';
 
 		/**
 		 * Create a new wishlist item in the database.
 		 *
-		 * @since 3.0.0
 		 * @param \YITH_WCWL_Wishlist_Item $item Wishlist item object.
+		 * @since 3.0.0
 		 */
 		public function create( &$item ) {
 			global $wpdb;
@@ -207,7 +209,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			}
 
 			if ( ! $data ) {
-				throw new Exception( __( 'Invalid wishlist item.', 'yith-woocommerce-wishlist' ) );
+				throw new Exception( esc_html__( 'Invalid wishlist item.', 'yith-woocommerce-wishlist' ) );
 			}
 
 			$item->set_props(
@@ -229,8 +231,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Update a wishlist item in the database.
 		 *
-		 * @since 3.0.0
 		 * @param YITH_WCWL_Wishlist_Item $item Wishlist item object.
+		 * @since 3.0.0
 		 */
 		public function update( &$item ) {
 			if ( ! $item->get_id() ) {
@@ -285,8 +287,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Remove a wishlist item from the database.
 		 *
-		 * @since 3.0.0
 		 * @param \YITH_WCWL_Wishlist_Item $item Wishlist item object.
+		 * @since 3.0.0
 		 */
 		public function delete( &$item ) {
 			global $wpdb;
@@ -325,17 +327,17 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		 * Retrieves wishlist items that match a set of conditions
 		 *
 		 * @param array $args Arguments array; it may contains any of the following:<br/>
-		 * [<br/>
-		 *     'user_id'             // Owner of the wishlist; default to current user logged in (if any), or false for cookie wishlist<br/>
-		 *     'product_id'          // Product to search in the wishlist<br/>
-		 *     'wishlist_id'         // wishlist_id for a specific wishlist, false for default, or all for any wishlist<br/>
-		 *     'wishlist_token'      // wishlist token, or false as default<br/>
-		 *     'wishlist_visibility' // all, visible, public, shared, private<br/>
-		 *     'is_default' =>       // whether searched wishlist should be default one <br/>
-		 *     'id' => false,        // only for table select<br/>
-		 *     'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
-		 *     'offset' => 0         // pagination param; offset for the current set. 0 to start from the first item<br/>
-		 * ].
+		 *                    [<br/>
+		 *                    'user_id'             // Owner of the wishlist; default to current user logged in (if any), or false for cookie wishlist<br/>
+		 *                    'product_id'          // Product to search in the wishlist<br/>
+		 *                    'wishlist_id'         // wishlist_id for a specific wishlist, false for default, or all for any wishlist<br/>
+		 *                    'wishlist_token'      // wishlist token, or false as default<br/>
+		 *                    'wishlist_visibility' // all, visible, public, shared, private<br/>
+		 *                    'is_default' =>       // whether searched wishlist should be default one <br/>
+		 *                    'id' => false,        // only for table select<br/>
+		 *                    'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
+		 *                    'offset' => 0         // pagination param; offset for the current set. 0 to start from the first item<br/>
+		 *                    ].
 		 *
 		 * @return YITH_WCWL_Wishlist_Item[]
 		 */
@@ -404,52 +406,52 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			);
 
 			if ( ! empty( $user_id ) ) {
-				$sql       .= ' AND i.`user_id` = %d';
+				$sql        .= ' AND i.`user_id` = %d';
 				$sql_args[] = $user_id;
 			}
 
 			if ( ! empty( $session_id ) ) {
-				$sql       .= ' AND l.`session_id` = %s AND l.`expiration` > NOW()';
+				$sql        .= ' AND l.`session_id` = %s AND l.`expiration` > NOW()';
 				$sql_args[] = $session_id;
 			}
 
 			if ( ! empty( $product_id ) ) {
 				$product_id = yith_wcwl_object_id( $product_id, 'product', true, 'default' );
 
-				$sql       .= ' AND i.`prod_id` = %d';
+				$sql        .= ' AND i.`prod_id` = %d';
 				$sql_args[] = $product_id;
 			}
 
 			if ( ! empty( $wishlist_id ) && 'all' !== $wishlist_id ) {
-				$sql       .= ' AND i.`wishlist_id` = %d';
+				$sql        .= ' AND i.`wishlist_id` = %d';
 				$sql_args[] = $wishlist_id;
 			} elseif ( ( empty( $wishlist_id ) ) && empty( $wishlist_token ) && empty( $is_default ) ) {
 				$sql .= ' AND i.`wishlist_id` IS NULL';
 			}
 
 			if ( ! empty( $wishlist_token ) ) {
-				$sql       .= ' AND l.`wishlist_token` = %s';
+				$sql        .= ' AND l.`wishlist_token` = %s';
 				$sql_args[] = $wishlist_token;
 			}
 
 			if ( ! empty( $wishlist_visibility ) && 'all' !== $wishlist_visibility ) {
 				switch ( $wishlist_visibility ) {
 					case 'visible':
-						$sql       .= ' AND ( l.`wishlist_privacy` = %d OR l.`wishlist_privacy` = %d )';
+						$sql        .= ' AND ( l.`wishlist_privacy` = %d OR l.`wishlist_privacy` = %d )';
 						$sql_args[] = 0;
 						$sql_args[] = 1;
 						break;
 					case 'shared':
-						$sql       .= ' AND l.`wishlist_privacy` = %d';
+						$sql        .= ' AND l.`wishlist_privacy` = %d';
 						$sql_args[] = 1;
 						break;
 					case 'private':
-						$sql       .= ' AND l.`wishlist_privacy` = %d';
+						$sql        .= ' AND l.`wishlist_privacy` = %d';
 						$sql_args[] = 2;
 						break;
 					case 'public':
 					default:
-						$sql       .= ' AND l.`wishlist_privacy` = %d';
+						$sql        .= ' AND l.`wishlist_privacy` = %d';
 						$sql_args[] = 0;
 						break;
 				}
@@ -458,17 +460,17 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			if ( ! empty( $is_default ) ) {
 				YITH_WCWL_Wishlist_Factory::generate_default_wishlist();
 
-				$sql       .= ' AND l.`is_default` = %d';
+				$sql        .= ' AND l.`is_default` = %d';
 				$sql_args[] = $is_default;
 			}
 
 			if ( isset( $on_sale ) && false !== $on_sale ) {
-				$sql       .= ' AND i.`on_sale` = %d';
+				$sql        .= ' AND i.`on_sale` = %d';
 				$sql_args[] = $on_sale;
 			}
 
 			if ( ! empty( $id ) ) {
-				$sql       .= ' AND `i.ID` = %d';
+				$sql        .= ' AND `i.ID` = %d';
 				$sql_args[] = $id;
 			}
 
@@ -476,13 +478,13 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 
 			if ( ! empty( $orderby ) ) {
 				$order = ! empty( $order ) ? $order : 'DESC';
-				$sql  .= ' ORDER BY i.' . esc_sql( $orderby ) . ' ' . esc_sql( $order ) . ', i.position ASC';
+				$sql   .= ' ORDER BY i.' . esc_sql( $orderby ) . ' ' . esc_sql( $order ) . ', i.position ASC';
 			} else {
 				$sql .= ' ORDER BY i.position ASC, i.ID DESC';
 			}
 
 			if ( ! empty( $limit ) && isset( $offset ) ) {
-				$sql       .= ' LIMIT %d, %d';
+				$sql        .= ' LIMIT %d, %d';
 				$sql_args[] = $offset;
 				$sql_args[] = $limit;
 			}
@@ -542,15 +544,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		 * Query items table to retrieve distinct products added to wishlist, with count of occurrences
 		 *
 		 * @param array $args Arguments array; it may contains any of the following:<br/>
-		 * [<br/>
-		 *     'product_id'          // Product to search in the wishlist<br/>
-		 *     'search' => '',       // search string; will be matched against product name<br/>
-		 *     'interval' => '',     // Interval of dates; this should be an associative array, that may contain start_date or end_date<br/>
-		 *     'orderby' => 'ID',    // order param; a valid column in the result set<br/>
-		 *     'order' => 'desc',    // order param; asc or desc<br/>
-		 *     'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
-		 *     'offset' => 0         // pagination param; offset for the current set. 0 to start from the first item<br/>
-		 * ].
+		 *                    [<br/>
+		 *                    'product_id'          // Product to search in the wishlist<br/>
+		 *                    'search' => '',       // search string; will be matched against product name<br/>
+		 *                    'interval' => '',     // Interval of dates; this should be an associative array, that may contain start_date or end_date<br/>
+		 *                    'orderby' => 'ID',    // order param; a valid column in the result set<br/>
+		 *                    'order' => 'desc',    // order param; asc or desc<br/>
+		 *                    'limit' => false,     // pagination param; number of items per page. 0 to get all items<br/>
+		 *                    'offset' => 0         // pagination param; offset for the current set. 0 to start from the first item<br/>
+		 *                    ].
 		 * @return mixed Result set
 		 */
 		public function query_products( $args ) {
@@ -587,34 +589,34 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			$sql_args = array( 'publish' );
 
 			if ( ! empty( $product_id ) ) {
-				$sql       .= ' AND i.prod_id = %d';
+				$sql        .= ' AND i.prod_id = %d';
 				$sql_args[] = $product_id;
 			}
 
 			if ( ! empty( $search ) ) {
-				$sql       .= ' AND p.post_title LIKE %s';
+				$sql        .= ' AND p.post_title LIKE %s';
 				$sql_args[] = '%' . $search . '%';
 			}
 
 			if ( ! empty( $args['interval'] ) && is_array( $args['interval'] ) && ( isset( $args['interval']['start_date'] ) || isset( $args['interval']['end_date'] ) ) ) {
 				if ( ! empty( $args['interval']['start_date'] ) ) {
-					$sql       .= ' AND i.dateadded >= %s';
+					$sql        .= ' AND i.dateadded >= %s';
 					$sql_args[] = $args['interval']['start_date'];
 				}
 
 				if ( ! empty( $args['interval']['end_date'] ) ) {
-					$sql       .= ' AND i.dateadded <= %s';
+					$sql        .= ' AND i.dateadded <= %s';
 					$sql_args[] = $args['interval']['end_date'];
 				}
 			}
 
 			if ( ! empty( $orderby ) ) {
 				$order = ! empty( $order ) ? $order : 'DESC';
-				$sql  .= ' ORDER BY ' . esc_sql( $orderby ) . ' ' . esc_sql( $order );
+				$sql   .= ' ORDER BY ' . esc_sql( $orderby ) . ' ' . esc_sql( $order );
 			}
 
 			if ( ! empty( $limit ) && isset( $offset ) ) {
-				$sql       .= ' LIMIT %d, %d';
+				$sql        .= ' LIMIT %d, %d';
 				$sql_args[] = $offset;
 				$sql_args[] = $limit;
 			}
@@ -638,7 +640,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		 * Counts how many distinct users added a product in wishlist
 		 *
 		 * @param int        $product_id Product id.
-		 * @param string|int $user User to use in query; it could be a user id, a session id or 'current' (for current user/session).
+		 * @param string|int $user       User to use in query; it could be a user id, a session id or 'current' (for current user/session).
 		 * @return int Count of times product was added to wishlist
 		 */
 		public function count_times_added( $product_id, $user = false ) {
@@ -689,11 +691,11 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 		/**
 		 * Raw update method; useful when it is needed to update a bunch of items
 		 *
-		 * @param array $columns Array of columns to update, in the following format: 'column_id' => 'column_type'.
-		 * @param array $column_values Array of values to apply to the query; must have same number of elements of columns, and they must respect defined tpe.
-		 * @param array $conditions Array of where conditions, in the following format: 'column_id' => 'columns_type'.
+		 * @param array $columns           Array of columns to update, in the following format: 'column_id' => 'column_type'.
+		 * @param array $column_values     Array of values to apply to the query; must have same number of elements of columns, and they must respect defined tpe.
+		 * @param array $conditions        Array of where conditions, in the following format: 'column_id' => 'columns_type'.
 		 * @param array $conditions_values Array of values to apply to where condition; must have same number of elements of columns, and they must respect defined type.
-		 * @param bool  $clear_caches Whether system should clear caches (this is optional since other methods may want to run more optimized clear).
+		 * @param bool  $clear_caches      Whether system should clear caches (this is optional since other methods may want to run more optimized clear).
 		 *
 		 * @return void
 		 */
@@ -791,6 +793,15 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item_Data_Store' ) ) {
 			$orderby = 'i.wishlist_count ' . $order;
 
 			return $orderby;
+		}
+
+		protected function get_db_info() {
+			global $wpdb;
+
+			$db_info          = parent::get_db_info();
+			$db_info['table'] = $wpdb->yith_wcwl_itemmeta;
+
+			return $db_info;
 		}
 	}
 }

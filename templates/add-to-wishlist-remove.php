@@ -2,7 +2,7 @@
 /**
  * Add to wishlist button template - Remove button
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Templates\AddToWishlist
  * @version 3.0.12
  */
@@ -33,9 +33,7 @@
  * @var $found_item                YITH_WCWL_Wishlist_Item Wishlist item
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly.
 
 global $product;
 ?>

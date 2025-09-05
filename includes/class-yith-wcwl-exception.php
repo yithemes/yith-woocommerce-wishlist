@@ -2,14 +2,12 @@
 /**
  * Wishlist Exception class
  *
- * @author YITH
  * @package YITH\Wishlist\Classes
+ * @author  YITH <plugins@yithemes.com>
  * @version 3.0.0
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly.
 
 if ( ! class_exists( 'YITH_WCWL_Exception' ) ) {
 	/**

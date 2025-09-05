@@ -1,0 +1,25 @@
+#popular-filter {
+	input.yith-wcwl-popular-filter-date-picker {
+		width : 200px;
+
+		+ .yith-icon-calendar {
+			display         : flex;
+			align-items     : center;
+			justify-content : center;
+		}
+	}
+
+	table.products {
+		th#count {
+			text-align : center;
+		}
+	}
+}
+
+#wishlist-filter {
+	table.wishlists {
+		th#items {
+			text-align : center;
+		}
+	}
+}

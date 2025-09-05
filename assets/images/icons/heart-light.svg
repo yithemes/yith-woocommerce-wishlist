@@ -1,0 +1,10 @@
+<svg id="yith-wcwl-icon-heart-light" class="yith-wcwl-icon-svg yith-wcwl-icon-svg--light" xmlns="http://www.w3.org/2000/svg" viewBox="234.05 0 58.542 48">
+    <defs>
+        <path id="heart-check-light-A"
+              d="M284.833 11.167l8.764 1.529L297.666-1l-45.333-3.5h-18.5l-2 56.5c.5 0 27 3.166 28 2.833s18.5-18.333 18.5-18.333l-8.833-9-7.834-3.5 8.871-12.833h14.296z"/>
+    </defs>
+    <g clip-path="url(#heart-check-light-B)">
+        <path fill="none" stroke="#222" stroke-width="2" stroke-linejoin="round"
+              d="M240.245 4.946c-5.272 5.261-5.272 13.792 0 19.054l23.047 23 23.045-23c5.272-5.262 5.272-13.792 0-19.054a13.52 13.52 0 0 0-19.092 0l-3.953 3.946-3.955-3.946c-5.273-5.261-13.819-5.261-19.092 0z"/>
+    </g>
+</svg>

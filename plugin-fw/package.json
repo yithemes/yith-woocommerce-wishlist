@@ -1,11 +1,12 @@
 {
   "name": "yith-plugin-framewowrk",
-  "version": "4.1.2",
+  "version": "4.7.4",
   "description": "YITH Plugin Framework",
   "main": "Gruntfile.js",
   "scripts": {
     "build": "npm run -s blocks:build && npm run assets && npm run i18n",
     "assets": "grunt assets",
+    "css": "grunt css",
     "watch": "grunt watch",
     "i18n": "npm run -s i18n:build && npm run -s i18n:translations",
     "i18n:build": "grunt makepot",
@@ -23,13 +24,23 @@
     "env:cli": "node ./tools/local-env/scripts/docker.js run cli",
     "blocks:watch": "wp-scripts start ./includes/builders/gutenberg/src/index.js --output-path=dist/gutenberg --progress --watch --mode=development",
     "blocks:build": "wp-scripts build ./includes/builders/gutenberg/src/index.js --output-path=dist/gutenberg --progress",
+    "sync-lapilli-ui": "wp-scripts build --progress --config tools/webpack/webpack.config.lapilli-ui.js",
     "test:php": "node ./tools/local-env/scripts/docker.js run --rm phpunit phpunit"
   },
   "author": "YITH",
   "license": "GPL-3.0+",
   "keywords": [],
   "devDependencies": {
+    "@wordpress/block-editor": "^12.6.0",
+    "@wordpress/components": "^25.4.0",
+    "@wordpress/compose": "^6.15.0",
+    "@wordpress/dependency-extraction-webpack-plugin": "^4.24.0",
+    "@wordpress/element": "^5.15.0",
+    "@wordpress/hooks": "^3.38.0",
+    "@wordpress/i18n": "^4.38.0",
     "@wordpress/scripts": "^18.0.1",
+    "@wordpress/server-side-render": "^4.15.0",
+    "@wordpress/url": "^3.39.0",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "grunt": "^1.4.1",
@@ -37,14 +48,23 @@
     "grunt-contrib-jshint": "^2.0.0",
     "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-phpcs": "^0.4.0",
     "grunt-sass": "^3.1.0",
     "grunt-wp-i18n": "^1.0.2",
-    "node-sass": "^6.0.1",
+    "lodash": "^4.17.21",
+    "node-sass": "^7.0.3",
+    "prop-types": "^15.8.1",
     "wait-on": "^5.2.1"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@lapilli-ui/block-editor": "^1.0.0-beta.6",
+    "@lapilli-ui/components": "^1.0.0-beta.6",
+    "@lapilli-ui/date": "^1.0.0-beta.6",
+    "@lapilli-ui/styles": "^1.0.0-beta.6",
     "classnames": "^2.3.1",
-    "md5": "^2.3.0"
+    "md5": "^2.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

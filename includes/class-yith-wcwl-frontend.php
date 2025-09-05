@@ -2,14 +2,12 @@
 /**
  * Init class
  *
- * @author YITH
+ * @author  YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly
 
 if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 	/**
@@ -17,23 +15,14 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	class YITH_WCWL_Frontend {
-
-		/**
-		 * Single instance of the class
-		 *
-		 * @var \YITH_WCWL_Frontend
-		 * @since 2.0.0
-		 */
-		protected static $instance;
-
+	class YITH_WCWL_Frontend extends YITH_WCWL_Frontend_Legacy {
 		/**
 		 * Plugin version
 		 *
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $version = '3.20.0';
+		public $version;
 
 		/**
 		 * Plugin database version
@@ -41,30 +30,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var string
 		 * @since 1.0.0
 		 */
-		public $db_version = '3.0.0';
-
-		/**
-		 * Store class yith_WCWL_Install.
-		 *
-		 * @var object
-		 * @access private
-		 * @since 1.0.0
-		 */
-		protected $yith_wcwl_install;
-
-		/**
-		 * Returns single instance of the class
-		 *
-		 * @return \YITH_WCWL_Frontend
-		 * @since 2.0.0
-		 */
-		public static function get_instance() {
-			if ( is_null( static::$instance ) ) {
-				static::$instance = new static();
-			}
-
-			return static::$instance;
-		}
+		public $db_version;
 
 		/**
 		 * Constructor
@@ -72,10 +38,10 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 1.0.0
 		 */
 		public function __construct() {
-			define( 'YITH_WCWL_VERSION', $this->version );
-			define( 'YITH_WCWL_DB_VERSION', $this->db_version );
-
-			$this->yith_wcwl_install = YITH_WCWL_Install();
+			// Leave for retro-compatibility.
+			$this->version    = YITH_WCWL_VERSION;
+			$this->db_version = YITH_WCWL_DB::DB_VERSION;
+			define( 'YITH_WCWL_DB_VERSION', YITH_WCWL_DB::DB_VERSION );
 
 			// add filter for font-awesome compatibility.
 			add_filter( 'option_yith_wcwl_add_to_wishlist_icon', array( $this, 'update_font_awesome_classes' ) );
@@ -86,7 +52,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			// templates.
 			add_action( 'init', array( $this, 'add_button' ) );
-			add_filter( 'body_class', array( $this, 'add_body_class' ) );
+			add_filter( 'body_class', array( $this, 'add_body_class' ), 90 );
 			add_action( 'template_redirect', array( $this, 'add_nocache_headers' ) );
 			add_action( 'wp_head', array( $this, 'add_noindex_header' ) );
 			add_filter( 'wp_robots', array( $this, 'add_noindex_robots' ) );
@@ -96,7 +62,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			add_action( 'yith_wcwl_wishlist_after_wishlist_content', array( $this, 'wishlist_footer' ), 10, 1 );
 
 			// template modifications.
-			add_filter( 'woocommerce_post_class', array( $this, 'add_products_class_on_loop' ) );
+			add_filter( 'post_class', array( $this, 'add_products_class_on_loop' ), 20, 3 );
 
 			// scripts.
 			add_action( 'wp_head', array( $this, 'detect_javascript' ), 0 );
@@ -113,6 +79,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			 * Allows to fire some action when the frontend class has loaded all the requirements.
 			 */
 			do_action( 'yith_wcwl_loaded' );
+
+			YITH_WCWL_Rendering_Method_Frontend_Handler::get_instance();
 		}
 
 		/**
@@ -141,6 +109,24 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 1.0.0
 		 */
 		public function add_button() {
+			$this->add_button_for_single();
+			$this->add_button_for_loop();
+
+			// Add the link "Add to wishlist" for Gutenberg blocks.
+			add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'add_button_for_blocks_product_grid_item' ), 10, 3 );
+		}
+
+		/**
+		 * Add ATW button to Single product page
+		 * Accounts for both Legacy Templates and Blockified ones
+		 *
+		 * @return void
+		 * @since 3.24.0
+		 */
+		public function add_button_for_single() {
+			// Add the link "Add to wishlist".
+			$position = get_option( 'yith_wcwl_button_position', 'add-to-cart' );
+
 			/**
 			 * APPLY_FILTERS: yith_wcwl_positions
 			 *
@@ -172,13 +158,25 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				)
 			);
 
-			// Add the link "Add to wishlist".
-			$position = get_option( 'yith_wcwl_button_position', 'add-to-cart' );
-
-			if ( 'shortcode' !== $position && isset( $positions[ $position ] ) ) {
-				add_action( $positions[ $position ]['hook'], array( $this, 'print_button' ), $positions[ $position ]['priority'] );
+			if ( 'shortcode' === $position || ! isset( $positions[ $position ] ) ) {
+				return;
 			}
 
+			if ( yith_plugin_fw_wc_is_using_block_template_in_single_product() ) {
+				$this->add_button_for_blockified_template( 'single-product', $position );
+			} else {
+				add_action( $positions[ $position ][ 'hook' ], array( $this, 'print_button' ), $positions[ $position ][ 'priority' ] );
+			}
+		}
+
+		/**
+		 * Add ATW button to Archive product page
+		 * Accounts for both Legacy Templates and Blockified ones
+		 *
+		 * @return void
+		 * @since 3.24.0
+		 */
+		public function add_button_for_loop() {
 			// check if Add to wishlist button is enabled for loop.
 			$enabled_on_loop = 'yes' === get_option( 'yith_wcwl_show_on_loop', 'no' );
 
@@ -216,12 +214,95 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			// Add the link "Add to wishlist" in the loop.
 			$position = get_option( 'yith_wcwl_loop_position', 'after_add_to_cart' );
 
-			if ( 'shortcode' !== $position && isset( $positions[ $position ] ) ) {
-				add_action( $positions[ $position ]['hook'], array( $this, 'print_button' ), $positions[ $position ]['priority'] );
+			if ( 'shortcode' === $position || ! isset( $positions[ $position ] ) ) {
+				return;
 			}
 
-			// Add the link "Add to wishlist" for Gutenberg blocks.
-			add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'add_button_for_block' ), 10, 3 );
+			if ( yith_plugin_fw_wc_is_using_block_template_in_product_catalogue() ) {
+				$this->add_button_for_blockified_template( 'archive-product', $position );
+			} else {
+				add_action( $positions[ $position ][ 'hook' ], array( $this, 'print_button' ), $positions[ $position ][ 'priority' ] );
+			}
+		}
+
+		/**
+		 * Hooks action required to print ATW button in correct locations inside a Blockified template
+		 *
+		 * @param string $template Template to change.
+		 * @param string $position Position where to add button.
+		 * @return void
+		 * @since 3.24.0
+		 */
+		public function add_button_for_blockified_template( $template, $position ) {
+			switch ( $position ) {
+				case 'add-to-cart':
+				case 'after_add_to_cart':
+					$block = 'single-product' === $template ? 'add-to-cart-form' : 'product-button';
+					add_filter( "render_block_woocommerce/$block", array( $this, 'add_button_after_block' ), 10, 3 );
+					break;
+				case 'before_add_to_cart':
+					$block = 'single-product' === $template ? 'add-to-cart-form' : 'product-button';
+					add_filter( "render_block_woocommerce/$block", array( $this, 'add_button_before_block' ), 10, 3 );
+					break;
+				case 'thumbnails':
+					add_filter( 'render_block_woocommerce/product-image-gallery', array( $this, 'add_button_after_block' ), 10, 3 );
+					break;
+				case 'before_image':
+					add_filter( 'render_block_woocommerce/product-image', array( $this, 'add_button_after_block' ), 10, 3 );
+					break;
+				case 'summary':
+					add_filter( 'render_block_woocommerce/product-details', array( $this, 'add_button_after_block' ), 10, 3 );
+					break;
+			}
+		}
+
+		/**
+		 * Prepend ATW button to a block
+		 * Uses block context to retrieve product id.
+		 *
+		 * @param string   $block_content The block content.
+		 * @param string   $parsed_block  The full block, including name and attributes.
+		 * @param WP_Block $block         The block instance.
+		 *
+		 * @return string Filtered block content.
+		 */
+		public function add_button_before_block( $block_content, $parsed_block, $block ) {
+			$post_id = $block->context[ 'postId' ];
+			$product = wc_get_product( $post_id );
+
+			if ( ! $product ) {
+				return $block_content;
+			}
+
+			$button = $this->get_button( $product->get_id() );
+
+			return "$button $block_content";
+		}
+
+		/**
+		 * Append ATW button to a block
+		 * Uses block context to retrieve product id.
+		 *
+		 * @param string   $block_content The block content.
+		 * @param string   $parsed_block  The full block, including name and attributes.
+		 * @param WP_Block $block         The block instance.
+		 *
+		 * @return string Filtered block content.
+		 */
+		public function add_button_after_block( $block_content, $parsed_block, $block ) {
+			global $post;
+
+			$post_id = isset( $block->context[ 'postId' ] ) ? $block->context[ 'postId' ] : false;
+			$post_id = $post_id ?? isset( $post->ID ) ? $post->ID : false;
+			$product = wc_get_product( $post_id );
+
+			if ( ! $product ) {
+				return $block_content;
+			}
+
+			$button = $this->get_button( $product->get_id() );
+
+			return "$block_content $button";
 		}
 
 		/**
@@ -233,7 +314,13 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 *
 		 * @return string Filtered HTML.
 		 */
-		public function add_button_for_block( $item_html, $data, $product ) {
+		public function add_button_for_blocks_product_grid_item( $item_html, $data, $product ) {
+			$enabled_on_loop = 'yes' === get_option( 'yith_wcwl_show_on_loop', 'no' );
+
+			if ( ! $enabled_on_loop ) {
+				return $item_html;
+			}
+
 			// Add the link "Add to wishlist" in the loop.
 			$position = get_option( 'yith_wcwl_loop_position', 'after_add_to_cart' );
 			$button   = $this->get_button( $product->get_id() );
@@ -250,6 +337,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			// removes empty parts.
 			$parts = array_filter( $parts );
+			$index = false;
 
 			// searches for index to cut parts array.
 			switch ( $position ) {
@@ -276,7 +364,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				);
 
 				// replace li classes.
-				$parts[0] = preg_replace( '/class="(.*)"/', 'class="$1 add-to-wishlist-' . $position . '"', $parts[0] );
+				$parts[ 0 ] = preg_replace( '/class="(.*)"/', 'class="$1 add-to-wishlist-' . $position . '"', $parts[ 0 ] );
 			}
 
 			// join all parts together.
@@ -293,23 +381,9 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return string HTML for ATW button.
 		 */
 		public function get_button( $product_id = false ) {
-			$shortcode_tag = 'yith_wcwl_add_to_wishlist';
-			$options       = array();
-			$text_options  = '';
+			$button = YITH_WCWL_Add_To_Wishlist_Button::get( compact( 'product_id' ) );
 
-			if ( $product_id ) {
-				$options['product_id'] = $product_id;
-			}
-
-			if ( ! empty( $options ) ) {
-				foreach ( $options as $option_key => $option_value ) {
-					$text_options .= " $option_key=\"$option_value\"";
-				}
-			}
-
-			$shortcode = "[$shortcode_tag $text_options]";
-
-			return do_shortcode( $shortcode );
+			return $button->render( true );
 		}
 
 		/**
@@ -338,7 +412,12 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				return;
 			}
 
-			echo do_shortcode( '[yith_wcwl_add_to_wishlist]' );
+			if ( 'react-components' === self::get_rendering_method() ) {
+				$button = YITH_WCWL_Add_To_Wishlist_Button::get();
+				$button->render();
+			} else {
+				echo do_shortcode( '[yith_wcwl_add_to_wishlist]' );
+			}
 		}
 
 		/* === WISHLIST PAGE === */
@@ -404,11 +483,11 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			 *
 			 * @return bool
 			 */
-			if ( function_exists( 'wp_robots_no_robots' ) || ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( function_exists( 'wp_robots_no_robots' ) || ! isset( $_GET[ 'add_to_wishlist' ] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return;
 			}
 
-			wp_no_robots();
+			wp_robots_no_robots();
 		}
 
 		/**
@@ -420,7 +499,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return array Filtered robots directives.
 		 */
 		public function add_noindex_robots( $robots ) {
-			if ( ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! isset( $_GET[ 'add_to_wishlist' ] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return $robots;
 			}
 
@@ -440,7 +519,6 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			// register dependencies.
 			wp_register_style( 'jquery-selectBox', YITH_WCWL_URL . 'assets/css/jquery.selectBox.css', array(), '1.2.0' );
-			wp_register_style( 'yith-wcwl-font-awesome', YITH_WCWL_URL . 'assets/css/font-awesome.css', array(), '4.7.0' );
 			wp_register_style( 'woocommerce_prettyPhoto_css', $assets_path . 'css/prettyPhoto.css', array(), '3.1.6' );
 
 			/**
@@ -452,7 +530,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			 *
 			 * @return array
 			 */
-			$deps = apply_filters( 'yith_wcwl_main_style_deps', array( 'jquery-selectBox', 'yith-wcwl-font-awesome', 'woocommerce_prettyPhoto_css' ) );
+			$deps = apply_filters( 'yith_wcwl_main_style_deps', array( 'jquery-selectBox', 'woocommerce_prettyPhoto_css' ) );
 
 			// register main style.
 			$located = locate_template(
@@ -463,7 +541,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			);
 
 			if ( ! $located ) {
-				wp_register_style( 'yith-wcwl-main', YITH_WCWL_URL . 'assets/css/style.css', $deps, $this->version );
+				wp_register_style( 'yith-wcwl-main', YITH_WCWL_URL . 'assets/css/style.css', $deps, YITH_WCWL_VERSION );
 			} else {
 				$stylesheet_directory     = get_stylesheet_directory();
 				$stylesheet_directory_uri = get_stylesheet_directory_uri();
@@ -472,7 +550,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 				$style_url = ( strpos( $located, $stylesheet_directory ) !== false ) ? str_replace( $stylesheet_directory, $stylesheet_directory_uri, $located ) : str_replace( $template_directory, $template_directory_uri, $located );
 
-				wp_register_style( 'yith-wcwl-user-main', $style_url, $deps, $this->version );
+				wp_register_style( 'yith-wcwl-user-main', $style_url, $deps, YITH_WCWL_VERSION );
 			}
 
 			// theme specific assets.
@@ -482,54 +560,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				$theme_slug = $current_theme->Template; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 
 				if ( file_exists( YITH_WCWL_DIR . 'assets/css/themes/' . $theme_slug . '.css' ) ) {
-					wp_register_style( 'yith-wcwl-theme', YITH_WCWL_URL . 'assets/css/themes/' . $theme_slug . '.css', array( $located ? 'yith-wcwl-user-main' : 'yith-wcwl-main' ), $this->version );
+					wp_register_style( 'yith-wcwl-theme', YITH_WCWL_URL . 'assets/css/themes/' . $theme_slug . '.css', array( $located ? 'yith-wcwl-user-main' : 'yith-wcwl-main' ), YITH_WCWL_VERSION );
 				}
-			}
-		}
-
-		/**
-		 * Register scripts required by the plugin
-		 *
-		 * @return void
-		 */
-		public function register_scripts() {
-			$woocommerce_base = WC()->template_path();
-			$assets_path      = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
-			$suffix           = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			$prefix           = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'unminified/' : '';
-
-			// register dependencies.
-			wp_register_script( 'prettyPhoto', $assets_path . 'js/prettyPhoto/jquery.prettyPhoto' . $suffix . '.js', array( 'jquery' ), '3.1.6', true );
-			wp_register_script( 'jquery-selectBox', YITH_WCWL_URL . 'assets/js/jquery.selectBox.min.js', array( 'jquery' ), '1.2.0', true );
-
-			/**
-			 * APPLY_FILTERS: yith_wcwl_main_script_deps
-			 *
-			 * Filter the script dependencies to be used in the plugin.
-			 *
-			 * @param array $deps Array of script dependencies
-			 *
-			 * @return array
-			 */
-			$deps = apply_filters( 'yith_wcwl_main_script_deps', array( 'jquery', 'jquery-selectBox', 'prettyPhoto' ) );
-
-			// get localized variables.
-			$yith_wcwl_l10n = $this->get_localize();
-
-			// register main script.
-			$located = locate_template(
-				array(
-					$woocommerce_base . 'wishlist.js',
-					'wishlist.js',
-				)
-			);
-
-			if ( ! $located ) {
-				wp_register_script( 'jquery-yith-wcwl', YITH_WCWL_URL . 'assets/js/' . $prefix . 'jquery.yith-wcwl' . $suffix . '.js', $deps, $this->version, true );
-				wp_localize_script( 'jquery-yith-wcwl', 'yith_wcwl_l10n', $yith_wcwl_l10n );
-			} else {
-				wp_register_script( 'jquery-yith-wcwl-user', str_replace( get_stylesheet_directory(), get_stylesheet_directory_uri(), $located ), $deps, $this->version, true );
-				wp_localize_script( 'jquery-yith-wcwl-user', 'yith_wcwl_l10n', $yith_wcwl_l10n );
 			}
 		}
 
@@ -552,6 +584,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				wp_enqueue_style( 'yith-wcwl-theme' );
 			}
 
+			YITH_WCWL_Add_To_Wishlist_Button::get_class()::enqueue_style();
+
 			// custom style.
 			$this->enqueue_custom_style();
 		}
@@ -559,13 +593,17 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		/**
 		 * Enqueue style dynamically generated by the plugin
 		 *
+		 * @param string $handle Get a custom handler in which add the inline style.
+		 *
 		 * @return void
 		 */
-		public function enqueue_custom_style() {
+		public function enqueue_custom_style( $handle = '' ) {
 			$custom_css = $this->build_custom_css();
 
 			if ( $custom_css ) {
-				$handle = wp_script_is( 'yith-wcwl-user-main' ) ? 'yith-wcwl-user-main' : 'yith-wcwl-main';
+				if ( ! $handle || ! wp_script_is( $handle ) ) {
+					$handle = wp_script_is( 'yith-wcwl-user-main' ) ? 'yith-wcwl-user-main' : 'yith-wcwl-main';
+				}
 
 				wp_add_inline_style( $handle, $custom_css );
 			}
@@ -595,7 +633,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			/**
 			 * APPLY_FILTERS: yith_wcwl_localize_script
 			 *
-			 * Filter the array with the parameters sent to the plugin scripts trought the localize.
+			 * Filter the array with the parameters sent to the plugin scripts through localize.
 			 *
 			 * @param array $localize Array of parameters
 			 *
@@ -604,10 +642,10 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			return apply_filters(
 				'yith_wcwl_localize_script',
 				array(
-					'ajax_url'                    => admin_url( 'admin-ajax.php', 'relative' ),
-					'redirect_to_cart'            => get_option( 'yith_wcwl_redirect_cart' ),
-					'yith_wcwl_button_position'   => get_option( 'yith_wcwl_button_position' ),
-					'multi_wishlist'              => false,
+					'ajax_url'                               => admin_url( 'admin-ajax.php', 'relative' ),
+					'redirect_to_cart'                       => get_option( 'yith_wcwl_redirect_cart' ),
+					'yith_wcwl_button_position'              => get_option( 'yith_wcwl_button_position' ),
+					'multi_wishlist'                         => false,
 					/**
 					 * APPLY_FILTERS: yith_wcwl_hide_add_button
 					 *
@@ -617,9 +655,9 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'hide_add_button'             => apply_filters( 'yith_wcwl_hide_add_button', true ),
-					'enable_ajax_loading'         => 'yes' === get_option( 'yith_wcwl_ajax_enable', 'no' ),
-					'ajax_loader_url'             => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
+					'hide_add_button'                        => apply_filters( 'yith_wcwl_hide_add_button', true ),
+					'enable_ajax_loading'                    => 'yes' === get_option( 'yith_wcwl_ajax_enable', 'no' ),
+					'ajax_loader_url'                        => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
 					'remove_from_wishlist_after_add_to_cart' => 'yes' === get_option( 'yith_wcwl_remove_after_add_to_cart' ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_is_wishlist_responsive
@@ -630,7 +668,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'is_wishlist_responsive'      => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
+					'is_wishlist_responsive'                 => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_time_to_close_prettyphoto
 					 *
@@ -640,7 +678,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return int
 					 */
-					'time_to_close_prettyphoto'   => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
+					'time_to_close_prettyphoto'              => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_fragments_index_glue
 					 *
@@ -650,7 +688,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return string
 					 */
-					'fragments_index_glue'        => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
+					'fragments_index_glue'                   => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_reload_on_found_variation
 					 *
@@ -660,7 +698,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'reload_on_found_variation'   => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
+					'reload_on_found_variation'              => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_mobile_media_query
 					 *
@@ -670,8 +708,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return int
 					 */
-					'mobile_media_query'          => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
-					'labels'                      => array(
+					'mobile_media_query'                     => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
+					'labels'                                 => array(
 						'cookie_disabled'       => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
 						/**
 						 * APPLY_FILTERS: yith_wcwl_added_to_cart_message
@@ -684,25 +722,25 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						 */
 						'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) ),
 					),
-					'actions'                     => array(
-						'add_to_wishlist_action'      => 'add_to_wishlist',
-						'remove_from_wishlist_action' => 'remove_from_wishlist',
+					'actions'                                => array(
+						'add_to_wishlist_action'                 => 'add_to_wishlist',
+						'remove_from_wishlist_action'            => 'remove_from_wishlist',
 						'reload_wishlist_and_adding_elem_action' => 'reload_wishlist_and_adding_elem',
-						'load_mobile_action'          => 'load_mobile',
-						'delete_item_action'          => 'delete_item',
-						'save_title_action'           => 'save_title',
-						'save_privacy_action'         => 'save_privacy',
-						'load_fragments'              => 'load_fragments',
+						'load_mobile_action'                     => 'load_mobile',
+						'delete_item_action'                     => 'delete_item',
+						'save_title_action'                      => 'save_title',
+						'save_privacy_action'                    => 'save_privacy',
+						'load_fragments'                         => 'load_fragments',
 					),
-					'nonce'                       => array(
-						'add_to_wishlist_nonce'      => wp_create_nonce( 'add_to_wishlist' ),
-						'remove_from_wishlist_nonce' => wp_create_nonce( 'remove_from_wishlist' ),
+					'nonce'                                  => array(
+						'add_to_wishlist_nonce'                 => wp_create_nonce( 'add_to_wishlist' ),
+						'remove_from_wishlist_nonce'            => wp_create_nonce( 'remove_from_wishlist' ),
 						'reload_wishlist_and_adding_elem_nonce' => wp_create_nonce( 'reload_wishlist_and_adding_elem' ),
-						'load_mobile_nonce'          => wp_create_nonce( 'load_mobile' ),
-						'delete_item_nonce'          => wp_create_nonce( 'delete_item' ),
-						'save_title_nonce'           => wp_create_nonce( 'save_title' ),
-						'save_privacy_nonce'         => wp_create_nonce( 'save_privacy' ),
-						'load_fragments_nonce'       => wp_create_nonce( 'load_fragments' ),
+						'load_mobile_nonce'                     => wp_create_nonce( 'load_mobile' ),
+						'delete_item_nonce'                     => wp_create_nonce( 'delete_item' ),
+						'save_title_nonce'                      => wp_create_nonce( 'save_title' ),
+						'save_privacy_nonce'                    => wp_create_nonce( 'save_privacy' ),
+						'load_fragments_nonce'                  => wp_create_nonce( 'load_fragments' ),
 					),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_redirect_after_ask_an_estimate
@@ -713,7 +751,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'redirect_after_ask_estimate' => apply_filters( 'yith_wcwl_redirect_after_ask_an_estimate', false ),
+					'redirect_after_ask_estimate'            => apply_filters( 'yith_wcwl_redirect_after_ask_an_estimate', false ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_redirect_url_after_ask_an_estimate
 					 *
@@ -723,7 +761,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return string
 					 */
-					'ask_estimate_redirect_url'   => apply_filters( 'yith_wcwl_redirect_url_after_ask_an_estimate', get_home_url() ),
+					'ask_estimate_redirect_url'              => apply_filters( 'yith_wcwl_redirect_url_after_ask_an_estimate', get_home_url() ),
 				)
 			);
 		}
@@ -740,7 +778,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			if ( ! defined( 'YIT' ) ) :
 				?>
 				<script>document.documentElement.className = document.documentElement.className + ' yes-js js_active js'</script>
-				<?php
+			<?php
 			endif;
 		}
 
@@ -754,9 +792,9 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @var $var array Array of parameters for current view
 		 * @return void
 		 */
-		public function main_wishlist_content( $var ) {
-			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
-			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
+		public function main_wishlist_content( $var ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound
+			$template = isset( $var[ 'template_part' ] ) ? $var[ 'template_part' ] : 'view';
+			$layout   = ! empty( $var[ 'layout' ] ) ? $var[ 'layout' ] : '';
 
 			yith_wcwl_get_template_part( $template, '', $layout, $var );
 		}
@@ -766,12 +804,12 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 *
 		 * @param array $var Array of variables to pass to the template.
 		 *
-		 * @var $var array Array of parameters for current view
+		 * @var         $var array Array of parameters for current view
 		 * @return void
 		 */
-		public function wishlist_header( $var ) {
-			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
-			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
+		public function wishlist_header( $var ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound
+			$template = isset( $var[ 'template_part' ] ) ? $var[ 'template_part' ] : 'view';
+			$layout   = ! empty( $var[ 'layout' ] ) ? $var[ 'layout' ] : '';
 
 			yith_wcwl_get_template_part( $template, 'header', $layout, $var );
 		}
@@ -781,12 +819,12 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 *
 		 * @param array $var Array of variables to pass to the template.
 		 *
-		 * @var $var array Array of parameters for current view
+		 * @var         $var array Array of parameters for current view
 		 * @return void
 		 */
-		public function wishlist_footer( $var ) {
-			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
-			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
+		public function wishlist_footer( $var ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound
+			$template = isset( $var[ 'template_part' ] ) ? $var[ 'template_part' ] : 'view';
+			$layout   = ! empty( $var[ 'layout' ] ) ? $var[ 'layout' ] : '';
 
 			yith_wcwl_get_template_part( $template, 'footer', $layout, $var );
 		}
@@ -796,12 +834,14 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		/**
 		 * Add class to products when Add to Wishlist is shown on loop
 		 *
-		 * @param array $classes Array of available classes for the product.
+		 * @param array        $classes Array of available classes for the product.
+		 * @param string|array $class   Additional class.
+		 * @param int          $post_id Post ID.
 		 * @return array Array of filtered classes for the product
 		 * @since 3.0.0
 		 */
-		public function add_products_class_on_loop( $classes ) {
-			if ( yith_wcwl_is_single() ) {
+		public function add_products_class_on_loop( $classes, $class = '', $post_id = 0 ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.classFound
+			if ( yith_wcwl_is_single() || doing_action( 'body_class' ) || ! $post_id || ! in_array( get_post_type( $post_id ), array( 'product', 'product_variation' ), true ) ) {
 				return $classes;
 			}
 
@@ -840,28 +880,28 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						// remove item if type is not supported.
 						unset( $options[ $id ] );
 					} elseif ( 'ajax_loading' === $id ) {
-						$options['ajax_loading'] = false;
+						$options[ 'ajax_loading' ] = false;
 					}
 				}
 			}
 
 			// applies context specific changes.
 			if ( ! empty( $context ) ) {
-				$options['item'] = $context;
+				$options[ 'item' ] = $context;
 
 				switch ( $context ) {
 					case 'add_to_wishlist':
-						unset( $options['template_part'] );
-						unset( $options['label'] );
-						unset( $options['exists'] );
-						unset( $options['icon'] );
-						unset( $options['link_classes'] );
-						unset( $options['link_popup_classes'] );
-						unset( $options['container_classes'] );
-						unset( $options['found_in_list'] );
-						unset( $options['found_item'] );
-						unset( $options['popup_title'] );
-						unset( $options['wishlist_url'] );
+						unset( $options[ 'template_part' ] );
+						unset( $options[ 'label' ] );
+						unset( $options[ 'exists' ] );
+						unset( $options[ 'icon' ] );
+						unset( $options[ 'link_classes' ] );
+						unset( $options[ 'link_popup_classes' ] );
+						unset( $options[ 'container_classes' ] );
+						unset( $options[ 'found_in_list' ] );
+						unset( $options[ 'found_item' ] );
+						unset( $options[ 'popup_title' ] );
+						unset( $options[ 'wishlist_url' ] );
 						break;
 				}
 			}
@@ -895,7 +935,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * Alter add to cart button when on wishlist page
 		 *
 		 * @return void
-		 * @since 2.0.0
+		 * @since   2.0.0
 		 * @version 3.0.0
 		 */
 		public function alter_add_to_cart_button() {
@@ -928,29 +968,32 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$button_class      = in_array( $use_custom_button, array( 'button_custom', 'button_default' ), true );
 			$icon              = get_option( 'yith_wcwl_add_to_cart_icon' );
 			$custom_icon       = get_option( 'yith_wcwl_add_to_cart_custom_icon' );
-			$classes           = isset( $args['class'] ) ? explode( ' ', $args['class'] ) : array();
+			$classes           = isset( $args[ 'class' ] ) ? explode( ' ', $args[ 'class' ] ) : array();
 			$pos               = array_search( 'button', $classes, true );
 
 			if ( ! $button_class && false !== $pos ) {
 				unset( $classes[ $pos ] );
 			} elseif ( $button_class ) {
+				if ( 'button_default' === $use_custom_button ) {
+					$classes[] = 'yith-wcwl-themed-button-style';
+				}
 				$classes[] = 'button';
 			}
 
 			$classes[] = 'add_to_cart';
 			$classes[] = 'alt';
 
-			$args['class'] = implode( ' ', $classes );
+			$args[ 'class' ] = implode( ' ', $classes );
 
 			if ( 'button_custom' === $use_custom_button && 'none' !== $icon ) {
-				if ( ! isset( $args['attributes'] ) ) {
-					$args['attributes'] = array();
+				if ( ! isset( $args[ 'attributes' ] ) ) {
+					$args[ 'attributes' ] = array();
 				}
 
 				if ( 'custom' !== $icon ) {
-					$args['attributes']['data-icon'] = $icon;
+					$args[ 'attributes' ][ 'data-icon' ] = $icon;
 				} elseif ( $custom_icon ) {
-					$args['attributes']['data-icon'] = $custom_icon;
+					$args[ 'attributes' ][ 'data-icon' ] = $custom_icon;
 				}
 			}
 
@@ -960,7 +1003,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		/**
 		 * Filter Add to Cart button label on wishlist page
 		 *
-		 * @param string      $text Button label.
+		 * @param string      $text    Button label.
 		 * @param \WC_Product $product Current product.
 		 * @return string Filtered label
 		 */
@@ -984,7 +1027,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		/**
 		 * Filter Add to Cart button url on wishlist page
 		 *
-		 * @param string      $url Url to the Add to Cart.
+		 * @param string      $url     Url to the Add to Cart.
 		 * @param \WC_Product $product Current product.
 		 * @return string Filtered url
 		 */
@@ -1013,8 +1056,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					$url = add_query_arg(
 						array(
 							'remove_from_wishlist_after_add_to_cart' => $product->get_id(),
-							'wishlist_id'    => $wishlist_id,
-							'wishlist_token' => $yith_wcwl_wishlist_token,
+							'wishlist_id'                            => $wishlist_id,
+							'wishlist_token'                         => $yith_wcwl_wishlist_token,
 						),
 						$url
 					);
@@ -1046,7 +1089,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return string Filtered font-awesome class
 		 * @since 2.0.2
 		 */
-		public function update_font_awesome_classes( $class ) {
+		public function update_font_awesome_classes( $class ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.classFound
 			$exceptions = array(
 				'icon-envelope'           => 'fa-envelope-o',
 				'icon-star-empty'         => 'fa-star-o',
@@ -1136,7 +1179,6 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * Add Frequently Bought Together shortcode to wishlist page
 		 *
 		 * @param mixed $meta Meta.
-		 * @author Francesco Licandro
 		 */
 		public function yith_wcfbt_shortcode( $meta ) {
 
@@ -1144,16 +1186,16 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				return;
 			}
 
-			$products = YITH_WCWL()->get_products(
+			$products = yith_wcwl_wishlists()->get_items(
 				array(
-					'wishlist_id' => is_user_logged_in() ? $meta['ID'] : '',
+					'wishlist_id' => is_user_logged_in() ? $meta[ 'ID' ] : '',
 				)
 			);
 
 			$ids = array();
 			// take id of products in wishlist.
 			foreach ( $products as $product ) {
-				$ids[] = $product['prod_id'];
+				$ids[] = $product[ 'prod_id' ];
 			}
 
 			if ( empty( $ids ) ) {
@@ -1171,7 +1213,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 2.0.0
 		 */
 		public function yith_wfbt_redirect_after_add_to_cart( $url ) {
-			if ( ! isset( $_REQUEST['yith_wfbt_shortcode'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! isset( $_REQUEST[ 'yith_wfbt_shortcode' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return $url;
 			}
 
@@ -1185,7 +1227,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return string Generated CSS code
 		 */
 		protected function build_custom_css( $rules = array() ) {
-			$generated_code = '';
+			$feedback_duration = yith_wcwl_get_feedback_duration();
 
 			/**
 			 * APPLY_FILTERS: yith_wcwl_custom_css_rules
@@ -1194,407 +1236,90 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			 *
 			 * @param array $css_rules CSS rules
 			 *
+			 * TODO: update filter name and deprecation.
+			 *
 			 * @return array
 			 */
 			$rules = apply_filters(
 				'yith_wcwl_custom_css_rules',
 				array_merge(
 					array(
-						'color_add_to_wishlist'    => array(
-							'selector' => '.woocommerce a.add_to_wishlist.button.alt',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background-color: %1$s; background: %1$s',
-									'default' => '#333333',
-								),
-								'text'             => array(
-									'rule'    => 'color: %s',
-									'default' => '#ffffff',
-								),
-								'border'           => array(
-									'rule'    => 'border-color: %s',
-									'default' => '#333333',
-								),
-								'background_hover' => array(
-									'rule'    => 'background-color: %1$s; background: %1$s',
-									'default' => '#4F4F4F',
-									'status'  => ':hover',
-								),
-								'text_hover'       => array(
-									'rule'    => 'color: %s',
-									'default' => '#ffffff',
-									'status'  => ':hover',
-								),
-								'border_hover'     => array(
-									'rule'    => 'border-color: %s',
-									'default' => '#4F4F4F',
-									'status'  => ':hover',
-								),
-							),
-							'deps'     => array(
+						'add_to_wishlist_icon_color'         => array(),
+						'added_to_wishlist_icon_color'       => array(),
+						'color_add_to_wishlist'              => array(
+							'deps' => array(
 								'yith_wcwl_add_to_wishlist_style' => 'button_custom',
 							),
 						),
-						'rounded_corners_radius'   => array(
-							'selector' => '.woocommerce a.add_to_wishlist.button.alt',
-							'rules'    => array(
-								'rule'    => 'border-radius: %dpx',
-								'default' => 16,
-							),
-							'deps'     => array(
-								'yith_wcwl_add_to_wishlist_style' => 'button_custom',
-							),
-						),
-						'color_add_to_cart'        => array(
-							'selector' => '.woocommerce .wishlist_table a.add_to_cart.button.alt',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#333333',
-								),
-								'text'             => array(
-									'rule'    => 'color: %s',
-									'default' => '#ffffff',
-								),
-								'border'           => array(
-									'rule'    => 'border-color: %s',
-									'default' => '#333333',
-								),
-								'background_hover' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#4F4F4F',
-									'status'  => ':hover',
-								),
-								'text_hover'       => array(
-									'rule'    => 'color: %s',
-									'default' => '#ffffff',
-									'status'  => ':hover',
-								),
-								'border_hover'     => array(
-									'rule'    => 'border-color: %s',
-									'default' => '#4F4F4F',
-									'status'  => ':hover',
-								),
-							),
-							'deps'     => array(
+						'rounded_corners_radius'             => array(),
+						'color_add_to_cart'                  => array(
+							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
 						'add_to_cart_rounded_corners_radius' => array(
-							'selector' => '.woocommerce .wishlist_table a.add_to_cart.button.alt',
-							'rules'    => array(
-								'rule'    => 'border-radius: %dpx',
-								'default' => 16,
-							),
-							'deps'     => array(
+
+							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_button_style_1'     => array(
-							'selector' => '.woocommerce .hidden-title-form button,
-								   .yith-wcwl-wishlist-new .create-wishlist-button,
-								   .wishlist_manage_table tfoot button.submit-wishlist-changes,
-								   .yith-wcwl-wishlist-search-form button.wishlist-search-button',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#333333',
-								),
-								'text'             => array(
-									'rule'    => 'color: %s',
-									'default' => '#ffffff',
-								),
-								'border'           => array(
-									'rule'    => 'border-color: %s',
-									'default' => '#333333',
-								),
-								'background_hover' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#333333',
-									'status'  => ':hover',
-								),
-								'text_hover'       => array(
-									'rule'    => 'color: %s',
-									'default' => '#ffffff',
-									'status'  => ':hover',
-								),
-								'border_hover'     => array(
-									'rule'    => 'border-color: %s',
-									'default' => '#333333',
-									'status'  => ':hover',
-								),
-							),
-							'deps'     => array(
+						'color_button_style_1'               => array(
+							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_button_style_2'     => array(
-							'selector' => '.woocommerce .wishlist-title a.show-title-form,
-								   .woocommerce .hidden-title-form a.hide-title-form,
-								   .wishlist_manage_table tfoot a.create-new-wishlist',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#333333',
-								),
-								'text'             => array(
-									'rule'    => 'color: %s',
-									'default' => '#ffffff',
-								),
-								'border'           => array(
-									'rule'    => 'border-color: %s',
-									'default' => '#333333',
-								),
-								'background_hover' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#333333',
-									'status'  => ':hover',
-								),
-								'text_hover'       => array(
-									'rule'    => 'color: %s',
-									'default' => '#ffffff',
-									'status'  => ':hover',
-								),
-								'border_hover'     => array(
-									'rule'    => 'border-color: %s',
-									'default' => '#333333',
-									'status'  => ':hover',
-								),
-							),
-							'deps'     => array(
+						'color_button_style_2'               => array(
+							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_wishlist_table'     => array(
-							'selector' => '.woocommerce table.shop_table.wishlist_table tr td',
-							'rules'    => array(
-								'background' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#FFFFFF',
-								),
-								'text'       => array(
-									'rule'    => 'color: %s',
-									'default' => '#6D6C6C',
-								),
-								'border'     => array(
-									'rule'    => 'border-color: %s;',
-									'default' => '#FFFFFF',
-								),
-							),
-							'deps'     => array(
+						'color_wishlist_table'               => array(
+							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_headers_background' => array(
-							'selector' => '.wishlist_table thead tr th,
-								   .wishlist_table tfoot td td,
-								   .widget_yith-wcwl-lists ul.dropdown li.current a,
-								   .widget_yith-wcwl-lists ul.dropdown li a:hover,
-								   .selectBox-dropdown-menu.selectBox-options li.selectBox-selected a,
-								   .selectBox-dropdown-menu.selectBox-options li.selectBox-hover a',
-							'rules'    => array(
-								'rule'    => 'background: %1$s; background-color: %1$s;',
-								'default' => '#F4F4F4',
-							),
-							'deps'     => array(
+						'color_headers_background'           => array(
+							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_share_button'       => array(
-							'selector' => '.yith-wcwl-share li a',
-							'rules'    => array(
-								'color'       => array(
-									'rule'    => 'color: %s;',
-									'default' => '#FFFFFF',
-								),
-								'color_hover' => array(
-									'rule'    => 'color: %s;',
-									'status'  => ':hover',
-									'default' => '#FFFFFF',
-								),
-							),
-							'deps'     => array(
-								'yith_wcwl_enable_share' => 'yes',
-							),
-						),
-						'color_fb_button'          => array(
-							'selector' => '.yith-wcwl-share a.facebook',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#39599E',
-								),
-								'background_hover' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'status'  => ':hover',
-									'default' => '#39599E',
-								),
-							),
-							'deps'     => array(
-								'yith_wcwl_enable_share' => 'yes',
-								'yith_wcwl_share_fb'     => 'yes',
-							),
-						),
-						'color_tw_button'          => array(
-							'selector' => '.yith-wcwl-share a.twitter',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#45AFE2',
-								),
-								'background_hover' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'status'  => ':hover',
-									'default' => '#39599E',
-								),
-							),
-							'deps'     => array(
-								'yith_wcwl_enable_share'  => 'yes',
-								'yith_wcwl_share_twitter' => 'yes',
-							),
-						),
-						'color_pr_button'          => array(
-							'selector' => '.yith-wcwl-share a.pinterest',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#AB2E31',
-								),
-								'background_hover' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'status'  => ':hover',
-									'default' => '#39599E',
-								),
-							),
-							'deps'     => array(
-								'yith_wcwl_enable_share' => 'yes',
-								'yith_wcwl_share_pinterest' => 'yes',
-							),
-						),
-						'color_em_button'          => array(
-							'selector' => '.yith-wcwl-share a.email',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#FBB102',
-								),
-								'background_hover' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'status'  => ':hover',
-									'default' => '#39599E',
-								),
-							),
-							'deps'     => array(
-								'yith_wcwl_enable_share' => 'yes',
-								'yith_wcwl_share_email'  => 'yes',
-							),
-						),
-						'color_wa_button'          => array(
-							'selector' => '.yith-wcwl-share a.whatsapp',
-							'rules'    => array(
-								'background'       => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'default' => '#00A901',
-								),
-								'background_hover' => array(
-									'rule'    => 'background: %1$s; background-color: %1$s;',
-									'status'  => ':hover',
-									'default' => '#39599E',
-								),
-							),
-							'deps'     => array(
-								'yith_wcwl_enable_share'   => 'yes',
-								'yith_wcwl_share_whatsapp' => 'yes',
-							),
+						'color_share_button'                 => array(),
+						'color_fb_button'                    => array(),
+						'color_tw_button'                    => array(),
+						'color_pr_button'                    => array(),
+						'color_em_button'                    => array(),
+						'color_wa_button'                    => array(),
+						'feedback_duration'                  => array(
+							'value' => ( $feedback_duration / 1000 ) . 's',
 						),
 					),
 					$rules
 				)
 			);
 
-			if ( empty( $rules ) ) {
-				return $generated_code;
-			}
+			// TODO: check if need to handle the dependencies.
 
-			// retrieve dependencies.
-			$deps_list    = wp_list_pluck( $rules, 'deps' );
-			$dependencies = array();
-
-			if ( ! empty( $deps_list ) ) {
-				foreach ( $deps_list as $rule => $deps ) {
-					foreach ( $deps as $dep_rule => $dep_value ) {
-						if ( ! isset( $dependencies[ $dep_rule ] ) ) {
-							$dependencies[ $dep_rule ] = get_option( $dep_rule );
+			$css_variables = array();
+			foreach ( $rules as $key => $value ) {
+				$option_name = "yith_wcwl_$key";
+				$value       = $value[ 'value' ] ?? get_option( $option_name, $value[ 'default' ] ?? null );
+				if ( ! is_null( $value ) ) {
+					$variable_name = str_replace( '_', '-', $key );
+					if ( is_array( $value ) ) {
+						foreach ( $value as $sub_key => $sub_value ) {
+							$sub_variable_name = $variable_name . '-' . str_replace( '_', '-', $sub_key );
+							$css_variables[]   = "--$sub_variable_name: $sub_value";
 						}
+					} else {
+						$css_variables[] = "--$variable_name: $value" . ( is_numeric( $value ) ? 'px' : '' );
 					}
 				}
 			}
 
-			foreach ( $rules as $id => $rule ) {
-				// check dependencies first.
-				if ( ! empty( $rule['deps'] ) ) {
-					foreach ( $rule['deps'] as $dep_rule => $dep_value ) {
-						if ( ! isset( $dependencies[ $dep_rule ] ) || $dependencies[ $dep_rule ] !== $dep_value ) {
-							continue 2;
-						}
-					}
-				}
-
-				// retrieve values from db.
-				$values     = get_option( "yith_wcwl_{$id}" );
-				$new_rules  = array();
-				$rules_code = '';
-
-				if ( isset( $rule['rules']['rule'] ) ) {
-					// if we have a single-valued option, just search for the rule to apply.
-					$status = isset( $rule['rules']['status'] ) ? $rule['rules']['status'] : '';
-
-					if ( ! isset( $new_rules[ $status ] ) ) {
-						$new_rules[ $status ] = array();
-					}
-
-					$new_rules[ $status ][] = $this->build_css_rule( $rule['rules']['rule'], $values, $rule['rules']['default'] );
-				} else {
-					// otherwise cycle through rules, and generate CSS code.
-					foreach ( $rule['rules'] as $property => $css ) {
-						$status = isset( $css['status'] ) ? $css['status'] : '';
-
-						if ( ! isset( $new_rules[ $status ] ) ) {
-							$new_rules[ $status ] = array();
-						}
-
-						$new_rules[ $status ][] = $this->build_css_rule( $css['rule'], isset( $values[ $property ] ) ? $values[ $property ] : false, $css['default'] );
-					}
-				}
-
-				// if code was generated, prepend selector.
-				if ( ! empty( $new_rules ) ) {
-					foreach ( $new_rules as $status => $rules ) {
-						$selector = $rule['selector'];
-
-						if ( ! empty( $status ) ) {
-							$updated_selector = array();
-							$split_selectors  = explode( ',', $rule['selector'] );
-
-							foreach ( $split_selectors as $split_selector ) {
-								$updated_selector[] = $split_selector . $status;
-							}
-
-							$selector = implode( ',', $updated_selector );
-						}
-
-						$rules_code .= $selector . '{' . implode( '', $rules ) . '}';
-					}
-				}
-
-				// append new rule to generated CSS.
-				$generated_code .= $rules_code;
-			}
-
-			$custom_css = get_option( 'yith_wcwl_custom_css' );
-
+			$generated_code = ' :root { ' . implode( '; ', $css_variables ) . ' } ';
+			$custom_css     = get_option( 'yith_wcwl_custom_css' );
 			if ( $custom_css ) {
-				$generated_code .= $custom_css;
+				$generated_code .= ' ' . $custom_css;
 			}
 
 			return $generated_code;
@@ -1609,7 +1334,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 *
 		 * @return string Formatted CSS rule
 		 */
-		protected function build_css_rule( $rule, $value, $default = '' ) {
+		protected function build_css_rule( $rule, $value, $default = '' ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.defaultFound
 			$value = ( '0' === $value || ( ! empty( $value ) && ! is_array( $value ) ) ) ? $value : $default;
 
 			return sprintf( rtrim( $rule, ';' ) . ';', $value );
@@ -1642,13 +1367,13 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			if ( ! empty( $cookie ) ) {
 				foreach ( $cookie as $item ) {
-					if ( ! isset( $item['add-to-wishlist'] ) ) {
+					if ( ! isset( $item[ 'add-to-wishlist' ] ) ) {
 						return;
 					}
 
 					$new_cookie[] = array(
-						'prod_id'     => $item['add-to-wishlist'],
-						'quantity'    => isset( $item['quantity'] ) ? $item['quantity'] : 1,
+						'prod_id'     => $item[ 'add-to-wishlist' ],
+						'quantity'    => isset( $item[ 'quantity' ] ) ? $item[ 'quantity' ] : 1,
 						'wishlist_id' => false,
 					);
 				}
@@ -1672,17 +1397,17 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				}
 
 				foreach ( $cookie as $item ) {
-					if ( $default_list->has_product( $item['prod_id'] ) ) {
+					if ( $default_list->has_product( $item[ 'prod_id' ] ) ) {
 						continue;
 					}
 
 					$new_item = new YITH_WCWL_Wishlist_Item();
 
-					$new_item->set_product_id( $item['prod_id'] );
-					$new_item->set_quantity( $item['quantity'] );
+					$new_item->set_product_id( $item[ 'prod_id' ] );
+					$new_item->set_quantity( $item[ 'quantity' ] );
 
-					if ( isset( $item['dateadded'] ) ) {
-						$new_item->set_date_added( $item['dateadded'] );
+					if ( isset( $item[ 'dateadded' ] ) ) {
+						$new_item->set_date_added( $item[ 'dateadded' ] );
 					}
 
 					$default_list->add_item( $new_item );
@@ -1694,22 +1419,4 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			}
 		}
 	}
-}
-
-/**
- * Unique access to instance of YITH_WCWL_Frontend class
- *
- * @return \YITH_WCWL_Frontend|\YITH_WCWL_Frontend_Premium
- * @since 2.0.0
- */
-function YITH_WCWL_Frontend() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-	if ( defined( 'YITH_WCWL_PREMIUM' ) ) {
-		$instance = YITH_WCWL_Frontend_Premium::get_instance();
-	} elseif ( defined( 'YITH_WCWL_EXTENDED' ) ) {
-		$instance = YITH_WCWL_Frontend_Extended::get_instance();
-	} else {
-		$instance = YITH_WCWL_Frontend::get_instance();
-	}
-
-	return $instance;
 }

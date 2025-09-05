@@ -9,7 +9,7 @@
  * Text Domain: yith-plugin-framework-loader
  * Domain Path: /languages/
  *
- * @author  YITH
+ * @author  YITH <plugins@yithemes.com>
  * @package YITH Plugin Framework Loader
  * @version 1.0.0
  */

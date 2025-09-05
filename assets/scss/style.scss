@@ -1,0 +1,537 @@
+/**
+ * Main YITH WooCommerce Wishlist CSS
+ *
+ * @author YITH <plugins@yithemes.com>
+ * @package YITH WooCommerce Wishlist
+ * @version 3.0.0
+ */
+
+@use "includes/frontend/_add-to-wishlist";
+@use "includes/frontend/_wishlist";
+
+/**
+ * Index:
+ *
+ * 1. SELECTBOX STYLE
+ * 2. PRETTY PHOTO STYLE
+ * 3. BLOCK STYLE
+ * 4. POPUP ADD TO WISHLIST
+ * 5. DROPDOWN ADD TO WISHLIST
+ * 6. TOOLTIP
+ * 7. POPUP MESSAGE
+ * 8. WISHLIST TITLE FORM
+ * 9. WISHLIST TABLE TEMPLATE
+ * 10. WISHLIST MODERN GRID / IMAGES GRID TEMPLATE
+ * 11. WISHLIST MOBILE
+ * 12. WISHLIST BUTTONS
+ * 13. WISHLIST TITLE
+ * 14. REMOVE BUTTONS
+ * 15. SHARE BUTTONS
+ * 16. ASK AN ESTIMATE BUTTON
+ * 17. WISHLIST FOOTER
+ * 18. MOVE TO ANOTHER WISHLIST POPUP
+ * 19. CREATE NEW WISHLIST
+ * 20. MANAGE WISHLISTS
+ * 21. MANAGE MOBILE WISHLISTS
+ * 22. SEARCH WISHLIST
+ * 23. AJAX LOADING GIF
+ * 24. LISTS WIDGET
+ * 25. ITEMS WIDGET
+ * 26. RESPONSIVE
+ */
+
+/* === 1. SELECTBOX STYLE === */
+
+.woocommerce a.selectBox {
+	background   : #ffffff;
+	min-width    : 100px;
+	margin-right : 10px;
+	color        : inherit;
+}
+
+.woocommerce a.selectBox,
+.woocommerce a.selectBox:hover {
+	border-bottom : 1px solid #bbb !important;
+}
+
+.woocommerce a.selectBox:hover {
+	color : inherit;
+}
+
+.woocommerce a.selectBox:focus {
+	border : 1px solid #ccc;
+}
+
+.selectBox-dropdown .selectBox-label {
+	vertical-align : middle;
+	padding        : 3px 8px;
+}
+
+.selectBox-dropdown .selectBox-arrow {
+	border     : none;
+	background : url(../images/jquery.selectBox-arrow.png) center right no-repeat;
+}
+
+.selectBox-dropdown.selectBox-menuShowing .selectBox-arrow {
+	background : url(../images/jquery.selectBox-arrow.png) center left no-repeat;
+}
+
+.selectBox-dropdown-menu {
+	border-bottom-left-radius  : 3px;
+	border-bottom-right-radius : 3px;
+	padding                    : 5px;
+	font-size                  : 80%;
+}
+
+.selectBox-dropdown-menu li a {
+	color         : inherit;
+	padding       : 5px 8px;
+	border-radius : 3px;
+}
+
+.selectBox-dropdown-menu a:hover {
+	color           : inherit;
+	text-decoration : none;
+}
+
+select.selectBox.change-wishlist {
+	max-width : 100px;
+}
+
+.selectBox.change-wishlist {
+	width : auto !important;
+}
+
+.change-wishlist-selectBox-dropdown-menu {
+	width : auto !important;
+}
+
+/* === 2. PRETTY PHOTO STYLE === */
+
+.yith-wcwl-with-pretty-photo {
+	overflow : hidden;
+}
+
+.yith-wcwl-with-pretty-photo .pp_content {
+	height : auto !important;
+}
+
+/* === 3. BLOCK STYLE === */
+
+.woocommerce .wishlist-fragment .blockUI.blockOverlay::before,
+.woocommerce .yith-wcwl-popup-form .blockUI.blockOverlay::before {
+	display : none;
+}
+
+/* === 23. AJAX LOADING GIF === */
+
+.yith-wcwl-add-to-wishlist .ajax-loading {
+	box-shadow         : none !important;
+	-moz-box-shadow    : none !important;
+	-webkit-box-shadow : none !important;
+	display            : inline !important;
+	margin-left        : 5px;
+	vertical-align     : middle;
+	visibility         : hidden;
+	width              : 16px !important;
+	height             : 16px !important;
+}
+
+/* === 24. LISTS WIDGET === */
+
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown li,
+.widget_yith-wcwl-lists ul.dropdown li {
+	padding : 0;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown > li a,
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown ul.lists > li a,
+.widget_yith-wcwl-lists ul.dropdown > li a,
+.widget_yith-wcwl-lists ul.dropdown ul.lists > li a {
+	display : block;
+	padding : 5px 15px;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown ul.lists > li a,
+.widget_yith-wcwl-lists ul.dropdown ul.lists > li a {
+	padding : 5px 25px;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown > li.lists-section,
+.widget_yith-wcwl-lists ul.dropdown > li.lists-section {
+	border-bottom : 1px solid #e7e7e7;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-lists ul.dropdown ul.lists,
+.widget_yith-wcwl-lists ul.dropdown ul.lists {
+	margin : 0;
+}
+
+/* === 25. ITEMS WIDGET === */
+
+.elementor-widget-wp-widget-yith-wcwl-items,
+.widget_yith-wcwl-items {
+
+	ul.product_list_widget {
+		margin-bottom : 40px !important;
+
+		&::-webkit-scrollbar-thumb {
+			border-radius    : 4px;
+			background-color : rgba(0, 0, 0, .4);
+			box-shadow       : 0 0 1px rgba(255, 255, 255, .4);
+		}
+
+		li {
+			display : table;
+
+			&:not(:last-child) {
+				margin-bottom : 10px;
+			}
+
+			.remove_from_all_wishlists,
+			.image-thumb,
+			.mini-cart-item-info {
+				display        : table-cell;
+				vertical-align : middle;
+			}
+		}
+	}
+
+	p.empty-wishlist {
+		margin-bottom : 0 !important;
+	}
+
+	.heading {
+		text-align : center;
+		cursor     : pointer;
+
+		a {
+			color : inherit;
+		}
+	}
+
+	.mini {
+		position : relative;
+		display  : flex;
+
+		&:hover .list {
+			display : block;
+		}
+
+		ul.product_list_widget {
+			max-height  : 30vh;
+			overflow-y  : auto;
+			margin-left : -20px;
+
+			&::-webkit-scrollbar {
+				-webkit-appearance : none;
+				width              : 7px;
+			}
+		}
+
+		.heading {
+			display : inline-block;
+
+			.items-counter {
+				i {
+					font-size : 25px;
+				}
+
+				.items-count {
+					font-size   : 14px;
+					line-height : 20px;
+				}
+			}
+		}
+
+		.list {
+			position           : absolute;
+			z-index            : 1;
+			left               : 0;
+			background         : #fff;
+			padding            : 25px 40px;
+			min-width          : 300px;
+			display            : none;
+
+			-webkit-box-shadow : 0 0 15px rgba(0, 0, 0, .3);
+			-moz-box-shadow    : 0 0 15px rgba(0, 0, 0, .3);
+			box-shadow         : 0 0 15px rgba(0, 0, 0, .3);
+		}
+
+		.items-counter {
+			& > a {
+				display     : flex;
+				align-items : flex-end;
+
+				.heading-icon {
+					display : flex;
+
+					svg.yith-wcwl-icon-svg,
+					img {
+						stroke-width : 1.25;
+						height       : 35px;
+						width        : 35px;
+					}
+				}
+			}
+
+		}
+	}
+
+	.extended .heading {
+		h3:after {
+			content       : "";
+			display       : block;
+
+			max-width     : 80px;
+			border-bottom : 1px solid #cdcdcd;
+			margin        : 10px auto;
+		}
+
+		.items-counter {
+			position        : relative;
+			display         : flex;
+			align-items     : center;
+			justify-content : center;
+
+			i {
+				font-size     : 70px;
+				position      : relative;
+				margin-bottom : 10px;
+			}
+
+			svg.yith-wcwl-icon-svg {
+				width  : 70px;
+				height : 70px;
+			}
+
+			.items-count {
+				display   : block;
+				position  : absolute;
+				font-size : 14px;
+			}
+		}
+	}
+}
+
+
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .remove_from_all_wishlists,
+.widget_yith-wcwl-items ul.product_list_widget li .remove_from_all_wishlists {
+	font-size : 1.2rem;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .image-thumb img,
+.widget_yith-wcwl-items ul.product_list_widget li .image-thumb img {
+	margin-left : 10px;
+	max-width   : 40px;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .mini-cart-item-info,
+.widget_yith-wcwl-items ul.product_list_widget li .mini-cart-item-info {
+	display        : inline-block;
+	vertical-align : middle;
+	margin-left    : 10px;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .mini-cart-item-info a,
+.widget_yith-wcwl-items ul.product_list_widget li .mini-cart-item-info a {
+	display : inline-block;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-items ul.product_list_widget li .mini-cart-item-info > *,
+.widget_yith-wcwl-items ul.product_list_widget li .mini-cart-item-info > * {
+	display : block;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-items .show-wishlist,
+.elementor-widget-wp-widget-yith-wcwl-items a.add_all_to_cart,
+.widget_yith-wcwl-items .show-wishlist,
+.widget_yith-wcwl-items a.add_all_to_cart {
+	display : block !important;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-items .show-wishlist,
+.widget_yith-wcwl-items .show-wishlist {
+	margin-bottom : 10px;
+}
+
+.elementor-widget-wp-widget-yith-wcwl-items a.add_all_to_cart,
+.widget_yith-wcwl-items a.add_all_to_cart {
+	text-align : center;
+}
+
+/* === 26. RESPONSIVE === */
+
+@media(max-width : 768px) {
+	.yith_wcwl_wishlist_bulk_action select {
+		width         : 100%;
+		margin-bottom : 15px;
+	}
+
+	.yith_wcwl_wishlist_bulk_action input {
+		float : right;
+	}
+
+	.yith_wcwl_wishlist_footer .yith_wcwl_footer_additional_action {
+		float : none;
+	}
+
+	.yith_wcwl_wishlist_footer .yith_wcwl_footer_additional_action .ask-an-estimate-button {
+		width      : 100%;
+		text-align : center;
+	}
+}
+
+// OLD MODAL STYLE COMPATIBILITY
+
+$modal-overlay                     : var(--modal-colors-overlay, #0000004d);
+$modal-icon                        : var(--modal-colors-icon, #007565);
+$modal-primary-button              : var(--modal-colors-primary-button, #007565);
+$modal-primary-button-text         : var(--modal-colors-primary-button-text, #fff);
+$modal-primary-button-hover        : var(--modal-colors-primary-button-hover, #007565);
+$modal-primary-button-text-hover   : var(--modal-colors-primary-button-text-hover, #fff);
+$modal-secondary-button            : var(--modal-colors-secondary-button, #08a889);
+$modal-secondary-button-text       : var(--modal-colors-secondary-button-text, #fff);
+$modal-secondary-button-hover      : var(--modal-colors-secondary-button-hover, #08a889);
+$modal-secondary-button-text-hover : var(--modal-colors-secondary-button-text-hover, #fff);
+
+.yith-wcwl-pp-modal {
+	position  : fixed !important;;
+	top       : 50% !important;;
+	left      : 50% !important;;
+	transform : translate(-50%, -50%) !important;;
+	width     : 450px !important;
+
+	.yith-wcwl-popup-form {
+		padding : 0;
+	}
+
+	div.pp_content_container {
+		padding       : 40px 35px;
+		border-radius : 15px;
+		display       : flex;
+		box-shadow    : rgba(24, 53, 62, 0.1) 0 11px 15px -7px, rgba(24, 53, 62, 0.07) 0px 24px 38px 3px, rgba(24, 53, 62, 0.06) 0px 9px 46px 8px;
+		max-width     : fit-content;
+
+		.pp_content {
+			width : 380px !important;
+
+			.yith-wcwl-popup-content {
+				padding : 0;
+
+				.heading-icon {
+					margin-top : 0;
+				}
+
+				.create-wishlist-button {
+					margin-bottom : 0;
+				}
+
+				.wishlist-select + .select2-container {
+					width : 100% !important;
+				}
+
+				p.form-row.yith-wcwl-info-text {
+					text-wrap  : balance;
+					text-align : center;
+				}
+			}
+		}
+
+		.popup-description {
+			margin-bottom : 10px;
+		}
+
+		.heading-icon {
+			color      : $modal-icon;
+			height     : auto;
+			max-height : 90px;
+
+			&:not([id$="-light"]):not(.yith-wcwl-icon-svg--light) {
+				stroke-width : 1;
+
+				* {
+					stroke-width : 1;
+				}
+			}
+		}
+
+		div.yith-wcwl-modal__content {
+			padding        : 20px 55px 0;
+			display        : flex;
+			flex-direction : column;
+			gap            : 20px;
+		}
+
+		div.yith-wcwl-popup-footer {
+			margin-bottom : 0;
+		}
+
+		.popup_button,
+		.create-wishlist-button,
+		.ask-an-estimate-button {
+			transition      : .2s;
+			background      : $modal-primary-button;
+			color           : $modal-primary-button-text;
+			border          : none;
+			border-radius   : 8px;
+			width           : 100%;
+			box-sizing      : border-box;
+			display         : block;
+			padding         : 13px 25px;
+			text-align      : center;
+			text-decoration : none;
+			font-size       : 14px;
+
+			&:hover {
+				color      : $modal-primary-button-text-hover;
+				background : $modal-primary-button-hover;
+			}
+
+			.yith-wcwl-icon-svg,
+			img {
+				display : none;
+			}
+		}
+
+		.woocommerce-input-wrapper {
+			label.radio,
+			span.radiobutton {
+				display : inline-block;
+				float   : left;
+			}
+
+			span.radiobutton {
+				clear : left;
+			}
+
+			span.description {
+				clear : both;
+			}
+		}
+
+		.yith-wcwl-modal__secondary-button {
+			transition    : .2s;
+			border-radius : 5px;
+			background    : $modal-secondary-button;
+			color         : $modal-secondary-button-text;
+			border        : none;
+
+			&:hover {
+				background : $modal-secondary-button-hover;
+				color      : $modal-secondary-button-text-hover;
+			}
+		}
+	}
+
+	&.feedback .pp_content_container {
+		padding : 20px 15px;
+	}
+
+	select.change-wishlist,
+	button.move-to-another-wishlist-button {
+		box-sizing : border-box;
+	}
+
+}
+

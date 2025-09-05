@@ -2,7 +2,7 @@
 /**
  * Add to wishlist button template
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Templates\AddToWishlist
  * @version 3.0.12
  */
@@ -30,9 +30,7 @@
  * @var $container_classes         string Container classes
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly.
 
 global $product;
 ?>

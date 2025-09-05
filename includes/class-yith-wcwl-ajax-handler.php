@@ -2,14 +2,12 @@
 /**
  * Static class that will handle all ajax calls for the list
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Classes
  * @version 3.0.0
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly
 
 if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 	/**
@@ -64,7 +62,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			}
 
 			try {
-				YITH_WCWL()->add();
+				yith_wcwl_wishlists()->add_item( yith_wcwl()->get_details() );
 
 				$return = 'true';
 
@@ -89,7 +87,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				 *
 				 * @return bool
 				 */
-				if ( apply_filters( 'yith_wcwl_show_popup_links', YITH_WCWL()->is_multi_wishlist_enabled() ) ) {
+				if ( apply_filters( 'yith_wcwl_show_popup_links', yith_wcwl_wishlists()->is_multi_wishlist_enabled() ) ) {
 					$message .= '<p class="after-links">
 					<a href="' . YITH_WCWL()->get_last_operation_url() . '">' . __( 'View &rsaquo;', 'yith-woocommerce-wishlist' ) . '</a>
 					<span class="separator">' . __( 'or', 'yith-woocommerce-wishlist' ) . '</span>
@@ -189,7 +187,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			$fragments = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
 			try {
-				YITH_WCWL()->remove();
+				yith_wcwl_wishlists()->remove_item(yith_wcwl()->get_details());
 
 				/**
 				 * APPLY_FILTERS: yith_wcwl_product_removed_text
@@ -344,7 +342,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			$type_msg = 'success';
 
 			try {
-				YITH_WCWL()->add();
+				yith_wcwl_wishlists()->add_item( yith_wcwl()->get_details() );
 
 				/**
 				 * APPLY_FILTERS: yith_wcwl_product_added_to_wishlist_message
@@ -384,7 +382,6 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			<?php
 
 			die();
-
 		}
 
 		/**

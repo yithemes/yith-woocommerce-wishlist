@@ -2,7 +2,7 @@
 /**
  * Uninstall plugin
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist
  * @version 2.0.16
  */
@@ -29,7 +29,7 @@ function yith_wcwl_uninstall() {
 		// Delete option from options table.
 		delete_option( 'yith_wcwl_version' );
 		delete_option( 'yith_wcwl_db_version' );
-		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", 'yith_wcwl_%' ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", 'yith_wcwl_%' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
 		// delete pages created for this plugin.
 		wp_delete_post( get_option( 'yith-wcwl-pageid' ), true );
@@ -48,7 +48,7 @@ if ( ! is_multisite() ) {
 	yith_wcwl_uninstall();
 } else {
 	global $wpdb;
-	$blog_ids = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}" );
+	$blog_ids         = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 	$original_blog_id = get_current_blog_id();
 
 	foreach ( $blog_ids as $blog_to_process ) {

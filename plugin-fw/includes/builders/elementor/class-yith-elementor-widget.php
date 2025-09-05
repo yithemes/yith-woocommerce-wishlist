@@ -17,7 +17,7 @@ if ( ! class_exists( 'YITH_Elementor_Widget' ) ) {
 	/**
 	 * YITH_Elementor_Widget class.
 	 *
-	 * @author  Leanza Francesco <leanzafrancesco@gmail.com>
+	 * @author  YITH <plugins@yithemes.com>
 	 */
 	class YITH_Elementor_Widget extends Widget_Base {
 

@@ -2,8 +2,8 @@
 /**
  * Functions file
  *
- * @author YITH
  * @package YITH\Wishlist\Functions
+ * @author  YITH <plugins@yithemes.com>
  * @version 3.0.0
  */
 
@@ -111,7 +111,7 @@ if ( ! function_exists( 'yith_wcwl_locate_template' ) ) {
 	 * @return string
 	 * @since 1.0.0
 	 */
-	function yith_wcwl_locate_template( $path, $var = null ) {
+	function yith_wcwl_locate_template( $path, $var = null ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter, Universal.NamingConventions.NoReservedKeywordParameterNames.varFound
 		$woocommerce_base = WC()->template_path();
 
 		$template_woocommerce_path = $woocommerce_base . $path;
@@ -154,7 +154,7 @@ if ( ! function_exists( 'yith_wcwl_get_template' ) ) {
 	 * @return string|void
 	 * @since 1.0.0
 	 */
-	function yith_wcwl_get_template( $path, $var = null, $return = false ) {
+	function yith_wcwl_get_template( $path, $var = null, $return = false ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound, Universal.NamingConventions.NoReservedKeywordParameterNames.returnFound
 		$located = yith_wcwl_locate_template( $path, $var );
 
 		if ( $var && is_array( $var ) ) {
@@ -166,8 +166,40 @@ if ( ! function_exists( 'yith_wcwl_get_template' ) ) {
 			ob_start();
 		}
 
-		// include file located.
-		include $located;
+		if (file_exists($located)) {
+			// include file located.
+			include $located;
+		}
+
+		if ( $return ) {
+			return ob_get_clean();
+		}
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_get_view' ) ) {
+	/**
+	 * Retrieve a template file.
+	 *
+	 * @param string $path   Path to get.
+	 * @param mixed  $args   the args to use in the view.
+	 * @param bool   $return Whether to return or print the template.
+	 *
+	 * @return string|void
+	 * @since 1.0.0
+	 */
+	function yith_wcwl_get_view( $path, $args = null, $return = false ) {
+		$fullpath = strpos( $path, YITH_WCWL_VIEWS ) === 0 ? $path : YITH_WCWL_VIEWS . $path;
+		if ( $args && is_array( $args ) ) {
+			$atts = $args;
+			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+		}
+
+		if ( $return ) {
+			ob_start();
+		}
+
+		file_exists( $fullpath ) && include $fullpath;
 
 		if ( $return ) {
 			return ob_get_clean();
@@ -187,7 +219,7 @@ if ( ! function_exists( 'yith_wcwl_get_template_part' ) ) {
 	 *
 	 * @return string|null
 	 */
-	function yith_wcwl_get_template_part( $template = '', $template_part = '', $template_layout = '', $var = array(), $return = false ) {
+	function yith_wcwl_get_template_part( $template = '', $template_part = '', $template_layout = '', $var = array(), $return = false ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound, Universal.NamingConventions.NoReservedKeywordParameterNames.returnFound
 		if ( ! empty( $template_part ) ) {
 			$template_part = '-' . $template_part;
 		}
@@ -237,6 +269,40 @@ if ( ! function_exists( 'yith_wcwl_get_template_part' ) ) {
 	}
 }
 
+if ( ! function_exists( 'yith_wcwl_get_icon' ) ) {
+	/**
+	 * Get the SVG icon string
+	 *
+	 * @param string $icon The icon name.
+	 * @return false|string
+	 */
+	function yith_wcwl_get_icon( $icon ) {
+		if ( 0 === strpos( $icon, '<svg' ) ) {
+			return $icon;
+		}
+
+		$path = YITH_WCWL_ASSETS_ICONS . $icon . ( substr( $icon, -4 ) === '.svg' ? '' : '.svg' );
+
+		ob_start();
+		if ( file_exists( $path ) ) {
+			include $path;
+		}
+
+		return ob_get_clean();
+	}
+}
+if ( ! function_exists( 'yith_wcwl_get_icon_url' ) ) {
+	/**
+	 * Get the icon url
+	 *
+	 * @param string $icon The icon name.
+	 * @return string
+	 */
+	function yith_wcwl_get_icon_url( $icon ) {
+		return YITH_WCWL_ASSETS_ICONS_URL . $icon . ( substr( $icon, -4 ) === '.svg' ? '' : '.svg' );
+	}
+}
+
 /* === COUNT FUNCTIONS === */
 
 if ( ! function_exists( 'yith_wcwl_count_products' ) ) {
@@ -249,7 +315,7 @@ if ( ! function_exists( 'yith_wcwl_count_products' ) ) {
 	 * @since 1.0.0
 	 */
 	function yith_wcwl_count_products( $wishlist_token = false ) {
-		return YITH_WCWL()->count_products( $wishlist_token );
+		return yith_wcwl_wishlists()->count_items_in_wishlist( $wishlist_token );
 	}
 }
 
@@ -261,7 +327,7 @@ if ( ! function_exists( 'yith_wcwl_count_all_products' ) ) {
 	 * @since 2.0.13
 	 */
 	function yith_wcwl_count_all_products() {
-		return YITH_WCWL()->count_all_products();
+		return yith_wcwl_wishlists()->count_all_items();
 	}
 }
 
@@ -275,7 +341,7 @@ if ( ! function_exists( 'yith_wcwl_count_add_to_wishlist' ) ) {
 	 * @since 2.0.13
 	 */
 	function yith_wcwl_count_add_to_wishlist( $product_id = false ) {
-		return YITH_WCWL()->count_add_to_wishlist( $product_id );
+		return yith_wcwl_wishlists()->count_add_to_wishlist( $product_id );
 	}
 }
 
@@ -461,7 +527,7 @@ if ( ! function_exists( 'yith_wcwl_get_hidden_products' ) ) {
 					array(
 						'post_type'      => 'product',
 						'post_status'    => 'publish',
-						'posts_per_page' => - 1,
+						'posts_per_page' => -1,
 						'fields'         => 'ids',
 						'meta_query'     => array(
 							array(
@@ -475,7 +541,7 @@ if ( ! function_exists( 'yith_wcwl_get_hidden_products' ) ) {
 			} else {
 				$hidden_products = wc_get_products(
 					array(
-						'limit'      => - 1,
+						'limit'      => -1,
 						'status'     => 'publish',
 						'return'     => 'ids',
 						'visibility' => 'hidden',
@@ -510,11 +576,11 @@ if ( ! function_exists( 'yith_wcwl_get_wishlist' ) ) {
 	/**
 	 * Retrieves wishlist by ID
 	 *
-	 * @param int|string $wishlist_id Wishlist ID or Wishlist Token.
+	 * @param int|string|false $wishlist_id Wishlist ID or Wishlist Token, or false to retrieve the default one.
 	 *
 	 * @return \YITH_WCWL_Wishlist|bool Wishlist object; false on error
 	 */
-	function yith_wcwl_get_wishlist( $wishlist_id ) {
+	function yith_wcwl_get_wishlist( $wishlist_id = false ) {
 		return YITH_WCWL_Wishlist_Factory::get_wishlist( $wishlist_id );
 	}
 }
@@ -527,12 +593,14 @@ if ( ! function_exists( 'yith_wcwl_get_plugin_icons' ) ) {
 	 * @param string $custom_label Label to use for custom option.
 	 *
 	 * @return array Array of available icons, in class => name format
+	 * @deprecated since 4.0 due to new icons-pack usage
 	 */
 	function yith_wcwl_get_plugin_icons( $none_label = '', $custom_label = '' ) {
+		wc_deprecated_function( 'yith_wcwl_get_plugin_icons', '4.0.0' );
 		$icons = json_decode( file_get_contents( YITH_WCWL_DIR . 'assets/js/admin/yith-wcwl-icons.json' ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
-		$icons['none']   = $none_label ? $none_label : __( 'None', 'yith-woocommerce-wishlist' );
-		$icons['custom'] = $custom_label ? $custom_label : __( 'Custom', 'yith-woocommerce-wishlist' );
+		$icons[ 'none' ]   = $none_label ?: __( 'None', 'yith-woocommerce-wishlist' );
+		$icons[ 'custom' ] = $custom_label ?: __( 'Custom', 'yith-woocommerce-wishlist' );
 
 		/**
 		 * APPLY_FILTERS: yith_wcwl_plugin_icons
@@ -549,49 +617,118 @@ if ( ! function_exists( 'yith_wcwl_get_plugin_icons' ) ) {
 	}
 }
 
+if ( ! function_exists( 'yith_wcwl_get_icons_list' ) ) {
+	/**
+	 * Return array of available icons
+	 *
+	 * @param string|string[] $context The context of the icons you want.
+	 *
+	 * @return array Array of available icons, in class => name format
+	 */
+	function yith_wcwl_get_plugin_icons_list( $context = '' ) {
+		static $icons = null;
+
+		if ( is_null( $icons ) ) {
+			$icons = include YITH_WCWL_DIR . '/plugin-options/icons-list.php';
+
+			foreach ( $icons as $icon => &$icon_details ) {
+				if ( empty( $icon_details[ 'svg' ] ) ) {
+					if ( ! empty( $icon_details[ 'path' ] ) && file_exists( $icon_details[ 'path' ] ) ) {
+						ob_start();
+						include $icon_details[ 'path' ];
+						$icon_details[ 'svg' ] = ob_get_clean();
+					} else {
+						$icon_details[ 'svg' ] = yith_wcwl_get_icon( $icon );
+					}
+				}
+			}
+		}
+
+		$list = $icons;
+		if ( $context ) {
+			$list = array_filter(
+				$icons,
+				function ( $icon ) use ( $context ) {
+					return is_array( $context ) ? array_intersect( $context, $icon[ 'tags' ] ) : in_array( $context, $icon[ 'tags' ], true );
+				}
+			);
+		}
+
+		/**
+		 * APPLY_FILTERS: yith_wcwl_plugin_icons_list
+		 *
+		 * Filter the icons used in the plugin.
+		 *
+		 * @param array $list Icons
+		 *
+		 * @return array
+		 */
+		return apply_filters( 'yith_wcwl_plugin_icons_list', $list );
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_get_plugin_icons_options' ) ) {
+	/**
+	 * Return array of options 'value' => 'label' of icons
+	 *
+	 * @param string|string[] $context The icon context.
+	 * @return array The array of icons options used in the plugin icons selectors
+	 */
+	function yith_wcwl_get_plugin_icons_options( $context = '' ) {
+		$icons         = yith_wcwl_get_plugin_icons_list( $context );
+		$icons_options = array_combine( array_keys( $icons ), array_column( $icons, 'label' ) );
+
+		/**
+		 * APPLY_FILTERS: yith_wcwl_plugin_icons_options
+		 *
+		 * Filter the icons options used in the icons selectors.
+		 *
+		 * @param array $icons_options The icons options.
+		 *
+		 * @return array
+		 */
+		return apply_filters( 'yith_wcwl_plugin_icons_options', $icons_options );
+	}
+}
+
 if ( ! function_exists( 'yith_wcwl_get_privacy_label' ) ) {
 	/**
 	 * Returns privacy label
 	 *
-	 * @param int  $privacy  Privacy value.
-	 * @param bool $extended Whether to show extended or simplified label.
+	 * @param int         $privacy  Privacy value.
+	 * @param bool|string $extended Either to show extended, simplified label or get only the extension.
 	 *
 	 * @return string Privacy label
 	 * @since 3.0.0
 	 */
 	function yith_wcwl_get_privacy_label( $privacy, $extended = false ) {
 
+		$extension = '';
+
 		switch ( $privacy ) {
 			case 1:
 				$privacy_label = 'shared';
 				$privacy_text  = __( 'Shared', 'yith-woocommerce-wishlist' );
-
-				if ( $extended ) {
-					$privacy_text  = '<b>' . $privacy_text . '</b> - ';
-					$privacy_text .= __( 'Only people with a link to this list can see it', 'yith-woocommerce-wishlist' );
-				}
-
+				$extension     = __( 'Only people with the link can view it', 'yith-woocommerce-wishlist' );
 				break;
 			case 2:
 				$privacy_label = 'private';
 				$privacy_text  = __( 'Private', 'yith-woocommerce-wishlist' );
-
-				if ( $extended ) {
-					$privacy_text  = '<b>' . $privacy_text . '</b> - ';
-					$privacy_text .= __( 'Only you can see this list', 'yith-woocommerce-wishlist' );
-				}
-
+				$extension     = __( 'Only you can view it', 'yith-woocommerce-wishlist' );
 				break;
 			default:
 				$privacy_label = 'public';
 				$privacy_text  = __( 'Public', 'yith-woocommerce-wishlist' );
-
-				if ( $extended ) {
-					$privacy_text  = '<b>' . $privacy_text . '</b> - ';
-					$privacy_text .= __( 'Anyone can search for and see this list', 'yith-woocommerce-wishlist' );
-				}
-
+				$extension     = __( 'Anybody can view it', 'yith-woocommerce-wishlist' );
 				break;
+		}
+
+		if ( $extended ) {
+			if ( 'only_extension' === $extended ) {
+				$privacy_text = $extension;
+			} else {
+				$privacy_text = '<b>' . $privacy_text . '</b> - ' . $extension;
+			}
 		}
 
 		/**
@@ -690,7 +827,7 @@ if ( ! function_exists( 'yith_wcwl_merge_in_array' ) ) {
 	 *
 	 * @return array Result of the merge
 	 */
-	function yith_wcwl_merge_in_array( $array, $element, $pivot, $position = 'after' ) {
+	function yith_wcwl_merge_in_array( $array, $element, $pivot, $position = 'after' ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.arrayFound
 		// search for the pivot inside array.
 		$pos = array_search( $pivot, array_keys( $array ), true );
 
@@ -723,21 +860,21 @@ if ( ! function_exists( 'yith_wcwl_maybe_format_field_array' ) ) {
 		}
 
 		foreach ( $field_structure as $field ) {
-			if ( isset( $field['active'] ) && 'yes' !== $field['active'] ) {
+			if ( isset( $field[ 'active' ] ) && 'yes' !== $field[ 'active' ] ) {
 				continue;
 			}
 
-			if ( empty( $field['label'] ) ) {
+			if ( empty( $field[ 'label' ] ) ) {
 				continue;
 			}
 
 			// format type.
-			$field_id = sanitize_title_with_dashes( $field['label'] );
+			$field_id = sanitize_title_with_dashes( $field[ 'label' ] );
 
 			// format options, if needed.
-			if ( ! empty( $field['options'] ) ) {
+			if ( ! empty( $field[ 'options' ] ) ) {
 				$options     = array();
-				$raw_options = explode( '|', $field['options'] );
+				$raw_options = explode( '|', $field[ 'options' ] );
 
 				if ( ! empty( $raw_options ) ) {
 					foreach ( $raw_options as $raw_option ) {
@@ -746,28 +883,28 @@ if ( ! function_exists( 'yith_wcwl_maybe_format_field_array' ) ) {
 						}
 
 						list( $id, $value ) = explode( '::', $raw_option );
-						$options[ $id ]     = $value;
+						$options[ $id ] = $value;
 					}
 				}
 
-				$field['options'] = $options;
+				$field[ 'options' ] = $options;
 			}
 
 			// format class.
-			$field['class'] = array( 'form-row-' . $field['position'] );
+			$field[ 'class' ] = array( 'form-row-' . $field[ 'position' ] );
 
 			// format requires.
-			$field['required'] = isset( $field['required'] ) && 'yes' === $field['required'];
+			$field[ 'required' ] = isset( $field[ 'required' ] ) && 'yes' === $field[ 'required' ];
 
 			// set custom attributes when field is required.
-			if ( $field['required'] ) {
-				$field['custom_attributes'] = array(
+			if ( $field[ 'required' ] ) {
+				$field[ 'custom_attributes' ] = array(
 					'required' => 'required',
 				);
 			}
 
 			// if type requires options, but no options was defined, skip field printing.
-			if ( in_array( $field['type'], array( 'select', 'radio' ), true ) && empty( $field['options'] ) ) {
+			if ( in_array( $field[ 'type' ], array( 'select', 'radio' ), true ) && empty( $field[ 'options' ] ) ) {
 				continue;
 			}
 
@@ -861,14 +998,48 @@ if ( ! function_exists( 'yith_wcwl_kses_icon' ) ) {
 		$allowed_icon_html = apply_filters(
 			'yith_wcwl_allowed_icon_html',
 			array(
-				'i'   => array(
+				'i'        => array(
 					'class' => true,
 				),
-				'img' => array(
+				'img'      => array(
 					'src'    => true,
 					'alt'    => true,
 					'width'  => true,
 					'height' => true,
+				),
+				'svg'      => array(
+					'id'           => true,
+					'class'        => true,
+					'width'        => true,
+					'height'       => true,
+					'viewbox'      => true,
+					'fill'         => true,
+					'xmlns'        => true,
+					'aria-hidden'  => true,
+					'stroke'       => true,
+					'stroke-width' => true,
+				),
+				'path'     => array(
+					'd'               => true,
+					'fill'            => true,
+					'stroke'          => true,
+					'clip-rule'       => true,
+					'fill-rule'       => true,
+					'stroke-linecap'  => true,
+					'stroke-linejoin' => true,
+				),
+				'g'        => array(
+					'clip-path' => true,
+				),
+				'clipPath' => array(
+					'id' => true,
+				),
+				'defs'     => array(),
+				'rect'     => array(
+					'id'     => true,
+					'width'  => true,
+					'height' => true,
+					'fill'   => true,
 				),
 			)
 		);
@@ -877,38 +1048,143 @@ if ( ! function_exists( 'yith_wcwl_kses_icon' ) ) {
 	}
 }
 
-/* === DEPRECATED FUNCTIONS === */
-
-if ( ! function_exists( 'yith_frontend_css_color_picker' ) ) {
+if ( ! function_exists( 'yith_wcwl_get_feedback_duration' ) ) {
 	/**
-	 * Output a colour picker input box.
+	 * Get the feedback duration
 	 *
-	 * This function is not of the plugin YITH WCWL. It is from WooCommerce.
-	 * We redeclare it only because it is needed in the tab "Styles" where it is not available.
-	 * The original function name is woocommerce_frontend_css_colorpicker and it is declared in
-	 * wp-content/plugins/woocommerce/admin/settings/settings-frontend-styles.php
-	 *
-	 * @access public
-	 *
-	 * @param mixed  $name  Name for the input field.
-	 * @param mixed  $id    Id for the input field.
-	 * @param mixed  $value Value for the input field.
-	 * @param string $desc  Description to show under input field (default '').
-	 *
-	 * @return void
-	 * @deprecated
+	 * @return int
 	 */
-	function yith_frontend_css_color_picker( $name, $id, $value, $desc = '' ) {
-		_deprecated_function( 'yith_frontend_css_color_picker', '3.0.0' );
-
-		$value = ! empty( $value ) ? $value : '#ffffff';
-
-		echo '<div  class="color_box">
-				  <table><tr><td>
-				  <strong>' . esc_html( $name ) . '</strong>
-				  <input name="' . esc_attr( $id ) . '" id="' . esc_attr( $id ) . '" type="text" value="' . esc_attr( $value ) . '" class="colorpick colorpickpreview" style="background-color: ' . esc_attr( $value ) . '" /> <div id="colorPickerDiv_' . esc_attr( $id ) . '" class="colorpickdiv"></div>
-				  </td></tr></table>
-			  </div>';
-
+	function yith_wcwl_get_feedback_duration() {
+		/**
+		 * APPLY_FILTERS: yith_wcwl_feedback_duration
+		 *
+		 * Filter the feedback duration time.
+		 *
+		 * @param int $duration The duration time.
+		 *
+		 * @return int
+		 */
+		return absint( apply_filters( 'yith_wcwl_feedback_duration', 3000 ) );
 	}
 }
+
+if ( ! function_exists( 'yith_wcwl_get_modal_colors_defaults' ) ) {
+	/**
+	 * Get modal colors default values
+	 *
+	 * @return string[]
+	 */
+	function yith_wcwl_get_modal_colors_defaults() {
+		return array(
+			'overlay'                     => '#0000004d',
+			'icon'                        => '#007565',
+			'primary_button'              => '#007565',
+			'primary_button_hover'        => '#007565',
+			'primary_button_text'         => '#fff',
+			'primary_button_text_hover'   => '#fff',
+			'secondary_button'            => '#e8e8e8',
+			'secondary_button_hover'      => '#d8d8d8',
+			'secondary_button_text'       => '#777',
+			'secondary_button_text_hover' => '#777',
+		);
+	}
+}
+
+/* === INSTANCE CLASS FUNCTIONS === */
+
+if ( ! function_exists( 'yith_wcwl' ) ) {
+	/**
+	 * Unique access to instance of YITH_WCWL class
+	 *
+	 * @return \YITH_WCWL|\YITH_WCWL_Extended|\YITH_WCWL_Premium
+	 * @since 2.0.0
+	 */
+	function yith_wcwl() {
+		return YITH_WCWL::get_instance();
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_install' ) ) {
+	/**
+	 * Unique access to instance of YITH_WCWL_Install class
+	 *
+	 * @return \YITH_WCWL_Install
+	 * @since 2.0.0
+	 */
+	function yith_wcwl_install() {
+		return YITH_WCWL_Install::get_instance();
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_frontend' ) ) {
+	/**
+	 * Unique access to instance of YITH_WCWL_Frontend class
+	 *
+	 * @return \YITH_WCWL_Frontend|\YITH_WCWL_Frontend_Extended|\YITH_WCWL_Frontend_Premium
+	 * @since 2.0.0
+	 */
+	function yith_wcwl_frontend() {
+		return YITH_WCWL_Frontend::get_instance();
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_admin' ) ) {
+	/**
+	 * Unique access to instance of YITH_WCWL_Admin class
+	 *
+	 * @return YITH_WCWL_Admin|YITH_WCWL_Admin_Extended|YITH_WCWL_Admin_Premium
+	 * @since 2.0.0
+	 */
+	function yith_wcwl_admin() {
+		return YITH_WCWL_Admin::get_instance();
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_session' ) ) {
+	/**
+	 * Unique access to instance of YITH_WCWL_Session class
+	 *
+	 * @return YITH_WCWL_Session
+	 */
+	function yith_wcwl_session() {
+		return YITH_WCWL_Session::get_instance();
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_emails' ) ) {
+	/**
+	 * Unique access to instance of YITH_WCWL_Emails class
+	 *
+	 * @return YITH_WCWL_Emails|YITH_WCWL_Emails_Premium|YITH_WCWL_Emails_Extended
+	 * @since 2.0.0
+	 */
+	function yith_wcwl_emails() {
+		return YITH_WCWL_Emails::get_instance();
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_cron' ) ) {
+	/**
+	 * Unique access to instance of YITH_WCWL_Cron class
+	 *
+	 * @return \YITH_WCWL_Cron|YITH_WCWL_Cron_Extended|YITH_WCWL_Cron_Premium
+	 * @since 3.0.0
+	 */
+	function yith_wcwl_cron() {
+		return YITH_WCWL_Cron::get_instance();
+	}
+}
+
+if ( ! function_exists( 'yith_wcwl_wishlists' ) ) {
+	/**
+	 * Unique access to instance of YITH_WCWL_Wishlists class
+	 *
+	 * @return YITH_WCWL_Wishlists|YITH_WCWL_Wishlists_Premium
+	 * @since 4.0.0
+	 */
+	function yith_wcwl_wishlists() {
+		return YITH_WCWL_Wishlists::get_instance();
+	}
+}
+
+/* === DEPRECATED FUNCTIONS === */

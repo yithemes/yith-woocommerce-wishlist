@@ -12,7 +12,7 @@ if ( ! class_exists( 'YIT_Plugin_SubPanel' ) ) {
 	/**
 	 * YIT_Plugin_SubPanel class.
 	 *
-	 * @author Emanuela Castorina <emanuela.castorina@yithemes.it>
+	 * @author YITH <plugins@yithemes.com>
 	 */
 	class YIT_Plugin_SubPanel extends YIT_Plugin_Panel {
 
@@ -52,8 +52,6 @@ if ( ! class_exists( 'YIT_Plugin_SubPanel' ) ) {
 		/**
 		 * Register Settings
 		 * Generate wp-admin settings pages by registering your settings and using a few callbacks to control the output
-		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function register_settings() {
 			register_setting( 'yit_' . $this->settings['page'] . '_options', 'yit_' . $this->settings['page'] . '_options', array( &$this, 'options_validate' ) );
@@ -63,8 +61,6 @@ if ( ! class_exists( 'YIT_Plugin_SubPanel' ) ) {
 		/**
 		 * Add Setting SubPage
 		 * add Setting SubPage to WordPress administrator
-		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function add_setting_page() {
 			global $admin_page_hooks;
@@ -90,8 +86,6 @@ if ( ! class_exists( 'YIT_Plugin_SubPanel' ) ) {
 		/**
 		 * Show a tabbed panel to setting page
 		 * a callback function called by add_setting_page => add_submenu_page
-		 *
-		 * @author   Emanuela Castorina <emanuela.castorina@yithemes.it>
 		 */
 		public function yit_panel() {
 			$tabs        = '';

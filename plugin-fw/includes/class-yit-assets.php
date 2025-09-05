@@ -13,7 +13,7 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 	/**
 	 * YIT_Assets class.
 	 *
-	 * @author     Leanza Francesco <leanzafrancesco@gmail.com>
+	 * @author     YITH <plugins@yithemes.com>
 	 */
 	class YIT_Assets {
 		/**
@@ -44,11 +44,13 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 		 */
 		private function __construct() {
 			$this->version = yith_plugin_fw_get_version();
-			add_action( 'admin_enqueue_scripts', array( $this, 'register_common_scripts' ) );
-			add_action( 'wp_enqueue_scripts', array( $this, 'register_common_scripts' ) );
+			add_action( 'init', array( $this, 'register_common_scripts' ) );
 			add_action( 'elementor/editor/before_enqueue_styles', array( $this, 'register_common_scripts' ) );
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'register_styles_and_scripts' ) );
+
+			add_action( 'init', array( $this, 'register_lapilli_ui_scripts' ) );
+			add_action( 'should_load_block_editor_scripts_and_styles', array( $this, 'should_load_block_editor_scripts_and_styles' ), 10 );
 		}
 
 		/**
@@ -57,6 +59,79 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 		public function register_common_scripts() {
 			wp_register_style( 'yith-plugin-fw-icon-font', YIT_CORE_PLUGIN_URL . '/assets/css/yith-icon.css', array(), $this->version );
 			wp_register_style( 'yith-plugin-fw-elementor', YIT_CORE_PLUGIN_URL . '/assets/css/elementor.css', array(), $this->version );
+		}
+
+		/**
+		 * Register Lapilli UI scripts
+		 */
+		public function register_lapilli_ui_scripts() {
+			$base_url  = YIT_CORE_PLUGIN_URL . '/dist/lapilli-ui/';
+			$base_path = YIT_CORE_PLUGIN_PATH . '/dist/lapilli-ui/';
+			$packages  = array(
+				'lapilli-ui-block-editor' => 'block-editor',
+				'lapilli-ui-components'   => 'components',
+				'lapilli-ui-styles'       => 'styles',
+				'lapilli-ui-date'         => 'date',
+			);
+
+			foreach ( $packages as $handle => $package ) {
+				$asset_file = $base_path . $package . '/index.asset.php';
+
+				if ( file_exists( $asset_file ) ) {
+					$script_asset = include $asset_file;
+					$dependencies = $script_asset['dependencies'] ?? array();
+					$version      = $script_asset['version'] ?? '1.0.0';
+
+					$script = $base_url . $package . '/index.js';
+
+					if ( 'lapilli-ui-date' === $handle ) {
+						$dependencies[] = 'wp-date';
+					}
+
+					wp_register_script( $handle, $script, $dependencies, $version, true );
+				}
+			}
+
+			$locale_options = array(
+				'options' => array(
+					'weekStartsOn' => (int) get_option( 'start_of_week', 0 ),
+				),
+			);
+
+			$date_formats = array(
+				'year'         => 'Y',
+				'month'        => 'F',
+				'dayOfMonth'   => 'j',
+				'monthShort'   => 'M',
+				'weekday'      => 'l',
+				'weekdayShort' => 'D',
+				'fullDate'     => get_option( 'date_format', 'F j, Y' ),
+				'inputDate'    => 'Y-m-d',
+				'monthAndDate' => 'F j',
+				'monthAndYear' => 'F Y',
+			);
+
+			wp_add_inline_script(
+				'lapilli-ui-date',
+				'lapilliUI.date.setLocale( ' . wp_json_encode( $locale_options ) . ' );
+				lapilliUI.date.setDateFormats( ' . wp_json_encode( $date_formats ) . ' );
+				lapilliUI.date.setFormatDate( wp.date.format );'
+			);
+		}
+
+		/**
+		 * Should load block editor scripts and styles.
+		 *
+		 * @param bool $should_load Should load flag.
+		 *
+		 * @return bool
+		 */
+		public function should_load_block_editor_scripts_and_styles( $should_load ) {
+			if ( ! $should_load ) {
+				$should_load = wp_script_is( 'lapilli-ui-block-editor', 'enqueued' );
+			}
+
+			return $should_load;
 		}
 
 		/**
@@ -76,7 +151,7 @@ if ( ! class_exists( 'YIT_Assets' ) ) {
 			wp_register_script( 'yith-date-format', YIT_CORE_PLUGIN_URL . '/assets/js/yith-date-format' . $suffix . '.js', array( 'jquery', 'jquery-ui-datepicker' ), $this->version, true );
 
 			wp_register_script( 'yit-metabox', YIT_CORE_PLUGIN_URL . '/assets/js/metabox' . $suffix . '.js', array( 'jquery', 'wp-color-picker', 'yith-plugin-fw-fields', 'yith-ui' ), $this->version, true );
-			wp_register_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel' . $suffix . '.js', array( 'jquery', 'wp-color-picker', 'jquery-ui-sortable', 'yith-plugin-fw-fields', 'yith-ui', 'utils' ), $this->version, true );
+			wp_register_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel' . $suffix . '.js', array( 'jquery', 'wp-color-picker', 'jquery-ui-sortable', 'yith-plugin-fw-fields', 'yith-ui', 'utils', 'jquery-blockui' ), $this->version, true );
 			wp_register_script( 'colorbox', YIT_CORE_PLUGIN_URL . '/assets/js/jquery.colorbox' . $suffix . '.js', array( 'jquery' ), '1.6.3', true );
 			wp_register_script( 'yith_how_to', YIT_CORE_PLUGIN_URL . '/assets/js/how-to' . $suffix . '.js', array( 'jquery' ), $this->version, true );
 			wp_register_script( 'yith-plugin-fw-wp-pages', YIT_CORE_PLUGIN_URL . '/assets/js/wp-pages' . $suffix . '.js', array( 'jquery' ), $this->version, false );

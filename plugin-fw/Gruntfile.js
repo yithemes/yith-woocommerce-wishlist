@@ -32,16 +32,16 @@ module.exports = function ( grunt ) {
 								  }
 							  },
 							  common : {
-								  files: [{
+								  files: [ {
 									  expand: true,
 									  cwd   : '<%= dirs.js %>/',
-									  src   : ['*.js', '!*.min.js'],
+									  src   : [ '*.js', '!*.min.js' ],
 									  dest  : '<%= dirs.js %>/',
 									  rename: function ( dst, src ) {
 										  // To keep the source js files and make new files as `*.min.js`:
 										  return dst + '/' + src.replace( '.js', '.min.js' );
 									  }
-								  }]
+								  } ]
 							  }
 						  },
 
@@ -50,15 +50,15 @@ module.exports = function ( grunt ) {
 							  compile: {
 								  options: {
 									  implementation: sass,
-									  outputStyle: 'expanded'
+									  outputStyle   : 'expanded'
 								  },
-								  files  : [{
+								  files  : [ {
 									  expand: true,
 									  cwd   : '<%= dirs.scss %>/',
-									  src   : ['*.scss'],
+									  src   : [ '*.scss' ],
 									  dest  : '<%= dirs.css %>/',
 									  ext   : '.css'
-								  }]
+								  } ]
 							  }
 						  },
 
@@ -76,8 +76,8 @@ module.exports = function ( grunt ) {
 						  // Watch changes for assets.
 						  watch: {
 							  css: {
-								  files: ['<%= dirs.scss %>/**/*.scss'],
-								  tasks: ['sass']
+								  files: [ '<%= dirs.scss %>/**/*.scss' ],
+								  tasks: [ 'sass' ]
 							  }
 						  },
 
@@ -110,25 +110,6 @@ module.exports = function ( grunt ) {
 							  build  : {
 								  src: potInfo.languageFolderPath + '*.po'
 							  }
-						  },
-
-						  // PHP Code Sniffer.
-						  phpcs: {
-							  options: {
-								  bin: 'vendor/bin/phpcs'
-							  },
-							  dist   : {
-								  src: [
-									  '**/*.php', // Include all php files.
-									  '!bin/**',
-									  '!dist/**',
-									  '!node_modules/**',
-									  '!tests/**',
-									  '!tools/**',
-									  '!tmp/**',
-									  '!vendor/**'
-								  ]
-							  }
 						  }
 
 					  } );
@@ -148,7 +129,7 @@ module.exports = function ( grunt ) {
 				file.src.forEach( function ( fileSrc ) {
 					grunt.util.spawn( {
 										  cmd : 'msgmerge',
-										  args: ['-U', fileSrc, template]
+										  args: [ '-U', fileSrc, template ]
 									  }, function ( error, result, code ) {
 						const output = fileSrc.replace( '.po', '.mo' );
 						grunt.log.writeln( 'Updating: ' + fileSrc + ' ...' );
@@ -162,7 +143,7 @@ module.exports = function ( grunt ) {
 						// Updating also the .mo files
 						grunt.util.spawn( {
 											  cmd : 'msgfmt',
-											  args: [fileSrc, '-o', output]
+											  args: [ fileSrc, '-o', output ]
 										  }, function ( moError, moResult, moCode ) {
 							grunt.log.writeln( 'Updating MO for: ' + fileSrc + ' ...' );
 							counter--;
@@ -183,7 +164,6 @@ module.exports = function ( grunt ) {
 
 	// Load NPM tasks to be used here.
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
-	grunt.loadNpmTasks( 'grunt-phpcs' );
 	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
@@ -191,8 +171,8 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-uglify-es' );
 
 	// Register tasks.
-	grunt.registerTask( 'js', ['uglify'] );
+	grunt.registerTask( 'js', [ 'uglify' ] );
 
-	grunt.registerTask( 'css', ['sass'] );
-	grunt.registerTask( 'assets', ['js', 'css'] );
+	grunt.registerTask( 'css', [ 'sass' ] );
+	grunt.registerTask( 'assets', [ 'js', 'css' ] );
 };

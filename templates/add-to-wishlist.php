@@ -2,7 +2,7 @@
 /**
  * Add to wishlist template
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Templates\AddToWishlist
  * @version 3.0.0
  */
@@ -36,6 +36,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 } // Exit if accessed directly
 
 global $product;
+
 ?>
 
 <div
@@ -44,7 +45,7 @@ global $product;
 	data-fragment-options="<?php echo wc_esc_json( wp_json_encode( $fragment_options ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
 >
 	<?php if ( ! $ajax_loading ) : ?>
-		<?php if ( ! ( $disable_wishlist && ! is_user_logged_in() ) ) : ?>
+		<?php if ( ! $disable_wishlist || is_user_logged_in() ) : ?>
 
 			<!-- ADD TO WISHLIST -->
 			<?php yith_wcwl_get_template( 'add-to-wishlist-' . $template_part . '.php', $var ); ?>

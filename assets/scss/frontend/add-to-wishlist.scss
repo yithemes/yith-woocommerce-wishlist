@@ -1,0 +1,780 @@
+$add-to-wishlist-icon-color             : var(--add-to-wishlist-icon-color, #000);
+$added-to-wishlist-icon-color           : var(--added-to-wishlist-icon-color, #000);
+$color-add-to-wishlist-background       : var(--color-add-to-wishlist-background, #333333);
+$color-add-to-wishlist-text             : var(--color-add-to-wishlist-text, #ffffff);
+$color-add-to-wishlist-border           : var(--color-add-to-wishlist-border, #333333);
+$color-add-to-wishlist-background-hover : var(--color-add-to-wishlist-background-hover, #4f4f4f);
+$color-add-to-wishlist-text-hover       : var(--color-add-to-wishlist-text-hover, #ffffff);
+$color-add-to-wishlist-border-hover     : var(--color-add-to-wishlist-border-hover, #4f4f4f);
+$rounded-corners-radius                 : var(--rounded-corners-radius, 16px);
+
+$tooltip-color-background               : var(--tooltip-color-background, #333333e6);
+$tooltip-color-text                     : var(--tooltip-color-text, #ffffff);
+
+$modal-overlay                          : var(--modal-colors-overlay, #0000004d);
+$modal-icon                             : var(--modal-colors-icon, #007565);
+$modal-primary-button                   : var(--modal-colors-primary-button, #007565);
+$modal-primary-button-text              : var(--modal-colors-primary-button-text, #fff);
+$modal-primary-button-hover             : var(--modal-colors-primary-button-hover, #007565);
+$modal-primary-button-text-hover        : var(--modal-colors-primary-button-text-hover, #fff);
+$modal-secondary-button                 : var(--modal-colors-secondary-button, #08a889);
+$modal-secondary-button-text            : var(--modal-colors-secondary-button-text, #fff);
+$modal-secondary-button-hover           : var(--modal-colors-secondary-button-hover, #08a889);
+$modal-secondary-button-text-hover      : var(--modal-colors-secondary-button-text-hover, #fff);
+
+$feedback-duration                      : var(--feedback-duration, 2.5s);
+
+svg.yith-wcwl-icon-svg {
+	width  : 30px;
+	height : 30px;
+}
+
+.yith-add-to-wishlist-button-block {
+	display         : flex;
+	align-items     : center;
+	justify-content : center;
+	position        : relative;
+	width           : max-content;
+	margin          : 7px auto;
+
+	&.yith-add-to-wishlist-button-block--single {
+		margin-inline  : 0;
+		gap            : 10px;
+		align-items    : flex-start;
+		flex-direction : column;
+	}
+
+	a.yith-wcwl-add-to-wishlist-button__wrapper {
+		text-decoration : none;
+	}
+}
+
+
+.yith-wcwl-add-to-wishlist-button {
+	display        : flex;
+	flex-direction : column;
+	align-items    : center;
+	position       : relative;
+	cursor         : pointer;
+	font-size      : 1rem;
+
+	& svg, img.yith-wcwl-custom-icon {
+		width  : 30px;
+		height : 30px;
+	}
+
+	&:is(button) {
+		flex-direction : row;
+		gap            : 5px;
+		padding        : 6px 10px;
+		font-size      : .9rem;
+
+		.yith-wcwl-icon-svg__wrapper {
+			display : flex;
+
+			&:is(span) {
+				display : inline-flex;
+			}
+		}
+
+		svg, img {
+			width  : 22px;
+			height : 22px;
+		}
+
+		&:not( .yith-wcwl-theme-button-style ) {
+			background-color : $color-add-to-wishlist-background;
+			color            : $color-add-to-wishlist-text;
+			border           : 2px solid $color-add-to-wishlist-border;
+			border-radius    : $rounded-corners-radius;
+
+			&:hover {
+				background-color : $color-add-to-wishlist-background-hover;
+				color            : $color-add-to-wishlist-text-hover;
+				border           : 2px solid $color-add-to-wishlist-border-hover;
+			}
+		}
+	}
+
+	&.yith-wcwl-add-to-wishlist-button--loading {
+		cursor : progress;
+	}
+
+	&.yith-wcwl-add-to-wishlist-button--custom-button {
+		text-decoration : none;
+	}
+
+	&.yith-wcwl-add-to-wishlist-button--pillow {
+		border-radius : 100px;
+		padding       : 7px 14px;
+		font-size     : .9rem;
+	}
+
+	&.yith-wcwl-add-to-wishlist-button--anchor {
+		flex-direction  : row;
+		margin          : auto;
+		justify-content : center;
+		gap             : 7px;
+
+		&.yith-wcwl-add-to-wishlist--with-counter {
+			gap : 4px;
+		}
+
+		svg.yith-wcwl-icon-svg, img {
+			width     : 30px;
+			color     : currentColor;
+			max-width : 35px;
+		}
+	}
+
+	&.yith-wcwl-add-to-wishlist-button--icon-button {
+		flex-direction : column;
+		color          : $add-to-wishlist-icon-color;
+
+		&.yith-wcwl-add-to-wishlist-button--added,
+		&.yith-wcwl-add-to-wishlist-button--added:hover,
+		&.yith-wcwl-add-to-wishlist-button--added .yith-wcwl-add-to-wishlist__counter {
+			color : $added-to-wishlist-icon-color;
+		}
+
+		&:hover,
+		.yith-wcwl-add-to-wishlist__counter {
+			color : $add-to-wishlist-icon-color;
+		}
+
+
+		&:is(button) {
+			gap        : 5px;
+			background : none;
+			border     : none;
+
+			&:hover {
+				background : none;
+				border     : none;
+			}
+
+			svg.yith-wcwl-add-to-wishlist-button-icon {
+				width  : 30px;
+				height : 30px;
+			}
+
+			.yith-wcwl-add-to-wishlist__counter {
+				line-height : 1;
+			}
+		}
+	}
+
+	&:not(.yith-wcwl-add-to-wishlist-button--single) {
+		.yith-wcwl-add-to-wishlist__counter {
+			font-weight : 500;
+		}
+	}
+
+	&.yith-wcwl-add-to-wishlist-button--single {
+		&.yith-wcwl-add-to-wishlist-button--anchor {
+			display         : flex;
+			align-items     : center;
+			margin-inline   : 0;
+			justify-content : flex-start;
+			gap             : 10px;
+		}
+	}
+
+	&.yith-wcwl-add-to-wishlist-button-over-image {
+		position : absolute;
+		display  : flex;
+		margin   : 10px;
+		z-index  : 20;
+
+		&--top-left {
+			left : 0;
+			top  : 0;
+		}
+
+		&--top-right {
+			right : 0;
+			top   : 0;
+		}
+
+		&--bottom-left {
+			left   : 0;
+			bottom : 0;
+		}
+
+		&--bottom-right {
+			right  : 0;
+			bottom : 0;
+		}
+
+		&--hover {
+			opacity    : 0;
+			transition : .2s;
+
+			&.yith-wcwl-add-to-wishlist-button--loading:not(.yith-wcwl-add-to-wishlist-button--first-loading) {
+				opacity : 1;
+			}
+		}
+
+		&.yith-wcwl-add-to-wishlist--dropdown-opened {
+			opacity : 1;
+		}
+
+		.yith-wcwl-icon {
+			width  : 30px;
+			height : 30px;
+		}
+	}
+}
+
+.yith-wcwl-add-to-wishlist__feedback {
+	text-align       : center;
+	padding          : 10px 17px;
+	top              : 50%;
+	left             : 50%;
+	transform        : translate(-50%, -50%);
+	background-color : rgba(255, 255, 255, .95);
+	font-size        : .8em;
+	transition       : opacity .5s ease-out;
+	opacity          : 1;
+	text-wrap        : balance;
+	animation        : fade-in .3s, bounce .45s;
+	width            : max-content;
+	max-width        : 90%;
+	position         : fixed;
+	z-index          : 999;
+
+	&.yith-wcwl-add-to-wishlist__feedback-on-product-image {
+		position : absolute;
+	}
+
+	&.yith-wcwl-fade-out {
+		animation : fade-out .5s forwards;
+	}
+}
+
+div[data-block-name="woocommerce/product-image"],
+div.wc-block-grid__product-image,
+.woocommerce-loop-product__link [class*="image"],
+.add-to-wishlist-before_image {
+	&:hover, &:focus, :has(*:focus) {
+		.yith-wcwl-add-to-wishlist-button-over-image--hover {
+			opacity : 1;
+		}
+	}
+}
+
+.yith-wcwl-feedback-messages-container {
+	display        : flex;
+	flex-direction : column;
+	align-items    : center;
+	position       : fixed;
+	top            : 50%;
+	left           : 50%;
+	transform      : translate(-50%, -50%);
+	width          : fit-content;
+	height         : fit-content;
+	z-index        : 999;
+	transition     : .3s;
+	max-width      : 90%;
+
+	.yith-wcwl-add-to-wishlist__feedback {
+		position        : relative;
+		transform       : unset;
+		top             : unset;
+		left            : unset;
+		animation       : fade-in .3s;
+		width           : 300px;
+		max-width       : 100%;
+		justify-content : center;
+
+		&.yith-wcwl-fade-out {
+			animation : fade-out .5s forwards;
+		}
+
+		&:not(:last-child) {
+			margin-bottom : 10px;
+		}
+	}
+}
+
+/* === AUTO GENERATED STYLE THAT WAS LOCALIZED === */
+
+.woocommerce a.add_to_wishlist.button.alt:not( .yith-wcwl-theme-button-style ) {
+	background-color : $color-add-to-wishlist-background;
+	background       : $color-add-to-wishlist-background;
+	color            : $color-add-to-wishlist-text;
+	border-color     : $color-add-to-wishlist-border;
+	border-radius    : $rounded-corners-radius;
+
+	&:hover {
+		background-color : $color-add-to-wishlist-background-hover;
+		background       : $color-add-to-wishlist-background-hover;
+		color            : $color-add-to-wishlist-text-hover;
+		border-color     : $color-add-to-wishlist-border-hover;
+	}
+}
+
+.yith-wcwl-tooltip,
+.with-tooltip .yith-wcwl-tooltip:before,
+.with-dropdown .with-tooltip .yith-wcwl-tooltip:before {
+	background-color    : $tooltip-color-background;
+	border-bottom-color : $tooltip-color-background;
+	border-top-color    : $tooltip-color-background;
+	color               : $tooltip-color-text;
+}
+
+.yith-wcwl-add-to-wishlist-button:not(.yith-wcwl-add-to-wishlist-button--themed-button) {
+	svg.yith-wcwl-add-to-wishlist-button-icon {
+		color : $add-to-wishlist-icon-color;
+	}
+
+	&.yith-wcwl-add-to-wishlist-button--added {
+		svg.yith-wcwl-add-to-wishlist-button-icon {
+			color : $added-to-wishlist-icon-color;
+		}
+	}
+}
+
+.yith-wcwl-add-to-wishlist-tooltip {
+	background-color : $tooltip-color-background;
+	color            : $tooltip-color-text;
+	display          : block;
+	$margin          : 10px;
+	position         : absolute;
+	top              : 100%;
+	left             : 50%;
+	transform        : translateX(-50%);
+	z-index          : 10;
+	width            : 250px;
+	padding          : 5px 10px;
+	border-radius    : 5px;
+	margin-top       : $margin;
+	max-width        : max-content;
+	text-align       : center;
+	font-size        : 12px;
+	line-height      : normal;
+	text-wrap        : balance;
+	pointer-events   : none;
+	cursor           : initial;
+	opacity          : 0;
+	animation        : fade-in .3s .3s forwards, slide-down .3s .3s;
+
+	&--top {
+		top          : unset;
+		bottom       : 100%;
+		margin-block : 0 $margin;
+	}
+}
+
+.yith-wcwl-add-to-wishlist-dropdown {
+	position                 : absolute;
+	left                     : 0;
+	margin-top               : 20px;
+	z-index                  : 99;
+	top                      : 100%;
+	background               : rgba(255, 255, 255, .95);
+	padding                  : 10px;
+	border                   : 1px solid #ddd;
+	border-radius            : 10px;
+	width                    : max-content;
+	min-width                : 250px;
+	max-width                : 350px;
+	display                  : flex;
+	flex-direction           : column;
+	align-items              : flex-start;
+	gap                      : 0;
+	animation                : scale-up .3s;
+	-webkit-transform-origin : top left;-moz-transform-origin : top left;-ms-transform-origin : top left;-o-transform-origin : top left;transform-origin : top left;
+
+	&--bottom-left {
+		left                     : unset;
+		right                    : 0;
+		-webkit-transform-origin : top right;-moz-transform-origin : top right;-ms-transform-origin : top right;-o-transform-origin : top right;transform-origin : top right;
+	}
+
+	&--top-left {
+		left                     : unset;
+		right                    : 0;
+		top                      : unset;
+		bottom                   : 100%;
+		margin-block             : 0 20px;
+		-webkit-transform-origin : bottom right;-moz-transform-origin : bottom right;-ms-transform-origin : bottom right;-o-transform-origin : bottom right;transform-origin : bottom right;
+	}
+
+	&--top-right {
+		top                      : unset;
+		bottom                   : 100%;
+		margin-block             : 0 20px;
+		-webkit-transform-origin : bottom left;-moz-transform-origin : bottom left;-ms-transform-origin : bottom left;-o-transform-origin : bottom left;transform-origin : bottom left;
+	}
+
+	.yith-wcwl-add-to-wishlist-dropdown__option,
+	.yith-wcwl-add-to-wishlist-dropdown__view-more {
+		background    : none;
+		border        : none;
+		margin        : 0;
+		width         : 100%;
+		border-radius : 0;
+		font-size     : 13px;
+	}
+
+	.yith-wcwl-add-to-wishlist-dropdown__option {
+		color           : #222 !important;
+		max-width       : 260px;
+		white-space     : nowrap;
+		overflow        : hidden;
+		text-overflow   : ellipsis;
+		text-decoration : none;
+		padding         : 7px 20px 7px 0;
+		display         : flex;
+		align-items     : center;
+		gap             : 7px;
+		text-align      : left;
+		cursor          : pointer;
+		border-radius   : 0;
+		outline         : none;
+
+		&:not(:last-of-type) {
+			border-bottom : 1px solid #eee;
+		}
+
+		&:hover {
+			color : var(--wp--preset--color--primary, #007565);
+		}
+
+		&:focus .yith-wcwl-add-to-wishlist-dropdown__option__text {
+			text-decoration : underline;
+		}
+
+		.yith-wcwl-add-to-wishlist-dropdown__option__text {
+			color         : #222 !important;
+			flex          : 1;
+			white-space   : nowrap;
+			overflow      : hidden;
+			text-overflow : ellipsis;
+		}
+
+		.yith-wcwl-icon {
+			color : #222 !important;
+		}
+	}
+
+	.yith-wcwl-add-to-wishlist-dropdown__view-more {
+		color      : var(--wp--preset--color--primary, #007565);
+		padding    : 10px 0 10px 21px;
+		text-align : left;
+		outline    : none;
+
+		&:focus {
+			text-decoration : underline;
+		}
+	}
+
+}
+
+@keyframes scale-up {
+	0% { transform : scale(0) }
+	100% { transform : scale(1) }
+}
+
+@keyframes fade-in {
+	0% { opacity : 0 }
+	100% { opacity : 1 }
+}
+
+@keyframes slide-down {
+	0% { transform : translate(-50%, -5px) scale(.7) }
+	100% { transform : translate(-50%, 0) scale(1) }
+}
+
+a.yith-wcwl-add-to-wishlist-button-anchor-wrapper {
+	text-decoration : none;
+}
+
+.yith-wcwl-modal {
+	.lapilliUI-Paper__root {
+		width         : 450px;
+		border-radius : 15px;
+		box-shadow    : rgba(24, 53, 62, 0.1) 0px 11px 15px -7px, rgba(24, 53, 62, 0.07) 0px 24px 38px 3px, rgba(24, 53, 62, 0.06) 0px 9px 46px 8px;
+	}
+
+	.lapilliUI-Backdrop__root {
+		background-color : $modal-overlay;
+	}
+
+	button.lapilliUI-Modal__close {
+		color : rgba(0, 0, 0, .5);
+
+		&:hover {
+			color : rgba(0, 0, 0, .5);
+		}
+	}
+
+	.yith-wcwl-modal__title {
+		display        : flex;
+		flex-direction : column;
+		align-items    : center;
+		gap            : 25px;
+		padding        : 50px 55px 0;
+
+		.yith-wcwl-modal__icon {
+			color      : $modal-icon;
+			height     : auto;
+			max-height : 90px;
+
+			&:not([id$="-light"]):not(.yith-wcwl-icon-svg--light) {
+				stroke-width : 1;
+
+				* {
+					stroke-width : 1;
+				}
+			}
+		}
+	}
+
+	div.yith-wcwl-modal__content {
+		padding        : 20px 55px 0;
+		display        : flex;
+		flex-direction : column;
+		gap            : 20px;
+	}
+
+	div.yith-wcwl-modal__actions {
+		display        : flex;
+		flex-direction : column;
+		align-items    : unset;
+		gap            : 10px;
+		padding        : 20px 55px 50px;
+
+		* {
+			margin : unset;
+		}
+	}
+
+	.yith-wcwl-modal__primary-button {
+		transition       : .2s;
+		background-color : $modal-primary-button;
+		color            : $modal-primary-button-text;
+		border           : none;
+		width            : 100%;
+		box-sizing       : border-box;
+
+		&--loading {
+			opacity : .5;
+			cursor  : progress;
+		}
+
+		&:hover {
+			color            : $modal-primary-button-text-hover;
+			background-color : $modal-primary-button-hover;
+		}
+	}
+
+	.yith-wcwl-modal__secondary-button {
+		transition       : .2s;
+		border-radius    : 5px;
+		background-color : $modal-secondary-button;
+		color            : $modal-secondary-button-text;
+		border           : none;
+
+		&:hover {
+			background-color : $modal-secondary-button-hover;
+			color            : $modal-secondary-button-text-hover;
+		}
+	}
+}
+
+.yith-wcwl-add-to-wishlist-modal {
+
+	.yith-wcwl-add-to-wishlist-modal__title {
+		.yith-wcwl-add-to-wishlist-modal__type_selection {
+			display  : flex;
+			width    : 100%;
+			position : relative;
+
+			&::after {
+				content    : "";
+				position   : absolute;
+				left       : 0;
+				width      : 50%;
+				height     : 3px;
+				background : $modal-primary-button;
+				bottom     : 0;
+				transition : .2s;
+			}
+
+			&.yith-wcwl-add-to-wishlist-modal__type_selection--create::after {
+				left : 50%;
+			}
+
+			.yith-wcwl-add-to-wishlist-modal__type_option {
+				background      : none;
+				text-decoration : none;
+				flex            : 1;
+				cursor          : default;
+				text-align      : center;
+				border          : none;
+				font-size       : 16px;
+				font-weight     : normal;
+				border-bottom   : 3px solid transparent;
+				padding         : 10px 0;
+				color           : #333;
+				transition      : .2s;
+				position        : relative;
+				border-radius   : 0;
+
+				&:before {
+					content    : "";
+					position   : absolute;
+					left       : 0;
+					bottom     : -3px;
+					width      : 100%;
+					height     : 3px;
+					transition : .2s;
+					background : #000;
+					opacity    : 10%;
+				}
+
+				&:hover:before {
+					background : $modal-primary-button;
+					opacity    : 30%;
+				}
+
+				&:not(.yith-wcwl-add-to-wishlist-modal__type_option--selected) {
+					color  : #999;
+					cursor : pointer;
+
+					&:hover, &:focus {
+						color : #333;
+					}
+				}
+
+				&.yith-wcwl-add-to-wishlist-modal__type_option--selected {
+					color : inherit
+				}
+			}
+		}
+	}
+
+	.yith-wcwl-add-to-wishlist-modal__content {
+		padding-bottom : 0;
+	}
+}
+
+.yith-wcwl-modal__wishlist-select__create-option.lapilliUI-Select__option {
+	color : $modal-primary-button;
+}
+
+.yith-wcwl-move-to-another-wishlist-modal {
+	.yith-wcwl-move-to-another-wishlist-modal__content__desc {
+		text-align : center;
+	}
+
+	.yith-wcwl-move-to-another-wishlist-modal__remove-wrapper {
+		display         : flex;
+		justify-content : center;
+		gap             : .368em;
+
+		.yith-wcwl-move-to-another-wishlist-modal__remove {
+			text-align : center;
+			color      : $modal-primary-button;
+			transition : .2s;
+			cursor     : pointer;
+
+			&:hover {
+				color : $modal-primary-button-hover
+			}
+		}
+	}
+}
+
+@property --conic-gradient-loading-deg {
+	syntax        : "<angle>";
+	inherits      : false;
+	initial-value : 0deg;
+}
+
+.yith-wcwl-feedback-modal {
+
+	&.yith-wcwl-feedback-modal--no-animation {
+		.lapilliUI-Modal__paper,
+		.lapilliUI-Modal__backdrop {
+			animation : none;
+			position  : absolute;
+		}
+	}
+
+	div.yith-wcwl-feedback-modal__message {
+		text-wrap    : balance;
+		margin-block : 20px;
+	}
+
+	&:not(.yith-wcwl-feedback-modal--no-close) {
+		button.lapilliUI-Modal__close {
+			border            : 3px solid transparent;
+			background        : linear-gradient(white, white), conic-gradient(#d0d0d0 var(--conic-gradient-loading-deg), white 0deg);
+			border-radius     : 100%;
+			background-origin : border-box;
+			background-clip   : content-box, border-box;
+			animation         : conic-gradient-loading $feedback-duration linear forwards;
+			outline           : none;
+			box-shadow        : none;
+		}
+	}
+
+	.lapilliUI-ModalTitle__root,
+	.lapilliUI-ModalContent__root {
+		text-align : center;
+	}
+
+	.yith-wcwl-feedback-modal__footer {
+		display        : flex;
+		flex-direction : column;
+		align-items    : unset;
+		gap            : 10px;
+
+		a {
+			margin     : 0;
+			text-align : center;
+		}
+	}
+
+	.yith-wcwl-feedback__product-name {
+		display : block;
+	}
+}
+
+@keyframes bounce {
+	0% {
+		transform : translate(-50%, -40%);
+	}
+	100% {
+		transform : translate(-50%, -50%);
+	}
+}
+
+@keyframes fade-in-out {
+	0% {opacity : 0}
+	15% {opacity : 1}
+	85% {opacity : 1}
+	100% {opacity : 0}
+}
+
+@keyframes fade-in {
+	0% {opacity : 0}
+	100% {opacity : 1}
+}
+
+@keyframes fade-out {
+	0% {opacity : 1}
+	100% {opacity : 0}
+}
+
+@keyframes conic-gradient-loading {
+	0% {
+		--conic-gradient-loading-deg : 0deg
+	}
+	90%, 100% {
+		--conic-gradient-loading-deg : 360deg
+	}
+}

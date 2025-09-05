@@ -2,14 +2,12 @@
 /**
  * Wishlist Session Handler
  *
- * @author YITH
  * @package YITH\Wishlist\Classes
+ * @author  YITH <plugins@yithemes.com>
  * @version 3.0.0
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly
 
 if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 	/**
@@ -21,13 +19,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 	 * @since 3.0.0
 	 */
 	class YITH_WCWL_Session {
-		/**
-		 * Single instance of the class
-		 *
-		 * @var \YITH_WCWL_Session
-		 * @since 3.0.0
-		 */
-		protected static $instance;
+		use YITH_WCWL_Singleton_Trait;
 
 		/**
 		 * Session ID.
@@ -348,7 +340,7 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 		 * Update the session expiry timestamp.
 		 *
 		 * @param string $session_id Session ID.
-		 * @param int    $timestamp Timestamp to expire the cookie.
+		 * @param int    $timestamp  Timestamp to expire the cookie.
 		 */
 		public function update_session_timestamp( $session_id, $timestamp ) {
 			try {
@@ -373,29 +365,5 @@ if ( ! class_exists( 'YITH_WCWL_Session' ) ) {
 			$this->session_id = $this->generate_session_id();
 			$this->cookie     = null;
 		}
-
-		/**
-		 * Returns single instance of the class
-		 *
-		 * @return \YITH_WCWL_Session
-		 * @since 3.0.0
-		 */
-		public static function get_instance() {
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new self();
-			}
-
-			return self::$instance;
-		}
 	}
-}
-
-/**
- * Unique access to instance of YITH_WCWL_Session class
- *
- * @return \YITH_WCWL_Session
- * @since 3.0.0
- */
-function YITH_WCWL_Session() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-	return YITH_WCWL_Session::get_instance();
 }

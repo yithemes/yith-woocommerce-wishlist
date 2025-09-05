@@ -2,8 +2,8 @@
 /**
  * Wishlist class
  *
- * @author YITH
  * @package YITH\Wishlist\Classes\Wishlists
+ * @author  YITH <plugins@yithemes.com>
  * @version 3.0.0
  */
 
@@ -54,7 +54,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Stores meta in cache for future reads.
 		 *
-		 * A group must be set to to enable caching.
+		 * A group must be set to enable caching.
 		 *
 		 * @var string
 		 */
@@ -186,7 +186,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 				$is_owner = true;
 			}
 
-			if ( $this->is_session_based() && YITH_WCWL_Session()->maybe_get_session_id() === $session_id ) {
+			if ( $this->is_session_based() && YITH_WCWL_Session::get_instance()->maybe_get_session_id() === $session_id ) {
 				$is_owner = true;
 			}
 
@@ -216,7 +216,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * * update_quantity
 		 * * download_pdf
 		 *
-		 * @param string          $capability Capability to check; default "view".
+		 * @param string          $capability   Capability to check; default "view".
 		 * @param string|int|bool $current_user Optional user identifier, in the form of a User ID or session id; false for default.
 		 * @return bool
 		 */
@@ -234,7 +234,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 			 *
 			 * @return bool
 			 */
-			if ( is_user_logged_in() && current_user_can( 'manage_woocommerce' ) && apply_filters( 'yith_wcwl_admin_can', true, $capability, $current_user, $this ) ) {
+			if ( is_user_logged_in() && current_user_can( 'manage_woocommerce' ) && apply_filters( 'yith_wcwl_admin_can', true, $capability, $current_user, $this ) ) { // phpcs:ignore WordPress.WP.Capabilities.Unknown
 				return true;
 			}
 
@@ -389,7 +389,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 				 *
 				 * @return string
 				 */
-				$name = apply_filters( 'yith_wcwl_default_wishlist_formatted_title', get_option( 'yith_wcwl_wishlist_title' ) );
+				$name = apply_filters( 'yith_wcwl_default_wishlist_formatted_title', get_option( 'yith_wcwl_wishlist_title', __( 'My wishlist', 'yith-woocommerce-wishlist' ) ) );
 			}
 
 			/**
@@ -628,7 +628,10 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * @param int $privacy Wishlist visibility (0 => public, 1 => shared, 2 => private).
 		 */
 		public function set_privacy( $privacy ) {
-			$this->set_prop( 'privacy', $privacy );
+			$privacy = intval( $privacy );
+			if ( in_array( $privacy, array( 0, 1, 2 ), true ) ) {
+				$this->set_prop( 'privacy', $privacy );
+			}
 		}
 
 		/**
@@ -700,9 +703,9 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		 * This stores changes in a special array so we can track what needs saving
 		 * the the DB later.
 		 *
-		 * @since 3.0.0
-		 * @param string $prop Name of prop to set.
+		 * @param string $prop  Name of prop to set.
 		 * @param mixed  $value Value of the prop.
+		 * @since 3.0.0
 		 */
 		protected function set_prop( $prop, $value ) {
 			parent::set_prop( $prop, $value );
@@ -717,8 +720,8 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist' ) ) {
 		/**
 		 * Save data to the database.
 		 *
-		 * @since 3.0.0
 		 * @return int order ID
+		 * @since 3.0.0
 		 */
 		public function save() {
 			if ( $this->data_store ) {

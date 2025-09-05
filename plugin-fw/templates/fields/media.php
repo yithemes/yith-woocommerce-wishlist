@@ -22,7 +22,7 @@ if ( 'id' === $store_as ) {
 }
 
 $is_image  = $url && preg_match( '/(jpg|jpeg|png|gif|ico|svg|jpe|webp)$/', $url );
-$file_name = $url ? basename( wp_parse_url( $url, PHP_URL_PATH ) ) : '';
+$file_name = $url ? basename( wp_parse_url( $url, PHP_URL_PATH ) ?? '' ) : '';
 
 $classes = array(
 	'yith-plugin-fw-media',

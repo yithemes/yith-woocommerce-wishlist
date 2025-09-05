@@ -13,7 +13,7 @@ if ( ! class_exists( 'YITH_Elementor' ) ) {
 	/**
 	 * YITH_Elementor class.
 	 *
-	 * @author  Leanza Francesco <leanzafrancesco@gmail.com>
+	 * @author  YITH <plugins@yithemes.com>
 	 */
 	class YITH_Elementor {
 

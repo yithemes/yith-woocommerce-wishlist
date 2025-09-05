@@ -37,6 +37,7 @@ $reset_warning = __( 'If you continue with this action, you will reset all optio
 				<input type="submit" name="yit-reset" class="button-secondary"
 						value="<?php esc_attr_e( 'Reset to default', 'yith-plugin-fw' ); ?>"
 						onclick="return confirm('<?php echo esc_attr( $reset_warning ); ?>');"/>
+				<?php wp_nonce_field( 'yith_panel_reset_options', 'yith_panel_reset_options_nonce' ); ?>
 			</form>
 			<p>&nbsp;</p>
 		<?php endif ?>

@@ -1,0 +1,16 @@
+<svg id="yith-wcwl-icon-heart-check" class="yith-wcwl-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+          stroke-miterlimit="10"
+          d="M23 15.197c0 2.84-2.297 5.137-5.136 5.137s-5.136-2.297-5.136-5.137 2.297-5.135 5.136-5.135S23 12.359 23 15.197zm-7.869.356l1.875 1.802 3.175-3.209"/>
+    <defs>
+        <path id="heart-check-A"
+              d="M20.371 10.714l1.566.755.813-5.906c0-.093-3.188-4.625-3.469-4.719S3.063 1.75 3.063 1.75L-.843 9.094.563 20.334l8.531 2.697 6.031-2.063.156-1.063-1.906-1.594 6.996-7.597z"/>
+    </defs>
+    <clipPath id="heart-check-B">
+        <use xlink:href="#heart-check-A"/>
+    </clipPath>
+    <g clip-path="url(#heart-check-B)">
+        <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"
+              d="M21.375 8.094c0-2.588-2.187-4.688-4.884-4.688-2.016 0-3.747 1.173-4.491 2.847-.745-1.674-2.476-2.847-4.493-2.847-2.695 0-4.882 2.099-4.882 4.688 0 7.521 9.375 12.5 9.375 12.5s9.375-4.98 9.375-12.5z"/>
+    </g>
+</svg>

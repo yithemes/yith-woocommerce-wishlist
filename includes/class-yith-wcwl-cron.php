@@ -2,14 +2,12 @@
 /**
  * Wishlist Cron Handler
  *
- * @author YITH
  * @package YITH\Wishlist\Classes
+ * @author  YITH <plugins@yithemes.com>
  * @version 3.0.0
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly
 
 if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 	/**
@@ -18,20 +16,14 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 	 * @since 3.0.0
 	 */
 	class YITH_WCWL_Cron {
+		use YITH_WCWL_Extensible_Singleton_Trait;
+
 		/**
 		 * Array of events to schedule
 		 *
 		 * @var array
 		 */
 		protected $crons = array();
-
-		/**
-		 * Single instance of the class
-		 *
-		 * @var \YITH_WCWL_Cron
-		 * @since 3.0.0
-		 */
-		protected static $instance;
 
 		/**
 		 * Constructor
@@ -101,37 +93,5 @@ if ( ! class_exists( 'YITH_WCWL_Cron' ) ) {
 				return;
 			}
 		}
-
-		/**
-		 * Returns single instance of the class
-		 *
-		 * @return \YITH_WCWL_Cron
-		 * @since 3.0.0
-		 */
-		public static function get_instance() {
-			if ( is_null( static::$instance ) ) {
-				static::$instance = new static();
-			}
-
-			return static::$instance;
-		}
 	}
-}
-
-/**
- * Unique access to instance of YITH_WCWL_Cron class
- *
- * @return \YITH_WCWL_Cron
- * @since 3.0.0
- */
-function YITH_WCWL_Cron() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-	if ( defined( 'YITH_WCWL_PREMIUM' ) ) {
-		$instance = YITH_WCWL_Cron_Premium::get_instance();
-	} elseif ( defined( 'YITH_WCWL_EXTENDED' ) ) {
-		$instance = YITH_WCWL_Cron_Extended::get_instance();
-	} else {
-		$instance = YITH_WCWL_Cron::get_instance();
-	}
-
-	return $instance;
 }

@@ -13,6 +13,7 @@ import React                 from 'react';
  * WordPress dependencies
  */
 import {
+	Disabled,
 	PanelBody,
 	ToggleControl,
 	SelectControl,
@@ -20,9 +21,11 @@ import {
 	TextareaControl,
 	CheckboxControl,
 	RangeControl,
-	RadioControl
+	RadioControl,
+	Spinner
 }                            from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
+
 
 /**
  * Internal dependencies
@@ -33,6 +36,9 @@ import ColorPickerControl    from './components/color-picker-control';
 import ColorPaletteControl   from './components/color-palette-control';
 import MultipleSelectControl from './components/multiple-select-control';
 import classNames            from 'classnames';
+import FrameBlock            from './components/frame-block';
+import EditorPlaceholder     from './components/editor-placeholder';
+import ServerSideBlock       from './components/server-side-block';
 
 /**
  * Retrieve an help message from arguments.
@@ -208,6 +214,20 @@ export const createEditFunction = ( blockName, blockArgs ) => {
 			setAttributes( { [ attributeName ]: updatedValue } );
 		}
 
+		let renderType = 'shortcode';
+
+		if ( blockArgs.render_callback ) {
+			renderType = blockArgs.use_frontend_preview ? 'frontend' : 'ssr';
+		}
+
+		if ( blockArgs.editor_placeholder ) {
+			renderType = 'placeholder';
+		}
+
+		const disabledByDefault = renderType !== 'shortcode';
+		const shouldUseDisabled = Boolean( blockArgs.should_use_disabled ?? disabledByDefault );
+		const MaybeDisabled     = shouldUseDisabled ? Disabled : Fragment;
+
 		return (
 			<>
 				{!!blockArgs.attributes &&
@@ -227,7 +247,24 @@ export const createEditFunction = ( blockName, blockArgs ) => {
 					 </PanelBody>
 				 </InspectorControls>
 				}
-				<Shortcode attributes={attributes} blockArgs={blockArgs} context={context}/>
+				<MaybeDisabled>
+					{
+						'shortcode' === renderType &&
+						<Shortcode attributes={attributes} blockArgs={blockArgs} context={context}/>
+					}
+					{
+						'frontend' === renderType &&
+						<FrameBlock attributes={attributes} block={blockName} title={blockArgs.title} context={context}/>
+					}
+					{
+						'ssr' === renderType &&
+						<ServerSideBlock block={`yith/${blockName}`} attributes={attributes}/>
+					}
+					{
+						'placeholder' === renderType &&
+						<EditorPlaceholder blockArgs={blockArgs}/>
+					}
+				</MaybeDisabled>
 			</>
 		);
 	}

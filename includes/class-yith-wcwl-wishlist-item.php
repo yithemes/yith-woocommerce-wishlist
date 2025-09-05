@@ -2,14 +2,12 @@
 /**
  * Wishlist Item class
  *
- * @author YITH
  * @package YITH\Wishlist\Classes\Wishlists
+ * @author  YITH <plugins@yithemes.com>
  * @version 3.0.0
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly.
 
 if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 	/**
@@ -242,7 +240,19 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		 * @return int Quantity
 		 */
 		public function get_quantity( $context = 'view' ) {
-			return max( 1, (int) $this->get_prop( 'quantity', $context ) );
+			/**
+			 * APPLY_FILTERS: yith_wcwl_min_item_quantity
+			 *
+			 * Filter the minimum wishlist item quantity.
+			 *
+			 * @param int Minimum quantity
+			 *
+			 * @return int
+			 */
+			$min_quantity = apply_filters( 'yith_wcwl_min_item_quantity', 1 );
+			$quantity     = (int) $this->get_prop( 'quantity', $context );
+
+			return max( $min_quantity, $quantity );
 		}
 
 		/**
@@ -307,7 +317,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Item' ) ) {
 		/**
 		 * Get related wishlist
 		 *
-		 * @return \YITH_WCWL_Wishlist|bool Wishlist object, or false on failure
+		 * @return YITH_WCWL_Wishlist|bool Wishlist object, or false on failure
 		 */
 		public function get_wishlist() {
 			$wishlist_id = $this->get_wishlist_id();

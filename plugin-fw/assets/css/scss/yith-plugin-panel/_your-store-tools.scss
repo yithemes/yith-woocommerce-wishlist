@@ -44,7 +44,6 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
         grid-gap: 24px;
-        max-width: 1700px;
 
         .item {
             display: flex;
@@ -73,19 +72,19 @@
                     flex: 1;
                     font-size: 1.1em;
                 }
-            }
 
-            .recommended {
-                position: absolute;
-                top: 12px;
-                right: 12px;
-                padding: 2px 10px;
-                font-size: .75em;
-                font-weight: 800;
-                text-transform: uppercase;
-                background: rgb(196, 145, 0);
-                color: #fff;
-                border-radius: 40px;
+                .recommended {
+                    align-self: flex-start;
+                    margin: -8px -8px 0 -4px;
+                    padding: 2px 10px;
+                    font-size: .75em;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    background: rgb(196, 145, 0);
+                    color: #fff;
+                    border-radius: 40px;
+                    white-space: nowrap;
+                }
             }
 
             .description {

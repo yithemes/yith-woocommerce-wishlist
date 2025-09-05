@@ -2,7 +2,7 @@
 /**
  * Wishlist pages template; load template parts basing on the url
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Templates\Wishlist
  * @version 3.0.0
  */

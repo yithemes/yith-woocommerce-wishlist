@@ -1,0 +1,72 @@
+.yith-plugin-fw__notice-banner {
+    --yith-fw-notice-banner-bg: #ffffff;
+    --yith-fw-notice-banner-icon-color: #4361c4;
+    --yith-fw-notice-banner-title-color: #4361c4;
+    --yith-fw-notice-banner-message-color: #3c434a;
+    --yith-fw-notice-banner-shadow-color: rgba(56, 0, 199, 0.1);
+
+    &.yith-plugin-fw__notice-banner--warning {
+        --yith-fw-notice-banner-bg: #fefce9;
+        --yith-fw-notice-banner-icon-color: #fbcc15;
+        --yith-fw-notice-banner-title-color: #945b3b;
+        --yith-fw-notice-banner-message-color: #945b3b;
+        --yith-fw-notice-banner-shadow-color: rgba(199, 0, 0, 0.1);
+    }
+
+    &.yith-plugin-fw__notice-banner--error {
+        --yith-fw-notice-banner-bg: #ffffff;
+        --yith-fw-notice-banner-icon-color: #D02323;
+        --yith-fw-notice-banner-title-color: #982A21;
+        --yith-fw-notice-banner-shadow-color: rgba(199, 0, 0, 0.1);
+    }
+
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    padding: 24px;
+    box-shadow: 1px 2px 8px 0 var(--yith-fw-notice-banner-shadow-color);
+    background: var(--yith-fw-notice-banner-bg);
+    text-align: left;
+
+    &:not(.yith-plugin-fw--inline):not(.inline) {
+        display: none;
+    }
+
+    @media screen and (max-width: 782px) {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .yith-plugin-fw__notice-banner__icon {
+        width: 40px;
+        color: var(--yith-fw-notice-banner-icon-color);
+
+        svg {
+            width: 100%;
+        }
+    }
+
+    .yith-plugin-fw__notice-banner__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .yith-plugin-fw__notice-banner__title {
+        color: var(--yith-fw-notice-banner-title-color);
+        font-size: 1rem;
+        line-height: 1.5;
+        font-weight: 600;
+    }
+
+    .yith-plugin-fw__notice-banner__message {
+        color: var(--yith-fw-notice-banner-message-color);
+        font-weight: 400;
+        font-size: 13px;
+    }
+}

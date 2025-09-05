@@ -19,7 +19,12 @@ body.yith-plugin-fw-panel.yith-plugin-fw-panel--version-2 {
     }
 
     #yith-plugin-fw__panel__notices {
-        margin: 35px 20px -24px 0;
+        margin: 32px 24px -24px 0;
+        max-width: 2175px;
+
+        @media screen and (max-width: 782px) {
+            margin-right: 10px;
+        }
 
         .notice {
             margin-left: 0;
@@ -101,6 +106,7 @@ body.yith-plugin-fw-panel.yith-plugin-fw-panel--version-2 {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    max-width: 2200px;
 
     @media screen and (max-width: 782px) {
         padding-right: 8px;
@@ -387,6 +393,41 @@ body.yith-plugin-fw-panel.yith-plugin-fw-panel--version-2 {
     border-radius: 8px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
 
+    .yith-plugin-fw__panel__header-nav__wrapper {
+        .yith-plugin-fw__panel__header-nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--yith-field-border-color);
+            font-weight: 500;
+            font-size: 14px;
+
+            .yith-plugin-fw__panel__header-nav-item {
+                a.yith-plugin-fw__panel__header-nav-item__content {
+                    display: block;
+                    padding: 20px 32px;
+                    text-decoration: none;
+                    color: inherit;
+
+                    &:hover {
+                        color: var(--yith-primary-hover);
+                    }
+
+                    &:focus, &:focus-visible, &:active {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+
+                &.yith-plugin-fw--active {
+                    box-shadow: 0 3px 0 0 var(--yith-primary);
+                    color: var(--yith-primary);
+                }
+            }
+        }
+    }
+
     .yith-plugin-fw__panel__content__page {
         display: flex;
         flex-direction: column;
@@ -417,7 +458,7 @@ body.yith-plugin-fw-panel.yith-plugin-fw-panel--version-2 {
 
             .yith-plugin-fw__panel__content__page__description {
                 margin-top: .75rem;
-                font-size: .875rem;
+                font-size: .8rem;
                 line-height: 1.5;
             }
         }
@@ -503,6 +544,7 @@ body.yith-plugin-fw-panel.yith-plugin-fw-panel--version-2 {
             font-weight: 400;
             font-size: inherit;
             margin-bottom: 8px;
+            padding-inline-end: 70px;
         }
 
         &.yith-plugin-fw__panel__option--onoff {
@@ -568,6 +610,7 @@ body.yith-plugin-fw-panel.yith-plugin-fw-panel--version-2 {
         border-bottom-left-radius: inherit;
         border-bottom-right-radius: inherit;
         background: rgb(248, 250, 252);
+        z-index: 10;
 
         :not(style) + :not(style) {
             margin-left: 8px;

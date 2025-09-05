@@ -12,7 +12,7 @@ list ( $field_id, $name, $class, $fields, $value, $data, $custom_attributes ) = 
 
 $class         = ! ! $class ? $class : '';
 $value         = maybe_unserialize( $value );
-$allowed_types = apply_filters( 'yith_plugin_fw_inline_fields_allowed_types', array( 'select', 'select-buttons', 'number', 'text', 'slider', 'hidden', 'html', 'datepicker' ), $name, $field );
+$allowed_types = apply_filters( 'yith_plugin_fw_inline_fields_allowed_types', array( 'select', 'select-buttons', 'number', 'text', 'slider', 'hidden', 'html', 'datepicker', 'colorpicker' ), $name, $field );
 $default_args  = array( 'type' => 'select' );
 ?>
 <?php if ( ! empty( $fields ) && is_array( $fields ) ) : ?>

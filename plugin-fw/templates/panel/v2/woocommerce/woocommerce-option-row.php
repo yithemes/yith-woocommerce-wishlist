@@ -35,11 +35,13 @@ $row_classes = array(
 $row_classes = array_filter( array_merge( $row_classes, $extra_row_classes, array( $extra_row_class ) ) );
 $row_classes = implode( ' ', $row_classes );
 
+$label_id = ! ! $field['id'] ? ( $field['id'] . '__label' ) : '';
+
 ?>
 <div class="<?php echo esc_attr( $row_classes ); ?>" <?php echo yith_field_deps_data( $field ); ?>>
 	<?php if ( $display_row ) : ?>
 		<div class="yith-plugin-fw__panel__option__label">
-			<label for="<?php echo esc_attr( $field['id'] ); ?>"><?php echo wp_kses_post( $field['title'] ); ?></label>
+			<label id="<?php echo esc_attr( $label_id ); ?>" for="<?php echo esc_attr( $field['id'] ); ?>"><?php echo wp_kses_post( $field['title'] ); ?></label>
 			<?php $panel->get_template( 'panel-option-label-tags.php', array( 'field' => $field ) ); ?>
 		</div>
 		<div class="yith-plugin-fw__panel__option__content">

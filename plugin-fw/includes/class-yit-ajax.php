@@ -12,7 +12,7 @@ if ( ! class_exists( 'YIT_Ajax' ) ) {
 	/**
 	 * YIT_Ajax class.
 	 *
-	 * @author  Leanza Francesco <leanzafrancesco@gmail.com>
+	 * @author  YITH <plugins@yithemes.com>
 	 */
 	class YIT_Ajax {
 

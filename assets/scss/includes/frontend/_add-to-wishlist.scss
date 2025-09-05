@@ -1,0 +1,316 @@
+/* === POPUP ADD TO WISHLIST === */
+
+.yith-wcwl-popup {
+	display : none;
+
+	&-content {
+		h3 {
+			text-align : center;
+			font-size  : 1.5em;
+		}
+
+		label {
+			display : block;
+		}
+
+		select,
+		input[type="text"] {
+			padding : 10px 7px;
+		}
+
+		.create {
+			display : none;
+		}
+
+		.yith-wcwl-second-row {
+			display : none;
+		}
+
+		.popup-description {
+			text-align    : center;
+			font-weight   : 600;
+			margin-bottom : 15px;
+
+			a.show-tab.active {
+				cursor         : inherit;
+				color          : inherit;
+				pointer-events : none;
+			}
+		}
+
+		.wishlist-select {
+			box-sizing : border-box;
+		}
+	}
+
+	&-feedback {
+		margin-top    : 2em;
+		margin-bottom : 2em;
+
+		p.feedback {
+			margin-top  : 1.5em;
+			text-align  : center;
+			font-size   : 1.1rem;
+			font-weight : 600;
+		}
+	}
+
+	&-footer {
+		margin : 15px 0;
+
+		.button.wishlist-submit {
+			display    : block;
+			width      : 100%;
+			text-align : center;
+		}
+	}
+
+	&-content,
+	&-feedback {
+		.heading-icon {
+			text-align   : center;
+			display      : block;
+			font-size    : 70px;
+			color        : #333;
+			margin-block : 0 15px;
+
+			svg.yith-wcwl-icon-svg, img {
+				width  : 70px;
+				height : 70px;
+			}
+		}
+	}
+}
+
+.pp_pic_holder.pp_woocommerce.feedback {
+	max-width : 450px !important;
+
+	.pp_content {
+		width : auto !important;
+	}
+}
+
+/* === DROPDOWN ADD TO WISHLIST === */
+
+.yith-wcwl-add-button {
+
+	&.with-dropdown {
+		position : relative;
+		padding  : 15px 0;
+	}
+
+	&.show-dropdown ul.yith-wcwl-dropdown {
+		display : block;
+	}
+
+	ul.yith-wcwl-dropdown li {
+		padding        : 15px;
+		padding-left   : 0;
+		text-transform : uppercase;
+		font-size      : .8em;
+
+		&:before {
+			font-family  : FontAwesome;
+			content      : "\f067";
+			margin-right : 15px;
+		}
+
+		&:not(:last-child) {
+			border-bottom : 1px solid #cdcdcd;
+		}
+
+		a {
+			font-size  : 1em !important;
+			color      : inherit;
+			box-shadow : none;
+
+			&:hover {
+				color : initial;
+			}
+		}
+	}
+}
+
+$add-to-wishlist-icon-color             : var(--add-to-wishlist-icon-color, #000);
+$added-to-wishlist-icon-color           : var(--added-to-wishlist-icon-color, #000);
+
+.yith-wcwl-add-to-wishlist {
+	.yith-wcwl-add-button {
+		display        : flex;
+		flex-direction : column;
+		align-items    : center;
+	}
+
+	a.button:not( .theme-button-style ) {
+		padding : 7px 10px;
+	}
+
+	svg.yith-wcwl-icon-svg, .add_to_wishlist img {
+		height : auto;
+		width  : 25px;
+		// transform    : translateY(5px);
+		// margin-right : 5px;
+		color  : $add-to-wishlist-icon-color;
+	}
+
+	&.exists {
+		svg.yith-wcwl-icon-svg {
+			color : $added-to-wishlist-icon-color;
+		}
+	}
+}
+
+.yith-wcwl-wishlistaddedbrowse {
+	display        : flex;
+	flex-direction : column;
+	align-items    : center;
+
+	.feedback {
+		display         : flex;
+		align-items     : center;
+		justify-content : center;
+		gap             : 5px;
+		text-wrap       : balance;
+	}
+}
+
+.yith-wcwl-add-to-wishlist--single .yith-wcwl-add-button ul.yith-wcwl-dropdown {
+	left : 0;
+}
+
+.yith-wcwl-add-button ul.yith-wcwl-dropdown {
+	display        : none;
+	list-style     : none;
+	margin-bottom  : 0;
+	padding        : 5px 25px;
+	background     : #fff;
+	position       : absolute;
+	z-index        : 15;
+	top            : 100%;
+	border         : 1px solid #cdcdcd;
+	outline-offset : -10px;
+	left           : 50%;
+	min-width      : 200px;
+}
+
+/* === TOOLTIP ===  */
+
+.yith-wcwl-add-to-wishlist {
+	.separator + [data-title] {
+		display : inline-block;
+	}
+
+	.with-tooltip {
+		position : relative;
+	}
+}
+
+.yith-wcwl-tooltip {
+	z-index        : 10;
+	padding        : 5px 10px;
+	border-radius  : 5px;
+	text-align     : center;
+	top            : calc(100% + 5px);
+	pointer-events : none;
+	cursor         : initial;
+	font-size      : .6875rem;
+	line-height    : normal;
+	display        : none;
+}
+
+.with-dropdown .yith-wcwl-tooltip {
+	top    : auto;
+	bottom : calc(100% + 10px);
+}
+
+.with-tooltip .yith-wcwl-tooltip {
+	position  : absolute;
+	left      : 50%;
+	transform : translateX(-50%);
+
+	&:before {
+		content       : "";
+		display       : block;
+		position      : absolute;
+		top           : 0;
+		left          : 50%;
+		transform     : translate(-50%, -95%);
+		width         : 0;
+		height        : 0;
+
+		background    : transparent !important;
+		border-left   : 5px solid transparent !important;
+		border-right  : 5px solid transparent !important;
+		border-bottom : 5px solid;
+	}
+}
+
+.with-dropdown .with-tooltip .yith-wcwl-tooltip:before {
+	bottom        : -5px;
+	top           : auto;
+
+	border-left   : 5px solid transparent;
+	border-right  : 5px solid transparent;
+	border-top    : 5px solid;
+	border-bottom : none;
+}
+
+/* === POPUP MESSAGE === */
+
+#yith-wcwl-popup-message {
+	font-weight        : 700;
+	line-height        : 50px;
+	text-align         : center;
+
+	background         : white;
+	-webkit-box-shadow : 0 0 15px rgba(0, 0, 0, .3);
+	-moz-box-shadow    : 0 0 15px rgba(0, 0, 0, .3);
+	box-shadow         : 0 0 15px rgba(0, 0, 0, .3);
+
+	position           : fixed;
+	top                : 50%;
+	left               : 50%;
+	padding            : 7px 40px;
+	z-index            : 10000; /* Thanks WP -.- */
+}
+
+
+/* === AUTO GENERATED STYLE THAT WAS LOCALIZED === */
+$add-to-wishlist-icon-color             : var(--add-to-wishlist-icon-color, #000);
+$added-to-wishlist-icon-color           : var(--added-to-wishlist-icon-color, #000);
+$color-add-to-wishlist-background       : var(--color-add-to-wishlist-background, #333333);
+$color-add-to-wishlist-text             : var(--color-add-to-wishlist-text, #ffffff);
+$color-add-to-wishlist-border           : var(--color-add-to-wishlist-border, #333333);
+$color-add-to-wishlist-background-hover : var(--color-add-to-wishlist-background-hover, #4f4f4f);
+$color-add-to-wishlist-text-hover       : var(--color-add-to-wishlist-text-hover, #ffffff);
+$color-add-to-wishlist-border-hover     : var(--color-add-to-wishlist-border-hover, #4f4f4f);
+$rounded-corners-radius                 : var(--rounded-corners-radius, 16px);
+
+$tooltip-color-background               : var(--tooltip-color-background, #333333);
+$tooltip-color-background               : var(--tooltip-color-background, #333333);
+$tooltip-color-background               : var(--tooltip-color-background, #333333);
+$tooltip-color-text                     : var(--tooltip-color-text, #ffffff);
+
+.woocommerce .yith-wcwl-add-button a.button.alt:not( .theme-button-style ) {
+	background-color : $color-add-to-wishlist-background;
+	background       : $color-add-to-wishlist-background;
+	color            : $color-add-to-wishlist-text;
+	border-color     : $color-add-to-wishlist-border;
+	border-radius    : $rounded-corners-radius;
+
+	&:hover {
+		background-color : $color-add-to-wishlist-background-hover;
+		background       : $color-add-to-wishlist-background-hover;
+		color            : $color-add-to-wishlist-text-hover;
+		border-color     : $color-add-to-wishlist-border-hover;
+	}
+}
+
+.yith-wcwl-tooltip,
+.with-tooltip .yith-wcwl-tooltip:before,
+.with-dropdown .with-tooltip .yith-wcwl-tooltip:before {
+	background-color    : $tooltip-color-background;
+	border-bottom-color : $tooltip-color-background;
+	border-top-color    : $tooltip-color-background;
+	color               : $tooltip-color-text;
+}

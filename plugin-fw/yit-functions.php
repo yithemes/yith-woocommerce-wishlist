@@ -2,6 +2,7 @@
 /**
  * Functions.
  *
+ * @author  YITH <plugins@yithemes.com>
  * @package YITH\PluginFramework
  */
 
@@ -131,7 +132,7 @@ if ( ! function_exists( 'yit_plugin_content' ) ) {
 		// Splitting.
 		if ( count( $content ) >= $limit ) {
 			$split_content = '';
-			for ( $i = 0; $i < $limit; $i ++ ) {
+			for ( $i = 0; $i < $limit; $i++ ) {
 				$split_content .= $content[ $i ] . ' ';
 			}
 
@@ -296,7 +297,6 @@ if ( ! function_exists( 'yit_enqueue_script' ) ) {
 	 * @param string|bool|null $ver       Optional. String specifying script version number.
 	 * @param bool             $in_footer Optional. Whether to enqueue the script before </body> instead of in the <head>.
 	 *
-	 * @author     Simone D'Amico <simone.damico@yithemes.com>
 	 * @deprecated 3.5
 	 */
 	function yit_enqueue_script( $handle, $src, $deps = array(), $ver = false, $in_footer = true ) {
@@ -360,7 +360,7 @@ if ( ! function_exists( 'yit_get_post_meta' ) ) {
 		$meta           = get_post_meta( $id, current( $sub_meta ), true );
 		$sub_meta_count = count( $sub_meta );
 
-		for ( $i = 1; $i < $sub_meta_count; $i ++ ) {
+		for ( $i = 1; $i < $sub_meta_count; $i++ ) {
 			$current_submeta = rtrim( $sub_meta[ $i ], ']' );
 			if ( ! isset( $meta[ $current_submeta ] ) ) {
 				return false;
@@ -446,7 +446,7 @@ if ( ! function_exists( 'yit_pagination' ) ) {
 				$html .= sprintf( '<a class="%s" href="%s">&lsaquo;</a>', 'yit_pagination_previous', get_pagenum_link( $paged - 1 ) );
 			}
 
-			for ( $i = 1; $i <= $pages; $i ++ ) {
+			for ( $i = 1; $i <= $pages; $i++ ) {
 				if ( 1 !== $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
 					$class = ( $paged === $i ) ? 'selected' : '';
 
@@ -589,7 +589,7 @@ if ( ! function_exists( 'yit_get_excluded_categories' ) ) {
 		foreach ( $cats as $cat ) {
 			$query .= ",-$cat";
 
-			$i ++;
+			$i++;
 		}
 
 		ltrim( ',', $query );
@@ -607,7 +607,6 @@ if ( ! function_exists( 'yit_add_extra_theme_headers' ) ) {
 	 *
 	 * @return array
 	 * @since  2.0.0
-	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	 */
 	function yit_add_extra_theme_headers( $headers ) {
 		$headers[] = 'Core Framework Version';
@@ -622,7 +621,6 @@ if ( ! function_exists( 'yit_check_plugin_support' ) ) {
 	 *
 	 * @return bool
 	 * @since  2.0.0
-	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	 */
 	function yit_check_plugin_support() {
 		$headers['core']   = wp_get_theme()->get( 'Core Framework Version' );
@@ -646,12 +644,11 @@ if ( ! function_exists( 'yit_ie_version' ) ) {
 	 *
 	 * @return int|float
 	 * @since  1.0.0
-	 * @author Andrea Grillo <andrea.grillo@yithemes.com>, Andrea Frascaspata<andrea.frascaspata@yithemes.com>
 	 */
 	function yit_ie_version() {
 		// phpcs:disable WordPress.Security.ValidatedSanitizedInput
 		if ( ! isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
-			return - 1;
+			return -1;
 		}
 		preg_match( '/MSIE ([0-9]+\.[0-9])/', $_SERVER['HTTP_USER_AGENT'], $reg );
 
@@ -659,7 +656,7 @@ if ( ! function_exists( 'yit_ie_version' ) ) {
 		if ( ! isset( $reg[1] ) ) {
 			preg_match( '/rv:([0-9]+\.[0-9])/', $_SERVER['HTTP_USER_AGENT'], $reg );
 			if ( ! isset( $reg[1] ) ) {
-				return - 1;
+				return -1;
 			} else {
 				return floatval( $reg[1] );
 			}
@@ -680,7 +677,6 @@ if ( ! function_exists( 'yit_avoid_duplicate' ) ) {
 	 *
 	 * @return mixed
 	 * @since  2.0.0
-	 * @author Antonino Scarfì <antonino.scarfi@yithemes.com>
 	 */
 	function yit_avoid_duplicate( $value, $array, $check = 'value' ) {
 		$match = array();
@@ -796,7 +792,6 @@ if ( ! function_exists( 'is_shop_installed' ) ) {
 	 *
 	 * @return bool
 	 * @since  2.0.0
-	 * @author Francesco Grasso <francesco.grasso@yithemes.com
 	 */
 	function is_shop_installed() {
 		global $woocommerce;
@@ -816,7 +811,6 @@ if ( ! function_exists( 'yit_load_js_file' ) ) {
 	 *
 	 * @return string The file path
 	 * @since  2.0.0
-	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	 */
 	function yit_load_js_file( $filename ) {
 
@@ -836,7 +830,6 @@ if ( ! function_exists( 'yit_load_css_file' ) ) {
 	 *
 	 * @return string The file path
 	 * @since  2.0.0
-	 * @author Alberto Ruggiero
 	 */
 	function yit_load_css_file( $filename ) {
 
@@ -857,7 +850,6 @@ if ( ! function_exists( 'yit_wpml_register_string' ) ) {
 	 * @param string $value   The value to translate.
 	 *
 	 * @since  2.0.0
-	 * @author Andrea Frascaspata <andrea.frascaspata@yithemes.com>
 	 */
 	function yit_wpml_register_string( $context, $name, $value ) {
 		do_action( 'wpml_register_single_string', $context, $name, $value );
@@ -874,7 +866,6 @@ if ( ! function_exists( 'yit_wpml_string_translate' ) ) {
 	 *
 	 * @return string the string translated
 	 * @since  2.0.0
-	 * @author Andrea Frascaspata <andrea.frascaspata@yithemes.com>
 	 */
 	function yit_wpml_string_translate( $context, $name, $default_value ) {
 		return apply_filters( 'wpml_translate_single_string', $default_value, $context, $name );
@@ -892,7 +883,6 @@ if ( ! function_exists( 'yit_wpml_object_id' ) ) {
 	 *
 	 * @return int the translation id
 	 * @since  2.0.0
-	 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 	 */
 	function yit_wpml_object_id( $element_id, $element_type = 'post', $return_original_if_missing = false, $language_code = null ) {
 		if ( function_exists( 'wpml_object_id_filter' ) ) {
@@ -914,7 +904,6 @@ if ( ! function_exists( 'yit_get_language_from_locale' ) ) {
 	 *
 	 * @return string Language name for passed locale; if can't find any, local itself is returned.
 	 * @since  3.7.1
-	 * @author Antonio La Rocca <antonio.larocca@yithemes.com>
 	 */
 	function yit_get_language_from_locale( $locale, $show_native = false ) {
 		require_once ABSPATH . 'wp-admin/includes/translation-install.php';
@@ -1000,7 +989,7 @@ if ( ! function_exists( 'yith_get_formatted_price' ) ) {
 		list ( $decimals, $decimal_separator, $thousand_separator, $price_format, $currency ) = yith_plugin_fw_extract( $args, 'decimals', 'decimal_separator', 'thousand_separator', 'price_format', 'currency' );
 
 		$negative = $price < 0;
-		$price    = apply_filters( 'raw_woocommerce_price', floatval( $negative ? $price * - 1 : $price ) );
+		$price    = apply_filters( 'raw_woocommerce_price', floatval( $negative ? $price * -1 : $price ) );
 		$price    = apply_filters( 'formatted_woocommerce_price', number_format( $price, $decimals, $decimal_separator, $thousand_separator ), $price, $decimals, $decimal_separator, $thousand_separator );
 
 		if ( apply_filters( 'woocommerce_price_trim_zeros', false ) && $decimals > 0 ) {
@@ -1128,7 +1117,7 @@ if ( ! function_exists( 'yith_plugin_fw_get_field' ) ) {
 			static $field_number = 1;
 
 			$field['id'] = "yith-plugin-fw-field__{$field_number}";
-			$field_number ++;
+			$field_number++;
 		}
 
 		if ( $field_template ) {
@@ -1283,7 +1272,7 @@ if ( ! function_exists( 'yit_add_select2_fields' ) ) {
 		$custom_attributes = implode( ' ', $custom_attributes );
 
 		if ( ! function_exists( 'WC' ) || version_compare( WC()->version, '2.7.0', '>=' ) ) {
-			if ( true === $args['data-multiple'] && substr( $args['name'], - 2 ) !== '[]' ) {
+			if ( true === $args['data-multiple'] && substr( $args['name'], -2 ) !== '[]' ) {
 				$args['name'] = $args['name'] . '[]';
 			}
 			$select2_template_name = 'select2.php';
@@ -1349,7 +1338,6 @@ if ( ! function_exists( 'yith_plugin_fw_force_regenerate_plugin_update_transient
 	 * @return void
 	 * @since  1.0
 	 * @see    update_plugins transient and pre_set_site_transient_update_plugins hooks
-	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	 */
 	function yith_plugin_fw_force_regenerate_plugin_update_transient() {
 		delete_site_transient( 'update_plugins' );
@@ -1374,18 +1362,12 @@ if ( ! function_exists( 'yith_plugin_fw_gutenberg_add_blocks' ) ) {
 	 * @param string|array $blocks Blocks to add.
 	 *
 	 * @return bool true if add a new blocks, false otherwise
-	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	 */
 	function yith_plugin_fw_gutenberg_add_blocks( $blocks ) {
 		$added = false;
 		if ( yith_plugin_fw_is_gutenberg_enabled() ) {
 			// Add blocks.
 			$added = YITH_Gutenberg()->add_blocks( $blocks );
-
-			// Add blocks arguments.
-			if ( $added ) {
-				YITH_Gutenberg()->set_block_args( $blocks );
-			}
 		}
 
 		return $added;
@@ -1444,7 +1426,6 @@ if ( ! function_exists( 'yith_set_wrapper_class' ) ) {
 	 * @param array|string $class List of additional classes to add to the UI style class.
 	 *
 	 * @return string
-	 * @author Emanuela Castorina
 	 */
 	function yith_set_wrapper_class( $class = '' ) {
 		$new_class = yith_get_wrapper_class();
@@ -1461,7 +1442,6 @@ if ( ! function_exists( 'yith_get_date_formats' ) ) {
 	 * @param bool $js JS date format or not.
 	 *
 	 * @return array
-	 * @author     Salvatore Strano
 	 * @since      3.1
 	 * @deprecated 3.5 | use yith_get_date_formats() instead
 	 */
@@ -1505,7 +1485,6 @@ if ( ! function_exists( 'yith_get_time_formats' ) ) {
 	 * Get all available time format.
 	 *
 	 * @return array
-	 * @author Emanuela Castorina
 	 * @since  3.5
 	 */
 	function yith_get_time_formats() {
@@ -1530,7 +1509,6 @@ if ( ! function_exists( 'yith_format_toggle_title' ) ) {
 	 * @param array  $values The values.
 	 *
 	 * @return array
-	 * @author Salvatore Strano
 	 * @since  3.1
 	 */
 	function yith_format_toggle_title( $title, $values ) {
@@ -1550,8 +1528,6 @@ if ( ! function_exists( 'yith_format_toggle_title' ) ) {
 if ( ! function_exists( 'yith_plugin_fw_load_update_and_licence_files' ) ) {
 	/**
 	 * Load premium file for license and update system
-	 *
-	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	 */
 	function yith_plugin_fw_load_update_and_licence_files() {
 		global $plugin_upgrade_fw_data;
@@ -1594,7 +1570,6 @@ if ( ! function_exists( 'yith_plugin_fw_remove_duplicate_classes' ) ) {
 	 *
 	 * @return string
 	 * @since  3.2.2
-	 * @author Emanuela Castorina <emanuela.castorina@yithemes.com>
 	 */
 	function yith_plugin_fw_remove_duplicate_classes( $classes ) {
 		$class_array  = explode( ' ', $classes );
@@ -1752,10 +1727,13 @@ if ( ! function_exists( 'yith_plugin_fw_add_utm_data' ) ) {
 	 * @param string $slug     Plugin slug.
 	 * @param string $campaign Campaign to track. Default: default.
 	 * @param string $source   Where the link came from. You can simply set it to the plugin version type(free, extended, premium) to get the correct source. Default: wp-dashboard.
+	 * @param string $content  Identifies what specifically was clicked to bring the user to the site, such as button-cta, link, and something similar.
+	 * @param string $term     A keyword representing something that brought the user to the site.
 	 *
 	 * @since 3.6.10
+	 * @since 4.5.8 Added $content and $term prams.
 	 */
-	function yith_plugin_fw_add_utm_data( $url, $slug, $campaign = 'default', $source = 'wp-dashboard' ) {
+	function yith_plugin_fw_add_utm_data( $url, $slug, $campaign = 'default', $source = 'wp-dashboard', $content = '', $term = '' ) {
 		$sources = array(
 			'free'     => 'wp-free-dashboard',
 			'extended' => 'wp-extended-dashboard',
@@ -1770,6 +1748,14 @@ if ( ! function_exists( 'yith_plugin_fw_add_utm_data' ) ) {
 				'utm_medium'   => $slug,
 				'utm_campaign' => $campaign,
 			);
+
+			if ( $content ) {
+				$utm_track_data['utm_content'] = $content;
+			}
+
+			if ( $term ) {
+				$utm_track_data['utm_term'] = $term;
+			}
 
 			$url = add_query_arg( $utm_track_data, $url );
 		}
@@ -1913,11 +1899,11 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_post_actions' ) ) {
 	 * @param array       $args                   {
 	 *                                            Optional. Arguments to retrieve actions.
 	 *
-	 * @type array        $more-menu              Array of more-menu items.
-	 * @type array|bool   $more-menu-in-trash     false: the menu will be not shown in trash | true: the menu will be shown in trash | array: set specific menu for trash.
-	 * @type string|false $duplicate-url          The Duplicate URL. Default: false (the duplicate action will be not shown).
-	 * @type string|false $confirm-trash-message  The 'confirm trash' message. Set to false to not ask for trash confirmation.
-	 * @type string|false $confirm-delete-message The 'confirm delete' message. Set to false to not ask for delete confirmation.
+	 * @type array        $more                   -menu              Array of more-menu items.
+	 * @type array|bool   $more                   -menu-in-trash     false: the menu will be not shown in trash | true: the menu will be shown in trash | array: set specific menu for trash.
+	 * @type string|false $duplicate              -url          The Duplicate URL. Default: false (the duplicate action will be not shown).
+	 * @type string|false $confirm                -trash-message  The 'confirm trash' message. Set to false to not ask for trash confirmation.
+	 * @type string|false $confirm                -delete-message The 'confirm delete' message. Set to false to not ask for delete confirmation.
 	 *                                            }
 	 * @return array
 	 * @since 3.7.0
@@ -2066,10 +2052,10 @@ if ( ! function_exists( 'yith_plugin_fw_get_default_term_actions' ) ) {
 	 *                                            Optional. Arguments to retrieve actions.
 	 *
 	 * @type string       $taxonomy               The taxonomy. If not set, the taxonomy will be retrieved by $_REQUEST.
-	 * @type string       $object-type            The object type the term is assigned to (ex: the post-type).
-	 * @type array        $more-menu              Array of more-menu items.
-	 * @type string|false $duplicate-url          The Duplicate URL. Default: false (the duplicate action will be not shown).
-	 * @type string|false $confirm-delete-message The 'confirm delete' message. Set to false to not ask for delete confirmation.
+	 * @type string       $object                 -type            The object type the term is assigned to (ex: the post-type).
+	 * @type array        $more                   -menu              Array of more-menu items.
+	 * @type string|false $duplicate              -url          The Duplicate URL. Default: false (the duplicate action will be not shown).
+	 * @type string|false $confirm                -delete-message The 'confirm delete' message. Set to false to not ask for delete confirmation.
 	 *                                            }
 	 * @return array
 	 * @since 3.7.0
@@ -2386,6 +2372,8 @@ if ( ! function_exists( 'yith_plugin_fw_kses_allowed_svg_tags' ) ) {
 				'class'           => true,
 				'd'               => true,
 				'fill'            => true,
+				'clip-rule'       => true,
+				'fill-rule'       => true,
 				'stroke-linecap'  => true,
 				'stroke-linejoin' => true,
 			),
@@ -2398,5 +2386,58 @@ if ( ! function_exists( 'yith_plugin_fw_kses_allowed_svg_tags' ) ) {
 				'height' => true,
 			),
 		);
+	}
+}
+
+if ( ! function_exists( 'yith_plugin_fw_load_plugin_textdomain' ) ) {
+	/**
+	 * Load plugin text-domain.
+	 *
+	 * @param string $domain         The text-domain.
+	 * @param string $languages_path Path of the "languages" plugin folder.
+	 *
+	 * @since 4.7.0
+	 * @since 4.7.3 Set NOOP_Translations for the specific text-domain if no translation was found.
+	 */
+	function yith_plugin_fw_load_plugin_textdomain( $domain, $languages_path ) {
+		/** @var WP_Textdomain_Registry $wp_textdomain_registry */
+		global $wp_textdomain_registry;
+
+		$locale = apply_filters( 'plugin_locale', determine_locale(), $domain ); // phpcs:ignore WooCommerce.Commenting.CommentHooks.MissingSinceComment
+
+		$plugin_mo_rel_path = trailingslashit( $languages_path ) . $domain . '-' . $locale . '.mo';
+		$plugin_mo_path     = trailingslashit( WP_PLUGIN_DIR ) . trim( $plugin_mo_rel_path, '/' );
+
+		unload_textdomain( $domain, true );
+
+		$mo_path = $wp_textdomain_registry->get( $domain, $locale );
+		$loaded  = false;
+
+		if ( $mo_path ) {
+			$template_directory   = trailingslashit( get_template_directory() );
+			$stylesheet_directory = trailingslashit( get_stylesheet_directory() );
+			if ( str_starts_with( $mo_path, $template_directory ) || str_starts_with( $mo_path, $stylesheet_directory ) ) {
+				$mo_file = "{$mo_path}{$locale}.mo";
+			} else {
+				$mo_file = "{$mo_path}{$domain}-{$locale}.mo";
+			}
+
+			$loaded = load_textdomain( $domain, $mo_file, $locale );
+		}
+
+		if ( load_textdomain( $domain, $plugin_mo_path, $locale ) ) {
+			$loaded = true;
+		}
+
+		if ( ! $loaded && class_exists( 'NOOP_Translations' ) ) {
+			global $l10n;
+
+			static $noop_translations = null;
+			if ( null === $noop_translations ) {
+				$noop_translations = new NOOP_Translations();
+			}
+
+			$l10n[ $domain ] = &$noop_translations;
+		}
 	}
 }

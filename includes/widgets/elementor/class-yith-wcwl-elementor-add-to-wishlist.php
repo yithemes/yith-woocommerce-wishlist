@@ -2,7 +2,7 @@
 /**
  * Add to Wishlist widget for Elementor
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Classes\Elementor
  * @version 3.0.7
  */
@@ -190,7 +190,6 @@ if ( ! class_exists( 'YITH_WCWL_Elementor_Add_To_Wishlist' ) ) {
 			);
 
 			$this->end_controls_section();
-
 		}
 
 		/**
@@ -213,6 +212,5 @@ if ( ! class_exists( 'YITH_WCWL_Elementor_Add_To_Wishlist' ) ) {
 
 			echo do_shortcode( "[yith_wcwl_add_to_wishlist {$attribute_string}]" );
 		}
-
 	}
 }

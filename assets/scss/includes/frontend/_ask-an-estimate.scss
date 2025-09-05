@@ -1,0 +1,70 @@
+/* === ASK AN ESTIMATE === */
+
+.woocommerce .ask-an-estimate-button > img {
+	max-width    : 1em;
+	display      : inline;
+	margin-right : 5px;
+}
+
+#ask_an_estimate_popup {
+	display : none;
+}
+
+.wishlist-ask-an-estimate-popup {
+	.ask-an-estimate-button-popup {
+		width : 100%;
+	}
+
+	.woocommerce-error {
+		margin-bottom : 0;
+	}
+
+	#additional_notes {
+		min-height : 150px;
+	}
+}
+
+.ask-an-estimate-confirmation {
+	padding    : 0 30px;
+	text-align : center;
+}
+
+.yith-wcwl-ask-an-estimate-button {
+	display     : flex;
+	align-items : center;
+	gap         : 7px;
+	padding     : 7px 10px;
+
+	.yith-wcwl-icon-svg, img {
+		width       : 25px;
+		height      : 25px;
+		margin-left : -5px;
+		max-width   : unset !important;
+	}
+}
+
+/* === AUTO GENERATED STYLE THAT WAS LOCALIZED === */
+
+$color-ask-an-estimate-background       : var(--color-ask-an-estimate-background, #333333);
+$color-ask-an-estimate-text             : var(--color-ask-an-estimate-text, #ffffff);
+$color-ask-an-estimate-border           : var(--color-ask-an-estimate-border, #333333);
+$color-ask-an-estimate-background-hover : var(--color-ask-an-estimate-background-hover, #4f4f4f);
+$color-ask-an-estimate-text-hover       : var(--color-ask-an-estimate-text-hover, #ffffff);
+$color-ask-an-estimate-border-hover     : var(--color-ask-an-estimate-border-hover, #4f4f4f);
+$ask-an-estimate-rounded-corners-radius : var(--ask-an-estimate-rounded-corners-radius, 16px);
+
+.woocommerce a.button.ask-an-estimate-button:not(.yith-wcwl-ask-an-estimate-button--theme-style) {
+	background-color : $color-ask-an-estimate-background;
+	background       : $color-ask-an-estimate-background;
+	color            : $color-ask-an-estimate-text;
+	border-color     : $color-ask-an-estimate-border;
+	border-radius    : $ask-an-estimate-rounded-corners-radius;
+
+	&:hover {
+		background-color : $color-ask-an-estimate-background-hover;
+		background       : $color-ask-an-estimate-background-hover;
+		color            : $color-ask-an-estimate-text-hover;
+		border-color     : $color-ask-an-estimate-border-hover;
+	}
+}
+

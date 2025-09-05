@@ -1,0 +1,57 @@
+.yith-plugin-fw__modal__wrap .yith-wcwl-rendering-methods-modal {
+	.yith-wcwl-rendering-methods-modal__title {
+		color : #c49100;
+	}
+
+	.yith-wcwl-rendering-methods-modal__content {
+		padding-bottom : 0;
+	}
+
+	.yith-wcwl-rendering-methods-modal__footer {
+		display        : flex;
+		flex-direction : column;
+		text-align     : center;
+		gap            : 15px;
+		background     : #fff;
+
+		a {
+			text-decoration : none;
+		}
+	}
+}
+
+.yith-wcwl-react-only-option {
+	> *:not(.yith-wcwl-react-only-option__notice) {
+		opacity        : .35;
+		pointer-events : none;
+	}
+
+	.yith-wcwl-react-only-option__notice {
+		background    : #fefce8;
+		color         : #844e0f;
+		padding       : 10px 15px;
+		border-radius : 5px;
+		font-weight   : 500;
+		width         : fit-content;
+		display       : flex;
+		align-items   : center;
+		gap           : 10px;
+		max-width     : 100%;
+
+		svg {
+			width     : 25px;
+			min-width : 25px;
+			color     : #fccd13;
+		}
+
+		p {
+			text-wrap : balance;
+			margin    : 0;
+
+			a {
+				text-decoration : underline;
+				cursor          : pointer;
+			}
+		}
+	}
+}

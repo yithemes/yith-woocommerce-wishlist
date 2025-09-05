@@ -2,7 +2,7 @@
 /**
  * Add to wishlist button template - Added to list
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Templates\AddToWishlist
  * @version 3.0.12
  */
@@ -29,9 +29,7 @@
  * @var $is_single                 bool Whether we're on single template
  */
 
-if ( ! defined( 'YITH_WCWL' ) ) {
-	exit;
-} // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly.
 
 global $product;
 ?>

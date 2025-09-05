@@ -1,11 +1,5 @@
 /* jshint ignore: start */
 
-/**
- *
- *
- * @author Leanza Francesco <leanzafrancesco@gmail.com>
- */
-
 const fs    = require( 'fs' );
 const glob  = require( 'glob' );
 const chalk = require( 'chalk' );

@@ -47,6 +47,7 @@ $page_description = $panel->get_page_description();
 			<form id="yith-plugin-fw-panel-reset" method="post">
 				<input type="hidden" name="yit-action" value="reset"/>
 				<input type="hidden" name="yit-reset" value="1"/>
+				<?php wp_nonce_field( 'yith_panel_reset_options', 'yith_panel_reset_options_nonce' ); ?>
 			</form>
 			<p>&nbsp;</p>
 		<?php endif ?>

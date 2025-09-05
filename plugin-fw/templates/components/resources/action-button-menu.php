@@ -8,6 +8,7 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 ?>
+<span class="yith-plugin-fw__action-button__menu__backdrop"></span>
 <span class="yith-plugin-fw__action-button__menu">
 	<?php foreach ( $action_button_menu as $menu_key => $menu_item ) : ?>
 		<?php

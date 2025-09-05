@@ -2,7 +2,7 @@
 /**
  * Wishlist header
  *
- * @author YITH
+ * @author  YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Templates\Wishlist\View
  * @version 3.0.0
  */
@@ -10,12 +10,12 @@
 /**
  * Template variables:
  *
- * @var $wishlist \YITH_WCWL_Wishlist Current wishlist
- * @var $is_custom_list bool Whether current wishlist is custom
+ * @var $wishlist            \YITH_WCWL_Wishlist Current wishlist
+ * @var $is_custom_list      bool Whether current wishlist is custom
  * @var $can_user_edit_title bool Whether current user can edit title
- * @var $form_action string Action for the wishlist form
- * @var $page_title string Page title
- * @var $fragment_options array Array of items to use for fragment generation
+ * @var $form_action         string Action for the wishlist form
+ * @var $page_title          string Page title
+ * @var $fragment_options    array Array of items to use for fragment generation
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -81,7 +81,7 @@ do_action( 'yith_wcwl_before_wishlist_form', $wishlist );
 						 *
 						 * @return string
 						 */
-						echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_edit_title_icon', '<i class="fa fa-pencil"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_edit_title_icon', yith_wcwl_get_icon( 'pencil-outline' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						?>
 						<?php esc_html_e( 'Edit title', 'yith-woocommerce-wishlist' ); ?>
 					</a>
@@ -102,7 +102,7 @@ do_action( 'yith_wcwl_before_wishlist_form', $wishlist );
 							 *
 							 * @return string
 							 */
-							echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_cancel_wishlist_title_icon', '<i class="fa fa-remove"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_cancel_wishlist_title_icon', yith_wcwl_get_icon( 'x-mark' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							?>
 						</a>
 						<a role="button" href="#" class="save-title-form">
@@ -116,14 +116,14 @@ do_action( 'yith_wcwl_before_wishlist_form', $wishlist );
 							 *
 							 * @return string
 							 */
-							echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_save_wishlist_title_icon', '<i class="fa fa-check"></i>' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo yith_wcwl_kses_icon( apply_filters( 'yith_wcwl_save_wishlist_title_icon', yith_wcwl_get_icon( 'check' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							?>
 						</a>
 					</div>
 				</div>
 			<?php endif; ?>
 		</div>
-		<?php
+	<?php
 	endif;
 
 	/**

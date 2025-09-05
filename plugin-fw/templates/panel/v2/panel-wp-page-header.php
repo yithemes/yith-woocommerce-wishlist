@@ -21,5 +21,6 @@ $collapsed_class = get_user_setting( 'yithFwSidebarFold', 'o' ) === 'f' ? 'yith-
 		$panel->print_tabs_nav( $tabs_nav_args );
 		?>
 	</div><!-- yith-plugin-fw__panel__sidebar -->
-	<div class="yith-plugin-fw__panel__content">
+	<div class="<?php echo esc_attr( $panel->get_panel_content_classes() ); ?>">
+		<?php $panel->render_panel_header_nav(); ?>
 		<div class="<?php echo esc_attr( $page_wrapper_classes ); ?>">

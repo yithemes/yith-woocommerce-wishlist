@@ -2,7 +2,7 @@
 /**
  * Wishlist page template - Standard Layout
  *
- * @author YITH
+ * @author YITH <plugins@yithemes.com>
  * @package YITH\Wishlist\Templates\Wishlist\View
  * @version 3.0.11
  */
@@ -204,7 +204,20 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 						<?php endif; ?>
 
 						<!-- Add to cart button -->
-						<?php $show_add_to_cart = apply_filters( 'yith_wcwl_table_product_show_add_to_cart', $show_add_to_cart, $item, $wishlist ); ?>
+						<?php
+						/**
+						 * APPLY_FILTERS: yith_wcwl_table_product_show_add_to_cart
+						 *
+						 * Filter if show the 'Add to cart' button in the wishlist table for each product.
+						 *
+						 * @param bool                    $show_add_to_cart Show 'Add to cart' button or not
+						 * @param YITH_WCWL_Wishlist_Item $item             Wishlist item object
+						 * @param YITH_WCWL_Wishlist      $wishlist         Wishlist object
+						 *
+						 * @return bool
+						 */
+						$show_add_to_cart = apply_filters( 'yith_wcwl_table_product_show_add_to_cart', $show_add_to_cart, $item, $wishlist );
+						?>
 						<?php if ( $show_add_to_cart && $item->is_purchasable() && 'out-of-stock' !== $item->get_stock_status() ) : ?>
 							<div class="product-add-to-cart">
 								<?php woocommerce_template_loop_add_to_cart( array( 'quantity' => $show_quantity ? $item->get_quantity() : 1 ) ); ?>

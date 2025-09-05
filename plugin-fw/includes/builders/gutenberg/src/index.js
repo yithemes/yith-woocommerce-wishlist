@@ -23,8 +23,9 @@ import { yith_icon, generateShortcode } from './common';
 import { createEditFunction }           from './edit';
 import './common/actions-to-jquery-events';
 
-for ( const [blockName, blockArgs] of Object.entries( yithGutenbergBlocks ) ) {
+for ( const [ blockName, blockArgs ] of Object.entries( yithGutenbergBlocks ) ) {
 	registerBlockType( 'yith/' + blockName, {
+		apiVersion : blockArgs.apiVersion ?? 3,
 		title      : blockArgs.title,
 		description: blockArgs.description,
 		category   : blockArgs.category,
@@ -33,10 +34,10 @@ for ( const [blockName, blockArgs] of Object.entries( yithGutenbergBlocks ) ) {
 		keywords   : blockArgs.keywords,
 		edit       : createEditFunction( blockName, blockArgs ),
 		usesContext: [
-			'postId',
+			'postId'
 		],
 		save       : ( { attributes } ) => {
-			return generateShortcode( blockArgs, attributes );
+			return blockArgs?.shortcode_name && ! blockArgs.render_callback ? generateShortcode( blockArgs, attributes ) : null;
 		},
 		deprecated : [
 			{
@@ -47,7 +48,7 @@ for ( const [blockName, blockArgs] of Object.entries( yithGutenbergBlocks ) ) {
 					const shortcodeSpan = '<span class="yith_block_' + blockHash + '">' + shortcode + '</span>';
 
 					return (
-						<RawHTML>{shortcodeSpan}</RawHTML>
+						<RawHTML>{ shortcodeSpan }</RawHTML>
 					)
 				}
 			}

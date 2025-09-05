@@ -111,6 +111,25 @@
   }
 }
 
+@mixin button-tertiary {
+  background: var(--yith-tertiary-bg);
+  color: var(--yith-tertiary-text);
+  border: 1px solid var(--yith-tertiary-border);
+
+  &:focus {
+    background: var(--yith-tertiary-bg);
+    color: var(--yith-tertiary-text);
+    border: 1px solid var(--yith-tertiary-border);
+    box-shadow: 0 0 0 3px var(--yith-tertiary-focus);
+  }
+
+  &:hover, &:active {
+    background: var(--yith-tertiary-bg-hover);
+    color: var(--yith-tertiary-text);
+    border: 1px solid var(--yith-tertiary-border-hover);
+  }
+}
+
 @mixin button-with-icon($icon) {
 
   &:before {

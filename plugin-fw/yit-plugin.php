@@ -2,6 +2,7 @@
 /**
  * Define constants and include Plugin Framework files.
  *
+ * @author  YITH <plugins@yithemes.com>
  * @package YITH\PluginFramework
  */
 
@@ -38,6 +39,7 @@ require_once 'includes/privacy/class-yith-privacy-plugin-abstract.php';
 require_once 'includes/class-yith-system-status.php';
 require_once 'includes/class-yith-post-type-admin.php';
 require_once 'includes/class-yith-bh-onboarding.php';
+require_once 'includes/class-yith-external-services.php';
 
 // Gutenberg Support.
 if ( class_exists( 'WP_Block_Type_Registry' ) ) {
@@ -63,7 +65,6 @@ if ( ! function_exists( 'yit_plugin_fw_row_meta' ) ) {
 	 * @param string   $status      Status filter currently applied to the plugin list.
 	 *
 	 * @return string[] array of the plugin's metadata.
-	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
 	 * @since  3.0.17
 	 */
 	function yit_plugin_fw_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
@@ -125,8 +126,8 @@ if ( ! function_exists( 'yit_plugin_fw_row_meta' ) ) {
 			$to_remove      = array( 'live_demo' );
 
 			// set custom base uri.
-			$base_uri['documentation'] = 'https://www.bluehost.com/help/article/';
-			$base_uri['free_support']  = add_query_arg( array( 'page' => 'bluehost' ), admin_url( 'admin.php' ) ) . '#/help';
+			$base_uri['documentation'] = 'https://docs.yithemes.com/';
+			$base_uri['free_support']  = 'https://docs.yithemes.com/';
 		} else {
 			$plugin_version = 'free';
 		}
@@ -172,12 +173,22 @@ if ( ! function_exists( 'yit_plugin_fw_row_meta' ) ) {
 							$url = $base_uri[ $support_field ];
 						}
 
-						if ( 'free_support' === $support_field && ! $is_extended ) {
+						if ( 'free_support' === $support_field ) {
 							$url = $url . $slug;
+
+							if ( $is_extended ) {
+								$url .= '-extended/overview/need-support/';
+							}
 						}
 					} else {
 						if ( isset( $base_uri[ $field ] ) ) {
-							$url = apply_filters( "yith_plugin_row_meta_{$field}_url", $base_uri[ $field ] . $slug, $field, $slug, $base_uri );
+							$url = $base_uri[ $field ] . $slug;
+
+							if ( 'documentation' === $field && $is_extended ) {
+								$url .= '-extended';
+							}
+
+							$url = apply_filters( "yith_plugin_row_meta_{$field}_url", $url, $field, $slug, $base_uri );
 						}
 					}
 				}
@@ -220,7 +231,6 @@ if ( ! function_exists( 'yith_add_action_links' ) ) {
 	 * @param string $plugin_slug The plugin slug.
 	 *
 	 * @return   array
-	 * @author   Andrea Grillo <andrea.grillo@yithemes.com>
 	 * @since    1.6.5
 	 */
 	function yith_add_action_links( $links, $panel_page = '', $is_premium = false, $plugin_slug = '' ) {
@@ -286,3 +296,16 @@ if ( ! function_exists( 'yith_plugin_fw_print_deactivation_message' ) ) {
 }
 
 add_action( 'admin_notices', 'yith_plugin_fw_print_deactivation_message' );
+
+add_action(
+	'plugins_loaded',
+	function () {
+		/**
+		 * Action triggered after the Plugin Framework initialization finishes.
+		 *
+		 * @deprecated 4.7.0 | The framework is initialized at plugins_loaded:10; the plugin is loaded at plugins_loaded:11, so the framework is already loaded, and you don't need this action anymore! Kept for backward compatibility.
+		 */
+		do_action( 'yith_plugin_fw_loaded' );
+	},
+	15
+);

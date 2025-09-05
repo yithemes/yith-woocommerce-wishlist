@@ -1,0 +1,18 @@
+<svg id="yith-wcwl-icon-heart-remove-light" class="yith-wcwl-icon-svg yith-wcwl-icon-svg--light"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="85.333 0 56 48">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          d="M123.109 27.936l7.714 7.715m.032-7.715l-7.714 7.715m16.165-3.873a12.32 12.32 0 1 1-24.646 0 12.32 12.32 0 1 1 24.646 0z"/>
+    <defs>
+        <path id="heart-remove-light-A"
+              d="M136.167 17.772l4.396 4.836 6.771-26.275L99.5-6.833 81.167-4.5c-.167-.167.5 44.999 1 45.333s10.334 19.333 11.167 19 27.833-4.999 27.833-5.666-2.5-8.5-2.5-8.5l-6.5-5.898 24-21.997z"/>
+    </defs>
+    <clipPath id="heart-remove-light-B">
+        <use xlink:href="#heart-remove-light-A"/>
+    </clipPath>
+    <g clip-path="url(#heart-remove-light-B)">
+        <path fill="none" stroke="#222" stroke-width="2" stroke-linejoin="round"
+              d="M90.287 4.946c-5.272 5.261-5.272 13.792 0 19.054l23.047 23 23.045-23c5.272-5.262 5.272-13.792 0-19.054a13.52 13.52 0 0 0-19.092 0l-3.953 3.946-3.955-3.946c-5.273-5.261-13.819-5.261-19.092 0z"/>
+    </g>
+</svg>

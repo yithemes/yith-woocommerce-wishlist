@@ -7,7 +7,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 999999;
+  z-index: var(--yith-modal-z-index);
   background: rgba(34, 59, 80, 0.7);
   animation: yith-plugin-fw-fade-in .3s forwards;
   box-sizing: border-box;
@@ -68,17 +68,23 @@
   overflow: hidden;
 }
 
+.yith-plugin-fw__modal--no-title{
+  .yith-plugin-fw__modal__content{
+    padding-top: 25px;
+  }
+}
+
 // Allow seeing WP Menu.
 
 .yith-plugin-fw__modal--allow-wp-menu {
   .yith-plugin-fw__modal__wrap {
-    z-index: 99;
+    z-index: var(--yith-modal-allow-wp-z-index);
     padding-left: $wp_menu_size;
     padding-top: $wp_top_bar_size;
   }
 
   #adminmenuback {
-    z-index: 100;
+    z-index: calc(var(--yith-modal-allow-wp-z-index) + 1);
   }
 }
 
@@ -102,7 +108,7 @@
   .auto-fold {
     .yith-plugin-fw__modal--allow-wp-menu {
       .yith-plugin-fw__modal__wrap {
-        z-index: 999999;
+        z-index: var(--yith-modal-z-index);
         width: 100%;
         height: 100%;
         padding-left: 0;
@@ -112,7 +118,7 @@
 
     .yith-plugin-fw__modal--allow-wp-menu-in-mobile {
       .yith-plugin-fw__modal__wrap {
-        z-index: 99;
+        z-index: var(--yith-modal-allow-wp-z-index);
         padding-top: $wp_top_bar_mobile_size;
       }
 

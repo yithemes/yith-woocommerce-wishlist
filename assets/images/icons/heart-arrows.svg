@@ -1,0 +1,17 @@
+<svg id="yith-wcwl-icon-heart-arrows" class="yith-wcwl-icon-svg" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+    <defs>
+        <path id="heart-arrows-A"
+              d="M19.5 6.625l3.042 2.75-.292-3.813c0-.094-2.938-4.625-3.219-4.719S2.938 1.75 2.938 1.75L-.906 9.094.532 20.334l8.547 2.697 6.039-2.063.466-1.427-2.291-1.875L19.5 6.625z"/>
+    </defs>
+    <clipPath id="heart-arrows-B">
+        <use xlink:href="#heart-arrows-A"/>
+    </clipPath>
+    <g clip-path="url(#heart-arrows-B)">
+        <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"
+              d="M21.375 8.094c0-2.588-2.187-4.688-4.884-4.688-2.016 0-3.747 1.173-4.491 2.847-.745-1.674-2.476-2.847-4.493-2.847-2.695 0-4.882 2.099-4.882 4.688 0 7.521 9.375 12.5 9.375 12.5s9.375-4.98 9.375-12.5z"/>
+    </g>
+    <path d="M16.287 11.652h4.999m-1.343-2.277l2.37 2.277-2.37 2.141m-4.817 2.232h5m-3.657-2.277l-2.368 2.277 2.368 2.141"
+          fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+          stroke-miterlimit="10"/>
+</svg>

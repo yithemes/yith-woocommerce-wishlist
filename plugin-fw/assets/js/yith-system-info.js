@@ -15,10 +15,11 @@ jQuery(
 			'click',
 			'.notice-dismiss',
 			function () {
-				var t          = $( this ),
-					wrapper_id = t.parent().attr( 'id' );
+				var t       = $( this ),
+					wrapper = t.parent();
 
-				if ( wrapper_id === 'yith-system-alert' ) {
+				if ( wrapper.attr( 'id' ) === 'yith-system-alert' ) {
+					wrapper.hide( 200 );
 					var cname  = 'hide_yith_system_alert',
 						cvalue = 'yes';
 
@@ -34,8 +35,8 @@ jQuery(
 				var container = $( this ).parent();
 				var data      = {
 					action: 'yith_create_log_file',
-					file  : $( this ).data( 'file' ),
-					nonce : $( this ).data( 'nonce' ),
+					file:   $( this ).data( 'file' ),
+					nonce:  $( this ).data( 'nonce' ),
 				};
 
 				container.addClass( 'progress' );
@@ -75,7 +76,7 @@ jQuery(
 				if ( ! $this.find( '.copied-tooltip' ).length ) {
 					$this
 						.append(
-							$( '<span/>', { class: 'copied-tooltip' } )
+							$( '<span/>', {class: 'copied-tooltip'} )
 								.html( $this.data( "tooltip" ) ).fadeIn( 300 )
 						);
 					setTimeout(

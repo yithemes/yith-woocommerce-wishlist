@@ -25,30 +25,32 @@ $icons = array(
 	'premium'       => '<svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"></path></svg>',
 );
 
-$active_class = $current_tab === $tab_key && ! $current_sub_tab ? 'yith-plugin-fw--active' : '';
-
-if ( 'premium' === $tab_key ) {
-	$active_class .= ' ' . $premium_class;
-}
-$active_class = apply_filters( 'yith_plugin_fw_panel_active_tab_class', $active_class, $current_tab, $tab_key );
-
 $first_sub_tab = $panel->get_first_sub_tab_key( $tab_key );
 $sub_tab       = ! ! $first_sub_tab ? $first_sub_tab : '';
+$layout        = $panel->get_sub_tabs_nav_layout( $tab_key );
 $sub_tabs      = $panel->get_sub_tabs( $tab_key );
 $url           = $panel->get_nav_url( $the_page, $tab_key, $sub_tab, $parent_page );
 
 $is_current  = $current_tab === $tab_key;
 $is_opened   = $is_current;
-$has_submenu = ! ! $sub_tabs;
+$has_submenu = ! ! $sub_tabs && 'vertical' === $layout;
 $icon        = false;
 if ( isset( $tab_data['icon'] ) ) {
 	$icon = $icons[ $tab_data['icon'] ] ?? $tab_data['icon'];
 }
 $has_icon = isset( $tab_data['icon'] );
 
+$active_class = $current_tab === $tab_key && ( ! $current_sub_tab || ! $has_submenu ) ? 'yith-plugin-fw--active' : '';
+
+if ( 'premium' === $tab_key ) {
+	$active_class .= ' ' . $premium_class;
+}
+$active_class = apply_filters( 'yith_plugin_fw_panel_active_tab_class', $active_class, $current_tab, $tab_key );
+
+
 $menu_id = 'yith-plugin-fw__panel__menu-item-' . $tab_key;
 $classes = array( 'yith-plugin-fw__panel__menu-item' );
-if ( $sub_tabs ) {
+if ( $has_submenu ) {
 	$classes[] = 'yith-plugin-fw--has-submenu';
 	$classes[] = $is_current ? 'yith-plugin-fw__panel__menu-item--current' : '';
 	$classes[] = $is_opened ? 'yith-plugin-fw--open' : '';
@@ -56,6 +58,7 @@ if ( $sub_tabs ) {
 	$classes[] = $active_class;
 }
 
+$classes = $panel->apply_filters( 'nav_item_classes', $classes, $tab_key, $tab_data, $nav_args );
 $classes = implode( ' ', array_filter( $classes ) );
 
 $allowed_icon_tags = array_merge( wp_kses_allowed_html( 'post' ), yith_plugin_fw_kses_allowed_svg_tags() );
@@ -86,10 +89,14 @@ $allowed_icon_tags = array_merge( wp_kses_allowed_html( 'post' ), yith_plugin_fw
 				</div>
 				<?php foreach ( $sub_tabs as $sub_tab_key => $sub_tab_data ) : ?>
 					<?php
-					$active_class = $current_tab === $tab_key && $current_sub_tab === $sub_tab_key ? 'yith-plugin-fw--active' : '';
-					$url          = $panel->get_nav_url( $the_page, $tab_key, $sub_tab_key );
+					$item_active_class = $current_tab === $tab_key && $current_sub_tab === $sub_tab_key ? 'yith-plugin-fw--active' : '';
+					$item_classes      = array( 'yith-plugin-fw__panel__submenu-item', $item_active_class );
+					$item_classes      = $panel->apply_filters( 'nav_submenu_item_classes', $item_classes, $tab_key, $sub_tab_key, $sub_tab_data, $nav_args );
+					$item_classes      = implode( ' ', array_filter( $item_classes ) );
+
+					$url = $panel->get_nav_url( $the_page, $tab_key, $sub_tab_key );
 					?>
-					<div class="yith-plugin-fw__panel__submenu-item <?php echo esc_attr( $active_class ); ?>">
+					<div class="<?php echo esc_attr( $item_classes ); ?>">
 						<a class="yith-plugin-fw__panel__submenu-item__content" href="<?php echo esc_url( $url ); ?>">
 						<span class="yith-plugin-fw__panel__submenu-item__name">
 							<?php echo wp_kses_post( $sub_tab_data['title'] ); ?>
