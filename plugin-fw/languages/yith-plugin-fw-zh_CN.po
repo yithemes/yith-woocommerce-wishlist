@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2025-07-07 05:33:17+00:00\n"
+"POT-Creation-Date: 2025-10-13 14:06:23+00:00\n"
 "PO-Revision-Date: 2022-06-29 13:12:18+0000\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
@@ -13,75 +13,75 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 
-#: includes/class-yit-assets.php:213
+#: includes/class-yit-assets.php:254
 msgid "No file provided."
 msgstr ""
 
-#: includes/class-yit-assets.php:214
+#: includes/class-yit-assets.php:255
 msgid "You cannot drop files here."
 msgstr ""
 
-#: includes/class-yit-assets.php:236 yit-functions.php:1993
+#: includes/class-yit-assets.php:277 yit-functions.php:1993
 msgid "Confirm trash"
 msgstr "確認丟棄"
 
-#: includes/class-yit-assets.php:237
+#: includes/class-yit-assets.php:278
 msgid "Are you sure you want to trash the selected items?"
 msgstr "你確定要將所選的項目移至垃圾桶嗎?"
 
-#: includes/class-yit-assets.php:239 includes/class-yit-assets.php:243
+#: includes/class-yit-assets.php:280 includes/class-yit-assets.php:284
 #: templates/sysinfo/tabs/main.php:54 templates/sysinfo/tabs/main.php:58
 #: yit-functions.php:1995 yit-functions.php:2013
 msgid "No"
 msgstr "不"
 
-#: includes/class-yit-assets.php:240 yit-functions.php:2011
+#: includes/class-yit-assets.php:281 yit-functions.php:2011
 #: yit-functions.php:2138
 msgid "Confirm delete"
 msgstr "確認刪除"
 
-#: includes/class-yit-assets.php:241
+#: includes/class-yit-assets.php:282
 msgid "Are you sure you want to delete the selected items?"
 msgstr "你確定要刪除所選的項目嗎?"
 
-#: includes/class-yit-assets.php:241 yit-functions.php:1927
+#: includes/class-yit-assets.php:282 yit-functions.php:1927
 #: yit-functions.php:2086
 msgid ""
 "This action cannot be undone and you will not be able to recover this data."
 msgstr "此操作無法撤消，您將無法恢復此數據。"
 
-#: includes/class-yit-assets.php:261 includes/class-yit-plugin-subpanel.php:134
+#: includes/class-yit-assets.php:302 includes/class-yit-plugin-subpanel.php:134
 #: templates/panel/panel-content-page.php:14
 msgid "Are you sure?"
 msgstr "你確定嗎?"
 
-#: includes/class-yit-assets.php:262 includes/class-yit-plugin-subpanel.php:134
+#: includes/class-yit-assets.php:303 includes/class-yit-plugin-subpanel.php:134
 #: templates/panel/panel-content-page.php:14
 msgid ""
 "If you continue with this action, you will reset all options in this page."
 msgstr "如果你繼續這個動作，你將會重設這個頁面所有的選項"
 
-#: includes/class-yit-assets.php:273
+#: includes/class-yit-assets.php:314
 msgid "Clear"
 msgstr "清除"
 
-#: includes/class-yit-assets.php:274
+#: includes/class-yit-assets.php:315
 msgid "Clear color"
 msgstr "清除顏色"
 
-#: includes/class-yit-assets.php:275
+#: includes/class-yit-assets.php:316
 msgid "Default"
 msgstr "預設"
 
-#: includes/class-yit-assets.php:276
+#: includes/class-yit-assets.php:317
 msgid "Select default color"
 msgstr "選擇預設顏色"
 
-#: includes/class-yit-assets.php:277
+#: includes/class-yit-assets.php:318
 msgid "Select Color"
 msgstr "選擇顏色"
 
-#: includes/class-yit-assets.php:278
+#: includes/class-yit-assets.php:319
 msgid "Color value"
 msgstr "顏色數值"
 
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Options reset correctly!"
 msgstr ""
 
-#: includes/class-yit-plugin-panel-woocommerce.php:607
+#: includes/class-yit-plugin-panel-woocommerce.php:599
 msgid "The changes you have made will be lost if you leave this page."
 msgstr "如果你離開這個頁面，這些改變將會遺失"
 
@@ -830,48 +830,48 @@ msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr "YITH"
 
-#: includes/class-yit-assets.php:196
+#: includes/class-yit-assets.php:237
 msgctxt "Enhanced select"
 msgid "No matches found"
 msgstr ""
 
-#: includes/class-yit-assets.php:197
+#: includes/class-yit-assets.php:238
 msgctxt "Enhanced select"
 msgid "Please enter 1 or more characters"
 msgstr ""
 
 #. translators: %s is the number of characters.
-#: includes/class-yit-assets.php:199
+#: includes/class-yit-assets.php:240
 msgctxt "Enhanced select"
 msgid "Please enter %s or more characters"
 msgstr ""
 
-#: includes/class-yit-assets.php:200
+#: includes/class-yit-assets.php:241
 msgctxt "Enhanced select"
 msgid "Searching&hellip;"
 msgstr ""
 
-#: includes/class-yit-assets.php:212
+#: includes/class-yit-assets.php:253
 msgctxt "Title"
 msgid "Error"
 msgstr ""
 
-#: includes/class-yit-assets.php:224
+#: includes/class-yit-assets.php:265
 msgctxt "Button text"
 msgid "Confirm"
 msgstr "確認"
 
-#: includes/class-yit-assets.php:225
+#: includes/class-yit-assets.php:266
 msgctxt "Button text"
 msgid "Cancel"
 msgstr "取消"
 
-#: includes/class-yit-assets.php:238 yit-functions.php:1996
+#: includes/class-yit-assets.php:279 yit-functions.php:1996
 msgctxt "Trash confirmation action"
 msgid "Yes, move to trash"
 msgstr "是的，將它移至垃圾桶"
 
-#: includes/class-yit-assets.php:242 yit-functions.php:2014
+#: includes/class-yit-assets.php:283 yit-functions.php:2014
 #: yit-functions.php:2140
 msgctxt "Delete confirmation action"
 msgid "Yes, delete"

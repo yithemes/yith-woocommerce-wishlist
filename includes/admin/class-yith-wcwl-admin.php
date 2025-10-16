@@ -85,8 +85,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 
 			wp_register_style( 'yith-wcwl-material-icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), '3.0.1' );
 			wp_register_style( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/css/admin.css', array(), YITH_WCWL_VERSION );
-			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/' . $prefix . 'admin/yith-wcwl' . $suffix . '.js', array( 'jquery', 'jquery-blockui' ), YITH_WCWL_VERSION, true );
-
+			wp_register_script( 'yith-wcwl-admin', YITH_WCWL_URL . 'assets/js/' . $prefix . 'admin/yith-wcwl' . $suffix . '.js', array( 'jquery', \YIT_Assets::wc_script_handle( 'wc-jquery-blockui' ) ), YITH_WCWL_VERSION, true );
 
 			$icons = yith_wcwl_get_plugin_icons_list();
 			wp_localize_script(

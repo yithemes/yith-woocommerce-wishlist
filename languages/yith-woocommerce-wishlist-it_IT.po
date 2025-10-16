@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2025-08-07T13:20:34+00:00\n"
+"POT-Creation-Date: 2025-10-16T13:58:49+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:05+0200\n"
 "Last-Translator: Nicola Mustone <mail@nicolamustone.it>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -169,19 +169,19 @@ msgstr ""
 msgid "Wishlist Page"
 msgstr "Pagina Lista dei desideri"
 
-#: includes/admin/class-yith-wcwl-admin.php:99
+#: includes/admin/class-yith-wcwl-admin.php:98
 msgctxt "[Admin] Delete wishlist from panel confirmation modal"
 msgid "Confirm delete"
 msgstr ""
 
 #. translators: %s is the name of the wishlist
-#: includes/admin/class-yith-wcwl-admin.php:101
+#: includes/admin/class-yith-wcwl-admin.php:100
 #, php-format
 msgctxt "[Admin] Delete wishlist from panel confirmation modal"
 msgid "Are you sure you want to delete %s?"
 msgstr ""
 
-#: includes/admin/class-yith-wcwl-admin.php:102
+#: includes/admin/class-yith-wcwl-admin.php:101
 msgctxt "[Admin] Delete wishlist from panel confirmation modal"
 msgid "Delete"
 msgstr ""

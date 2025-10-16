@@ -3,24 +3,24 @@
  * Plugin Name: YITH WooCommerce Wishlist
  * Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
  * Description: <code><strong>YITH WooCommerce Wishlist</strong></code> gives your users the possibility to create, fill, manage and share their wishlists allowing you to analyze their interests and needs to improve your marketing strategies. <a href="https://yithemes.com/" target="_blank">Get more plugins for your e-commerce on <strong>YITH</strong></a>
- * Version: 4.9.0
+ * Version: 4.10.0
  * Author: YITH
  * Author URI: https://yithemes.com/
  * Text Domain: yith-woocommerce-wishlist
  * Domain Path: /languages/
- * WC requires at least: 10.0
- * WC tested up to: 10.2
+ * WC requires at least: 10.1
+ * WC tested up to: 10.3
  * Requires Plugins: woocommerce
  *
  * @package YITH\Wishlist
  * @author  YITH <plugins@yithemes.com>
- * @version 4.9.0
+ * @version 4.10.0
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 defined( 'YITH_WCWL' ) || define( 'YITH_WCWL', true );
-defined( 'YITH_WCWL_VERSION' ) || define( 'YITH_WCWL_VERSION', '4.9.0' );
+defined( 'YITH_WCWL_VERSION' ) || define( 'YITH_WCWL_VERSION', '4.10.0' );
 defined( 'YITH_WCWL_URL' ) || define( 'YITH_WCWL_URL', plugin_dir_url( __FILE__ ) );
 defined( 'YITH_WCWL_DIR' ) || define( 'YITH_WCWL_DIR', plugin_dir_path( __FILE__ ) );
 defined( 'YITH_WCWL_INC' ) || define( 'YITH_WCWL_INC', YITH_WCWL_DIR . 'includes/' );

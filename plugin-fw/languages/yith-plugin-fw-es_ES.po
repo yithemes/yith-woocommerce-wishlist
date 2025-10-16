@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2025-07-07 05:33:17+00:00\n"
+"POT-Creation-Date: 2025-10-13 14:06:23+00:00\n"
 "PO-Revision-Date: 2024-02-15 12:07:20+0000\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -13,50 +13,50 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 
-#: includes/class-yit-assets.php:213
+#: includes/class-yit-assets.php:254
 msgid "No file provided."
 msgstr "No se proporcionó ningún archivo."
 
-#: includes/class-yit-assets.php:214
+#: includes/class-yit-assets.php:255
 msgid "You cannot drop files here."
 msgstr "Aquí no se pueden soltar archivos."
 
-#: includes/class-yit-assets.php:236 yit-functions.php:1993
+#: includes/class-yit-assets.php:277 yit-functions.php:1993
 msgid "Confirm trash"
 msgstr "Confirmar el traslado a la papelera"
 
-#: includes/class-yit-assets.php:237
+#: includes/class-yit-assets.php:278
 msgid "Are you sure you want to trash the selected items?"
 msgstr ""
 "¿Estás seguro de que quieres mover a la papelera los elementos seleccionados?"
 
-#: includes/class-yit-assets.php:239 includes/class-yit-assets.php:243
+#: includes/class-yit-assets.php:280 includes/class-yit-assets.php:284
 #: templates/sysinfo/tabs/main.php:54 templates/sysinfo/tabs/main.php:58
 #: yit-functions.php:1995 yit-functions.php:2013
 msgid "No"
 msgstr "No"
 
-#: includes/class-yit-assets.php:240 yit-functions.php:2011
+#: includes/class-yit-assets.php:281 yit-functions.php:2011
 #: yit-functions.php:2138
 msgid "Confirm delete"
 msgstr "Confirmar el borrado"
 
-#: includes/class-yit-assets.php:241
+#: includes/class-yit-assets.php:282
 msgid "Are you sure you want to delete the selected items?"
 msgstr "¿Estás seguro de que quieres borrar los elementos seleccionados?"
 
-#: includes/class-yit-assets.php:241 yit-functions.php:1927
+#: includes/class-yit-assets.php:282 yit-functions.php:1927
 #: yit-functions.php:2086
 msgid ""
 "This action cannot be undone and you will not be able to recover this data."
 msgstr "Esta acción no se puede revertir y no podrá recuperar estos datos."
 
-#: includes/class-yit-assets.php:261 includes/class-yit-plugin-subpanel.php:134
+#: includes/class-yit-assets.php:302 includes/class-yit-plugin-subpanel.php:134
 #: templates/panel/panel-content-page.php:14
 msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
-#: includes/class-yit-assets.php:262 includes/class-yit-plugin-subpanel.php:134
+#: includes/class-yit-assets.php:303 includes/class-yit-plugin-subpanel.php:134
 #: templates/panel/panel-content-page.php:14
 msgid ""
 "If you continue with this action, you will reset all options in this page."
@@ -64,27 +64,27 @@ msgstr ""
 "Si continúas con esta acción, restablecerás todas las opciones en esta "
 "página."
 
-#: includes/class-yit-assets.php:273
+#: includes/class-yit-assets.php:314
 msgid "Clear"
 msgstr "Borrar"
 
-#: includes/class-yit-assets.php:274
+#: includes/class-yit-assets.php:315
 msgid "Clear color"
 msgstr "Borrar color"
 
-#: includes/class-yit-assets.php:275
+#: includes/class-yit-assets.php:316
 msgid "Default"
 msgstr "Predeterminado"
 
-#: includes/class-yit-assets.php:276
+#: includes/class-yit-assets.php:317
 msgid "Select default color"
 msgstr "Seleccionar color predeterminado"
 
-#: includes/class-yit-assets.php:277
+#: includes/class-yit-assets.php:318
 msgid "Select Color"
 msgstr "Seleccionar color"
 
-#: includes/class-yit-assets.php:278
+#: includes/class-yit-assets.php:319
 msgid "Color value"
 msgstr "Valor del color"
 
@@ -102,7 +102,7 @@ msgstr "¡Opciones guardadas!"
 msgid "Options reset correctly!"
 msgstr "¡Opciones restablecidas correctamente!"
 
-#: includes/class-yit-plugin-panel-woocommerce.php:607
+#: includes/class-yit-plugin-panel-woocommerce.php:599
 msgid "The changes you have made will be lost if you leave this page."
 msgstr "Los cambios que has hecho se perderán si abandonas esta página."
 
@@ -864,48 +864,48 @@ msgctxt "[gutenberg]: Category Name"
 msgid "YITH"
 msgstr "YITH"
 
-#: includes/class-yit-assets.php:196
+#: includes/class-yit-assets.php:237
 msgctxt "Enhanced select"
 msgid "No matches found"
 msgstr "No se han encontrado coincidencias"
 
-#: includes/class-yit-assets.php:197
+#: includes/class-yit-assets.php:238
 msgctxt "Enhanced select"
 msgid "Please enter 1 or more characters"
 msgstr "Por favor, introduce uno o más caracteres"
 
 #. translators: %s is the number of characters.
-#: includes/class-yit-assets.php:199
+#: includes/class-yit-assets.php:240
 msgctxt "Enhanced select"
 msgid "Please enter %s or more characters"
 msgstr "Por favor, introduce %s o más caracteres"
 
-#: includes/class-yit-assets.php:200
+#: includes/class-yit-assets.php:241
 msgctxt "Enhanced select"
 msgid "Searching&hellip;"
 msgstr "Buscando&hellip;"
 
-#: includes/class-yit-assets.php:212
+#: includes/class-yit-assets.php:253
 msgctxt "Title"
 msgid "Error"
 msgstr "Error"
 
-#: includes/class-yit-assets.php:224
+#: includes/class-yit-assets.php:265
 msgctxt "Button text"
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: includes/class-yit-assets.php:225
+#: includes/class-yit-assets.php:266
 msgctxt "Button text"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: includes/class-yit-assets.php:238 yit-functions.php:1996
+#: includes/class-yit-assets.php:279 yit-functions.php:1996
 msgctxt "Trash confirmation action"
 msgid "Yes, move to trash"
 msgstr "Sí, mover a la papelera"
 
-#: includes/class-yit-assets.php:242 yit-functions.php:2014
+#: includes/class-yit-assets.php:283 yit-functions.php:2014
 #: yit-functions.php:2140
 msgctxt "Delete confirmation action"
 msgid "Yes, delete"

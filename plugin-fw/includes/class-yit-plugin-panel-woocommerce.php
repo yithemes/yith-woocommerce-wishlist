@@ -574,15 +574,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
 
 			if ( $is_current_panel || in_array( $screen->id, $assets_screen_ids, true ) ) {
 				$woocommerce_version       = function_exists( 'WC' ) ? WC()->version : $woocommerce->version;
-				$woocommerce_settings_deps = array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-sortable', 'iris' );
-
-				if ( version_compare( '2.5', $woocommerce_version, '<=' ) ) {
-					$woocommerce_settings_deps[] = 'select2';
-				} else {
-					$woocommerce_settings_deps[] = 'jquery-ui-dialog';
-					$woocommerce_settings_deps[] = 'chosen';
-				}
-
+				$woocommerce_settings_deps = array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-sortable', 'iris', YIT_Assets::wc_script_handle( 'wc-select2' ) );
 				wp_enqueue_media();
 
 				if ( $is_current_panel ) {
