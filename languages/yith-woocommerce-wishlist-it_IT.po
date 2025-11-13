@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WooCommerce Wishlist\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2025-10-16T13:58:49+00:00\n"
+"POT-Creation-Date: 2025-11-13T10:14:10+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:05+0200\n"
 "Last-Translator: Nicola Mustone <mail@nicolamustone.it>\n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -576,19 +576,23 @@ msgctxt ""
 msgid "(Was %2$s when added  in list)"
 msgstr ""
 
-#: includes/class-yith-wcwl-wishlists.php:277
+#: includes/class-yith-wcwl-wishlists.php:47
+msgid "There was an error while processing your request; please, try later"
+msgstr ""
+
+#: includes/class-yith-wcwl-wishlists.php:283
 msgid "The item cannot be added to this wishlist"
 msgstr "L'elemento non può essere aggiunto alla lista dei desideri"
 
-#: includes/class-yith-wcwl-wishlists.php:281
 #: includes/class-yith-wcwl-wishlists.php:287
+#: includes/class-yith-wcwl-wishlists.php:293
 msgid "An error occurred while adding the products to the wishlist."
 msgstr ""
 "Si è verificato un errore mentre si cercava di aggiungere i prodotti alla "
 "lista."
 
-#: includes/class-yith-wcwl-wishlists.php:387
-#: includes/class-yith-wcwl-wishlists.php:413
+#: includes/class-yith-wcwl-wishlists.php:393
+#: includes/class-yith-wcwl-wishlists.php:419
 msgid "Error. Unable to remove the product from the wishlist."
 msgstr "Errore. Impossibile rimuovere il prodotto dalla lista dei desideri."
 

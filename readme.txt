@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: woocommerce wishlist, yith woocommerce wishlist, yith wishlist, woocommerce add to wishlist, wishlist for woocommerce
 Requires at least: 6.6
 Tested up to: 6.8
-Stable tag: 4.10.0
+Stable tag: 4.10.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -117,6 +117,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Label customization options
 
 == Changelog ==
+
+= 4.10.1 - Released on 13 November 2025 =
+
+* Update: YITH plugin framework
+* Dev: added additional security checks to REST API operations
 
 = 4.10.0 - Released on 16 October 2025 =
 

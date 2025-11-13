@@ -36,10 +36,16 @@ if ( ! class_exists( 'YITH_WCWL_Wishlists' ) ) {
 		 *
 		 * @param array $args Array of params for wishlist creation.
 		 * @return int|false The id of the wishlist created or false if something goes wrong
+		 *
+		 * @throws YITH_WCWL_Exception When trying to create wishlist.
 		 */
 		public function create( $args = array() ) {
 			// phpcs:disable WordPress.Security.NonceVerification.Recommended
-			$user_id = $args[ 'user_id' ] ?? false;
+			$user_id = $args['user_id'] ?? false;
+
+			if ( $user_id && get_current_user_id() !== $user_id && ! current_user_can( 'manage_woocommerce' ) ) { // phpcs:ignore WordPress.WP.Capabilities.Unknown
+				throw new YITH_WCWL_Exception( esc_html__( 'There was an error while processing your request; please, try later', 'yith-woocommerce-wishlist' ), 0 );
+			}
 
 			$wishlist = YITH_WCWL_Wishlist_Factory::generate_default_wishlist( $user_id );
 
