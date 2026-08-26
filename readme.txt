@@ -2,15 +2,15 @@
 
 Contributors: yithemes
 Tags: woocommerce wishlist, yith woocommerce wishlist, yith wishlist, woocommerce add to wishlist, wishlist for woocommerce
-Requires at least: 6.8
-Tested up to: 7.0
-Stable tag: 4.17.0
+Requires at least: 6.9
+Tested up to: 7.1
+Stable tag: 4.18.0
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 YITH WooCommerce Wishlist add all Wishlist features to your website. Needs WooCommerce to work.
-WooCommerce 11.0.x compatible.
+WooCommerce 11.1.x compatible.
 
 == Description ==
 
@@ -117,6 +117,12 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Label customization options
 
 == Changelog ==
+
+= 4.18.0 - Released on 26 August 2026 =
+
+* New: support for WordPress 7.1
+* New: support for WooCommerce 11.1
+* Update: YITH plugin framework
 
 = 4.17.0 - Released on 21 July 2026 =
 
