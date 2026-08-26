@@ -614,13 +614,13 @@ $wishlist_page = array(
 		),
 	) : false,
 
-	'socials_image' => array(
+	'socials_image' => $share_on[ 'pinterest' ] ? array(
 		'name'    => __( 'Pinterest image', 'yith-woocommerce-wishlist' ),
 		'desc'    => __( 'Set an image to share the list on Pinterest', 'yith-woocommerce-wishlist' ),
 		'id'      => 'yith_wcwl_socials_image_url',
 		'default' => '',
 		'type'    => 'text', // TODO: transform into an upload field.
-	),
+	) : false,
 
 	'pr_button_icon' => $share_on[ 'pinterest' ] ? array(
 		'name'      => __( 'Pinterest share button icon', 'yith-woocommerce-wishlist' ),
