@@ -4,6 +4,10 @@
   "description": "YITH WooCommerce Wishlist",
   "main": "Gruntfile.js",
   "scripts": {
+	"start": "wp-env start",
+    "stop": "wp-env stop",
+    "destroy": "wp-env destroy",
+    "shell": "wp-env run cli /bin/bash",
     "release": "cross-env ./bin/release.sh",
     "release:package": "node ./bin/release-package.js",
     "build": "npm run js && npm run i18n",
@@ -30,6 +34,7 @@
   "license": "GPL-3.0+",
   "homepage": "https://yithemes.com/themes/plugins/yith-woocommerce-wishlist/",
   "devDependencies": {
+    "@wordpress/env": "^11.14.0",
     "@wordpress/eslint-plugin": "^7.4.0",
     "archiver": "^5.2.0",
     "axios": "^0.21.4",
