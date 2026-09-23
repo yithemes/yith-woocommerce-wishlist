@@ -1018,6 +1018,7 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			if ( ! empty( $items ) ) {
 				$items_string = implode( ',', array_map( 'esc_sql', $items ) );
 				$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->yith_wcwl_items} SET user_id = %d WHERE ID IN ({$items_string})", $user_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				$this->clear_up_duplicate_items($user_id);
 			}
 
 			// set user id for any session wishlist, and remove session data.
@@ -1291,6 +1292,24 @@ if ( ! class_exists( 'YITH_WCWL_Wishlist_Data_Store' ) ) {
 			if ( $session_id ) {
 				wp_cache_delete( 'user-wishlists-' . $session_id, 'wishlists' );
 			}
+		}
+
+		protected function clear_up_duplicate_items( int $user_id )
+		{
+			global $wpdb;
+
+			$wpdb->query(
+				$wpdb->prepare('DELETE FROM ' . $wpdb->yith_wcwl_items .
+					' WHERE user_id = %1$d AND ID NOT IN (
+					    SELECT min_id
+					    FROM (
+							SELECT user_id, prod_id, wishlist_id, MIN(ID) AS min_id
+							FROM ' . $wpdb->yith_wcwl_items .
+					' WHERE user_id = %1$d
+							GROUP BY user_id, wishlist_id, prod_id
+						) AS subquery
+					)', $user_id)
+			);
 		}
 	}
 }
