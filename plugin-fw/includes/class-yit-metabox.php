@@ -503,6 +503,10 @@ if ( ! class_exists( 'YIT_Metabox' ) ) {
 				return;
 			}
 
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				return;
+			}
+
 			if ( isset( $_REQUEST['yit_metaboxes'], $_REQUEST['toggle_id'], $_REQUEST['metabox_tab'], $_REQUEST['yit_metaboxes'][ $_REQUEST['toggle_id'] ] ) ) {
 				$meta_box_data = isset( $_REQUEST['yit_metaboxes'] ) ? wp_unslash( $_REQUEST['yit_metaboxes'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$metabox_tab   = sanitize_key( wp_unslash( $_REQUEST['metabox_tab'] ) );
