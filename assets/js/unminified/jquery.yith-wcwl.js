@@ -649,6 +649,7 @@ jQuery( function ( $ ) {
 			overlay_gallery: false,
 			keyboard_shortcuts: false,
 			default_width: 500,
+			image_markup: '',
 			changepicturecallback: function () {
 				init_select_box();
 
@@ -676,13 +677,14 @@ jQuery( function ( $ ) {
 				'<div class="pp_overlay yith-wcwl-overlay"></div>'
 		};
 
-		$( 'a[data-rel^="prettyPhoto[add_to_wishlist_"]' )
+		$( '.yith-wcwl-add-to-wishlist, #yith-wcwl-form' ).find( 'a[data-rel^="prettyPhoto[add_to_wishlist_"]' )
 			.add( 'a[data-rel="prettyPhoto[ask_an_estimate]"]' )
 			.add( 'a[data-rel="prettyPhoto[create_wishlist]"]' )
 			.off( 'click' )
-			.prettyPhoto( ppParams );
+			.filter( is_valid_popup_link )
+    		.prettyPhoto( ppParams );
 
-		$( 'a[data-rel="prettyPhoto[move_to_another_wishlist]"]' ).on( 'click', function () {
+		$( '#yith-wcwl-form' ).find( 'a[data-rel="prettyPhoto[move_to_another_wishlist]"]' ).on( 'click', function () {
 			var t = $( this ),
 				popup = $( '#move_to_another_wishlist' ),
 				form = popup.find( 'form' ),
@@ -699,7 +701,9 @@ jQuery( function ( $ ) {
 				class: 'row-id'
 			} ).val( id );
 			form.append( input );
-		} ).prettyPhoto( ppParams );
+		} )
+		.filter( is_valid_popup_link )
+		.prettyPhoto( ppParams );
 
 		// add & remove class to body when popup is opened
 		var callback = function ( node, op ) {
@@ -728,6 +732,12 @@ jQuery( function ( $ ) {
 		observer.observe( document.body, {
 			childList: true
 		} );
+	}
+
+	function is_valid_popup_link() {
+		var href = $( this ).attr( 'href' );
+
+		return typeof href === 'string' && /^#[a-zA-Z0-9_-]+$/.test( href ) && $( document.getElementById( href.substring( 1 ) ) ).length > 0;
 	}
 
 	/**

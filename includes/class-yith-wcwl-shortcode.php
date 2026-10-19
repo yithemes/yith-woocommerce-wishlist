@@ -256,7 +256,7 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 			 * @return array
 			 */
 			$action_params = explode( '/', apply_filters( 'yith_wcwl_current_wishlist_view_params', $action_params ) );
-			$action        = ( isset( $action_params[ 0 ] ) ) ? $action_params[ 0 ] : 'view';
+			$action        = ( isset( $action_params[0] ) ) ? $action_params[0] : 'view';
 
 			// retrieve options from db.
 			$default_wishlist_title = get_option( 'yith_wcwl_wishlist_title', __( 'My wishlist', 'yith-woocommerce-wishlist' ) );
@@ -301,7 +301,7 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 
 				$heading_icon = '<img src="' . esc_url( $custom_icon ) . '" alt="' . esc_attr( $custom_icon_alt ) . '" width="' . esc_attr( $custom_icon_width ) . '" />';
 			} else {
-				$heading_icon = ! empty( $icon ) ? '<i class="fa ' . esc_attr( $icon ) . '"></i>' : '';
+				$heading_icon = $icon ? yith_wcwl_get_icon( $icon ) : '';
 			}
 
 			// init params needed to load correct template.
@@ -541,40 +541,40 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 					);
 
 					foreach ( $social_buttons as $social_id => $social_button ) {
-						if ( $social_button[ 'enabled' ] ) {
-							$share_button_icon        = get_option( 'yith_wcwl_' . $social_id . '_button_icon', 'default' );
-							if ('none' === $share_button_icon) {
-								$share_atts[ 'share_' . $social_button[ 'name' ] . '_icon' ] = '';
-							}else{
+						if ( $social_button['enabled'] ) {
+							$share_button_icon = get_option( 'yith_wcwl_' . $social_id . '_button_icon', 'default' );
+							if ( 'none' === $share_button_icon ) {
+								$share_atts[ 'share_' . $social_button['name'] . '_icon' ] = '';
+							} else {
 								$share_button_custom_icon = get_option( 'yith_wcwl_' . $social_id . '_button_custom_icon' );
 								if ( 'custom' === $share_button_icon && $share_button_custom_icon ) {
-									$share_atts[ 'share_' . $social_button[ 'name' ] . '_icon' ] = "<img src='$share_button_custom_icon' alt='{$social_button[ 'alt_text' ]}'/>";
+									$share_atts[ 'share_' . $social_button['name'] . '_icon' ] = "<img src='$share_button_custom_icon' alt='{$social_button[ 'alt_text' ]}'/>";
 								} else {
-									$share_atts[ 'share_' . $social_button[ 'name' ] . '_icon' ] = yith_wcwl_get_icon( $social_button[ 'icon' ] ?? $social_button[ 'name' ] );
+									$share_atts[ 'share_' . $social_button['name'] . '_icon' ] = yith_wcwl_get_icon( $social_button['icon'] ?? $social_button['name'] );
 								}
 							}
 						}
 					}
 
 					if ( $share_twitter_enabled ) {
-						$share_atts[ 'share_twitter_summary' ] = urlencode( str_replace( '%wishlist_url%', '', get_option( 'yith_wcwl_socials_text' ) ) );
+						$share_atts['share_twitter_summary'] = urlencode( str_replace( '%wishlist_url%', '', get_option( 'yith_wcwl_socials_text' ) ) );
 					}
 
 					if ( $share_pinterest_enabled ) {
-						$share_atts[ 'share_summary' ]   = $share_summary;
-						$share_atts[ 'share_image_url' ] = urlencode( get_option( 'yith_wcwl_socials_image_url' ) );
+						$share_atts['share_summary']   = $share_summary;
+						$share_atts['share_image_url'] = urlencode( get_option( 'yith_wcwl_socials_image_url' ) );
 					}
 
 					if ( $share_whatsapp_enabled ) {
 						if ( wp_is_mobile() ) {
-							$share_atts[ 'share_whatsapp_url' ] = 'whatsapp://send?text=' . $share_link_title . ' - ' . urlencode( $share_link_url );
+							$share_atts['share_whatsapp_url'] = 'whatsapp://send?text=' . $share_link_title . ' - ' . urlencode( $share_link_url );
 						} else {
-							$share_atts[ 'share_whatsapp_url' ] = 'https://web.whatsapp.com/send?text=' . $share_link_title . ' - ' . urlencode( $share_link_url );
+							$share_atts['share_whatsapp_url'] = 'https://web.whatsapp.com/send?text=' . $share_link_title . ' - ' . urlencode( $share_link_url );
 						}
 					}
 
-					$additional_params[ 'share_enabled' ] = true;
-					$additional_params[ 'share_atts' ]    = $share_atts;
+					$additional_params['share_enabled'] = true;
+					$additional_params['share_atts']    = $share_atts;
 				}
 				// phpcs:enable WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
 			}
@@ -602,7 +602,7 @@ if ( ! class_exists( 'YITH_WCWL_Shortcode' ) ) {
 				$additional_params
 			);
 
-			$atts[ 'fragment_options' ] = YITH_WCWL_Frontend()->format_fragment_options( $atts, 'wishlist' );
+			$atts['fragment_options'] = YITH_WCWL_Frontend()->format_fragment_options( $atts, 'wishlist' );
 
 			// apply filters for add to cart buttons.
 			YITH_WCWL_Frontend()->alter_add_to_cart_button();

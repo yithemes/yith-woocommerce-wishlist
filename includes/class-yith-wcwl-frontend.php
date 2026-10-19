@@ -7,7 +7,7 @@
  * @version 3.0.0
  */
 
-defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly
+defined( 'YITH_WCWL' ) || exit; // Exit if accessed directly.
 
 if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 	/**
@@ -165,7 +165,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			if ( yith_plugin_fw_wc_is_using_block_template_in_single_product() ) {
 				$this->add_button_for_blockified_template( 'single-product', $position );
 			} else {
-				add_action( $positions[ $position ][ 'hook' ], array( $this, 'print_button' ), $positions[ $position ][ 'priority' ] );
+				add_action( $positions[ $position ]['hook'], array( $this, 'print_button' ), $positions[ $position ]['priority'] );
 			}
 		}
 
@@ -221,7 +221,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			if ( yith_plugin_fw_wc_is_using_block_template_in_product_catalogue() ) {
 				$this->add_button_for_blockified_template( 'archive-product', $position );
 			} else {
-				add_action( $positions[ $position ][ 'hook' ], array( $this, 'print_button' ), $positions[ $position ][ 'priority' ] );
+				add_action( $positions[ $position ]['hook'], array( $this, 'print_button' ), $positions[ $position ]['priority'] );
 			}
 		}
 
@@ -267,7 +267,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return string Filtered block content.
 		 */
 		public function add_button_before_block( $block_content, $parsed_block, $block ) {
-			$post_id = $block->context[ 'postId' ];
+			$post_id = $block->context['postId'];
 			$product = wc_get_product( $post_id );
 
 			if ( ! $product ) {
@@ -292,7 +292,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		public function add_button_after_block( $block_content, $parsed_block, $block ) {
 			global $post;
 
-			$post_id = isset( $block->context[ 'postId' ] ) ? $block->context[ 'postId' ] : false;
+			$post_id = isset( $block->context['postId'] ) ? $block->context['postId'] : false;
 			$post_id = $post_id ?? isset( $post->ID ) ? $post->ID : false;
 			$product = wc_get_product( $post_id );
 
@@ -364,7 +364,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				);
 
 				// replace li classes.
-				$parts[ 0 ] = preg_replace( '/class="(.*)"/', 'class="$1 add-to-wishlist-' . $position . '"', $parts[ 0 ] );
+				$parts[0] = preg_replace( '/class="(.*)"/', 'class="$1 add-to-wishlist-' . $position . '"', $parts[0] );
 			}
 
 			// join all parts together.
@@ -483,7 +483,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			 *
 			 * @return bool
 			 */
-			if ( function_exists( 'wp_robots_no_robots' ) || ! isset( $_GET[ 'add_to_wishlist' ] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( function_exists( 'wp_robots_no_robots' ) || ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return;
 			}
 
@@ -499,7 +499,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return array Filtered robots directives.
 		 */
 		public function add_noindex_robots( $robots ) {
-			if ( ! isset( $_GET[ 'add_to_wishlist' ] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! isset( $_GET['add_to_wishlist'] ) || apply_filters( 'yith_wcwl_skip_noindex_headers', false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return $robots;
 			}
 
@@ -633,7 +633,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			/**
 			 * APPLY_FILTERS: yith_wcwl_localize_script
 			 *
-			 * Filter the array with the parameters sent to the plugin scripts through localize.
+			 * Filter the array with the parameters sent to the plugin scripts trought the localize.
 			 *
 			 * @param array $localize Array of parameters
 			 *
@@ -778,7 +778,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			if ( ! defined( 'YIT' ) ) :
 				?>
 				<script>document.documentElement.className = document.documentElement.className + ' yes-js js_active js'</script>
-			<?php
+				<?php
 			endif;
 		}
 
@@ -789,12 +789,12 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 *
 		 * @param array $var Array of variables to pass to the template.
 		 *
-		 * @var $var array Array of parameters for current view
 		 * @return void
+		 * @var         $var array Array of parameters for current view
 		 */
 		public function main_wishlist_content( $var ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound
-			$template = isset( $var[ 'template_part' ] ) ? $var[ 'template_part' ] : 'view';
-			$layout   = ! empty( $var[ 'layout' ] ) ? $var[ 'layout' ] : '';
+			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
+			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
 
 			yith_wcwl_get_template_part( $template, '', $layout, $var );
 		}
@@ -808,8 +808,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return void
 		 */
 		public function wishlist_header( $var ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound
-			$template = isset( $var[ 'template_part' ] ) ? $var[ 'template_part' ] : 'view';
-			$layout   = ! empty( $var[ 'layout' ] ) ? $var[ 'layout' ] : '';
+			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
+			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
 
 			yith_wcwl_get_template_part( $template, 'header', $layout, $var );
 		}
@@ -823,8 +823,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @return void
 		 */
 		public function wishlist_footer( $var ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound
-			$template = isset( $var[ 'template_part' ] ) ? $var[ 'template_part' ] : 'view';
-			$layout   = ! empty( $var[ 'layout' ] ) ? $var[ 'layout' ] : '';
+			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
+			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
 
 			yith_wcwl_get_template_part( $template, 'footer', $layout, $var );
 		}
@@ -880,28 +880,28 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						// remove item if type is not supported.
 						unset( $options[ $id ] );
 					} elseif ( 'ajax_loading' === $id ) {
-						$options[ 'ajax_loading' ] = false;
+						$options['ajax_loading'] = false;
 					}
 				}
 			}
 
 			// applies context specific changes.
 			if ( ! empty( $context ) ) {
-				$options[ 'item' ] = $context;
+				$options['item'] = $context;
 
 				switch ( $context ) {
 					case 'add_to_wishlist':
-						unset( $options[ 'template_part' ] );
-						unset( $options[ 'label' ] );
-						unset( $options[ 'exists' ] );
-						unset( $options[ 'icon' ] );
-						unset( $options[ 'link_classes' ] );
-						unset( $options[ 'link_popup_classes' ] );
-						unset( $options[ 'container_classes' ] );
-						unset( $options[ 'found_in_list' ] );
-						unset( $options[ 'found_item' ] );
-						unset( $options[ 'popup_title' ] );
-						unset( $options[ 'wishlist_url' ] );
+						unset( $options['template_part'] );
+						unset( $options['label'] );
+						unset( $options['exists'] );
+						unset( $options['icon'] );
+						unset( $options['link_classes'] );
+						unset( $options['link_popup_classes'] );
+						unset( $options['container_classes'] );
+						unset( $options['found_in_list'] );
+						unset( $options['found_item'] );
+						unset( $options['popup_title'] );
+						unset( $options['wishlist_url'] );
 						break;
 				}
 			}
@@ -968,7 +968,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$button_class      = in_array( $use_custom_button, array( 'button_custom', 'button_default' ), true );
 			$icon              = get_option( 'yith_wcwl_add_to_cart_icon' );
 			$custom_icon       = get_option( 'yith_wcwl_add_to_cart_custom_icon' );
-			$classes           = isset( $args[ 'class' ] ) ? explode( ' ', $args[ 'class' ] ) : array();
+			$classes           = isset( $args['class'] ) ? explode( ' ', $args['class'] ) : array();
 			$pos               = array_search( 'button', $classes, true );
 
 			if ( ! $button_class && false !== $pos ) {
@@ -983,17 +983,17 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$classes[] = 'add_to_cart';
 			$classes[] = 'alt';
 
-			$args[ 'class' ] = implode( ' ', $classes );
+			$args['class'] = implode( ' ', $classes );
 
 			if ( 'button_custom' === $use_custom_button && 'none' !== $icon ) {
-				if ( ! isset( $args[ 'attributes' ] ) ) {
-					$args[ 'attributes' ] = array();
+				if ( ! isset( $args['attributes'] ) ) {
+					$args['attributes'] = array();
 				}
 
 				if ( 'custom' !== $icon ) {
-					$args[ 'attributes' ][ 'data-icon' ] = $icon;
+					$args['attributes']['data-icon'] = $icon;
 				} elseif ( $custom_icon ) {
-					$args[ 'attributes' ][ 'data-icon' ] = $custom_icon;
+					$args['attributes']['data-icon'] = $custom_icon;
 				}
 			}
 
@@ -1188,14 +1188,14 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			$products = yith_wcwl_wishlists()->get_items(
 				array(
-					'wishlist_id' => is_user_logged_in() ? $meta[ 'ID' ] : '',
+					'wishlist_id' => is_user_logged_in() ? $meta['ID'] : '',
 				)
 			);
 
 			$ids = array();
 			// take id of products in wishlist.
 			foreach ( $products as $product ) {
-				$ids[] = $product[ 'prod_id' ];
+				$ids[] = $product['prod_id'];
 			}
 
 			if ( empty( $ids ) ) {
@@ -1213,7 +1213,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 2.0.0
 		 */
 		public function yith_wfbt_redirect_after_add_to_cart( $url ) {
-			if ( ! isset( $_REQUEST[ 'yith_wfbt_shortcode' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! isset( $_REQUEST['yith_wfbt_shortcode'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return $url;
 			}
 
@@ -1302,7 +1302,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$css_variables = array();
 			foreach ( $rules as $key => $value ) {
 				$option_name = "yith_wcwl_$key";
-				$value       = $value[ 'value' ] ?? get_option( $option_name, $value[ 'default' ] ?? null );
+				$value       = $value['value'] ?? get_option( $option_name, $value['default'] ?? null );
 				if ( ! is_null( $value ) ) {
 					$variable_name = str_replace( '_', '-', $key );
 					if ( is_array( $value ) ) {
@@ -1367,13 +1367,13 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			if ( ! empty( $cookie ) ) {
 				foreach ( $cookie as $item ) {
-					if ( ! isset( $item[ 'add-to-wishlist' ] ) ) {
+					if ( ! isset( $item['add-to-wishlist'] ) ) {
 						return;
 					}
 
 					$new_cookie[] = array(
-						'prod_id'     => $item[ 'add-to-wishlist' ],
-						'quantity'    => isset( $item[ 'quantity' ] ) ? $item[ 'quantity' ] : 1,
+						'prod_id'     => $item['add-to-wishlist'],
+						'quantity'    => isset( $item['quantity'] ) ? $item['quantity'] : 1,
 						'wishlist_id' => false,
 					);
 				}
@@ -1397,17 +1397,17 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				}
 
 				foreach ( $cookie as $item ) {
-					if ( $default_list->has_product( $item[ 'prod_id' ] ) ) {
+					if ( $default_list->has_product( $item['prod_id'] ) ) {
 						continue;
 					}
 
 					$new_item = new YITH_WCWL_Wishlist_Item();
 
-					$new_item->set_product_id( $item[ 'prod_id' ] );
-					$new_item->set_quantity( $item[ 'quantity' ] );
+					$new_item->set_product_id( $item['prod_id'] );
+					$new_item->set_quantity( $item['quantity'] );
 
-					if ( isset( $item[ 'dateadded' ] ) ) {
-						$new_item->set_date_added( $item[ 'dateadded' ] );
+					if ( isset( $item['dateadded'] ) ) {
+						$new_item->set_date_added( $item['dateadded'] );
 					}
 
 					$default_list->add_item( $new_item );

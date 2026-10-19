@@ -31,7 +31,19 @@ $default_args  = array( 'type' => 'select' );
 			}
 			$default = isset( $inline_field['default'] ) ? $inline_field['default'] : '';
 
-			$inline_field['value'] = isset( $value[ $key ] ) ? maybe_unserialize( $value[ $key ] ) : $default;
+			if ( isset( $value[ $key ] ) ) {
+				$inline_field['value'] = $value[ $key ];
+
+				if ( is_serialized( $value[ $key ] ) ) {
+					$inline_field['value'] = unserialize(
+						trim( $value[ $key ] ),
+						array( 'allowed_classes' => false )
+					);
+				}
+			} else {
+				$inline_field['value'] = $default;
+			}
+
 			$inline_field['class'] = isset( $inline_field['class'] ) ? $inline_field['class'] : '';
 			$inline_field['id']    = $field_id . '_' . $key;
 			$inline_field['name']  = $name . '[' . $key . ']';
