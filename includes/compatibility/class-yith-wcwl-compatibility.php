@@ -75,7 +75,7 @@ if ( ! class_exists( 'YITH_WCWL_Compatibility' ) ) {
 				case 'wpml':
 					global $sitepress;
 
-					$has_plugin = ! empty( $sitepress );
+					$has_plugin = ! empty( $sitepress ) || defined( 'WCML_VERSION' );
 
 					break;
 

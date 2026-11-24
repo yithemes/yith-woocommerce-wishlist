@@ -19,18 +19,17 @@
 
 /* === 1. POPULAR TAB === */
 
-#popular-filter .wp-list-table td.column-name img {
+#popular-filter .wp-list-table .column-name img {
 	max-width : 40px;
 	height    : auto;
 	float     : left;
 }
 
-#popular-filter .wp-list-table td.column-name .product-details {
+#popular-filter .wp-list-table .column-name .product-details {
 	padding-left : 60px;
 }
 
-#popular-filter .wp-list-table th.column-name,
-#popular-filter .wp-list-table td.column-name {
+#popular-filter .wp-list-table .column-name {
 	width : 25% !important;
 }
 

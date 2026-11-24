@@ -16,6 +16,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 	 * @since 3.0.0
 	 */
 	class YITH_WCWL_Ajax_Handler {
+
 		/**
 		 * Performs all required add_actions to handle forms
 		 *
@@ -113,7 +114,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			}
 
 			$product_id   = isset( $_REQUEST['add_to_wishlist'] ) ? intval( $_REQUEST['add_to_wishlist'] ) : false;
-			$fragments    = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$fragments    = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$wishlist_url = YITH_WCWL()->get_last_operation_url();
 
 			$wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
@@ -184,7 +185,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				wp_send_json( array( 'fragments' => array() ) );
 			}
 
-			$fragments = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$fragments = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 			$wishlist_token = isset( $_REQUEST['wishlist_token'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wishlist_token'] ) ) : false;
 
@@ -233,7 +234,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 			}
 
 			$item_id   = isset( $_POST['item_id'] ) ? intval( $_POST['item_id'] ) : false;
-			$fragments = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$fragments = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$return    = array(
 				'result' => false,
 			);
@@ -283,7 +284,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 
 			$wishlist_id   = isset( $_POST['wishlist_id'] ) ? sanitize_text_field( wp_unslash( $_POST['wishlist_id'] ) ) : false;
 			$wishlist_name = isset( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : false;
-			$fragments     = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$fragments     = isset( $_REQUEST['fragments'] ) ? wc_clean( $_REQUEST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$wishlist      = $wishlist_id ? yith_wcwl_get_wishlist( $wishlist_id ) : false;
 
 			if ( ! $wishlist_id || ! $wishlist ) {
@@ -341,11 +342,12 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				wp_send_json( array( 'result' => false ) );
 			}
 
-			$fragments = isset( $_POST['fragments'] ) ? wc_clean( $_POST['fragments'] ) : false; // phpcs:ignore WordPress.Security
+			$fragments    = isset( $_POST['fragments'] ) ? wc_clean( $_POST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$popup_marker = isset( $_POST['popup_marker'] ) ? sanitize_text_field( wp_unslash( $_POST['popup_marker'] ) ) : '';
 
 			wp_send_json(
 				array(
-					'fragments' => self::refresh_fragments( $fragments ),
+					'fragments' => self::refresh_fragments( $fragments, $popup_marker ),
 				)
 			);
 		}
@@ -419,7 +421,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 				wp_send_json( array( 'fragments' => array() ) );
 			}
 
-			$fragments = isset( $_POST['fragments'] ) ? wc_clean( $_POST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$fragments = isset( $_POST['fragments'] ) ? wc_clean( $_POST['fragments'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$result    = array();
 
 			if ( ! empty( $fragments ) ) {
@@ -440,16 +442,23 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 		/**
 		 * Generate fragments for the templates that needs to be refreshed after ajax
 		 *
-		 * @param array $fragments Array of fragments to refresh.
+		 * @param array  $fragments    Array of fragments to refresh.
+		 * @param string $popup_marker Popup marker.
+		 *
 		 * @return array Array of templates to be replaced on the page
 		 */
-		public static function refresh_fragments( $fragments ) {
-			$result = array();
+		public static function refresh_fragments( $fragments, $popup_marker = '' ) {
+			$result   = array();
+			$frontend = YITH_WCWL_Frontend();
+
+			if ( ! empty( $popup_marker ) ) {
+				$frontend->set_popup_marker( $popup_marker );
+			}
 
 			if ( ! empty( $fragments ) ) {
 				foreach ( $fragments as $id => $options ) {
 					$id      = sanitize_text_field( $id );
-					$options = YITH_WCWL_Frontend()->decode_fragment_options( $options );
+					$options = $frontend->decode_fragment_options( $options );
 					$item    = isset( $options['item'] ) ? $options['item'] : false;
 
 					if ( ! $item ) {
@@ -460,13 +469,18 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 						case 'add_to_wishlist':
 						case 'wishlist':
 							$result[ $id ] = YITH_WCWL_Shortcode::$item( $options );
+
 							break;
+
 						case 'YITH_WCWL_Widget':
 						case 'YITH_WCWL_Items_Widget':
 							ob_start();
 							the_widget( $item, $options );
+
 							$result[ $id ] = ob_get_clean();
+
 							break;
+
 						default:
 							/**
 							 * APPLY_FILTERS: yith_wcwl_fragment_output
@@ -480,6 +494,7 @@ if ( ! class_exists( 'YITH_WCWL_Ajax_Handler' ) ) {
 							 * @return string
 							 */
 							$result[ $id ] = apply_filters( 'yith_wcwl_fragment_output', '', $id, $options );
+
 							break;
 					}
 				}

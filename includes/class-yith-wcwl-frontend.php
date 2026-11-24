@@ -16,6 +16,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 	 * @since 1.0.0
 	 */
 	class YITH_WCWL_Frontend extends YITH_WCWL_Frontend_Legacy {
+
 		/**
 		 * Plugin version
 		 *
@@ -31,6 +32,13 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @since 1.0.0
 		 */
 		public $db_version;
+
+		/**
+		 * Marker used to identify plugin-generated popup links.
+		 *
+		 * @var string
+		 */
+		protected $popup_marker;
 
 		/**
 		 * Constructor
@@ -238,20 +246,31 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				case 'add-to-cart':
 				case 'after_add_to_cart':
 					$block = 'single-product' === $template ? 'add-to-cart-form' : 'product-button';
+
 					add_filter( "render_block_woocommerce/$block", array( $this, 'add_button_after_block' ), 10, 3 );
+
 					break;
+
 				case 'before_add_to_cart':
 					$block = 'single-product' === $template ? 'add-to-cart-form' : 'product-button';
+
 					add_filter( "render_block_woocommerce/$block", array( $this, 'add_button_before_block' ), 10, 3 );
+
 					break;
+
 				case 'thumbnails':
 					add_filter( 'render_block_woocommerce/product-image-gallery', array( $this, 'add_button_after_block' ), 10, 3 );
+
 					break;
+
 				case 'before_image':
 					add_filter( 'render_block_woocommerce/product-image', array( $this, 'add_button_after_block' ), 10, 3 );
+
 					break;
+
 				case 'summary':
 					add_filter( 'render_block_woocommerce/product-details', array( $this, 'add_button_after_block' ), 10, 3 );
+
 					break;
 			}
 		}
@@ -343,12 +362,17 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			switch ( $position ) {
 				case 'before_image':
 					$index = 1;
+
 					break;
+
 				case 'before_add_to_cart':
 					$index = 2;
+
 					break;
+
 				case 'after_add_to_cart':
 					$index = 3;
+
 					break;
 			}
 
@@ -642,10 +666,10 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			return apply_filters(
 				'yith_wcwl_localize_script',
 				array(
-					'ajax_url'                               => admin_url( 'admin-ajax.php', 'relative' ),
-					'redirect_to_cart'                       => get_option( 'yith_wcwl_redirect_cart' ),
-					'yith_wcwl_button_position'              => get_option( 'yith_wcwl_button_position' ),
-					'multi_wishlist'                         => false,
+					'ajax_url'                    => admin_url( 'admin-ajax.php', 'relative' ),
+					'redirect_to_cart'            => get_option( 'yith_wcwl_redirect_cart' ),
+					'yith_wcwl_button_position'   => get_option( 'yith_wcwl_button_position' ),
+					'multi_wishlist'              => false,
 					/**
 					 * APPLY_FILTERS: yith_wcwl_hide_add_button
 					 *
@@ -655,9 +679,9 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'hide_add_button'                        => apply_filters( 'yith_wcwl_hide_add_button', true ),
-					'enable_ajax_loading'                    => 'yes' === get_option( 'yith_wcwl_ajax_enable', 'no' ),
-					'ajax_loader_url'                        => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
+					'hide_add_button'             => apply_filters( 'yith_wcwl_hide_add_button', true ),
+					'enable_ajax_loading'         => 'yes' === get_option( 'yith_wcwl_ajax_enable', 'no' ),
+					'ajax_loader_url'             => YITH_WCWL_URL . 'assets/images/ajax-loader-alt.svg',
 					'remove_from_wishlist_after_add_to_cart' => 'yes' === get_option( 'yith_wcwl_remove_after_add_to_cart' ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_is_wishlist_responsive
@@ -668,7 +692,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'is_wishlist_responsive'                 => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
+					'is_wishlist_responsive'      => apply_filters( 'yith_wcwl_is_wishlist_responsive', true ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_time_to_close_prettyphoto
 					 *
@@ -678,7 +702,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return int
 					 */
-					'time_to_close_prettyphoto'              => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
+					'time_to_close_prettyphoto'   => apply_filters( 'yith_wcwl_time_to_close_prettyphoto', 3000 ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_fragments_index_glue
 					 *
@@ -688,7 +712,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return string
 					 */
-					'fragments_index_glue'                   => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
+					'fragments_index_glue'        => apply_filters( 'yith_wcwl_fragments_index_glue', '.' ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_reload_on_found_variation
 					 *
@@ -698,7 +722,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'reload_on_found_variation'              => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
+					'reload_on_found_variation'   => apply_filters( 'yith_wcwl_reload_on_found_variation', true ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_mobile_media_query
 					 *
@@ -708,8 +732,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return int
 					 */
-					'mobile_media_query'                     => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
-					'labels'                                 => array(
+					'mobile_media_query'          => apply_filters( 'yith_wcwl_mobile_media_query', 768 ),
+					'labels'                      => array(
 						'cookie_disabled'       => __( 'We are sorry, but this feature is available only if cookies on your browser are enabled.', 'yith-woocommerce-wishlist' ),
 						/**
 						 * APPLY_FILTERS: yith_wcwl_added_to_cart_message
@@ -722,25 +746,25 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						 */
 						'added_to_cart_message' => sprintf( '<div class="woocommerce-notices-wrapper"><div class="woocommerce-message" role="alert">%s</div></div>', apply_filters( 'yith_wcwl_added_to_cart_message', __( 'Product added to cart successfully', 'yith-woocommerce-wishlist' ) ) ),
 					),
-					'actions'                                => array(
-						'add_to_wishlist_action'                 => 'add_to_wishlist',
-						'remove_from_wishlist_action'            => 'remove_from_wishlist',
+					'actions'                     => array(
+						'add_to_wishlist_action'      => 'add_to_wishlist',
+						'remove_from_wishlist_action' => 'remove_from_wishlist',
 						'reload_wishlist_and_adding_elem_action' => 'reload_wishlist_and_adding_elem',
-						'load_mobile_action'                     => 'load_mobile',
-						'delete_item_action'                     => 'delete_item',
-						'save_title_action'                      => 'save_title',
-						'save_privacy_action'                    => 'save_privacy',
-						'load_fragments'                         => 'load_fragments',
+						'load_mobile_action'          => 'load_mobile',
+						'delete_item_action'          => 'delete_item',
+						'save_title_action'           => 'save_title',
+						'save_privacy_action'         => 'save_privacy',
+						'load_fragments'              => 'load_fragments',
 					),
-					'nonce'                                  => array(
-						'add_to_wishlist_nonce'                 => wp_create_nonce( 'add_to_wishlist' ),
-						'remove_from_wishlist_nonce'            => wp_create_nonce( 'remove_from_wishlist' ),
+					'nonce'                       => array(
+						'add_to_wishlist_nonce'      => wp_create_nonce( 'add_to_wishlist' ),
+						'remove_from_wishlist_nonce' => wp_create_nonce( 'remove_from_wishlist' ),
 						'reload_wishlist_and_adding_elem_nonce' => wp_create_nonce( 'reload_wishlist_and_adding_elem' ),
-						'load_mobile_nonce'                     => wp_create_nonce( 'load_mobile' ),
-						'delete_item_nonce'                     => wp_create_nonce( 'delete_item' ),
-						'save_title_nonce'                      => wp_create_nonce( 'save_title' ),
-						'save_privacy_nonce'                    => wp_create_nonce( 'save_privacy' ),
-						'load_fragments_nonce'                  => wp_create_nonce( 'load_fragments' ),
+						'load_mobile_nonce'          => wp_create_nonce( 'load_mobile' ),
+						'delete_item_nonce'          => wp_create_nonce( 'delete_item' ),
+						'save_title_nonce'           => wp_create_nonce( 'save_title' ),
+						'save_privacy_nonce'         => wp_create_nonce( 'save_privacy' ),
+						'load_fragments_nonce'       => wp_create_nonce( 'load_fragments' ),
 					),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_redirect_after_ask_an_estimate
@@ -751,7 +775,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return bool
 					 */
-					'redirect_after_ask_estimate'            => apply_filters( 'yith_wcwl_redirect_after_ask_an_estimate', false ),
+					'redirect_after_ask_estimate' => apply_filters( 'yith_wcwl_redirect_after_ask_an_estimate', false ),
 					/**
 					 * APPLY_FILTERS: yith_wcwl_redirect_url_after_ask_an_estimate
 					 *
@@ -761,7 +785,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					 *
 					 * @return string
 					 */
-					'ask_estimate_redirect_url'              => apply_filters( 'yith_wcwl_redirect_url_after_ask_an_estimate', get_home_url() ),
+					'ask_estimate_redirect_url'   => apply_filters( 'yith_wcwl_redirect_url_after_ask_an_estimate', get_home_url() ),
+					'popup_marker'                => $this->get_popup_marker(),
 				)
 			);
 		}
@@ -796,6 +821,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
 			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
 
+			$var['popup_marker'] = $this->get_popup_marker();
+
 			yith_wcwl_get_template_part( $template, '', $layout, $var );
 		}
 
@@ -825,6 +852,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		public function wishlist_footer( $var ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.varFound
 			$template = isset( $var['template_part'] ) ? $var['template_part'] : 'view';
 			$layout   = ! empty( $var['layout'] ) ? $var['layout'] : '';
+
+			$var['popup_marker'] = $this->get_popup_marker();
 
 			yith_wcwl_get_template_part( $template, 'footer', $layout, $var );
 		}
@@ -902,6 +931,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 						unset( $options['found_item'] );
 						unset( $options['popup_title'] );
 						unset( $options['wishlist_url'] );
+
 						break;
 				}
 			}
@@ -1056,8 +1086,8 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 					$url = add_query_arg(
 						array(
 							'remove_from_wishlist_after_add_to_cart' => $product->get_id(),
-							'wishlist_id'                            => $wishlist_id,
-							'wishlist_token'                         => $yith_wcwl_wishlist_token,
+							'wishlist_id'    => $wishlist_id,
+							'wishlist_token' => $yith_wcwl_wishlist_token,
 						),
 						$url
 					);
@@ -1181,7 +1211,6 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 		 * @param mixed $meta Meta.
 		 */
 		public function yith_wcfbt_shortcode( $meta ) {
-
 			if ( ! ( defined( 'YITH_WFBT' ) && YITH_WFBT ) || 'no' === get_option( 'yith_wfbt_enable_integration' ) || empty( $meta ) ) {
 				return;
 			}
@@ -1193,6 +1222,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			);
 
 			$ids = array();
+
 			// take id of products in wishlist.
 			foreach ( $products as $product ) {
 				$ids[] = $product['prod_id'];
@@ -1244,52 +1274,51 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 				'yith_wcwl_custom_css_rules',
 				array_merge(
 					array(
-						'add_to_wishlist_icon_color'         => array(),
-						'added_to_wishlist_icon_color'       => array(),
-						'color_add_to_wishlist'              => array(
+						'add_to_wishlist_icon_color'   => array(),
+						'added_to_wishlist_icon_color' => array(),
+						'color_add_to_wishlist'        => array(
 							'deps' => array(
 								'yith_wcwl_add_to_wishlist_style' => 'button_custom',
 							),
 						),
-						'rounded_corners_radius'             => array(),
-						'color_add_to_cart'                  => array(
+						'rounded_corners_radius'       => array(),
+						'color_add_to_cart'            => array(
 							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
 						'add_to_cart_rounded_corners_radius' => array(
-
 							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_button_style_1'               => array(
+						'color_button_style_1'         => array(
 							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_button_style_2'               => array(
+						'color_button_style_2'         => array(
 							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_wishlist_table'               => array(
+						'color_wishlist_table'         => array(
 							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_headers_background'           => array(
+						'color_headers_background'     => array(
 							'deps' => array(
 								'yith_wcwl_add_to_cart_style' => 'button_custom',
 							),
 						),
-						'color_share_button'                 => array(),
-						'color_fb_button'                    => array(),
-						'color_tw_button'                    => array(),
-						'color_pr_button'                    => array(),
-						'color_em_button'                    => array(),
-						'color_wa_button'                    => array(),
-						'feedback_duration'                  => array(
+						'color_share_button'           => array(),
+						'color_fb_button'              => array(),
+						'color_tw_button'              => array(),
+						'color_pr_button'              => array(),
+						'color_em_button'              => array(),
+						'color_wa_button'              => array(),
+						'feedback_duration'            => array(
 							'value' => ( $feedback_duration / 1000 ) . 's',
 						),
 					),
@@ -1300,11 +1329,14 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			// TODO: check if need to handle the dependencies.
 
 			$css_variables = array();
+
 			foreach ( $rules as $key => $value ) {
 				$option_name = "yith_wcwl_$key";
 				$value       = $value['value'] ?? get_option( $option_name, $value['default'] ?? null );
+
 				if ( ! is_null( $value ) ) {
 					$variable_name = str_replace( '_', '-', $key );
+
 					if ( is_array( $value ) ) {
 						foreach ( $value as $sub_key => $sub_value ) {
 							$sub_variable_name = $variable_name . '-' . str_replace( '_', '-', $sub_key );
@@ -1318,6 +1350,7 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 			$generated_code = ' :root { ' . implode( '; ', $css_variables ) . ' } ';
 			$custom_css     = get_option( 'yith_wcwl_custom_css' );
+
 			if ( $custom_css ) {
 				$generated_code .= ' ' . $custom_css;
 			}
@@ -1389,7 +1422,6 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 			$cookie = yith_getcookie( 'yith_wcwl_products' );
 
 			if ( ! empty( $cookie ) ) {
-
 				$default_list = YITH_WCWL_Wishlist_Factory::get_default_wishlist();
 
 				if ( ! $default_list ) {
@@ -1417,6 +1449,38 @@ if ( ! class_exists( 'YITH_WCWL_Frontend' ) ) {
 
 				yith_destroycookie( 'yith_wcwl_products' );
 			}
+		}
+
+		/**
+		 * Get the marker used to identify plugin-generated popup links.
+		 *
+		 * @return string
+		 */
+		public function get_popup_marker() {
+			if ( empty( $this->popup_marker ) ) {
+				$this->popup_marker = wp_generate_uuid4();
+			}
+
+			return $this->popup_marker;
+		}
+
+		/**
+		 * Set the marker used to identify plugin-generated popup links.
+		 *
+		 * @param string $marker Marker value.
+		 *
+		 * @return bool
+		 */
+		public function set_popup_marker( $marker ) {
+			$marker = strtolower( sanitize_text_field( $marker ) );
+
+			if ( ! preg_match( '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $marker ) ) {
+				return false;
+			}
+
+			$this->popup_marker = $marker;
+
+			return true;
 		}
 	}
 }

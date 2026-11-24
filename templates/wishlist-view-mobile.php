@@ -39,6 +39,7 @@
  * @var $repeat_remove_button          bool Whether to repeat remove button in last column
  * @var $available_multi_wishlist      bool Whether multi wishlist is enabled and available
  * @var $no_interactions               bool
+ * @var $popup_marker                  string Popup marker
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -249,7 +250,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 										?>
 									</select>
 								<?php else : ?>
-									<a href="#move_to_another_wishlist" class="move-to-another-wishlist-button" data-rel="prettyPhoto[move_to_another_wishlist]">
+									<a href="#move_to_another_wishlist" class="move-to-another-wishlist-button" data-rel="prettyPhoto[move_to_another_wishlist]" data-yith-wcwl-popup="<?php echo esc_attr( $popup_marker ); ?>">
 										<?php
 										/**
 										 * APPLY_FILTERS: yith_wcwl_move_to_another_list_label

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: YITH WCWL\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-woocommerce-"
 "wishlist\n"
-"POT-Creation-Date: 2026-11-10T12:24:06+00:00\n"
+"POT-Creation-Date: 2026-11-24T10:24:16+00:00\n"
 "PO-Revision-Date: 2020-10-16 14:06+0200\n"
 "Last-Translator: Nicola Mustone <mail@nicolamustone.it>\n"
 "Language-Team: Your Inspiration Themes <support@yithemes.com>\n"
@@ -168,14 +168,12 @@ msgctxt "[Admin] Delete wishlist from panel confirmation modal"
 msgid "Confirm delete"
 msgstr ""
 
-#. translators: %s is the name of the wishlist
-#: includes/admin/class-yith-wcwl-admin.php:100
-#, php-format
+#: includes/admin/class-yith-wcwl-admin.php:99
 msgctxt "[Admin] Delete wishlist from panel confirmation modal"
-msgid "Are you sure you want to delete %s?"
+msgid "Are you sure you want to delete this wishlist?"
 msgstr ""
 
-#: includes/admin/class-yith-wcwl-admin.php:101
+#: includes/admin/class-yith-wcwl-admin.php:100
 msgctxt "[Admin] Delete wishlist from panel confirmation modal"
 msgid "Delete"
 msgstr ""
@@ -265,22 +263,22 @@ msgstr ""
 msgid "{{product_name}} has been removed from your {{wishlist_name}} list!"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:92
+#: includes/class-yith-wcwl-ajax-handler.php:93
 #: templates/add-to-wishlist-remove.php:79
 msgid "View &rsaquo;"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:93
+#: includes/class-yith-wcwl-ajax-handler.php:94
 #: templates/add-to-wishlist-remove.php:67
 msgid "or"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:94
+#: includes/class-yith-wcwl-ajax-handler.php:95
 msgid "Close"
 msgstr ""
 
-#: includes/class-yith-wcwl-ajax-handler.php:209
-#: includes/class-yith-wcwl-ajax-handler.php:264
+#: includes/class-yith-wcwl-ajax-handler.php:210
+#: includes/class-yith-wcwl-ajax-handler.php:265
 msgid "Product successfully removed."
 msgstr "Produkten borttagen."
 
@@ -288,23 +286,23 @@ msgstr "Produkten borttagen."
 msgid "Please, make sure to enter a valid title"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:713
+#: includes/class-yith-wcwl-frontend.php:737
 #: includes/legacy/class-yith-wcwl-frontend-legacy.php:248
 msgid ""
 "We are sorry, but this feature is available only if cookies on your browser "
 "are enabled."
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:723
+#: includes/class-yith-wcwl-frontend.php:747
 #: includes/legacy/class-yith-wcwl-frontend-legacy.php:258
 msgid "Product added to cart successfully"
 msgstr ""
 
-#: includes/class-yith-wcwl-frontend.php:1011
+#: includes/class-yith-wcwl-frontend.php:1041
 #: includes/class-yith-wcwl-shortcode.php:270
 #: plugin-options/customization/labels-options.php:105
-#: templates/wishlist-view-footer-mobile.php:59
-#: templates/wishlist-view-footer.php:59
+#: templates/wishlist-view-footer-mobile.php:60
+#: templates/wishlist-view-footer.php:60
 msgid "Add to cart"
 msgstr ""
 
@@ -1903,35 +1901,35 @@ msgstr ""
 msgid "this wishlist link and share it anywhere)"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:55
-#: templates/wishlist-view-footer.php:55
+#: templates/wishlist-view-footer-mobile.php:56
+#: templates/wishlist-view-footer.php:56
 msgid "Apply this action to all the selected items:"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:73
-#: templates/wishlist-view-footer.php:73
+#: templates/wishlist-view-footer-mobile.php:74
+#: templates/wishlist-view-footer.php:74
 msgid "Remove from wishlist"
 msgstr ""
 
 #. translators: 1. Wishlist formatted name.
-#: templates/wishlist-view-footer-mobile.php:93
-#: templates/wishlist-view-footer.php:93
+#: templates/wishlist-view-footer-mobile.php:94
+#: templates/wishlist-view-footer.php:94
 #, php-format
 msgid "Move to %s"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:99
-#: templates/wishlist-view-footer.php:99
+#: templates/wishlist-view-footer-mobile.php:100
+#: templates/wishlist-view-footer.php:100
 msgid "Apply"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:107
-#: templates/wishlist-view-footer.php:107
+#: templates/wishlist-view-footer-mobile.php:108
+#: templates/wishlist-view-footer.php:108
 msgid "Update"
 msgstr ""
 
-#: templates/wishlist-view-footer-mobile.php:113
-#: templates/wishlist-view-footer.php:151
+#: templates/wishlist-view-footer-mobile.php:114
+#: templates/wishlist-view-footer.php:158
 msgid "Add all to cart"
 msgstr ""
 
@@ -1939,74 +1937,74 @@ msgstr ""
 msgid "Edit title"
 msgstr "Ändra titel"
 
-#: templates/wishlist-view-mobile.php:143
+#: templates/wishlist-view-mobile.php:144
 msgid "Added on:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:154
+#: templates/wishlist-view-mobile.php:155
 msgid "Price:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:181
+#: templates/wishlist-view-mobile.php:182
 msgid "Quantity:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:196
+#: templates/wishlist-view-mobile.php:197
 msgid "Stock:"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:199 templates/wishlist-view.php:431
+#: templates/wishlist-view-mobile.php:200 templates/wishlist-view.php:432
 msgid "Out of stock"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:199 templates/wishlist-view.php:431
+#: templates/wishlist-view-mobile.php:200 templates/wishlist-view.php:432
 msgid "In Stock"
 msgstr "Finns i lager"
 
-#: templates/wishlist-view-mobile.php:232 templates/wishlist-view.php:544
+#: templates/wishlist-view-mobile.php:233 templates/wishlist-view.php:545
 msgid "Move"
 msgstr "Flytta"
 
-#: templates/wishlist-view-mobile.php:263 templates/wishlist-view.php:575
+#: templates/wishlist-view-mobile.php:264 templates/wishlist-view.php:576
 msgid "Move to another list &rsaquo;"
 msgstr ""
 
-#: templates/wishlist-view-mobile.php:283 templates/wishlist-view.php:250
-#: templates/wishlist-view.php:607
+#: templates/wishlist-view-mobile.php:284 templates/wishlist-view.php:251
+#: templates/wishlist-view.php:608
 msgid "Remove this product"
 msgstr "Ta bort denna produkt"
 
-#: templates/wishlist-view-mobile.php:304 templates/wishlist-view.php:649
+#: templates/wishlist-view-mobile.php:305 templates/wishlist-view.php:650
 msgid "No products added to the wishlist"
 msgstr ""
 
-#: templates/wishlist-view.php:102
+#: templates/wishlist-view.php:103
 msgid "Product name"
 msgstr ""
 
-#: templates/wishlist-view.php:122
+#: templates/wishlist-view.php:123
 msgid "Unit price"
 msgstr ""
 
-#: templates/wishlist-view.php:143
+#: templates/wishlist-view.php:144
 msgid "Quantity"
 msgstr ""
 
-#: templates/wishlist-view.php:164
+#: templates/wishlist-view.php:165
 msgid "Stock status"
 msgstr ""
 
-#: templates/wishlist-view.php:206
+#: templates/wishlist-view.php:207
 msgid "Arrange"
 msgstr ""
 
 #. translators: 1. Date product was added to wishlist.
-#: templates/wishlist-view.php:479
+#: templates/wishlist-view.php:480
 #, php-format
 msgid "Added on: %s"
 msgstr ""
 
-#: templates/wishlist-view.php:607
+#: templates/wishlist-view.php:608
 msgid "Remove"
 msgstr "Ta bort"
 

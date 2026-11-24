@@ -96,8 +96,7 @@ if ( ! class_exists( 'YITH_WCWL_Admin' ) ) {
 					'i18n'         => array(
 						'deleteWishlistConfirmModal' => array(
 							'title'         => _x( 'Confirm delete', '[Admin] Delete wishlist from panel confirmation modal', 'yith-woocommerce-wishlist' ),
-							//translators: %s is the name of the wishlist
-							'message'       => _x( 'Are you sure you want to delete %s?', '[Admin] Delete wishlist from panel confirmation modal', 'yith-woocommerce-wishlist' ),
+							'message'       => _x( 'Are you sure you want to delete this wishlist?', '[Admin] Delete wishlist from panel confirmation modal', 'yith-woocommerce-wishlist' ),
 							'confirmButton' => _x( 'Delete', '[Admin] Delete wishlist from panel confirmation modal', 'yith-woocommerce-wishlist' ),
 						),
 					),

@@ -31,6 +31,7 @@
  * @var $users_wishlists               array Array of current user wishlists
  * @var $count                         int Count of items in wishlist
  * @var $var                           array Array of variable passed to the template
+ * @var $popup_marker                  string Popup marker
  */
 
 if ( ! defined( 'YITH_WCWL' ) ) {
@@ -121,7 +122,10 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 					<a
 						href="<?php echo esc_url( ( $additional_info || ! is_user_logged_in() ) ? '#ask_an_estimate_popup' : $ask_estimate_url ); ?>"
 						class="<?php echo esc_attr( $ask_an_estimate_classes ); ?> ask-an-estimate-button"
-						<?php echo ( $additional_info || ! is_user_logged_in() ) ? 'data-rel="prettyPhoto[ask_an_estimate]"' : ''; ?>
+						<?php if ( $additional_info || ! is_user_logged_in() ) : ?>
+							data-rel="prettyPhoto[ask_an_estimate]"
+							data-yith-wcwl-popup="<?php echo esc_attr( $popup_marker ); ?>"
+						<?php endif; ?>
 					>
 						<?php
 						/**
